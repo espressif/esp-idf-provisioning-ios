@@ -1,0 +1,45 @@
+// Copyright 2018 Espressif Systems (Shanghai) PTE LTD
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+package espressif;
+
+enum WifiStationState {
+    Connected = 0;
+    Connecting = 1;
+    Disconnected = 2;
+    ConnectionFailed = 3;
+}
+
+enum WifiConnectFailedReason {
+    AuthError = 0;
+    NetworkNotFound = 1;
+}
+
+enum WifiAuthMode {
+    Open = 0;
+    WEP  = 1;
+    WPA_PSK = 2;
+    WPA2_PSK = 3;
+    WPA_WPA2_PSK = 4;
+    WPA2_ENTERPRISE = 5;
+}
+message WifiConnectedState {
+    string ip4_addr = 1;
+    WifiAuthMode auth_mode = 2;
+    bytes ssid = 3;
+    bytes bssid = 4;
+    int32 channel = 5;
+}
+
