@@ -36,7 +36,7 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
             let deviceNamePrefix = provisionConfig[Provision.CONFIG_BLE_DEVICE_NAME_PREFIX],
             let sessionUuid = provisionConfig[Provision.CONFIG_BLE_SESSION_UUID],
             let configUuid = provisionConfig[Provision.CONFIG_BLE_CONFIG_UUID] {
-            var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: configUuid]
+            let configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: configUuid]
             bleTransport = BLETransport(serviceUUIDString: serviceUuid,
                                         sessionUUIDString: sessionUuid,
                                         configUUIDMap: configUUIDMap,
@@ -64,8 +64,8 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func bleDeviceNotConfigured() {
         showBusy(isBusy: false)
-        let alertController = UIAlertController(title: "Configure BLE device", message: "Could not configure the selected bluetooth device", preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+        let alertController = UIAlertController(title: "Configure BLE device", message: "Could not configure the selected bluetooth device", preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
 
@@ -105,7 +105,7 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
             grayView?.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
             view.addSubview(grayView!)
 
-            activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            activityView = UIActivityIndicatorView(style: .gray)
             activityView?.center = view.center
             activityView?.startAnimating()
 
@@ -138,8 +138,8 @@ extension BLELandingViewController: BLETransportDelegate {
 
     func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {
         let alertMessage = "Peripheral device disconnected"
-        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
 }

@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         #endif
 
         #if BLE
-            var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: configUUIDString]
+            let configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: configUUIDString]
             bleTransport = BLETransport(serviceUUIDString: serviceUUIDString,
                                         sessionUUIDString: sessionUUIDString,
                                         configUUIDMap: configUUIDMap,
@@ -156,8 +156,8 @@ class ViewController: UIViewController {
 
     func showError(errorMessage: String) {
         let alertMessage = errorMessage
-        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
 }
@@ -169,7 +169,7 @@ class ViewController: UIViewController {
         }
 
         func peripheralsNotFound(serviceUUID: UUID?) {
-            showError(errorMessage: "No peripherals found for service UUID : \(serviceUUID?.uuidString)")
+            showError(errorMessage: "No peripherals found for service UUID : \(String(describing: serviceUUID?.uuidString))")
         }
 
         func peripheralConfigured(peripheral _: CBPeripheral) {
@@ -181,7 +181,7 @@ class ViewController: UIViewController {
         }
 
         func peripheralDisconnected(peripheral _: CBPeripheral, error: Error?) {
-            showError(errorMessage: "Error in connection : \(error)")
+            showError(errorMessage: "Error in connection : \(String(describing: error))")
         }
     }
 #endif

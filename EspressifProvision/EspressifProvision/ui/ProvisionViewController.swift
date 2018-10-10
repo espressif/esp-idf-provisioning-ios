@@ -46,7 +46,7 @@ class ProvisionViewController: UIViewController {
             grayView?.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
             view.addSubview(grayView!)
 
-            activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+            activityView = UIActivityIndicatorView(style: .gray)
             activityView?.center = view.center
             activityView?.startAnimating()
 
@@ -95,7 +95,7 @@ class ProvisionViewController: UIViewController {
             initialiseSessionAndConfigure(transport: transport!,
                                           security: security!)
         } else if transport == nil {
-            var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: bleConfigUuid!]
+            let configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: bleConfigUuid!]
             bleTransport = BLETransport(serviceUUIDString: bleServiceUuid!,
                                         sessionUUIDString: bleSessionUuid!,
                                         configUUIDMap: configUUIDMap,
@@ -192,8 +192,8 @@ class ProvisionViewController: UIViewController {
 
     func showError(errorMessage: String) {
         let alertMessage = errorMessage
-        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
 }

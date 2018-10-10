@@ -45,7 +45,7 @@ struct SoftAPTransport: Transport {
 
             let httpStatus = response as? HTTPURLResponse
             if httpStatus?.statusCode != 200 {
-                print("statusCode should be 200, but is \(httpStatus?.statusCode)")
+                print("statusCode should be 200, but is \(String(describing: httpStatus?.statusCode))")
             }
 
             completionHandler(data, nil)
