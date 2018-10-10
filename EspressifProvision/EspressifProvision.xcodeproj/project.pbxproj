@@ -454,7 +454,7 @@
 				TargetAttributes = {
 					1431462220DE994B0017E119 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -463,10 +463,12 @@
 					};
 					1431463620DE994C0017E119 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 1431462220DE994B0017E119;
 					};
 					1431464120DE994C0017E119 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 						TestTargetID = 1431462220DE994B0017E119;
 					};
 				};
@@ -848,7 +850,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -873,7 +875,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -885,7 +887,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -894,7 +896,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -907,7 +909,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -916,7 +918,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -927,7 +929,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -936,7 +938,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -947,7 +949,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -956,7 +958,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -1044,7 +1046,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "WifiSec0AVS-Debug";
@@ -1056,7 +1058,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1065,7 +1067,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1076,7 +1078,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1085,7 +1087,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -1166,7 +1168,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "WifiSec0AVS-Release";
@@ -1178,7 +1180,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1187,7 +1189,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1198,7 +1200,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1207,7 +1209,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -1295,7 +1297,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "WifiSec1AVS-Debug";
@@ -1307,7 +1309,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1316,7 +1318,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1327,7 +1329,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1336,7 +1338,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -1424,7 +1426,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "WifiSec0-Debug";
@@ -1436,7 +1438,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1445,7 +1447,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1456,7 +1458,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1465,7 +1467,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -1553,7 +1555,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "WifiSec1-Debug";
@@ -1565,7 +1567,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1574,7 +1576,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1585,7 +1587,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1594,7 +1596,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -1682,7 +1684,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "BLESec0AVS-Debug";
@@ -1694,7 +1696,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1703,7 +1705,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1714,7 +1716,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1723,7 +1725,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -1811,7 +1813,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "BLESec0-Debug";
@@ -1823,7 +1825,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1832,7 +1834,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1843,7 +1845,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1852,7 +1854,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -1940,7 +1942,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "BLESec1AVS-Debug";
@@ -1952,7 +1954,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1961,7 +1963,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1972,7 +1974,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1981,7 +1983,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -2069,7 +2071,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "BLESec1-Debug";
@@ -2081,7 +2083,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2090,7 +2092,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -2101,7 +2103,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TQG5Q437BW;
+				DEVELOPMENT_TEAM = Y9ZJ436PPN;
 				INFOPLIST_FILE = EspressifProvisionUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2110,7 +2112,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};

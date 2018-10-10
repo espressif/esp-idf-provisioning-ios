@@ -34,9 +34,9 @@ class ProvisionLandingViewController: UIViewController {
     }
 
     @IBAction func connectClicked(_: Any) {
-        if let url = URL(string: UIApplicationOpenSettingsURLString) {
+        if let url = URL(string: UIApplication.openSettingsURLString) {
             if UIApplication.shared.canOpenURL(url) {
-                let url = UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                _ = UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             }
         }
     }
@@ -55,10 +55,15 @@ class ProvisionLandingViewController: UIViewController {
         let nonBoldAttribute = [
             kCTFontAttributeName: UIFont.systemFont(ofSize: 20),
         ]
-        let attrStr = NSMutableAttributedString(string: string, attributes: attrs as [NSAttributedStringKey: Any])
+        let attrStr = NSMutableAttributedString(string: string, attributes: attrs as [NSAttributedString.Key: Any])
         if let range = nonBoldRange {
-            attrStr.setAttributes(nonBoldAttribute as [NSAttributedStringKey: Any], range: range)
+            attrStr.setAttributes(nonBoldAttribute as [NSAttributedString.Key: Any], range: range)
         }
         return attrStr
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+    return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value) })
 }
