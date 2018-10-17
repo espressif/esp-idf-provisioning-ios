@@ -55,12 +55,14 @@ This ensures that you have the following dependencies installed -
 
 ### Get Alexa credentials
 
-As we are building a mobile application that will provision network credentials as well AVS credentials, we will need the following details 
+As we are building a mobile application that will provision network credentials as well AVS credentials, we will need to associate our application with a security profile for `Login with Amazon`.
+
+`Login with Amazon` is Amazon's OAuth2 provider. It allows third party developers like us to enable the user to use their existing Amazon account to sign in through our ESP32 device.
 
 - Product ID
 - API key from Login With Amazon (LWA)
 
-Please input these values in `Info.plist` file before building. How to create these can be found [on the AVS Wiki](https://github.com/alexa/avs-device-sdk/wiki/Create-Security-Profile).
+Please input these values in `Info.plist` file before building.
 
 # Resources
 

@@ -31,3 +31,11 @@ extension Data {
         return map { String(format: format, $0) }.joined()
     }
 }
+
+func base64ToBase64url(base64: String) -> String {
+    let base64url = base64
+        .replacingOccurrences(of: "+", with: "-")
+        .replacingOccurrences(of: "/", with: "_")
+        .replacingOccurrences(of: "=", with: "")
+    return base64url
+}
