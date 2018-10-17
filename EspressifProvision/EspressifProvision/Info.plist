@@ -12,6 +12,8 @@
 	<string>ff51</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Espressif BLE Provisioning</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -30,10 +32,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.espressif.provision</string>
+			<string>com.espressif.provision.ble.1</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>amzn-com.espressif.provision</string>
+				<string>espressif.provision.ble</string>
 			</array>
 		</dict>
 	</array>
