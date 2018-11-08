@@ -35,7 +35,7 @@
         public static let AVS_CONFIG_UUID_KEY = "avsconfigUUID"
 
         private static let PRODUCT_INSTANCE_ATTRIBUTES = "productInstanceAttributes"
-        private static let AMZN_SCOPE = "alexa:all"
+        private static let AMZN_SCOPE = "alexa:all alexa:voice_service:pre_auth"
 
         init(session: Session) {
             self.session = session
