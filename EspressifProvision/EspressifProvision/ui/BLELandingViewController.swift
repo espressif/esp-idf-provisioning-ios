@@ -61,8 +61,9 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
 
     func bleDeviceConfigured() {
         showBusy(isBusy: false)
-        let provisionVC = storyboard?.instantiateViewController(withIdentifier: "provision") as! ProvisionViewController
+        let provisionVC = storyboard?.instantiateViewController(withIdentifier: "loginWithAmazon") as! LoginWithAmazonViewController
         provisionVC.transport = bleTransport
+
         provisionVC.provisionConfig = provisionConfig
         navigationController?.pushViewController(provisionVC, animated: true)
     }
@@ -99,6 +100,7 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
         tableView.deselectRow(at: indexPath, animated: true)
         if let peripheral = self.peripherals?[indexPath.row] {
             bleTransport?.connect(peripheral: peripheral, withOptions: nil)
+            print(peripheral)
         }
 
         showBusy(isBusy: true)

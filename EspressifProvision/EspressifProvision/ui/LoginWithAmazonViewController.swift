@@ -15,41 +15,109 @@
 //  LoginWithAmazonViewController.swift
 //  EspressifProvision
 //
-#if AVS
-    import Foundation
-    import UIKit
 
-    class LoginWithAmazonViewController: UIViewController {
-        var provisionConfig: [String: String] = [:]
+import Foundation
+import UIKit
 
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            // Do any additional setup after loading the view, typically from a nib.
+class LoginWithAmazonViewController: UIViewController {
+    var provisionConfig: [String: String] = [:]
+    var transport: Transport?
+    var secu: Security?
+    var newSession: Session?
+    var bleTransport: BLETransport?
+    var configureAvs: ConfigureAVS?
+    var waiter: Bool?
+    var deviceDetails: [String] = ["", "", ""]
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+
+    @IBAction func onAmazonLoginClicked(_: Any) {
+        let bleConfigUuid = provisionConfig[Provision.CONFIG_BLE_CONFIG_UUID]
+        var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: bleConfigUuid!]
+        let avsconfigUuid = provisionConfig[ConfigureAVS.AVS_CONFIG_UUID_KEY]
+        configUUIDMap[ConfigureAVS.AVS_CONFIG_PATH] = avsconfigUuid
+
+        bleTransport = BLETransport(
+            serviceUUIDString: provisionConfig[Provision.CONFIG_BLE_SERVICE_UUID],
+            sessionUUIDString: provisionConfig[Provision.CONFIG_BLE_SESSION_UUID]!,
+            configUUIDMap: configUUIDMap,
+            deviceNamePrefix: provisionConfig[Provision.CONFIG_BLE_DEVICE_NAME_PREFIX]!,
+            scanTimeout: 5.0
+        )
+
+        let securityVersion = provisionConfig[Provision.CONFIG_SECURITY_KEY]
+        let pop = provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]
+        if securityVersion == Provision.CONFIG_SECURITY_SECURITY1 {
+            secu = Security1(proofOfPossession: pop!)
+        } else {
+            secu = Security0()
         }
 
-        @IBAction func onAmazonLoginClicked(_: Any) {
-            ConfigureAVS.loginWithAmazon(productId: provisionConfig[ConfigureAVS.PRODUCT_ID]!,
-                                         deviceSerialNumber: provisionConfig[ConfigureAVS.DEVICE_SERIAL_NUMBER]!,
-                                         codeVerifier: provisionConfig[ConfigureAVS.CODE_VERIFIER]!) { results, error in
-                if error != nil {
-                    print(error.debugDescription)
-                } else if let results = results {
-                    var config = self.provisionConfig
-                    results.forEach { config[$0] = $1 }
-                    DispatchQueue.main.async {
-                        let transportVersion = config[Provision.CONFIG_TRANSPORT_KEY]
-                        if let transportVersion = transportVersion, transportVersion == Provision.CONFIG_TRANSPORT_BLE {
-                            let provisionLandingVC = self.storyboard?.instantiateViewController(withIdentifier: "bleLanding") as! BLELandingViewController
-                            provisionLandingVC.provisionConfig = config
-                            self.navigationController?.pushViewController(provisionLandingVC, animated: true)
-                        } else {
-                            let provisionLandingVC = self.storyboard?.instantiateViewController(withIdentifier: "provisionLanding") as! ProvisionLandingViewController
-                            provisionLandingVC.provisionConfig = config
-                            self.navigationController?.pushViewController(provisionLandingVC, animated: true)
-                        }
+        do {
+            getDeviceDetails(tras: bleTransport!, secu: secu as! Security1) { _ in
+                self.callLWA()
+            }
+        }
+    }
+
+    private func getDeviceDetails(tras _: Transport,
+                                  secu _: Security1,
+                                  completionHandler: @escaping (String) -> Swift.Void) {
+        let newSession = Session(transport: transport!,
+                                 security: secu!)
+
+        newSession.initialize(response: nil) { error in
+            guard error == nil else {
+                print("Error in establishing session \(error.debugDescription)")
+                return
+            }
+            if newSession.isEstablished {
+                var prov: Provision
+                prov = Provision(session: newSession)
+                self.deviceDetails = prov.getAVSDeviceDetails(completionHandler: { _, error in
+                    guard error == nil else {
+                        print(error!)
+
+                        return
+                    }
+
+                    completionHandler("nil")
+                    //                    self.callLWA()
+                })
+            }
+        }
+        return
+    }
+
+    public func callLWA() {
+        ConfigureAVS.loginWithAmazon { results, error in
+            if error != nil {
+                print(error.debugDescription)
+            } else if let results = results {
+                // Write AVS details to device
+//                print(results)
+//                self.putAVSDetails(results: results)
+                self.waiter = true
+                var config = self.provisionConfig
+                results.forEach { config[$0] = $1 }
+                DispatchQueue.main.async {
+                    let transportVersion = config[Provision.CONFIG_TRANSPORT_KEY]
+                    if let transportVersion = transportVersion, transportVersion == Provision.CONFIG_TRANSPORT_BLE {
+                        let provisionVC = self.storyboard?.instantiateViewController(withIdentifier: "provision") as! ProvisionViewController
+                        provisionVC.provisionConfig = config
+                        provisionVC.avsDetails = results
+                        provisionVC.transport = self.transport
+                        self.navigationController?.pushViewController(provisionVC, animated: true)
+                    } else {
+                        let provisionLandingVC = self.storyboard?.instantiateViewController(withIdentifier: "provisionLanding") as! ProvisionLandingViewController
+                        provisionLandingVC.provisionConfig = config
+                        self.navigationController?.pushViewController(provisionLandingVC, animated: true)
                     }
                 }
             }
         }
     }
-#endif
+}

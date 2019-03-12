@@ -31,6 +31,7 @@ class ProvisionViewController: UIViewController {
     var bleTransport: BLETransport?
     var activityView: UIActivityIndicatorView?
     var grayView: UIView?
+    var avsDetails: [String: String]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,9 @@ class ProvisionViewController: UIViewController {
         passphraseTextfield.addTarget(self, action: #selector(passphraseEntered), for: .editingDidEndOnExit)
         ssidTextfield.addTarget(self, action: #selector(ssidEntered), for: .editingDidEndOnExit)
         provisionButton.isUserInteractionEnabled = false
+        if let bleTransport = transport as? BLETransport {
+            print("Inside PVC", bleTransport.currentPeripheral!)
+        }
     }
 
     private func showBusy(isBusy: Bool) {
@@ -61,7 +65,7 @@ class ProvisionViewController: UIViewController {
 
     private func provisionDevice() {
         guard let ssid = ssidTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines), let passphrase = passphraseTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            ssid.count > 0 && passphrase.count > 0 else {
+            ssid.count > 0, passphrase.count > 0 else {
             return
         }
 
@@ -95,17 +99,13 @@ class ProvisionViewController: UIViewController {
             initialiseSessionAndConfigure(transport: transport!,
                                           security: security!)
         } else if transport == nil {
-            var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: bleConfigUuid!]
-            #if AVS
-                let avsconfigUuid = provisionConfig[ConfigureAVS.AVS_CONFIG_UUID_KEY]
-                configUUIDMap[ConfigureAVS.AVS_CONFIG_PATH] = avsconfigUuid
-            #endif
+            let configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: bleConfigUuid!]
 
             bleTransport = BLETransport(serviceUUIDString: bleServiceUuid!,
                                         sessionUUIDString: bleSessionUuid!,
                                         configUUIDMap: configUUIDMap,
                                         deviceNamePrefix: bleDeviceNamePrefix!,
-                                        scanTimeout: 2.0)
+                                        scanTimeout: 5.0)
             bleTransport?.scan(delegate: self)
             transport = bleTransport
         }
@@ -128,33 +128,15 @@ class ProvisionViewController: UIViewController {
 
             let provision = Provision(session: newSession)
 
-            provision.configureWifi(ssid: ssid,
-                                    passphrase: passphrase) { status, error in
+            provision.configureWifiAvs(ssid: ssid,
+                                       passphrase: passphrase,
+                                       avs: self.avsDetails!) { status, error in
                 guard error == nil else {
                     print("Error in configuring wifi : \(error.debugDescription)")
                     return
                 }
                 if status == Espressif_Status.success {
-                    #if AVS
-                        let clientId = self.provisionConfig[ConfigureAVS.CLIENT_ID]
-                        let authCode = self.provisionConfig[ConfigureAVS.AUTH_CODE]
-                        let redirectUri = self.provisionConfig[ConfigureAVS.REDIRECT_URI]
-                        let codeVerifier = self.provisionConfig[ConfigureAVS.CODE_VERIFIER]
-
-                        if let authCode = authCode,
-                            let clientId = clientId,
-                            let redirectUri = redirectUri,
-                            let codeVerifier = codeVerifier {
-                            self.configureAWSLogin(clientId: clientId, authCode: authCode, redirectUri: redirectUri, codeVerifier: codeVerifier, session: newSession, completionHandler: { err in
-                                guard err == nil else {
-                                    return
-                                }
-                                self.applyConfigurations(provision: provision)
-                            })
-                        }
-                    #else
-                        self.applyConfigurations(provision: provision)
-                    #endif
+                    self.applyConfigurations(provision: provision)
                 }
             }
         }
@@ -165,7 +147,7 @@ class ProvisionViewController: UIViewController {
         guard let ssid = ssidTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines), let passphrase = passphraseTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
             return
         }
-        if ssid.count > 0 && passphrase.count > 0 {
+        if ssid.count > 0, passphrase.count > 0 {
             provisionButton.isUserInteractionEnabled = true
             provisionDevice()
         }
@@ -175,7 +157,7 @@ class ProvisionViewController: UIViewController {
         guard let ssid = ssidTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines), let passphrase = passphraseTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
             return
         }
-        if ssid.count > 0 && passphrase.count > 0 {
+        if ssid.count > 0, passphrase.count > 0 {
             provisionButton.isUserInteractionEnabled = true
         }
         passphraseTextfield.becomeFirstResponder()
@@ -184,27 +166,6 @@ class ProvisionViewController: UIViewController {
     @IBAction func provisionButtonClicked(_: Any) {
         provisionDevice()
     }
-
-    #if AVS
-        private func configureAWSLogin(clientId: String,
-                                       authCode: String,
-                                       redirectUri: String,
-                                       codeVerifier: String,
-                                       session newSession: Session,
-                                       completionHandler: @escaping (Error?) -> Void) {
-            let configureAVS = ConfigureAVS(session: newSession)
-            configureAVS.configureAmazonLogin(cliendId: clientId,
-                                              authCode: authCode,
-                                              redirectUri: redirectUri,
-                                              codeVerifier: codeVerifier) { _, error in
-                if let error = error {
-                    completionHandler(error)
-                } else {
-                    completionHandler(nil)
-                }
-            }
-        }
-    #endif
 
     private func applyConfigurations(provision: Provision) {
         provision.applyConfigurations(completionHandler: { status, error in
@@ -261,6 +222,7 @@ extension ProvisionViewController: BLETransportDelegate {
     }
 
     func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {
+        print("Here")
         showError(errorMessage: "Peripheral device disconnected")
     }
 }

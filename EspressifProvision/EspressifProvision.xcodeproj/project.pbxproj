@@ -456,6 +456,9 @@
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 0;
 							};
@@ -573,7 +576,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
 			);
@@ -584,7 +587,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BC6043E63EC0B0F301552320 /* [CP] Embed Pods Frameworks */ = {
@@ -593,7 +596,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
 			);
@@ -604,7 +607,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D282A8FC0F41CD28BF8F6877 /* [CP] Check Pods Manifest.lock */ = {
@@ -847,7 +850,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -875,7 +878,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -1047,7 +1050,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DWIFI -DAVS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -1171,7 +1174,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DAVS -DSEC0 -DWIFI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
@@ -1300,7 +1303,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DAVS -DSEC1 -DWIFI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -1431,7 +1434,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DWIFI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -1561,7 +1564,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1690,7 +1693,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DBLE -DAVS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1819,7 +1822,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DBLE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1948,7 +1951,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DAVS -DSEC1 -DBLE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2078,7 +2081,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DBLE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";

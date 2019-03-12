@@ -23,10 +23,10 @@ import Foundation
 
 extension Data {
     public init(hex: String) {
-        self.init(bytes: Array<UInt8>(hex: hex))
+        self.init(bytes: [UInt8](hex: hex))
     }
 
-    public var bytes: Array<UInt8> {
+    public var bytes: [UInt8] {
         return Array(self)
     }
 

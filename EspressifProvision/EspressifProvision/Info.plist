@@ -4,10 +4,20 @@
 <dict>
 	<key>APIKey</key>
 	<string></string>
+	<key>BLEAVSConfigUUID</key>
+	<string>ff54</string>
+	<key>BLEConfigUUID</key>
+	<string>ff52</string>
+	<key>BLEDeviceNamePrefix</key>
+	<string>ESP-Alexa-</string>
+	<key>BLEServiceUUID</key>
+	<string>0000ffff-0000-1000-8000-00805f9b34fb</string>
+	<key>BLESessionUUID</key>
+	<string>ff51</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Espressif BLE Provisioning</string>
+	<string>Int BLE AVS</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -26,19 +36,29 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.espressif.provision.ble.1</string>
+			<string>com.espressif.avs.provisioning.ble</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>espressif.provision.ble</string>
+				<string>amzn-com.espressif.avs.provisioning.ble</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>CodeVerifier</key>
+	<string>abcd1234</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Connect with BLE Compatible devices for Provisioning</string>
+	<key>ProductId</key>
+	<string>esp_avs_master</string>
+	<key>ProofOfPossession</key>
+	<string>abcd1234</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -60,25 +80,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>ProofOfPossession</key>
-	<string>abcd1234</string>
 	<key>WifiBaseUrl</key>
 	<string>192.168.4.1:80</string>
-	<key>ProductId</key>
-	<string></string>
-	<key>CodeVerifier</key>
-	<string>abcd1234</string>
-	<key>BLEServiceUUID</key>
-	<string>0000ffff-0000-1000-8000-00805f9b34fb</string>
-	<key>BLEDeviceNamePrefix</key>
-	<string>PROV_</string>
-	<key>BLESessionUUID</key>
-	<string>ff51</string>
-	<key>BLEConfigUUID</key>
-	<string>ff52</string>
-	<key>BLEAVSConfigUUID</key>
-	<string>ff53</string>
 	<key>WifiNetworkNamePrefix</key>
-	<string>mysoftap</string>
+	<string>ESP-Alexa-</string>
 </dict>
 </plist>

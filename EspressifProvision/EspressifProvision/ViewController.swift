@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     private let pop = Bundle.main.infoDictionary?["ProofOfPossession"] as! String
     private let ssid = "ESPIndia"
     private let passphrase = ""
+    private let avsdetails = ["codeChallenge": "6c7nGrky_ehjM40Ivk3p3-OeoEm9r7NCzmWexUULaa4", "redirectUri": "amzn-com.espressif.avs.provisioning.ble://?methodName=signin", "authCode": "", "clientId": "amzn1.application-oa2-"]
     // AVS
     private let productId = Bundle.main.infoDictionary?["ProductId"] as! String
     private var productDSN = ""
@@ -93,6 +94,9 @@ class ViewController: UIViewController {
                 Provision.CONFIG_BASE_URL_KEY: baseUrl,
                 Provision.CONFIG_WIFI_AP_KEY: networkNamePrefix,
                 Provision.CONFIG_BLE_DEVICE_NAME_PREFIX: deviceNamePrefix,
+                ConfigureAVS.PRODUCT_ID: productId,
+                ConfigureAVS.DEVICE_SERIAL_NUMBER: productDSN,
+                ConfigureAVS.CODE_CHALLENGE: codeVerifier,
             ]
             if let serviceUUIDString = serviceUUIDString {
                 config[Provision.CONFIG_BLE_SERVICE_UUID] = serviceUUIDString
@@ -100,12 +104,13 @@ class ViewController: UIViewController {
                 config[Provision.CONFIG_BLE_CONFIG_UUID] = configUUIDString
                 config[ConfigureAVS.AVS_CONFIG_UUID_KEY] = avsconfigUUIDString
             }
-
-            Provision.showProvisioningWithAmazonUI(on: self,
-                                                   productId: productId,
-                                                   productDSN: productDSN,
-                                                   codeVerifier: codeVerifier,
-                                                   config: config)
+            print(config)
+//            Provision.showProvisioningWithAmazonUI(on: self,
+//                                                   productId: productId,
+//                                                   productDSN: productDSN,
+//                                                   codeVerifier: codeVerifier,
+//                                                   config: config)
+            Provision.showProvisioningUI(on: self, config: config)
         }
     #endif
 
@@ -147,49 +152,46 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    #if AVS
-        private func configureAWSLogin(session newSession: Session,
-                                       completionHandler: @escaping (Error?) -> Void) {
-            let configureAVS = ConfigureAVS(session: newSession)
-
-            DispatchQueue.main.async {
-                ConfigureAVS.loginWithAmazon(productId: self.productId,
-                                             deviceSerialNumber: self.productDSN,
-                                             codeVerifier: self.codeVerifier,
-                                             completionHandler: { awsInfo, error in
-                                                 guard error == nil && awsInfo != nil else {
-                                                     return
-                                                 }
-
-                                                 let authCode = awsInfo![ConfigureAVS.AUTH_CODE]
-                                                 let redirectUri = awsInfo![ConfigureAVS.REDIRECT_URI]
-                                                 let codeVerifier = awsInfo![ConfigureAVS.CODE_VERIFIER]
-                                                 let clientId = awsInfo![ConfigureAVS.CLIENT_ID]
-
-                                                 if let authCode = authCode,
-                                                     let clientId = clientId,
-                                                     let redirectUri = redirectUri,
-                                                     let codeVerifier = codeVerifier {
-                                                     configureAVS.configureAmazonLogin(cliendId: clientId,
-                                                                                       authCode: authCode,
-                                                                                       redirectUri: redirectUri,
-                                                                                       codeVerifier: codeVerifier) { _, error in
-                                                         if let error = error {
-                                                             print("Error in configuring AVS : \(error)")
-                                                         } else {
-                                                             print("AVS configured \(authCode)")
-                                                         }
-
-                                                         completionHandler(error)
-                                                     }
-                                                 }
-
-                })
-            }
-        }
-    #endif
+//    #if AVS
+//        private func configureAWSLogin(session newSession: Session,
+//                                       completionHandler: @escaping (Error?) -> Void) {
+//            let configureAVS = ConfigureAVS(session: newSession)
+//
+//            DispatchQueue.main.async {
+//                ConfigureAVS.loginWithAmazon(completionHandler: { awsInfo, error in
+//                    guard error == nil, awsInfo != nil else {
+//                        return
+//                    }
+//
+//                    let authCode = awsInfo![ConfigureAVS.AUTH_CODE]
+//                    let redirectUri = awsInfo![ConfigureAVS.REDIRECT_URI]
+//                    let codeVerifier = awsInfo![ConfigureAVS.CODE_VERIFIER]
+//                    let clientId = awsInfo![ConfigureAVS.CLIENT_ID]
+//
+//                    if let authCode = authCode,
+//                        let clientId = clientId,
+//                        let redirectUri = redirectUri,
+//                        let codeVerifier = codeVerifier {
+//                        configureAVS.configureAmazonLogin(cliendId: clientId,
+//                                                          authCode: authCode,
+//                                                          redirectUri: redirectUri) { _, error in
+//                            if let error = error {
+//                                print("Error in configuring AVS : \(error)")
+//                            } else {
+//                                print("AVS configured \(authCode)")
+//                            }
+//
+//                            completionHandler(error)
+//                        }
+//                    }
+//
+//                })
+//            }
+//        }
+//    #endif
 
     private func provisionDevice() {
+        print("provisionDevice in ViewController")
         if let transport = transport, let security = security {
             let newSession = Session(transport: transport,
                                      security: security)
@@ -202,21 +204,22 @@ class ViewController: UIViewController {
 
                 let provision = Provision(session: newSession)
 
-                provision.configureWifi(ssid: self.ssid,
-                                        passphrase: self.passphrase) { status, error in
+                provision.configureWifiAvs(ssid: self.ssid,
+                                           passphrase: self.passphrase,
+                                           avs: self.avsdetails) { status, error in
                     guard error == nil else {
                         print("Error in configuring wifi : \(error.debugDescription)")
                         return
                     }
 
                     if status == Espressif_Status.success {
-                        #if AVS
-                            self.configureAWSLogin(session: newSession) { _ in
-                                self.applyConfigurations(provision: provision)
-                            }
-                        #else
-                            self.applyConfigurations(provision: provision)
-                        #endif
+//                        #if AVS
+//                            self.configureAWSLogin(session: newSession) { _ in
+//                                self.applyConfigurations(provision: provision)
+//                            }
+//                        #else
+                        self.applyConfigurations(provision: provision)
+//                        #endif
                     }
                 }
             }

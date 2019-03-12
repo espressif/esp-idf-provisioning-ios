@@ -44,6 +44,7 @@ class ProvisionLandingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if let vc = segue.destination as? ProvisionViewController {
             vc.provisionConfig = provisionConfig
+            print("Inside PLanding", vc.provisionConfig)
         }
     }
 
@@ -64,6 +65,6 @@ class ProvisionLandingViewController: UIViewController {
 }
 
 // Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+private func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
     return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value) })
 }
