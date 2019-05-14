@@ -138,7 +138,7 @@ class ConfigureAVS {
     }
 
     private static func generateCodeChallenge(codeVerifier: String) -> String {
-        let codeChallenge = Data(bytes: codeVerifier.bytes).sha256()
+        let codeChallenge = Data(codeVerifier.bytes).sha256()
         return base64ToBase64url(base64: codeChallenge.base64EncodedString())
     }
 }

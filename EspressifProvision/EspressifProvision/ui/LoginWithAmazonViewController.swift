@@ -93,28 +93,30 @@ class LoginWithAmazonViewController: UIViewController {
     }
 
     public func callLWA() {
-        ConfigureAVS.loginWithAmazon { results, error in
-            if error != nil {
-                print(error.debugDescription)
-            } else if let results = results {
-                // Write AVS details to device
+        DispatchQueue.main.async {
+            ConfigureAVS.loginWithAmazon { results, error in
+                if error != nil {
+                    print(error.debugDescription)
+                } else if let results = results {
+                    // Write AVS details to device
 //                print(results)
 //                self.putAVSDetails(results: results)
-                self.waiter = true
-                var config = self.provisionConfig
-                results.forEach { config[$0] = $1 }
-                DispatchQueue.main.async {
-                    let transportVersion = config[Provision.CONFIG_TRANSPORT_KEY]
-                    if let transportVersion = transportVersion, transportVersion == Provision.CONFIG_TRANSPORT_BLE {
-                        let provisionVC = self.storyboard?.instantiateViewController(withIdentifier: "provision") as! ProvisionViewController
-                        provisionVC.provisionConfig = config
-                        provisionVC.avsDetails = results
-                        provisionVC.transport = self.transport
-                        self.navigationController?.pushViewController(provisionVC, animated: true)
-                    } else {
-                        let provisionLandingVC = self.storyboard?.instantiateViewController(withIdentifier: "provisionLanding") as! ProvisionLandingViewController
-                        provisionLandingVC.provisionConfig = config
-                        self.navigationController?.pushViewController(provisionLandingVC, animated: true)
+                    self.waiter = true
+                    var config = self.provisionConfig
+                    results.forEach { config[$0] = $1 }
+                    DispatchQueue.main.async {
+                        let transportVersion = config[Provision.CONFIG_TRANSPORT_KEY]
+                        if let transportVersion = transportVersion, transportVersion == Provision.CONFIG_TRANSPORT_BLE {
+                            let provisionVC = self.storyboard?.instantiateViewController(withIdentifier: "provision") as! ProvisionViewController
+                            provisionVC.provisionConfig = config
+                            provisionVC.avsDetails = results
+                            provisionVC.transport = self.transport
+                            self.navigationController?.pushViewController(provisionVC, animated: true)
+                        } else {
+                            let provisionLandingVC = self.storyboard?.instantiateViewController(withIdentifier: "provisionLanding") as! ProvisionLandingViewController
+                            provisionLandingVC.provisionConfig = config
+                            self.navigationController?.pushViewController(provisionLandingVC, animated: true)
+                        }
                     }
                 }
             }

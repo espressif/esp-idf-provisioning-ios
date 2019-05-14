@@ -23,7 +23,7 @@ import Foundation
 
 extension Data {
     public init(hex: String) {
-        self.init(bytes: [UInt8](hex: hex))
+        self.init([UInt8](hex: hex))
     }
 
     public var bytes: [UInt8] {
@@ -37,8 +37,8 @@ extension Data {
     public func sha256() -> Data {
         var hash = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
         withUnsafeBytes {
-            _ = CC_SHA256($0, CC_LONG(self.count), &hash)
+            _ = CC_SHA256($0.baseAddress, CC_LONG(self.count), &hash)
         }
-        return Data(bytes: hash)
+        return Data(hash)
     }
 }

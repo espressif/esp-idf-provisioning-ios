@@ -135,8 +135,9 @@ class Provision {
                         print(status)
 
                         completionHandler()
-
-                    } catch {}
+                    } catch {
+                        completionHandler()
+                    }
                 }
             }
         } catch {
@@ -293,8 +294,8 @@ class Provision {
     private func createSetWifiConfigRequest(ssid: String, passphrase: String) throws -> Data? {
         var configData = Espressif_WiFiConfigPayload()
         configData.msg = Espressif_WiFiConfigMsgType.typeCmdSetConfig
-        configData.cmdSetConfig.ssid = Data(bytes: ssid.bytes)
-        configData.cmdSetConfig.passphrase = Data(bytes: passphrase.bytes)
+        configData.cmdSetConfig.ssid = Data(ssid.bytes)
+        configData.cmdSetConfig.passphrase = Data(passphrase.bytes)
 
         return try security.encrypt(data: configData.serializedData())
     }

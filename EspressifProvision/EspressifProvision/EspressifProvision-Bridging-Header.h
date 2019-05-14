@@ -17,5 +17,4 @@
 //
 
 #import <LoginWithAmazon/LoginWithAmazon.h>
-#import "aes.h"
 #import <CommonCrypto/CommonDigest.h>

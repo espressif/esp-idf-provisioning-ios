@@ -199,6 +199,7 @@ extension BLETransport: CBCentralManagerDelegate {
                 uuids = [CBUUID(string: serviceUUID.uuidString)]
             }
             centralManager.scanForPeripherals(withServices: uuids)
+        @unknown default: break
         }
     }
 
