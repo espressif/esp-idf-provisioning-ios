@@ -72,7 +72,7 @@ class BLETransport: NSObject, Transport {
     ///   - completionHandler: handler called when data is sent
     func SendSessionData(data: Data,
                          completionHandler: @escaping (Data?, Error?) -> Void) {
-        guard peripheralCanWrite && peripheralCanRead,
+        guard peripheralCanWrite, peripheralCanRead,
             let espressifPeripheral = currentPeripheral else {
             completionHandler(nil, TransportError.deviceUnreachableError("BLE device unreachable"))
             return
@@ -92,7 +92,7 @@ class BLETransport: NSObject, Transport {
     func SendConfigData(path: String,
                         data: Data,
                         completionHandler: @escaping (Data?, Error?) -> Void) {
-        guard peripheralCanWrite && peripheralCanRead,
+        guard peripheralCanWrite, peripheralCanRead,
             let espressifPeripheral = currentPeripheral else {
             completionHandler(nil, TransportError.deviceUnreachableError("BLE device unreachable"))
             return
@@ -199,6 +199,7 @@ extension BLETransport: CBCentralManagerDelegate {
                 uuids = [CBUUID(string: serviceUUID.uuidString)]
             }
             centralManager.scanForPeripherals(withServices: uuids)
+        @unknown default: break
         }
     }
 
@@ -252,7 +253,7 @@ extension BLETransport: CBPeripheralDelegate {
                 peripheralCanWrite = false
             }
         }
-        if sessionCharacteristic != nil && peripheralCanRead && peripheralCanWrite {
+        if sessionCharacteristic != nil, peripheralCanRead, peripheralCanWrite {
             delegate?.peripheralConfigured(peripheral: peripheral)
         } else {
             delegate?.peripheralNotConfigured(peripheral: peripheral)

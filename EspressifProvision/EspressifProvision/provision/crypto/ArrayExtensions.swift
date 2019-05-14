@@ -23,7 +23,7 @@ import Foundation
 
 extension Array {
     public init(reserveCapacity: Int) {
-        self = Array<Element>()
+        self = [Element]()
         self.reserveCapacity(reserveCapacity)
     }
 
@@ -42,7 +42,7 @@ extension Array where Element == UInt8 {
                 skip -= 1
                 continue
             }
-            guard char.value >= 48 && char.value <= 102 else {
+            guard char.value >= 48, char.value <= 102 else {
                 removeAll()
                 return
             }

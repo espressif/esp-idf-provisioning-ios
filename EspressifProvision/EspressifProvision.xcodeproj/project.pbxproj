@@ -33,8 +33,7 @@
 		143146B520EB273B0017E119 /* ProvisionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143146B420EB273B0017E119 /* ProvisionViewController.swift */; };
 		144149442126AE09002AD5E1 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144149432126AE09002AD5E1 /* SuccessViewController.swift */; };
 		14706917211050EE00F8E1D8 /* BLELandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14706916211050EE00F8E1D8 /* BLELandingViewController.swift */; };
-		149774DB210C713300022841 /* aes.c in Sources */ = {isa = PBXBuildFile; fileRef = 149774DA210C713300022841 /* aes.c */; };
-		149774DD210C799900022841 /* MbedAES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149774DC210C799900022841 /* MbedAES.swift */; };
+		149774DD210C799900022841 /* CryptoAES.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149774DC210C799900022841 /* CryptoAES.swift */; };
 		149774DF210C87AB00022841 /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149774DE210C87AB00022841 /* DataExtensions.swift */; };
 		149774E1210C89E600022841 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149774E0210C89E600022841 /* ArrayExtensions.swift */; };
 		149774E3210C8A0000022841 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149774E2210C8A0000022841 /* StringExtensions.swift */; };
@@ -97,11 +96,7 @@
 		143146B420EB273B0017E119 /* ProvisionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvisionViewController.swift; sourceTree = "<group>"; };
 		144149432126AE09002AD5E1 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		14706916211050EE00F8E1D8 /* BLELandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLELandingViewController.swift; sourceTree = "<group>"; };
-		149774D7210C713300022841 /* check_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = check_config.h; sourceTree = "<group>"; };
-		149774D8210C713300022841 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		149774D9210C713300022841 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
-		149774DA210C713300022841 /* aes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aes.c; sourceTree = "<group>"; };
-		149774DC210C799900022841 /* MbedAES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MbedAES.swift; sourceTree = "<group>"; };
+		149774DC210C799900022841 /* CryptoAES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoAES.swift; sourceTree = "<group>"; };
 		149774DE210C87AB00022841 /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		149774E0210C89E600022841 /* ArrayExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		149774E2210C8A0000022841 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
@@ -285,24 +280,12 @@
 		149774D5210C711500022841 /* crypto */ = {
 			isa = PBXGroup;
 			children = (
-				149774DA210C713300022841 /* aes.c */,
-				149774D6210C713300022841 /* mbedtls */,
-				149774DC210C799900022841 /* MbedAES.swift */,
+				149774DC210C799900022841 /* CryptoAES.swift */,
 				149774DE210C87AB00022841 /* DataExtensions.swift */,
 				149774E0210C89E600022841 /* ArrayExtensions.swift */,
 				149774E2210C8A0000022841 /* StringExtensions.swift */,
 			);
 			path = crypto;
-			sourceTree = "<group>";
-		};
-		149774D6210C713300022841 /* mbedtls */ = {
-			isa = PBXGroup;
-			children = (
-				149774D7210C713300022841 /* check_config.h */,
-				149774D8210C713300022841 /* config.h */,
-				149774D9210C713300022841 /* aes.h */,
-			);
-			path = mbedtls;
 			sourceTree = "<group>";
 		};
 		56A4FE6F186D17F2A0F189AC /* Pods */ = {
@@ -409,7 +392,7 @@
 				TargetAttributes = {
 					1431462220DE994B0017E119 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -418,12 +401,12 @@
 					};
 					1431463620DE994C0017E119 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						TestTargetID = 1431462220DE994B0017E119;
 					};
 					1431464120DE994C0017E119 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						TestTargetID = 1431462220DE994B0017E119;
 					};
 				};
@@ -506,7 +489,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "swiftformat .";
+			shellScript = "swiftformat .\n";
 		};
 		14E4319221118AD000A76D62 /* Generate Swift Proto files */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -528,18 +511,20 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curve25519.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BC6043E63EC0B0F301552320 /* [CP] Embed Pods Frameworks */ = {
@@ -548,18 +533,20 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curve25519.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D282A8FC0F41CD28BF8F6877 /* [CP] Check Pods Manifest.lock */ = {
@@ -596,7 +583,7 @@
 				1431468420DF69C30017E119 /* Security1.swift in Sources */,
 				143146B520EB273B0017E119 /* ProvisionViewController.swift in Sources */,
 				1431462920DE994B0017E119 /* ViewController.swift in Sources */,
-				149774DD210C799900022841 /* MbedAES.swift in Sources */,
+				149774DD210C799900022841 /* CryptoAES.swift in Sources */,
 				1431466920DEAD1A0017E119 /* SoftAPTransport.swift in Sources */,
 				1431469B20E387C60017E119 /* constants.pb.swift in Sources */,
 				149774E1210C89E600022841 /* ArrayExtensions.swift in Sources */,
@@ -605,7 +592,6 @@
 				143146B320EB22470017E119 /* ProvisionLandingViewController.swift in Sources */,
 				1431468B20E37B980017E119 /* Session.swift in Sources */,
 				1431469F20E387C60017E119 /* wifi_constants.pb.swift in Sources */,
-				149774DB210C713300022841 /* aes.c in Sources */,
 				149774E3210C8A0000022841 /* StringExtensions.swift in Sources */,
 				14A6EA0E2108DF95007F9407 /* wifi_config.pb.swift in Sources */,
 				1431466520DEA97C0017E119 /* Transport.swift in Sources */,
@@ -724,6 +710,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -777,6 +764,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -802,9 +790,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -830,8 +819,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -852,7 +842,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -874,7 +864,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -894,7 +884,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -914,7 +904,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -977,6 +967,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = "WifiSec0-Debug";
 		};
@@ -988,7 +979,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1004,7 +995,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "WifiSec0-Debug";
@@ -1025,7 +1016,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1045,7 +1036,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -1108,6 +1099,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = "WifiSec1-Debug";
 		};
@@ -1133,9 +1125,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "WifiSec1-Debug";
@@ -1156,7 +1149,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1176,7 +1169,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -1239,6 +1232,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = "BLESec0-Debug";
 		};
@@ -1264,9 +1258,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provision;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "BLESec0-Debug";
@@ -1287,7 +1282,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1307,7 +1302,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
@@ -1370,6 +1365,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = "BLESec1-Debug";
 		};
@@ -1397,7 +1393,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = "BLESec1-Debug";
@@ -1418,7 +1414,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EspressifProvision.app/EspressifProvision";
 			};
@@ -1438,7 +1434,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.EspressifProvisionUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = EspressifProvision;
 			};
