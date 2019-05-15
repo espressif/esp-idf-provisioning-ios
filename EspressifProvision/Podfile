@@ -9,7 +9,6 @@ abstract_target 'EspressifProvisionAll' do
 
   pod 'SwiftProtobuf', '~> 1.5.0'
   pod 'Curve25519', '~> 1.1.0'
-  pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift", :branch => "master"
   
   target 'EspressifProvision'
   target 'EspressifProvisionTests' do

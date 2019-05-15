@@ -16,7 +16,7 @@
 //  EspressifProvision
 //
 
-import CryptoSwift
+import CommonCrypto
 import Foundation
 
 class CryptoAES {
@@ -25,24 +25,18 @@ class CryptoAES {
 
     var streamBlock = Data()
     var nonceCounterOffset = 0
-    var aes: AES!
-    var decryptor: Updatable!
+    var decryptor: AESDecryptor!
 
     public init(key: Data, iv: Data) {
         self.key = key
         self.iv = iv
-        aes = try! AES(key: key.bytes, blockMode: CTR(iv: iv.bytes), padding: .noPadding)
-        decryptor = try! aes.makeDecryptor()
+        decryptor = AESDecryptor(key: key, andIV: iv)
     }
 
     func encrypt(data: Data) -> Data? {
         var returnData: Data?
-        do {
-            let encryptedData = try decryptor.update(withBytes: data.bytes)
-            returnData = Data(encryptedData)
-        } catch {
-            print("Encryption error")
-        }
+        var error: NSError?
+        returnData = decryptor.cryptData(data, operation: CCOperation(kCCEncrypt), mode: CCMode(kCCModeCTR), algorithm: CCAlgorithm(kCCAlgorithmAES), padding: CCPadding(ccNoPadding), keyLength: kCCKeySizeAES256, iv: iv, key: key, error: &error)
         return returnData
     }
 }

@@ -40,6 +40,7 @@
 		14A6EA0E2108DF95007F9407 /* wifi_config.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A6EA0D2108DF95007F9407 /* wifi_config.pb.swift */; };
 		14DE671E20ECD04100941522 /* BLETransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE671D20ECD04100941522 /* BLETransport.swift */; };
 		7E89B3398606A35D1BCB7893 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */; };
+		F184C9E7228C4A780034C5B7 /* AESDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F184C9E6228C4A780034C5B7 /* AESDecryptor.m */; };
 		F6D7C9B0F5FDCEEFFA78A8C8 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +116,8 @@
 		C9F80AFFF914218F4C795369 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig"; sourceTree = "<group>"; };
 		D2B4EC5704D46C3EA9A47720 /* Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA24507D63588F8C9C0C451B /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; sourceTree = "<group>"; };
+		F184C9E5228C4A780034C5B7 /* AESDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESDecryptor.h; sourceTree = "<group>"; };
+		F184C9E6228C4A780034C5B7 /* AESDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESDecryptor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +283,8 @@
 		149774D5210C711500022841 /* crypto */ = {
 			isa = PBXGroup;
 			children = (
+				F184C9E5228C4A780034C5B7 /* AESDecryptor.h */,
+				F184C9E6228C4A780034C5B7 /* AESDecryptor.m */,
 				149774DC210C799900022841 /* CryptoAES.swift */,
 				149774DE210C87AB00022841 /* DataExtensions.swift */,
 				149774E0210C89E600022841 /* ArrayExtensions.swift */,
@@ -512,13 +517,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curve25519.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
 			);
@@ -534,13 +537,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curve25519.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
 			);
@@ -596,6 +597,7 @@
 				14A6EA0E2108DF95007F9407 /* wifi_config.pb.swift in Sources */,
 				1431466520DEA97C0017E119 /* Transport.swift in Sources */,
 				144149442126AE09002AD5E1 /* SuccessViewController.swift in Sources */,
+				F184C9E7228C4A780034C5B7 /* AESDecryptor.m in Sources */,
 				14706917211050EE00F8E1D8 /* BLELandingViewController.swift in Sources */,
 				1431462720DE994B0017E119 /* AppDelegate.swift in Sources */,
 				1431469D20E387C60017E119 /* session.pb.swift in Sources */,
