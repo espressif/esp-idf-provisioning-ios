@@ -66,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0AF3D0A00BBA987EC1329277 /* Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1avs-release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1avs-release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1avs-release.xcconfig"; sourceTree = "<group>"; };
 		10FBDE85E3C2325EA6CC75E3 /* Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig"; sourceTree = "<group>"; };
 		1431462320DE994B0017E119 /* EspressifProvision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EspressifProvision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1431462620DE994B0017E119 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +135,7 @@
 		C285865721D96C24054F1647 /* Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec0-debug.xcconfig"; sourceTree = "<group>"; };
 		C9F80AFFF914218F4C795369 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig"; sourceTree = "<group>"; };
 		D2B4EC5704D46C3EA9A47720 /* Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig"; sourceTree = "<group>"; };
+		D3C0A52210E731723240B81F /* Pods-EspressifProvisionAll-EspressifProvision.blesec1avs-release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.blesec1avs-release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.blesec1avs-release.xcconfig"; sourceTree = "<group>"; };
 		EA24507D63588F8C9C0C451B /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; sourceTree = "<group>"; };
 		F184C9E2228C3E8B0034C5B7 /* AESDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESDecryptor.h; sourceTree = "<group>"; };
 		F184C9E3228C3E8B0034C5B7 /* AESDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESDecryptor.m; sourceTree = "<group>"; };
@@ -352,6 +354,8 @@
 				82594A2ED75EE20241927EC3 /* Pods-EspressifProvisionAll-EspressifProvisionTests.blesec0-debug.xcconfig */,
 				2499731B0276139041352A28 /* Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1avs-debug.xcconfig */,
 				82ECC73D5F6285205C5D6B5C /* Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1-debug.xcconfig */,
+				D3C0A52210E731723240B81F /* Pods-EspressifProvisionAll-EspressifProvision.blesec1avs-release.xcconfig */,
+				0AF3D0A00BBA987EC1329277 /* Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1avs-release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -828,17 +832,18 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -856,17 +861,18 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -1027,18 +1033,19 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DWIFI -DAVS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -1151,18 +1158,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DAVS -DSEC0 -DWIFI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1280,18 +1288,19 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DAVS -DSEC1 -DWIFI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -1411,18 +1420,19 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DWIFI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -1541,18 +1551,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1670,18 +1681,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DBLE -DAVS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1799,18 +1811,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DBLE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1928,18 +1941,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DAVS -DSEC1 -DBLE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2058,18 +2072,19 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DBLE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -2184,7 +2199,7 @@
 		};
 		F184C9E9228D37440034C5B7 /* BLESec1AVS-Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 68BDE7FE2DF38246D584027E /* Pods-EspressifProvisionAll-EspressifProvision.blesec1avs-debug.xcconfig */;
+			baseConfigurationReference = D3C0A52210E731723240B81F /* Pods-EspressifProvisionAll-EspressifProvision.blesec1avs-release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -2195,24 +2210,27 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = "COCOAPODS=1";
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DAVS -DSEC1 -DBLE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.avs.provisioning.ble;
+				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.intprovbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = "BLESec1AVS-Release";
 		};
 		F184C9EA228D37440034C5B7 /* BLESec1AVS-Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2499731B0276139041352A28 /* Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1avs-debug.xcconfig */;
+			baseConfigurationReference = 0AF3D0A00BBA987EC1329277 /* Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1avs-release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

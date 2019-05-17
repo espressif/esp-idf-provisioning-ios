@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>APIKey</key>
-	<string></string>
+	<string>eyJhbGciOiJSU0EtU0hBMjU2IiwidmVyIjoiMSJ9.eyJ2ZXIiOiIzIiwiZW5kcG9pbnRzIjp7ImF1dGh6IjoiaHR0cHM6Ly93d3cuYW1hem9uLmNvbS9hcC9vYSIsInRva2VuRXhjaGFuZ2UiOiJodHRwczovL2FwaS5hbWF6b24uY29tL2F1dGgvbzIvdG9rZW4ifSwiY2xpZW50SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1vYTItY2xpZW50Ljk0NTA0YjhjZjQ0ZDQ2OTQ4YmJkNmMwYjdlNmViNTljIiwiYXBwRmFtaWx5SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi45ZjA5NDkzYzQxNDI0YjczOGE0YWNmYThkNWVlN2Y3MCIsImJ1bmRsZVNlZWRJZCI6ImNvbS5lc3ByZXNzaWYuaW50cHJvdmJsZWF2cyIsImJ1bmRsZUlkIjoiY29tLmVzcHJlc3NpZi5pbnRwcm92YmxlYXZzIiwiaXNzIjoiQW1hem9uIiwidHlwZSI6IkFQSUtleSIsImFwcFZhcmlhbnRJZCI6ImFtem4xLmFwcGxpY2F0aW9uLWNsaWVudC41ZjRjZTE2MWU1MzQ0Zjk0OWU2YTVmMTA3Yzc5ZDhmNCIsInRydXN0UG9vbCI6bnVsbCwiYXBwSWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1jbGllbnQuNWY0Y2UxNjFlNTM0NGY5NDllNmE1ZjEwN2M3OWQ4ZjQiLCJpZCI6IjA0MGEwNjkyLTc4ODUtMTFlOS1hM2EwLWRiYzNmZDYzMmEyZiIsImlhdCI6IjE1NTgwODQ4MzA1MjUifQ==.HiXv0UKO7zl7wZABuAkXrRhUAwa4f4nu5X2ThcDL/ZUqgRTZpWGyhwvmWKeLVYV81QcjLJaNU1lr3wWGYT9utEWvsDzMZm4eLHtnkg38n8QZZjaCPC8EO+3ExU3mU+Zs5RJHRq0we4lZypM5SCna0qKFZ5BX5D6iCgkn+l/bhHIvc8M3a3EWt6689BLVQNqQer8+wKYhG96/xXz5kH+7YMKcu0hgpp5JIeBSLcx1bOi+ymK3QWhCJPNKV1t98joBAVPI9Z1/0Qa0WW6WJ97yhRZTs7XFm8gyz6vlnUsrfBArLrfb+S2/Rz1U2eTQzzkSC9uF0LNKHGdtUYRQXKNtcw==</string>
 	<key>BLEAVSConfigUUID</key>
 	<string>ff54</string>
 	<key>BLEConfigUUID</key>
@@ -17,7 +17,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Int BLE AVS</string>
+	<string>Int-BLE-AVS-Prov</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -36,10 +36,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.espressif.avs.provisioning.ble</string>
+			<string>com.espressif.intprovbleavs</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>amzn-com.espressif.avs.provisioning.ble</string>
+				<string>amzn-com.espressif.intprovbleavs</string>
 			</array>
 		</dict>
 	</array>
@@ -70,8 +70,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
