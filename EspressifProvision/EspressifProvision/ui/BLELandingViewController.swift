@@ -36,7 +36,7 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
             let deviceNamePrefix = provisionConfig[Provision.CONFIG_BLE_DEVICE_NAME_PREFIX],
             let sessionUuid = provisionConfig[Provision.CONFIG_BLE_SESSION_UUID],
             let configUuid = provisionConfig[Provision.CONFIG_BLE_CONFIG_UUID] {
-            var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: configUuid]
+            var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: configUuid, Provision.PROVISIONING_SCAN_PATH: provisionConfig[Provision.CONFIG_BLE_SCAN_UUID]!]
             #if AVS
                 let avsconfigUuid = provisionConfig[ConfigureAVS.AVS_CONFIG_UUID_KEY]
                 configUUIDMap[ConfigureAVS.AVS_CONFIG_PATH] = avsconfigUuid

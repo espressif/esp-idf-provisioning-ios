@@ -33,8 +33,10 @@ class Provision {
     public static let CONFIG_BLE_SERVICE_UUID = "serviceUUID"
     public static let CONFIG_BLE_SESSION_UUID = "sessionUUID"
     public static let CONFIG_BLE_CONFIG_UUID = "configUUID"
+    public static let CONFIG_BLE_SCAN_UUID = "scanUUID"
     public static let CONFIG_BLE_DEVICE_NAME_PREFIX = "deviceNamePrefix"
     public static let PROVISIONING_CONFIG_PATH = "prov-config"
+    public static let PROVISIONING_SCAN_PATH = "prov-scan"
 
     /// Create Provision object with a Session object
     /// Here the Provision class will require a session
@@ -176,6 +178,127 @@ class Provision {
                 completionHandler(Espressif_Status.internalError, error)
             }
         }
+    }
+
+    func startWifiScan(completionHandler: @escaping (Data?, Error?) -> Void) {
+        var configRequest = Espressif_CmdScanStart()
+        configRequest.blocking = true
+        configRequest.passive = false
+        configRequest.groupChannels = 0
+        configRequest.periodMs = 120
+        let msgType = Espressif_WiFiScanMsgType.typeCmdScanStart
+        var payload = Espressif_WiFiScanPayload()
+        payload.msg = msgType
+        payload.cmdScanStart = configRequest
+        do {
+            let payloadData = try security.encrypt(data: payload.serializedData())
+            if let data = payloadData {
+                transport.SendConfigData(path: Provision.PROVISIONING_SCAN_PATH, data: data) { response, error in
+                    guard error == nil, response != nil else {
+                        completionHandler(nil, error)
+                        return
+                    }
+                    self.getWiFiScanStatus(completionHandler: completionHandler)
+                }
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+//    func getWiFiScanList(completionHandler: @escaping (Data?, Error?) -> Void) {
+//        getWiFiScanStatus(completionHandler: completionHandler)
+//        do {
+//            let data = try createWifiScanConfigRequest()
+//            if let scanData = data {
+//                transport.SendConfigData(path: Provision.PROVISIONING_SCAN_PATH, data: scanData) { response, error in
+//                    guard error == nil, response != nil else {
+//                        completionHandler(nil, error)
+//                        return
+//                    }
+//                    self.getWiFiScanStatus(completionHandler: completionHandler)
+    ////                    let scanCount = self.processGetWiFiScanStatus(responseData: response!)
+    ////                    if scanCount > 0 {
+    ////                        self.getScannedWiFiListResponse(count: scanCount, completionHandler: completionHandler)
+    ////                    } else {
+    ////                        completionHandler(nil, nil)
+    ////                    }
+//                }
+//            }
+//        } catch {
+//            completionHandler(nil, error)
+//        }
+//    }
+
+    func getWiFiScanStatus(completionHandler: @escaping (Data?, Error?) -> Void) {
+        let configRequest = Espressif_CmdScanStatus()
+        let msgType = Espressif_WiFiScanMsgType.typeCmdScanStatus
+        var payload = Espressif_WiFiScanPayload()
+        payload.msg = msgType
+        payload.cmdScanStatus = configRequest
+        do {
+            let payloadData = try security.encrypt(data: payload.serializedData())
+            if let data = payloadData {
+                transport.SendConfigData(path: Provision.PROVISIONING_SCAN_PATH, data: data) { response, error in
+                    guard error == nil, response != nil else {
+//                        completionHandler(nil, error)
+                        return
+                    }
+                    let scanCount = self.processGetWiFiScanStatus(responseData: response!)
+                    if scanCount > 0 {
+                        self.getScannedWiFiListResponse(count: scanCount, completionHandler: completionHandler)
+                    } else {
+                        completionHandler(nil, nil)
+                    }
+                }
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    func getScannedWiFiListResponse(count: UInt32, completionHandler: @escaping (Data?, Error?) -> Void) {
+        var configRequest = Espressif_CmdScanResult()
+        configRequest.startIndex = 0
+        configRequest.count = count
+        let msgType = Espressif_WiFiScanMsgType()
+        var payload = Espressif_WiFiScanPayload()
+        payload.msg = msgType
+        payload.cmdScanResult = configRequest
+        do {
+            let payloadData = try security.encrypt(data: payload.serializedData())
+            if let data = payloadData {
+                transport.SendConfigData(path: Provision.PROVISIONING_SCAN_PATH, data: data) { response, error in
+                    guard error == nil, response != nil else {
+                        completionHandler(nil, error)
+                        return
+                    }
+                    if let decryptedResponse = self.security.decrypt(data: response!) {
+                        completionHandler(decryptedResponse, nil)
+                    } else {
+                        completionHandler(nil, nil)
+                    }
+                }
+            } else {
+                completionHandler(nil, nil)
+            }
+        } catch {
+            completionHandler(nil, error)
+        }
+    }
+
+    func processGetWiFiScanStatus(responseData: Data) -> UInt32 {
+        let resultCount: UInt32 = 0
+        if let decryptedResponse = security.decrypt(data: responseData) {
+            do {
+                let payload = try Espressif_WiFiScanPayload(serializedData: decryptedResponse)
+                let response = payload.respScanStatus
+                return response.resultCount
+            } catch {
+                print(error)
+            }
+        }
+        return resultCount
     }
 
     /// Launch default UI for provisioning Wifi credentials on the device.
@@ -417,5 +540,14 @@ class Provision {
         failReason = configResponse.respGetStatus.failReason
 
         return (responseStatus, failReason)
+    }
+
+    private func createWifiScanConfigRequest() throws -> Data? {
+        let configRequest = Espressif_CmdScanStatus()
+        let msgType = Espressif_WiFiScanMsgType.typeCmdScanStatus
+        var payload = Espressif_WiFiScanPayload()
+        payload.msg = msgType
+        payload.cmdScanStatus = configRequest
+        return try security.encrypt(data: payload.serializedData())
     }
 }

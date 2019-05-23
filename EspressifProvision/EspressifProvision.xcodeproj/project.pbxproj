@@ -45,6 +45,7 @@
 		14DE671E20ECD04100941522 /* BLETransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE671D20ECD04100941522 /* BLETransport.swift */; };
 		7E89B3398606A35D1BCB7893 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */; };
 		F184C9E4228C3E8B0034C5B7 /* AESDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F184C9E3228C3E8B0034C5B7 /* AESDecryptor.m */; };
+		F1F339572296703C000F53A0 /* wifi_scan.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F339562296703C000F53A0 /* wifi_scan.pb.swift */; };
 		F6D7C9B0F5FDCEEFFA78A8C8 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -139,6 +140,7 @@
 		EA24507D63588F8C9C0C451B /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; sourceTree = "<group>"; };
 		F184C9E2228C3E8B0034C5B7 /* AESDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESDecryptor.h; sourceTree = "<group>"; };
 		F184C9E3228C3E8B0034C5B7 /* AESDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESDecryptor.m; sourceTree = "<group>"; };
+		F1F339562296703C000F53A0 /* wifi_scan.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_scan.pb.swift; sourceTree = "<group>"; };
 		F5A6E92635049FCEB2D5787E /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -283,6 +285,7 @@
 		1431468F20E387C60017E119 /* proto */ = {
 			isa = PBXGroup;
 			children = (
+				F1F339562296703C000F53A0 /* wifi_scan.pb.swift */,
 				14A6EA0D2108DF95007F9407 /* wifi_config.pb.swift */,
 				1431469020E387C60017E119 /* sec1.pb.swift */,
 				1431469120E387C60017E119 /* sec0.pb.swift */,
@@ -643,6 +646,7 @@
 				149774E1210C89E600022841 /* ArrayExtensions.swift in Sources */,
 				1431466720DEAC220017E119 /* Security.swift in Sources */,
 				1431468720DFA58E0017E119 /* HexUtils.swift in Sources */,
+				F1F339572296703C000F53A0 /* wifi_scan.pb.swift in Sources */,
 				143146B320EB22470017E119 /* ProvisionLandingViewController.swift in Sources */,
 				1431468B20E37B980017E119 /* Session.swift in Sources */,
 				143146AA20EA29E90017E119 /* LoginWithAmazonViewController.swift in Sources */,

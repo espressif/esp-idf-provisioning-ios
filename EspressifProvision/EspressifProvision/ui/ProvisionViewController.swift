@@ -32,6 +32,7 @@ class ProvisionViewController: UIViewController {
     var activityView: UIActivityIndicatorView?
     var grayView: UIView?
     var avsDetails: [String: String]?
+    var provision: Provision!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,52 @@ class ProvisionViewController: UIViewController {
         provisionButton.isUserInteractionEnabled = false
         if let bleTransport = transport as? BLETransport {
             print("Inside PVC", bleTransport.currentPeripheral!)
+        }
+        getWifiScanList()
+    }
+
+    func getWifiScanList() {
+        let pop = provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]
+        let securityVersion = provisionConfig[Provision.CONFIG_SECURITY_KEY]
+        if securityVersion == Provision.CONFIG_SECURITY_SECURITY1 {
+            security = Security1(proofOfPossession: pop!)
+        } else {
+            security = Security0()
+        }
+
+        if transport != nil {
+            // transport is BLETransport set from BLELandingVC
+            if let bleTransport = transport as? BLETransport {
+                bleTransport.delegate = self
+            }
+        }
+
+        let newSession = Session(transport: transport!,
+                                 security: security!)
+
+        newSession.initialize(response: nil) { error in
+            guard error == nil else {
+                print("Error in establishing session \(error.debugDescription)")
+                return
+            }
+
+            self.provision = Provision(session: newSession)
+
+            self.provision.startWifiScan(completionHandler: { response, error in
+                guard error == nil, response != nil else {
+                    print(error)
+                    return
+                }
+                do {
+                    let payload = try Espressif_WiFiScanPayload(serializedData: response!)
+                    let responseList = payload.respScanResult
+                    var result: [String] = []
+                    for index in 0 ... responseList.entries.count {
+                        result.append(String(decoding: responseList.entries[index].ssid, as: UTF8.self))
+                    }
+                    print(result)
+                } catch {}
+            })
         }
     }
 
@@ -221,8 +268,12 @@ extension ProvisionViewController: BLETransportDelegate {
         showError(errorMessage: "Peripheral device could not be configured.")
     }
 
-    func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {
-        print("Here")
+//    func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {
+//        print("Here")
+//        showError(errorMessage: "Peripheral device disconnected")
+//    }
+    func peripheralDisconnected(peripheral _: CBPeripheral, error: Error?) {
+        print(error)
         showError(errorMessage: "Peripheral device disconnected")
     }
 }

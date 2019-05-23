@@ -10,6 +10,8 @@
 	<string>ff52</string>
 	<key>BLEDeviceNamePrefix</key>
 	<string>ESP-Alexa-</string>
+	<key>BLEScanUUID</key>
+	<string>ff50</string>
 	<key>BLEServiceUUID</key>
 	<string>0000ffff-0000-1000-8000-00805f9b34fb</string>
 	<key>BLESessionUUID</key>
