@@ -45,6 +45,8 @@
 		14DE671E20ECD04100941522 /* BLETransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE671D20ECD04100941522 /* BLETransport.swift */; };
 		7E89B3398606A35D1BCB7893 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */; };
 		F184C9E4228C3E8B0034C5B7 /* AESDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F184C9E3228C3E8B0034C5B7 /* AESDecryptor.m */; };
+		F1DCEC292296CB94005918FE /* ScanWifiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEC282296CB94005918FE /* ScanWifiList.swift */; };
+		F1DCEC2D2297D577005918FE /* WifiListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEC2C2297D577005918FE /* WifiListTableViewCell.swift */; };
 		F1F339572296703C000F53A0 /* wifi_scan.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F339562296703C000F53A0 /* wifi_scan.pb.swift */; };
 		F6D7C9B0F5FDCEEFFA78A8C8 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */; };
 /* End PBXBuildFile section */
@@ -140,6 +142,8 @@
 		EA24507D63588F8C9C0C451B /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; sourceTree = "<group>"; };
 		F184C9E2228C3E8B0034C5B7 /* AESDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESDecryptor.h; sourceTree = "<group>"; };
 		F184C9E3228C3E8B0034C5B7 /* AESDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESDecryptor.m; sourceTree = "<group>"; };
+		F1DCEC282296CB94005918FE /* ScanWifiList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanWifiList.swift; sourceTree = "<group>"; };
+		F1DCEC2C2297D577005918FE /* WifiListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiListTableViewCell.swift; sourceTree = "<group>"; };
 		F1F339562296703C000F53A0 /* wifi_scan.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_scan.pb.swift; sourceTree = "<group>"; };
 		F5A6E92635049FCEB2D5787E /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -236,6 +240,7 @@
 		1431466320DEA9690017E119 /* provision */ = {
 			isa = PBXGroup;
 			children = (
+				F1DCEC272296CB7D005918FE /* wifi */,
 				149774D5210C711500022841 /* crypto */,
 				1431468C20E382250017E119 /* transport */,
 				1431468920E37B8B0017E119 /* session */,
@@ -373,6 +378,15 @@
 				9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F1DCEC272296CB7D005918FE /* wifi */ = {
+			isa = PBXGroup;
+			children = (
+				F1DCEC282296CB94005918FE /* ScanWifiList.swift */,
+				F1DCEC2C2297D577005918FE /* WifiListTableViewCell.swift */,
+			);
+			path = wifi;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -573,11 +587,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curve25519.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -593,11 +609,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curve25519.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -638,6 +656,7 @@
 				1431469920E387C60017E119 /* sec0.pb.swift in Sources */,
 				14DE671C20EC94C600941522 /* ConfigureAVS.swift in Sources */,
 				1431468420DF69C30017E119 /* Security1.swift in Sources */,
+				F1DCEC2D2297D577005918FE /* WifiListTableViewCell.swift in Sources */,
 				143146B520EB273B0017E119 /* ProvisionViewController.swift in Sources */,
 				1431462920DE994B0017E119 /* ViewController.swift in Sources */,
 				149774DD210C799900022841 /* CryptoAES.swift in Sources */,
@@ -660,6 +679,7 @@
 				1431469D20E387C60017E119 /* session.pb.swift in Sources */,
 				F184C9E4228C3E8B0034C5B7 /* AESDecryptor.m in Sources */,
 				1431469E20E387C60017E119 /* avsconfig.pb.swift in Sources */,
+				F1DCEC292296CB94005918FE /* ScanWifiList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

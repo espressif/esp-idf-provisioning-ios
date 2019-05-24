@@ -103,14 +103,12 @@ class BLETransport: NSObject, Transport {
         if let characteristics = self.currentService?.characteristics {
             for c in characteristics {
                 if c.uuid.uuidString.lowercased() == configUUIDMap![path]?.lowercased() {
-                    print(path)
                     characteristic = c
                     break
                 }
             }
         }
         if let characteristic = characteristic {
-            print(data as NSData)
             espressifPeripheral.writeValue(data, for: characteristic, type: .withResponse)
             currentRequestCompletionHandler = completionHandler
         } else {

@@ -44,9 +44,7 @@ class ConfigureAVS {
 
     public static func loginWithAmazon(completionHandler: @escaping ([String: String]?, Error?) -> Swift.Void) {
         let request = AMZNAuthorizeRequest()
-        for i in stride(from: 1, to: 10, by: 3) {
-            print(i)
-        }
+        for _ in stride(from: 1, to: 10, by: 3) {}
         let productId = ProvDeviceDetails[1]
         let deviceSerialNumber = ProvDeviceDetails[0]
         let codeChallenge = ProvDeviceDetails[2]
