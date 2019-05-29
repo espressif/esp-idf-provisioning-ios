@@ -71,7 +71,7 @@ class Provision {
                 let message = try createSetWifiConfigRequest(ssid: ssid, passphrase: passphrase)
                 if let message = message {
                     transport.SendConfigData(path: Provision.PROVISIONING_CONFIG_PATH, data: message) { response, error in
-                        guard error == nil && response != nil else {
+                        guard error == nil, response != nil else {
                             completionHandler(Espressif_Status.internalError, error)
                             return
                         }
@@ -100,7 +100,7 @@ class Provision {
                 let message = try createApplyConfigRequest()
                 if let message = message {
                     transport.SendConfigData(path: Provision.PROVISIONING_CONFIG_PATH, data: message) { response, error in
-                        guard error == nil && response != nil else {
+                        guard error == nil, response != nil else {
                             completionHandler(Espressif_Status.internalError, error)
                             return
                         }
@@ -160,7 +160,7 @@ class Provision {
             if let message = message {
                 transport.SendConfigData(path: Provision.PROVISIONING_CONFIG_PATH,
                                          data: message) { response, error in
-                    guard error == nil && response != nil else {
+                    guard error == nil, response != nil else {
                         completionHandler(Espressif_WifiStationState.disconnected, Espressif_WifiConnectFailedReason.UNRECOGNIZED(0), error)
                         return
                     }
@@ -188,8 +188,8 @@ class Provision {
     private func createSetWifiConfigRequest(ssid: String, passphrase: String) throws -> Data? {
         var configData = Espressif_WiFiConfigPayload()
         configData.msg = Espressif_WiFiConfigMsgType.typeCmdSetConfig
-        configData.cmdSetConfig.ssid = Data(bytes: ssid.bytes)
-        configData.cmdSetConfig.passphrase = Data(bytes: passphrase.bytes)
+        configData.cmdSetConfig.ssid = Data(ssid.bytes)
+        configData.cmdSetConfig.passphrase = Data(passphrase.bytes)
 
         return try security.encrypt(data: configData.serializedData())
     }

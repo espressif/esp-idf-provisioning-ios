@@ -29,7 +29,7 @@ struct HexUtils {
             output[i] = firstBytes[i % firstBytes.count] ^ secondBytes[i % secondBytes.count]
         }
 
-        return Data(bytes: output)
+        return Data(output)
     }
 }
 

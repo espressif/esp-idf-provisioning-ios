@@ -36,7 +36,7 @@ class Security1: Security {
     private var privateKey: Data?
     private var publicKey: Data?
     private var clientVerify: Data?
-    private var mbedAES: MbedAES?
+    private var cryptoAES: CryptoAES?
 
     private var sharedKey: Data?
     private var deviceRandom: Data?
@@ -74,24 +74,23 @@ class Security1: Security {
     }
 
     func encrypt(data: Data) -> Data? {
-        guard let mbedAES = self.mbedAES else {
+        guard let cryptoAES = self.cryptoAES else {
             return nil
         }
-        return mbedAES.encrypt(data: data)
+        return cryptoAES.encrypt(data: data)
     }
 
     func decrypt(data: Data) -> Data? {
-        guard let mbedAES = self.mbedAES else {
+        guard let cryptoAES = self.cryptoAES else {
             return nil
         }
-        return mbedAES.encrypt(data: data)
+        return cryptoAES.encrypt(data: data)
     }
 
     private func generatePrivateKey() -> Data? {
         var keyData = Data(count: 32)
         let result = keyData.withUnsafeMutableBytes {
-            (mutableBytes: UnsafeMutablePointer<UInt8>) -> Int32 in
-            SecRandomCopyBytes(kSecRandomDefault, 32, mutableBytes)
+            SecRandomCopyBytes(kSecRandomDefault, 32, $0.baseAddress!)
         }
         if result == errSecSuccess {
             return keyData
@@ -158,7 +157,7 @@ class Security1: Security {
                 sharedKey = HexUtils.xor(first: sharedKey, second: digest)
             }
 
-            mbedAES = MbedAES(key: sharedKey, iv: deviceRandom)
+            cryptoAES = CryptoAES(key: sharedKey, iv: deviceRandom)
 
             let verifyBytes = encrypt(data: devicePublicKey)
 
@@ -183,7 +182,6 @@ class Security1: Security {
 
         let deviceVerify = sessionData.sec1.sr1.deviceVerifyData
         let decryptedDeviceVerify = decrypt(data: deviceVerify)
-
         if let decryptedDeviceVerify = decryptedDeviceVerify,
             !decryptedDeviceVerify.bytes.elementsEqual(self.publicKey!.bytes) {
             throw SecurityError.handshakeError("Key mismatch")

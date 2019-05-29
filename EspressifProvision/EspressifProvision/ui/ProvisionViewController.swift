@@ -61,7 +61,7 @@ class ProvisionViewController: UIViewController {
 
     private func provisionDevice() {
         guard let ssid = ssidTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines), let passphrase = passphraseTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            ssid.count > 0 && passphrase.count > 0 else {
+            ssid.count > 0, passphrase.count > 0 else {
             return
         }
 
@@ -141,7 +141,7 @@ class ProvisionViewController: UIViewController {
         guard let ssid = ssidTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines), let passphrase = passphraseTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
             return
         }
-        if ssid.count > 0 && passphrase.count > 0 {
+        if ssid.count > 0, passphrase.count > 0 {
             provisionButton.isUserInteractionEnabled = true
             provisionDevice()
         }
@@ -151,7 +151,7 @@ class ProvisionViewController: UIViewController {
         guard let ssid = ssidTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines), let passphrase = passphraseTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
             return
         }
-        if ssid.count > 0 && passphrase.count > 0 {
+        if ssid.count > 0, passphrase.count > 0 {
             provisionButton.isUserInteractionEnabled = true
         }
         passphraseTextfield.becomeFirstResponder()
