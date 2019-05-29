@@ -10,6 +10,7 @@ abstract_target 'EspressifProvisionAll' do
   pod 'SwiftProtobuf', '~> 1.5.0'
   pod 'Curve25519', '~> 1.1.0'
   pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'BlueSocket'
   
   target 'EspressifProvision'
   target 'EspressifProvisionTests' do
