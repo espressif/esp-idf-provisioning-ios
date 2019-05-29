@@ -215,7 +215,7 @@ extension BLETransport: CBCentralManagerDelegate {
         if let serviceUUID = self.serviceUUID {
             uuids = [CBUUID(string: serviceUUID.uuidString)]
         }
-        currentPeripheral?.discoverServices(uuids)
+        currentPeripheral?.discoverServices(nil)
     }
 
     func centralManager(_: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {

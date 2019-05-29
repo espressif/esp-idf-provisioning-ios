@@ -28,26 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1431463620DE994C0017E119"
-               BuildableName = "EspressifProvisionTests.xctest"
-               BlueprintName = "EspressifProvisionTests"
-               ReferencedContainer = "container:EspressifProvision.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1431464120DE994C0017E119"
-               BuildableName = "EspressifProvisionUITests.xctest"
-               BlueprintName = "EspressifProvisionUITests"
-               ReferencedContainer = "container:EspressifProvision.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -62,9 +42,9 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "BLESec1AVS-Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      buildConfiguration = "BLESec1AVS-Release"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -105,7 +85,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "BLESec1AVS-Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
