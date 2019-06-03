@@ -16,6 +16,7 @@ struct Constants {
 
     // Reuse identifier
     static let deviceListCellReuseIdentifier = "deviceListCell"
+    static let deviceDetailVCIndentifier = "deviceDetailVC"
 
     static func showLoader(message: String, view: UIView) {
         DispatchQueue.main.async {

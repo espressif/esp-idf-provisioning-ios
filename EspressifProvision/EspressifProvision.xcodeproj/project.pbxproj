@@ -53,6 +53,11 @@
 		F18C3ABF229BF4D4007C197F /* SSDPDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18C3ABD229BF4D4007C197F /* SSDPDiscovery.swift */; };
 		F1DCEC292296CB94005918FE /* ScanWifiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEC282296CB94005918FE /* ScanWifiList.swift */; };
 		F1DCEC2D2297D577005918FE /* WifiListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEC2C2297D577005918FE /* WifiListTableViewCell.swift */; };
+		F1DD7095229FC8620092DAB9 /* AmazonEmberDisplay_Lt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD7094229FC8590092DAB9 /* AmazonEmberDisplay_Lt.ttf */; };
+		F1DD7097229FCAB10092DAB9 /* Bookerly-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD7096229FCAB10092DAB9 /* Bookerly-Italic.ttf */; };
+		F1DD7099229FCEDE0092DAB9 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD7098229FCEDE0092DAB9 /* DeviceDetailViewController.swift */; };
+		F1DD709B229FDE6C0092DAB9 /* AmazonEmberDisplay_Md.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD709A229FDE6C0092DAB9 /* AmazonEmberDisplay_Md.ttf */; };
+		F1DD709D229FDF5E0092DAB9 /* AmazonEmberDisplay_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD709C229FDF5E0092DAB9 /* AmazonEmberDisplay_Rg.ttf */; };
 		F1F339572296703C000F53A0 /* wifi_scan.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F339562296703C000F53A0 /* wifi_scan.pb.swift */; };
 		F6D7C9B0F5FDCEEFFA78A8C8 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */; };
 /* End PBXBuildFile section */
@@ -156,6 +161,11 @@
 		F18C3ABD229BF4D4007C197F /* SSDPDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPDiscovery.swift; sourceTree = "<group>"; };
 		F1DCEC282296CB94005918FE /* ScanWifiList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanWifiList.swift; sourceTree = "<group>"; };
 		F1DCEC2C2297D577005918FE /* WifiListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiListTableViewCell.swift; sourceTree = "<group>"; };
+		F1DD7094229FC8590092DAB9 /* AmazonEmberDisplay_Lt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Lt.ttf; sourceTree = "<group>"; };
+		F1DD7096229FCAB10092DAB9 /* Bookerly-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Bookerly-Italic.ttf"; sourceTree = "<group>"; };
+		F1DD7098229FCEDE0092DAB9 /* DeviceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailViewController.swift; sourceTree = "<group>"; };
+		F1DD709A229FDE6C0092DAB9 /* AmazonEmberDisplay_Md.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Md.ttf; sourceTree = "<group>"; };
+		F1DD709C229FDF5E0092DAB9 /* AmazonEmberDisplay_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Rg.ttf; sourceTree = "<group>"; };
 		F1F339562296703C000F53A0 /* wifi_scan.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_scan.pb.swift; sourceTree = "<group>"; };
 		F5A6E92635049FCEB2D5787E /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -215,6 +225,7 @@
 		1431462520DE994B0017E119 /* EspressifProvision */ = {
 			isa = PBXGroup;
 			children = (
+				F1DD7093229FC83A0092DAB9 /* fonts */,
 				F1342A46229D696700AD8626 /* Utilities */,
 				F18C3AB4229BEC8E007C197F /* Model */,
 				143146B020EA303C0017E119 /* EspressifProvision.entitlements */,
@@ -409,6 +420,7 @@
 			children = (
 				F18C3AB7229BEDB2007C197F /* ScannedLocalDevicesVC.swift */,
 				F1342A4A229E7D8700AD8626 /* DeviceListTableViewCell.swift */,
+				F1DD7098229FCEDE0092DAB9 /* DeviceDetailViewController.swift */,
 			);
 			path = ManageDevice;
 			sourceTree = "<group>";
@@ -438,6 +450,17 @@
 				F1DCEC2C2297D577005918FE /* WifiListTableViewCell.swift */,
 			);
 			path = wifi;
+			sourceTree = "<group>";
+		};
+		F1DD7093229FC83A0092DAB9 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F1DD7094229FC8590092DAB9 /* AmazonEmberDisplay_Lt.ttf */,
+				F1DD709A229FDE6C0092DAB9 /* AmazonEmberDisplay_Md.ttf */,
+				F1DD709C229FDF5E0092DAB9 /* AmazonEmberDisplay_Rg.ttf */,
+				F1DD7096229FCAB10092DAB9 /* Bookerly-Italic.ttf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -564,6 +587,10 @@
 				1431463120DE994C0017E119 /* LaunchScreen.storyboard in Resources */,
 				1431462E20DE994C0017E119 /* Assets.xcassets in Resources */,
 				1431462C20DE994B0017E119 /* Main.storyboard in Resources */,
+				F1DD7097229FCAB10092DAB9 /* Bookerly-Italic.ttf in Resources */,
+				F1DD709D229FDF5E0092DAB9 /* AmazonEmberDisplay_Rg.ttf in Resources */,
+				F1DD709B229FDE6C0092DAB9 /* AmazonEmberDisplay_Md.ttf in Resources */,
+				F1DD7095229FC8620092DAB9 /* AmazonEmberDisplay_Lt.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,6 +732,7 @@
 			files = (
 				1431468220DEB6F50017E119 /* Security0.swift in Sources */,
 				F1342A48229D697B00AD8626 /* Constants.swift in Sources */,
+				F1DD7099229FCEDE0092DAB9 /* DeviceDetailViewController.swift in Sources */,
 				1431469820E387C60017E119 /* sec1.pb.swift in Sources */,
 				F18C3AB6229BECE1007C197F /* AlexaDevice.swift in Sources */,
 				F18C3ABE229BF4D4007C197F /* SSDPService.swift in Sources */,

@@ -9,6 +9,14 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AmazonEmberDisplay_Lt.ttf">
+            <string>AmazonEmberDisplay-Light</string>
+        </array>
+        <array key="Bookerly-Italic.ttf">
+            <string>Bookerly-Italic</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Amazon-->
         <scene sceneID="jOF-Ok-9Fs">
@@ -174,13 +182,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="670-DZ-eiW">
-                                                    <rect key="frame" x="15" y="19.5" width="270" height="21"/>
+                                                    <rect key="frame" x="15" y="19.5" width="663" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifi_symbol_weak" translatesAutoresizingMaskIntoConstraints="NO" id="fPb-NJ-4le">
-                                                    <rect key="frame" x="305" y="13" width="45" height="33.5"/>
+                                                    <rect key="frame" x="698" y="13" width="45" height="33.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="OQc-Ym-vD3"/>
                                                         <constraint firstAttribute="width" secondItem="fPb-NJ-4le" secondAttribute="height" multiplier="4:3" id="yIJ-5m-G4g"/>
@@ -401,7 +409,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCS-lr-wK6">
-                                                    <rect key="frame" x="15" y="19.5" width="344" height="21"/>
+                                                    <rect key="frame" x="15" y="19.5" width="737" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -449,6 +457,175 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpc-8j-3Gd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2509.5999999999999" y="-696.7016491754124"/>
+        </scene>
+        <!--Device Detail View Controller-->
+        <scene sceneID="YV9-Nr-g7u">
+            <objects>
+                <viewController storyboardIdentifier="deviceDetailVC" id="48V-9A-pox" customClass="DeviceDetailViewController" customModule="EspressifProvision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bVe-1G-4vW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alexa_logo" translatesAutoresizingMaskIntoConstraints="NO" id="hBl-4l-hMI">
+                                <rect key="frame" x="62" y="40" width="251" height="188.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hBl-4l-hMI" secondAttribute="height" multiplier="4:3" id="Ofe-WK-F0R"/>
+                                </constraints>
+                            </imageView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vr9-Xd-du9">
+                                <rect key="frame" x="0.0" y="228.5" width="375" height="438.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JEu-YH-d0n">
+                                        <rect key="frame" x="16" y="367.5" width="343" height="1"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="0ms-hH-LIh"/>
+                                        </constraints>
+                                    </view>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="W4Y-fK-DbZ">
+                                        <rect key="frame" x="20" y="75" width="335" height="279"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <string key="text">Alexa, what's the weather today? 
+
+Alexa, play my Flash Briefing.
+
+Alexa, set a timer for 20 minutes.
+
+Alexa, add Dinner with Mom to my calendar.
+
+Alexa, set an alarm for 6 a.m.</string>
+                                        <fontDescription key="fontDescription" name="Bookerly-Italic" family="Bookerly" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Bookerly-Italic" family="Bookerly" pointSize="28"/>
+                                        </variation>
+                                    </textView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Here are some of tha many things you can ask Alexa" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="PXZ-oC-hAg">
+                                        <rect key="frame" x="20" y="0.0" width="335" height="65"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="65" id="p6Y-5F-jpY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="25"/>
+                                        </variation>
+                                    </textView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="To learn more and access additional features, download the Alexa app." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mJM-Um-0Xs">
+                                        <rect key="frame" x="14" y="376" width="347" height="55"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        </variation>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="PXZ-oC-hAg" firstAttribute="top" secondItem="Vr9-Xd-du9" secondAttribute="top" id="4Ji-Qq-s79"/>
+                                    <constraint firstAttribute="bottom" secondItem="JEu-YH-d0n" secondAttribute="bottom" constant="70" id="69m-at-UeR"/>
+                                    <constraint firstAttribute="trailing" secondItem="JEu-YH-d0n" secondAttribute="trailing" constant="16" id="6Do-ft-ulg"/>
+                                    <constraint firstItem="W4Y-fK-DbZ" firstAttribute="top" secondItem="PXZ-oC-hAg" secondAttribute="bottom" constant="10" id="9hl-OA-mpl"/>
+                                    <constraint firstAttribute="trailing" secondItem="PXZ-oC-hAg" secondAttribute="trailing" constant="20" id="Eaz-UF-YAE"/>
+                                    <constraint firstItem="PXZ-oC-hAg" firstAttribute="leading" secondItem="Vr9-Xd-du9" secondAttribute="leading" constant="20" id="HJP-hD-bs3"/>
+                                    <constraint firstAttribute="trailing" secondItem="mJM-Um-0Xs" secondAttribute="trailing" constant="14" id="M2I-vH-VAL"/>
+                                    <constraint firstAttribute="trailing" secondItem="W4Y-fK-DbZ" secondAttribute="trailing" constant="20" id="NcM-BK-NF4"/>
+                                    <constraint firstItem="W4Y-fK-DbZ" firstAttribute="leading" secondItem="Vr9-Xd-du9" secondAttribute="leading" constant="20" id="Tvt-WC-m9F"/>
+                                    <constraint firstItem="mJM-Um-0Xs" firstAttribute="leading" secondItem="Vr9-Xd-du9" secondAttribute="leading" constant="14" id="WnB-qw-zJf"/>
+                                    <constraint firstItem="mJM-Um-0Xs" firstAttribute="top" secondItem="JEu-YH-d0n" secondAttribute="bottom" constant="7.5" id="eNq-sB-vcY"/>
+                                    <constraint firstItem="JEu-YH-d0n" firstAttribute="top" secondItem="W4Y-fK-DbZ" secondAttribute="bottom" constant="13.5" id="nuW-gj-oDm"/>
+                                    <constraint firstItem="JEu-YH-d0n" firstAttribute="leading" secondItem="Vr9-Xd-du9" secondAttribute="leading" constant="16" id="rLi-cj-YM0"/>
+                                    <constraint firstAttribute="bottom" secondItem="mJM-Um-0Xs" secondAttribute="bottom" constant="7.5" id="rWR-4F-lXG"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5T3-Xm-ReH">
+                                <rect key="frame" x="0.0" y="228.5" width="375" height="438.5"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-vU-cjz">
+                                        <rect key="frame" x="20" y="2" width="335" height="102"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="102" id="Sx6-Al-00P"/>
+                                        </constraints>
+                                        <string key="text">Your device includes access to Alexa.
+Connect your Amazon account to access personalized features.</string>
+                                        <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="26"/>
+                                        </variation>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kao-I3-Wri">
+                                        <rect key="frame" x="94" y="288.5" width="187.5" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.60392156862745094" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Tog-zg-cGX"/>
+                                        </constraints>
+                                        <state key="normal" title="Sign in with Amazon">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="18"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="signInAmazon:" destination="48V-9A-pox" eventType="touchUpInside" id="NMj-d1-w67"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Imy-ld-1d2">
+                                        <rect key="frame" x="20" y="114" width="335" height="149.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <string key="text">Alexa allows you to use voice to play music and get news, sports, scores, weather and more-all hands-free.
+All you have to do is ask Alexa.</string>
+                                        <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="24"/>
+                                        </variation>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Imy-ld-1d2" secondAttribute="trailing" constant="20" id="6xL-Js-fyY"/>
+                                    <constraint firstAttribute="bottom" secondItem="Kao-I3-Wri" secondAttribute="bottom" constant="100" id="HCC-Nu-9RL"/>
+                                    <constraint firstItem="Imy-ld-1d2" firstAttribute="top" secondItem="W0k-vU-cjz" secondAttribute="bottom" constant="10" id="YXM-Bl-1UX"/>
+                                    <constraint firstItem="Kao-I3-Wri" firstAttribute="top" secondItem="Imy-ld-1d2" secondAttribute="bottom" constant="25" id="aWt-f6-r4B"/>
+                                    <constraint firstItem="Imy-ld-1d2" firstAttribute="leading" secondItem="5T3-Xm-ReH" secondAttribute="leading" constant="20" id="g06-RI-Cv9"/>
+                                    <constraint firstAttribute="trailing" secondItem="W0k-vU-cjz" secondAttribute="trailing" constant="20" id="kBa-81-REu"/>
+                                    <constraint firstItem="Kao-I3-Wri" firstAttribute="width" secondItem="5T3-Xm-ReH" secondAttribute="width" multiplier="0.5" id="nqi-3S-XRv"/>
+                                    <constraint firstItem="W0k-vU-cjz" firstAttribute="leading" secondItem="5T3-Xm-ReH" secondAttribute="leading" constant="20" id="ocW-Lm-kOa"/>
+                                    <constraint firstItem="W0k-vU-cjz" firstAttribute="top" secondItem="5T3-Xm-ReH" secondAttribute="top" constant="2" id="rrT-td-0CA"/>
+                                    <constraint firstItem="Kao-I3-Wri" firstAttribute="centerX" secondItem="5T3-Xm-ReH" secondAttribute="centerX" id="vk1-J6-XF4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="hBl-4l-hMI" firstAttribute="top" secondItem="0iD-Gg-96z" secondAttribute="top" constant="20" id="2ln-a2-7a7"/>
+                            <constraint firstItem="Vr9-Xd-du9" firstAttribute="leading" secondItem="0iD-Gg-96z" secondAttribute="leading" id="45V-jW-2l9"/>
+                            <constraint firstItem="Vr9-Xd-du9" firstAttribute="trailing" secondItem="0iD-Gg-96z" secondAttribute="trailing" id="7uY-z1-vWZ"/>
+                            <constraint firstItem="5T3-Xm-ReH" firstAttribute="width" secondItem="Vr9-Xd-du9" secondAttribute="width" id="9mD-fv-15E"/>
+                            <constraint firstItem="0iD-Gg-96z" firstAttribute="bottom" secondItem="5T3-Xm-ReH" secondAttribute="bottom" id="Khz-5k-z2M"/>
+                            <constraint firstItem="5T3-Xm-ReH" firstAttribute="leading" secondItem="0iD-Gg-96z" secondAttribute="leading" id="OiI-VU-MtJ"/>
+                            <constraint firstItem="Vr9-Xd-du9" firstAttribute="top" secondItem="hBl-4l-hMI" secondAttribute="bottom" id="SoG-3B-egv"/>
+                            <constraint firstItem="hBl-4l-hMI" firstAttribute="width" secondItem="bVe-1G-4vW" secondAttribute="width" multiplier="0.67" id="hRP-RV-2TM"/>
+                            <constraint firstItem="5T3-Xm-ReH" firstAttribute="height" secondItem="Vr9-Xd-du9" secondAttribute="height" id="nnR-ha-ql2"/>
+                            <constraint firstItem="Vr9-Xd-du9" firstAttribute="bottom" secondItem="0iD-Gg-96z" secondAttribute="bottom" id="rAn-Jn-OHB"/>
+                            <constraint firstItem="hBl-4l-hMI" firstAttribute="centerX" secondItem="bVe-1G-4vW" secondAttribute="centerX" id="vBY-PN-Ty8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0iD-Gg-96z"/>
+                    </view>
+                    <connections>
+                        <outlet property="signedInViewContainer" destination="Vr9-Xd-du9" id="fVO-kU-gMA"/>
+                        <outlet property="signedOutViewContainer" destination="5T3-Xm-ReH" id="jPz-O4-G3A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZGd-3I-tUr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3277.5999999999999" y="-697.60119940029995"/>
         </scene>
         <!--Espressif-->
         <scene sceneID="vP2-nv-Q6V">
@@ -555,10 +732,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Ev-W2-bX4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3356" y="-681"/>
+            <point key="canvasLocation" x="4119" y="-697"/>
         </scene>
     </scenes>
     <resources>
+        <image name="alexa_logo" width="360" height="170"/>
         <image name="btnLWA_gold_209x48" width="209" height="48"/>
         <image name="btnLWA_gold_209x48_pressed" width="209" height="48"/>
         <image name="wifi_symbol" width="109" height="83"/>
