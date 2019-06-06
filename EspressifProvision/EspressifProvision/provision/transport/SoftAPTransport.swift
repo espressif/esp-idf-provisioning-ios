@@ -19,6 +19,12 @@
 import Foundation
 
 struct SoftAPTransport: Transport {
+    var utility: Utility
+
+    func isDeviceConfigured() -> Bool {
+        return true
+    }
+
     var baseUrl: String
 
     /// Create HTTP implementation of Transport protocol
@@ -26,6 +32,7 @@ struct SoftAPTransport: Transport {
     /// - Parameter baseUrl: base URL for the HTTP endpoints
     init(baseUrl: String) {
         self.baseUrl = baseUrl
+        utility = Utility()
     }
 
     private func SendHTTPData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void) {

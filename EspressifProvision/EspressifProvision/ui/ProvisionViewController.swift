@@ -71,10 +71,6 @@ class ProvisionViewController: UIViewController {
         let baseUrl = provisionConfig[Provision.CONFIG_BASE_URL_KEY]
         let transportVersion = provisionConfig[Provision.CONFIG_TRANSPORT_KEY]
         let securityVersion = provisionConfig[Provision.CONFIG_SECURITY_KEY]
-        let bleDeviceNamePrefix = provisionConfig[Provision.CONFIG_BLE_DEVICE_NAME_PREFIX]
-        let bleServiceUuid = provisionConfig[Provision.CONFIG_BLE_SERVICE_UUID]
-        let bleSessionUuid = provisionConfig[Provision.CONFIG_BLE_SESSION_UUID]
-        let bleConfigUuid = provisionConfig[Provision.CONFIG_BLE_CONFIG_UUID]
 
         if securityVersion == Provision.CONFIG_SECURITY_SECURITY1 {
             security = Security1(proofOfPossession: pop!)
@@ -95,12 +91,7 @@ class ProvisionViewController: UIViewController {
             initialiseSessionAndConfigure(transport: transport!,
                                           security: security!)
         } else if transport == nil {
-            let configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: bleConfigUuid!]
-            bleTransport = BLETransport(serviceUUIDString: bleServiceUuid!,
-                                        sessionUUIDString: bleSessionUuid!,
-                                        configUUIDMap: configUUIDMap,
-                                        deviceNamePrefix: bleDeviceNamePrefix!,
-                                        scanTimeout: 2.0)
+            bleTransport = BLETransport(scanTimeout: 2.0)
             bleTransport?.scan(delegate: self)
             transport = bleTransport
         }
@@ -114,25 +105,28 @@ class ProvisionViewController: UIViewController {
 
         let newSession = Session(transport: transport,
                                  security: security)
-
-        newSession.initialize(response: nil) { error in
-            guard error == nil else {
-                print("Error in establishing session \(error.debugDescription)")
-                return
-            }
-
-            let provision = Provision(session: newSession)
-
-            provision.configureWifi(ssid: ssid,
-                                    passphrase: passphrase) { status, error in
+        if transport.isDeviceConfigured() {
+            newSession.initialize(response: nil) { error in
                 guard error == nil else {
-                    print("Error in configuring wifi : \(error.debugDescription)")
+                    print("Error in establishing session \(error.debugDescription)")
                     return
                 }
-                if status == Espressif_Status.success {
-                    self.applyConfigurations(provision: provision)
+
+                let provision = Provision(session: newSession)
+
+                provision.configureWifi(ssid: ssid,
+                                        passphrase: passphrase) { status, error in
+                    guard error == nil else {
+                        print("Error in configuring wifi : \(error.debugDescription)")
+                        return
+                    }
+                    if status == Espressif_Status.success {
+                        self.applyConfigurations(provision: provision)
+                    }
                 }
             }
+        } else {
+            showError(errorMessage: "Peripheral device could not be configured.")
         }
     }
 

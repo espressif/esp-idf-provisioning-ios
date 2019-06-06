@@ -41,6 +41,8 @@
 		14DE671E20ECD04100941522 /* BLETransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE671D20ECD04100941522 /* BLETransport.swift */; };
 		7E89B3398606A35D1BCB7893 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */; };
 		F184C9E7228C4A780034C5B7 /* AESDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F184C9E6228C4A780034C5B7 /* AESDecryptor.m */; };
+		F1DD70A422A8EA150092DAB9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A322A8EA140092DAB9 /* Utility.swift */; };
+		F1DD70A622A8EA2A0092DAB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A522A8EA2A0092DAB9 /* Constants.swift */; };
 		F6D7C9B0F5FDCEEFFA78A8C8 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -118,6 +120,8 @@
 		EA24507D63588F8C9C0C451B /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; sourceTree = "<group>"; };
 		F184C9E5228C4A780034C5B7 /* AESDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESDecryptor.h; sourceTree = "<group>"; };
 		F184C9E6228C4A780034C5B7 /* AESDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESDecryptor.m; sourceTree = "<group>"; };
+		F1DD70A322A8EA140092DAB9 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		F1DD70A522A8EA2A0092DAB9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +178,7 @@
 		1431462520DE994B0017E119 /* EspressifProvision */ = {
 			isa = PBXGroup;
 			children = (
+				F1DD70A222A8EA140092DAB9 /* Utilities */,
 				143146B020EA303C0017E119 /* EspressifProvision.entitlements */,
 				1431468F20E387C60017E119 /* proto */,
 				143146B120EB221E0017E119 /* ui */,
@@ -321,6 +326,15 @@
 				9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F1DD70A222A8EA140092DAB9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F1DD70A322A8EA140092DAB9 /* Utility.swift */,
+				F1DD70A522A8EA2A0092DAB9 /* Constants.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -586,6 +600,7 @@
 				1431462920DE994B0017E119 /* ViewController.swift in Sources */,
 				149774DD210C799900022841 /* CryptoAES.swift in Sources */,
 				1431466920DEAD1A0017E119 /* SoftAPTransport.swift in Sources */,
+				F1DD70A622A8EA2A0092DAB9 /* Constants.swift in Sources */,
 				1431469B20E387C60017E119 /* constants.pb.swift in Sources */,
 				149774E1210C89E600022841 /* ArrayExtensions.swift in Sources */,
 				1431466720DEAC220017E119 /* Security.swift in Sources */,
@@ -595,6 +610,7 @@
 				1431469F20E387C60017E119 /* wifi_constants.pb.swift in Sources */,
 				149774E3210C8A0000022841 /* StringExtensions.swift in Sources */,
 				14A6EA0E2108DF95007F9407 /* wifi_config.pb.swift in Sources */,
+				F1DD70A422A8EA150092DAB9 /* Utility.swift in Sources */,
 				1431466520DEA97C0017E119 /* Transport.swift in Sources */,
 				144149442126AE09002AD5E1 /* SuccessViewController.swift in Sources */,
 				F184C9E7228C4A780034C5B7 /* AESDecryptor.m in Sources */,
@@ -779,7 +795,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -808,7 +824,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1113,7 +1129,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1246,7 +1262,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1379,7 +1395,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y9ZJ436PPN;
+				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

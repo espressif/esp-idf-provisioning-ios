@@ -22,12 +22,7 @@ import UIKit
 class ViewController: UIViewController {
     // Provisioning
     private let pop = Bundle.main.infoDictionary?["ProofOfPossession"] as! String
-    private let ssid = "ESPIndia"
-    private let passphrase = "5=ChotaCoke"
     // BLE
-    private let serviceUUIDString: String? = Bundle.main.infoDictionary?["BLEServiceUUID"] as? String
-    private let sessionUUIDString: String = Bundle.main.infoDictionary?["BLESessionUUID"] as! String
-    private let configUUIDString: String = Bundle.main.infoDictionary?["BLEConfigUUID"] as! String
     private let deviceNamePrefix = Bundle.main.infoDictionary?["BLEDeviceNamePrefix"] as! String
     // WIFI
     private let baseUrl = Bundle.main.infoDictionary?["WifiBaseUrl"] as! String
@@ -49,12 +44,7 @@ class ViewController: UIViewController {
         #endif
 
         #if BLE
-            let configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: configUUIDString]
-            bleTransport = BLETransport(serviceUUIDString: serviceUUIDString,
-                                        sessionUUIDString: sessionUUIDString,
-                                        configUUIDMap: configUUIDMap,
-                                        deviceNamePrefix: deviceNamePrefix,
-                                        scanTimeout: 5.0)
+            bleTransport = BLETransport(scanTimeout: 5.0)
             bleTransport?.scan(delegate: self)
             transport = bleTransport
 
@@ -83,46 +73,12 @@ class ViewController: UIViewController {
             Provision.CONFIG_WIFI_AP_KEY: networkNamePrefix,
             Provision.CONFIG_BLE_DEVICE_NAME_PREFIX: deviceNamePrefix,
         ]
-        if let serviceUUIDString = serviceUUIDString {
-            config[Provision.CONFIG_BLE_SERVICE_UUID] = serviceUUIDString
-            config[Provision.CONFIG_BLE_SESSION_UUID] = sessionUUIDString
-            config[Provision.CONFIG_BLE_CONFIG_UUID] = configUUIDString
-        }
-
         Provision.showProvisioningUI(on: self, config: config)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    private func provisionDevice() {
-        if let transport = transport, let security = security {
-            let newSession = Session(transport: transport,
-                                     security: security)
-
-            newSession.initialize(response: nil) { error in
-                guard error == nil else {
-                    print("Error in establishing session \(error.debugDescription)")
-                    return
-                }
-
-                let provision = Provision(session: newSession)
-
-                provision.configureWifi(ssid: self.ssid,
-                                        passphrase: self.passphrase) { status, error in
-                    guard error == nil else {
-                        print("Error in configuring wifi : \(error.debugDescription)")
-                        return
-                    }
-
-                    if status == Espressif_Status.success {
-                        self.applyConfigurations(provision: provision)
-                    }
-                }
-            }
-        }
     }
 
     private func applyConfigurations(provision: Provision) {
@@ -172,9 +128,7 @@ class ViewController: UIViewController {
             showError(errorMessage: "No peripherals found for service UUID : \(String(describing: serviceUUID?.uuidString))")
         }
 
-        func peripheralConfigured(peripheral _: CBPeripheral) {
-            provisionDevice()
-        }
+        func peripheralConfigured(peripheral _: CBPeripheral) {}
 
         func peripheralNotConfigured(peripheral _: CBPeripheral) {
             showError(errorMessage: "Device cannot be configured")

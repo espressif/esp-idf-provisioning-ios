@@ -42,7 +42,6 @@ class Provision {
     public static let CONFIG_BLE_SESSION_UUID = "sessionUUID"
     public static let CONFIG_BLE_CONFIG_UUID = "configUUID"
     public static let CONFIG_BLE_DEVICE_NAME_PREFIX = "deviceNamePrefix"
-    public static let PROVISIONING_CONFIG_PATH = "prov-config"
 
     /// Create Provision object with a Session object
     /// Here the Provision class will require a session
@@ -69,8 +68,8 @@ class Provision {
         if session.isEstablished {
             do {
                 let message = try createSetWifiConfigRequest(ssid: ssid, passphrase: passphrase)
-                if let message = message {
-                    transport.SendConfigData(path: Provision.PROVISIONING_CONFIG_PATH, data: message) { response, error in
+                if let message = message, let configPath = transport.utility.configPath {
+                    transport.SendConfigData(path: configPath, data: message) { response, error in
                         guard error == nil, response != nil else {
                             completionHandler(Espressif_Status.internalError, error)
                             return
@@ -98,8 +97,8 @@ class Provision {
         if session.isEstablished {
             do {
                 let message = try createApplyConfigRequest()
-                if let message = message {
-                    transport.SendConfigData(path: Provision.PROVISIONING_CONFIG_PATH, data: message) { response, error in
+                if let message = message, let configPath = transport.utility.configPath {
+                    transport.SendConfigData(path: configPath, data: message) { response, error in
                         guard error == nil, response != nil else {
                             completionHandler(Espressif_Status.internalError, error)
                             return
@@ -157,8 +156,8 @@ class Provision {
     private func pollForWifiConnectionStatus(completionHandler: @escaping (Espressif_WifiStationState, Espressif_WifiConnectFailedReason, Error?) -> Swift.Void) {
         do {
             let message = try createGetWifiConfigRequest()
-            if let message = message {
-                transport.SendConfigData(path: Provision.PROVISIONING_CONFIG_PATH,
+            if let message = message, let configPath = transport.utility.configPath {
+                transport.SendConfigData(path: configPath,
                                          data: message) { response, error in
                     guard error == nil, response != nil else {
                         completionHandler(Espressif_WifiStationState.disconnected, Espressif_WifiConnectFailedReason.UNRECOGNIZED(0), error)

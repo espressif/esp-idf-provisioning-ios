@@ -31,20 +31,9 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let serviceUuid = provisionConfig[Provision.CONFIG_BLE_SERVICE_UUID],
-            let deviceNamePrefix = provisionConfig[Provision.CONFIG_BLE_DEVICE_NAME_PREFIX],
-            let sessionUuid = provisionConfig[Provision.CONFIG_BLE_SESSION_UUID],
-            let configUuid = provisionConfig[Provision.CONFIG_BLE_CONFIG_UUID] {
-            let configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: configUuid]
-            bleTransport = BLETransport(serviceUUIDString: serviceUuid,
-                                        sessionUUIDString: sessionUuid,
-                                        configUUIDMap: configUUIDMap,
-                                        deviceNamePrefix: deviceNamePrefix,
-                                        scanTimeout: 5.0)
-            bleTransport?.scan(delegate: self)
-            showBusy(isBusy: true)
-        }
+        bleTransport = BLETransport(scanTimeout: 5.0)
+        bleTransport?.scan(delegate: self)
+        showBusy(isBusy: true)
     }
 
     @IBAction func rescanBLEDevices(_: Any) {
