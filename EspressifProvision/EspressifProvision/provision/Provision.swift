@@ -38,11 +38,6 @@ class Provision {
     public static let CONFIG_SECURITY_SECURITY0 = "security0"
     public static let CONFIG_SECURITY_SECURITY1 = "security1"
 
-    public static let CONFIG_BLE_SERVICE_UUID = "serviceUUID"
-    public static let CONFIG_BLE_SESSION_UUID = "sessionUUID"
-    public static let CONFIG_BLE_CONFIG_UUID = "configUUID"
-    public static let CONFIG_BLE_DEVICE_NAME_PREFIX = "deviceNamePrefix"
-
     /// Create Provision object with a Session object
     /// Here the Provision class will require a session
     /// which has been successfully initialised by calling Session.initialize
@@ -121,24 +116,6 @@ class Provision {
     /// This UI will take the user through the following flow
     /// 1. Connect to the device via Wifi (AP) or Bluetooth (BLE)
     /// 2. Provide Network information like SSID and Passphrase
-    ///
-    /// - Parameters:
-    ///   - viewController: view controller on which to show the UI
-    ///   - config: provisioning config map.
-    ///             Currently supported configs are
-    ///    var config = [
-    ///      Provision.CONFIG_TRANSPORT_KEY: transport,
-    ///      Provision.CONFIG_SECURITY_KEY: security,
-    ///      Provision.CONFIG_PROOF_OF_POSSESSION_KEY: pop,
-    ///      Provision.CONFIG_BASE_URL_KEY: baseUrl,
-    ///      Provision.CONFIG_WIFI_AP_KEY: networkNamePrefix,
-    ///      Provision.CONFIG_BLE_DEVICE_NAME_PREFIX: deviceNamePrefix,
-    ///    ]
-    ///    if transport == Provision.CONFIG_TRANSPORT_BLE {
-    ///       config[Provision.CONFIG_BLE_SERVICE_UUID] = serviceUUIDString
-    ///       config[Provision.CONFIG_BLE_SESSION_UUID] = sessionUUIDString
-    ///       config[Provision.CONFIG_BLE_CONFIG_UUID] = configUUIDString
-    ///    }
     static func showProvisioningUI(on viewController: UIViewController,
                                    config: [String: String]) {
         let transportVersion = config[Provision.CONFIG_TRANSPORT_KEY]

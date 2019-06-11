@@ -41,8 +41,11 @@
 		14DE671E20ECD04100941522 /* BLETransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE671D20ECD04100941522 /* BLETransport.swift */; };
 		7E89B3398606A35D1BCB7893 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */; };
 		F184C9E7228C4A780034C5B7 /* AESDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F184C9E6228C4A780034C5B7 /* AESDecryptor.m */; };
+		F1A06C7622AA48E6008567D8 /* wifi_scan.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A06C7522AA48E6008567D8 /* wifi_scan.pb.swift */; };
 		F1DD70A422A8EA150092DAB9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A322A8EA140092DAB9 /* Utility.swift */; };
 		F1DD70A622A8EA2A0092DAB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A522A8EA2A0092DAB9 /* Constants.swift */; };
+		F1DD70AA22A9BFBE0092DAB9 /* ScanWifiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A822A9BFBE0092DAB9 /* ScanWifiList.swift */; };
+		F1DD70AB22A9BFBE0092DAB9 /* WifiListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A922A9BFBE0092DAB9 /* WifiListTableViewCell.swift */; };
 		F6D7C9B0F5FDCEEFFA78A8C8 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -120,8 +123,11 @@
 		EA24507D63588F8C9C0C451B /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; sourceTree = "<group>"; };
 		F184C9E5228C4A780034C5B7 /* AESDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESDecryptor.h; sourceTree = "<group>"; };
 		F184C9E6228C4A780034C5B7 /* AESDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESDecryptor.m; sourceTree = "<group>"; };
+		F1A06C7522AA48E6008567D8 /* wifi_scan.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_scan.pb.swift; sourceTree = "<group>"; };
 		F1DD70A322A8EA140092DAB9 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		F1DD70A522A8EA2A0092DAB9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F1DD70A822A9BFBE0092DAB9 /* ScanWifiList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanWifiList.swift; sourceTree = "<group>"; };
+		F1DD70A922A9BFBE0092DAB9 /* WifiListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +221,7 @@
 		1431466320DEA9690017E119 /* provision */ = {
 			isa = PBXGroup;
 			children = (
+				F1DD70A722A9BFBE0092DAB9 /* wifi */,
 				149774D5210C711500022841 /* crypto */,
 				1431468C20E382250017E119 /* transport */,
 				1431468920E37B8B0017E119 /* session */,
@@ -264,6 +271,7 @@
 		1431468F20E387C60017E119 /* proto */ = {
 			isa = PBXGroup;
 			children = (
+				F1A06C7522AA48E6008567D8 /* wifi_scan.pb.swift */,
 				14A6EA0D2108DF95007F9407 /* wifi_config.pb.swift */,
 				1431469020E387C60017E119 /* sec1.pb.swift */,
 				1431469120E387C60017E119 /* sec0.pb.swift */,
@@ -335,6 +343,15 @@
 				F1DD70A522A8EA2A0092DAB9 /* Constants.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F1DD70A722A9BFBE0092DAB9 /* wifi */ = {
+			isa = PBXGroup;
+			children = (
+				F1DD70A822A9BFBE0092DAB9 /* ScanWifiList.swift */,
+				F1DD70A922A9BFBE0092DAB9 /* WifiListTableViewCell.swift */,
+			);
+			path = wifi;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -532,11 +549,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curve25519.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,11 +571,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curve25519.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -590,6 +611,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1431468220DEB6F50017E119 /* Security0.swift in Sources */,
+				F1DD70AA22A9BFBE0092DAB9 /* ScanWifiList.swift in Sources */,
+				F1DD70AB22A9BFBE0092DAB9 /* WifiListTableViewCell.swift in Sources */,
 				1431469820E387C60017E119 /* sec1.pb.swift in Sources */,
 				14DE671E20ECD04100941522 /* BLETransport.swift in Sources */,
 				149774DF210C87AB00022841 /* DataExtensions.swift in Sources */,
@@ -613,6 +636,7 @@
 				F1DD70A422A8EA150092DAB9 /* Utility.swift in Sources */,
 				1431466520DEA97C0017E119 /* Transport.swift in Sources */,
 				144149442126AE09002AD5E1 /* SuccessViewController.swift in Sources */,
+				F1A06C7622AA48E6008567D8 /* wifi_scan.pb.swift in Sources */,
 				F184C9E7228C4A780034C5B7 /* AESDecryptor.m in Sources */,
 				14706917211050EE00F8E1D8 /* BLELandingViewController.swift in Sources */,
 				1431462720DE994B0017E119 /* AppDelegate.swift in Sources */,

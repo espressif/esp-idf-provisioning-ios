@@ -25,12 +25,12 @@ class BLETransport: NSObject, Transport {
     private var transportToken = DispatchSemaphore(value: 1)
     private var isBLEEnabled = false
     private var scanTimeout = 5.0
+    private var readCounter = 0
 
     var centralManager: CBCentralManager!
     var espressifPeripherals: [CBPeripheral] = []
     var currentPeripheral: CBPeripheral?
     var currentService: CBService?
-    var sessionCharacteristic: CBCharacteristic!
 
     var peripheralCanRead: Bool = true
     var peripheralCanWrite: Bool = false
@@ -68,7 +68,7 @@ class BLETransport: NSObject, Transport {
         }
 
         transportToken.wait()
-        espressifPeripheral.writeValue(data, for: sessionCharacteristic, type: .withResponse)
+        espressifPeripheral.writeValue(data, for: utility.sessionCharacteristic, type: .withResponse)
         currentRequestCompletionHandler = completionHandler
     }
 
@@ -220,6 +220,7 @@ extension BLETransport: CBPeripheralDelegate {
         guard let characteristics = service.characteristics else { return }
 
         peripheralCanWrite = true
+        readCounter = characteristics.count
         for characteristic in characteristics {
             if !characteristic.properties.contains(.read) {
                 peripheralCanRead = false
@@ -263,9 +264,9 @@ extension BLETransport: CBPeripheralDelegate {
 
     func peripheral(_: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error _: Error?) {
         utility.processDescriptor(descriptor: descriptor)
-        if let value = descriptor.value as? String {
-            if value.contains(Constants.sessionCharacterstic) {
-                sessionCharacteristic = descriptor.characteristic
+        readCounter -= 1
+        if readCounter < 1 {
+            if utility.peripheralConfigured {
                 delegate?.peripheralConfigured(peripheral: currentPeripheral!)
             }
         }

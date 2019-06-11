@@ -18,12 +18,14 @@
 
 import CoreBluetooth
 import Foundation
+import MBProgressHUD
 import UIKit
 
 class ProvisionViewController: UIViewController {
     @IBOutlet var passphraseTextfield: UITextField!
     @IBOutlet var ssidTextfield: UITextField!
     @IBOutlet var provisionButton: UIButton!
+    @IBOutlet var tableView: UITableView!
 
     var provisionConfig: [String: String] = [:]
     var transport: Transport?
@@ -31,6 +33,9 @@ class ProvisionViewController: UIViewController {
     var bleTransport: BLETransport?
     var activityView: UIActivityIndicatorView?
     var grayView: UIView?
+    var provision: Provision!
+    var ssidList: [String] = []
+    var wifiDetailList: [String: Int32] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +43,19 @@ class ProvisionViewController: UIViewController {
         passphraseTextfield.addTarget(self, action: #selector(passphraseEntered), for: .editingDidEndOnExit)
         ssidTextfield.addTarget(self, action: #selector(ssidEntered), for: .editingDidEndOnExit)
         provisionButton.isUserInteractionEnabled = false
+        if let bleTransport = transport as? BLETransport {
+            print("Inside PVC", bleTransport.currentPeripheral!)
+        }
+        tableView.tableFooterView = UIView()
+        let securityVersion = provisionConfig[Provision.CONFIG_SECURITY_KEY]
+        let pop = provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]
+
+        if securityVersion == Provision.CONFIG_SECURITY_SECURITY1 {
+            security = Security1(proofOfPossession: pop!)
+        } else {
+            security = Security0()
+        }
+        scanDeviceForWiFiList()
     }
 
     private func showBusy(isBusy: Bool) {
@@ -59,25 +77,11 @@ class ProvisionViewController: UIViewController {
         provisionButton.isUserInteractionEnabled = !isBusy
     }
 
-    private func provisionDevice() {
-        guard let ssid = ssidTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines), let passphrase = passphraseTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-            ssid.count > 0, passphrase.count > 0 else {
-            return
-        }
-
+    private func provisionDevice(ssid: String, passphrase: String) {
         showBusy(isBusy: true)
 
-        let pop = provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]
         let baseUrl = provisionConfig[Provision.CONFIG_BASE_URL_KEY]
         let transportVersion = provisionConfig[Provision.CONFIG_TRANSPORT_KEY]
-        let securityVersion = provisionConfig[Provision.CONFIG_SECURITY_KEY]
-
-        if securityVersion == Provision.CONFIG_SECURITY_SECURITY1 {
-            security = Security1(proofOfPossession: pop!)
-        } else {
-            security = Security0()
-        }
-
         if transport != nil {
             // transport is BLETransport set from BLELandingVC
             if let bleTransport = transport as? BLETransport {
@@ -85,11 +89,11 @@ class ProvisionViewController: UIViewController {
             }
 
             initialiseSessionAndConfigure(transport: transport!,
-                                          security: security!)
+                                          security: security!, ssid: ssid, passPhrase: passphrase)
         } else if transportVersion == Provision.CONFIG_TRANSPORT_WIFI {
             transport = SoftAPTransport(baseUrl: baseUrl!)
             initialiseSessionAndConfigure(transport: transport!,
-                                          security: security!)
+                                          security: security!, ssid: ssid, passPhrase: passphrase)
         } else if transport == nil {
             bleTransport = BLETransport(scanTimeout: 2.0)
             bleTransport?.scan(delegate: self)
@@ -97,12 +101,26 @@ class ProvisionViewController: UIViewController {
         }
     }
 
-    func initialiseSessionAndConfigure(transport: Transport,
-                                       security: Security) {
-        guard let ssid = ssidTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines), let passphrase = passphraseTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
-            return
+    func scanDeviceForWiFiList() {
+        let newSession = Session(transport: transport!, security: security!)
+        newSession.initialize(response: nil) { error in
+            guard error == nil else {
+                print("Error in establishing session \(error.debugDescription)")
+                return
+            }
+            if newSession.isEstablished {
+                DispatchQueue.main.async {
+                    self.showLoader(message: "Scanning for Wifi")
+                    let scanWifiManager: ScanWifiList = ScanWifiList(session: newSession)
+                    scanWifiManager.delegate = self
+                    scanWifiManager.startWifiScan()
+                }
+            }
         }
+    }
 
+    func initialiseSessionAndConfigure(transport: Transport,
+                                       security: Security, ssid: String, passPhrase: String) {
         let newSession = Session(transport: transport,
                                  security: security)
         if transport.isDeviceConfigured() {
@@ -115,7 +133,7 @@ class ProvisionViewController: UIViewController {
                 let provision = Provision(session: newSession)
 
                 provision.configureWifi(ssid: ssid,
-                                        passphrase: passphrase) { status, error in
+                                        passphrase: passPhrase) { status, error in
                     guard error == nil else {
                         print("Error in configuring wifi : \(error.debugDescription)")
                         return
@@ -137,7 +155,7 @@ class ProvisionViewController: UIViewController {
         }
         if ssid.count > 0, passphrase.count > 0 {
             provisionButton.isUserInteractionEnabled = true
-            provisionDevice()
+            provisionDevice(ssid: ssid, passphrase: passphrase)
         }
     }
 
@@ -152,7 +170,11 @@ class ProvisionViewController: UIViewController {
     }
 
     @IBAction func provisionButtonClicked(_: Any) {
-        provisionDevice()
+        guard let ssid = ssidTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines), let passphrase = passphraseTextfield.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+            ssid.count > 0, passphrase.count > 0 else {
+            return
+        }
+        provisionDevice(ssid: ssid, passphrase: passphrase)
     }
 
     private func applyConfigurations(provision: Provision) {
@@ -190,6 +212,25 @@ class ProvisionViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+
+    func showLoader(message: String) {
+        let loader = MBProgressHUD.showAdded(to: view, animated: true)
+        loader.mode = MBProgressHUDMode.indeterminate
+        loader.label.text = message
+    }
+
+    func setWifiIconImageFor(cell: WifiListTableViewCell, ssid: String) {
+        let rssi = wifiDetailList[ssid] ?? -70
+        if rssi > Int32(-50) {
+            cell.signalImageView.image = UIImage(named: "wifi_symbol_strong")
+        } else if rssi > Int32(-60) {
+            cell.signalImageView?.image = UIImage(named: "wifi_symbol_good")
+        } else if rssi > Int32(-67) {
+            cell.signalImageView?.image = UIImage(named: "wifi_symbol_fair")
+        } else {
+            cell.signalImageView?.image = UIImage(named: "wifi_symbol_weak")
+        }
+    }
 }
 
 extension ProvisionViewController: BLETransportDelegate {
@@ -201,9 +242,7 @@ extension ProvisionViewController: BLETransportDelegate {
         showError(errorMessage: "No peripherals found!")
     }
 
-    func peripheralConfigured(peripheral _: CBPeripheral) {
-        initialiseSessionAndConfigure(transport: transport!, security: security!)
-    }
+    func peripheralConfigured(peripheral _: CBPeripheral) {}
 
     func peripheralNotConfigured(peripheral _: CBPeripheral) {
         showError(errorMessage: "Peripheral device could not be configured.")
@@ -211,5 +250,79 @@ extension ProvisionViewController: BLETransportDelegate {
 
     func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {
         showError(errorMessage: "Peripheral device disconnected")
+    }
+}
+
+extension ProvisionViewController: ScanWifiListProtocol {
+    func wifiScanFinished(wifiList: [String: Int32]?, error: Error?) {
+        if wifiList?.count != 0, wifiList != nil {
+            wifiDetailList = wifiList!
+            ssidList = Array(wifiList!.keys)
+            DispatchQueue.main.async {
+                self.tableView.isHidden = false
+                self.ssidTextfield.isHidden = true
+                self.passphraseTextfield.isHidden = true
+                self.tableView.reloadData()
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.tableView.isHidden = true
+                self.ssidTextfield.isHidden = false
+                self.passphraseTextfield.isHidden = false
+            }
+            if error != nil {
+                print("Unable to fetch wifi list :\(String(describing: error))")
+            }
+        }
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+    }
+}
+
+extension ProvisionViewController: UITableViewDelegate {
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        let ssid = ssidList[indexPath.row]
+
+        let input = UIAlertController(title: ssid, message: nil, preferredStyle: .alert)
+
+        input.addTextField { textField in
+            textField.placeholder = "Password"
+            textField.isSecureTextEntry = true
+        }
+
+        input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
+            let textField = input?.textFields![0]
+            guard let passphrase = textField?.text else {
+                return
+            }
+            if passphrase.count > 0 {
+                self.provisionDevice(ssid: ssid, passphrase: passphrase)
+            }
+        }))
+        input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+
+        }))
+
+        present(input, animated: true, completion: nil)
+    }
+
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
+        return 60.0
+    }
+}
+
+extension ProvisionViewController: UITableViewDataSource {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        return ssidList.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "wifiListCell", for: indexPath) as! WifiListTableViewCell
+        cell.ssidLabel.text = ssidList[indexPath.row]
+        setWifiIconImageFor(cell: cell, ssid: ssidList[indexPath.row])
+        return cell
     }
 }

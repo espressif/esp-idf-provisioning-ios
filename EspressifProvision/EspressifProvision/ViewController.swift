@@ -22,8 +22,6 @@ import UIKit
 class ViewController: UIViewController {
     // Provisioning
     private let pop = Bundle.main.infoDictionary?["ProofOfPossession"] as! String
-    // BLE
-    private let deviceNamePrefix = Bundle.main.infoDictionary?["BLEDeviceNamePrefix"] as! String
     // WIFI
     private let baseUrl = Bundle.main.infoDictionary?["WifiBaseUrl"] as! String
     private let networkNamePrefix = Bundle.main.infoDictionary?["WifiNetworkNamePrefix"] as! String
@@ -50,7 +48,6 @@ class ViewController: UIViewController {
 
         #else
             transport = SoftAPTransport(baseUrl: baseUrl)
-            provisionDevice()
         #endif
     }
 
@@ -65,13 +62,12 @@ class ViewController: UIViewController {
             security = Provision.CONFIG_SECURITY_SECURITY1
         #endif
 
-        var config = [
+        let config = [
             Provision.CONFIG_TRANSPORT_KEY: transport,
             Provision.CONFIG_SECURITY_KEY: security,
             Provision.CONFIG_PROOF_OF_POSSESSION_KEY: pop,
             Provision.CONFIG_BASE_URL_KEY: baseUrl,
             Provision.CONFIG_WIFI_AP_KEY: networkNamePrefix,
-            Provision.CONFIG_BLE_DEVICE_NAME_PREFIX: deviceNamePrefix,
         ]
         Provision.showProvisioningUI(on: self, config: config)
     }
