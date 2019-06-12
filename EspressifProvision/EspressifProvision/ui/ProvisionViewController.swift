@@ -38,6 +38,7 @@ class ProvisionViewController: UIViewController {
     var wifiDetailList: [String: Espressif_WiFiScanResult] = [:]
     var versionInfo: String?
     var session: Session?
+    var capabilities: [String]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,16 +52,7 @@ class ProvisionViewController: UIViewController {
         tableView.tableFooterView = UIView()
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(showDeviceVersion))
-        let securityVersion = provisionConfig[Provision.CONFIG_SECURITY_KEY]
-        let pop = provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]
-
-        if securityVersion == Provision.CONFIG_SECURITY_SECURITY1 {
-            security = Security1(proofOfPossession: pop!)
-        } else {
-            security = Security0()
-        }
-        initialiseSession()
-        scanDeviceForWiFiList()
+        getDeviceVersionInfo()
     }
 
     private func showBusy(isBusy: Bool) {
@@ -105,6 +97,13 @@ class ProvisionViewController: UIViewController {
     }
 
     private func initialiseSession() {
+        let pop = provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]
+
+        if let capability = self.capabilities, capability.contains(Constants.noProofCapability) {
+            security = Security1(proofOfPossession: "")
+        } else {
+            security = Security1(proofOfPossession: pop!)
+        }
         session = Session(transport: transport!,
                           security: security!)
         session!.initialize(response: nil) { error in
@@ -112,7 +111,11 @@ class ProvisionViewController: UIViewController {
                 print("Error in establishing session \(error.debugDescription)")
                 return
             }
-            self.getDeviceVersionInfo()
+            if let capability = self.capabilities, capability.contains(Constants.noProofCapability) {
+                self.scanDeviceForWiFiList()
+            } else {
+                self.showTextFieldUI()
+            }
         }
     }
 
@@ -151,29 +154,24 @@ class ProvisionViewController: UIViewController {
     }
 
     func getDeviceVersionInfo() {
-        if session!.isEstablished {
-            transport?.SendConfigData(path: (transport?.utility.versionPath)!, data: Data("ESP".utf8), completionHandler: { response, error in
-                guard error == nil else {
-                    print("Error reading device version info")
-                    return
-                }
-                do {
-                    if let result = try JSONSerialization.jsonObject(with: response!, options: .mutableContainers) as? NSDictionary {
-                        self.transport?.utility.deviceVersionInfo = result
-                        if let prov = result[Constants.provKey] as? NSDictionary, let capabilities = prov[Constants.capabilitiesKey] as? [String] {
-                            if capabilities.contains(Constants.wifiScanCapability) {
-                                self.scanDeviceForWiFiList()
-                            } else {
-                                self.showTextFieldUI()
-                            }
-                        }
+        transport?.SendConfigData(path: (transport?.utility.versionPath)!, data: Data("ESP".utf8), completionHandler: { response, error in
+            guard error == nil else {
+                print("Error reading device version info")
+                return
+            }
+            do {
+                if let result = try JSONSerialization.jsonObject(with: response!, options: .mutableContainers) as? NSDictionary {
+                    self.transport?.utility.deviceVersionInfo = result
+                    if let prov = result[Constants.provKey] as? NSDictionary, let capabilities = prov[Constants.capabilitiesKey] as? [String] {
+                        self.capabilities = capabilities
+                        self.initialiseSession()
                     }
-                } catch {
-                    self.showTextFieldUI()
-                    print(error)
                 }
-            })
-        }
+            } catch {
+                self.showTextFieldUI()
+                print(error)
+            }
+        })
     }
 
     @objc func showDeviceVersion() {

@@ -19,4 +19,5 @@ struct Constants {
     static let provKey = "prov"
     static let capabilitiesKey = "cap"
     static let wifiScanCapability = "wifi_scan"
+    static let noProofCapability = "no_pop"
 }
