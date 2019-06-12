@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ScanWifiListProtocol {
-    func wifiScanFinished(wifiList: [String: Int32]?, error: Error?)
+    func wifiScanFinished(wifiList: [String: Espressif_WiFiScanResult]?, error: Error?)
 }
 
 enum CustomError: Error {
@@ -20,7 +20,7 @@ enum CustomError: Error {
 class ScanWifiList {
     private let transport: Transport
     private let security: Security
-    private var scanResult: [String: Int32] = [:]
+    private var scanResult: [String: Espressif_WiFiScanResult] = [:]
 
     var delegate: ScanWifiListProtocol?
 
@@ -133,11 +133,11 @@ class ScanWifiList {
                     let ssid = String(decoding: responseList.entries[index].ssid, as: UTF8.self)
                     let rssi = responseList.entries[index].rssi
                     if let val = scanResult[ssid] {
-                        if rssi > val {
-                            scanResult[ssid] = rssi
+                        if rssi > val.rssi {
+                            scanResult[ssid] = val
                         }
                     } else {
-                        scanResult[ssid] = rssi
+                        scanResult[ssid] = responseList.entries[index]
                     }
                 }
                 if fetchFinish {

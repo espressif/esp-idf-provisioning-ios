@@ -13,4 +13,10 @@ struct Constants {
     static let sessionCharacterstic = "session"
     static let configCharacterstic = "config"
     static let versionCharacterstic = "ver"
+    static let deviceInfoStoryboardID = "versionInfo"
+
+    // Device version info
+    static let provKey = "prov"
+    static let capabilitiesKey = "cap"
+    static let wifiScanCapability = "wifi_scan"
 }

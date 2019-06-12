@@ -42,6 +42,7 @@
 		7E89B3398606A35D1BCB7893 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */; };
 		F184C9E7228C4A780034C5B7 /* AESDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F184C9E6228C4A780034C5B7 /* AESDecryptor.m */; };
 		F1A06C7622AA48E6008567D8 /* wifi_scan.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A06C7522AA48E6008567D8 /* wifi_scan.pb.swift */; };
+		F1D4F1FB22AFBD6D000452EE /* DeviceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */; };
 		F1DD70A422A8EA150092DAB9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A322A8EA140092DAB9 /* Utility.swift */; };
 		F1DD70A622A8EA2A0092DAB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A522A8EA2A0092DAB9 /* Constants.swift */; };
 		F1DD70AA22A9BFBE0092DAB9 /* ScanWifiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A822A9BFBE0092DAB9 /* ScanWifiList.swift */; };
@@ -124,6 +125,7 @@
 		F184C9E5228C4A780034C5B7 /* AESDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESDecryptor.h; sourceTree = "<group>"; };
 		F184C9E6228C4A780034C5B7 /* AESDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESDecryptor.m; sourceTree = "<group>"; };
 		F1A06C7522AA48E6008567D8 /* wifi_scan.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_scan.pb.swift; sourceTree = "<group>"; };
+		F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewController.swift; sourceTree = "<group>"; };
 		F1DD70A322A8EA140092DAB9 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		F1DD70A522A8EA2A0092DAB9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F1DD70A822A9BFBE0092DAB9 /* ScanWifiList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanWifiList.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				143146B420EB273B0017E119 /* ProvisionViewController.swift */,
 				14706916211050EE00F8E1D8 /* BLELandingViewController.swift */,
 				144149432126AE09002AD5E1 /* SuccessViewController.swift */,
+				F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				1431468720DFA58E0017E119 /* HexUtils.swift in Sources */,
 				143146B320EB22470017E119 /* ProvisionLandingViewController.swift in Sources */,
 				1431468B20E37B980017E119 /* Session.swift in Sources */,
+				F1D4F1FB22AFBD6D000452EE /* DeviceInfoViewController.swift in Sources */,
 				1431469F20E387C60017E119 /* wifi_constants.pb.swift in Sources */,
 				149774E3210C8A0000022841 /* StringExtensions.swift in Sources */,
 				14A6EA0E2108DF95007F9407 /* wifi_config.pb.swift in Sources */,

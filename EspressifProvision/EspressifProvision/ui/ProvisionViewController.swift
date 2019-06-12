@@ -35,7 +35,9 @@ class ProvisionViewController: UIViewController {
     var grayView: UIView?
     var provision: Provision!
     var ssidList: [String] = []
-    var wifiDetailList: [String: Int32] = [:]
+    var wifiDetailList: [String: Espressif_WiFiScanResult] = [:]
+    var versionInfo: String?
+    var session: Session?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +49,8 @@ class ProvisionViewController: UIViewController {
             print("Inside PVC", bleTransport.currentPeripheral!)
         }
         tableView.tableFooterView = UIView()
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(showDeviceVersion))
         let securityVersion = provisionConfig[Provision.CONFIG_SECURITY_KEY]
         let pop = provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]
 
@@ -55,6 +59,7 @@ class ProvisionViewController: UIViewController {
         } else {
             security = Security0()
         }
+        initialiseSession()
         scanDeviceForWiFiList()
     }
 
@@ -88,12 +93,10 @@ class ProvisionViewController: UIViewController {
                 bleTransport.delegate = self
             }
 
-            initialiseSessionAndConfigure(transport: transport!,
-                                          security: security!, ssid: ssid, passPhrase: passphrase)
+            initialiseSessionAndConfigure(ssid: ssid, passPhrase: passphrase)
         } else if transportVersion == Provision.CONFIG_TRANSPORT_WIFI {
             transport = SoftAPTransport(baseUrl: baseUrl!)
-            initialiseSessionAndConfigure(transport: transport!,
-                                          security: security!, ssid: ssid, passPhrase: passphrase)
+            initialiseSessionAndConfigure(ssid: ssid, passPhrase: passphrase)
         } else if transport == nil {
             bleTransport = BLETransport(scanTimeout: 2.0)
             bleTransport?.scan(delegate: self)
@@ -101,36 +104,33 @@ class ProvisionViewController: UIViewController {
         }
     }
 
-    func scanDeviceForWiFiList() {
-        let newSession = Session(transport: transport!, security: security!)
-        newSession.initialize(response: nil) { error in
+    private func initialiseSession() {
+        session = Session(transport: transport!,
+                          security: security!)
+        session!.initialize(response: nil) { error in
             guard error == nil else {
                 print("Error in establishing session \(error.debugDescription)")
                 return
             }
-            if newSession.isEstablished {
-                DispatchQueue.main.async {
-                    self.showLoader(message: "Scanning for Wifi")
-                    let scanWifiManager: ScanWifiList = ScanWifiList(session: newSession)
-                    scanWifiManager.delegate = self
-                    scanWifiManager.startWifiScan()
-                }
+            self.getDeviceVersionInfo()
+        }
+    }
+
+    func scanDeviceForWiFiList() {
+        if session!.isEstablished {
+            DispatchQueue.main.async {
+                self.showLoader(message: "Scanning for Wifi")
+                let scanWifiManager: ScanWifiList = ScanWifiList(session: self.session!)
+                scanWifiManager.delegate = self
+                scanWifiManager.startWifiScan()
             }
         }
     }
 
-    func initialiseSessionAndConfigure(transport: Transport,
-                                       security: Security, ssid: String, passPhrase: String) {
-        let newSession = Session(transport: transport,
-                                 security: security)
-        if transport.isDeviceConfigured() {
-            newSession.initialize(response: nil) { error in
-                guard error == nil else {
-                    print("Error in establishing session \(error.debugDescription)")
-                    return
-                }
-
-                let provision = Provision(session: newSession)
+    func initialiseSessionAndConfigure(ssid: String, passPhrase: String) {
+        if transport!.isDeviceConfigured() {
+            if session!.isEstablished {
+                let provision = Provision(session: session!)
 
                 provision.configureWifi(ssid: ssid,
                                         passphrase: passPhrase) { status, error in
@@ -142,10 +142,44 @@ class ProvisionViewController: UIViewController {
                         self.applyConfigurations(provision: provision)
                     }
                 }
+            } else {
+                print("Session is not established")
             }
         } else {
             showError(errorMessage: "Peripheral device could not be configured.")
         }
+    }
+
+    func getDeviceVersionInfo() {
+        if session!.isEstablished {
+            transport?.SendConfigData(path: (transport?.utility.versionPath)!, data: Data("ESP".utf8), completionHandler: { response, error in
+                guard error == nil else {
+                    print("Error reading device version info")
+                    return
+                }
+                do {
+                    if let result = try JSONSerialization.jsonObject(with: response!, options: .mutableContainers) as? NSDictionary {
+                        self.transport?.utility.deviceVersionInfo = result
+                        if let prov = result[Constants.provKey] as? NSDictionary, let capabilities = prov[Constants.capabilitiesKey] as? [String] {
+                            if capabilities.contains(Constants.wifiScanCapability) {
+                                self.scanDeviceForWiFiList()
+                            } else {
+                                self.showTextFieldUI()
+                            }
+                        }
+                    }
+                } catch {
+                    self.showTextFieldUI()
+                    print(error)
+                }
+            })
+        }
+    }
+
+    @objc func showDeviceVersion() {
+        let deviceVersionVC = storyboard?.instantiateViewController(withIdentifier: Constants.deviceInfoStoryboardID) as! DeviceInfoViewController
+        deviceVersionVC.utility = transport!.utility
+        navigationController?.pushViewController(deviceVersionVC, animated: true)
     }
 
     @objc func passphraseEntered() {
@@ -220,7 +254,7 @@ class ProvisionViewController: UIViewController {
     }
 
     func setWifiIconImageFor(cell: WifiListTableViewCell, ssid: String) {
-        let rssi = wifiDetailList[ssid] ?? -70
+        let rssi = wifiDetailList[ssid]?.rssi ?? -70
         if rssi > Int32(-50) {
             cell.signalImageView.image = UIImage(named: "wifi_symbol_strong")
         } else if rssi > Int32(-60) {
@@ -229,6 +263,20 @@ class ProvisionViewController: UIViewController {
             cell.signalImageView?.image = UIImage(named: "wifi_symbol_fair")
         } else {
             cell.signalImageView?.image = UIImage(named: "wifi_symbol_weak")
+        }
+        if wifiDetailList[ssid]?.auth != Espressif_WifiAuthMode.open {
+            cell.authenticationImageView.image = UIImage(named: "wifi_security")
+            cell.authenticationImageView.isHidden = false
+        } else {
+            cell.authenticationImageView.isHidden = true
+        }
+    }
+
+    func showTextFieldUI() {
+        DispatchQueue.main.async {
+            self.tableView.isHidden = true
+            self.ssidTextfield.isHidden = false
+            self.passphraseTextfield.isHidden = false
         }
     }
 }
@@ -254,7 +302,7 @@ extension ProvisionViewController: BLETransportDelegate {
 }
 
 extension ProvisionViewController: ScanWifiListProtocol {
-    func wifiScanFinished(wifiList: [String: Int32]?, error: Error?) {
+    func wifiScanFinished(wifiList: [String: Espressif_WiFiScanResult]?, error: Error?) {
         if wifiList?.count != 0, wifiList != nil {
             wifiDetailList = wifiList!
             ssidList = Array(wifiList!.keys)
@@ -265,11 +313,7 @@ extension ProvisionViewController: ScanWifiListProtocol {
                 self.tableView.reloadData()
             }
         } else {
-            DispatchQueue.main.async {
-                self.tableView.isHidden = true
-                self.ssidTextfield.isHidden = false
-                self.passphraseTextfield.isHidden = false
-            }
+            showTextFieldUI()
             if error != nil {
                 print("Unable to fetch wifi list :\(String(describing: error))")
             }
@@ -286,27 +330,30 @@ extension ProvisionViewController: UITableViewDelegate {
 
         let ssid = ssidList[indexPath.row]
 
-        let input = UIAlertController(title: ssid, message: nil, preferredStyle: .alert)
+        if wifiDetailList[ssid]?.auth != Espressif_WifiAuthMode.open {
+            let input = UIAlertController(title: ssid, message: nil, preferredStyle: .alert)
 
-        input.addTextField { textField in
-            textField.placeholder = "Password"
-            textField.isSecureTextEntry = true
+            input.addTextField { textField in
+                textField.placeholder = "Password"
+                textField.isSecureTextEntry = true
+            }
+
+            input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
+                let textField = input?.textFields![0]
+                guard let passphrase = textField?.text else {
+                    return
+                }
+                if passphrase.count > 0 {
+                    self.provisionDevice(ssid: ssid, passphrase: passphrase)
+                }
+            }))
+            input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+
+            }))
+            present(input, animated: true, completion: nil)
+        } else {
+            provisionDevice(ssid: ssid, passphrase: "")
         }
-
-        input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
-            let textField = input?.textFields![0]
-            guard let passphrase = textField?.text else {
-                return
-            }
-            if passphrase.count > 0 {
-                self.provisionDevice(ssid: ssid, passphrase: passphrase)
-            }
-        }))
-        input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
-
-        }))
-
-        present(input, animated: true, completion: nil)
     }
 
     func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {

@@ -183,7 +183,6 @@ extension BLETransport: CBCentralManagerDelegate {
                         didDiscover peripheral: CBPeripheral,
                         advertisementData data: [String: Any],
                         rssi _: NSNumber) {
-        print(peripheral)
         if let peripheralName = peripheral.name {
             if peripheralName.hasPrefix(Utility.deviceNamePrefix) {
                 if !(espressifPeripherals.filter { $0.name == peripheralName }.count > 0) {
@@ -194,6 +193,9 @@ extension BLETransport: CBCentralManagerDelegate {
     }
 
     func centralManager(_: CBCentralManager, didConnect _: CBPeripheral) {
+        if let deviceName = currentPeripheral?.name {
+            utility.deviceName = deviceName
+        }
         currentPeripheral?.discoverServices(nil)
     }
 

@@ -12,6 +12,7 @@ import Foundation
 class Utility {
     static let deviceNamePrefix = Bundle.main.infoDictionary?["BLEDeviceNamePrefix"] as! String
 
+    var deviceName = "ESP Device"
     var configPath: String?
     var versionPath: String?
     var scanPath: String?
@@ -19,10 +20,10 @@ class Utility {
     var peripheralConfigured = false
     var sessionCharacteristic: CBCharacteristic!
     var configUUIDMap: [String: CBCharacteristic] = [:]
+    var deviceVersionInfo: NSDictionary?
 
     func processDescriptor(descriptor: CBDescriptor) {
         if let value = descriptor.value as? String {
-            print("Value: \(value)")
             if value.contains(Constants.scanCharacteristic) {
                 scanPath = value
                 configUUIDMap.updateValue(descriptor.characteristic, forKey: scanPath!)
