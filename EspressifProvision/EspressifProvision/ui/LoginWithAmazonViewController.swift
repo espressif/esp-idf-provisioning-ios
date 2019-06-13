@@ -43,6 +43,7 @@ class LoginWithAmazonViewController: UIViewController {
         bleTransport = BLETransport(
             serviceUUIDString: provisionConfig[Provision.CONFIG_BLE_SERVICE_UUID],
             sessionUUIDString: provisionConfig[Provision.CONFIG_BLE_SESSION_UUID]!,
+
             configUUIDMap: configUUIDMap,
             deviceNamePrefix: provisionConfig[Provision.CONFIG_BLE_DEVICE_NAME_PREFIX]!,
             scanTimeout: 5.0
@@ -111,6 +112,7 @@ class LoginWithAmazonViewController: UIViewController {
                             provisionVC.provisionConfig = config
                             provisionVC.avsDetails = results
                             provisionVC.transport = self.transport
+                            provisionVC.security = self.secu
                             self.navigationController?.pushViewController(provisionVC, animated: true)
                         } else {
                             let provisionLandingVC = self.storyboard?.instantiateViewController(withIdentifier: "provisionLanding") as! ProvisionLandingViewController

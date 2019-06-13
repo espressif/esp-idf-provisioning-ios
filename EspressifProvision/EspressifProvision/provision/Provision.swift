@@ -33,8 +33,10 @@ class Provision {
     public static let CONFIG_BLE_SERVICE_UUID = "serviceUUID"
     public static let CONFIG_BLE_SESSION_UUID = "sessionUUID"
     public static let CONFIG_BLE_CONFIG_UUID = "configUUID"
+    public static let CONFIG_BLE_SCAN_UUID = "scanUUID"
     public static let CONFIG_BLE_DEVICE_NAME_PREFIX = "deviceNamePrefix"
     public static let PROVISIONING_CONFIG_PATH = "prov-config"
+    public static let PROVISIONING_SCAN_PATH = "prov-scan"
 
     /// Create Provision object with a Session object
     /// Here the Provision class will require a session

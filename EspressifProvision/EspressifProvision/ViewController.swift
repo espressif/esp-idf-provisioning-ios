@@ -36,6 +36,7 @@ class ViewController: UIViewController {
     private let sessionUUIDString: String = Bundle.main.infoDictionary?["BLESessionUUID"] as! String
     private let configUUIDString: String = Bundle.main.infoDictionary?["BLEConfigUUID"] as! String
     private let deviceNamePrefix = Bundle.main.infoDictionary?["BLEDeviceNamePrefix"] as! String
+    private let scanUUIDString: String? = Bundle.main.infoDictionary?["BLEScanUUID"] as? String
     // WIFI
     private let baseUrl = Bundle.main.infoDictionary?["WifiBaseUrl"] as! String
     private let networkNamePrefix = Bundle.main.infoDictionary?["WifiNetworkNamePrefix"] as! String
@@ -103,6 +104,7 @@ class ViewController: UIViewController {
                 config[Provision.CONFIG_BLE_SESSION_UUID] = sessionUUIDString
                 config[Provision.CONFIG_BLE_CONFIG_UUID] = configUUIDString
                 config[ConfigureAVS.AVS_CONFIG_UUID_KEY] = avsconfigUUIDString
+                config[Provision.CONFIG_BLE_SCAN_UUID] = scanUUIDString
             }
             print(config)
 //            Provision.showProvisioningWithAmazonUI(on: self,
@@ -141,6 +143,7 @@ class ViewController: UIViewController {
                 config[Provision.CONFIG_BLE_SERVICE_UUID] = serviceUUIDString
                 config[Provision.CONFIG_BLE_SESSION_UUID] = sessionUUIDString
                 config[Provision.CONFIG_BLE_CONFIG_UUID] = configUUIDString
+                config[Provision.CONFIG_BLE_SCAN_UUID] = scanUUIDString
             }
 
             Provision.showProvisioningUI(on: self, config: config)

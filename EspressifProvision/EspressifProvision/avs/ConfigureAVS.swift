@@ -44,9 +44,7 @@ class ConfigureAVS {
 
     public static func loginWithAmazon(completionHandler: @escaping ([String: String]?, Error?) -> Swift.Void) {
         let request = AMZNAuthorizeRequest()
-        for i in stride(from: 1, to: 10, by: 3) {
-            print(i)
-        }
+        for _ in stride(from: 1, to: 10, by: 3) {}
         let productId = ProvDeviceDetails[1]
         let deviceSerialNumber = ProvDeviceDetails[0]
         let codeChallenge = ProvDeviceDetails[2]
@@ -108,6 +106,44 @@ class ConfigureAVS {
         }
     }
 
+    public func isLoggedIn(completionHandler: @escaping (Bool) -> Void) {
+        var payload = Avs_AVSConfigPayload()
+        payload.msg = Avs_AVSConfigMsgType.typeCmdSignInStatus
+        payload.cmdSigninStatus = Avs_CmdSignInStatus()
+        do {
+            let encryptedData = try security.encrypt(data: payload.serializedData())
+            if let data = encryptedData {
+                transport.SendConfigData(path: ConfigureAVS.AVS_CONFIG_PATH, data: data) { response, error in
+                    if response != nil, error == nil {
+                        completionHandler(self.processAVSLoginStatus(response: response!))
+                    }
+                }
+            }
+        } catch {
+            print(error)
+            completionHandler(false)
+        }
+    }
+
+    public func signOut(completionHandler: @escaping (Bool) -> Void) {
+        var payload = Avs_AVSConfigPayload()
+        payload.msg = Avs_AVSConfigMsgType.typeCmdSignOut
+        payload.cmdSigninStatus = Avs_CmdSignInStatus()
+        do {
+            let encryptedData = try security.encrypt(data: payload.serializedData())
+            if let data = encryptedData {
+                transport.SendConfigData(path: ConfigureAVS.AVS_CONFIG_PATH, data: data) { response, error in
+                    if response != nil, error == nil {
+                        completionHandler(self.processAVSLoginStatus(response: response!))
+                    }
+                }
+            }
+        } catch {
+            print(error)
+            completionHandler(false)
+        }
+    }
+
     private func createSetAVSConfigRequest(cliendId: String,
                                            authCode: String,
                                            redirectUri: String) throws -> Data? {
@@ -135,6 +171,19 @@ class ConfigureAVS {
         }
 
         return responseStatus
+    }
+
+    private func processAVSLoginStatus(response: Data) -> Bool {
+        do {
+            if let decryptedResponse = security.decrypt(data: response) {
+                let statusResponse = try Avs_AVSConfigPayload(serializedData: decryptedResponse)
+                return statusResponse.respSigninStatus.status == .signedIn
+            }
+        } catch {
+            print(error)
+            return false
+        }
+        return false
     }
 
     private static func generateCodeChallenge(codeVerifier: String) -> String {
