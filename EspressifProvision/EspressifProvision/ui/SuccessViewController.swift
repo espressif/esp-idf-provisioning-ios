@@ -20,15 +20,39 @@ import Foundation
 import UIKit
 
 class SuccessViewController: UIViewController {
-    var statusText: String?
-
-    @IBOutlet var successLabel: UILabel!
+    @IBOutlet var learnMoreTextView: UITextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let statusText = statusText {
-            successLabel.text = statusText
-        }
         // Do any additional setup after loading the view, typically from a nib.
+        let attributedString = NSMutableAttributedString(string: "To learn more and access additional features, download the Alexa app")
+        let url = URL(string: "alexa://")!
+        var redirectURL = url
+        if !UIApplication.shared.canOpenURL(url) {
+            redirectURL = URL(string: "https://apps.apple.com/in/app/amazon-alexa/id944011620")!
+        }
+
+        attributedString.setAttributes([.link: redirectURL], range: NSRange(location: attributedString.length - 9, length: 9))
+
+        learnMoreTextView.attributedText = attributedString
+        learnMoreTextView.isUserInteractionEnabled = true
+        learnMoreTextView.isEditable = false
+
+        // Set how links should appear: blue and underlined
+        learnMoreTextView.linkTextAttributes = [
+            .foregroundColor: UIColor.blue,
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+        ]
+        learnMoreTextView.textAlignment = .center
+
+        let righButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(presentVC))
+
+        navigationItem.rightBarButtonItem = righButtonItem
+
+        navigationItem.setHidesBackButton(true, animated: true)
+    }
+
+    @objc func presentVC() {
+        performSegue(withIdentifier: "presentFirstVC", sender: nil)
     }
 }

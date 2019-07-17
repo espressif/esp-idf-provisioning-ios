@@ -16,6 +16,7 @@ class DeviceDetailViewController: UIViewController {
     var avsConfig: ConfigureAVS?
     @IBOutlet var signedInViewContainer: UIView!
     @IBOutlet var signedOutViewContainer: UIView!
+    @IBOutlet var learnMoreTextView: UITextView!
 
     override func viewDidLoad() {
         let label = UILabel(frame: CGRect(x: 10, y: 0, width: 50, height: 40))
@@ -29,6 +30,26 @@ class DeviceDetailViewController: UIViewController {
         label.textAlignment = .center
 
         navigationItem.titleView = label
+
+        // Do any additional setup after loading the view, typically from a nib.
+        let attributedString = NSMutableAttributedString(string: "To learn more and access additional features, download the Alexa app")
+        let url = URL(string: "alexa://")!
+        var redirectURL = url
+        if !UIApplication.shared.canOpenURL(url) {
+            redirectURL = URL(string: "https://apps.apple.com/in/app/amazon-alexa/id944011620")!
+        }
+
+        attributedString.setAttributes([.link: redirectURL], range: NSRange(location: attributedString.length - 9, length: 9))
+        learnMoreTextView.attributedText = attributedString
+        learnMoreTextView.isUserInteractionEnabled = true
+        learnMoreTextView.isEditable = false
+
+        // Set how links should appear: blue and underlined
+        learnMoreTextView.linkTextAttributes = [
+            .foregroundColor: UIColor.blue,
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+        ]
+        learnMoreTextView.textAlignment = .center
     }
 
     override func viewWillAppear(_: Bool) {

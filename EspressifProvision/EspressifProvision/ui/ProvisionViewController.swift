@@ -188,20 +188,21 @@ class ProvisionViewController: UIViewController {
                                       wifiStatusUpdatedHandler: { wifiState, failReason, error in
             DispatchQueue.main.async {
                 self.showBusy(isBusy: false)
-                let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as? SuccessViewController
-                if let successVC = successVC {
-                    if error != nil {
-                        successVC.statusText = "Error in getting wifi state : \(error.debugDescription)"
-                    } else if wifiState == Espressif_WifiStationState.connected {
-                        successVC.statusText = "Device has been successfully provisioned!"
-                    } else if wifiState == Espressif_WifiStationState.disconnected {
-                        successVC.statusText = "Please check the device indicators for Provisioning status."
-                    } else {
-                        successVC.statusText = "Device provisioning failed.\nReason : \(failReason).\nPlease try again"
-                    }
-                    self.navigationController?.present(successVC, animated: true, completion: nil)
-                    self.provisionButton.isUserInteractionEnabled = true
+                let statusVC = self.storyboard?.instantiateViewController(withIdentifier: "statusViewController") as! StatusViewController
+                if error != nil {
+                    statusVC.statusText = "Error in getting wifi state : \(error.debugDescription)"
+                    self.navigationController?.present(statusVC, animated: true, completion: nil)
+                } else if wifiState == Espressif_WifiStationState.connected {
+                    let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as! SuccessViewController
+                    self.navigationController?.show(successVC, sender: nil)
+                } else if wifiState == Espressif_WifiStationState.disconnected {
+                    statusVC.statusText = "Please check the device indicators for Provisioning status."
+                    self.navigationController?.present(statusVC, animated: true, completion: nil)
+                } else {
+                    statusVC.statusText = "Device provisioning failed.\nReason : \(failReason).\nPlease try again"
+                    self.navigationController?.present(statusVC, animated: true, completion: nil)
                 }
+                self.provisionButton.isUserInteractionEnabled = true
             }
         })
     }
@@ -291,6 +292,10 @@ extension ProvisionViewController: UITableViewDelegate {
             textField.isSecureTextEntry = true
         }
 
+        input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+
+        }))
+
         input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
             let textField = input?.textFields![0]
             guard let passphrase = textField?.text else {
@@ -298,10 +303,9 @@ extension ProvisionViewController: UITableViewDelegate {
             }
             if passphrase.count > 0 {
                 self.provisionDevice(ssid: ssid, passphrase: passphrase)
+            } else {
+                self.provisionDevice(ssid: ssid, passphrase: "")
             }
-        }))
-        input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
-
         }))
 
         present(input, animated: true, completion: nil)

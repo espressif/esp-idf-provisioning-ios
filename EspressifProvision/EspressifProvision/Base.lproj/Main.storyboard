@@ -182,13 +182,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="670-DZ-eiW">
-                                                    <rect key="frame" x="15" y="19.5" width="663" height="21"/>
+                                                    <rect key="frame" x="15" y="19.5" width="270" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifi_symbol_weak" translatesAutoresizingMaskIntoConstraints="NO" id="fPb-NJ-4le">
-                                                    <rect key="frame" x="698" y="13" width="45" height="33.5"/>
+                                                    <rect key="frame" x="305" y="13" width="45" height="33.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="OQc-Ym-vD3"/>
                                                         <constraint firstAttribute="width" secondItem="fPb-NJ-4le" secondAttribute="height" multiplier="4:3" id="yIJ-5m-G4g"/>
@@ -247,10 +247,10 @@
             </objects>
             <point key="canvasLocation" x="1752.8" y="31.934032983508249"/>
         </scene>
-        <!--Success View Controller-->
+        <!--Status View Controller-->
         <scene sceneID="1NK-5s-vK5">
             <objects>
-                <viewController storyboardIdentifier="successViewController" id="kI4-hk-B8X" customClass="SuccessViewController" customModule="EspressifProvision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="I" id="kI4-hk-B8X" customClass="StatusViewController" customModule="EspressifProvision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cg9-vu-1LI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -291,7 +291,7 @@
                         <viewLayoutGuide key="safeArea" id="k5F-pP-pmt"/>
                     </view>
                     <connections>
-                        <outlet property="successLabel" destination="wHO-RU-suR" id="1LM-Po-fT5"/>
+                        <outlet property="successLabel" destination="wHO-RU-suR" id="kPH-AE-bHP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55T-vs-eK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -301,7 +301,7 @@
         <!--Int AVS BLE-->
         <scene sceneID="vpc-50-hsG">
             <objects>
-                <viewController id="ZH1-Yn-aSM" customClass="ViewController" customModule="EspressifProvision" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="firstVC" id="ZH1-Yn-aSM" customClass="ViewController" customModule="EspressifProvision" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="63H-8f-fMi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -409,7 +409,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCS-lr-wK6">
-                                                    <rect key="frame" x="15" y="19.5" width="737" height="21"/>
+                                                    <rect key="frame" x="15" y="19.5" width="344" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -619,6 +619,7 @@ All you have to do is ask Alexa.</string>
                         <viewLayoutGuide key="safeArea" id="0iD-Gg-96z"/>
                     </view>
                     <connections>
+                        <outlet property="learnMoreTextView" destination="mJM-Um-0Xs" id="aaQ-KO-lU0"/>
                         <outlet property="signedInViewContainer" destination="Vr9-Xd-du9" id="fVO-kU-gMA"/>
                         <outlet property="signedOutViewContainer" destination="5T3-Xm-ReH" id="jPz-O4-G3A"/>
                     </connections>
@@ -734,6 +735,110 @@ All you have to do is ask Alexa.</string>
             </objects>
             <point key="canvasLocation" x="4119" y="-697"/>
         </scene>
+        <!--Success View Controller-->
+        <scene sceneID="oaR-T7-gzf">
+            <objects>
+                <viewController storyboardIdentifier="successViewController" id="Bme-mi-jWq" customClass="SuccessViewController" customModule="EspressifProvision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ecx-aD-f9p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alexa_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Jj7-WV-xmS">
+                                <rect key="frame" x="62" y="40" width="251" height="188.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Jj7-WV-xmS" secondAttribute="height" multiplier="4:3" id="tVF-z2-NRN"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKN-n0-Z4q">
+                                <rect key="frame" x="0.0" y="228.5" width="375" height="438.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJk-U9-e9k">
+                                        <rect key="frame" x="16" y="367.5" width="343" height="1"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="NKa-Wq-d55"/>
+                                        </constraints>
+                                    </view>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Xbi-2B-wq6">
+                                        <rect key="frame" x="20" y="75" width="335" height="279"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <string key="text">Alexa, what's the weather today? 
+
+Alexa, play my Flash Briefing.
+
+Alexa, set a timer for 20 minutes.
+
+Alexa, add Dinner with Mom to my calendar.
+
+Alexa, set an alarm for 6 a.m.</string>
+                                        <fontDescription key="fontDescription" name="Bookerly-Italic" family="Bookerly" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Bookerly-Italic" family="Bookerly" pointSize="28"/>
+                                        </variation>
+                                    </textView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Here are some of tha many things you can ask Alexa" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="g50-Ns-Suf">
+                                        <rect key="frame" x="20" y="0.0" width="335" height="65"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="65" id="DPO-h7-QKd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="25"/>
+                                        </variation>
+                                    </textView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="To learn more and access additional features, download the Alexa app." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="G18-s4-Hxc">
+                                        <rect key="frame" x="14" y="376" width="347" height="55"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        </variation>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="G18-s4-Hxc" secondAttribute="bottom" constant="7.5" id="0Qx-6E-EQb"/>
+                                    <constraint firstItem="g50-Ns-Suf" firstAttribute="top" secondItem="cKN-n0-Z4q" secondAttribute="top" id="7cM-1x-ubE"/>
+                                    <constraint firstItem="Xbi-2B-wq6" firstAttribute="top" secondItem="g50-Ns-Suf" secondAttribute="bottom" constant="10" id="Cqv-Hb-gGf"/>
+                                    <constraint firstItem="G18-s4-Hxc" firstAttribute="leading" secondItem="cKN-n0-Z4q" secondAttribute="leading" constant="14" id="F4G-BC-SO5"/>
+                                    <constraint firstAttribute="trailing" secondItem="g50-Ns-Suf" secondAttribute="trailing" constant="20" id="MUO-uk-7ab"/>
+                                    <constraint firstItem="vJk-U9-e9k" firstAttribute="top" secondItem="Xbi-2B-wq6" secondAttribute="bottom" constant="13.5" id="PBH-7Z-BkN"/>
+                                    <constraint firstItem="g50-Ns-Suf" firstAttribute="leading" secondItem="cKN-n0-Z4q" secondAttribute="leading" constant="20" id="PjG-91-ACX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Xbi-2B-wq6" secondAttribute="trailing" constant="20" id="StZ-WA-3CC"/>
+                                    <constraint firstAttribute="bottom" secondItem="vJk-U9-e9k" secondAttribute="bottom" constant="70" id="Yeq-N9-QDX"/>
+                                    <constraint firstItem="G18-s4-Hxc" firstAttribute="top" secondItem="vJk-U9-e9k" secondAttribute="bottom" constant="7.5" id="ZX8-u0-ehT"/>
+                                    <constraint firstAttribute="trailing" secondItem="G18-s4-Hxc" secondAttribute="trailing" constant="14" id="a5Y-0z-y50"/>
+                                    <constraint firstItem="vJk-U9-e9k" firstAttribute="leading" secondItem="cKN-n0-Z4q" secondAttribute="leading" constant="16" id="aBy-oE-lYp"/>
+                                    <constraint firstAttribute="trailing" secondItem="vJk-U9-e9k" secondAttribute="trailing" constant="16" id="gWF-xE-wMk"/>
+                                    <constraint firstItem="Xbi-2B-wq6" firstAttribute="leading" secondItem="cKN-n0-Z4q" secondAttribute="leading" constant="20" id="iIy-0R-Mbc"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cKN-n0-Z4q" firstAttribute="top" secondItem="Jj7-WV-xmS" secondAttribute="bottom" id="3hX-Hb-8rl"/>
+                            <constraint firstItem="cKN-n0-Z4q" firstAttribute="trailing" secondItem="84t-H9-Bra" secondAttribute="trailing" id="MWP-0i-Mui"/>
+                            <constraint firstItem="Jj7-WV-xmS" firstAttribute="top" secondItem="84t-H9-Bra" secondAttribute="top" constant="20" id="O7D-S5-YOL"/>
+                            <constraint firstItem="cKN-n0-Z4q" firstAttribute="bottom" secondItem="84t-H9-Bra" secondAttribute="bottom" id="VrI-ct-Duf"/>
+                            <constraint firstItem="cKN-n0-Z4q" firstAttribute="leading" secondItem="84t-H9-Bra" secondAttribute="leading" id="WqR-VS-NC5"/>
+                            <constraint firstItem="Jj7-WV-xmS" firstAttribute="centerX" secondItem="ecx-aD-f9p" secondAttribute="centerX" id="jDi-PD-ajd"/>
+                            <constraint firstItem="Jj7-WV-xmS" firstAttribute="width" secondItem="ecx-aD-f9p" secondAttribute="width" multiplier="0.67" id="jUB-Oy-We7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="84t-H9-Bra"/>
+                    </view>
+                    <connections>
+                        <outlet property="learnMoreTextView" destination="G18-s4-Hxc" id="jur-AF-dVv"/>
+                        <segue destination="mgC-Sj-4EB" kind="presentation" identifier="presentFirstVC" id="oku-eL-FWZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tp3-wf-dD2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3328.8000000000002" y="26.53673163418291"/>
+        </scene>
     </scenes>
     <resources>
         <image name="alexa_logo" width="360" height="170"/>
@@ -742,4 +847,7 @@ All you have to do is ask Alexa.</string>
         <image name="wifi_symbol" width="109" height="83"/>
         <image name="wifi_symbol_weak" width="128" height="128"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="1Ay-XD-52f"/>
+    </inferredMetricsTieBreakers>
 </document>
