@@ -193,67 +193,6 @@ class ViewController: UIViewController {
 //        }
 //    #endif
 
-    private func provisionDevice() {
-        print("provisionDevice in ViewController")
-        if let transport = transport, let security = security {
-            let newSession = Session(transport: transport,
-                                     security: security)
-
-            newSession.initialize(response: nil) { error in
-                guard error == nil else {
-                    print("Error in establishing session \(error.debugDescription)")
-                    return
-                }
-
-                let provision = Provision(session: newSession)
-
-                provision.configureWifiAvs(ssid: self.ssid,
-                                           passphrase: self.passphrase,
-                                           avs: self.avsdetails) { status, error in
-                    guard error == nil else {
-                        print("Error in configuring wifi : \(error.debugDescription)")
-                        return
-                    }
-
-                    if status == Espressif_Status.success {
-//                        #if AVS
-//                            self.configureAWSLogin(session: newSession) { _ in
-//                                self.applyConfigurations(provision: provision)
-//                            }
-//                        #else
-                        self.applyConfigurations(provision: provision)
-//                        #endif
-                    }
-                }
-            }
-        }
-    }
-
-    private func applyConfigurations(provision: Provision) {
-        provision.applyConfigurations(completionHandler: { status, error in
-            guard error == nil else {
-                print("Error in applying configurations : \(error.debugDescription)")
-                return
-            }
-            print("Configurations applied ! \(status)")
-        },
-                                      wifiStatusUpdatedHandler: { wifiState, failReason, error in
-            let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as? SuccessViewController
-            if let successVC = successVC {
-                if error != nil {
-                    successVC.statusText = "Error in getting wifi state : \(error.debugDescription)"
-                } else if wifiState == Espressif_WifiStationState.connected {
-                    successVC.statusText = "Device has been successfully provisioned!"
-                } else if wifiState == Espressif_WifiStationState.disconnected {
-                    successVC.statusText = "Please check the device indicators for Provisioning status."
-                } else {
-                    successVC.statusText = "Device provisioning failed.\nReason : \(failReason).\nPlease try again"
-                }
-                self.navigationController?.present(successVC, animated: true, completion: nil)
-            }
-        })
-    }
-
     private func generateProductDSN() -> String {
         return UUID().uuidString
     }
@@ -276,9 +215,7 @@ class ViewController: UIViewController {
             showError(errorMessage: "No peripherals found for service UUID : \(String(describing: serviceUUID?.uuidString))")
         }
 
-        func peripheralConfigured(peripheral _: CBPeripheral) {
-            provisionDevice()
-        }
+        func peripheralConfigured(peripheral _: CBPeripheral) {}
 
         func peripheralNotConfigured(peripheral _: CBPeripheral) {
             showError(errorMessage: "Device cannot be configured")
