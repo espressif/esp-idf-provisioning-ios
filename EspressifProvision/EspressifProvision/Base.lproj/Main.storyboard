@@ -26,19 +26,82 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBL-o3-BJC">
-                                <rect key="frame" x="83" y="519" width="209" height="48"/>
-                                <state key="normal" backgroundImage="btnLWA_gold_209x48"/>
-                                <state key="selected" backgroundImage="btnLWA_gold_209x48_pressed"/>
-                                <connections>
-                                    <action selector="onAmazonLoginClicked:" destination="0Hz-c3-bd6" eventType="touchUpInside" id="eyK-Yy-ezT"/>
-                                </connections>
-                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alexa_logo" translatesAutoresizingMaskIntoConstraints="NO" id="og7-zo-7Gv">
+                                <rect key="frame" x="62" y="40" width="251" height="188.5"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Med-En-HI0">
+                                <rect key="frame" x="0.0" y="228.5" width="375" height="438.5"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="n5o-MU-mui">
+                                        <rect key="frame" x="20" y="2" width="335" height="102"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="102" id="Vs7-dW-aUW"/>
+                                        </constraints>
+                                        <string key="text">Your device includes access to Alexa.
+Connect your Amazon account to access personalized features.</string>
+                                        <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="26"/>
+                                        </variation>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZj-DA-GXg">
+                                        <rect key="frame" x="94" y="288.5" width="187.5" height="50"/>
+                                        <color key="backgroundColor" red="0.0" green="0.60392156860000001" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="7yK-nC-1jW"/>
+                                        </constraints>
+                                        <state key="normal" title="Sign in with Amazon">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="18"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onAmazonLoginClicked:" destination="0Hz-c3-bd6" eventType="touchUpInside" id="aBQ-cO-CIH"/>
+                                            <action selector="signInAmazon:" destination="48V-9A-pox" eventType="touchUpInside" id="BB5-YC-ANy"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0rd-jo-PgA">
+                                        <rect key="frame" x="20" y="114" width="335" height="149.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <string key="text">Alexa allows you to use voice to play music and get news, sports, scores, weather and more-all hands-free.
+All you have to do is ask Alexa.</string>
+                                        <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="AmazonEmberDisplay-Light" family="Amazon Ember Display" pointSize="24"/>
+                                        </variation>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="IZj-DA-GXg" secondAttribute="bottom" constant="100" id="H4Y-dG-uME"/>
+                                    <constraint firstItem="IZj-DA-GXg" firstAttribute="top" secondItem="0rd-jo-PgA" secondAttribute="bottom" constant="25" id="MjU-VO-t9W"/>
+                                    <constraint firstItem="0rd-jo-PgA" firstAttribute="leading" secondItem="Med-En-HI0" secondAttribute="leading" constant="20" id="ORT-yl-U7u"/>
+                                    <constraint firstItem="0rd-jo-PgA" firstAttribute="top" secondItem="n5o-MU-mui" secondAttribute="bottom" constant="10" id="OtT-PM-bcH"/>
+                                    <constraint firstItem="n5o-MU-mui" firstAttribute="top" secondItem="Med-En-HI0" secondAttribute="top" constant="2" id="PMa-0I-57F"/>
+                                    <constraint firstItem="IZj-DA-GXg" firstAttribute="width" secondItem="Med-En-HI0" secondAttribute="width" multiplier="0.5" id="SUm-Cb-nMI"/>
+                                    <constraint firstItem="IZj-DA-GXg" firstAttribute="centerX" secondItem="Med-En-HI0" secondAttribute="centerX" id="T5v-Jr-dht"/>
+                                    <constraint firstItem="n5o-MU-mui" firstAttribute="leading" secondItem="Med-En-HI0" secondAttribute="leading" constant="20" id="cJe-R0-LhH"/>
+                                    <constraint firstAttribute="trailing" secondItem="n5o-MU-mui" secondAttribute="trailing" constant="20" id="uax-VG-Kr0"/>
+                                    <constraint firstAttribute="trailing" secondItem="0rd-jo-PgA" secondAttribute="trailing" constant="20" id="y9c-0V-q43"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="zPV-X8-7Ke" firstAttribute="bottom" secondItem="GBL-o3-BJC" secondAttribute="bottom" constant="100" id="8F5-rt-4Zg"/>
-                            <constraint firstItem="GBL-o3-BJC" firstAttribute="centerX" secondItem="zPV-X8-7Ke" secondAttribute="centerX" id="LQV-wQ-Vqz"/>
+                            <constraint firstItem="zPV-X8-7Ke" firstAttribute="bottom" secondItem="Med-En-HI0" secondAttribute="bottom" id="Iuv-Ek-euy"/>
+                            <constraint firstItem="og7-zo-7Gv" firstAttribute="width" secondItem="OIs-7f-pk8" secondAttribute="width" multiplier="0.67" id="ZFc-vV-yEW"/>
+                            <constraint firstItem="Med-En-HI0" firstAttribute="trailing" secondItem="zPV-X8-7Ke" secondAttribute="trailing" id="cGq-wh-9NH"/>
+                            <constraint firstItem="Med-En-HI0" firstAttribute="top" secondItem="og7-zo-7Gv" secondAttribute="bottom" id="eum-Ln-LOI"/>
+                            <constraint firstItem="og7-zo-7Gv" firstAttribute="width" secondItem="og7-zo-7Gv" secondAttribute="height" multiplier="4:3" id="g77-y2-Ln5"/>
+                            <constraint firstItem="Med-En-HI0" firstAttribute="leading" secondItem="zPV-X8-7Ke" secondAttribute="leading" id="hR5-es-O0f"/>
+                            <constraint firstItem="og7-zo-7Gv" firstAttribute="centerX" secondItem="OIs-7f-pk8" secondAttribute="centerX" id="m9G-77-4no"/>
+                            <constraint firstItem="og7-zo-7Gv" firstAttribute="top" secondItem="zPV-X8-7Ke" secondAttribute="top" constant="20" id="syG-wL-NTs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zPV-X8-7Ke"/>
                     </view>
@@ -842,8 +905,6 @@ Alexa, set an alarm for 6 a.m.</string>
     </scenes>
     <resources>
         <image name="alexa_logo" width="360" height="170"/>
-        <image name="btnLWA_gold_209x48" width="209" height="48"/>
-        <image name="btnLWA_gold_209x48_pressed" width="209" height="48"/>
         <image name="wifi_symbol" width="109" height="83"/>
         <image name="wifi_symbol_weak" width="128" height="128"/>
     </resources>
