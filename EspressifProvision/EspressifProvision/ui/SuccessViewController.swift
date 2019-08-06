@@ -21,6 +21,8 @@ import UIKit
 
 class SuccessViewController: UIViewController {
     var statusText: String?
+    var session: Session!
+    let uuid = UUID().uuidString
 
     @IBOutlet var successLabel: UILabel!
 
@@ -29,6 +31,20 @@ class SuccessViewController: UIViewController {
         if let statusText = statusText {
             successLabel.text = statusText
         }
+        let deviceAssociation = DeviceAssociation(session: session, secretId: uuid)
+        deviceAssociation.associateDeviceWithUser()
+        deviceAssociation.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
+    }
+}
+
+extension SuccessViewController: DeviceAssociationProtocol {
+    func deviceAssociationFinishedWith(success: Bool, deviceID: String?) {
+        if success {
+            if let deviceSecret = deviceID {
+                let parameters = ["user_id": User.shared.userID, "device_id": deviceSecret, "secret_key": uuid, "operation": "add"]
+                NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String])
+            }
+        }
     }
 }

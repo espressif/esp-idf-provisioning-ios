@@ -15,6 +15,7 @@ protocol ScanWifiListProtocol {
 enum CustomError: Error {
     case emptyConfigData
     case emptyResultCount
+    case emptyToken
 }
 
 class ScanWifiList {
@@ -32,8 +33,8 @@ class ScanWifiList {
     func startWifiScan() {
         do {
             let payloadData = try createStartScanRequest()
-            if let data = payloadData, let scanPath = transport.utility.scanPath {
-                transport.SendConfigData(path: scanPath, data: data) { response, error in
+            if let data = payloadData {
+                transport.SendConfigData(path: transport.utility.scanPath, data: data) { response, error in
                     guard error == nil, response != nil else {
                         self.delegate?.wifiScanFinished(wifiList: nil, error: error)
                         return
@@ -61,8 +62,8 @@ class ScanWifiList {
     private func getWiFiScanStatus() {
         do {
             let payloadData = try createWifiScanConfigRequest()
-            if let data = payloadData, let scanPath = transport.utility.scanPath {
-                transport.SendConfigData(path: scanPath, data: data) { response, error in
+            if let data = payloadData {
+                transport.SendConfigData(path: transport.utility.scanPath, data: data) { response, error in
                     guard error == nil, response != nil else {
                         self.delegate?.wifiScanFinished(wifiList: nil, error: error)
                         return
@@ -105,8 +106,8 @@ class ScanWifiList {
                 lastFetch = true
             }
             let payloadData = try createWifiListConfigRequest(startIndex: startIndex, count: fetchCount)
-            if let data = payloadData, let scanPath = transport.utility.scanPath {
-                transport.SendConfigData(path: scanPath, data: data) { response, error in
+            if let data = payloadData {
+                transport.SendConfigData(path: transport.utility.scanPath, data: data) { response, error in
                     guard error == nil, response != nil else {
                         self.delegate?.wifiScanFinished(wifiList: nil, error: error)
                         return

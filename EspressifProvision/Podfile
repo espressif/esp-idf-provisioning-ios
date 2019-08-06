@@ -10,6 +10,12 @@ abstract_target 'EspressifProvisionAll' do
   pod 'SwiftProtobuf', '~> 1.5.0'
   pod 'Curve25519', '~> 1.1.0'
   pod 'MBProgressHUD', '~> 1.1.0'
+  $awsVersion = '~> 2.9.0'
+  pod 'AWSCore', $awsVersion
+  pod 'AWSCognitoIdentityProvider', $awsVersion
+  pod 'AWSMobileClient'
+  pod 'Alamofire'
+  pod 'SideMenu'
 
   
   target 'EspressifProvision'

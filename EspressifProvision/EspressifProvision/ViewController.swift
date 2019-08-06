@@ -16,12 +16,19 @@
 //  EspressifProvision
 //
 
+import AWSAuthCore
+import AWSCognitoIdentityProvider
 import CoreBluetooth
+import MBProgressHUD
 import UIKit
 
 class ViewController: UIViewController {
     // Provisioning
+    @IBOutlet var titleView: UIView!
+    @IBOutlet var addButton: UIButton!
+    @IBOutlet var tableView: DeviceListTableView!
     private let pop = Bundle.main.infoDictionary?["ProofOfPossession"] as! String
+    private let refreshControl = UIRefreshControl()
     // WIFI
     private let baseUrl = Bundle.main.infoDictionary?["WifiBaseUrl"] as! String
     private let networkNamePrefix = Bundle.main.infoDictionary?["WifiNetworkNamePrefix"] as! String
@@ -30,8 +37,65 @@ class ViewController: UIViewController {
     var security: Security?
     var bleTransport: BLETransport?
 
+    var response: AWSCognitoIdentityUserGetDetailsResponse?
+    var user: AWSCognitoIdentityUser?
+    var pool: AWSCognitoIdentityUserPool?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
+        if user == nil {
+            user = pool?.currentUser()
+        }
+        refresh()
+        tableView.tableFooterView = UIView()
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
+
+        addButton.layer.masksToBounds = false
+        addButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        addButton.layer.shadowRadius = 0.5
+        addButton.layer.shadowColor = UIColor.gray.cgColor
+        addButton.layer.shadowOpacity = 1.0
+
+        refreshControl.addTarget(self, action: #selector(refreshDeviceList), for: .valueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        tableView.refreshControl = refreshControl
+
+//        titleView.layer.masksToBounds = false
+//        titleView.layer.shadowOffset = CGSize(width: 0, height: 1)
+//        titleView.layer.shadowRadius = 0.5
+//        titleView.layer.shadowColor = UIColor.gray.cgColor
+//        titleView.layer.shadowOpacity = 0.4
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if User.shared.associatedDevices == nil {
+            refreshDeviceList()
+        }
+    }
+
+    @objc func refreshDeviceList() {
+        showLoader(message: "Fetching Device List")
+        NetworkManager.shared.getDeviceList { _, _ in
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.refreshControl.endRefreshing()
+//            User.shared.associatedDevices = devices
+            self.tableView.reloadData()
+        }
+    }
+
+    func showLoader(message: String) {
+        let loader = MBProgressHUD.showAdded(to: view, animated: true)
+        loader.mode = MBProgressHUDMode.indeterminate
+        loader.label.text = message
+    }
+
+    func resetAttributeValues() {
+        user = nil
     }
 
     func provisionWithAPIs(_: Any) {
@@ -70,6 +134,26 @@ class ViewController: UIViewController {
             Provision.CONFIG_WIFI_AP_KEY: networkNamePrefix,
         ]
         Provision.showProvisioningUI(on: self, config: config)
+    }
+
+    @IBAction func signOut(_: Any) {
+        user?.signOut()
+        User.shared.userID = nil
+        refresh()
+    }
+
+    @IBAction func refreshList(_: Any) {
+        refreshDeviceList()
+    }
+
+    func refresh() {
+        user?.getDetails().continueOnSuccessWith { (task) -> AnyObject? in
+            DispatchQueue.main.async {
+                self.response = task.result
+//                self.title = self.user?.username
+            }
+            return nil
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -135,3 +219,35 @@ class ViewController: UIViewController {
         }
     }
 #endif
+
+extension ViewController: UITableViewDataSource {
+    func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
+        return 1
+    }
+
+    func numberOfSections(in _: UITableView) -> Int {
+        return User.shared.associatedDevices?.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "deviceListCell", for: indexPath) as! DeviceListTableViewCell
+        cell.deviceNameLabel.text = User.shared.associatedDevices![indexPath.section].name
+        return cell
+    }
+
+    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
+        return 70.0
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
+        return 12.0
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection _: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 12))
+        headerView.backgroundColor = UIColor.white
+        return headerView
+    }
+}

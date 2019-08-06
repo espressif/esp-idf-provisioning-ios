@@ -17,10 +17,13 @@
 //
 
 import Foundation
+import MBProgressHUD
 import UIKit
 
 class ProvisionLandingViewController: UIViewController {
     var provisionConfig: [String: String] = [:]
+    var deviceList: [Device]?
+
     @IBOutlet var provisionInstructions: UILabel!
 
     override func viewDidLoad() {

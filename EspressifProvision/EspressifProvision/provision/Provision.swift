@@ -63,8 +63,8 @@ class Provision {
         if session.isEstablished {
             do {
                 let message = try createSetWifiConfigRequest(ssid: ssid, passphrase: passphrase)
-                if let message = message, let configPath = transport.utility.configPath {
-                    transport.SendConfigData(path: configPath, data: message) { response, error in
+                if let message = message {
+                    transport.SendConfigData(path: transport.utility.configPath, data: message) { response, error in
                         guard error == nil, response != nil else {
                             completionHandler(Espressif_Status.internalError, error)
                             return
@@ -92,8 +92,8 @@ class Provision {
         if session.isEstablished {
             do {
                 let message = try createApplyConfigRequest()
-                if let message = message, let configPath = transport.utility.configPath {
-                    transport.SendConfigData(path: configPath, data: message) { response, error in
+                if let message = message {
+                    transport.SendConfigData(path: transport.utility.configPath, data: message) { response, error in
                         guard error == nil, response != nil else {
                             completionHandler(Espressif_Status.internalError, error)
                             return
@@ -133,8 +133,8 @@ class Provision {
     private func pollForWifiConnectionStatus(completionHandler: @escaping (Espressif_WifiStationState, Espressif_WifiConnectFailedReason, Error?) -> Swift.Void) {
         do {
             let message = try createGetWifiConfigRequest()
-            if let message = message, let configPath = transport.utility.configPath {
-                transport.SendConfigData(path: configPath,
+            if let message = message {
+                transport.SendConfigData(path: transport.utility.configPath,
                                          data: message) { response, error in
                     guard error == nil, response != nil else {
                         completionHandler(Espressif_WifiStationState.disconnected, Espressif_WifiConnectFailedReason.UNRECOGNIZED(0), error)
