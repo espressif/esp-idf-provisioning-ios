@@ -23,6 +23,8 @@ class SuccessViewController: UIViewController {
     var statusText: String?
     var session: Session!
     let uuid = UUID().uuidString
+    var deviceID: String?
+    var requestID: String?
 
     @IBOutlet var successLabel: UILabel!
 
@@ -36,6 +38,16 @@ class SuccessViewController: UIViewController {
         deviceAssociation.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
+        if segue.identifier == "goToFirstScreen" {
+            if let destinationVC = segue.destination as? ViewController {
+                destinationVC.checkDeviceAssociation = true
+                destinationVC.deviceID = deviceID
+                destinationVC.requestID = requestID
+            }
+        }
+    }
 }
 
 extension SuccessViewController: DeviceAssociationProtocol {
@@ -43,7 +55,10 @@ extension SuccessViewController: DeviceAssociationProtocol {
         if success {
             if let deviceSecret = deviceID {
                 let parameters = ["user_id": User.shared.userID, "device_id": deviceSecret, "secret_key": uuid, "operation": "add"]
-                NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String])
+                NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, _ in
+                    self.deviceID = deviceID
+                    self.requestID = requestID
+                }
             }
         }
     }

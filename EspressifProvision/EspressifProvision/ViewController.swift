@@ -40,6 +40,9 @@ class ViewController: UIViewController {
     var response: AWSCognitoIdentityUserGetDetailsResponse?
     var user: AWSCognitoIdentityUser?
     var pool: AWSCognitoIdentityUserPool?
+    var checkDeviceAssociation = false
+    var deviceID: String?
+    var requestID: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,17 +77,35 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if User.shared.associatedDevices == nil {
+            showLoader(message: "Fetching Device List")
             refreshDeviceList()
+        }
+        if checkDeviceAssociation {
+            checkDeviceAssociation = false
+            fetchDeviceAssociationStatus(3)
         }
     }
 
     @objc func refreshDeviceList() {
-        showLoader(message: "Fetching Device List")
-        NetworkManager.shared.getDeviceList { _, _ in
+        NetworkManager.shared.getDeviceList { devices, _ in
             MBProgressHUD.hide(for: self.view, animated: true)
             self.refreshControl.endRefreshing()
-//            User.shared.associatedDevices = devices
+            User.shared.associatedDevices = devices
             self.tableView.reloadData()
+        }
+    }
+
+    @objc func fetchDeviceAssociationStatus(_ count: Int) {
+        if let deviceid = self.deviceID, let requestid = self.requestID, count >= 0 {
+            NetworkManager.shared.deviceAssociationStatus(deviceID: deviceid, requestID: requestid) { status in
+                if status {
+                    self.refreshDeviceList()
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                        self.fetchDeviceAssociationStatus(count - 1)
+                    }
+                }
+            }
         }
     }
 

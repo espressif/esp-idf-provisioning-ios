@@ -112,7 +112,7 @@
                                 </state>
                                 <connections>
                                     <action selector="provisionButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hMo-mg-5pp"/>
-                                    <segue destination="mgC-Sj-4EB" kind="presentation" id="1Ay-XD-52f"/>
+                                    <segue destination="mgC-Sj-4EB" kind="presentation" identifier="goToFirstScreen" id="1Ay-XD-52f"/>
                                 </connections>
                             </button>
                         </subviews>

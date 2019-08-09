@@ -30,10 +30,10 @@ class User {
         AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
 
         pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
-        associatedDevices = []
-        associatedDevices?.append(Device(name: "Test Device 1", device_id: "fafafe", type: nil))
-        associatedDevices?.append(Device(name: "Test Device 2", device_id: "fafafe", type: nil))
-        associatedDevices?.append(Device(name: "Test Device 3", device_id: "fafafe", type: nil))
+//        associatedDevices = []
+//        associatedDevices?.append(Device(name: "Test Device 1", device_id: "fafafe", type: nil))
+//        associatedDevices?.append(Device(name: "Test Device 2", device_id: "fafafe", type: nil))
+//        associatedDevices?.append(Device(name: "Test Device 3", device_id: "fafafe", type: nil))
     }
 
     func currentUser() -> AWSCognitoIdentityUser? {
