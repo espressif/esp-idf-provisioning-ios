@@ -41,6 +41,7 @@ class ProvisionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        navigationItem.title = "WiFi"
         passphraseTextfield.addTarget(self, action: #selector(passphraseEntered), for: .editingDidEndOnExit)
         ssidTextfield.addTarget(self, action: #selector(ssidEntered), for: .editingDidEndOnExit)
         provisionButton.isUserInteractionEnabled = false
@@ -136,7 +137,7 @@ class ProvisionViewController: UIViewController {
 
             provision.configureWifiAvs(ssid: ssid,
                                        passphrase: passPhrase,
-                                       avs: self.avsDetails!) { status, error in
+                                       avs: self.avsDetails) { status, error in
                 guard error == nil else {
                     print("Error in configuring wifi : \(error.debugDescription)")
                     return
@@ -167,6 +168,11 @@ class ProvisionViewController: UIViewController {
             provisionButton.isUserInteractionEnabled = true
         }
         passphraseTextfield.becomeFirstResponder()
+    }
+
+    @IBAction func rescanWifiList(_: Any) {
+        ssidList.removeAll()
+        scanDeviceForWiFiList()
     }
 
     @IBAction func provisionButtonClicked(_: Any) {
@@ -232,6 +238,32 @@ class ProvisionViewController: UIViewController {
             cell.signalImageView?.image = UIImage(named: "wifi_symbol_weak")
         }
     }
+
+    private func joinOtherNetwork() {
+        let input = UIAlertController(title: "", message: nil, preferredStyle: .alert)
+
+        input.addTextField { textField in
+            textField.placeholder = "Network Name"
+        }
+
+        input.addTextField { textField in
+            textField.placeholder = "Password"
+            textField.isSecureTextEntry = true
+        }
+        input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+        }))
+        input.addAction(UIAlertAction(title: "Connect", style: .default, handler: { [weak input] _ in
+            let ssidTextField = input?.textFields![0]
+            let passphrase = input?.textFields![1]
+
+            if let ssid = ssidTextField?.text, ssid.count > 0 {
+                self.provisionDevice(ssid: ssid, passphrase: passphrase?.text ?? "")
+            }
+        }))
+        DispatchQueue.main.async {
+            self.present(input, animated: true, completion: nil)
+        }
+    }
 }
 
 extension ProvisionViewController: BLETransportDelegate {
@@ -251,7 +283,6 @@ extension ProvisionViewController: BLETransportDelegate {
 
     func peripheralDisconnected(peripheral _: CBPeripheral, error: Error?) {
         print(error?.localizedDescription ?? "")
-        showError(errorMessage: "Peripheral device disconnected")
     }
 }
 
@@ -264,6 +295,7 @@ extension ProvisionViewController: ScanWifiListProtocol {
                 self.tableView.isHidden = false
                 self.ssidTextfield.isHidden = true
                 self.passphraseTextfield.isHidden = true
+                self.provisionButton.isHidden = true
                 self.tableView.reloadData()
             }
         } else {
@@ -271,6 +303,7 @@ extension ProvisionViewController: ScanWifiListProtocol {
                 self.tableView.isHidden = true
                 self.ssidTextfield.isHidden = false
                 self.passphraseTextfield.isHidden = false
+                self.provisionButton.isHidden = false
             }
         }
         DispatchQueue.main.async {
@@ -283,32 +316,35 @@ extension ProvisionViewController: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let ssid = ssidList[indexPath.row]
+        if indexPath.row >= ssidList.count {
+            joinOtherNetwork()
+        } else {
+            let ssid = ssidList[indexPath.row]
 
-        let input = UIAlertController(title: ssid, message: nil, preferredStyle: .alert)
+            let input = UIAlertController(title: ssid, message: nil, preferredStyle: .alert)
 
-        input.addTextField { textField in
-            textField.placeholder = "Password"
-            textField.isSecureTextEntry = true
+            input.addTextField { textField in
+                textField.placeholder = "Password"
+                textField.isSecureTextEntry = true
+            }
+
+            input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+            }))
+
+            input.addAction(UIAlertAction(title: "Connect", style: .default, handler: { [weak input] _ in
+                let textField = input?.textFields![0]
+                guard let passphrase = textField?.text else {
+                    return
+                }
+                if passphrase.count > 0 {
+                    self.provisionDevice(ssid: ssid, passphrase: passphrase)
+                } else {
+                    self.provisionDevice(ssid: ssid, passphrase: "")
+                }
+            }))
+
+            present(input, animated: true, completion: nil)
         }
-
-        input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
-
-        }))
-
-        input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
-            let textField = input?.textFields![0]
-            guard let passphrase = textField?.text else {
-                return
-            }
-            if passphrase.count > 0 {
-                self.provisionDevice(ssid: ssid, passphrase: passphrase)
-            } else {
-                self.provisionDevice(ssid: ssid, passphrase: "")
-            }
-        }))
-
-        present(input, animated: true, completion: nil)
     }
 
     func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
@@ -318,13 +354,18 @@ extension ProvisionViewController: UITableViewDelegate {
 
 extension ProvisionViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return ssidList.count
+        return ssidList.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "wifiListCell", for: indexPath) as! WifiListTableViewCell
-        cell.ssidLabel.text = ssidList[indexPath.row]
-        setWifiIconImageFor(cell: cell, ssid: ssidList[indexPath.row])
+        if indexPath.row >= ssidList.count {
+            cell.ssidLabel.text = "Join Other Network"
+            cell.signalImageView.image = UIImage(named: "add_icon")
+        } else {
+            cell.ssidLabel.text = ssidList[indexPath.row]
+            setWifiIconImageFor(cell: cell, ssid: ssidList[indexPath.row])
+        }
         return cell
     }
 }

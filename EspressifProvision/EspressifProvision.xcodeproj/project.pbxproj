@@ -59,6 +59,7 @@
 		F1DD7099229FCEDE0092DAB9 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD7098229FCEDE0092DAB9 /* DeviceDetailViewController.swift */; };
 		F1DD709B229FDE6C0092DAB9 /* AmazonEmberDisplay_Md.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD709A229FDE6C0092DAB9 /* AmazonEmberDisplay_Md.ttf */; };
 		F1DD709D229FDF5E0092DAB9 /* AmazonEmberDisplay_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD709C229FDF5E0092DAB9 /* AmazonEmberDisplay_Rg.ttf */; };
+		F1EB558923043B1400AEEBE3 /* BLEDeviceListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB558823043B1400AEEBE3 /* BLEDeviceListViewCell.swift */; };
 		F1F339572296703C000F53A0 /* wifi_scan.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F339562296703C000F53A0 /* wifi_scan.pb.swift */; };
 		F6D7C9B0F5FDCEEFFA78A8C8 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */; };
 /* End PBXBuildFile section */
@@ -168,6 +169,7 @@
 		F1DD7098229FCEDE0092DAB9 /* DeviceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailViewController.swift; sourceTree = "<group>"; };
 		F1DD709A229FDE6C0092DAB9 /* AmazonEmberDisplay_Md.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Md.ttf; sourceTree = "<group>"; };
 		F1DD709C229FDF5E0092DAB9 /* AmazonEmberDisplay_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Rg.ttf; sourceTree = "<group>"; };
+		F1EB558823043B1400AEEBE3 /* BLEDeviceListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceListViewCell.swift; sourceTree = "<group>"; };
 		F1F339562296703C000F53A0 /* wifi_scan.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_scan.pb.swift; sourceTree = "<group>"; };
 		F5A6E92635049FCEB2D5787E /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -339,6 +341,7 @@
 				14706916211050EE00F8E1D8 /* BLELandingViewController.swift */,
 				144149432126AE09002AD5E1 /* SuccessViewController.swift */,
 				F11B547322DDE41A00F7D0D3 /* StatusViewController.swift */,
+				F1EB558823043B1400AEEBE3 /* BLEDeviceListViewCell.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -756,6 +759,7 @@
 				149774E1210C89E600022841 /* ArrayExtensions.swift in Sources */,
 				1431466720DEAC220017E119 /* Security.swift in Sources */,
 				1431468720DFA58E0017E119 /* HexUtils.swift in Sources */,
+				F1EB558923043B1400AEEBE3 /* BLEDeviceListViewCell.swift in Sources */,
 				F18C3AB8229BEDB2007C197F /* ScannedLocalDevicesVC.swift in Sources */,
 				F1F339572296703C000F53A0 /* wifi_scan.pb.swift in Sources */,
 				F18C3ABF229BF4D4007C197F /* SSDPDiscovery.swift in Sources */,

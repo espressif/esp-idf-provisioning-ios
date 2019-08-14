@@ -48,6 +48,7 @@ class SuccessViewController: UIViewController {
         let righButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(presentVC))
 
         navigationItem.rightBarButtonItem = righButtonItem
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
 
         navigationItem.setHidesBackButton(true, animated: true)
     }

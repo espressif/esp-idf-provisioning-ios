@@ -32,6 +32,10 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableview.tableFooterView = UIView()
+        navigationItem.title = "Connect"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         if let serviceUuid = provisionConfig[Provision.CONFIG_BLE_SERVICE_UUID],
             let deviceNamePrefix = provisionConfig[Provision.CONFIG_BLE_DEVICE_NAME_PREFIX],
             let sessionUuid = provisionConfig[Provision.CONFIG_BLE_SESSION_UUID],
@@ -53,6 +57,7 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     @IBAction func rescanBLEDevices(_: Any) {
+        bleTransport?.disconnect()
         peripherals?.removeAll()
         tableview.reloadData()
         bleTransport?.scan(delegate: self)
@@ -63,7 +68,7 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
         showBusy(isBusy: false)
         let provisionVC = storyboard?.instantiateViewController(withIdentifier: "loginWithAmazon") as! LoginWithAmazonViewController
         provisionVC.transport = bleTransport
-
+        provisionVC.deviceName = bleTransport?.currentPeripheral?.name
         provisionVC.provisionConfig = provisionConfig
         navigationController?.pushViewController(provisionVC, animated: true)
     }
@@ -82,11 +87,10 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
         return peripherals.count
     }
 
-    func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "bleDeviceCell")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bleDeviceCell", for: indexPath) as! BLEDeviceListViewCell
         if let peripheral: CBPeripheral = self.peripherals?[indexPath.row] {
-            cell.textLabel?.text = peripheral.name
-            cell.imageView?.image = UIImage(named: "bluetooth_icon")
+            cell.deviceName.text = peripheral.name
         }
 
         return cell
@@ -143,10 +147,5 @@ extension BLELandingViewController: BLETransportDelegate {
         bleDeviceNotConfigured()
     }
 
-    func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {
-        let alertMessage = "Peripheral device disconnected"
-        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
-        present(alertController, animated: true, completion: nil)
-    }
+    func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {}
 }

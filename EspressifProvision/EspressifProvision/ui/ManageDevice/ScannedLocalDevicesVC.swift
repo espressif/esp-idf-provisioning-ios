@@ -20,6 +20,9 @@ class ScannedLocalDevicesVC: UIViewController {
     var alexaDevices: [AlexaDevice] = []
 
     override func viewDidLoad() {
+        navigationItem.title = "Devices"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         ssdpDiscovery.delegate = self
         tableView.tableFooterView = UIView()
         tableView.isHidden = true
@@ -130,13 +133,14 @@ extension ScannedLocalDevicesVC: UITableViewDelegate {
                 self.showDeviceDetails(device: alexaDevice, avsConfig: avsConfig, loginStatus: status)
             })
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension ScannedLocalDevicesVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.deviceListCellReuseIdentifier, for: indexPath) as! DeviceListTableViewCell
-        cell.deviceNameLabel.text = "\(alexaDevices[indexPath.row].friendlyname ?? "") | \(alexaDevices[indexPath.row].hostAddress ?? "")"
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.deviceListCellReuseIdentifier, for: indexPath) as! BLEDeviceListViewCell
+        cell.deviceName.text = alexaDevices[indexPath.row].friendlyname ?? ""
         return cell
     }
 

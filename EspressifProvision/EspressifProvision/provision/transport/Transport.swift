@@ -43,4 +43,8 @@ protocol Transport {
     ///   - data: config data to be sent
     ///   - completionHandler: handler called when data is successfully sent and response is recieved
     func SendConfigData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void)
+
+    /// Disconnect current preipheral device
+    ///
+    func disconnect()
 }

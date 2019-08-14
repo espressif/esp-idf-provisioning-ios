@@ -25,4 +25,8 @@ struct Constants {
             loader.label.text = message
         }
     }
+
+    static func hideLoader(view: UIView) {
+        MBProgressHUD.hide(for: view, animated: true)
+    }
 }

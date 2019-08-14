@@ -16,9 +16,6 @@ class StatusViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let statusText = statusText {
-            successLabel.text = statusText
-        }
         // Do any additional setup after loading the view, typically from a nib.
     }
 }

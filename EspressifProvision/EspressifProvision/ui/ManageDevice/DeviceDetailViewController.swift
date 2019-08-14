@@ -20,8 +20,6 @@ class DeviceDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         let label = UILabel(frame: CGRect(x: 10, y: 0, width: 50, height: 40))
-//        label.backgroundColor = .red
-//        label.font = UIFont.boldSystemFont(ofSize: 14)
 
         label.text = device?.friendlyname
         label.numberOfLines = 2
@@ -29,7 +27,7 @@ class DeviceDetailViewController: UIViewController {
         label.sizeToFit()
         label.textAlignment = .center
 
-        navigationItem.titleView = label
+        navigationItem.title = device?.friendlyname
 
         // Do any additional setup after loading the view, typically from a nib.
         let attributedString = NSMutableAttributedString(string: "To learn more and access additional features, download the Alexa app")
@@ -118,6 +116,7 @@ class DeviceDetailViewController: UIViewController {
     func updateUIView() {
         if loginStatus {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOut))
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.white
             signedInViewContainer.isHidden = false
             signedOutViewContainer.isHidden = true
         } else {

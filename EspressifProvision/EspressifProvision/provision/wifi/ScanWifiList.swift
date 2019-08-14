@@ -20,6 +20,7 @@ enum CustomError: Error {
 class ScanWifiList {
     private let transport: Transport
     private let security: Security
+    private var scanResult: [String: Int32] = [:]
 
     var delegate: ScanWifiListProtocol?
 
@@ -95,16 +96,25 @@ class ScanWifiList {
         return resultCount
     }
 
-    func getScannedWiFiListResponse(count: UInt32) {
+    func getScannedWiFiListResponse(count: UInt32, startIndex: UInt32 = 0) {
         do {
-            let payloadData = try createWifiListConfigRequest(count: count)
+            var lastFetch = false
+            var fetchCount: UInt32 = 4
+            if startIndex + 4 >= count {
+                fetchCount = count - startIndex
+                lastFetch = true
+            }
+            let payloadData = try createWifiListConfigRequest(startIndex: startIndex, count: fetchCount)
             if let data = payloadData {
                 transport.SendConfigData(path: Provision.PROVISIONING_SCAN_PATH, data: data) { response, error in
                     guard error == nil, response != nil else {
                         self.delegate?.wifiScanFinished(wifiList: nil, error: error)
                         return
                     }
-                    self.getScannedWifiSSIDs(response: response!)
+                    self.getScannedWifiSSIDs(response: response!, fetchFinish: lastFetch)
+                    if startIndex + fetchCount < count {
+                        self.getScannedWiFiListResponse(count: count, startIndex: startIndex + 4)
+                    }
                 }
             } else {
                 delegate?.wifiScanFinished(wifiList: nil, error: CustomError.emptyConfigData)
@@ -114,24 +124,25 @@ class ScanWifiList {
         }
     }
 
-    private func getScannedWifiSSIDs(response: Data) {
+    private func getScannedWifiSSIDs(response: Data, fetchFinish: Bool) {
         do {
             if let decryptedResponse = try security.decrypt(data: response) {
                 let payload = try Espressif_WiFiScanPayload(serializedData: decryptedResponse)
                 let responseList = payload.respScanResult
-                var result: [String: Int32] = [:]
                 for index in 0 ... responseList.entries.count - 1 {
                     let ssid = String(decoding: responseList.entries[index].ssid, as: UTF8.self)
                     let rssi = responseList.entries[index].rssi
-                    if let val = result[ssid] {
+                    if let val = scanResult[ssid] {
                         if rssi > val {
-                            result[ssid] = rssi
+                            scanResult[ssid] = val
                         }
                     } else {
-                        result[ssid] = rssi
+                        scanResult[ssid] = responseList.entries[index].rssi
                     }
                 }
-                delegate?.wifiScanFinished(wifiList: result, error: nil)
+                if fetchFinish {
+                    delegate?.wifiScanFinished(wifiList: scanResult, error: nil)
+                }
             }
         } catch {
             delegate?.wifiScanFinished(wifiList: nil, error: error)
@@ -160,9 +171,9 @@ class ScanWifiList {
         return try security.encrypt(data: payload.serializedData())
     }
 
-    private func createWifiListConfigRequest(count: UInt32) throws -> Data? {
+    private func createWifiListConfigRequest(startIndex: UInt32, count: UInt32) throws -> Data? {
         var configRequest = Espressif_CmdScanResult()
-        configRequest.startIndex = 0
+        configRequest.startIndex = startIndex
         configRequest.count = count
         var payload = Espressif_WiFiScanPayload()
         payload.msg = Espressif_WiFiScanMsgType.typeCmdScanResult
