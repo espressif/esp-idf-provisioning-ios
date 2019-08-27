@@ -30,7 +30,7 @@ class DeviceDetailViewController: UIViewController {
         navigationItem.title = device?.friendlyname
 
         // Do any additional setup after loading the view, typically from a nib.
-        let attributedString = NSMutableAttributedString(string: "To learn more and access additional features, download the Alexa app")
+        let attributedString = NSMutableAttributedString(string: "To learn more and access additional features, download the Alexa App")
         let url = URL(string: "alexa://")!
         var redirectURL = url
         if !UIApplication.shared.canOpenURL(url) {

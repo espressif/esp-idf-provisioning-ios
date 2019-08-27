@@ -46,7 +46,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>CodeVerifier</key>
 	<string>abcd1234</string>
 	<key>LSApplicationQueriesSchemes</key>

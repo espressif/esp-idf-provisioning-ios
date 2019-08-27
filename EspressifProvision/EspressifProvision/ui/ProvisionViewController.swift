@@ -37,11 +37,19 @@ class ProvisionViewController: UIViewController {
     var provision: Provision!
     var ssidList: [String] = []
     var wifiDetailList: [String: Int32] = [:]
+    var alertTextField: UITextField?
+    var showPasswordImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        navigationItem.title = "WiFi"
+        showPasswordImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showPassword))
+        tap.numberOfTapsRequired = 1
+        showPasswordImageView.isUserInteractionEnabled = true
+        showPasswordImageView.addGestureRecognizer(tap)
+
+        navigationItem.title = "Wi-Fi"
         passphraseTextfield.addTarget(self, action: #selector(passphraseEntered), for: .editingDidEndOnExit)
         ssidTextfield.addTarget(self, action: #selector(ssidEntered), for: .editingDidEndOnExit)
         provisionButton.isUserInteractionEnabled = false
@@ -115,7 +123,7 @@ class ProvisionViewController: UIViewController {
     }
 
     func scanDeviceForWiFiList() {
-        showLoader(message: "Scanning for Wifi")
+        showLoader(message: "Scanning for Wi-Fi")
         let newSession = Session(transport: transport!, security: security!)
         let scanWifiManager: ScanWifiList = ScanWifiList(session: newSession)
         scanWifiManager.delegate = self
@@ -244,11 +252,12 @@ class ProvisionViewController: UIViewController {
 
         input.addTextField { textField in
             textField.placeholder = "Network Name"
+            self.addHeightConstraint(textField: textField)
         }
 
         input.addTextField { textField in
-            textField.placeholder = "Password"
-            textField.isSecureTextEntry = true
+            self.configurePasswordTextfield(textField: textField)
+            self.addHeightConstraint(textField: textField)
         }
         input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
         }))
@@ -263,6 +272,32 @@ class ProvisionViewController: UIViewController {
         DispatchQueue.main.async {
             self.present(input, animated: true, completion: nil)
         }
+    }
+
+    @objc func showPassword() {
+        if let secureEntry = self.alertTextField?.isSecureTextEntry {
+            alertTextField?.togglePasswordVisibility()
+            if secureEntry {
+                showPasswordImageView.image = UIImage(named: "hide_password")
+            } else {
+                showPasswordImageView.image = UIImage(named: "show_password")
+            }
+        }
+    }
+
+    private func addHeightConstraint(textField: UITextField) {
+        let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
+        textField.addConstraint(heightConstraint)
+        textField.font = UIFont(name: textField.font!.fontName, size: 18)
+    }
+
+    private func configurePasswordTextfield(textField: UITextField) {
+        alertTextField = textField
+        textField.placeholder = "Password"
+        textField.isSecureTextEntry = true
+        showPasswordImageView.image = UIImage(named: "show_password")
+        textField.rightView = showPasswordImageView
+        textField.rightViewMode = .always
     }
 }
 
@@ -324,8 +359,8 @@ extension ProvisionViewController: UITableViewDelegate {
             let input = UIAlertController(title: ssid, message: nil, preferredStyle: .alert)
 
             input.addTextField { textField in
-                textField.placeholder = "Password"
-                textField.isSecureTextEntry = true
+                self.configurePasswordTextfield(textField: textField)
+                self.addHeightConstraint(textField: textField)
             }
 
             input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
@@ -367,5 +402,29 @@ extension ProvisionViewController: UITableViewDataSource {
             setWifiIconImageFor(cell: cell, ssid: ssidList[indexPath.row])
         }
         return cell
+    }
+}
+
+extension UITextField {
+    func togglePasswordVisibility() {
+        isSecureTextEntry = !isSecureTextEntry
+
+        if let existingText = text, isSecureTextEntry {
+            /* When toggling to secure text, all text will be purged if the user
+             continues typing unless we intervene. This is prevented by first
+             deleting the existing text and then recovering the original text. */
+            deleteBackward()
+
+            if let textRange = textRange(from: beginningOfDocument, to: endOfDocument) {
+                replace(textRange, withText: existingText)
+            }
+        }
+
+        /* Reset the selected text range since the cursor can end up in the wrong
+         position after a toggle because the text might vary in width */
+        if let existingSelectedTextRange = selectedTextRange {
+            selectedTextRange = nil
+            selectedTextRange = existingSelectedTextRange
+        }
     }
 }

@@ -25,7 +25,7 @@ class SuccessViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let attributedString = NSMutableAttributedString(string: "To learn more and access additional features, download the Alexa app")
+        let attributedString = NSMutableAttributedString(string: "To learn more and access additional features, download the Alexa App")
         let url = URL(string: "alexa://")!
         var redirectURL = url
         if !UIApplication.shared.canOpenURL(url) {
@@ -51,6 +51,8 @@ class SuccessViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = UIColor.white
 
         navigationItem.setHidesBackButton(true, animated: true)
+
+        navigationItem.title = "Things to try"
     }
 
     @objc func presentVC() {
