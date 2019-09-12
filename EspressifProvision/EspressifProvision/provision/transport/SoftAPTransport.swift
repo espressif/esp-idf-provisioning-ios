@@ -19,6 +19,12 @@
 import Foundation
 
 struct SoftAPTransport: Transport {
+    var utility: Utility
+
+    func isDeviceConfigured() -> Bool {
+        return true
+    }
+
     var baseUrl: String
 
     /// Create HTTP implementation of Transport protocol
@@ -26,6 +32,8 @@ struct SoftAPTransport: Transport {
     /// - Parameter baseUrl: base URL for the HTTP endpoints
     init(baseUrl: String) {
         self.baseUrl = baseUrl
+        utility = Utility()
+        utility.scanPath = "prov-scan"
     }
 
     private func SendHTTPData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void) {
@@ -37,6 +45,7 @@ struct SoftAPTransport: Transport {
 
         request.httpMethod = "POST"
         request.httpBody = data
+        request.timeoutInterval = 10
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 completionHandler(nil, error)
@@ -71,4 +80,6 @@ struct SoftAPTransport: Transport {
     func SendConfigData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void) {
         SendHTTPData(path: path, data: data, completionHandler: completionHandler)
     }
+
+    func disconnect() {}
 }

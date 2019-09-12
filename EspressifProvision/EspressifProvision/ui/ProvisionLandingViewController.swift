@@ -25,11 +25,13 @@ class ProvisionLandingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.title = "Connect"
         let wifiPrefix = provisionConfig[Provision.CONFIG_WIFI_AP_KEY]
         if let text = provisionInstructions.text, let wifiPrefix = wifiPrefix {
-            let nonBoldRange = NSMakeRange(0, text.count)
-            provisionInstructions.attributedText = attributedString(from: text + " \(wifiPrefix)",
-                                                                    nonBoldRange: nonBoldRange)
+            let boldRange = NSMakeRange(text.count + 1, wifiPrefix.count)
+            provisionInstructions.attributedText = attributedString(from: text + " \(wifiPrefix)" + "\nOnce connected, continue to Provision.",
+                                                                    boldRange: boldRange)
         }
     }
 
@@ -47,7 +49,7 @@ class ProvisionLandingViewController: UIViewController {
         }
     }
 
-    func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
+    func attributedString(from string: String, boldRange: NSRange?) -> NSAttributedString {
         let attrs = [
             kCTFontAttributeName: UIFont.boldSystemFont(ofSize: 20),
             kCTForegroundColorAttributeName: UIColor.black,
@@ -55,9 +57,9 @@ class ProvisionLandingViewController: UIViewController {
         let nonBoldAttribute = [
             kCTFontAttributeName: UIFont.systemFont(ofSize: 20),
         ]
-        let attrStr = NSMutableAttributedString(string: string, attributes: attrs as [NSAttributedString.Key: Any])
-        if let range = nonBoldRange {
-            attrStr.setAttributes(nonBoldAttribute as [NSAttributedString.Key: Any], range: range)
+        let attrStr = NSMutableAttributedString(string: string, attributes: nonBoldAttribute as [NSAttributedString.Key: Any])
+        if let range = boldRange {
+            attrStr.setAttributes(attrs as [NSAttributedString.Key: Any], range: range)
         }
         return attrStr
     }

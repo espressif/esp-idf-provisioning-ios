@@ -31,7 +31,7 @@ To install, run the following command -
 ```
 brew install swift-protobuf
 ```
-Next, confirm that the version that you have installed is `1.1.1`.
+Next, confirm that the version that you have installed is greater than `1.1.1`.
 
 ```
 $ protoc-gen-swift --version
@@ -64,6 +64,8 @@ There are multiple app variants that you can build using this repository. You wi
 |WifiSec1 Debug|Wi-Fi|1|`examples/provisioning/softap_prov`|`Example Configuration` -> Select `Use Security Version 1`|
 |BLESec0 Debug|BLE|0|`examples/provisioning/ble_prov`|`Example Configuration` -> Deselect `Use Security Version 1`|
 |BLESec1 Debug|BLE|1|`examples/provisioning/ble_prov`|`Example Configuration` -> Select `Use Security Version 1`|
+|BLESec1 Release|BLE|1|`examples/provisioning/ble_prov`|`Example Configuration` -> Select `Use Security Version 1`|
+|WifiSec1 Release|Wi-Fi|1|`examples/provisioning/softap_prov`|`Example Configuration` -> Select `Use Security Version 1`|
 
 
 For Security 1, for BLE or Wi-Fi, you can set an optional `Proof of Possession` key. Make sure that the key present in `Example Configuration` -> `Proof-of-possession` under ESP-IDF example menuconfig is the same as the one set in `Info.plist` file in the `./EspressifProvision/EspressifProvision/` folder
