@@ -61,17 +61,17 @@ class NetworkManager {
         })
     }
 
-    func getDeviceList(completionHandler: @escaping ([Device]?, Error?) -> Void) {
+    func getDeviceList(completionHandler: @escaping ([Node]?, Error?) -> Void) {
         NetworkManager.shared.getUserId { userID, _ in
             if userID != nil {
                 User.shared.getAccessToken(completionHandler: { idToken in
                     if idToken != nil {
                         let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                         Alamofire.request(Constants.getDevices + Constants.CognitoIdentityUserPoolId + "?userid=" + userID!, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                            var deviceList: [Device] = []
+                            var deviceList: [Node] = []
                             if let tempArray = response.result.value as? [[String: String]] {
                                 for item in tempArray {
-                                    let device = Device(name: item["name"], device_id: item["device_id"], type: nil)
+                                    let device = Node(name: item["name"], device_id: item["device_id"], type: nil, devices: nil)
                                     deviceList.append(device)
                                 }
                             }
@@ -104,6 +104,24 @@ class NetworkManager {
             } else {
                 completionHandler(false)
             }
+        }
+    }
+
+    func toggleDevice(deviceID: String, output: Bool) {
+        NetworkManager.shared.getUserId { userID, _ in
+            print(deviceID)
+            if userID != nil {
+                User.shared.getAccessToken(completionHandler: { idToken in
+                    if idToken != nil {
+                        let url = Constants.toggleDevice
+                        let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
+                        let parameter = ["device_id": "a2b9c139-7783-4de9-a42d-b3158eb870f1", "output": output] as [String: Any]
+                        Alamofire.request(url, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                            print(response.result.value)
+                        }
+                    } else {}
+                })
+            } else {}
         }
     }
 }

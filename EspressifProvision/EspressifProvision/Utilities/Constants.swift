@@ -37,4 +37,6 @@ struct Constants {
     static let getDevices = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/user/device/"
     static let addDeviceToUser = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/user/device/"
     static let checkStatus = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/user/device?"
+
+    static let toggleDevice = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/updatethingshadow"
 }

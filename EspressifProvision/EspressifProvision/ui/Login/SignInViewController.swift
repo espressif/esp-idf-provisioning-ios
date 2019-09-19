@@ -33,7 +33,13 @@ class SignInViewController: UIViewController {
         super.viewWillAppear(animated)
         password.text = nil
         username.text = usernameText
-        navigationController?.setNavigationBarHidden(true, animated: false)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
 
     override func viewDidLoad() {
@@ -42,11 +48,26 @@ class SignInViewController: UIViewController {
         password.setBottomBorder()
         username.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         password.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         // Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
+
+//        topView.layer.masksToBounds = false
+        topView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        topView.layer.shadowRadius = 0.5
+        topView.layer.shadowColor = UIColor.gray.cgColor
+        topView.layer.shadowOpacity = 0.5
+
+//        formView.layer.masksToBounds = false
+        formView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        formView.layer.shadowRadius = 0.5
+        formView.layer.shadowColor = UIColor.gray.cgColor
+        formView.layer.shadowOpacity = 1.0
     }
 
     override func viewDidLayoutSubviews() {
@@ -56,18 +77,6 @@ class SignInViewController: UIViewController {
         let backgroundLayer = colors.gl
         backgroundLayer!.frame = topView.frame
         topView.layer.insertSublayer(backgroundLayer!, at: 0)
-
-        topView.layer.masksToBounds = false
-        topView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        topView.layer.shadowRadius = 0.5
-        topView.layer.shadowColor = UIColor.gray.cgColor
-        topView.layer.shadowOpacity = 0.5
-
-        formView.layer.masksToBounds = false
-        formView.layer.shadowOffset = CGSize(width: 0, height: 0)
-        formView.layer.shadowRadius = 0.5
-        formView.layer.shadowColor = UIColor.gray.cgColor
-        formView.layer.shadowOpacity = 1.0
     }
 
     @IBAction func signInPressed(_: AnyObject) {
@@ -147,42 +156,15 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     }
 }
 
-class Colors {
-    var gl: CAGradientLayer!
-    var bg: CAGradientLayer!
-    var hvl: CAGradientLayer!
-
-    init() {
-        let colorTop = UIColor(red: 243.0 / 255.0, green: 104.0 / 255.0, blue: 101.0 / 255.0, alpha: 1.0).cgColor
-        let colorBottom = UIColor(red: 172.0 / 255.0, green: 14.0 / 255.0, blue: 13.0 / 255.0, alpha: 1.0).cgColor
-
-        let bgcolorTop = UIColor(red: 241.0 / 255.0, green: 220.0 / 255.0, blue: 220.0 / 255.0, alpha: 1.0).cgColor
-        let bgcolorBottom = UIColor(red: 249.0 / 255.0, green: 156.0 / 255.0, blue: 156.0 / 255.0, alpha: 1.0).cgColor
-
-        let hvcolorTop = UIColor(red: 255.0 / 255.0, green: 201.0 / 255.0, blue: 202.0 / 255.0, alpha: 1.0).cgColor
-        let hvcolorBottom = UIColor(red: 255.0 / 255.0, green: 97.0 / 255.0, blue: 99.0 / 255.0, alpha: 1.0).cgColor
-
-        hvl = CAGradientLayer()
-        hvl.colors = [hvcolorTop, hvcolorBottom]
-        hvl.locations = [0.0, 1.0]
-        bg = CAGradientLayer()
-        bg.colors = [bgcolorTop, bgcolorBottom]
-        bg.locations = [0.0, 1.0]
-        gl = CAGradientLayer()
-        gl.colors = [colorTop, colorBottom]
-        gl.locations = [0.0, 1.0]
-    }
-}
-
 extension UITextField {
     func setBottomBorder() {
         borderStyle = .none
-        layer.backgroundColor = UIColor.white.cgColor
+        layer.backgroundColor = UIColor.clear.cgColor
 
-        layer.masksToBounds = false
-        layer.shadowColor = UIColor.darkGray.cgColor
-        layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
-        layer.shadowOpacity = 0.5
-        layer.shadowRadius = 0.0
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0.0, y: frame.height - 1, width: frame.width, height: 1.0)
+        bottomLine.backgroundColor = UIColor(red: 255.0 / 255.0, green: 97.0 / 255.0, blue: 99.0 / 255.0, alpha: 1.0).cgColor
+        borderStyle = UITextField.BorderStyle.none
+        layer.addSublayer(bottomLine)
     }
 }

@@ -58,14 +58,28 @@ class ViewController: UIViewController {
         navigationController?.view.backgroundColor = .clear
 
         addButton.layer.masksToBounds = false
-        addButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+        addButton.layer.shadowOffset = CGSize(width: 1, height: 1)
         addButton.layer.shadowRadius = 0.5
-        addButton.layer.shadowColor = UIColor.gray.cgColor
+        addButton.layer.shadowColor = UIColor.darkGray.cgColor
         addButton.layer.shadowOpacity = 1.0
+//        addButton.layer.shadowPath = UIBezierPath(roundedRect: addButton.frame, cornerRadius: 40.0).cgPath
 
         refreshControl.addTarget(self, action: #selector(refreshDeviceList), for: .valueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         tableView.refreshControl = refreshControl
+
+        let colors = Colors()
+        view.backgroundColor = UIColor.clear
+        let backgroundLayer = colors.backGroundLayer
+        backgroundLayer!.frame = view.frame
+        view.layer.insertSublayer(backgroundLayer!, at: 0)
+
+        // view.backgroundColor = UIColor.black
+//        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.prominent)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = view.bounds
+//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        view.insertSubview(blurEffectView, at: 0)
 
 //        titleView.layer.masksToBounds = false
 //        titleView.layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -253,6 +267,12 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deviceListCell", for: indexPath) as! DeviceListTableViewCell
         cell.deviceNameLabel.text = User.shared.associatedDevices![indexPath.section].name
+        cell.node = User.shared.associatedDevices![indexPath.section]
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.extraLight)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = cell.backView.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        cell.backView.insertSubview(blurEffectView, at: 0)
         return cell
     }
 
@@ -268,7 +288,24 @@ extension ViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection _: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 12))
-        headerView.backgroundColor = UIColor.white
+        headerView.backgroundColor = UIColor.clear
         return headerView
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let path = Bundle.main.path(forResource: "Example4", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                User.shared.associatedDevices?[indexPath.section].devices = JSONParser.parseNodeData(data: data)
+                let storyboard = UIStoryboard(name: "DeviceDetail", bundle: nil)
+                let ivc = storyboard.instantiateViewController(withIdentifier: "devicesVC") as! DevicesViewController
+                ivc.currentNode = User.shared.associatedDevices?[indexPath.section]
+                navigationController?.pushViewController(ivc, animated: true)
+
+            } catch {
+                // handle error
+            }
+        }
     }
 }

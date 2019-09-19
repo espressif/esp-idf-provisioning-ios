@@ -45,7 +45,7 @@
 		F12261A222C619A0004D049F /* cloud.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12261A122C6199F004D049F /* cloud.pb.swift */; };
 		F12261A422C620ED004D049F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12261A322C620ED004D049F /* User.swift */; };
 		F184C9E7228C4A780034C5B7 /* AESDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F184C9E6228C4A780034C5B7 /* AESDecryptor.m */; };
-		F194B60822CDD7BD00417347 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = F194B60722CDD7BD00417347 /* Device.swift */; };
+		F194B60822CDD7BD00417347 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = F194B60722CDD7BD00417347 /* Node.swift */; };
 		F194B60A22CDD83200417347 /* DeviceListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F194B60922CDD83200417347 /* DeviceListTableViewCell.swift */; };
 		F19A9D1022BB6DD800A450C3 /* MFAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D0E22BB6DD800A450C3 /* MFAViewController.swift */; };
 		F19A9D1322C0D23E00A450C3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1222C0D23E00A450C3 /* SignInViewController.swift */; };
@@ -57,12 +57,33 @@
 		F19F6FF322F02B3400C70DE3 /* SettingsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F6FF222F02B3400C70DE3 /* SettingsPageViewController.swift */; };
 		F19F6FF522F45A1500C70DE3 /* DeviceListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F6FF422F45A1500C70DE3 /* DeviceListTableView.swift */; };
 		F1A06C7622AA48E6008567D8 /* wifi_scan.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A06C7522AA48E6008567D8 /* wifi_scan.pb.swift */; };
+		F1AB5118233216FE002401F9 /* GenericControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AB5116233216FE002401F9 /* GenericControlTableViewCell.swift */; };
+		F1AB5119233216FE002401F9 /* GenericControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1AB5117233216FE002401F9 /* GenericControlTableViewCell.xib */; };
+		F1AB511B23321B7E002401F9 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AB511A23321B7E002401F9 /* JSONParser.swift */; };
+		F1AB511D23324266002401F9 /* Example1.json in Resources */ = {isa = PBXBuildFile; fileRef = F1AB511C23324266002401F9 /* Example1.json */; };
+		F1AB511F233242AE002401F9 /* Example2.json in Resources */ = {isa = PBXBuildFile; fileRef = F1AB511E233242AE002401F9 /* Example2.json */; };
+		F1AB5121233242BA002401F9 /* Example3.json in Resources */ = {isa = PBXBuildFile; fileRef = F1AB5120233242BA002401F9 /* Example3.json */; };
+		F1AB5123233245BD002401F9 /* Example4.json in Resources */ = {isa = PBXBuildFile; fileRef = F1AB5122233245BD002401F9 /* Example4.json */; };
 		F1C8082C22CA17790098F3B4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C8082B22CA17790098F3B4 /* NetworkManager.swift */; };
 		F1D4F1FB22AFBD6D000452EE /* DeviceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */; };
+		F1DB6F60232F93D1004B1FA1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DB6F5F232F93D1004B1FA1 /* Colors.swift */; };
+		F1DB6F62232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DB6F61232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift */; };
 		F1DD70A422A8EA150092DAB9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A322A8EA140092DAB9 /* Utility.swift */; };
 		F1DD70A622A8EA2A0092DAB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A522A8EA2A0092DAB9 /* Constants.swift */; };
 		F1DD70AA22A9BFBE0092DAB9 /* ScanWifiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A822A9BFBE0092DAB9 /* ScanWifiList.swift */; };
 		F1DD70AB22A9BFBE0092DAB9 /* WifiListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A922A9BFBE0092DAB9 /* WifiListTableViewCell.swift */; };
+		F1F451372328C51A0009DCE0 /* DeviceDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */; };
+		F1F4513A2328C5D40009DCE0 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F451392328C5D40009DCE0 /* DevicesViewController.swift */; };
+		F1F4513D2328C90E0009DCE0 /* DeviceDetails.json in Resources */ = {isa = PBXBuildFile; fileRef = F1F4513C2328C90E0009DCE0 /* DeviceDetails.json */; };
+		F1F4513F232A30C70009DCE0 /* SwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4513E232A30C70009DCE0 /* SwitchViewController.swift */; };
+		F1F45141232A3B260009DCE0 /* LightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F45140232A3B260009DCE0 /* LightViewController.swift */; };
+		F1F45147232A43510009DCE0 /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F45145232A43510009DCE0 /* SliderTableViewCell.swift */; };
+		F1F45148232A43510009DCE0 /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1F45146232A43510009DCE0 /* SliderTableViewCell.xib */; };
+		F1F4514B232B74510009DCE0 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F45149232B74510009DCE0 /* SwitchTableViewCell.swift */; };
+		F1F4514C232B74510009DCE0 /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1F4514A232B74510009DCE0 /* SwitchTableViewCell.xib */; };
+		F1F4514E232B78100009DCE0 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4514D232B78100009DCE0 /* Device.swift */; };
+		F1F45150232B7A780009DCE0 /* ControlListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4514F232B7A780009DCE0 /* ControlListViewController.swift */; };
+		F1F45152232B7ECB0009DCE0 /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F45151232B7ECB0009DCE0 /* Attribute.swift */; };
 		F6D7C9B0F5FDCEEFFA78A8C8 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -145,7 +166,7 @@
 		F12261A322C620ED004D049F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F184C9E5228C4A780034C5B7 /* AESDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESDecryptor.h; sourceTree = "<group>"; };
 		F184C9E6228C4A780034C5B7 /* AESDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESDecryptor.m; sourceTree = "<group>"; };
-		F194B60722CDD7BD00417347 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		F194B60722CDD7BD00417347 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		F194B60922CDD83200417347 /* DeviceListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListTableViewCell.swift; sourceTree = "<group>"; };
 		F19A9D0E22BB6DD800A450C3 /* MFAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFAViewController.swift; sourceTree = "<group>"; };
 		F19A9D1222C0D23E00A450C3 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -157,12 +178,33 @@
 		F19F6FF222F02B3400C70DE3 /* SettingsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageViewController.swift; sourceTree = "<group>"; };
 		F19F6FF422F45A1500C70DE3 /* DeviceListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListTableView.swift; sourceTree = "<group>"; };
 		F1A06C7522AA48E6008567D8 /* wifi_scan.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_scan.pb.swift; sourceTree = "<group>"; };
+		F1AB5116233216FE002401F9 /* GenericControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericControlTableViewCell.swift; sourceTree = "<group>"; };
+		F1AB5117233216FE002401F9 /* GenericControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericControlTableViewCell.xib; sourceTree = "<group>"; };
+		F1AB511A23321B7E002401F9 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
+		F1AB511C23324266002401F9 /* Example1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Example1.json; sourceTree = "<group>"; };
+		F1AB511E233242AE002401F9 /* Example2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Example2.json; sourceTree = "<group>"; };
+		F1AB5120233242BA002401F9 /* Example3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Example3.json; sourceTree = "<group>"; };
+		F1AB5122233245BD002401F9 /* Example4.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Example4.json; sourceTree = "<group>"; };
 		F1C8082B22CA17790098F3B4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewController.swift; sourceTree = "<group>"; };
+		F1DB6F5F232F93D1004B1FA1 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		F1DB6F61232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1DD70A322A8EA140092DAB9 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		F1DD70A522A8EA2A0092DAB9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F1DD70A822A9BFBE0092DAB9 /* ScanWifiList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanWifiList.swift; sourceTree = "<group>"; };
 		F1DD70A922A9BFBE0092DAB9 /* WifiListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiListTableViewCell.swift; sourceTree = "<group>"; };
+		F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeviceDetail.storyboard; sourceTree = "<group>"; };
+		F1F451392328C5D40009DCE0 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
+		F1F4513C2328C90E0009DCE0 /* DeviceDetails.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DeviceDetails.json; sourceTree = "<group>"; };
+		F1F4513E232A30C70009DCE0 /* SwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchViewController.swift; sourceTree = "<group>"; };
+		F1F45140232A3B260009DCE0 /* LightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightViewController.swift; sourceTree = "<group>"; };
+		F1F45145232A43510009DCE0 /* SliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
+		F1F45146232A43510009DCE0 /* SliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
+		F1F45149232B74510009DCE0 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		F1F4514A232B74510009DCE0 /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
+		F1F4514D232B78100009DCE0 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		F1F4514F232B7A780009DCE0 /* ControlListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlListViewController.swift; sourceTree = "<group>"; };
+		F1F45151232B7ECB0009DCE0 /* Attribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +261,7 @@
 		1431462520DE994B0017E119 /* EspressifProvision */ = {
 			isa = PBXGroup;
 			children = (
+				F1F4513B2328C8F10009DCE0 /* Resources */,
 				F194B60622CDD79D00417347 /* Models */,
 				F122619E22C6166A004D049F /* AWSCognito */,
 				F122619922C39EC6004D049F /* SupportingFiles */,
@@ -228,6 +271,7 @@
 				143146B120EB221E0017E119 /* ui */,
 				1431466320DEA9690017E119 /* provision */,
 				1431462620DE994B0017E119 /* AppDelegate.swift */,
+				F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */,
 				F19A9D1C22C2070E00A450C3 /* Login.storyboard */,
 				1431462820DE994B0017E119 /* ViewController.swift */,
 				1431462A20DE994B0017E119 /* Main.storyboard */,
@@ -325,6 +369,7 @@
 		143146B120EB221E0017E119 /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				F1F451382328C5B80009DCE0 /* Devices */,
 				F194B60522CDD6AD00417347 /* DeviceList */,
 				F19A9D0D22BB6DD800A450C3 /* Login */,
 				143146B220EB22470017E119 /* ProvisionLandingViewController.swift */,
@@ -410,7 +455,9 @@
 		F194B60622CDD79D00417347 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F194B60722CDD7BD00417347 /* Device.swift */,
+				F194B60722CDD7BD00417347 /* Node.swift */,
+				F1F4514D232B78100009DCE0 /* Device.swift */,
+				F1F45151232B7ECB0009DCE0 /* Attribute.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -434,6 +481,8 @@
 				F1DD70A322A8EA140092DAB9 /* Utility.swift */,
 				F1DD70A522A8EA2A0092DAB9 /* Constants.swift */,
 				F12261A322C620ED004D049F /* User.swift */,
+				F1DB6F5F232F93D1004B1FA1 /* Colors.swift */,
+				F1AB511A23321B7E002401F9 /* JSONParser.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -445,6 +494,44 @@
 				F1DD70A922A9BFBE0092DAB9 /* WifiListTableViewCell.swift */,
 			);
 			path = wifi;
+			sourceTree = "<group>";
+		};
+		F1F451382328C5B80009DCE0 /* Devices */ = {
+			isa = PBXGroup;
+			children = (
+				F1F45142232A424C0009DCE0 /* Controls */,
+				F1F451392328C5D40009DCE0 /* DevicesViewController.swift */,
+				F1F4513E232A30C70009DCE0 /* SwitchViewController.swift */,
+				F1F45140232A3B260009DCE0 /* LightViewController.swift */,
+				F1F4514F232B7A780009DCE0 /* ControlListViewController.swift */,
+				F1DB6F61232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift */,
+			);
+			path = Devices;
+			sourceTree = "<group>";
+		};
+		F1F4513B2328C8F10009DCE0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F1F4513C2328C90E0009DCE0 /* DeviceDetails.json */,
+				F1AB511C23324266002401F9 /* Example1.json */,
+				F1AB511E233242AE002401F9 /* Example2.json */,
+				F1AB5120233242BA002401F9 /* Example3.json */,
+				F1AB5122233245BD002401F9 /* Example4.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F1F45142232A424C0009DCE0 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				F1F45145232A43510009DCE0 /* SliderTableViewCell.swift */,
+				F1F45146232A43510009DCE0 /* SliderTableViewCell.xib */,
+				F1F45149232B74510009DCE0 /* SwitchTableViewCell.swift */,
+				F1F4514A232B74510009DCE0 /* SwitchTableViewCell.xib */,
+				F1AB5116233216FE002401F9 /* GenericControlTableViewCell.swift */,
+				F1AB5117233216FE002401F9 /* GenericControlTableViewCell.xib */,
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -566,10 +653,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				F19A9D1D22C2070E00A450C3 /* Login.storyboard in Resources */,
+				F1AB511D23324266002401F9 /* Example1.json in Resources */,
+				F1AB5119233216FE002401F9 /* GenericControlTableViewCell.xib in Resources */,
 				F122619B22C39EDA004D049F /* CognitoLogo.png in Resources */,
 				1431463120DE994C0017E119 /* LaunchScreen.storyboard in Resources */,
+				F1AB5123233245BD002401F9 /* Example4.json in Resources */,
+				F1AB5121233242BA002401F9 /* Example3.json in Resources */,
+				F1F451372328C51A0009DCE0 /* DeviceDetail.storyboard in Resources */,
 				1431462E20DE994C0017E119 /* Assets.xcassets in Resources */,
+				F1F4513D2328C90E0009DCE0 /* DeviceDetails.json in Resources */,
+				F1F4514C232B74510009DCE0 /* SwitchTableViewCell.xib in Resources */,
+				F1F45148232A43510009DCE0 /* SliderTableViewCell.xib in Resources */,
 				1431462C20DE994B0017E119 /* Main.storyboard in Resources */,
+				F1AB511F233242AE002401F9 /* Example2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,25 +830,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				1431468220DEB6F50017E119 /* Security0.swift in Sources */,
+				F1DB6F60232F93D1004B1FA1 /* Colors.swift in Sources */,
+				F1F45150232B7A780009DCE0 /* ControlListViewController.swift in Sources */,
 				F19A9D1822C0ED4C00A450C3 /* ForgotPasswordViewController.swift in Sources */,
 				F1DD70AA22A9BFBE0092DAB9 /* ScanWifiList.swift in Sources */,
 				F19A9D1B22C0ED4C00A450C3 /* ConfirmSignUpViewController.swift in Sources */,
+				F1F45152232B7ECB0009DCE0 /* Attribute.swift in Sources */,
+				F1F45147232A43510009DCE0 /* SliderTableViewCell.swift in Sources */,
 				F1DD70AB22A9BFBE0092DAB9 /* WifiListTableViewCell.swift in Sources */,
 				F19F6FF322F02B3400C70DE3 /* SettingsPageViewController.swift in Sources */,
+				F1F4513F232A30C70009DCE0 /* SwitchViewController.swift in Sources */,
 				1431469820E387C60017E119 /* sec1.pb.swift in Sources */,
 				14DE671E20ECD04100941522 /* BLETransport.swift in Sources */,
-				F194B60822CDD7BD00417347 /* Device.swift in Sources */,
+				F194B60822CDD7BD00417347 /* Node.swift in Sources */,
 				149774DF210C87AB00022841 /* DataExtensions.swift in Sources */,
 				1431468E20E3823F0017E119 /* Provision.swift in Sources */,
 				1431469920E387C60017E119 /* sec0.pb.swift in Sources */,
 				F19A9D1922C0ED4C00A450C3 /* ConfirmForgotPasswordViewController.swift in Sources */,
 				1431468420DF69C30017E119 /* Security1.swift in Sources */,
 				F12261A022C61695004D049F /* DeviceAssociation.swift in Sources */,
+				F1F4513A2328C5D40009DCE0 /* DevicesViewController.swift in Sources */,
 				143146B520EB273B0017E119 /* ProvisionViewController.swift in Sources */,
 				1431462920DE994B0017E119 /* ViewController.swift in Sources */,
 				149774DD210C799900022841 /* CryptoAES.swift in Sources */,
+				F1F45141232A3B260009DCE0 /* LightViewController.swift in Sources */,
 				1431466920DEAD1A0017E119 /* SoftAPTransport.swift in Sources */,
+				F1F4514B232B74510009DCE0 /* SwitchTableViewCell.swift in Sources */,
 				F1DD70A622A8EA2A0092DAB9 /* Constants.swift in Sources */,
+				F1DB6F62232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift in Sources */,
 				F12261A422C620ED004D049F /* User.swift in Sources */,
 				1431469B20E387C60017E119 /* constants.pb.swift in Sources */,
 				149774E1210C89E600022841 /* ArrayExtensions.swift in Sources */,
@@ -762,17 +867,20 @@
 				1431468B20E37B980017E119 /* Session.swift in Sources */,
 				F1D4F1FB22AFBD6D000452EE /* DeviceInfoViewController.swift in Sources */,
 				1431469F20E387C60017E119 /* wifi_constants.pb.swift in Sources */,
+				F1AB511B23321B7E002401F9 /* JSONParser.swift in Sources */,
 				149774E3210C8A0000022841 /* StringExtensions.swift in Sources */,
 				14A6EA0E2108DF95007F9407 /* wifi_config.pb.swift in Sources */,
 				F1C8082C22CA17790098F3B4 /* NetworkManager.swift in Sources */,
 				F19A9D1322C0D23E00A450C3 /* SignInViewController.swift in Sources */,
 				F1DD70A422A8EA150092DAB9 /* Utility.swift in Sources */,
+				F1F4514E232B78100009DCE0 /* Device.swift in Sources */,
 				1431466520DEA97C0017E119 /* Transport.swift in Sources */,
 				144149442126AE09002AD5E1 /* SuccessViewController.swift in Sources */,
 				F12261A222C619A0004D049F /* cloud.pb.swift in Sources */,
 				F1A06C7622AA48E6008567D8 /* wifi_scan.pb.swift in Sources */,
 				F19A9D1022BB6DD800A450C3 /* MFAViewController.swift in Sources */,
 				F19F6FF522F45A1500C70DE3 /* DeviceListTableView.swift in Sources */,
+				F1AB5118233216FE002401F9 /* GenericControlTableViewCell.swift in Sources */,
 				F184C9E7228C4A780034C5B7 /* AESDecryptor.m in Sources */,
 				14706917211050EE00F8E1D8 /* BLELandingViewController.swift in Sources */,
 				1431462720DE994B0017E119 /* AppDelegate.swift in Sources */,

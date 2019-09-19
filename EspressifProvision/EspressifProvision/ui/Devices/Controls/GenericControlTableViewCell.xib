@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="genericControlCell" rowHeight="70" id="KGk-i7-Jjw" customClass="GenericControlTableViewCell" customModule="EspressifProvision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="55.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view alpha="0.55000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uIA-4d-qmP">
+                        <rect key="frame" x="15" y="2" width="290" height="51.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDY-dV-8Ts">
+                                <rect key="frame" x="8" y="15.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArT-Ou-Q5h">
+                                <rect key="frame" x="240" y="14.5" width="42" height="22.5"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ArT-Ou-Q5h" secondAttribute="trailing" constant="8" id="CgO-SW-8n0"/>
+                            <constraint firstItem="ArT-Ou-Q5h" firstAttribute="centerY" secondItem="uIA-4d-qmP" secondAttribute="centerY" id="bla-fZ-BPc"/>
+                            <constraint firstItem="MDY-dV-8Ts" firstAttribute="centerY" secondItem="uIA-4d-qmP" secondAttribute="centerY" id="dpS-vK-Ctb"/>
+                            <constraint firstItem="MDY-dV-8Ts" firstAttribute="leading" secondItem="uIA-4d-qmP" secondAttribute="leading" constant="8" id="o8u-TH-nzi"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="uIA-4d-qmP" secondAttribute="bottom" constant="2" id="H9l-qg-Fwh"/>
+                    <constraint firstItem="uIA-4d-qmP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="LFP-CP-6bR"/>
+                    <constraint firstItem="uIA-4d-qmP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="q2B-YF-9qH"/>
+                    <constraint firstAttribute="trailing" secondItem="uIA-4d-qmP" secondAttribute="trailing" constant="15" id="zUO-Nb-tdY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="backView" destination="uIA-4d-qmP" id="Vta-W1-3w0"/>
+                <outlet property="controlName" destination="MDY-dV-8Ts" id="7JS-rS-ZP9"/>
+                <outlet property="controlValue" destination="ArT-Ou-Q5h" id="3oR-EJ-dBi"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="83.035714285714278"/>
+        </tableViewCell>
+    </objects>
+</document>

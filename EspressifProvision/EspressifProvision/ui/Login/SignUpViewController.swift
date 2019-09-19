@@ -22,6 +22,8 @@ class SignUpViewController: UIViewController {
     var pool: AWSCognitoIdentityUserPool?
     var sentTo: String?
 
+    @IBOutlet var signUpButton: UIButton!
+    @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var username: UITextField!
     @IBOutlet var password: UITextField!
 
@@ -40,10 +42,27 @@ class SignUpViewController: UIViewController {
         password.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         phone.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         email.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        let colors = Colors()
+        view.backgroundColor = UIColor.clear
+        let backgroundLayer = colors.signUPLayer
+        backgroundLayer!.frame = view.frame
+        view.layer.insertSublayer(backgroundLayer!, at: 0)
+        view.addGestureRecognizer(tap)
     }
 
-    override func viewWillAppear(_: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: false)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
@@ -51,6 +70,40 @@ class SignUpViewController: UIViewController {
             signUpConfirmationViewController.sentTo = sentTo
             signUpConfirmationViewController.user = pool?.getUser(username.text!)
         }
+    }
+
+    @objc func dismissKeyboard() {
+        // Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        scrollView.isScrollEnabled = true
+        var info = notification.userInfo!
+        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize!.height, right: 0.0)
+
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+
+        var aRect: CGRect = view.frame
+        aRect.size.height -= keyboardSize!.height
+        if let activeField = self.signUpButton {
+            if !aRect.contains(activeField.frame.origin) {
+                scrollView.scrollRectToVisible(activeField.frame, animated: true)
+            }
+        }
+        scrollView.isScrollEnabled = false
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        var info = notification.userInfo!
+        let keyboardSize = (info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size
+        let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -keyboardSize!.height, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        view.endEditing(true)
+        scrollView.isScrollEnabled = false
     }
 
     @IBAction func signUp(_ sender: AnyObject) {

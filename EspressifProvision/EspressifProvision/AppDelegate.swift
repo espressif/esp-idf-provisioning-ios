@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // fetch the user pool client we initialized in above step
         storyboard = UIStoryboard(name: "Login", bundle: nil)
         User.shared.pool.delegate = self
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 189.0 / 255.0, green: 69.0 / 255.0, blue: 71.0 / 255.0, alpha: 1.0)]
         return true
     }
 

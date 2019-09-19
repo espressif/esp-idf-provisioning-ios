@@ -14,7 +14,7 @@ class User {
     var userID: String?
     var pool: AWSCognitoIdentityUserPool!
     var idToken: String?
-    var associatedDevices: [Device]?
+    var associatedDevices: [Node]?
     var username: String!
 
     private init() {

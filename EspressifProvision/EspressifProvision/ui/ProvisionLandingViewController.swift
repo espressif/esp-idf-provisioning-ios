@@ -22,7 +22,7 @@ import UIKit
 
 class ProvisionLandingViewController: UIViewController {
     var provisionConfig: [String: String] = [:]
-    var deviceList: [Device]?
+    var deviceList: [Node]?
 
     @IBOutlet var provisionInstructions: UILabel!
 

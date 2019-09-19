@@ -1,0 +1,85 @@
+{
+    "node-id": "00-11-22-33-44-55",
+    "info": {
+        "name": "ESP_Light",
+        "fw_version": "2.0",
+        "type": "esp.lightbulb"
+    },
+    "node_attributes": [{
+        "name": "var1",
+        "value": "val1"
+    }, {
+        "name": "var2",
+        "value": "val2"
+    }],
+    "Devices": [{
+        "type": "esp.light",
+        "name": "Light",
+        "static_params": [{
+            "name": "static_str",
+            "data-type": "string",
+            "value": "mystring"
+        }, {
+            "name": "static_float",
+            "data-type": "float",
+            "value": 30.3
+        }, {
+            "name": "static_int",
+            "data-type": "int",
+            "value": 5
+        }, {
+            "name": "static_bool",
+            "data-type": "bool",
+            "value": true
+        }],
+        "dynamic_params": [{
+            "type": "esp.name",
+            "name": "dyn_str",
+            "data-type": "string",
+            "permissions": ["read"],
+            "UIType": ""
+        }, {
+            "type": "esp.brightness",
+            "name": "dyn_int",
+            "data-type": "int",
+            "permissions": ["read", "write", "notify"],
+            "bounds": {
+                "min": 0,
+                "max": 100
+            },
+            "UIType": "esp-ui-slider"
+        }]
+    }, {
+        "type": "esp.switch",
+        "name": "Switch",
+        "dynamic_params": [{
+            "type": "esp.name",
+            "name": "dyn_str",
+            "data-type": "string",
+            "permissions": ["read"],
+            "UIType": ""
+        }, {
+            "type": "esp.state",
+            "name": "dyn_int",
+            "data-type": "int",
+            "permissions": ["read", "write", "notify"],
+            "UIType": "esp-ui-toggle"
+        }]
+    },{
+        "type": "unknown",
+        "name": "Unknown",
+        "dynamic_params": [{
+            "type": "esp.name",
+            "name": "dyn_str",
+            "data-type": "string",
+            "permissions": ["read"],
+            "UIType": ""
+        }, {
+            "type": "esp.state",
+            "name": "dyn_int",
+            "data-type": "int",
+            "permissions": ["read", "write", "notify"],
+            "UIType": "esp-ui-toggle"
+        }]
+    }]
+}

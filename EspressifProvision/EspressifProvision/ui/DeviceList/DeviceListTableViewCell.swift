@@ -13,6 +13,8 @@ class DeviceListTableViewCell: UITableViewCell {
     @IBOutlet var deviceNameLabel: UILabel!
     @IBOutlet var backView: UIView!
 
+    var node: Node?
+
     override func awakeFromNib() {
         backgroundColor = UIColor.clear
 
@@ -32,5 +34,9 @@ class DeviceListTableViewCell: UITableViewCell {
         layer.shadowColor = UIColor.black.cgColor
         layer.masksToBounds = false
 //        layer.shadowPath = shadowPath.cgPath
+    }
+
+    @IBAction func toggle(_ sender: UISwitch) {
+        NetworkManager.shared.toggleDevice(deviceID: node?.device_id ?? "", output: sender.isOn)
     }
 }
