@@ -46,4 +46,6 @@ protocol Transport {
     func SendConfigData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void)
 
     func isDeviceConfigured() -> Bool
+
+    func disconnect()
 }

@@ -1,85 +1,31 @@
 {
-    "node-id": "00-11-22-33-44-55",
+    "node_id": "001122334455",
+    "config_version": "2019-09-11",
     "info": {
-        "name": "ESP_Light",
+        "name": "My_Node",
         "fw_version": "2.0",
-        "type": "esp.lightbulb"
+        "type": "My_Node"
     },
-    "node_attributes": [{
-        "name": "var1",
-        "value": "val1"
-    }, {
-        "name": "var2",
-        "value": "val2"
-    }],
-    "Devices": [{
-        "type": "esp.light",
-        "name": "Light",
-        "static_params": [{
-            "name": "static_str",
-            "data-type": "string",
-            "value": "mystring"
-        }, {
-            "name": "static_float",
-            "data-type": "float",
-            "value": 30.3
-        }, {
-            "name": "static_int",
-            "data-type": "int",
-            "value": 5
-        }, {
-            "name": "static_bool",
-            "data-type": "bool",
-            "value": true
-        }],
+    "devices": [{
+        "name": "Standard Switch",
+        "type": "esp.device.switch",
         "dynamic_params": [{
-            "type": "esp.name",
-            "name": "dyn_str",
-            "data-type": "string",
-            "permissions": ["read"],
-            "UIType": ""
-        }, {
-            "type": "esp.brightness",
-            "name": "dyn_int",
-            "data-type": "int",
-            "permissions": ["read", "write", "notify"],
-            "bounds": {
-                "min": 0,
-                "max": 100
-            },
-            "UIType": "esp-ui-slider"
+            "name": "output",
+            "data_type": "bool",
+            "permissions": ["read", "write"]
         }]
     }, {
-        "type": "esp.switch",
-        "name": "Switch",
+        "name": "Standard Light",
+        "type": "esp.device.lightbulb",
         "dynamic_params": [{
-            "type": "esp.name",
-            "name": "dyn_str",
-            "data-type": "string",
-            "permissions": ["read"],
-            "UIType": ""
+            "name": "output",
+            "data_type": "bool",
+            "permissions": ["read", "write"]
         }, {
-            "type": "esp.state",
-            "name": "dyn_int",
-            "data-type": "int",
-            "permissions": ["read", "write", "notify"],
-            "UIType": "esp-ui-toggle"
-        }]
-    },{
-        "type": "unknown",
-        "name": "Unknown",
-        "dynamic_params": [{
-            "type": "esp.name",
-            "name": "dyn_str",
-            "data-type": "string",
-            "permissions": ["read"],
-            "UIType": ""
-        }, {
-            "type": "esp.state",
-            "name": "dyn_int",
-            "data-type": "int",
-            "permissions": ["read", "write", "notify"],
-            "UIType": "esp-ui-toggle"
+            "name": "brightness",
+            "data_type": "int",
+            "permissions": ["read", "write"],
+            "ui-type": "esp-ui-slider"
         }]
     }]
 }

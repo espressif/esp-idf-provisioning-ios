@@ -60,11 +60,8 @@
 		F1AB5118233216FE002401F9 /* GenericControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AB5116233216FE002401F9 /* GenericControlTableViewCell.swift */; };
 		F1AB5119233216FE002401F9 /* GenericControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1AB5117233216FE002401F9 /* GenericControlTableViewCell.xib */; };
 		F1AB511B23321B7E002401F9 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AB511A23321B7E002401F9 /* JSONParser.swift */; };
-		F1AB511D23324266002401F9 /* Example1.json in Resources */ = {isa = PBXBuildFile; fileRef = F1AB511C23324266002401F9 /* Example1.json */; };
-		F1AB511F233242AE002401F9 /* Example2.json in Resources */ = {isa = PBXBuildFile; fileRef = F1AB511E233242AE002401F9 /* Example2.json */; };
-		F1AB5121233242BA002401F9 /* Example3.json in Resources */ = {isa = PBXBuildFile; fileRef = F1AB5120233242BA002401F9 /* Example3.json */; };
-		F1AB5123233245BD002401F9 /* Example4.json in Resources */ = {isa = PBXBuildFile; fileRef = F1AB5122233245BD002401F9 /* Example4.json */; };
 		F1C8082C22CA17790098F3B4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C8082B22CA17790098F3B4 /* NetworkManager.swift */; };
+		F1CB6086233B549F0001D509 /* BLEDeviceListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CB6085233B549F0001D509 /* BLEDeviceListViewCell.swift */; };
 		F1D4F1FB22AFBD6D000452EE /* DeviceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */; };
 		F1DB6F60232F93D1004B1FA1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DB6F5F232F93D1004B1FA1 /* Colors.swift */; };
 		F1DB6F62232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DB6F61232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift */; };
@@ -181,11 +178,8 @@
 		F1AB5116233216FE002401F9 /* GenericControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericControlTableViewCell.swift; sourceTree = "<group>"; };
 		F1AB5117233216FE002401F9 /* GenericControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericControlTableViewCell.xib; sourceTree = "<group>"; };
 		F1AB511A23321B7E002401F9 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
-		F1AB511C23324266002401F9 /* Example1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Example1.json; sourceTree = "<group>"; };
-		F1AB511E233242AE002401F9 /* Example2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Example2.json; sourceTree = "<group>"; };
-		F1AB5120233242BA002401F9 /* Example3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Example3.json; sourceTree = "<group>"; };
-		F1AB5122233245BD002401F9 /* Example4.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Example4.json; sourceTree = "<group>"; };
 		F1C8082B22CA17790098F3B4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F1CB6085233B549F0001D509 /* BLEDeviceListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceListViewCell.swift; sourceTree = "<group>"; };
 		F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewController.swift; sourceTree = "<group>"; };
 		F1DB6F5F232F93D1004B1FA1 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F1DB6F61232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -378,6 +372,7 @@
 				144149432126AE09002AD5E1 /* SuccessViewController.swift */,
 				F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */,
 				F19F6FF222F02B3400C70DE3 /* SettingsPageViewController.swift */,
+				F1CB6085233B549F0001D509 /* BLEDeviceListViewCell.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -513,10 +508,6 @@
 			isa = PBXGroup;
 			children = (
 				F1F4513C2328C90E0009DCE0 /* DeviceDetails.json */,
-				F1AB511C23324266002401F9 /* Example1.json */,
-				F1AB511E233242AE002401F9 /* Example2.json */,
-				F1AB5120233242BA002401F9 /* Example3.json */,
-				F1AB5122233245BD002401F9 /* Example4.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -653,19 +644,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F19A9D1D22C2070E00A450C3 /* Login.storyboard in Resources */,
-				F1AB511D23324266002401F9 /* Example1.json in Resources */,
 				F1AB5119233216FE002401F9 /* GenericControlTableViewCell.xib in Resources */,
 				F122619B22C39EDA004D049F /* CognitoLogo.png in Resources */,
 				1431463120DE994C0017E119 /* LaunchScreen.storyboard in Resources */,
-				F1AB5123233245BD002401F9 /* Example4.json in Resources */,
-				F1AB5121233242BA002401F9 /* Example3.json in Resources */,
 				F1F451372328C51A0009DCE0 /* DeviceDetail.storyboard in Resources */,
 				1431462E20DE994C0017E119 /* Assets.xcassets in Resources */,
 				F1F4513D2328C90E0009DCE0 /* DeviceDetails.json in Resources */,
 				F1F4514C232B74510009DCE0 /* SwitchTableViewCell.xib in Resources */,
 				F1F45148232A43510009DCE0 /* SliderTableViewCell.xib in Resources */,
 				1431462C20DE994B0017E119 /* Main.storyboard in Resources */,
-				F1AB511F233242AE002401F9 /* Example2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,6 +872,7 @@
 				14706917211050EE00F8E1D8 /* BLELandingViewController.swift in Sources */,
 				1431462720DE994B0017E119 /* AppDelegate.swift in Sources */,
 				1431469D20E387C60017E119 /* session.pb.swift in Sources */,
+				F1CB6086233B549F0001D509 /* BLEDeviceListViewCell.swift in Sources */,
 				F19A9D1A22C0ED4C00A450C3 /* SignUpViewController.swift in Sources */,
 				F194B60A22CDD83200417347 /* DeviceListTableViewCell.swift in Sources */,
 			);

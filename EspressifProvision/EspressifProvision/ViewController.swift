@@ -50,6 +50,10 @@ class ViewController: UIViewController {
         if user == nil {
             user = pool?.currentUser()
         }
+        if let username = UserDefaults.standard.value(forKey: Constants.usernameKey) as? String {
+            User.shared.username = username
+        }
+
         refresh()
         tableView.tableFooterView = UIView()
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -74,18 +78,7 @@ class ViewController: UIViewController {
         backgroundLayer!.frame = view.frame
         view.layer.insertSublayer(backgroundLayer!, at: 0)
 
-        // view.backgroundColor = UIColor.black
-//        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.prominent)
-//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//        blurEffectView.frame = view.bounds
-//        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        view.insertSubview(blurEffectView, at: 0)
-
-//        titleView.layer.masksToBounds = false
-//        titleView.layer.shadowOffset = CGSize(width: 0, height: 1)
-//        titleView.layer.shadowRadius = 0.5
-//        titleView.layer.shadowColor = UIColor.gray.cgColor
-//        titleView.layer.shadowOpacity = 0.4
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshDeviceList), name: Notification.Name(Constants.newDeviceAdded), object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -94,32 +87,18 @@ class ViewController: UIViewController {
             showLoader(message: "Fetching Device List")
             refreshDeviceList()
         }
-        if checkDeviceAssociation {
-            checkDeviceAssociation = false
-            fetchDeviceAssociationStatus(3)
+        if User.shared.updateDeviceList {
+            refreshDeviceList()
         }
     }
 
     @objc func refreshDeviceList() {
+        User.shared.updateDeviceList = false
         NetworkManager.shared.getDeviceList { devices, _ in
             MBProgressHUD.hide(for: self.view, animated: true)
             self.refreshControl.endRefreshing()
             User.shared.associatedDevices = devices
             self.tableView.reloadData()
-        }
-    }
-
-    @objc func fetchDeviceAssociationStatus(_ count: Int) {
-        if let deviceid = self.deviceID, let requestid = self.requestID, count >= 0 {
-            NetworkManager.shared.deviceAssociationStatus(deviceID: deviceid, requestID: requestid) { status in
-                if status {
-                    self.refreshDeviceList()
-                } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        self.fetchDeviceAssociationStatus(count - 1)
-                    }
-                }
-            }
         }
     }
 
@@ -294,7 +273,7 @@ extension ViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let path = Bundle.main.path(forResource: "Example4", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "DeviceDetails", ofType: "json") {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                 User.shared.associatedDevices?[indexPath.section].devices = JSONParser.parseNodeData(data: data)

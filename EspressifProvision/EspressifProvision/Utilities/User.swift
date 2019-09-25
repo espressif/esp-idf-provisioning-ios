@@ -15,7 +15,8 @@ class User {
     var pool: AWSCognitoIdentityUserPool!
     var idToken: String?
     var associatedDevices: [Node]?
-    var username: String!
+    var username = ""
+    var updateDeviceList = false
 
     private init() {
         // setup service configuration
@@ -38,6 +39,21 @@ class User {
 
     func currentUser() -> AWSCognitoIdentityUser? {
         return pool.currentUser()
+    }
+
+    func fetchDeviceAssociationStatus(deviceID: String, requestID: String, count: Int) {
+        if count >= 0 {
+            NetworkManager.shared.deviceAssociationStatus(deviceID: deviceID, requestID: requestID) { status in
+                if status {
+                    NotificationCenter.default.post(name: Notification.Name(Constants.newDeviceAdded), object: nil)
+                    self.updateDeviceList = true
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                        self.fetchDeviceAssociationStatus(deviceID: deviceID, requestID: requestID, count: count - 1)
+                    }
+                }
+            }
+        }
     }
 
     func getAccessToken(completionHandler: @escaping (String?) -> Void) {

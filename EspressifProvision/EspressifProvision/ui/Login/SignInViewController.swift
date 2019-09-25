@@ -32,14 +32,11 @@ class SignInViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         password.text = nil
-        username.text = usernameText
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        username.text = ""
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
 
     override func viewDidLoad() {
@@ -50,12 +47,14 @@ class SignInViewController: UIViewController {
         password.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         // Looks for single or multiple taps.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.view.backgroundColor = .clear
+
+        navigationItem.backBarButtonItem?.title = ""
+        navigationItem.backBarButtonItem?.tintColor = UIColor(red: 234.0 / 255.0, green: 92.0 / 255.0, blue: 97.0 / 255.0, alpha: 1.0)
 
 //        topView.layer.masksToBounds = false
         topView.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -68,6 +67,8 @@ class SignInViewController: UIViewController {
         formView.layer.shadowRadius = 0.5
         formView.layer.shadowColor = UIColor.gray.cgColor
         formView.layer.shadowOpacity = 1.0
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
 
     override func viewDidLayoutSubviews() {
@@ -80,9 +81,12 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func signInPressed(_: AnyObject) {
+        dismissKeyboard()
         if username.text != nil, password.text != nil {
+            Utility.showLoader(message: "Signing in", view: view)
             let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: username.text!, password: password.text!)
             User.shared.username = username.text!
+            UserDefaults.standard.setValue(User.shared.username, forKey: Constants.usernameKey)
             passwordAuthenticationCompletion?.set(result: authDetails)
         } else {
             let alertController = UIAlertController(title: "Missing information",
@@ -106,6 +110,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     }
 
     public func didCompleteStepWithError(_ error: Error?) {
+        Utility.hideLoader(view: view)
         DispatchQueue.main.async {
             if let error = error as NSError? {
                 let alertController = UIAlertController(title: error.userInfo["__type"] as? String,

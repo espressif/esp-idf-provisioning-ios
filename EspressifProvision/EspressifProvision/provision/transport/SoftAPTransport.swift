@@ -78,4 +78,6 @@ struct SoftAPTransport: Transport {
     func SendConfigData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void) {
         SendHTTPData(path: path, data: data, completionHandler: completionHandler)
     }
+
+    func disconnect() {}
 }

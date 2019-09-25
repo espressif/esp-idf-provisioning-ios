@@ -56,8 +56,9 @@ extension SuccessViewController: DeviceAssociationProtocol {
             if let deviceSecret = deviceID {
                 let parameters = ["user_id": User.shared.userID, "device_id": deviceSecret, "secret_key": uuid, "operation": "add"]
                 NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, _ in
-                    self.deviceID = deviceID
-                    self.requestID = requestID
+                    if let requestid = requestID {
+                        User.shared.fetchDeviceAssociationStatus(deviceID: deviceSecret, requestID: requestid, count: 5)
+                    }
                 }
             }
         }

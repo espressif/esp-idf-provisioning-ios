@@ -39,14 +39,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="186" height="168"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view alpha="0.65000000000000002" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tVx-mM-T58">
-                                                    <rect key="frame" x="10" y="10" width="171" height="158"/>
+                                                <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tVx-mM-T58">
+                                                    <rect key="frame" x="10" y="10" width="166" height="148"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="light_bulb" translatesAutoresizingMaskIntoConstraints="NO" id="GeB-ZI-c19">
                                                             <rect key="frame" x="15" y="10" width="136" height="96.666666666666671"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJa-tb-4hh">
-                                                            <rect key="frame" x="62" y="115.66666666666667" width="42" height="22.333333333333329"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJa-tb-4hh">
+                                                            <rect key="frame" x="8" y="115.66666666666667" width="150" height="22.333333333333329"/>
                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -56,9 +56,11 @@
                                                     <constraints>
                                                         <constraint firstItem="yJa-tb-4hh" firstAttribute="centerX" secondItem="tVx-mM-T58" secondAttribute="centerX" id="75X-mQ-Ul7"/>
                                                         <constraint firstItem="GeB-ZI-c19" firstAttribute="top" secondItem="tVx-mM-T58" secondAttribute="top" constant="10" id="FTd-l7-RXU"/>
+                                                        <constraint firstAttribute="trailing" secondItem="yJa-tb-4hh" secondAttribute="trailing" constant="8" id="IK5-PB-RqI"/>
                                                         <constraint firstItem="GeB-ZI-c19" firstAttribute="leading" secondItem="tVx-mM-T58" secondAttribute="leading" constant="15" id="auR-kG-zJq"/>
                                                         <constraint firstAttribute="trailing" secondItem="GeB-ZI-c19" secondAttribute="trailing" constant="15" id="cG1-i2-HDU"/>
                                                         <constraint firstItem="yJa-tb-4hh" firstAttribute="top" secondItem="GeB-ZI-c19" secondAttribute="bottom" constant="9" id="ep1-LQ-Gja"/>
+                                                        <constraint firstItem="yJa-tb-4hh" firstAttribute="leading" secondItem="tVx-mM-T58" secondAttribute="leading" constant="8" id="sdd-Xe-3fj"/>
                                                         <constraint firstAttribute="bottom" secondItem="yJa-tb-4hh" secondAttribute="bottom" constant="10" id="wXE-qA-C4Z"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>

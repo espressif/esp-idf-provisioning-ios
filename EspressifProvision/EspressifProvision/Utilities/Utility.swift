@@ -12,7 +12,8 @@ import MBProgressHUD
 import UIKit
 
 class Utility {
-    static let deviceNamePrefix = Bundle.main.infoDictionary?["BLEDeviceNamePrefix"] as! String
+    static var deviceNamePrefix = UserDefaults.standard.value(forKey: Constants.prefixKey) as? String ?? (Bundle.main.infoDictionary?["BLEDeviceNamePrefix"] as? String ?? "PROV_")
+    static let allowPrefixFilter = Bundle.main.infoDictionary?["AllowFilteringByPrefix"] as? Bool ?? false
     static let baseUrl = Bundle.main.infoDictionary?["WifiBaseUrl"] as? String ?? "192.168.4.1:80"
 
     var deviceName = "ESP Device"
@@ -49,13 +50,17 @@ class Utility {
         }
     }
 
-    static func showLoader(message: String, view: UIView) {
-        let loader = MBProgressHUD.showAdded(to: view, animated: true)
-        loader.mode = MBProgressHUDMode.indeterminate
-        loader.label.text = message
+    class func showLoader(message: String, view: UIView) {
+        DispatchQueue.main.async {
+            let loader = MBProgressHUD.showAdded(to: view, animated: true)
+            loader.mode = MBProgressHUDMode.indeterminate
+            loader.label.text = message
+        }
     }
 
-    static func hideLoader(view: UIView) {
-        MBProgressHUD.hide(for: view, animated: true)
+    class func hideLoader(view: UIView) {
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: view, animated: true)
+        }
     }
 }

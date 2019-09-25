@@ -20,7 +20,6 @@ class NetworkManager {
         } else {
             User.shared.getAccessToken(completionHandler: { idToken in
                 if idToken != nil {
-                    User.shared.username = "nirvaanrocks@gmail.com"
                     User.shared.idToken = idToken
                     let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                     Alamofire.request(Constants.getUserId + Constants.CognitoIdentityUserPoolId + "?user_name=" + User.shared.username, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in

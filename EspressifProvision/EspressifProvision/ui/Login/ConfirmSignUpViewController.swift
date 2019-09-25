@@ -23,13 +23,19 @@ class ConfirmSignUpViewController: UIViewController {
     var user: AWSCognitoIdentityUser?
 
     @IBOutlet var sentToLabel: UILabel!
-    @IBOutlet var username: UITextField!
     @IBOutlet var code: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        username.text = user!.username
+        sentToLabel.text = user!.username
         sentToLabel.text = "Code sent to: \(sentTo!)"
+        code.setBottomBorder()
+        code.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+        let colors = Colors()
+        view.backgroundColor = UIColor.clear
+        let backgroundLayer = colors.signUPLayer
+        backgroundLayer!.frame = view.frame
+        view.layer.insertSublayer(backgroundLayer!, at: 0)
     }
 
     // MARK: IBActions
@@ -46,7 +52,11 @@ class ConfirmSignUpViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
             return
         }
+        Utility.showLoader(message: "", view: view)
         user?.confirmSignUp(code.text!, forceAliasCreation: true).continueWith { [weak self] (task: AWSTask) -> AnyObject? in
+            if let viewContainer = self?.view {
+                Utility.hideLoader(view: viewContainer)
+            }
             guard let strongSelf = self else { return nil }
             DispatchQueue.main.async {
                 if let error = task.error as NSError? {

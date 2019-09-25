@@ -43,8 +43,11 @@ class SignUpViewController: UIViewController {
         phone.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         email.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
 
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.title = ""
+        navigationItem.backBarButtonItem?.tintColor = UIColor(red: 234.0 / 255.0, green: 92.0 / 255.0, blue: 97.0 / 255.0, alpha: 1.0)
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
         let colors = Colors()
         view.backgroundColor = UIColor.clear
         let backgroundLayer = colors.signUPLayer
@@ -107,6 +110,7 @@ class SignUpViewController: UIViewController {
     }
 
     @IBAction func signUp(_ sender: AnyObject) {
+        dismissKeyboard()
         guard let userNameValue = self.username.text, !userNameValue.isEmpty,
             let passwordValue = self.password.text, !passwordValue.isEmpty else {
             let alertController = UIAlertController(title: "Missing Required Fields",
@@ -118,6 +122,7 @@ class SignUpViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
             return
         }
+        Utility.showLoader(message: "", view: view)
 
         var attributes = [AWSCognitoIdentityUserAttributeType]()
 
@@ -138,6 +143,7 @@ class SignUpViewController: UIViewController {
         // sign up the user
         pool?.signUp(userNameValue, password: passwordValue, userAttributes: attributes, validationData: nil).continueWith { [weak self] (task) -> Any? in
             guard let strongSelf = self else { return nil }
+            Utility.hideLoader(view: strongSelf.view)
             DispatchQueue.main.async {
                 if let error = task.error as NSError? {
                     let alertController = UIAlertController(title: error.userInfo["__type"] as? String,

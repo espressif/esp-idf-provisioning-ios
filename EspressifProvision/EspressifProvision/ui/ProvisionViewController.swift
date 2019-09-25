@@ -39,16 +39,30 @@ class ProvisionViewController: UIViewController {
     var versionInfo: String?
     var session: Session?
     var capabilities: [String]?
+    var alertTextField: UITextField?
+    var showPasswordImageView: UIImageView!
+    @IBOutlet var headerView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         // Do any additional setup after loading the view, typically from a nib.
+        showPasswordImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(showPassword))
+        tap.numberOfTapsRequired = 1
+        showPasswordImageView.isUserInteractionEnabled = true
+        showPasswordImageView.addGestureRecognizer(tap)
+
+        configurePassphraseTextField()
+
         passphraseTextfield.addTarget(self, action: #selector(passphraseEntered), for: .editingDidEndOnExit)
         ssidTextfield.addTarget(self, action: #selector(ssidEntered), for: .editingDidEndOnExit)
         provisionButton.isUserInteractionEnabled = false
         if let bleTransport = transport as? BLETransport {
             print("Inside PVC", bleTransport.currentPeripheral!)
         }
+
         tableView.tableFooterView = UIView()
 
         navigationItem.backBarButtonItem?.title = ""
@@ -79,8 +93,12 @@ class ProvisionViewController: UIViewController {
         provisionButton.isUserInteractionEnabled = !isBusy
     }
 
+    @IBAction func rescanWiFiList(_: Any) {
+        scanDeviceForWiFiList()
+    }
+
     private func provisionDevice(ssid: String, passphrase: String) {
-        showLoader(message: "Authenticating")
+        showLoader(message: "Device connecting to Wi-Fi")
 
         let baseUrl = provisionConfig[Provision.CONFIG_BASE_URL_KEY]
         let transportVersion = provisionConfig[Provision.CONFIG_TRANSPORT_KEY]
@@ -102,7 +120,6 @@ class ProvisionViewController: UIViewController {
     }
 
     private func initialiseSession() {
-        showLoader(message: "Connecting Device")
         let securityVersion = provisionConfig[Provision.CONFIG_SECURITY_KEY]
 
         if securityVersion == Provision.CONFIG_SECURITY_SECURITY1 {
@@ -111,13 +128,13 @@ class ProvisionViewController: UIViewController {
                 security = Security1(proofOfPossession: provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]!)
                 initSession()
             } else {
-                let input = UIAlertController(title: "Proof of possession", message: nil, preferredStyle: .alert)
+                let input = UIAlertController(title: "Proof of Possession", message: nil, preferredStyle: .alert)
 
                 input.addTextField { textField in
                     textField.text = "abcd1234"
                 }
                 input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
-//                    self.transport?.disconnect()
+                    self.transport?.disconnect()
                     self.navigationController?.popViewController(animated: true)
                 }))
                 input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
@@ -159,7 +176,7 @@ class ProvisionViewController: UIViewController {
     func scanDeviceForWiFiList() {
         if session!.isEstablished {
             DispatchQueue.main.async {
-                self.showLoader(message: "Scanning for Wifi")
+                self.showLoader(message: "Scanning for Wi-Fi")
                 let scanWifiManager: ScanWifiList = ScanWifiList(session: self.session!)
                 scanWifiManager.delegate = self
                 scanWifiManager.startWifiScan()
@@ -191,9 +208,14 @@ class ProvisionViewController: UIViewController {
     }
 
     func getDeviceVersionInfo() {
+        showLoader(message: "Connecting Device")
         transport?.SendConfigData(path: (transport?.utility.versionPath)!, data: Data("ESP".utf8), completionHandler: { response, error in
             guard error == nil else {
                 print("Error reading device version info")
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                }
+                self.showConnectionFailure()
                 return
             }
             do {
@@ -258,7 +280,6 @@ class ProvisionViewController: UIViewController {
             DispatchQueue.main.async {
                 self.showBusy(isBusy: false)
                 let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as? SuccessViewController
-                successVC?.session = self.session
                 if let successVC = successVC {
                     if error != nil {
                         successVC.statusText = "Error in getting wifi state : \(error.debugDescription)"
@@ -267,7 +288,13 @@ class ProvisionViewController: UIViewController {
                     } else if wifiState == Espressif_WifiStationState.disconnected {
                         successVC.statusText = "Please check the device indicators for Provisioning status."
                     } else {
-                        successVC.statusText = "Device provisioning failed.\nReason : \(failReason).\nPlease try again"
+                        if failReason == Espressif_WifiConnectFailedReason.authError {
+                            successVC.statusText = "Device provisioning failed.\nReason : Wi-Fi Authentication failed.\nPlease reset device to factory settings and retry."
+                        } else if failReason == Espressif_WifiConnectFailedReason.networkNotFound {
+                            successVC.statusText = "Device provisioning failed.\nReason : Network not found.\nPlease reset device to factory settings and retry."
+                        } else {
+                            successVC.statusText = "Device provisioning failed.\nReason : \(failReason).\nPlease reset device to factory settings and retry."
+                        }
                     }
                     self.navigationController?.present(successVC, animated: true, completion: nil)
                     self.provisionButton.isUserInteractionEnabled = true
@@ -279,7 +306,7 @@ class ProvisionViewController: UIViewController {
     func showError(errorMessage: String) {
         let alertMessage = errorMessage
         let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
+        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
 
@@ -288,6 +315,8 @@ class ProvisionViewController: UIViewController {
             let loader = MBProgressHUD.showAdded(to: self.view, animated: true)
             loader.mode = MBProgressHUDMode.indeterminate
             loader.label.text = message
+            loader.backgroundView.blurEffectStyle = .dark
+            loader.bezelView.backgroundColor = UIColor.white
         }
     }
 
@@ -316,23 +345,25 @@ class ProvisionViewController: UIViewController {
             self.ssidTextfield.isHidden = false
             self.passphraseTextfield.isHidden = false
             self.provisionButton.isHidden = false
+            self.headerView.isHidden = true
         }
     }
 
-    @IBAction func joinOtherNetwork(_: Any) {
+    private func joinOtherNetwork() {
         let input = UIAlertController(title: "", message: nil, preferredStyle: .alert)
 
         input.addTextField { textField in
-            textField.placeholder = "SSID"
+            textField.placeholder = "Network Name"
+            self.addHeightConstraint(textField: textField)
         }
 
         input.addTextField { textField in
-            textField.placeholder = "Passphrase"
-            textField.isSecureTextEntry = true
+            self.configurePasswordTextfield(textField: textField)
+            self.addHeightConstraint(textField: textField)
         }
         input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
         }))
-        input.addAction(UIAlertAction(title: "Provision", style: .default, handler: { [weak input] _ in
+        input.addAction(UIAlertAction(title: "Connect", style: .default, handler: { [weak input] _ in
             let ssidTextField = input?.textFields![0]
             let passphrase = input?.textFields![1]
 
@@ -348,8 +379,55 @@ class ProvisionViewController: UIViewController {
     func showStatusScreen() {
         DispatchQueue.main.async {
             let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as! SuccessViewController
-            successVC.statusText = "Error establishing session check if device configuration is correct!"
+            successVC.statusText = "Error establishing session.\n Check if Proof of Possession(POP) is correct!"
             self.navigationController?.present(successVC, animated: true, completion: nil)
+        }
+    }
+
+    @objc func showPassword() {
+        if let secureEntry = self.alertTextField?.isSecureTextEntry {
+            alertTextField?.togglePasswordVisibility()
+            if secureEntry {
+                showPasswordImageView.image = UIImage(named: "hide_password")
+            } else {
+                showPasswordImageView.image = UIImage(named: "show_password")
+            }
+        }
+    }
+
+    private func addHeightConstraint(textField: UITextField) {
+        let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
+        textField.addConstraint(heightConstraint)
+        textField.font = UIFont(name: textField.font!.fontName, size: 18)
+    }
+
+    private func configurePasswordTextfield(textField: UITextField) {
+        alertTextField = textField
+        textField.placeholder = "Password"
+        textField.isSecureTextEntry = true
+        showPasswordImageView.image = UIImage(named: "show_password")
+        textField.rightView = showPasswordImageView
+        textField.rightViewMode = .always
+    }
+
+    private func configurePassphraseTextField() {
+        alertTextField = passphraseTextfield
+        passphraseTextfield.placeholder = "Password"
+        passphraseTextfield.isSecureTextEntry = true
+        showPasswordImageView.image = UIImage(named: "show_password")
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: showPasswordImageView.frame.width + 10, height: showPasswordImageView.frame.height))
+        rightView.addSubview(showPasswordImageView)
+        passphraseTextfield.rightView = rightView
+        passphraseTextfield.rightViewMode = .always
+    }
+
+    private func showConnectionFailure() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Failure", message: "Connection to device failed.\n Please make sure you are connected to the Wi-Fi network of device.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { _ in
+                self.navigationController?.popViewController(animated: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
 }
@@ -372,6 +450,8 @@ extension ProvisionViewController: BLETransportDelegate {
     func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {
         showError(errorMessage: "Peripheral device disconnected")
     }
+
+    func bluetoothUnavailable() {}
 }
 
 extension ProvisionViewController: ScanWifiListProtocol {
@@ -383,6 +463,7 @@ extension ProvisionViewController: ScanWifiListProtocol {
                 self.tableView.isHidden = false
                 self.ssidTextfield.isHidden = true
                 self.passphraseTextfield.isHidden = true
+                self.headerView.isHidden = false
                 self.tableView.reloadData()
             }
         } else {
@@ -398,33 +479,36 @@ extension ProvisionViewController: ScanWifiListProtocol {
 }
 
 extension ProvisionViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-        let ssid = ssidList[indexPath.row]
-
-        if wifiDetailList[ssid]?.auth != Espressif_WifiAuthMode.open {
-            let input = UIAlertController(title: ssid, message: nil, preferredStyle: .alert)
-
-            input.addTextField { textField in
-                textField.placeholder = "Password"
-                textField.isSecureTextEntry = true
-            }
-            input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
-
-            }))
-            input.addAction(UIAlertAction(title: "Provision", style: .default, handler: { [weak input] _ in
-                let textField = input?.textFields![0]
-                guard let passphrase = textField?.text else {
-                    return
-                }
-                if passphrase.count > 0 {
-                    self.provisionDevice(ssid: ssid, passphrase: passphrase)
-                }
-            }))
-            present(input, animated: true, completion: nil)
+        if indexPath.row >= ssidList.count {
+            joinOtherNetwork()
         } else {
-            provisionDevice(ssid: ssid, passphrase: "")
+            let ssid = ssidList[indexPath.row]
+
+            if wifiDetailList[ssid]?.auth != Espressif_WifiAuthMode.open {
+                let input = UIAlertController(title: ssid, message: nil, preferredStyle: .alert)
+
+                input.addTextField { textField in
+                    self.configurePasswordTextfield(textField: textField)
+                    self.addHeightConstraint(textField: textField)
+                }
+                input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+
+                }))
+                input.addAction(UIAlertAction(title: "Provision", style: .default, handler: { [weak input] _ in
+                    let textField = input?.textFields![0]
+                    guard let passphrase = textField?.text else {
+                        return
+                    }
+                    if passphrase.count > 0 {
+                        self.provisionDevice(ssid: ssid, passphrase: passphrase)
+                    }
+                }))
+                present(input, animated: true, completion: nil)
+            } else {
+                provisionDevice(ssid: ssid, passphrase: "")
+            }
         }
     }
 
@@ -435,22 +519,51 @@ extension ProvisionViewController: UITableViewDelegate {
 
 extension ProvisionViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return ssidList.count
+        return ssidList.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "wifiListCell", for: indexPath) as! WifiListTableViewCell
-        cell.ssidLabel.text = ssidList[indexPath.row]
-        setWifiIconImageFor(cell: cell, ssid: ssidList[indexPath.row])
+        if indexPath.row >= ssidList.count {
+            cell.ssidLabel.text = "Join Other Network"
+            cell.signalImageView.image = UIImage(named: "add_icon")
+        } else {
+            cell.ssidLabel.text = ssidList[indexPath.row]
+            setWifiIconImageFor(cell: cell, ssid: ssidList[indexPath.row])
+        }
         return cell
     }
 }
 
-// extension ProvisionViewController: BLEStatusProtocol {
-//    func peripheralDisconnected() {
-//        MBProgressHUD.hide(for: view, animated: true)
-//        if !(session?.isEstablished ?? false) {
-//            showStatusScreen()
-//        }
-//    }
-// }
+extension ProvisionViewController: BLEStatusProtocol {
+    func peripheralDisconnected() {
+        MBProgressHUD.hide(for: view, animated: true)
+        if !(session?.isEstablished ?? false) {
+            showStatusScreen()
+        }
+    }
+}
+
+extension UITextField {
+    func togglePasswordVisibility() {
+        isSecureTextEntry = !isSecureTextEntry
+
+        if let existingText = text, isSecureTextEntry {
+            /* When toggling to secure text, all text will be purged if the user
+             continues typing unless we intervene. This is prevented by first
+             deleting the existing text and then recovering the original text. */
+            deleteBackward()
+
+            if let textRange = textRange(from: beginningOfDocument, to: endOfDocument) {
+                replace(textRange, withText: existingText)
+            }
+        }
+
+        /* Reset the selected text range since the cursor can end up in the wrong
+         position after a toggle because the text might vary in width */
+        if let existingSelectedTextRange = selectedTextRange {
+            selectedTextRange = nil
+            selectedTextRange = existingSelectedTextRange
+        }
+    }
+}
