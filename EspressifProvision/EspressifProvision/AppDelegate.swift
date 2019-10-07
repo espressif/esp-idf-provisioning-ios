@@ -16,6 +16,7 @@
 //  EspressifProvision
 //
 
+import Alamofire
 import AWSCognitoIdentityProvider
 import AWSMobileClient
 import UIKit
@@ -40,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let BarButtonItemAppearance = UIBarButtonItem.appearance()
         BarButtonItemAppearance.setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
         BarButtonItemAppearance.tintColor = UIColor(red: 234.0 / 255.0, green: 92.0 / 255.0, blue: 97.0 / 255.0, alpha: 1.0)
+
         return true
     }
 

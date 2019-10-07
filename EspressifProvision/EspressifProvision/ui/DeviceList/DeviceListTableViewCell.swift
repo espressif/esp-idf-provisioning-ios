@@ -36,7 +36,7 @@ class DeviceListTableViewCell: UITableViewCell {
 //        layer.shadowPath = shadowPath.cgPath
     }
 
-    @IBAction func toggle(_ sender: UISwitch) {
-        NetworkManager.shared.toggleDevice(deviceID: node?.device_id ?? "", output: sender.isOn)
+    @IBAction func toggle(_: UISwitch) {
+//        NetworkManager.shared.toggleDevice(deviceID: node?.node_id ?? "", output: sender.isOn)
     }
 }

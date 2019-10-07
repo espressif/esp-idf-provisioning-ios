@@ -23,24 +23,24 @@
                         <rect key="frame" x="15" y="2" width="290" height="51.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDY-dV-8Ts">
-                                <rect key="frame" x="8" y="15.5" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="8" y="14" width="44.5" height="23.5"/>
+                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ArT-Ou-Q5h">
-                                <rect key="frame" x="240" y="14.5" width="42" height="22.5"/>
-                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hWl-WX-L6w">
+                                <rect key="frame" x="257" y="11" width="25" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ArT-Ou-Q5h" secondAttribute="trailing" constant="8" id="CgO-SW-8n0"/>
-                            <constraint firstItem="ArT-Ou-Q5h" firstAttribute="centerY" secondItem="uIA-4d-qmP" secondAttribute="centerY" id="bla-fZ-BPc"/>
+                            <constraint firstItem="hWl-WX-L6w" firstAttribute="centerY" secondItem="uIA-4d-qmP" secondAttribute="centerY" id="2Ed-Fp-tME"/>
                             <constraint firstItem="MDY-dV-8Ts" firstAttribute="centerY" secondItem="uIA-4d-qmP" secondAttribute="centerY" id="dpS-vK-Ctb"/>
                             <constraint firstItem="MDY-dV-8Ts" firstAttribute="leading" secondItem="uIA-4d-qmP" secondAttribute="leading" constant="8" id="o8u-TH-nzi"/>
+                            <constraint firstAttribute="trailing" secondItem="hWl-WX-L6w" secondAttribute="trailing" constant="8" id="quk-Qk-d7b"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -55,7 +55,7 @@
             <connections>
                 <outlet property="backView" destination="uIA-4d-qmP" id="Vta-W1-3w0"/>
                 <outlet property="controlName" destination="MDY-dV-8Ts" id="7JS-rS-ZP9"/>
-                <outlet property="controlValue" destination="ArT-Ou-Q5h" id="3oR-EJ-dBi"/>
+                <outlet property="controlValueTextField" destination="hWl-WX-L6w" id="FCi-Yh-Bwh"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="83.035714285714278"/>
         </tableViewCell>

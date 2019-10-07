@@ -22,7 +22,6 @@ import UIKit
 class SuccessViewController: UIViewController {
     var statusText: String?
     var session: Session!
-    let uuid = UUID().uuidString
     var deviceID: String?
     var requestID: String?
 
@@ -33,10 +32,15 @@ class SuccessViewController: UIViewController {
         if let statusText = statusText {
             successLabel.text = statusText
         }
-        let deviceAssociation = DeviceAssociation(session: session, secretId: uuid)
-        deviceAssociation.associateDeviceWithUser()
-        deviceAssociation.delegate = self
+
+        User.shared.associateNodeWithUser(session: session)
         // Do any additional setup after loading the view, typically from a nib.
+
+        let colors = Colors()
+        view.backgroundColor = UIColor.clear
+        let backgroundLayer = colors.successLayer
+        backgroundLayer!.frame = view.frame
+        view.layer.insertSublayer(backgroundLayer!, at: 0)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
@@ -45,21 +49,6 @@ class SuccessViewController: UIViewController {
                 destinationVC.checkDeviceAssociation = true
                 destinationVC.deviceID = deviceID
                 destinationVC.requestID = requestID
-            }
-        }
-    }
-}
-
-extension SuccessViewController: DeviceAssociationProtocol {
-    func deviceAssociationFinishedWith(success: Bool, deviceID: String?) {
-        if success {
-            if let deviceSecret = deviceID {
-                let parameters = ["user_id": User.shared.userID, "device_id": deviceSecret, "secret_key": uuid, "operation": "add"]
-                NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, _ in
-                    if let requestid = requestID {
-                        User.shared.fetchDeviceAssociationStatus(deviceID: deviceSecret, requestID: requestid, count: 5)
-                    }
-                }
             }
         }
     }

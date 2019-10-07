@@ -11,6 +11,10 @@ import UIKit
 class SwitchTableViewCell: UITableViewCell {
     @IBOutlet var backView: UIView!
     @IBOutlet var controlName: UILabel!
+    @IBOutlet var toggleSwitch: UISwitch!
+
+    var attributeKey: String!
+    var device: Device!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,5 +38,9 @@ class SwitchTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    @IBAction func switchStateChanged(_ sender: UISwitch) {
+        NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [attributeKey: sender.isOn])
     }
 }

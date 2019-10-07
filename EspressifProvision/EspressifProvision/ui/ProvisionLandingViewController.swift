@@ -34,6 +34,11 @@ class ProvisionLandingViewController: UIViewController {
             provisionInstructions.attributedText = attributedString(from: text + " \(wifiPrefix)",
                                                                     nonBoldRange: nonBoldRange)
         }
+        let colors = Colors()
+        view.backgroundColor = UIColor.clear
+        let backgroundLayer = colors.backGroundLayer
+        backgroundLayer!.frame = view.frame
+        view.layer.insertSublayer(backgroundLayer!, at: 0)
     }
 
     @IBAction func connectClicked(_: Any) {

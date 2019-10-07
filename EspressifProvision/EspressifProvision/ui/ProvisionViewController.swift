@@ -72,13 +72,19 @@ class ProvisionViewController: UIViewController {
             transport = SoftAPTransport(baseUrl: Utility.baseUrl)
         }
         getDeviceVersionInfo()
+
+        let colors = Colors()
+        view.backgroundColor = UIColor.clear
+        let backgroundLayer = colors.backGroundLayer
+        backgroundLayer!.frame = view.frame
+        view.layer.insertSublayer(backgroundLayer!, at: 0)
     }
 
     private func showBusy(isBusy: Bool) {
         if isBusy {
-            grayView = UIView(frame: UIScreen.main.bounds)
-            grayView?.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
-            view.addSubview(grayView!)
+//            grayView = UIView(frame: UIScreen.main.bounds)
+//            grayView?.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+//            view.addSubview(grayView!)
 
             activityView = UIActivityIndicatorView(style: .gray)
             activityView?.center = view.center
@@ -86,7 +92,7 @@ class ProvisionViewController: UIViewController {
 
             view.addSubview(activityView!)
         } else {
-            grayView?.removeFromSuperview()
+//            grayView?.removeFromSuperview()
             activityView?.removeFromSuperview()
         }
 
@@ -280,6 +286,7 @@ class ProvisionViewController: UIViewController {
             DispatchQueue.main.async {
                 self.showBusy(isBusy: false)
                 let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as? SuccessViewController
+                successVC?.session = self.session
                 if let successVC = successVC {
                     if error != nil {
                         successVC.statusText = "Error in getting wifi state : \(error.debugDescription)"
@@ -458,7 +465,11 @@ extension ProvisionViewController: ScanWifiListProtocol {
     func wifiScanFinished(wifiList: [String: Espressif_WiFiScanResult]?, error: Error?) {
         if wifiList?.count != 0, wifiList != nil {
             wifiDetailList = wifiList!
-            ssidList = Array(wifiList!.keys)
+            let sortedList = (wifiList?.sorted(by: { $0.value.rssi > $1.value.rssi }))!
+            ssidList.removeAll()
+            for item in sortedList {
+                ssidList.append(item.key)
+            }
             DispatchQueue.main.async {
                 self.tableView.isHidden = false
                 self.ssidTextfield.isHidden = true

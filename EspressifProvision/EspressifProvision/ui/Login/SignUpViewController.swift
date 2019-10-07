@@ -24,23 +24,19 @@ class SignUpViewController: UIViewController {
 
     @IBOutlet var signUpButton: UIButton!
     @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var username: UITextField!
     @IBOutlet var password: UITextField!
+    @IBOutlet var confirmPassword: UITextField!
 
-    @IBOutlet var phone: UITextField!
     @IBOutlet var email: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
-        username.setBottomBorder()
         password.setBottomBorder()
-        phone.setBottomBorder()
+        confirmPassword.setBottomBorder()
         email.setBottomBorder()
-        username.layer.borderColor = UIColor.lightGray.cgColor
-        username.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
+        confirmPassword.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         password.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
-        phone.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
         email.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
 
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -71,7 +67,7 @@ class SignUpViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if let signUpConfirmationViewController = segue.destination as? ConfirmSignUpViewController {
             signUpConfirmationViewController.sentTo = sentTo
-            signUpConfirmationViewController.user = pool?.getUser(username.text!)
+            signUpConfirmationViewController.user = pool?.getUser(email.text!)
         }
     }
 
@@ -111,10 +107,21 @@ class SignUpViewController: UIViewController {
 
     @IBAction func signUp(_ sender: AnyObject) {
         dismissKeyboard()
-        guard let userNameValue = self.username.text, !userNameValue.isEmpty,
+        guard let userNameValue = self.email.text, !userNameValue.isEmpty,
             let passwordValue = self.password.text, !passwordValue.isEmpty else {
             let alertController = UIAlertController(title: "Missing Required Fields",
                                                     message: "Username / Password are required for registration.",
+                                                    preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(okAction)
+
+            present(alertController, animated: true, completion: nil)
+            return
+        }
+
+        if let confirmPasswordValue = confirmPassword.text, confirmPasswordValue != passwordValue {
+            let alertController = UIAlertController(title: "Mismatch",
+                                                    message: "Re-entered password do not match.",
                                                     preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
             alertController.addAction(okAction)
@@ -126,12 +133,12 @@ class SignUpViewController: UIViewController {
 
         var attributes = [AWSCognitoIdentityUserAttributeType]()
 
-        if let phoneValue = self.phone.text, !phoneValue.isEmpty {
-            let phone = AWSCognitoIdentityUserAttributeType()
-            phone?.name = "phone_number"
-            phone?.value = phoneValue
-            attributes.append(phone!)
-        }
+//        if let phoneValue = self.phone.text, !phoneValue.isEmpty {
+//            let phone = AWSCognitoIdentityUserAttributeType()
+//            phone?.name = "phone_number"
+//            phone?.value = phoneValue
+//            attributes.append(phone!)
+//        }
 
         if let emailValue = self.email.text, !emailValue.isEmpty {
             let email = AWSCognitoIdentityUserAttributeType()

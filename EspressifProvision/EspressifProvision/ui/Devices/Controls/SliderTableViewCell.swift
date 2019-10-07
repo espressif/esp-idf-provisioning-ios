@@ -6,14 +6,18 @@
 //  Copyright © 2019 Espressif. All rights reserved.
 //
 
+import MBProgressHUD
 import UIKit
 
 class SliderTableViewCell: UITableViewCell {
-    @IBOutlet var minLabel: UILabel!
-    @IBOutlet var maxLabel: UILabel!
     @IBOutlet var sliderValue: UILabel!
-    @IBOutlet var slider: UISlider!
+    @IBOutlet var slider: BrightnessSlider!
     @IBOutlet var backView: UIView!
+    @IBOutlet var title: UILabel!
+
+    var attributeKey: String!
+    var device: Device!
+    var dataType: String!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +33,7 @@ class SliderTableViewCell: UITableViewCell {
         layer.shadowRadius = 2
         layer.shadowColor = UIColor.black.cgColor
         layer.masksToBounds = false
+//        slider.setMinimumTrackImage(UIImage(named: "min_track_image"), for: .normal)
         // Initialization code
     }
 
@@ -36,5 +41,22 @@ class SliderTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
+        if dataType.lowercased() == "int" {
+            sliderValue.text = attributeKey + ": \(Int(slider.value))"
+            NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [attributeKey: Int(sender.value)])
+        } else {
+            sliderValue.text = attributeKey + ": \(slider.value)"
+            NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [attributeKey: sender.value])
+        }
+        let loader = MBProgressHUD.showAdded(to: window!, animated: true)
+        loader.mode = MBProgressHUDMode.customView
+        loader.label.text = sliderValue.text
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30.0, height: 30.0))
+        imageView.image = UIImage(named: "brightness")
+        loader.customView = imageView
+        loader.hide(animated: true, afterDelay: 1.0)
     }
 }

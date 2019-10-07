@@ -10,7 +10,7 @@ import Foundation
 
 struct Node {
     var name: String?
-    var device_id: String?
+    var node_id: String?
     var type: String?
     var devices: [Device]?
 }

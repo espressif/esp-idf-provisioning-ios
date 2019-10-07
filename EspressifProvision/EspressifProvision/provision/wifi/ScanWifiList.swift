@@ -101,7 +101,7 @@ class ScanWifiList {
         do {
             var lastFetch = false
             var fetchCount: UInt32 = 4
-            if startIndex + 4 > count {
+            if startIndex + 4 >= count {
                 fetchCount = count - startIndex
                 lastFetch = true
             }

@@ -17,6 +17,7 @@ class Colors {
     var devicesBgLayer: CAGradientLayer!
     var controlLayer: CAGradientLayer!
     var signUPLayer: CAGradientLayer!
+    var successLayer: CAGradientLayer!
 
     init() {
         let colorTop = UIColor(red: 243.0 / 255.0, green: 104.0 / 255.0, blue: 101.0 / 255.0, alpha: 1.0).cgColor
@@ -42,6 +43,9 @@ class Colors {
         let signUpLayerTop = UIColor(red: 245.0 / 255.0, green: 181.0 / 255.0, blue: 54.0 / 255.0, alpha: 1.0).cgColor
         let signUpLayerBottom = UIColor(red: 244.0 / 255.0, green: 106.0 / 255.0, blue: 13.0 / 255.0, alpha: 1.0).cgColor
 
+        let sucessLayerTop = UIColor(red: 189.0 / 255.0, green: 233.0 / 255.0, blue: 112.0 / 255.0, alpha: 1.0).cgColor
+        let sucessLayerBottom = UIColor(red: 42.0 / 255.0, green: 124.0 / 255.0, blue: 50.0 / 255.0, alpha: 1.0).cgColor
+
         hvl = CAGradientLayer()
         hvl.colors = [hvcolorTop, hvcolorBottom]
         hvl.locations = [0.0, 1.0]
@@ -63,5 +67,8 @@ class Colors {
         signUPLayer = CAGradientLayer()
         signUPLayer.colors = [signUpLayerTop, signUpLayerBottom]
         signUPLayer.locations = [0.0, 1.0]
+        successLayer = CAGradientLayer()
+        successLayer.colors = [sucessLayerTop, sucessLayerBottom]
+        successLayer.locations = [0.0, 1.0]
     }
 }

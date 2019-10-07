@@ -246,7 +246,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "deviceListCell", for: indexPath) as! DeviceListTableViewCell
         cell.deviceNameLabel.text = User.shared.associatedDevices![indexPath.section].name
-        cell.node = User.shared.associatedDevices![indexPath.section]
+//        cell.node = User.shared.associatedDevices![indexPath.section]
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.extraLight)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = cell.backView.bounds
@@ -271,20 +271,20 @@ extension ViewController: UITableViewDelegate {
         return headerView
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        if let path = Bundle.main.path(forResource: "DeviceDetails", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                User.shared.associatedDevices?[indexPath.section].devices = JSONParser.parseNodeData(data: data)
-                let storyboard = UIStoryboard(name: "DeviceDetail", bundle: nil)
-                let ivc = storyboard.instantiateViewController(withIdentifier: "devicesVC") as! DevicesViewController
-                ivc.currentNode = User.shared.associatedDevices?[indexPath.section]
-                navigationController?.pushViewController(ivc, animated: true)
-
-            } catch {
-                // handle error
-            }
-        }
+    func tableView(_: UITableView, didSelectRowAt _: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        if let path = Bundle.main.path(forResource: "DeviceDetails", ofType: "json") {
+//            do {
+//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                User.shared.associatedDevices?[indexPath.section].devices = JSONParser.parseNodeData(data: data)
+//                let storyboard = UIStoryboard(name: "DeviceDetail", bundle: nil)
+//                let ivc = storyboard.instantiateViewController(withIdentifier: "devicesVC") as! DevicesViewController
+//                ivc.currentNode = User.shared.associatedDevices?[indexPath.section]
+//                navigationController?.pushViewController(ivc, animated: true)
+//
+//            } catch {
+//                // handle error
+//            }
+//        }
     }
 }

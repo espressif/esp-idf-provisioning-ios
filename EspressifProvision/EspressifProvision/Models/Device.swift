@@ -13,6 +13,7 @@ import Foundation
 struct Device {
     var name: String?
     var type: String?
+    var node_id: String?
     var staticParams: [StaticAttribute]?
     var dynamicParams: [DynamicAttribute]?
 }

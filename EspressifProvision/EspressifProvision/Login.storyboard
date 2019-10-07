@@ -68,7 +68,7 @@
                                         <rect key="frame" x="30" y="97" width="235" height="30"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" smartInsertDeleteType="no"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartInsertDeleteType="no"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZiU-8u-bIf">
                                         <rect key="frame" x="30" y="204.5" width="235" height="30"/>
@@ -266,8 +266,8 @@
                                     <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOa-yP-jW7">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r03-4k-Je5">
-                                                <rect key="frame" x="25" y="50" width="84.5" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r03-4k-Je5">
+                                                <rect key="frame" x="25" y="50" width="48.5" height="17"/>
                                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
                                                 <color key="textColor" red="0.97254901960784312" green="0.42745098039215684" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
@@ -283,7 +283,7 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="TIU-z3-KTh"/>
@@ -291,8 +291,8 @@
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjh-ky-u5E">
-                                                <rect key="frame" x="25" y="142" width="48.5" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjh-ky-u5E">
+                                                <rect key="frame" x="25" y="142" width="84.5" height="18"/>
                                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
                                                 <color key="textColor" red="0.97131284870000001" green="0.42903222229999999" blue="0.41281165399999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
@@ -305,15 +305,15 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTs-Nh-5t2">
-                                                <rect key="frame" x="25" y="235" width="54" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TTs-Nh-5t2">
+                                                <rect key="frame" x="25" y="235" width="161.5" height="18"/>
                                                 <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
                                                 <color key="textColor" red="0.97131284870000001" green="0.42903222229999999" blue="0.41281165399999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone with country code i.e. +155555555" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z6Z-hP-Xgi">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z6Z-hP-Xgi">
                                                 <rect key="frame" x="25" y="268" width="325" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -321,29 +321,13 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES" textContentType="password"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="hgr-KH-cLt" id="NFh-6E-oWF"/>
                                                 </connections>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgm-Nv-C0G">
-                                                <rect key="frame" x="25" y="328" width="85" height="18"/>
-                                                <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="17"/>
-                                                <color key="textColor" red="0.97131284870000001" green="0.42903222229999999" blue="0.41281165399999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ryV-Vd-bZg">
-                                                <rect key="frame" x="25" y="361" width="325" height="30"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="X3q-2E-fqe"/>
-                                                </constraints>
-                                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="19"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" secureTextEntry="YES"/>
-                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VgW-ql-43i">
-                                                <rect key="frame" x="70" y="441" width="235" height="50"/>
+                                                <rect key="frame" x="70" y="348" width="235" height="50"/>
                                                 <color key="backgroundColor" red="0.97254901960784312" green="0.42903222229999999" blue="0.41281165399999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="EoD-kn-ufx"/>
@@ -365,28 +349,23 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Z6Z-hP-Xgi" firstAttribute="top" secondItem="TTs-Nh-5t2" secondAttribute="bottom" constant="15" id="6tE-2h-DmU"/>
-                                            <constraint firstItem="sgm-Nv-C0G" firstAttribute="leading" secondItem="dOa-yP-jW7" secondAttribute="leading" constant="25" id="7Jc-LD-BxK"/>
                                             <constraint firstItem="NQ2-Ug-LfW" firstAttribute="top" secondItem="jjh-ky-u5E" secondAttribute="bottom" constant="15" id="9Rs-0b-dlp"/>
                                             <constraint firstItem="r03-4k-Je5" firstAttribute="leading" secondItem="dOa-yP-jW7" secondAttribute="leading" constant="25" id="DpJ-co-bxa"/>
-                                            <constraint firstItem="sgm-Nv-C0G" firstAttribute="top" secondItem="Z6Z-hP-Xgi" secondAttribute="bottom" constant="30" id="FkK-aK-ssd"/>
                                             <constraint firstItem="Z6Z-hP-Xgi" firstAttribute="leading" secondItem="dOa-yP-jW7" secondAttribute="leading" constant="25" id="GP7-rY-oeR"/>
                                             <constraint firstAttribute="trailing" secondItem="NQ2-Ug-LfW" secondAttribute="trailing" constant="25" id="IfH-Ht-Zzx"/>
                                             <constraint firstItem="7Y9-2S-2z0" firstAttribute="top" secondItem="r03-4k-Je5" secondAttribute="bottom" constant="15" id="Mfj-Fm-Zx8"/>
-                                            <constraint firstItem="ryV-Vd-bZg" firstAttribute="leading" secondItem="dOa-yP-jW7" secondAttribute="leading" constant="25" id="Uuh-vP-WCZ"/>
                                             <constraint firstItem="TTs-Nh-5t2" firstAttribute="top" secondItem="NQ2-Ug-LfW" secondAttribute="bottom" constant="30" id="VjX-6N-frh"/>
                                             <constraint firstItem="jjh-ky-u5E" firstAttribute="top" secondItem="7Y9-2S-2z0" secondAttribute="bottom" constant="30" id="WHj-q6-hXK"/>
                                             <constraint firstAttribute="trailing" secondItem="Z6Z-hP-Xgi" secondAttribute="trailing" constant="25" id="auL-99-UQe"/>
                                             <constraint firstItem="TTs-Nh-5t2" firstAttribute="leading" secondItem="dOa-yP-jW7" secondAttribute="leading" constant="25" id="dqv-Pn-9Ox"/>
-                                            <constraint firstItem="VgW-ql-43i" firstAttribute="top" secondItem="ryV-Vd-bZg" secondAttribute="bottom" constant="50" id="gYL-Zs-lEG"/>
                                             <constraint firstItem="VgW-ql-43i" firstAttribute="leading" secondItem="dOa-yP-jW7" secondAttribute="leading" constant="70" id="gf5-4l-4IF"/>
+                                            <constraint firstItem="VgW-ql-43i" firstAttribute="top" secondItem="Z6Z-hP-Xgi" secondAttribute="bottom" constant="50" id="hpv-2g-hWT"/>
                                             <constraint firstAttribute="trailing" secondItem="VgW-ql-43i" secondAttribute="trailing" constant="70" id="lhG-2b-anx"/>
                                             <constraint firstItem="7Y9-2S-2z0" firstAttribute="leading" secondItem="dOa-yP-jW7" secondAttribute="leading" constant="25" id="nay-2j-bVC"/>
-                                            <constraint firstAttribute="trailing" secondItem="ryV-Vd-bZg" secondAttribute="trailing" constant="25" id="pBh-lW-d8I"/>
                                             <constraint firstAttribute="trailing" secondItem="7Y9-2S-2z0" secondAttribute="trailing" constant="25" id="s7U-6g-gP3"/>
                                             <constraint firstItem="jjh-ky-u5E" firstAttribute="leading" secondItem="dOa-yP-jW7" secondAttribute="leading" constant="25" id="uoa-xl-402"/>
                                             <constraint firstItem="r03-4k-Je5" firstAttribute="top" secondItem="dOa-yP-jW7" secondAttribute="top" constant="50" id="wB0-4s-Dhw"/>
                                             <constraint firstItem="NQ2-Ug-LfW" firstAttribute="leading" secondItem="dOa-yP-jW7" secondAttribute="leading" constant="25" id="x5I-wg-n8z"/>
-                                            <constraint firstItem="ryV-Vd-bZg" firstAttribute="top" secondItem="sgm-Nv-C0G" secondAttribute="bottom" constant="15" id="xzC-DF-aBa"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -417,12 +396,11 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="email" destination="NQ2-Ug-LfW" id="gk4-r1-I7d"/>
-                        <outlet property="password" destination="ryV-Vd-bZg" id="pPa-iC-Reo"/>
-                        <outlet property="phone" destination="Z6Z-hP-Xgi" id="CWD-O4-YWs"/>
+                        <outlet property="confirmPassword" destination="Z6Z-hP-Xgi" id="v6F-yO-6A4"/>
+                        <outlet property="email" destination="7Y9-2S-2z0" id="63B-GP-1H4"/>
+                        <outlet property="password" destination="NQ2-Ug-LfW" id="IfY-IL-VIi"/>
                         <outlet property="scrollView" destination="DnG-Ad-OJR" id="OAD-0g-PRg"/>
                         <outlet property="signUpButton" destination="VgW-ql-43i" id="q9A-vv-n1p"/>
-                        <outlet property="username" destination="7Y9-2S-2z0" id="Qhy-uo-GcD"/>
                         <segue destination="0hd-Au-BpE" kind="show" identifier="confirmSignUpSegue" id="Gb0-p1-d9K"/>
                     </connections>
                 </viewController>

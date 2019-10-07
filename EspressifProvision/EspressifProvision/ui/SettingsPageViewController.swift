@@ -14,13 +14,16 @@ class SettingsPageViewController: UIViewController {
     @IBOutlet var profileImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileImage.image = imageWith(name: "V")
-        headerView.layer.masksToBounds = false
-        headerView.layer.shadowOffset = CGSize(width: 1, height: 1)
-        headerView.layer.shadowRadius = 0.5
-        headerView.layer.shadowColor = UIColor.gray.cgColor
-        headerView.layer.shadowOpacity = 1.0
+//        profileImage.image = imageWith(name: "V")
+//        headerView.layer.masksToBounds = false
+//        headerView.layer.shadowOffset = CGSize(width: 1, height: 1)
+//        headerView.layer.shadowRadius = 0.5
+//        headerView.layer.shadowColor = UIColor.gray.cgColor
+//        headerView.layer.shadowOpacity = 1.0
+    }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         let colors = Colors()
         headerView.backgroundColor = UIColor.clear
         let backgroundLayer = colors.hvl
@@ -32,6 +35,8 @@ class SettingsPageViewController: UIViewController {
         User.shared.associatedDevices = nil
         User.shared.idToken = nil
         User.shared.currentUser()?.signOut()
+        UserDefaults.standard.removeObject(forKey: Constants.userIDKey)
+        User.shared.userID = nil
         dismiss(animated: true) {
             self.refresh()
         }

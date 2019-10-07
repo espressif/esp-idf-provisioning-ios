@@ -9,7 +9,7 @@
 import Foundation
 
 protocol DeviceAssociationProtocol {
-    func deviceAssociationFinishedWith(success: Bool, deviceID: String?)
+    func deviceAssociationFinishedWith(success: Bool, nodeID: String?)
 }
 
 class DeviceAssociation {
@@ -31,16 +31,16 @@ class DeviceAssociation {
             if let data = payloadData {
                 transport.SendConfigData(path: transport.utility.associationPath, data: data) { response, error in
                     guard error == nil, response != nil else {
-                        self.delegate?.deviceAssociationFinishedWith(success: false, deviceID: nil)
+                        self.delegate?.deviceAssociationFinishedWith(success: false, nodeID: nil)
                         return
                     }
                     self.processResponse(responseData: response!)
                 }
             } else {
-                delegate?.deviceAssociationFinishedWith(success: false, deviceID: nil)
+                delegate?.deviceAssociationFinishedWith(success: false, nodeID: nil)
             }
         } catch {
-            delegate?.deviceAssociationFinishedWith(success: false, deviceID: nil)
+            delegate?.deviceAssociationFinishedWith(success: false, nodeID: nil)
         }
     }
 
@@ -49,12 +49,12 @@ class DeviceAssociation {
         do {
             let response = try Cloud_CloudConfigPayload(serializedData: decryptedResponse)
             if response.respGetSetDetails.status == .success {
-                delegate?.deviceAssociationFinishedWith(success: true, deviceID: response.respGetSetDetails.deviceSecret)
+                delegate?.deviceAssociationFinishedWith(success: true, nodeID: response.respGetSetDetails.deviceSecret)
             } else {
-                delegate?.deviceAssociationFinishedWith(success: false, deviceID: nil)
+                delegate?.deviceAssociationFinishedWith(success: false, nodeID: nil)
             }
         } catch {
-            delegate?.deviceAssociationFinishedWith(success: false, deviceID: nil)
+            delegate?.deviceAssociationFinishedWith(success: false, nodeID: nil)
         }
     }
 

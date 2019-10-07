@@ -18,7 +18,7 @@ class Utility {
 
     var deviceName = "ESP Device"
     var configPath: String = "prov-config"
-    var versionPath: String = "prov-ver"
+    var versionPath: String = "proto-ver"
     var scanPath: String = "prov-scan"
     var sessionPath: String = "prov-session"
     var associationPath: String = "cloud_user_assoc"
@@ -55,6 +55,7 @@ class Utility {
             let loader = MBProgressHUD.showAdded(to: view, animated: true)
             loader.mode = MBProgressHUDMode.indeterminate
             loader.label.text = message
+            loader.isUserInteractionEnabled = false
         }
     }
 

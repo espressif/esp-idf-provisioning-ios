@@ -33,14 +33,17 @@ struct Constants {
     static let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
 
     // AWS cognito APIs
-    static let addDevice = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/user/device/"
-    static let getUserId = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/customer/users/"
-    static let getDevices = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/user/device/"
+    static let addDevice = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/node/"
+    static let getUserId = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/customer/users/"
+    static let getNodes = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/"
+    static let getNodeConfig = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/config/"
     static let addDeviceToUser = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/user/device/"
-    static let checkStatus = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/user/device?"
+    static let checkStatus = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/node/"
 
-    static let toggleDevice = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/updatethingshadow"
+    static let updateThingsShadow = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"
+    static let getDeviceShadow = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"
 
     static let newDeviceAdded = "com.espressif.newDeviceAdded"
     static let prefixKey = "com.espressif.prefix"
+    static let userIDKey = "com.espressif.userid"
 }
