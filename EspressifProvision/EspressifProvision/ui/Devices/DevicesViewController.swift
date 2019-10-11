@@ -115,6 +115,7 @@ class DevicesViewController: UIViewController {
             }
         } else {
             Utility.hideLoader(view: view)
+            refreshControl.endRefreshing()
         }
     }
 

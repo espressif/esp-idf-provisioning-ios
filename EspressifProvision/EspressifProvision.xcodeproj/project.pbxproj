@@ -82,6 +82,10 @@
 		F1F4514E232B78100009DCE0 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4514D232B78100009DCE0 /* Device.swift */; };
 		F1F45150232B7A780009DCE0 /* ControlListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4514F232B7A780009DCE0 /* ControlListViewController.swift */; };
 		F1F45152232B7ECB0009DCE0 /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F45151232B7ECB0009DCE0 /* Attribute.swift */; };
+		F1FB1539234C8AE20053B0ED /* ControlSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1FB1538234C8AE20053B0ED /* ControlSectionHeaderView.xib */; };
+		F1FB153C234D91000053B0ED /* GenericSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FB153A234D91000053B0ED /* GenericSliderTableViewCell.swift */; };
+		F1FB153D234D91000053B0ED /* GenericSliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1FB153B234D91000053B0ED /* GenericSliderTableViewCell.xib */; };
+		F1FB153F234DED260053B0ED /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FB153E234DED260053B0ED /* Errors.swift */; };
 		F6D7C9B0F5FDCEEFFA78A8C8 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -203,6 +207,10 @@
 		F1F4514D232B78100009DCE0 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		F1F4514F232B7A780009DCE0 /* ControlListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlListViewController.swift; sourceTree = "<group>"; };
 		F1F45151232B7ECB0009DCE0 /* Attribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
+		F1FB1538234C8AE20053B0ED /* ControlSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ControlSectionHeaderView.xib; sourceTree = "<group>"; };
+		F1FB153A234D91000053B0ED /* GenericSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericSliderTableViewCell.swift; sourceTree = "<group>"; };
+		F1FB153B234D91000053B0ED /* GenericSliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericSliderTableViewCell.xib; sourceTree = "<group>"; };
+		F1FB153E234DED260053B0ED /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -484,6 +492,7 @@
 				F12261A322C620ED004D049F /* User.swift */,
 				F1DB6F5F232F93D1004B1FA1 /* Colors.swift */,
 				F1AB511A23321B7E002401F9 /* JSONParser.swift */,
+				F1FB153E234DED260053B0ED /* Errors.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -528,6 +537,9 @@
 				F1AB5116233216FE002401F9 /* GenericControlTableViewCell.swift */,
 				F1AB5117233216FE002401F9 /* GenericControlTableViewCell.xib */,
 				F1EEE0422347268900E90B1F /* BrightnessSlider.swift */,
+				F1FB1538234C8AE20053B0ED /* ControlSectionHeaderView.xib */,
+				F1FB153A234D91000053B0ED /* GenericSliderTableViewCell.swift */,
+				F1FB153B234D91000053B0ED /* GenericSliderTableViewCell.xib */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -652,8 +664,10 @@
 			files = (
 				F19A9D1D22C2070E00A450C3 /* Login.storyboard in Resources */,
 				F1AB5119233216FE002401F9 /* GenericControlTableViewCell.xib in Resources */,
+				F1FB153D234D91000053B0ED /* GenericSliderTableViewCell.xib in Resources */,
 				F122619B22C39EDA004D049F /* CognitoLogo.png in Resources */,
 				1431463120DE994C0017E119 /* LaunchScreen.storyboard in Resources */,
+				F1FB1539234C8AE20053B0ED /* ControlSectionHeaderView.xib in Resources */,
 				F1F451372328C51A0009DCE0 /* DeviceDetail.storyboard in Resources */,
 				1431462E20DE994C0017E119 /* Assets.xcassets in Resources */,
 				F1F4513D2328C90E0009DCE0 /* DeviceDetails.json in Resources */,
@@ -843,6 +857,7 @@
 				F19F6FF322F02B3400C70DE3 /* SettingsPageViewController.swift in Sources */,
 				F1F4513F232A30C70009DCE0 /* SwitchViewController.swift in Sources */,
 				1431469820E387C60017E119 /* sec1.pb.swift in Sources */,
+				F1FB153F234DED260053B0ED /* Errors.swift in Sources */,
 				14DE671E20ECD04100941522 /* BLETransport.swift in Sources */,
 				F194B60822CDD7BD00417347 /* Node.swift in Sources */,
 				149774DF210C87AB00022841 /* DataExtensions.swift in Sources */,
@@ -886,6 +901,7 @@
 				F1AB5118233216FE002401F9 /* GenericControlTableViewCell.swift in Sources */,
 				F184C9E7228C4A780034C5B7 /* AESDecryptor.m in Sources */,
 				14706917211050EE00F8E1D8 /* BLELandingViewController.swift in Sources */,
+				F1FB153C234D91000053B0ED /* GenericSliderTableViewCell.swift in Sources */,
 				1431462720DE994B0017E119 /* AppDelegate.swift in Sources */,
 				1431469D20E387C60017E119 /* session.pb.swift in Sources */,
 				F1CB6086233B549F0001D509 /* BLEDeviceListViewCell.swift in Sources */,

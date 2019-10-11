@@ -18,13 +18,23 @@ class DeviceAssociation {
     let secretKey: String
 
     var delegate: DeviceAssociationProtocol?
-
+    
+    /// Create DeviceAssociation object that sends configuration data
+    /// Required for sending data related to assoicating device with app user
+    ///
+    /// - Parameters:
+    ///   - session: Initialised session object
+    ///   - secretId: a unique key to authenticate user-device mapping
     init(session: Session, secretId: String) {
         transport = session.transport
         security = session.security
         secretKey = secretId
     }
-
+    
+    
+    /// Method to start user device mapping
+    /// Info like userID and secretKey are sent from user to device
+    ///
     func associateDeviceWithUser() {
         do {
             let payloadData = try createAssociationConfigRequest()
@@ -43,7 +53,12 @@ class DeviceAssociation {
             delegate?.deviceAssociationFinishedWith(success: false, nodeID: nil)
         }
     }
-
+    
+    /// Prcocess response to check status of mapping
+    /// Info like userID and secretKey are sent from user to device
+    ///
+    /// - Parameters:
+    ///   - responseData: Response recieved from device after sending mapping payload
     func processResponse(responseData: Data) {
         let decryptedResponse = (security.encrypt(data: responseData))!
         do {
@@ -61,7 +76,6 @@ class DeviceAssociation {
     private func createAssociationConfigRequest() throws -> Data? {
         var configRequest = Cloud_CmdGetSetDetails()
         configRequest.secretKey = secretKey
-//        User.shared.userID = "GMNd8jhD6qR5sqxd9TFtEg"
         configRequest.userID = User.shared.userID!
         var payload = Cloud_CloudConfigPayload()
         payload.msg = Cloud_CloudConfigMsgType.typeCmdGetSetDetails

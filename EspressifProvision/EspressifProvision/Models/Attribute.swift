@@ -12,6 +12,7 @@ class Attribute {
     var name: String?
     var dataType: String?
     var value: Any?
+    var attributeKey:String?
 }
 
 class StaticAttribute: Attribute {}

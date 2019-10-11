@@ -27,7 +27,7 @@
             "data_type": "float",
             "permissions": ["read", "write"],
             "bounds": {
-                "min": 0,
+                "min": 2000,
                 "max": 5000
             },
             "ui-type": "esp-ui-slider"

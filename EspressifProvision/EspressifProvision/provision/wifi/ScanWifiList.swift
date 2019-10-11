@@ -12,12 +12,6 @@ protocol ScanWifiListProtocol {
     func wifiScanFinished(wifiList: [String: Espressif_WiFiScanResult]?, error: Error?)
 }
 
-enum CustomError: Error {
-    case emptyConfigData
-    case emptyResultCount
-    case emptyToken
-}
-
 class ScanWifiList {
     private let transport: Transport
     private let security: Security

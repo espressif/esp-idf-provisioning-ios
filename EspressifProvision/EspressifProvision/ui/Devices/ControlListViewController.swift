@@ -30,12 +30,15 @@ class ControlListViewController: UIViewController {
         tableView.register(UINib(nibName: "SliderTableViewCell", bundle: nil), forCellReuseIdentifier: "SliderTableViewCell")
         tableView.register(UINib(nibName: "SwitchTableViewCell", bundle: nil), forCellReuseIdentifier: "SwitchTableViewCell")
         tableView.register(UINib(nibName: "GenericControlTableViewCell", bundle: nil), forCellReuseIdentifier: "genericControlCell")
+        tableView.register(UINib(nibName: "GenericSliderTableViewCell", bundle: nil), forCellReuseIdentifier: "GenericSliderTableViewCell")
 
         let colors = Colors()
         view.backgroundColor = UIColor.clear
         let backgroundLayer = colors.controlLayer
         backgroundLayer!.frame = view.frame
         view.layer.insertSublayer(backgroundLayer!, at: 0)
+
+        navigationItem.title = device?.name ?? "Controls"
 
         updateDeviceAttributes()
     }
@@ -94,22 +97,44 @@ class ControlListViewController: UIViewController {
 
     func getTableViewCellBasedOn(dynamicAttribute: DynamicAttribute, indexPath: IndexPath) -> UITableViewCell {
         if dynamicAttribute.uiType == "esp-ui-slider" || dynamicAttribute.bounds != nil {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SliderTableViewCell", for: indexPath) as! SliderTableViewCell
+//            if (dynamicAttribute.name?.contains("brightness"))! {
+//                let cell = tableView.dequeueReusableCell(withIdentifier: "SliderTableViewCell", for: indexPath) as! SliderTableViewCell
+//                if let bounds = dynamicAttribute.bounds {
+//                    cell.slider.value = dynamicAttribute.value as? Float ?? 100
+//                    cell.slider.minimumValue = bounds["min"] as? Float ?? 0
+//                    cell.slider.maximumValue = bounds["max"] as? Float ?? 100
+//                }
+//                cell.device = device
+//                cell.dataType = dynamicAttribute.dataType
+//                if let attributeName = dynamicAttribute.name {
+//                    cell.attributeKey = attributeName
+//                }
+//                cell.sliderValue.text = cell.attributeKey + ": \(Int(cell.slider.value))"
+//                return cell
+//            } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "GenericSliderTableViewCell", for: indexPath) as! GenericSliderTableViewCell
+            cell.slider.value = dynamicAttribute.value as? Float ?? 100
             if let bounds = dynamicAttribute.bounds {
-                cell.slider.value = dynamicAttribute.value as? Float ?? 100
                 cell.slider.minimumValue = bounds["min"] as? Float ?? 0
                 cell.slider.maximumValue = bounds["max"] as? Float ?? 100
+            }
+            if dynamicAttribute.dataType!.lowercased() == "int" {
+                cell.minLabel.text = "\(Int(cell.slider.minimumValue))"
+                cell.maxLabel.text = "\(Int(cell.slider.maximumValue))"
+            } else {
+                cell.minLabel.text = "\(cell.slider.minimumValue)"
+                cell.maxLabel.text = "\(cell.slider.maximumValue)"
             }
             cell.device = device
             cell.dataType = dynamicAttribute.dataType
             if let attributeName = dynamicAttribute.name {
                 cell.attributeKey = attributeName
             }
-            cell.sliderValue.text = cell.attributeKey + ": \(Int(cell.slider.value))"
             return cell
+//            }
         } else if dynamicAttribute.uiType == "esp-ui-toggle" || dynamicAttribute.dataType?.lowercased() == "bool" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableViewCell", for: indexPath) as! SwitchTableViewCell
-            cell.controlName.text = dynamicAttribute.name
+            cell.controlName.text = dynamicAttribute.name?.deletingPrefix(device!.name!)
             cell.device = device
             if let attributeName = dynamicAttribute.name {
                 cell.attributeKey = attributeName
@@ -139,13 +164,19 @@ class ControlListViewController: UIViewController {
 
 extension ControlListViewController: UITableViewDelegate {
     func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
-        return 12.0
+        return 40.0
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection _: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 12))
-        headerView.backgroundColor = UIColor.clear
-        return headerView
+    func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionHeaderView = SectionHeaderView.instanceFromNib()
+        if section >= device?.dynamicParams?.count ?? 0 {
+            let staticControl = device?.staticParams![section - (device?.dynamicParams?.count ?? 0)]
+            sectionHeaderView.sectionTitle.text = staticControl?.name!.deletingPrefix(device!.name!)
+        } else {
+            let control = device?.dynamicParams![section]
+            sectionHeaderView.sectionTitle.text = control?.name!.deletingPrefix(device!.name!)
+        }
+        return sectionHeaderView
     }
 }
 
@@ -182,5 +213,20 @@ extension ControlListViewController: UITableViewDataSource {
 
     func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         return 80.0
+    }
+}
+
+class SectionHeaderView: UIView {
+    @IBOutlet var sectionTitle: UILabel!
+
+    class func instanceFromNib() -> SectionHeaderView {
+        return UINib(nibName: "ControlSectionHeaderView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! SectionHeaderView
+    }
+}
+
+extension String {
+    func deletingPrefix(_ prefix: String) -> String {
+        guard hasPrefix(prefix) else { return self }
+        return String(dropFirst(prefix.count + 1))
     }
 }

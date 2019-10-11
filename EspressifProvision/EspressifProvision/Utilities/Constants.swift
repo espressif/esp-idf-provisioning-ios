@@ -10,6 +10,11 @@ import AWSCognitoIdentityProvider
 import Foundation
 
 struct Constants {
+    
+    // JSON keys
+    static let userID = "user_id"
+    static let requestID = "request_id"
+    
     static let usernameKey = "espusername"
     static let scanCharacteristic = "scan"
     static let sessionCharacterstic = "session"
@@ -33,12 +38,12 @@ struct Constants {
     static let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
 
     // AWS cognito APIs
-    static let addDevice = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/node/"
+    static let addDevice = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/"
     static let getUserId = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/customer/users/"
     static let getNodes = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/"
     static let getNodeConfig = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/config/"
     static let addDeviceToUser = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/user/device/"
-    static let checkStatus = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/node/"
+    static let checkStatus = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/"
 
     static let updateThingsShadow = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"
     static let getDeviceShadow = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"

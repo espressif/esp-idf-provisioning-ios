@@ -10,6 +10,7 @@ import Alamofire
 import Foundation
 
 class NetworkManager {
+    /// A singleton class that manages Network call of the entire application
     static let shared = NetworkManager()
 
     private init() {}
@@ -25,17 +26,17 @@ class NetworkManager {
                     Alamofire.request(Constants.getUserId + Constants.CognitoIdentityUserPoolId + "?user_name=" + User.shared.username, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                         if let json = response.result.value as? [String: String] {
                             print("JSON: \(json)")
-                            if let userid = json["user_id"] {
+                            if let userid = json[Constants.userID] {
                                 User.shared.userID = userid
                                 UserDefaults.standard.set(userid, forKey: Constants.userIDKey)
                                 completionHandler(userid, nil)
                                 return
                             }
                         }
-                        completionHandler(nil, CustomError.emptyResultCount)
+                        completionHandler(nil, NetworkError.keyNotPresent)
                     }
                 } else {
-                    completionHandler(nil, CustomError.emptyToken)
+                    completionHandler(nil, NetworkError.emptyToken)
                 }
             })
         }
@@ -52,15 +53,15 @@ class NetworkManager {
                     }
                     if let json = response.result.value as? [String: String] {
                         print("JSON: \(json)")
-                        if let requestId = json["request_id"] {
+                        if let requestId = json[Constants.requestID] {
                             completionHandler(requestId, nil)
                             return
                         }
                     }
-                    completionHandler(nil, CustomError.emptyResultCount)
+                    completionHandler(nil, NetworkError.keyNotPresent)
                 }
             } else {
-                completionHandler(nil, CustomError.emptyResultCount)
+                completionHandler(nil, NetworkError.emptyToken)
             }
         })
     }
@@ -72,9 +73,7 @@ class NetworkManager {
                     if idToken != nil {
                         let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                         let url = Constants.getNodes + Constants.CognitoIdentityUserPoolId + "?userid=" + userID!
-//                        let mockURL = "https://7k721rna08.execute-api.us-east-1.amazonaws.com/mock/nodes"
                         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                            var nodeList: [Node] = []
                             print(response)
                             if let json = response.result.value as? [String: Any], let tempArray = json["nodes"] as? [String] {
                                 var deviceList: [Device] = []
@@ -94,40 +93,27 @@ class NetworkManager {
                                     completionHandler(deviceList, nil)
                                 }
                             } else {
-                                completionHandler(nil, nil)
+                                completionHandler(nil, NetworkError.keyNotPresent)
                             }
                         }
                     } else {
-                        completionHandler(nil, CustomError.emptyToken)
+                        completionHandler(nil, NetworkError.emptyToken)
                     }
                 })
             } else {
-                completionHandler(nil, CustomError.emptyToken)
+                completionHandler(nil, CustomError.userIDNotPresent)
             }
         }
     }
 
     func getNodeConfig(nodeID: String, headers: HTTPHeaders, completionHandler: @escaping ([Device]?, Error?) -> Void) {
         let url = Constants.getNodeConfig + Constants.CognitoIdentityUserPoolId + "?nodeid=" + nodeID
-//        let mockURL = "https://7k721rna08.execute-api.us-east-1.amazonaws.com/mock/nodes/config"
-//        if let path = Bundle.main.path(forResource: "DeviceDetails", ofType: "json") {
-//            do {
-//                let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-//                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-//                if let jsonResult = jsonResult as? [String: Any] {
-//                    // do stuff
-//                    completionHandler(JSONParser.parseNodeData(data: jsonResult, nodeID: nodeID), nil)
-//                }
-//            } catch {
-//                // handle error
-//            }
-//        }
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             print(response)
             if let json = response.result.value as? [String: Any] {
                 completionHandler(JSONParser.parseNodeData(data: json, nodeID: nodeID), nil)
             } else {
-                completionHandler(nil, nil)
+                completionHandler(nil, NetworkError.keyNotPresent)
             }
         }
     }
