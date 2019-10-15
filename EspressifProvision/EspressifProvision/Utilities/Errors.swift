@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 enum CustomError: Error {
     case emptyConfigData
     case emptyResultCount

@@ -18,7 +18,7 @@ class DeviceAssociation {
     let secretKey: String
 
     var delegate: DeviceAssociationProtocol?
-    
+
     /// Create DeviceAssociation object that sends configuration data
     /// Required for sending data related to assoicating device with app user
     ///
@@ -30,8 +30,7 @@ class DeviceAssociation {
         security = session.security
         secretKey = secretId
     }
-    
-    
+
     /// Method to start user device mapping
     /// Info like userID and secretKey are sent from user to device
     ///
@@ -53,7 +52,7 @@ class DeviceAssociation {
             delegate?.deviceAssociationFinishedWith(success: false, nodeID: nil)
         }
     }
-    
+
     /// Prcocess response to check status of mapping
     /// Info like userID and secretKey are sent from user to device
     ///

@@ -10,11 +10,10 @@ import AWSCognitoIdentityProvider
 import Foundation
 
 struct Constants {
-    
     // JSON keys
     static let userID = "user_id"
     static let requestID = "request_id"
-    
+
     static let usernameKey = "espusername"
     static let scanCharacteristic = "scan"
     static let sessionCharacterstic = "session"
@@ -31,22 +30,22 @@ struct Constants {
 
     // Amazon Cognito setup configuration
     static let CognitoIdentityUserPoolRegion: AWSRegionType = .USEast1
-    static let CognitoIdentityUserPoolId = "us-east-1_GpR1ECivd"
-    static let CognitoIdentityUserPoolAppClientId = "4h7n9e7cq56jvbr10pfdscp9ho"
-    static let CognitoIdentityUserPoolAppClientSecret = "1k45fn6jnm1fkv3svdvhcqn9dbleje2gme7e92fmavin9ht8lp9"
+    static let CognitoIdentityUserPoolId = "us-east-1_jeDPOx3EV"
+    static let CognitoIdentityUserPoolAppClientId = "54pj5q06huv4kubi7ov2bs5ca1"
+    static let CognitoIdentityUserPoolAppClientSecret = "12s43m3ma6h8bth0tosbv37f19svpmf9nu2asbbhu19ti1d8p93d"
 
     static let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
 
     // AWS cognito APIs
-    static let addDevice = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/"
-    static let getUserId = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/customer/users/"
-    static let getNodes = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/"
-    static let getNodeConfig = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/config/"
-    static let addDeviceToUser = "https://61h45uifta.execute-api.us-east-1.amazonaws.com/demo/user/device/"
-    static let checkStatus = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/"
+    static let addDevice = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
+    static let getUserId = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/customer/users/"
+    static let getNodes = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
+    static let getNodeConfig = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/config/"
+//    static let addDeviceToUser = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
+    static let checkStatus = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/"
 
-    static let updateThingsShadow = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"
-    static let getDeviceShadow = "https://l9f2a82c0a.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"
+    static let updateThingsShadow = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"
+    static let getDeviceShadow = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"
 
     static let newDeviceAdded = "com.espressif.newDeviceAdded"
     static let prefixKey = "com.espressif.prefix"
