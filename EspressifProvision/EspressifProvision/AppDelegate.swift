@@ -78,6 +78,7 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
 
         if signInViewController == nil {
             signInViewController = navigationController?.viewControllers[0] as? SignInViewController
+            navigationController?.presentationController?.delegate = signInViewController
         }
 
         DispatchQueue.main.async {

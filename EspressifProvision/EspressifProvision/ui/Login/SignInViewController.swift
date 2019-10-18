@@ -41,6 +41,7 @@ class SignInViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presentationController?.delegate = self
         username.setBottomBorder()
         password.setBottomBorder()
         username.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
@@ -69,6 +70,11 @@ class SignInViewController: UIViewController {
         formView.layer.shadowOpacity = 1.0
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        if #available(iOS 13.0, *) {
+            isModalInPresentation = false
+        } else {
+            // Fallback on earlier versions
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -141,7 +147,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
             } else {
                 if let frameHeight = endFrame?.size.height, frameHeight > 100 {
                     formViewBottomConstraint.constant = frameHeight + 25.0
-                    formViewTopConstraint.constant = 150.0 - frameHeight - 25.0
+                    formViewTopConstraint.constant = 150.0 - frameHeight - 50.0
                 } else {
                     formViewBottomConstraint.constant = 150.0
                     formViewTopConstraint.constant = -30.0
@@ -171,5 +177,11 @@ extension UITextField {
         bottomLine.backgroundColor = UIColor(red: 255.0 / 255.0, green: 97.0 / 255.0, blue: 99.0 / 255.0, alpha: 1.0).cgColor
         borderStyle = UITextField.BorderStyle.none
         layer.addSublayer(bottomLine)
+    }
+}
+
+extension SignInViewController: UIAdaptivePresentationControllerDelegate {
+    func adaptivePresentationStyle(for _: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.fullScreen
     }
 }

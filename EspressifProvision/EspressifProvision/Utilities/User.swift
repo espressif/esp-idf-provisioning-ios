@@ -15,6 +15,7 @@ class User {
     var pool: AWSCognitoIdentityUserPool!
     var idToken: String?
     var associatedDevices: [Device]?
+    var associatedNodes: [Node]?
     var username = ""
     var updateDeviceList = false
     var addDeviceStatusTimeout: Timer?

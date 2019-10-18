@@ -69,6 +69,8 @@
 		F1DD70A622A8EA2A0092DAB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A522A8EA2A0092DAB9 /* Constants.swift */; };
 		F1DD70AA22A9BFBE0092DAB9 /* ScanWifiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A822A9BFBE0092DAB9 /* ScanWifiList.swift */; };
 		F1DD70AB22A9BFBE0092DAB9 /* WifiListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A922A9BFBE0092DAB9 /* WifiListTableViewCell.swift */; };
+		F1DDA06823588B110005F982 /* NodeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDA06723588B110005F982 /* NodeDetailsViewController.swift */; };
+		F1DDA06A23588C890005F982 /* NodeDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDA06923588C890005F982 /* NodeDetailsTableViewCell.swift */; };
 		F1EEE0432347268900E90B1F /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EEE0422347268900E90B1F /* BrightnessSlider.swift */; };
 		F1F451372328C51A0009DCE0 /* DeviceDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */; };
 		F1F4513A2328C5D40009DCE0 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F451392328C5D40009DCE0 /* DevicesViewController.swift */; };
@@ -194,6 +196,8 @@
 		F1DD70A522A8EA2A0092DAB9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F1DD70A822A9BFBE0092DAB9 /* ScanWifiList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanWifiList.swift; sourceTree = "<group>"; };
 		F1DD70A922A9BFBE0092DAB9 /* WifiListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiListTableViewCell.swift; sourceTree = "<group>"; };
+		F1DDA06723588B110005F982 /* NodeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeDetailsViewController.swift; sourceTree = "<group>"; };
+		F1DDA06923588C890005F982 /* NodeDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		F1EEE0422347268900E90B1F /* BrightnessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
 		F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeviceDetail.storyboard; sourceTree = "<group>"; };
 		F1F451392328C5D40009DCE0 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
@@ -385,6 +389,8 @@
 				F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */,
 				F19F6FF222F02B3400C70DE3 /* SettingsPageViewController.swift */,
 				F1CB6085233B549F0001D509 /* BLEDeviceListViewCell.swift */,
+				F1DDA06723588B110005F982 /* NodeDetailsViewController.swift */,
+				F1DDA06923588C890005F982 /* NodeDetailsTableViewCell.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -853,6 +859,7 @@
 				F19A9D1B22C0ED4C00A450C3 /* ConfirmSignUpViewController.swift in Sources */,
 				F1F45152232B7ECB0009DCE0 /* Attribute.swift in Sources */,
 				F1F45147232A43510009DCE0 /* SliderTableViewCell.swift in Sources */,
+				F1DDA06A23588C890005F982 /* NodeDetailsTableViewCell.swift in Sources */,
 				F1DD70AB22A9BFBE0092DAB9 /* WifiListTableViewCell.swift in Sources */,
 				F19F6FF322F02B3400C70DE3 /* SettingsPageViewController.swift in Sources */,
 				F1F4513F232A30C70009DCE0 /* SwitchViewController.swift in Sources */,
@@ -883,6 +890,7 @@
 				1431468720DFA58E0017E119 /* HexUtils.swift in Sources */,
 				143146B320EB22470017E119 /* ProvisionLandingViewController.swift in Sources */,
 				1431468B20E37B980017E119 /* Session.swift in Sources */,
+				F1DDA06823588B110005F982 /* NodeDetailsViewController.swift in Sources */,
 				F1D4F1FB22AFBD6D000452EE /* DeviceInfoViewController.swift in Sources */,
 				1431469F20E387C60017E119 /* wifi_constants.pb.swift in Sources */,
 				F1AB511B23321B7E002401F9 /* JSONParser.swift in Sources */,

@@ -52,6 +52,7 @@ class ProvisionViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(showPassword))
         tap.numberOfTapsRequired = 1
         showPasswordImageView.isUserInteractionEnabled = true
+        showPasswordImageView.contentMode = .scaleAspectFit
         showPasswordImageView.addGestureRecognizer(tap)
 
         configurePassphraseTextField()
@@ -134,22 +135,22 @@ class ProvisionViewController: UIViewController {
                 security = Security1(proofOfPossession: provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]!)
                 initSession()
             } else {
-                let input = UIAlertController(title: "Proof of Possession", message: nil, preferredStyle: .alert)
-
-                input.addTextField { textField in
-                    textField.text = "abcd1234"
-                }
-                input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
-                    self.transport?.disconnect()
-                    self.navigationController?.popViewController(animated: true)
-                }))
-                input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
-                    let textField = input?.textFields![0]
-                    self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY] = textField?.text ?? ""
-                    self.security = Security1(proofOfPossession: self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]!)
-                    self.initSession()
-                }))
                 DispatchQueue.main.async {
+                    let input = UIAlertController(title: "Proof of Possession", message: nil, preferredStyle: .alert)
+
+                    input.addTextField { textField in
+                        textField.text = "abcd1234"
+                    }
+                    input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+                        self.transport?.disconnect()
+                        self.navigationController?.popViewController(animated: true)
+                    }))
+                    input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
+                        let textField = input?.textFields![0]
+                        self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY] = textField?.text ?? ""
+                        self.security = Security1(proofOfPossession: self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]!)
+                        self.initSession()
+                    }))
                     self.present(input, animated: true, completion: nil)
                 }
             }
@@ -303,6 +304,7 @@ class ProvisionViewController: UIViewController {
                             successVC.statusText = "Device provisioning failed.\nReason : \(failReason).\nPlease reset device to factory settings and retry."
                         }
                     }
+                    self.navigationController?.modalPresentationStyle = .fullScreen
                     self.navigationController?.present(successVC, animated: true, completion: nil)
                     self.provisionButton.isUserInteractionEnabled = true
                 }
@@ -387,6 +389,7 @@ class ProvisionViewController: UIViewController {
         DispatchQueue.main.async {
             let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as! SuccessViewController
             successVC.statusText = "Error establishing session.\n Check if Proof of Possession(POP) is correct!"
+            self.navigationController?.modalPresentationStyle = .fullScreen
             self.navigationController?.present(successVC, animated: true, completion: nil)
         }
     }
@@ -413,7 +416,9 @@ class ProvisionViewController: UIViewController {
         textField.placeholder = "Password"
         textField.isSecureTextEntry = true
         showPasswordImageView.image = UIImage(named: "show_password")
-        textField.rightView = showPasswordImageView
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: showPasswordImageView.frame.width + 10, height: showPasswordImageView.frame.height))
+        rightView.addSubview(showPasswordImageView)
+        textField.rightView = rightView
         textField.rightViewMode = .always
     }
 
