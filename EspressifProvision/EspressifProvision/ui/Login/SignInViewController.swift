@@ -130,6 +130,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 self.present(alertController, animated: true, completion: nil)
             } else {
                 self.username.text = nil
+                User.shared.updateDeviceList = true
                 self.dismiss(animated: true, completion: nil)
             }
         }
