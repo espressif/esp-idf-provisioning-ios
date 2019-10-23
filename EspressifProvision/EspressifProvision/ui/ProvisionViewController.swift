@@ -304,8 +304,7 @@ class ProvisionViewController: UIViewController {
                             successVC.statusText = "Device provisioning failed.\nReason : \(failReason).\nPlease reset device to factory settings and retry."
                         }
                     }
-                    self.navigationController?.modalPresentationStyle = .fullScreen
-                    self.navigationController?.present(successVC, animated: true, completion: nil)
+                    self.navigationController?.pushViewController(successVC, animated: true)
                     self.provisionButton.isUserInteractionEnabled = true
                 }
             }
@@ -389,8 +388,7 @@ class ProvisionViewController: UIViewController {
         DispatchQueue.main.async {
             let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as! SuccessViewController
             successVC.statusText = "Error establishing session.\n Check if Proof of Possession(POP) is correct!"
-            self.navigationController?.modalPresentationStyle = .fullScreen
-            self.navigationController?.present(successVC, animated: true, completion: nil)
+            self.navigationController?.pushViewController(successVC, animated: true)
         }
     }
 

@@ -9,9 +9,8 @@
 import UIKit
 
 class NodeDetailsTableViewCell: UITableViewCell {
-
-    @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet var detailLabel: UILabel!
+    @IBOutlet var titleLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,5 +21,4 @@ class NodeDetailsTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

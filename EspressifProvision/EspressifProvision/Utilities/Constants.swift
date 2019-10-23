@@ -42,7 +42,7 @@ struct Constants {
     static let getNodes = "https://tkjg4kjd5c.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
     static let getNodeConfig = "https://tkjg4kjd5c.execute-api.us-east-1.amazonaws.com/dev/user/nodes/config/"
 //    static let addDeviceToUser = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
-    static let checkStatus = "https://tkjg4kjd5c.execute-api.us-east-1.amazonaws.com/dev/user/nodes/"
+    static let checkStatus = "https://tkjg4kjd5c.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
 
     static let updateThingsShadow = "https://tkjg4kjd5c.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"
     static let getDeviceShadow = "https://tkjg4kjd5c.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"

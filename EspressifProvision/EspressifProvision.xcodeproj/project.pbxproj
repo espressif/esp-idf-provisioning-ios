@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1431462720DE994B0017E119 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1431462620DE994B0017E119 /* AppDelegate.swift */; };
-		1431462920DE994B0017E119 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1431462820DE994B0017E119 /* ViewController.swift */; };
 		1431462C20DE994B0017E119 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1431462A20DE994B0017E119 /* Main.storyboard */; };
 		1431462E20DE994C0017E119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1431462D20DE994C0017E119 /* Assets.xcassets */; };
 		1431463120DE994C0017E119 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1431462F20DE994C0017E119 /* LaunchScreen.storyboard */; };
@@ -112,7 +111,6 @@
 		10FBDE85E3C2325EA6CC75E3 /* Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig"; sourceTree = "<group>"; };
 		1431462320DE994B0017E119 /* EspressifProvision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EspressifProvision.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1431462620DE994B0017E119 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1431462820DE994B0017E119 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1431462B20DE994B0017E119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1431462D20DE994C0017E119 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1431463020DE994C0017E119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -283,7 +281,6 @@
 				1431462620DE994B0017E119 /* AppDelegate.swift */,
 				F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */,
 				F19A9D1C22C2070E00A450C3 /* Login.storyboard */,
-				1431462820DE994B0017E119 /* ViewController.swift */,
 				1431462A20DE994B0017E119 /* Main.storyboard */,
 				1431462D20DE994C0017E119 /* Assets.xcassets */,
 				1431462F20DE994C0017E119 /* LaunchScreen.storyboard */,
@@ -876,7 +873,6 @@
 				F12261A022C61695004D049F /* DeviceAssociation.swift in Sources */,
 				F1F4513A2328C5D40009DCE0 /* DevicesViewController.swift in Sources */,
 				143146B520EB273B0017E119 /* ProvisionViewController.swift in Sources */,
-				1431462920DE994B0017E119 /* ViewController.swift in Sources */,
 				149774DD210C799900022841 /* CryptoAES.swift in Sources */,
 				F1F45141232A3B260009DCE0 /* LightViewController.swift in Sources */,
 				1431466920DEAD1A0017E119 /* SoftAPTransport.swift in Sources */,

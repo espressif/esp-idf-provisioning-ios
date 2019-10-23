@@ -62,6 +62,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>WifiBaseUrl</key>
 	<string>192.168.4.1:80</string>
 	<key>WifiNetworkNamePrefix</key>

@@ -31,6 +31,8 @@ class SignInViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.presentationController?.delegate = self
+//        presentationController?.delegate = self
         password.text = nil
         username.text = ""
     }
@@ -116,8 +118,8 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
     }
 
     public func didCompleteStepWithError(_ error: Error?) {
-        Utility.hideLoader(view: view)
         DispatchQueue.main.async {
+            Utility.hideLoader(view: self.view)
             if let error = error as NSError? {
                 let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
                                                         message: error.userInfo["message"] as? String,

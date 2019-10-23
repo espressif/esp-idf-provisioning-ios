@@ -43,13 +43,30 @@ class SuccessViewController: UIViewController {
         view.layer.insertSublayer(backgroundLayer!, at: 0)
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
-        if segue.identifier == "goToFirstScreen" {
-            if let destinationVC = segue.destination as? ViewController {
-                destinationVC.checkDeviceAssociation = true
-                destinationVC.deviceID = deviceID
-                destinationVC.requestID = requestID
-            }
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
+
+    @IBAction func goToFirstView(_: Any) {
+        let destinationVC = navigationController?.viewControllers.first as! DevicesViewController
+        destinationVC.checkDeviceAssociation = true
+        destinationVC.deviceID = deviceID
+        destinationVC.requestID = requestID
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.popToRootViewController(animated: true)
+
+//        if segue.identifier == "goToFirstScreen" {
+//            if let destinationVC = segue.destination as? ViewController {
+//                destinationVC.checkDeviceAssociation = true
+//                destinationVC.deviceID = deviceID
+//                destinationVC.requestID = requestID
+//            }
+//        }
     }
 }

@@ -85,6 +85,7 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
             self.navigationController!.popToRootViewController(animated: true)
             if !self.navigationController!.isViewLoaded
                 || self.navigationController!.view.window == nil {
+                self.navigationController!.modalPresentationStyle = .fullScreen
                 self.window?.rootViewController?.present(self.navigationController!,
                                                          animated: true,
                                                          completion: nil)
