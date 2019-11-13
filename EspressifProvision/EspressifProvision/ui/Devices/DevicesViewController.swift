@@ -32,7 +32,7 @@ class DevicesViewController: UIViewController {
     var deviceID: String?
     var requestID: String?
 
-    let reachability = Reachability()!
+    let reachability = try! Reachability()
 
     override func viewDidLoad() {
         super.viewDidLoad()
