@@ -75,7 +75,7 @@ class DeviceAssociation {
     private func createAssociationConfigRequest() throws -> Data? {
         var configRequest = Cloud_CmdGetSetDetails()
         configRequest.secretKey = secretKey
-        configRequest.userID = User.shared.userID!
+        configRequest.userID = User.shared.userID ?? ""
         var payload = Cloud_CloudConfigPayload()
         payload.msg = Cloud_CloudConfigMsgType.typeCmdGetSetDetails
         payload.cmdGetSetDetails = configRequest

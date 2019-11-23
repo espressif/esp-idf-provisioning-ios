@@ -35,17 +35,18 @@ struct Constants {
     static let CognitoIdentityUserPoolAppClientSecret = "1vcurad1q2uhi32j2qpcmem0qbu6a5lif2heffav8ddf2dusimrf"
 
     static let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
+    static let baseURL = "https://yv4hu5b4oj.execute-api.us-east-1.amazonaws.com/dev/v1/"
 
     // AWS cognito APIs
-    static let addDevice = "https://yv4hu5b4oj.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
-    static let getUserId = "https://yv4hu5b4oj.execute-api.us-east-1.amazonaws.com/dev/users/"
-    static let getNodes = "https://yv4hu5b4oj.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
-    static let getNodeConfig = "https://yv4hu5b4oj.execute-api.us-east-1.amazonaws.com/dev/user/nodes/config/"
+    static let addDevice = Constants.baseURL + "user/nodes/mapping/"
+    static let getUserId = Constants.baseURL + "users/"
+    static let getNodes = Constants.baseURL + "user/nodes/mapping/"
+    static let getNodeConfig = Constants.baseURL + "user/nodes/config/"
 //    static let addDeviceToUser = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
-    static let checkStatus = "https://yv4hu5b4oj.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
+    static let checkStatus = Constants.baseURL + "user/nodes/mapping/"
 
-    static let updateThingsShadow = "https://yv4hu5b4oj.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"
-    static let getDeviceShadow = "https://yv4hu5b4oj.execute-api.us-east-1.amazonaws.com/dev/user/nodes/dynamic_params/"
+    static let updateThingsShadow = Constants.baseURL + "user/nodes/dynamic_params/"
+    static let getDeviceShadow = Constants.baseURL + "user/nodes/dynamic_params/"
 
     static let newDeviceAdded = "com.espressif.newDeviceAdded"
     static let prefixKey = "com.espressif.prefix"
