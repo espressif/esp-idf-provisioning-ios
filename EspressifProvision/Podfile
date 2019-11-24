@@ -11,6 +11,7 @@ abstract_target 'EspressifProvisionAll' do
   pod 'Curve25519', '~> 1.1.0'
   pod 'MBProgressHUD', '~> 1.1.0'
   pod 'BlueSocket'
+  pod "PickerView"
   
   target 'EspressifProvision'
   target 'EspressifProvisionTests' do

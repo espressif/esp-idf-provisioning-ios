@@ -116,6 +116,8 @@ class ConfigureAVS {
                 transport.SendConfigData(path: ConfigureAVS.AVS_CONFIG_PATH, data: data) { response, error in
                     if response != nil, error == nil {
                         completionHandler(self.processAVSLoginStatus(response: response!))
+                    } else {
+                        print(error)
                     }
                 }
             }

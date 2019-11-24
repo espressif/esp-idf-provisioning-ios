@@ -29,6 +29,7 @@ enum TransportError: Error {
  * transport layer to send messages to the Device.
  */
 protocol Transport {
+    var utility: Utility { get }
     /// Send message data relating to session establishment.
     ///
     /// - Parameters:
@@ -43,6 +44,8 @@ protocol Transport {
     ///   - data: config data to be sent
     ///   - completionHandler: handler called when data is successfully sent and response is recieved
     func SendConfigData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void)
+
+    func isDeviceConfigured() -> Bool
 
     /// Disconnect current preipheral device
     ///

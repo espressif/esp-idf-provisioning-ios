@@ -102,19 +102,12 @@ class LoginWithAmazonViewController: UIViewController {
     }
 
     private func configureSession() {
-        let bleConfigUuid = provisionConfig[Provision.CONFIG_BLE_CONFIG_UUID]
-        var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: bleConfigUuid!]
-        let avsconfigUuid = provisionConfig[ConfigureAVS.AVS_CONFIG_UUID_KEY]
-        configUUIDMap[ConfigureAVS.AVS_CONFIG_PATH] = avsconfigUuid
+        // let bleConfigUuid = provisionConfig[Provision.CONFIG_BLE_CONFIG_UUID]
+        // var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: bleConfigUuid!]
+        // let avsconfigUuid = provisionConfig[ConfigureAVS.AVS_CONFIG_UUID_KEY]
+        // configUUIDMap[ConfigureAVS.AVS_CONFIG_PATH] = avsconfigUuid
 
-        bleTransport = BLETransport(
-            serviceUUIDString: provisionConfig[Provision.CONFIG_BLE_SERVICE_UUID],
-            sessionUUIDString: provisionConfig[Provision.CONFIG_BLE_SESSION_UUID]!,
-
-            configUUIDMap: configUUIDMap,
-            deviceNamePrefix: provisionConfig[Provision.CONFIG_BLE_DEVICE_NAME_PREFIX]!,
-            scanTimeout: 5.0
-        )
+        bleTransport = BLETransport(scanTimeout: 5.0)
 
         let securityVersion = provisionConfig[Provision.CONFIG_SECURITY_KEY]
         let pop = provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]

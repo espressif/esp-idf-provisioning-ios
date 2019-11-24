@@ -15,6 +15,15 @@ class AlexaDevice: NSObject {
     var softwareVersion: String?
     var friendlyname: String?
     var uuid: String?
+    var deviceName: String?
+    var connectedWifi: String?
+    var fwVersion: String?
+    var mac: String?
+    var serialNumber: String?
+    var startToneEnabled: Bool?
+    var endToneEnabled: Bool?
+    var volume: UInt32?
+    var language: Avs_Locale?
 
     init(hostAddr: String) {
         hostAddress = hostAddr

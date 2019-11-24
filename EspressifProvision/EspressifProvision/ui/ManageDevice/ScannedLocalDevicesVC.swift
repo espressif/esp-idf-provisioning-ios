@@ -18,6 +18,8 @@ class ScannedLocalDevicesVC: UIViewController {
     var retry = 3
     var searchTarget = "urn:schemas-espressif-com:service:Alexa:1"
     var alexaDevices: [AlexaDevice] = []
+    var configureDevice: ConfigureDevice!
+    var session: Session!
 
     override func viewDidLoad() {
         navigationItem.title = "Devices"
@@ -50,7 +52,7 @@ class ScannedLocalDevicesVC: UIViewController {
     }
 
     @objc func checkNeedForReDiscovery() {
-        if retry != 0 {
+        if retry > 0 {
             if alexaDevices.filter({ $0.friendlyname == nil }).count > 0 {
                 retry -= 1
                 searchLocalDevices()
@@ -103,6 +105,7 @@ extension ScannedLocalDevicesVC: SSDPDiscoveryDelegate {
     }
 
     func ssdpDiscovery(_: SSDPDiscovery, didFinishWithError error: Error) {
+        retry = -1
         print(error)
     }
 
@@ -119,19 +122,24 @@ extension ScannedLocalDevicesVC: UITableViewDelegate {
     }
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Constants.showLoader(message: "Getting device info", view: view)
         let alexaDevice = alexaDevices[indexPath.row]
         let transport = SoftAPTransport(baseUrl: alexaDevice.hostAddress! + ":80")
         let security = Security0()
-        let session = Session(transport: transport, security: security)
+        session = Session(transport: transport, security: security)
         session.initialize(response: nil) { error in
             guard error == nil else {
+                Constants.hideLoader(view: self.view)
                 print("Error in establishing session \(error.debugDescription)")
                 return
             }
-            let avsConfig = ConfigureAVS(session: session)
-            avsConfig.isLoggedIn(completionHandler: { status in
-                self.showDeviceDetails(device: alexaDevice, avsConfig: avsConfig, loginStatus: status)
-            })
+            self.configureDevice = ConfigureDevice(session: self.session, device: alexaDevice)
+            self.configureDevice.delegate = self
+            self.configureDevice.getDeviceInfo()
+//            let avsConfig = ConfigureAVS(session: session)
+//            avsConfig.isLoggedIn(completionHandler: { status in
+//                self.showDeviceDetails(device: alexaDevice, avsConfig: avsConfig, loginStatus: status)
+//            })
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -146,5 +154,24 @@ extension ScannedLocalDevicesVC: UITableViewDataSource {
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return alexaDevices.count
+    }
+}
+
+extension ScannedLocalDevicesVC: GetDeviceInfoDelegate {
+    func deviceInfoFetched(alexaDevice: AlexaDevice?) {
+        DispatchQueue.main.async {
+            Constants.hideLoader(view: self.view)
+            if alexaDevice != nil {
+                let deviceSettingVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.deviceSettingVCIndentifier) as! DeviceSettingViewController
+                deviceSettingVC.configureDevice = self.configureDevice
+                deviceSettingVC.session = self.session
+                self.navigationController?.pushViewController(deviceSettingVC, animated: true)
+            } else {
+                let avsConfig = ConfigureAVS(session: self.session)
+                avsConfig.isLoggedIn(completionHandler: { status in
+                    self.showDeviceDetails(device: self.configureDevice.alexaDevice, avsConfig: avsConfig, loginStatus: status)
+                })
+            }
+        }
     }
 }

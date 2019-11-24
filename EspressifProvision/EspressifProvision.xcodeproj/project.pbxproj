@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -59,6 +59,12 @@
 		F1DD7099229FCEDE0092DAB9 /* DeviceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD7098229FCEDE0092DAB9 /* DeviceDetailViewController.swift */; };
 		F1DD709B229FDE6C0092DAB9 /* AmazonEmberDisplay_Md.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD709A229FDE6C0092DAB9 /* AmazonEmberDisplay_Md.ttf */; };
 		F1DD709D229FDF5E0092DAB9 /* AmazonEmberDisplay_Rg.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD709C229FDF5E0092DAB9 /* AmazonEmberDisplay_Rg.ttf */; };
+		F1DDA06C2359CE590005F982 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDA06B2359CE590005F982 /* Utility.swift */; };
+		F1DDA06E2360198E0005F982 /* ConfigureDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDA06D2360198E0005F982 /* ConfigureDevice.swift */; };
+		F1DDA070237AB9210005F982 /* DeviceSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDA06F237AB9210005F982 /* DeviceSettingViewController.swift */; };
+		F1DDA0722382AD880005F982 /* SoundSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDA0712382AD880005F982 /* SoundSettingViewController.swift */; };
+		F1DDA0742383C7130005F982 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDA0732383C7130005F982 /* AboutViewController.swift */; };
+		F1DDA07623855BFB0005F982 /* LanguageListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDA07523855BFB0005F982 /* LanguageListTableViewController.swift */; };
 		F1EB558923043B1400AEEBE3 /* BLEDeviceListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EB558823043B1400AEEBE3 /* BLEDeviceListViewCell.swift */; };
 		F1F339572296703C000F53A0 /* wifi_scan.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F339562296703C000F53A0 /* wifi_scan.pb.swift */; };
 		F6D7C9B0F5FDCEEFFA78A8C8 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */; };
@@ -169,6 +175,12 @@
 		F1DD7098229FCEDE0092DAB9 /* DeviceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceDetailViewController.swift; sourceTree = "<group>"; };
 		F1DD709A229FDE6C0092DAB9 /* AmazonEmberDisplay_Md.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Md.ttf; sourceTree = "<group>"; };
 		F1DD709C229FDF5E0092DAB9 /* AmazonEmberDisplay_Rg.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Rg.ttf; sourceTree = "<group>"; };
+		F1DDA06B2359CE590005F982 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		F1DDA06D2360198E0005F982 /* ConfigureDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigureDevice.swift; sourceTree = "<group>"; };
+		F1DDA06F237AB9210005F982 /* DeviceSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSettingViewController.swift; sourceTree = "<group>"; };
+		F1DDA0712382AD880005F982 /* SoundSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSettingViewController.swift; sourceTree = "<group>"; };
+		F1DDA0732383C7130005F982 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		F1DDA07523855BFB0005F982 /* LanguageListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageListTableViewController.swift; sourceTree = "<group>"; };
 		F1EB558823043B1400AEEBE3 /* BLEDeviceListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceListViewCell.swift; sourceTree = "<group>"; };
 		F1F339562296703C000F53A0 /* wifi_scan.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_scan.pb.swift; sourceTree = "<group>"; };
 		F5A6E92635049FCEB2D5787E /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1avs-debug.xcconfig"; sourceTree = "<group>"; };
@@ -363,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				14DE671B20EC94C600941522 /* ConfigureAVS.swift */,
+				F1DDA06D2360198E0005F982 /* ConfigureDevice.swift */,
 			);
 			path = avs;
 			sourceTree = "<group>";
@@ -417,6 +430,7 @@
 			children = (
 				F18C3ABB229BF4D4007C197F /* SSDPClient */,
 				F1342A47229D697B00AD8626 /* Constants.swift */,
+				F1DDA06B2359CE590005F982 /* Utility.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -427,6 +441,10 @@
 				F18C3AB7229BEDB2007C197F /* ScannedLocalDevicesVC.swift */,
 				F1342A4A229E7D8700AD8626 /* DeviceListTableViewCell.swift */,
 				F1DD7098229FCEDE0092DAB9 /* DeviceDetailViewController.swift */,
+				F1DDA06F237AB9210005F982 /* DeviceSettingViewController.swift */,
+				F1DDA0712382AD880005F982 /* SoundSettingViewController.swift */,
+				F1DDA0732383C7130005F982 /* AboutViewController.swift */,
+				F1DDA07523855BFB0005F982 /* LanguageListTableViewController.swift */,
 			);
 			path = ManageDevice;
 			sourceTree = "<group>";
@@ -668,19 +686,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BlueSocket/Socket.framework",
-				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Socket.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curve25519.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -692,19 +703,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/BlueSocket/Socket.framework",
-				"${BUILT_PRODUCTS_DIR}/Curve25519/Curve25519.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Socket.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Curve25519.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -740,23 +744,28 @@
 				F1342A48229D697B00AD8626 /* Constants.swift in Sources */,
 				F1DD7099229FCEDE0092DAB9 /* DeviceDetailViewController.swift in Sources */,
 				1431469820E387C60017E119 /* sec1.pb.swift in Sources */,
+				F1DDA07623855BFB0005F982 /* LanguageListTableViewController.swift in Sources */,
 				F18C3AB6229BECE1007C197F /* AlexaDevice.swift in Sources */,
 				F18C3ABE229BF4D4007C197F /* SSDPService.swift in Sources */,
 				14DE671E20ECD04100941522 /* BLETransport.swift in Sources */,
 				149774DF210C87AB00022841 /* DataExtensions.swift in Sources */,
 				1431468E20E3823F0017E119 /* Provision.swift in Sources */,
+				F1DDA0722382AD880005F982 /* SoundSettingViewController.swift in Sources */,
 				1431469920E387C60017E119 /* sec0.pb.swift in Sources */,
 				14DE671C20EC94C600941522 /* ConfigureAVS.swift in Sources */,
 				1431468420DF69C30017E119 /* Security1.swift in Sources */,
 				F1DCEC2D2297D577005918FE /* WifiListTableViewCell.swift in Sources */,
 				143146B520EB273B0017E119 /* ProvisionViewController.swift in Sources */,
+				F1DDA06C2359CE590005F982 /* Utility.swift in Sources */,
 				1431462920DE994B0017E119 /* ViewController.swift in Sources */,
 				149774DD210C799900022841 /* CryptoAES.swift in Sources */,
 				F11B547422DDE41A00F7D0D3 /* StatusViewController.swift in Sources */,
 				1431466920DEAD1A0017E119 /* SoftAPTransport.swift in Sources */,
 				1431469B20E387C60017E119 /* constants.pb.swift in Sources */,
 				F1342A4B229E7D8700AD8626 /* DeviceListTableViewCell.swift in Sources */,
+				F1DDA0742383C7130005F982 /* AboutViewController.swift in Sources */,
 				149774E1210C89E600022841 /* ArrayExtensions.swift in Sources */,
+				F1DDA06E2360198E0005F982 /* ConfigureDevice.swift in Sources */,
 				1431466720DEAC220017E119 /* Security.swift in Sources */,
 				1431468720DFA58E0017E119 /* HexUtils.swift in Sources */,
 				F1EB558923043B1400AEEBE3 /* BLEDeviceListViewCell.swift in Sources */,
@@ -777,6 +786,7 @@
 				F184C9E4228C3E8B0034C5B7 /* AESDecryptor.m in Sources */,
 				1431469E20E387C60017E119 /* avsconfig.pb.swift in Sources */,
 				F1DCEC292296CB94005918FE /* ScanWifiList.swift in Sources */,
+				F1DDA070237AB9210005F982 /* DeviceSettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

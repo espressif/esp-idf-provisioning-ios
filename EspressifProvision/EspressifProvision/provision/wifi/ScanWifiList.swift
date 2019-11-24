@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ScanWifiListProtocol {
-    func wifiScanFinished(wifiList: [String: Int32]?, error: Error?)
+    func wifiScanFinished(wifiList: [String: Espressif_WiFiScanResult]?, error: Error?)
 }
 
 enum CustomError: Error {
@@ -20,7 +20,7 @@ enum CustomError: Error {
 class ScanWifiList {
     private let transport: Transport
     private let security: Security
-    private var scanResult: [String: Int32] = [:]
+    private var scanResult: [String: Espressif_WiFiScanResult] = [:]
 
     var delegate: ScanWifiListProtocol?
 
@@ -32,8 +32,8 @@ class ScanWifiList {
     func startWifiScan() {
         do {
             let payloadData = try createStartScanRequest()
-            if let data = payloadData {
-                transport.SendConfigData(path: Provision.PROVISIONING_SCAN_PATH, data: data) { response, error in
+            if let data = payloadData, let scanPath = transport.utility.scanPath {
+                transport.SendConfigData(path: scanPath, data: data) { response, error in
                     guard error == nil, response != nil else {
                         self.delegate?.wifiScanFinished(wifiList: nil, error: error)
                         return
@@ -61,8 +61,8 @@ class ScanWifiList {
     private func getWiFiScanStatus() {
         do {
             let payloadData = try createWifiScanConfigRequest()
-            if let data = payloadData {
-                transport.SendConfigData(path: Provision.PROVISIONING_SCAN_PATH, data: data) { response, error in
+            if let data = payloadData, let scanPath = transport.utility.scanPath {
+                transport.SendConfigData(path: scanPath, data: data) { response, error in
                     guard error == nil, response != nil else {
                         self.delegate?.wifiScanFinished(wifiList: nil, error: error)
                         return
@@ -105,8 +105,8 @@ class ScanWifiList {
                 lastFetch = true
             }
             let payloadData = try createWifiListConfigRequest(startIndex: startIndex, count: fetchCount)
-            if let data = payloadData {
-                transport.SendConfigData(path: Provision.PROVISIONING_SCAN_PATH, data: data) { response, error in
+            if let data = payloadData, let scanPath = transport.utility.scanPath {
+                transport.SendConfigData(path: scanPath, data: data) { response, error in
                     guard error == nil, response != nil else {
                         self.delegate?.wifiScanFinished(wifiList: nil, error: error)
                         return
@@ -133,11 +133,11 @@ class ScanWifiList {
                     let ssid = String(decoding: responseList.entries[index].ssid, as: UTF8.self)
                     let rssi = responseList.entries[index].rssi
                     if let val = scanResult[ssid] {
-                        if rssi > val {
+                        if rssi > val.rssi {
                             scanResult[ssid] = val
                         }
                     } else {
-                        scanResult[ssid] = responseList.entries[index].rssi
+                        scanResult[ssid] = responseList.entries[index]
                     }
                 }
                 if fetchFinish {

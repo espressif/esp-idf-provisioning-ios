@@ -11,12 +11,29 @@ import MBProgressHUD
 import UIKit
 
 struct Constants {
+    static let scanCharacteristic = "scan"
+    static let sessionCharacterstic = "session"
+    static let configCharacterstic = "config"
+    static let versionCharacterstic = "ver"
+    static let avsConfigCharacterstic = "avsconfig"
+    static let deviceInfoStoryboardID = "versionInfo"
+
+    // Device version info
+    static let provKey = "prov"
+    static let capabilitiesKey = "cap"
+    static let wifiScanCapability = "wifi_scan"
+    static let noProofCapability = "no_pop"
+
     static let friendlynameKey = "friendlyname"
     static let UUIDKey = "uuid"
 
     // Reuse identifier
     static let deviceListCellReuseIdentifier = "deviceListCell"
     static let deviceDetailVCIndentifier = "deviceDetailVC"
+    static let deviceSettingVCIndentifier = "deviceSettingVC"
+    static let soundSettingVCIdentifier = "soundSettingVC"
+    static let aboutVCIdentifier = "aboutVC"
+    static let languageListVCIdentifier = "languageListVC"
 
     static func showLoader(message: String, view: UIView) {
         DispatchQueue.main.async {
@@ -27,6 +44,8 @@ struct Constants {
     }
 
     static func hideLoader(view: UIView) {
-        MBProgressHUD.hide(for: view, animated: true)
+        DispatchQueue.main.async {
+            MBProgressHUD.hide(for: view, animated: true)
+        }
     }
 }

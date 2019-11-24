@@ -51,32 +51,6 @@ class ViewController: UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
-    func provisionWithAPIs(_: Any) {
-        #if SEC1
-            security = Security1(proofOfPossession: pop)
-        #else
-            security = Security0()
-        #endif
-
-        #if BLE
-            var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: configUUIDString]
-            #if AVS
-                configUUIDMap[ConfigureAVS.AVS_CONFIG_PATH] = avsconfigUUIDString
-            #endif
-            bleTransport = BLETransport(serviceUUIDString: serviceUUIDString,
-                                        sessionUUIDString: sessionUUIDString,
-                                        configUUIDMap: configUUIDMap,
-                                        deviceNamePrefix: deviceNamePrefix,
-                                        scanTimeout: 5.0)
-            bleTransport?.scan(delegate: self)
-            transport = bleTransport
-
-        #else
-            transport = SoftAPTransport(baseUrl: baseUrl)
-            provisionDevice()
-        #endif
-    }
-
     #if AVS
         func provisionWithAmazon() {
             var transport = Provision.CONFIG_TRANSPORT_WIFI
@@ -100,19 +74,8 @@ class ViewController: UIViewController {
                 ConfigureAVS.DEVICE_SERIAL_NUMBER: productDSN,
                 ConfigureAVS.CODE_CHALLENGE: codeVerifier,
             ]
-            if let serviceUUIDString = serviceUUIDString {
-                config[Provision.CONFIG_BLE_SERVICE_UUID] = serviceUUIDString
-                config[Provision.CONFIG_BLE_SESSION_UUID] = sessionUUIDString
-                config[Provision.CONFIG_BLE_CONFIG_UUID] = configUUIDString
-                config[ConfigureAVS.AVS_CONFIG_UUID_KEY] = avsconfigUUIDString
-                config[Provision.CONFIG_BLE_SCAN_UUID] = scanUUIDString
-            }
+            config[ConfigureAVS.AVS_CONFIG_UUID_KEY] = avsconfigUUIDString
             print(config)
-//            Provision.showProvisioningWithAmazonUI(on: self,
-//                                                   productId: productId,
-//                                                   productDSN: productDSN,
-//                                                   codeVerifier: codeVerifier,
-//                                                   config: config)
             Provision.showProvisioningUI(on: self, config: config)
         }
     #endif
@@ -205,25 +168,3 @@ class ViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 }
-
-#if BLE
-    extension ViewController: BLETransportDelegate {
-        func peripheralsFound(peripherals: [CBPeripheral]) {
-            bleTransport?.connect(peripheral: peripherals[0], withOptions: nil)
-        }
-
-        func peripheralsNotFound(serviceUUID: UUID?) {
-            showError(errorMessage: "No peripherals found for service UUID : \(String(describing: serviceUUID?.uuidString))")
-        }
-
-        func peripheralConfigured(peripheral _: CBPeripheral) {}
-
-        func peripheralNotConfigured(peripheral _: CBPeripheral) {
-            showError(errorMessage: "Device cannot be configured")
-        }
-
-        func peripheralDisconnected(peripheral _: CBPeripheral, error: Error?) {
-            showError(errorMessage: "Error in connection : \(String(describing: error))")
-        }
-    }
-#endif

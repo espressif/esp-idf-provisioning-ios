@@ -55,6 +55,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Connect with BLE Compatible devices for Provisioning</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Connect with BLE Compatible devices for Provisioning</string>
 	<key>ProductId</key>
@@ -84,6 +86,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>WifiBaseUrl</key>
 	<string>192.168.4.1:80</string>
 	<key>WifiNetworkNamePrefix</key>

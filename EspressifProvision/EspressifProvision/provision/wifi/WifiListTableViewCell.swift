@@ -12,4 +12,5 @@ import UIKit
 class WifiListTableViewCell: UITableViewCell {
     @IBOutlet var ssidLabel: UILabel!
     @IBOutlet var signalImageView: UIImageView!
+    @IBOutlet var authenticationImageView: UIImageView!
 }

@@ -19,6 +19,8 @@
 import Foundation
 
 struct SoftAPTransport: Transport {
+    var utility: Utility
+
     var baseUrl: String
 
     func isDeviceConfigured() -> Bool {
@@ -30,6 +32,8 @@ struct SoftAPTransport: Transport {
     /// - Parameter baseUrl: base URL for the HTTP endpoints
     init(baseUrl: String) {
         self.baseUrl = baseUrl
+        utility = Utility()
+        utility.scanPath = "prov-scan"
     }
 
     private func SendHTTPData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void) {
