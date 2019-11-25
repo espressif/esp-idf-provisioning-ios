@@ -42,6 +42,7 @@ class ProvisionViewController: UIViewController {
     var capabilities: [String]?
     var alertTextField: UITextField?
     var showPasswordImageView: UIImageView!
+    var forceAuthentication = false
     @IBOutlet var headerView: UIView!
 
     override func viewDidLoad() {
@@ -211,7 +212,7 @@ class ProvisionViewController: UIViewController {
 
     func getDeviceVersionInfo() {
         showLoader(message: "Connecting Device")
-        transport?.SendConfigData(path: (transport?.utility.versionPath)!, data: Data("ESP".utf8), completionHandler: { response, error in
+        transport?.SendConfigData(path: (transport?.utility.versionPath)!, data: Data("V0.2".utf8), completionHandler: { response, error in
             guard error == nil else {
                 print("Error reading device version info")
                 DispatchQueue.main.async {
@@ -229,6 +230,12 @@ class ProvisionViewController: UIViewController {
                     }
                 }
             } catch {
+                let responseString = String(decoding: response!, as: UTF8.self)
+                if responseString.lowercased() == "success" {
+                    self.forceAuthentication = false
+                } else {
+                    self.forceAuthentication = true
+                }
                 self.initialiseSession()
                 print(error)
             }
@@ -479,7 +486,7 @@ extension ProvisionViewController: UITableViewDelegate {
         } else {
             let ssid = ssidList[indexPath.row]
 
-            if wifiDetailList[ssid]?.auth != Espressif_WifiAuthMode.open {
+            if wifiDetailList[ssid]?.auth != Espressif_WifiAuthMode.open || forceAuthentication {
                 let input = UIAlertController(title: ssid, message: nil, preferredStyle: .alert)
 
                 input.addTextField { textField in
@@ -494,7 +501,7 @@ extension ProvisionViewController: UITableViewDelegate {
                     guard let passphrase = textField?.text else {
                         return
                     }
-                    if passphrase.count > 0 {
+                    if passphrase.count > 0 || self.forceAuthentication {
                         self.provisionDevice(ssid: ssid, passphrase: passphrase)
                     }
                 }))
