@@ -211,6 +211,7 @@ class ProvisionViewController: UIViewController {
     }
 
     func getDeviceVersionInfo() {
+        forceAuthentication = false
         showLoader(message: "Connecting Device")
         transport?.SendConfigData(path: (transport?.utility.versionPath)!, data: Data("V0.2".utf8), completionHandler: { response, error in
             guard error == nil else {
