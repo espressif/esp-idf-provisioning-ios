@@ -210,7 +210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1t-Ju-tVJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2746" y="-1620"/>
+            <point key="canvasLocation" x="3289" y="-1792"/>
         </scene>
         <!--Espressif-->
         <scene sceneID="vP2-nv-Q6V">
@@ -237,7 +237,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RNp-Qq-dWP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="972" y="-695"/>
+            <point key="canvasLocation" x="444" y="-684"/>
         </scene>
         <!--Side Menu Navigation Controller-->
         <scene sceneID="m8J-gS-vBP">
@@ -259,7 +259,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X5k-Iu-npv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2513" y="-699"/>
+            <point key="canvasLocation" x="2540" y="-454"/>
         </scene>
         <!--Settings Page View Controller-->
         <scene sceneID="5Kp-wz-nQU">
@@ -877,34 +877,37 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Pf8-Uy-Y4N">
                                 <rect key="frame" x="10" y="94.5" width="355" height="528.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="25" id="0ed-Z3-gn0">
-                                    <size key="itemSize" width="186" height="168"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
+                                <collectionViewLayout key="collectionViewLayout" id="3em-xx-bFU" customClass="CollectionViewCenteredFlowLayout" customModule="CollectionViewCenteredFlowLayout"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="deviceCollectionViewCell" id="xk3-na-oA1" customClass="DevicesCollectionViewCell" customModule="EspressifProvision" customModuleProvider="target">
-                                        <rect key="frame" x="84.5" y="0.0" width="186" height="168"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="186" height="168"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view alpha="0.64999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l61-BQ-GxC">
-                                                    <rect key="frame" x="10" y="10" width="166" height="148"/>
+                                                    <rect key="frame" x="10" y="10" width="30" height="30"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="light_bulb" translatesAutoresizingMaskIntoConstraints="NO" id="cFZ-pL-eRb">
-                                                            <rect key="frame" x="15" y="10" width="136" height="96.5"/>
+                                                            <rect key="frame" x="15" y="10" width="0.0" height="0.0"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mla-ox-9Gj">
-                                                            <rect key="frame" x="8" y="115.5" width="150" height="22.5"/>
+                                                            <rect key="frame" x="8" y="19" width="14" height="1"/>
                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWD-ug-uJz">
-                                                            <rect key="frame" x="141" y="0.0" width="25" height="24"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoDark" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWD-ug-uJz">
+                                                            <rect key="frame" x="10" y="0.0" width="20" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="20" id="85h-l1-uQE"/>
+                                                                <constraint firstAttribute="height" constant="20" id="eee-9W-5Cg"/>
+                                                            </constraints>
+                                                            <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <connections>
+                                                                <action selector="showDeviceInfo:" destination="xk3-na-oA1" eventType="touchUpInside" id="ZK1-ra-UjX"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -967,6 +970,23 @@
                                     <action selector="provisionButtonClicked:" destination="aZq-BT-0rQ" eventType="touchUpInside" id="ARG-aW-5Y1"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AfD-lh-GZo">
+                                <rect key="frame" x="265" y="388" width="80" height="80"/>
+                                <color key="backgroundColor" red="0.68627450980000004" green="0.30196078430000001" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="M7e-Ec-AQR"/>
+                                    <constraint firstAttribute="width" constant="80" id="She-YH-CCt"/>
+                                </constraints>
+                                <state key="normal" image="scan_qr_code"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="w6s-C3-JJh" kind="show" identifier="scanQRCode" id="oPA-Fu-XzH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -979,10 +999,12 @@
                             <constraint firstItem="CLX-bB-em2" firstAttribute="trailing" secondItem="Pf8-Uy-Y4N" secondAttribute="trailing" constant="10" id="Y9q-Wf-G9B"/>
                             <constraint firstItem="npw-N2-6dU" firstAttribute="width" secondItem="gAh-G1-HgU" secondAttribute="width" id="YzW-vc-vCD"/>
                             <constraint firstItem="CLX-bB-em2" firstAttribute="trailing" secondItem="REK-JJ-rvp" secondAttribute="trailing" constant="30" id="cnq-uz-Icy"/>
+                            <constraint firstItem="CLX-bB-em2" firstAttribute="trailing" secondItem="AfD-lh-GZo" secondAttribute="trailing" constant="30" id="dmm-A2-yGK"/>
                             <constraint firstItem="cVg-8N-5QG" firstAttribute="leading" secondItem="CLX-bB-em2" secondAttribute="leading" constant="20" id="fMI-t5-W7q"/>
                             <constraint firstItem="npw-N2-6dU" firstAttribute="centerX" secondItem="gAh-G1-HgU" secondAttribute="centerX" id="jML-nL-BAC"/>
                             <constraint firstItem="npw-N2-6dU" firstAttribute="centerY" secondItem="gAh-G1-HgU" secondAttribute="centerY" id="sHI-SA-ZqY"/>
                             <constraint firstItem="npw-N2-6dU" firstAttribute="height" secondItem="gAh-G1-HgU" secondAttribute="height" id="tdU-gV-BG5"/>
+                            <constraint firstItem="REK-JJ-rvp" firstAttribute="top" secondItem="AfD-lh-GZo" secondAttribute="bottom" constant="20" id="v4S-RL-9DX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CLX-bB-em2"/>
                     </view>
@@ -1000,7 +1022,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sxn-wB-5GI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1820" y="-904"/>
+            <point key="canvasLocation" x="1394" y="-1008"/>
+        </scene>
+        <!--Scanner View Controller-->
+        <scene sceneID="lRR-bk-R8N">
+            <objects>
+                <viewController storyboardIdentifier="scannerVC" id="w6s-C3-JJh" customClass="ScannerViewController" customModule="EspressifProvision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cTi-Kl-D4N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="t3L-dF-xjx"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1be-9s-gtr"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Ok-ep-3cV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2449" y="-1242"/>
         </scene>
     </scenes>
     <resources>
@@ -1010,6 +1048,7 @@
         <image name="plus" width="128" height="128"/>
         <image name="profile_picture" width="128" height="128"/>
         <image name="refresh_icon" width="128" height="128"/>
+        <image name="scan_qr_code" width="32" height="32"/>
         <image name="settings" width="24" height="24"/>
         <image name="wifi_symbol" width="128" height="128"/>
         <image name="wifi_symbol_weak" width="128" height="128"/>

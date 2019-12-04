@@ -26,6 +26,7 @@ class Utility {
     var sessionCharacteristic: CBCharacteristic!
     var configUUIDMap: [String: CBCharacteristic] = [:]
     var deviceVersionInfo: NSDictionary?
+    var currentSSID = ""
 
     func processDescriptor(descriptor: CBDescriptor) {
         if let value = descriptor.value as? String {

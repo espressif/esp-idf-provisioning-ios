@@ -17,6 +17,7 @@ abstract_target 'EspressifProvisionAll' do
   pod 'SideMenu'
   pod 'RangeSeekSlider'
   pod 'ReachabilitySwift'
+  pod 'CollectionViewCenteredFlowLayout'
 
   
   target 'EspressifProvision'

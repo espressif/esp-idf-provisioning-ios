@@ -8,13 +8,13 @@
 
 import UIKit
 
-class GenericControlTableViewCell<Element>: UITableViewCell {
+class GenericControlTableViewCell: UITableViewCell {
     @IBOutlet var backView: UIView!
     @IBOutlet var controlName: UILabel!
     @IBOutlet var controlValueTextField: UITextField!
-    var controlValue: Element?
-
+    var controlValue: String?
     var attributeKey: String!
+    var dataType: String = "String"
     var device: Device!
 
     override func awakeFromNib() {
@@ -33,6 +33,8 @@ class GenericControlTableViewCell<Element>: UITableViewCell {
         layer.shadowColor = UIColor.black.cgColor
         layer.masksToBounds = false
 
+        controlValueTextField.setBottomBorder(color: UIColor.black.cgColor)
+
         controlValueTextField.addTarget(self, action: #selector(valueUpdated), for: .editingDidEndOnExit)
     }
 
@@ -43,7 +45,7 @@ class GenericControlTableViewCell<Element>: UITableViewCell {
     }
 
     @objc func valueUpdated() {
-        if let value = controlValueTextField.text as? Element {
+        if let value = controlValueTextField.text {
             controlValueTextField.text = "\(value)"
             controlValue = value
         } else {
@@ -67,6 +69,16 @@ class GenericControlTableViewCell<Element>: UITableViewCell {
 
     @objc func doneButtonAction() {
         controlValueTextField.resignFirstResponder()
-        NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [attributeKey: controlValue])
+        if let value = controlValue {
+            if dataType.lowercased() == "int" {
+                NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [attributeKey: Int(value)])
+            } else if dataType.lowercased() == "float" {
+                NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [attributeKey: Float(value)])
+            } else if dataType.lowercased() == "bool" {
+                NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [attributeKey: Bool(value)])
+            } else {
+                NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [attributeKey: controlValue])
+            }
+        }
     }
 }

@@ -74,16 +74,25 @@ class NetworkManager {
                         let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                         let url = Constants.getNodes + "?userid=" + userID!
                         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//                            if let path = Bundle.main.path(forResource: "DeviceDetails", ofType: "json") {
+//                                do {
+//                                    let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+//                                    let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+//                                    if let jsonResult = jsonResult as? [String: Any] {
+//                                        // do stuff
+//                                        print("valid json")
+//                                        completionHandler(JSONParser.parseNodeData(data: jsonResult, nodeID: "00-11-22-33-44-55"), nil)
+//                                        return
+//                                    }
+//                                } catch {
+//                                    // handle error
+//                                }
+//                            }
                             print(response)
                             if let json = response.result.value as? [String: Any], let tempArray = json["nodes"] as? [String] {
                                 var deviceList: [Device] = []
-                                var nodeList: [Node] = []
                                 let serviceGroup = DispatchGroup()
                                 for item in tempArray {
-                                    var node = Node()
-                                    node.node_id = item
-                                    nodeList.append(node)
-                                    User.shared.associatedNodes = nodeList
                                     serviceGroup.enter()
                                     self.getNodeConfig(nodeID: item, headers: headers, completionHandler: { device, _ in
                                         if let devices = device {

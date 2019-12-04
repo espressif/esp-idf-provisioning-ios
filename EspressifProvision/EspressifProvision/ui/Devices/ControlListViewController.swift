@@ -31,6 +31,7 @@ class ControlListViewController: UIViewController {
         tableView.register(UINib(nibName: "SwitchTableViewCell", bundle: nil), forCellReuseIdentifier: "SwitchTableViewCell")
         tableView.register(UINib(nibName: "GenericControlTableViewCell", bundle: nil), forCellReuseIdentifier: "genericControlCell")
         tableView.register(UINib(nibName: "GenericSliderTableViewCell", bundle: nil), forCellReuseIdentifier: "GenericSliderTableViewCell")
+        tableView.register(UINib(nibName: "StaticControlTableViewCell", bundle: nil), forCellReuseIdentifier: "staticControlTableViewCell")
 
         let colors = Colors()
         view.backgroundColor = UIColor.clear
@@ -88,10 +89,19 @@ class ControlListViewController: UIViewController {
      */
     @objc func setBrightness(_: UISlider) {}
 
-    func getTableViewGenericCell<Element>(attribute: Attribute, indexPath: IndexPath) -> GenericControlTableViewCell<Element> {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "genericControlCell", for: indexPath) as! GenericControlTableViewCell<Element>
+    func getTableViewGenericCell(attribute: DynamicAttribute, indexPath: IndexPath) -> GenericControlTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "genericControlCell", for: indexPath) as! GenericControlTableViewCell
         cell.controlName.text = attribute.name
-        cell.controlValue = attribute.value as? Element
+        cell.controlValue = attribute.value as? String
+        cell.controlValueTextField.text = cell.controlValue
+        if attribute.properties?.contains("write") ?? true {
+            cell.controlValueTextField.isEnabled = true
+        } else {
+            cell.controlValueTextField.isEnabled = false
+        }
+        if let data_type = attribute.dataType {
+            cell.dataType = data_type
+        }
         return cell
     }
 
@@ -130,6 +140,11 @@ class ControlListViewController: UIViewController {
             if let attributeName = dynamicAttribute.name {
                 cell.attributeKey = attributeName
             }
+            if dynamicAttribute.properties?.contains("write") ?? true {
+                cell.slider.isEnabled = true
+            } else {
+                cell.slider.isEnabled = false
+            }
             return cell
 //            }
         } else if dynamicAttribute.uiType == "esp-ui-toggle" || dynamicAttribute.dataType?.lowercased() == "bool" {
@@ -142,22 +157,16 @@ class ControlListViewController: UIViewController {
             if let switchState = dynamicAttribute.value as? Bool {
                 cell.toggleSwitch.setOn(switchState, animated: true)
             }
+            if dynamicAttribute.properties?.contains("write") ?? true {
+                cell.toggleSwitch.isEnabled = true
+            } else {
+                cell.toggleSwitch.isEnabled = false
+            }
 
             return cell
         } else {
-            if dynamicAttribute.dataType?.lowercased() == "int" {
-                let cell: GenericControlTableViewCell<Int> = getTableViewGenericCell(attribute: dynamicAttribute, indexPath: indexPath)
-                return cell
-            } else if dynamicAttribute.dataType?.lowercased() == "bool" {
-                let cell: GenericControlTableViewCell<Bool> = getTableViewGenericCell(attribute: dynamicAttribute, indexPath: indexPath)
-                return cell
-            } else if dynamicAttribute.dataType?.lowercased() == "float" {
-                let cell: GenericControlTableViewCell<Float> = getTableViewGenericCell(attribute: dynamicAttribute, indexPath: indexPath)
-                return cell
-            } else {
-                let cell: GenericControlTableViewCell<String> = getTableViewGenericCell(attribute: dynamicAttribute, indexPath: indexPath)
-                return cell
-            }
+            let cell: GenericControlTableViewCell = getTableViewGenericCell(attribute: dynamicAttribute, indexPath: indexPath)
+            return cell
         }
     }
 }
@@ -192,19 +201,11 @@ extension ControlListViewController: UITableViewDataSource {
     func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section >= device?.dynamicParams?.count ?? 0 {
             let staticControl = device?.staticParams![indexPath.section - (device?.dynamicParams?.count ?? 0)]
-            if staticControl?.dataType?.lowercased() == "int" {
-                let cell: GenericControlTableViewCell<Int> = getTableViewGenericCell(attribute: staticControl!, indexPath: indexPath)
-                return cell
-            } else if staticControl?.dataType?.lowercased() == "bool" {
-                let cell: GenericControlTableViewCell<Bool> = getTableViewGenericCell(attribute: staticControl!, indexPath: indexPath)
-                return cell
-            } else if staticControl?.dataType?.lowercased() == "float" {
-                let cell: GenericControlTableViewCell<Float> = getTableViewGenericCell(attribute: staticControl!, indexPath: indexPath)
-                return cell
-            } else {
-                let cell: GenericControlTableViewCell<String> = getTableViewGenericCell(attribute: staticControl!, indexPath: indexPath)
-                return cell
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "staticControlTableViewCell", for: indexPath) as! StaticControlTableViewCell
+            cell.controlNameLabel.text = staticControl?.name ?? ""
+            cell.controlValueLabel.text = staticControl?.value as? String ?? ""
+            return cell
+
         } else {
             let control = device?.dynamicParams![indexPath.section]
             return getTableViewCellBasedOn(dynamicAttribute: control!, indexPath: indexPath)

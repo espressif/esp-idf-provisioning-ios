@@ -24,6 +24,7 @@ class SuccessViewController: UIViewController {
     var session: Session!
     var deviceID: String?
     var requestID: String?
+    var success = false
 
     @IBOutlet var successLabel: UILabel!
 
@@ -32,8 +33,9 @@ class SuccessViewController: UIViewController {
         if let statusText = statusText {
             successLabel.text = statusText
         }
-
-        User.shared.associateNodeWithUser(session: session)
+        if success {
+            User.shared.associateNodeWithUser(session: session)
+        }
         // Do any additional setup after loading the view, typically from a nib.
 
         let colors = Colors()

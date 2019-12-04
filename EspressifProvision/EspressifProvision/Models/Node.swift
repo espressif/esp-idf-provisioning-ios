@@ -9,8 +9,15 @@
 import Foundation
 
 struct Node {
-    var name: String?
     var node_id: String?
-    var type: String?
+    var config_version: String?
+    var info: Info?
     var devices: [Device]?
+    var attributes: [Attribute]?
+}
+
+struct Info {
+    var name: String?
+    var fw_version: String?
+    var type: String?
 }

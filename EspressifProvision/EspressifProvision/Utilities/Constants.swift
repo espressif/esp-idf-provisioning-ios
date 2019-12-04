@@ -30,12 +30,12 @@ struct Constants {
 
     // Amazon Cognito setup configuration
     static let CognitoIdentityUserPoolRegion: AWSRegionType = .USEast1
-    static let CognitoIdentityUserPoolId = "us-east-1_M35Yu8neD"
-    static let CognitoIdentityUserPoolAppClientId = "5lu0kla1a769f4itp1m9fdoa7v"
-    static let CognitoIdentityUserPoolAppClientSecret = "1vcurad1q2uhi32j2qpcmem0qbu6a5lif2heffav8ddf2dusimrf"
+    static let CognitoIdentityUserPoolId = "us-east-1_Vrr3pWTIy"
+    static let CognitoIdentityUserPoolAppClientId = "78suluee2rmlltshrt2v4lvuo0"
+    static let CognitoIdentityUserPoolAppClientSecret = "6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d"
 
     static let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
-    static let baseURL = "https://yv4hu5b4oj.execute-api.us-east-1.amazonaws.com/dev/v1/"
+    static let baseURL = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/"
 
     // AWS cognito APIs
     static let addDevice = Constants.baseURL + "user/nodes/mapping/"

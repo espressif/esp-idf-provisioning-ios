@@ -171,13 +171,13 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
 }
 
 extension UITextField {
-    func setBottomBorder() {
+    func setBottomBorder(color: CGColor = UIColor(red: 255.0 / 255.0, green: 97.0 / 255.0, blue: 99.0 / 255.0, alpha: 1.0).cgColor) {
         borderStyle = .none
         layer.backgroundColor = UIColor.clear.cgColor
 
         let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0.0, y: frame.height - 1, width: frame.width, height: 1.0)
-        bottomLine.backgroundColor = UIColor(red: 255.0 / 255.0, green: 97.0 / 255.0, blue: 99.0 / 255.0, alpha: 1.0).cgColor
+        bottomLine.backgroundColor = color
         borderStyle = UITextField.BorderStyle.none
         layer.addSublayer(bottomLine)
     }

@@ -41,6 +41,8 @@ class ProvisionViewController: UIViewController {
     var capabilities: [String]?
     var alertTextField: UITextField?
     var showPasswordImageView: UIImageView!
+    var connectAutomatically = false
+    var pop = ""
     @IBOutlet var headerView: UIView!
 
     override func viewDidLoad() {
@@ -134,6 +136,9 @@ class ProvisionViewController: UIViewController {
                 provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY] = ""
                 security = Security1(proofOfPossession: provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]!)
                 initSession()
+            } else if connectAutomatically {
+                security = Security1(proofOfPossession: pop)
+                initSession()
             } else {
                 DispatchQueue.main.async {
                     let input = UIAlertController(title: "Proof of Possession", message: nil, preferredStyle: .alert)
@@ -167,6 +172,7 @@ class ProvisionViewController: UIViewController {
             DispatchQueue.main.async {
                 MBProgressHUD.hide(for: self.view, animated: true)
             }
+
             guard error == nil else {
                 print("Error in establishing session \(error.debugDescription)")
                 self.showStatusScreen()
@@ -293,6 +299,7 @@ class ProvisionViewController: UIViewController {
                         successVC.statusText = "Error in getting wifi state : \(error.debugDescription)"
                     } else if wifiState == Espressif_WifiStationState.connected {
                         successVC.statusText = "Device has been successfully provisioned!"
+                        successVC.success = true
                     } else if wifiState == Espressif_WifiStationState.disconnected {
                         successVC.statusText = "Please check the device indicators for Provisioning status."
                     } else {
@@ -388,6 +395,7 @@ class ProvisionViewController: UIViewController {
         DispatchQueue.main.async {
             let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as! SuccessViewController
             successVC.statusText = "Error establishing session.\n Check if Proof of Possession(POP) is correct!"
+            successVC.session = self.session
             self.navigationController?.pushViewController(successVC, animated: true)
         }
     }

@@ -9,6 +9,11 @@
 import UIKit
 
 class DevicesCollectionViewCell: UICollectionViewCell {
+    var device: Device!
+    var infoButtonAction: () -> Void = {}
     @IBOutlet var deviceImageView: UIImageView!
     @IBOutlet var deviceName: UILabel!
+    @IBAction func showDeviceInfo(_: Any) {
+        infoButtonAction()
+    }
 }

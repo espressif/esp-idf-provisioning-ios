@@ -37,6 +37,8 @@ class DevicesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
+
         pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
         if user == nil {
             user = pool?.currentUser()
@@ -81,6 +83,7 @@ class DevicesViewController: UIViewController {
         } catch {
             print("could not start reachability notifier")
         }
+        collectionView.reloadData()
         if User.shared.associatedDevices == nil {
             Utility.showLoader(message: "Fetching Device List", view: view)
             refreshDeviceList()
@@ -105,7 +108,7 @@ class DevicesViewController: UIViewController {
     }
 
     @objc func refreshDeviceList() {
-        if reachability.connection != .none {
+        if reachability.connection != .unavailable {
             User.shared.updateDeviceList = false
             NetworkManager.shared.getDeviceList { devices, _ in
                 Utility.hideLoader(view: self.view)
@@ -138,6 +141,30 @@ class DevicesViewController: UIViewController {
         ]
         Provision.showProvisioningUI(on: self, config: config)
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
+        if segue.identifier == "scanQRCode" {
+            if let scannerVC = segue.destination as? ScannerViewController {
+                var transport = Provision.CONFIG_TRANSPORT_WIFI
+                #if BLE
+                    transport = Provision.CONFIG_TRANSPORT_BLE
+                #endif
+
+                var security = Provision.CONFIG_SECURITY_SECURITY0
+                #if SEC1
+                    security = Provision.CONFIG_SECURITY_SECURITY1
+                #endif
+
+                let config = [
+                    Provision.CONFIG_TRANSPORT_KEY: transport,
+                    Provision.CONFIG_SECURITY_KEY: security,
+                    Provision.CONFIG_BASE_URL_KEY: baseUrl,
+                    Provision.CONFIG_WIFI_AP_KEY: networkNamePrefix,
+                ]
+                scannerVC.provisionConfig = config
+            }
+        }
+    }
 }
 
 extension DevicesViewController: UICollectionViewDelegate {
@@ -164,6 +191,14 @@ extension DevicesViewController: UICollectionViewDataSource {
         } else {
             cell.deviceImageView.image = UIImage(named: "generic_device")
         }
+        cell.infoButtonAction = { [unowned self] in
+            let storyboard = UIStoryboard(name: "DeviceDetail", bundle: nil)
+            let nodeDetailVC = storyboard.instantiateViewController(withIdentifier: "nodeDetailsVC") as! NodeDetailsViewController
+            if let currentDevice = User.shared.associatedDevices?[indexPath.row], let node = User.shared.associatedNodes[currentDevice.node_id!] {
+                nodeDetailVC.currentNode = node
+                self.navigationController?.pushViewController(nodeDetailVC, animated: true)
+            }
+        }
         return cell
     }
 }
@@ -171,15 +206,5 @@ extension DevicesViewController: UICollectionViewDataSource {
 extension DevicesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         return CGSize(width: 125.0, height: 125.0)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, insetForSectionAt _: Int) -> UIEdgeInsets {
-        let cellCount = User.shared.associatedDevices?.count ?? 0
-        let totalCellWidth = cellCount * 125
-        let totalSpaceWidth = 50 * (cellCount - 1)
-        let leftInset = (collectionView.layer.frame.size.width - CGFloat(totalCellWidth + totalSpaceWidth)) / 2
-        let rightInset = leftInset
-
-        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
     }
 }
