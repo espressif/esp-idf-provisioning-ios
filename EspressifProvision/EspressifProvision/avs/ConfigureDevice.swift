@@ -132,7 +132,7 @@ class ConfigureDevice {
         var audioCueRequest = Avs_CmdSetSORAudioCue()
         audioCueRequest.audioCue = value
         var payload = Avs_AVSConfigPayload()
-        payload.msg = Avs_AVSConfigMsgType.typeCmdSetEoraudioCue
+        payload.msg = Avs_AVSConfigMsgType.typeCmdSetSoraudioCue
         payload.cmdSorAudioCue = audioCueRequest
         notificationhandler = completionHandler
         do {

@@ -52,6 +52,7 @@
 		F18C3AB8229BEDB2007C197F /* ScannedLocalDevicesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18C3AB7229BEDB2007C197F /* ScannedLocalDevicesVC.swift */; };
 		F18C3ABE229BF4D4007C197F /* SSDPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18C3ABC229BF4D4007C197F /* SSDPService.swift */; };
 		F18C3ABF229BF4D4007C197F /* SSDPDiscovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18C3ABD229BF4D4007C197F /* SSDPDiscovery.swift */; };
+		F1B464B5239A50BE0090B346 /* AppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B464B4239A50BE0090B346 /* AppInfoViewController.swift */; };
 		F1DCEC292296CB94005918FE /* ScanWifiList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEC282296CB94005918FE /* ScanWifiList.swift */; };
 		F1DCEC2D2297D577005918FE /* WifiListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DCEC2C2297D577005918FE /* WifiListTableViewCell.swift */; };
 		F1DD7095229FC8620092DAB9 /* AmazonEmberDisplay_Lt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1DD7094229FC8590092DAB9 /* AmazonEmberDisplay_Lt.ttf */; };
@@ -168,6 +169,7 @@
 		F18C3AB7229BEDB2007C197F /* ScannedLocalDevicesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannedLocalDevicesVC.swift; sourceTree = "<group>"; };
 		F18C3ABC229BF4D4007C197F /* SSDPService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPService.swift; sourceTree = "<group>"; };
 		F18C3ABD229BF4D4007C197F /* SSDPDiscovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSDPDiscovery.swift; sourceTree = "<group>"; };
+		F1B464B4239A50BE0090B346 /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
 		F1DCEC282296CB94005918FE /* ScanWifiList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanWifiList.swift; sourceTree = "<group>"; };
 		F1DCEC2C2297D577005918FE /* WifiListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiListTableViewCell.swift; sourceTree = "<group>"; };
 		F1DD7094229FC8590092DAB9 /* AmazonEmberDisplay_Lt.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AmazonEmberDisplay_Lt.ttf; sourceTree = "<group>"; };
@@ -354,6 +356,7 @@
 				144149432126AE09002AD5E1 /* SuccessViewController.swift */,
 				F11B547322DDE41A00F7D0D3 /* StatusViewController.swift */,
 				F1EB558823043B1400AEEBE3 /* BLEDeviceListViewCell.swift */,
+				F1B464B4239A50BE0090B346 /* AppInfoViewController.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -774,6 +777,7 @@
 				F18C3ABF229BF4D4007C197F /* SSDPDiscovery.swift in Sources */,
 				143146B320EB22470017E119 /* ProvisionLandingViewController.swift in Sources */,
 				1431468B20E37B980017E119 /* Session.swift in Sources */,
+				F1B464B5239A50BE0090B346 /* AppInfoViewController.swift in Sources */,
 				143146AA20EA29E90017E119 /* LoginWithAmazonViewController.swift in Sources */,
 				1431469F20E387C60017E119 /* wifi_constants.pb.swift in Sources */,
 				149774E3210C8A0000022841 /* StringExtensions.swift in Sources */,
@@ -963,6 +967,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -974,6 +979,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -992,6 +998,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1003,6 +1010,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1164,6 +1172,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1175,6 +1184,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DWIFI -DAVS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1290,6 +1300,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1301,6 +1312,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DAVS -DSEC0 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1421,6 +1433,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1432,6 +1445,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DAVS -DSEC1 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1553,6 +1567,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1564,6 +1579,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1685,6 +1701,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1696,6 +1713,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1817,6 +1835,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1828,6 +1847,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DBLE -DAVS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1949,6 +1969,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1960,6 +1981,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DBLE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2081,6 +2103,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2092,6 +2115,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DAVS -DSEC1 -DBLE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2213,6 +2237,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2224,6 +2249,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DBLE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2346,6 +2372,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2359,6 +2386,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DAVS -DSEC1 -DBLE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provbleavs;
 				PRODUCT_NAME = "$(TARGET_NAME)";

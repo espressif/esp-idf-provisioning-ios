@@ -55,6 +55,9 @@ class SuccessViewController: UIViewController {
         navigationItem.title = "Things to try"
     }
 
+    ///
+    /// Go to intial View Controller.
+    ///
     @objc func presentVC() {
         performSegue(withIdentifier: "presentFirstVC", sender: nil)
     }

@@ -27,6 +27,5 @@ class AlexaDevice: NSObject {
 
     init(hostAddr: String) {
         hostAddress = hostAddr
-        friendlyname = nil
     }
 }

@@ -14,6 +14,7 @@ class DeviceDetailViewController: UIViewController {
     var loginStatus = false
     var device: AlexaDevice?
     var avsConfig: ConfigureAVS?
+    var session: Session!
     @IBOutlet var signedInViewContainer: UIView!
     @IBOutlet var signedOutViewContainer: UIView!
     @IBOutlet var learnMoreTextView: UITextView!
@@ -29,7 +30,6 @@ class DeviceDetailViewController: UIViewController {
 
         navigationItem.title = device?.friendlyname
 
-        // Do any additional setup after loading the view, typically from a nib.
         let attributedString = NSMutableAttributedString(string: "To learn more and access additional features, download the Alexa App")
         let url = URL(string: "alexa://")!
         var redirectURL = url
@@ -57,43 +57,33 @@ class DeviceDetailViewController: UIViewController {
 
     @IBAction func signInAmazon(_: Any) {
         Constants.showLoader(message: "Signing In", view: view)
-        let transport = SoftAPTransport(baseUrl: device!.hostAddress! + ":80")
-        let security = Security0()
-        let session = Session(transport: transport, security: security)
-        session.initialize(response: nil) { error in
-            guard error == nil else {
-                print("Error in establishing session \(error.debugDescription)")
-                MBProgressHUD.hide(for: self.view, animated: true)
-                return
-            }
-            if session.isEstablished {
-                let prov = Provision(session: session)
-                _ = prov.getAVSDeviceDetails(completionHandler: { _, error in
-                    guard error == nil else {
-                        print(error!)
-                        DispatchQueue.main.async {
-                            MBProgressHUD.hide(for: self.view, animated: true)
-                        }
-                        return
-                    }
+        if session.isEstablished {
+            let prov = Provision(session: session)
+            _ = prov.getAVSDeviceDetails(completionHandler: { _, error in
+                guard error == nil else {
+                    print(error!)
                     DispatchQueue.main.async {
-                        ConfigureAVS.loginWithAmazon(completionHandler: { avsDetails, error in
-                            if error == nil {
-                                prov.putAVSDeviceDetails(config: avsDetails!, completionHandler: {
-                                    DispatchQueue.main.async {
-                                        self.loginStatus = true
-                                        self.updateUIView()
-                                    }
-                                })
-                            }
-                            MBProgressHUD.hide(for: self.view, animated: true)
-                        })
+                        MBProgressHUD.hide(for: self.view, animated: true)
                     }
-                })
-            } else {
-                DispatchQueue.main.async {
-                    MBProgressHUD.hide(for: self.view, animated: true)
+                    return
                 }
+                DispatchQueue.main.async {
+                    ConfigureAVS.loginWithAmazon(completionHandler: { avsDetails, error in
+                        if error == nil {
+                            prov.putAVSDeviceDetails(config: avsDetails!, completionHandler: {
+                                DispatchQueue.main.async {
+                                    self.loginStatus = true
+                                    self.updateUIView()
+                                }
+                            })
+                        }
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                    })
+                }
+            })
+        } else {
+            DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
             }
         }
     }

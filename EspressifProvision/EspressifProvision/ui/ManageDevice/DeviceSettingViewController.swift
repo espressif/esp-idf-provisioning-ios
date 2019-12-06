@@ -18,28 +18,9 @@ class DeviceSettingViewController: UIViewController {
 
     var configureDevice: ConfigureDevice!
     var session: Session!
-    let dummyTextField = UITextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        dummyTextField.isHidden = true
-
-        let toolBar = UIToolbar()
-        toolBar.barStyle = UIBarStyle.default
-        toolBar.isTranslucent = true
-        toolBar.tintColor = UIColor(red: 76 / 255, green: 217 / 255, blue: 100 / 255, alpha: 1)
-        toolBar.sizeToFit()
-
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(doneTapped))
-        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItem.Style.plain, target: self, action: #selector(cancelTapped))
-
-        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
-        toolBar.isUserInteractionEnabled = true
-
-        dummyTextField.inputView = pickerView
-        dummyTextField.inputAccessoryView = toolBar
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -51,19 +32,24 @@ class DeviceSettingViewController: UIViewController {
         languageLabel.text = configureDevice.languages[configureDevice.alexaDevice.language?.rawValue ?? 0]
     }
 
-    @objc func doneTapped() {}
-
-    @objc func cancelTapped() {}
-
     func showDeviceDetails(device: AlexaDevice, avsConfig: ConfigureAVS, loginStatus: Bool = false) {
         DispatchQueue.main.async {
             let deviceDetailVC = self.storyboard?.instantiateViewController(withIdentifier: Constants.deviceDetailVCIndentifier) as! DeviceDetailViewController
             deviceDetailVC.avsConfig = avsConfig
             deviceDetailVC.loginStatus = loginStatus
+            deviceDetailVC.session = self.session
             deviceDetailVC.device = device
             self.navigationController?.pushViewController(deviceDetailVC, animated: true)
         }
     }
+
+    private func addHeightConstraint(textField: UITextField) {
+        let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
+        textField.addConstraint(heightConstraint)
+        textField.font = UIFont(name: textField.font!.fontName, size: 18)
+    }
+
+    // MARK: IBAction Methods
 
     @IBAction func setDeviceName(_: Any) {
         let input = UIAlertController(title: "Device name", message: nil, preferredStyle: .alert)
@@ -82,8 +68,8 @@ class DeviceSettingViewController: UIViewController {
                 if name != self.configureDevice.alexaDevice.deviceName, name != "" {
                     Constants.showLoader(message: "Setting device name", view: self.view)
                     self.configureDevice.setDeviceName(withName: name) { result in
-                        Constants.hideLoader(view: self.view)
                         DispatchQueue.main.async {
+                            Constants.hideLoader(view: self.view)
                             if result {
                                 self.deviceNameLabel.text = name
                                 self.configureDevice.alexaDevice.deviceName = name
@@ -100,8 +86,8 @@ class DeviceSettingViewController: UIViewController {
         Constants.showLoader(message: "Setting device volume", view: view)
         let volume = UInt32(sender.value)
         configureDevice.setDeviceVolume(volume: volume) { result in
-            Constants.hideLoader(view: self.view)
             DispatchQueue.main.async {
+                Constants.hideLoader(view: self.view)
                 if result {
                     self.volumeLabel.text = "\(volume)"
                     self.configureDevice.alexaDevice.volume = volume
@@ -135,24 +121,13 @@ class DeviceSettingViewController: UIViewController {
             self.showDeviceDetails(device: self.configureDevice.alexaDevice, avsConfig: avsConfig, loginStatus: status)
         })
     }
-
-    private func addHeightConstraint(textField: UITextField) {
-        let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
-        textField.addConstraint(heightConstraint)
-        textField.font = UIFont(name: textField.font!.fontName, size: 18)
-    }
-
-    /*
-     // MARK: - Navigation
-
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-     }
-     */
 }
 
+// MARK: UITextFieldDelegate
+
+/*
+ Over riding UITextField method in order to restrict the textfield to 22 characters only.
+ */
 extension DeviceSettingViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let maxLength = 22

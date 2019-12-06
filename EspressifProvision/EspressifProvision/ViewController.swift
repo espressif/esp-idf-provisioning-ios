@@ -23,8 +23,6 @@ import UIKit
 class ViewController: UIViewController {
     // Provisioning
     private let pop = Bundle.main.infoDictionary?["ProofOfPossession"] as! String
-    private let ssid = "ESPIndia"
-    private let passphrase = ""
     private let avsdetails = ["codeChallenge": "6c7nGrky_ehjM40Ivk3p3-OeoEm9r7NCzmWexUULaa4", "redirectUri": "amzn-com.espressif.avs.provisioning.ble://?methodName=signin", "authCode": "", "clientId": "amzn1.application-oa2-"]
     // AVS
     private let productId = Bundle.main.infoDictionary?["ProductId"] as! String
@@ -49,6 +47,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         productDSN = generateProductDSN()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem?.image = UIImage(named: "info_icon")
     }
 
     #if AVS
@@ -114,57 +113,7 @@ class ViewController: UIViewController {
         #endif
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-//    #if AVS
-//        private func configureAWSLogin(session newSession: Session,
-//                                       completionHandler: @escaping (Error?) -> Void) {
-//            let configureAVS = ConfigureAVS(session: newSession)
-//
-//            DispatchQueue.main.async {
-//                ConfigureAVS.loginWithAmazon(completionHandler: { awsInfo, error in
-//                    guard error == nil, awsInfo != nil else {
-//                        return
-//                    }
-//
-//                    let authCode = awsInfo![ConfigureAVS.AUTH_CODE]
-//                    let redirectUri = awsInfo![ConfigureAVS.REDIRECT_URI]
-//                    let codeVerifier = awsInfo![ConfigureAVS.CODE_VERIFIER]
-//                    let clientId = awsInfo![ConfigureAVS.CLIENT_ID]
-//
-//                    if let authCode = authCode,
-//                        let clientId = clientId,
-//                        let redirectUri = redirectUri,
-//                        let codeVerifier = codeVerifier {
-//                        configureAVS.configureAmazonLogin(cliendId: clientId,
-//                                                          authCode: authCode,
-//                                                          redirectUri: redirectUri) { _, error in
-//                            if let error = error {
-//                                print("Error in configuring AVS : \(error)")
-//                            } else {
-//                                print("AVS configured \(authCode)")
-//                            }
-//
-//                            completionHandler(error)
-//                        }
-//                    }
-//
-//                })
-//            }
-//        }
-//    #endif
-
     private func generateProductDSN() -> String {
         return UUID().uuidString
-    }
-
-    func showError(errorMessage: String) {
-        let alertMessage = errorMessage
-        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
-        present(alertController, animated: true, completion: nil)
     }
 }

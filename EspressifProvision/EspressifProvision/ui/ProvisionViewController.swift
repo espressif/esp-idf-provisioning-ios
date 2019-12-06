@@ -47,9 +47,9 @@ class ProvisionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         // Do any additional setup after loading the view, typically from a nib.
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         showPasswordImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         let tap = UITapGestureRecognizer(target: self, action: #selector(showPassword))
         tap.numberOfTapsRequired = 1
@@ -117,60 +117,6 @@ class ProvisionViewController: UIViewController {
         }
     }
 
-    private func initialiseSession() {
-        DispatchQueue.main.async {
-            let securityVersion = self.provisionConfig[Provision.CONFIG_SECURITY_KEY]
-
-            if securityVersion == Provision.CONFIG_SECURITY_SECURITY1 {
-                if let capability = self.capabilities, capability.contains(Constants.noProofCapability) {
-                    self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY] = ""
-                    self.security = Security1(proofOfPossession: self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]!)
-                    self.initSession()
-                } else {
-                    let input = UIAlertController(title: "Proof of Possession", message: nil, preferredStyle: .alert)
-
-                    input.addTextField { textField in
-                        textField.text = "abcd1234"
-                    }
-                    input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
-                        self.transport?.disconnect()
-                        self.navigationController?.popViewController(animated: true)
-                    }))
-                    input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
-                        let textField = input?.textFields![0]
-                        self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY] = textField?.text ?? ""
-                        self.security = Security1(proofOfPossession: self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]!)
-                        self.initSession()
-                    }))
-                    self.present(input, animated: true, completion: nil)
-                }
-            } else {
-                self.security = Security0()
-                self.initSession()
-            }
-        }
-    }
-
-    func initSession() {
-        session = Session(transport: transport!,
-                          security: security!)
-        session!.initialize(response: nil) { error in
-            DispatchQueue.main.async {
-                MBProgressHUD.hide(for: self.view, animated: true)
-            }
-            guard error == nil else {
-                print("Error in establishing session \(error.debugDescription)")
-                self.showStatusScreen()
-                return
-            }
-            if let capability = self.capabilities, capability.contains(Constants.wifiScanCapability) {
-                self.scanDeviceForWiFiList()
-            } else {
-                self.scanDeviceForWiFiList()
-            }
-        }
-    }
-
     func scanDeviceForWiFiList() {
         if session!.isEstablished {
             DispatchQueue.main.async {
@@ -214,11 +160,11 @@ class ProvisionViewController: UIViewController {
         forceAuthentication = false
         showLoader(message: "Connecting Device")
         transport?.SendConfigData(path: (transport?.utility.versionPath)!, data: Data("V0.2".utf8), completionHandler: { response, error in
+            DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }
             guard error == nil else {
                 print("Error reading device version info")
-                DispatchQueue.main.async {
-                    MBProgressHUD.hide(for: self.view, animated: true)
-                }
                 self.showConnectionFailure()
                 return
             }
@@ -227,7 +173,7 @@ class ProvisionViewController: UIViewController {
                     self.transport?.utility.deviceVersionInfo = result
                     if let prov = result[Constants.provKey] as? NSDictionary, let capabilities = prov[Constants.capabilitiesKey] as? [String] {
                         self.capabilities = capabilities
-                        self.initialiseSession()
+                        self.scanDeviceForWiFiList()
                     }
                 }
             } catch {
@@ -237,7 +183,7 @@ class ProvisionViewController: UIViewController {
                 } else {
                     self.forceAuthentication = true
                 }
-                self.initialiseSession()
+                self.scanDeviceForWiFiList()
                 print(error)
             }
         })
@@ -300,23 +246,6 @@ class ProvisionViewController: UIViewController {
                 self.provisionButton.isUserInteractionEnabled = true
             }
         })
-    }
-
-    func showError(errorMessage: String) {
-        let alertMessage = errorMessage
-        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-        present(alertController, animated: true, completion: nil)
-    }
-
-    func showLoader(message: String) {
-        DispatchQueue.main.async {
-            let loader = MBProgressHUD.showAdded(to: self.view, animated: true)
-            loader.mode = MBProgressHUDMode.indeterminate
-            loader.label.text = message
-            loader.backgroundView.blurEffectStyle = .dark
-            loader.bezelView.backgroundColor = UIColor.white
-        }
     }
 
     func setWifiIconImageFor(cell: WifiListTableViewCell, ssid: String) {
@@ -422,6 +351,8 @@ class ProvisionViewController: UIViewController {
         passphraseTextfield.rightViewMode = .always
     }
 
+    // MARK: Activity Indicators
+
     private func showConnectionFailure() {
         DispatchQueue.main.async {
             let alert = UIAlertController(title: "Failure", message: "Connection to device failed.\n Please make sure you are connected to the Wi-Fi network of device.", preferredStyle: .alert)
@@ -431,7 +362,26 @@ class ProvisionViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+
+    func showError(errorMessage: String) {
+        let alertMessage = errorMessage
+        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func showLoader(message: String) {
+        DispatchQueue.main.async {
+            let loader = MBProgressHUD.showAdded(to: self.view, animated: true)
+            loader.mode = MBProgressHUDMode.indeterminate
+            loader.label.text = message
+            loader.backgroundView.blurEffectStyle = .dark
+            loader.bezelView.backgroundColor = UIColor.white
+        }
+    }
 }
+
+// MARK: BLETransportDelegate
 
 extension ProvisionViewController: BLETransportDelegate {
     func peripheralsFound(peripherals: [CBPeripheral]) {
@@ -448,12 +398,12 @@ extension ProvisionViewController: BLETransportDelegate {
         showError(errorMessage: "Peripheral device could not be configured.")
     }
 
-    func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {
-//        showError(errorMessage: "Peripheral device disconnected")
-    }
+    func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {}
 
     func bluetoothUnavailable() {}
 }
+
+// MARK: ScanWifiListProtocol
 
 extension ProvisionViewController: ScanWifiListProtocol {
     func wifiScanFinished(wifiList: [String: Espressif_WiFiScanResult]?, error: Error?) {
@@ -478,6 +428,8 @@ extension ProvisionViewController: ScanWifiListProtocol {
         }
     }
 }
+
+// MARK: UITableViewDelegate
 
 extension ProvisionViewController: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -518,6 +470,8 @@ extension ProvisionViewController: UITableViewDelegate {
     }
 }
 
+// MARK: UITableViewDataSource
+
 extension ProvisionViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return ssidList.count + 1
@@ -536,6 +490,8 @@ extension ProvisionViewController: UITableViewDataSource {
     }
 }
 
+// MARK: BLEStatusProtocol
+
 extension ProvisionViewController: BLEStatusProtocol {
     func peripheralDisconnected() {
         MBProgressHUD.hide(for: view, animated: true)
@@ -544,6 +500,8 @@ extension ProvisionViewController: BLEStatusProtocol {
         }
     }
 }
+
+// MARK: UITextField Extension
 
 extension UITextField {
     func togglePasswordVisibility() {

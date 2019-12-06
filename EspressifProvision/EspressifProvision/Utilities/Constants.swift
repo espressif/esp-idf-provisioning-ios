@@ -35,6 +35,7 @@ struct Constants {
     static let aboutVCIdentifier = "aboutVC"
     static let languageListVCIdentifier = "languageListVC"
 
+    // Method to show loader on any view
     static func showLoader(message: String, view: UIView) {
         DispatchQueue.main.async {
             let loader = MBProgressHUD.showAdded(to: view, animated: true)
@@ -43,6 +44,7 @@ struct Constants {
         }
     }
 
+    // Method to hide loader from any view
     static func hideLoader(view: UIView) {
         DispatchQueue.main.async {
             MBProgressHUD.hide(for: view, animated: true)

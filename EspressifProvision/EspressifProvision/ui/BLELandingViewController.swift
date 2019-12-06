@@ -59,14 +59,20 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
         showBusy(isBusy: true, message: "Searching")
     }
 
+    ///
+    /// Go to loging page when bluetooth device is successfully configured
+    ///
     func bleDeviceConfigured() {
         showBusy(isBusy: false)
         let loginAVS = storyboard?.instantiateViewController(withIdentifier: "loginWithAmazon") as! LoginWithAmazonViewController
-        loginAVS.transport = bleTransport
         loginAVS.provisionConfig = provisionConfig
+        loginAVS.transport = bleTransport
         navigationController?.pushViewController(loginAVS, animated: true)
     }
 
+    ///
+    /// Show alert if ble device is not configured
+    ///
     func bleDeviceNotConfigured(title: String, message: String) {
         bleDeviceConnected = true
         showBusy(isBusy: false)
@@ -74,6 +80,8 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
         alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+
+    // MARK: // TableView Methods
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         guard let peripherals = self.peripherals else {
@@ -170,6 +178,8 @@ extension BLELandingViewController: BLETransportDelegate {
         }
     }
 }
+
+// MARK: UITextFieldDelegate
 
 extension BLELandingViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_: UITextField) -> Bool {
