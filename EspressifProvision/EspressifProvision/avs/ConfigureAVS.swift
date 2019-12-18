@@ -42,6 +42,12 @@ class ConfigureAVS {
         transport = session.transport
     }
 
+    // MARK: AMAZON LOGIN
+
+    /// Login Alexa device to Amazon
+    ///
+    /// - Parameters:
+    ///   - completionHandler: handler called when login is successful and response is recieved
     public static func loginWithAmazon(completionHandler: @escaping ([String: String]?, Error?) -> Swift.Void) {
         let request = AMZNAuthorizeRequest()
         for _ in stride(from: 1, to: 10, by: 3) {}
@@ -55,7 +61,6 @@ class ConfigureAVS {
         request.scopes = [AMZNScopeFactory.scope(withName: AMZN_SCOPE, data: scopeData)]
         request.grantType = .code
         request.interactiveStrategy = .auto
-//        request.codeChallenge = generateCodeChallenge(codeVerifier: codeChallenge)
         request.codeChallenge = codeChallenge
         request.codeChallengeMethod = "S256"
 
@@ -80,6 +85,13 @@ class ConfigureAVS {
         }
     }
 
+    /// Send Authorization data to device
+    ///
+    /// - Parameters:
+    ///   - clientId: client id of the app
+    ///   - authCode: authorization code
+    ///   - redirectUri: redirect URL
+    ///   - completionHandler: status of the login
     public func configureAmazonLogin(cliendId: String,
                                      authCode: String,
                                      redirectUri: String,
@@ -106,6 +118,10 @@ class ConfigureAVS {
         }
     }
 
+    /// Send status of device login
+    ///
+    /// - Parameters:
+    ///   - completionHandler: boolean value indicating device is logged in when True
     public func isLoggedIn(completionHandler: @escaping (Bool) -> Void) {
         var payload = Avs_AVSConfigPayload()
         payload.msg = Avs_AVSConfigMsgType.typeCmdSignInStatus
@@ -116,6 +132,8 @@ class ConfigureAVS {
                 transport.SendConfigData(path: ConfigureAVS.AVS_CONFIG_PATH, data: data) { response, error in
                     if response != nil, error == nil {
                         completionHandler(self.processAVSLoginStatus(response: response!))
+                    } else {
+                        print(error as Any)
                     }
                 }
             }
@@ -125,6 +143,10 @@ class ConfigureAVS {
         }
     }
 
+    /// Sign out of Amazon
+    ///
+    /// - Parameters:
+    ///   - completionHandler: boolean value indicating successful logout
     public func signOut(completionHandler: @escaping (Bool) -> Void) {
         var payload = Avs_AVSConfigPayload()
         payload.msg = Avs_AVSConfigMsgType.typeCmdSignOut
@@ -143,6 +165,8 @@ class ConfigureAVS {
             completionHandler(false)
         }
     }
+
+    // MARK: Data Encryption
 
     private func createSetAVSConfigRequest(cliendId: String,
                                            authCode: String,

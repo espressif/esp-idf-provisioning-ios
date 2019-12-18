@@ -23,8 +23,6 @@ import UIKit
 class ViewController: UIViewController {
     // Provisioning
     private let pop = Bundle.main.infoDictionary?["ProofOfPossession"] as! String
-    private let ssid = "ESPIndia"
-    private let passphrase = ""
     private let avsdetails = ["codeChallenge": "6c7nGrky_ehjM40Ivk3p3-OeoEm9r7NCzmWexUULaa4", "redirectUri": "amzn-com.espressif.avs.provisioning.ble://?methodName=signin", "authCode": "", "clientId": "amzn1.application-oa2-"]
     // AVS
     private let productId = Bundle.main.infoDictionary?["ProductId"] as! String
@@ -48,32 +46,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         productDSN = generateProductDSN()
-    }
-
-    func provisionWithAPIs(_: Any) {
-        #if SEC1
-            security = Security1(proofOfPossession: pop)
-        #else
-            security = Security0()
-        #endif
-
-        #if BLE
-            var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: configUUIDString]
-            #if AVS
-                configUUIDMap[ConfigureAVS.AVS_CONFIG_PATH] = avsconfigUUIDString
-            #endif
-            bleTransport = BLETransport(serviceUUIDString: serviceUUIDString,
-                                        sessionUUIDString: sessionUUIDString,
-                                        configUUIDMap: configUUIDMap,
-                                        deviceNamePrefix: deviceNamePrefix,
-                                        scanTimeout: 5.0)
-            bleTransport?.scan(delegate: self)
-            transport = bleTransport
-
-        #else
-            transport = SoftAPTransport(baseUrl: baseUrl)
-            provisionDevice()
-        #endif
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem?.image = UIImage(named: "info_icon")
     }
 
     #if AVS
@@ -99,19 +73,8 @@ class ViewController: UIViewController {
                 ConfigureAVS.DEVICE_SERIAL_NUMBER: productDSN,
                 ConfigureAVS.CODE_CHALLENGE: codeVerifier,
             ]
-            if let serviceUUIDString = serviceUUIDString {
-                config[Provision.CONFIG_BLE_SERVICE_UUID] = serviceUUIDString
-                config[Provision.CONFIG_BLE_SESSION_UUID] = sessionUUIDString
-                config[Provision.CONFIG_BLE_CONFIG_UUID] = configUUIDString
-                config[ConfigureAVS.AVS_CONFIG_UUID_KEY] = avsconfigUUIDString
-                config[Provision.CONFIG_BLE_SCAN_UUID] = scanUUIDString
-            }
+            config[ConfigureAVS.AVS_CONFIG_UUID_KEY] = avsconfigUUIDString
             print(config)
-//            Provision.showProvisioningWithAmazonUI(on: self,
-//                                                   productId: productId,
-//                                                   productDSN: productDSN,
-//                                                   codeVerifier: codeVerifier,
-//                                                   config: config)
             Provision.showProvisioningUI(on: self, config: config)
         }
     #endif
@@ -150,142 +113,7 @@ class ViewController: UIViewController {
         #endif
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-//    #if AVS
-//        private func configureAWSLogin(session newSession: Session,
-//                                       completionHandler: @escaping (Error?) -> Void) {
-//            let configureAVS = ConfigureAVS(session: newSession)
-//
-//            DispatchQueue.main.async {
-//                ConfigureAVS.loginWithAmazon(completionHandler: { awsInfo, error in
-//                    guard error == nil, awsInfo != nil else {
-//                        return
-//                    }
-//
-//                    let authCode = awsInfo![ConfigureAVS.AUTH_CODE]
-//                    let redirectUri = awsInfo![ConfigureAVS.REDIRECT_URI]
-//                    let codeVerifier = awsInfo![ConfigureAVS.CODE_VERIFIER]
-//                    let clientId = awsInfo![ConfigureAVS.CLIENT_ID]
-//
-//                    if let authCode = authCode,
-//                        let clientId = clientId,
-//                        let redirectUri = redirectUri,
-//                        let codeVerifier = codeVerifier {
-//                        configureAVS.configureAmazonLogin(cliendId: clientId,
-//                                                          authCode: authCode,
-//                                                          redirectUri: redirectUri) { _, error in
-//                            if let error = error {
-//                                print("Error in configuring AVS : \(error)")
-//                            } else {
-//                                print("AVS configured \(authCode)")
-//                            }
-//
-//                            completionHandler(error)
-//                        }
-//                    }
-//
-//                })
-//            }
-//        }
-//    #endif
-
-    private func provisionDevice() {
-        print("provisionDevice in ViewController")
-        if let transport = transport, let security = security {
-            let newSession = Session(transport: transport,
-                                     security: security)
-
-            newSession.initialize(response: nil) { error in
-                guard error == nil else {
-                    print("Error in establishing session \(error.debugDescription)")
-                    return
-                }
-
-                let provision = Provision(session: newSession)
-
-                provision.configureWifiAvs(ssid: self.ssid,
-                                           passphrase: self.passphrase,
-                                           avs: self.avsdetails) { status, error in
-                    guard error == nil else {
-                        print("Error in configuring wifi : \(error.debugDescription)")
-                        return
-                    }
-
-                    if status == Espressif_Status.success {
-//                        #if AVS
-//                            self.configureAWSLogin(session: newSession) { _ in
-//                                self.applyConfigurations(provision: provision)
-//                            }
-//                        #else
-                        self.applyConfigurations(provision: provision)
-//                        #endif
-                    }
-                }
-            }
-        }
-    }
-
-    private func applyConfigurations(provision: Provision) {
-        provision.applyConfigurations(completionHandler: { status, error in
-            guard error == nil else {
-                print("Error in applying configurations : \(error.debugDescription)")
-                return
-            }
-            print("Configurations applied ! \(status)")
-        },
-                                      wifiStatusUpdatedHandler: { wifiState, failReason, error in
-            let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as? SuccessViewController
-            if let successVC = successVC {
-                if error != nil {
-                    successVC.statusText = "Error in getting wifi state : \(error.debugDescription)"
-                } else if wifiState == Espressif_WifiStationState.connected {
-                    successVC.statusText = "Device has been successfully provisioned!"
-                } else if wifiState == Espressif_WifiStationState.disconnected {
-                    successVC.statusText = "Please check the device indicators for Provisioning status."
-                } else {
-                    successVC.statusText = "Device provisioning failed.\nReason : \(failReason).\nPlease try again"
-                }
-                self.navigationController?.present(successVC, animated: true, completion: nil)
-            }
-        })
-    }
-
     private func generateProductDSN() -> String {
         return UUID().uuidString
     }
-
-    func showError(errorMessage: String) {
-        let alertMessage = errorMessage
-        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
-        present(alertController, animated: true, completion: nil)
-    }
 }
-
-#if BLE
-    extension ViewController: BLETransportDelegate {
-        func peripheralsFound(peripherals: [CBPeripheral]) {
-            bleTransport?.connect(peripheral: peripherals[0], withOptions: nil)
-        }
-
-        func peripheralsNotFound(serviceUUID: UUID?) {
-            showError(errorMessage: "No peripherals found for service UUID : \(String(describing: serviceUUID?.uuidString))")
-        }
-
-        func peripheralConfigured(peripheral _: CBPeripheral) {
-            provisionDevice()
-        }
-
-        func peripheralNotConfigured(peripheral _: CBPeripheral) {
-            showError(errorMessage: "Device cannot be configured")
-        }
-
-        func peripheralDisconnected(peripheral _: CBPeripheral, error: Error?) {
-            showError(errorMessage: "Error in connection : \(String(describing: error))")
-        }
-    }
-#endif

@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//        let BarButtonItemAppearance = UIBarButtonItem.appearance()
+//        BarButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
         return true
     }
 
@@ -51,6 +53,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        // Source application is not available in iOS 13 and above
+        if #available(iOS 13, *) {
+            return AMZNAuthorizationManager.handleOpen(url, sourceApplication: "")
+        }
         return AMZNAuthorizationManager.handleOpen(url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String)
     }
 }

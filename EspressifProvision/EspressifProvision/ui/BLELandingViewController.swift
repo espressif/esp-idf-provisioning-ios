@@ -15,10 +15,14 @@
 //  BLELandingViewController.swift
 //  EspressifProvision
 //
-
 import CoreBluetooth
 import Foundation
+import MBProgressHUD
 import UIKit
+
+protocol BLEStatusProtocol {
+    func peripheralDisconnected()
+}
 
 class BLELandingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var provisionConfig: [String: String] = [:]
@@ -26,54 +30,58 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
     var peripherals: [CBPeripheral]?
     var activityView: UIActivityIndicatorView?
     var grayView: UIView?
+    var delegate: BLEStatusProtocol?
+    var bleConnectTimer = Timer()
+    var bleDeviceConnected = false
 
     @IBOutlet var tableview: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let serviceUuid = provisionConfig[Provision.CONFIG_BLE_SERVICE_UUID],
-            let deviceNamePrefix = provisionConfig[Provision.CONFIG_BLE_DEVICE_NAME_PREFIX],
-            let sessionUuid = provisionConfig[Provision.CONFIG_BLE_SESSION_UUID],
-            let configUuid = provisionConfig[Provision.CONFIG_BLE_CONFIG_UUID] {
-            var configUUIDMap: [String: String] = [Provision.PROVISIONING_CONFIG_PATH: configUuid, Provision.PROVISIONING_SCAN_PATH: provisionConfig[Provision.CONFIG_BLE_SCAN_UUID]!]
-            #if AVS
-                let avsconfigUuid = provisionConfig[ConfigureAVS.AVS_CONFIG_UUID_KEY]
-                configUUIDMap[ConfigureAVS.AVS_CONFIG_PATH] = avsconfigUuid
-            #endif
+        navigationItem.title = "Connect"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-            bleTransport = BLETransport(serviceUUIDString: serviceUuid,
-                                        sessionUUIDString: sessionUuid,
-                                        configUUIDMap: configUUIDMap,
-                                        deviceNamePrefix: deviceNamePrefix,
-                                        scanTimeout: 5.0)
-            bleTransport?.scan(delegate: self)
-            showBusy(isBusy: true)
-        }
+        // Scan for bluetooth devices
+        bleTransport = BLETransport(scanTimeout: 5.0)
+        bleTransport?.scan(delegate: self)
+        showBusy(isBusy: true, message: "Searching")
+
+        tableview.tableFooterView = UIView()
+        tableview.backgroundColor = UIColor.white
     }
 
     @IBAction func rescanBLEDevices(_: Any) {
+        bleTransport?.disconnect()
         peripherals?.removeAll()
         tableview.reloadData()
         bleTransport?.scan(delegate: self)
-        showBusy(isBusy: true)
+        showBusy(isBusy: true, message: "Searching")
     }
 
+    ///
+    /// Go to loging page when bluetooth device is successfully configured
+    ///
     func bleDeviceConfigured() {
         showBusy(isBusy: false)
-        let provisionVC = storyboard?.instantiateViewController(withIdentifier: "loginWithAmazon") as! LoginWithAmazonViewController
-        provisionVC.transport = bleTransport
-
-        provisionVC.provisionConfig = provisionConfig
-        navigationController?.pushViewController(provisionVC, animated: true)
+        let loginAVS = storyboard?.instantiateViewController(withIdentifier: "loginWithAmazon") as! LoginWithAmazonViewController
+        loginAVS.provisionConfig = provisionConfig
+        loginAVS.transport = bleTransport
+        navigationController?.pushViewController(loginAVS, animated: true)
     }
 
-    func bleDeviceNotConfigured() {
+    ///
+    /// Show alert if ble device is not configured
+    ///
+    func bleDeviceNotConfigured(title: String, message: String) {
+        bleDeviceConnected = true
         showBusy(isBusy: false)
-        let alertController = UIAlertController(title: "Configure BLE device", message: "Could not configure the selected bluetooth device", preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
+
+    // MARK: // TableView Methods
 
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         guard let peripherals = self.peripherals else {
@@ -82,11 +90,10 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
         return peripherals.count
     }
 
-    func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "bleDeviceCell")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bleDeviceCell", for: indexPath) as! BLEDeviceListViewCell
         if let peripheral: CBPeripheral = self.peripherals?[indexPath.row] {
-            cell.textLabel?.text = peripheral.name
-            cell.imageView?.image = UIImage(named: "bluetooth_icon")
+            cell.deviceName.text = peripheral.name
         }
 
         return cell
@@ -99,27 +106,31 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if let peripheral = self.peripherals?[indexPath.row] {
+            showBusy(isBusy: true)
             bleTransport?.connect(peripheral: peripheral, withOptions: nil)
-            print(peripheral)
+            bleDeviceConnected = false
+            bleConnectTimer.invalidate()
+            bleConnectTimer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(bleConnectionTimeout), userInfo: nil, repeats: false)
         }
-
-        showBusy(isBusy: true)
     }
 
-    private func showBusy(isBusy: Bool) {
-        if isBusy {
-            grayView = UIView(frame: UIScreen.main.bounds)
-            grayView?.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
-            view.addSubview(grayView!)
+    private func showBusy(isBusy: Bool, message: String = "") {
+        DispatchQueue.main.async {
+            if isBusy {
+                let loader = MBProgressHUD.showAdded(to: self.view, animated: true)
+                loader.mode = MBProgressHUDMode.indeterminate
+                loader.label.text = message
+            } else {
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }
+        }
+    }
 
-            activityView = UIActivityIndicatorView(style: .gray)
-            activityView?.center = view.center
-            activityView?.startAnimating()
-
-            view.addSubview(activityView!)
-        } else {
-            grayView?.removeFromSuperview()
-            activityView?.removeFromSuperview()
+    @objc func bleConnectionTimeout() {
+        if !bleDeviceConnected {
+            bleTransport?.disconnect()
+            bleConnectTimer.invalidate()
+            bleDeviceNotConfigured(title: "Error!", message: "Communication failed. Device may not be supported. ")
         }
     }
 }
@@ -136,17 +147,44 @@ extension BLELandingViewController: BLETransportDelegate {
     }
 
     func peripheralConfigured(peripheral _: CBPeripheral) {
+        bleDeviceConnected = true
         bleDeviceConfigured()
     }
 
     func peripheralNotConfigured(peripheral _: CBPeripheral) {
-        bleDeviceNotConfigured()
+        bleDeviceNotConfigured(title: "Configure BLE device", message: "Could not configure the selected bluetooth device")
     }
 
     func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {
-        let alertMessage = "Peripheral device disconnected"
-        let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: UIAlertAction.Style.default, handler: nil))
-        present(alertController, animated: true, completion: nil)
+        showBusy(isBusy: false)
+
+        if delegate == nil {
+            let alertMessage = "Peripheral device disconnected"
+            let alertController = UIAlertController(title: "Provision device", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            present(alertController, animated: true, completion: nil)
+        } else {
+            delegate?.peripheralDisconnected()
+        }
+    }
+
+    func bluetoothUnavailable() {
+        DispatchQueue.main.async {
+            let alertMessage = "Turn on your Phone's Bluetooth to allow search for discoverable device's"
+            let alertController = UIAlertController(title: "Error", message: alertMessage, preferredStyle: UIAlertController.Style.alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
+    }
+}
+
+// MARK: UITextFieldDelegate
+
+extension BLELandingViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_: UITextField) -> Bool {
+        view.endEditing(true)
+        rescanBLEDevices(self)
+        return false
     }
 }

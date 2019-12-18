@@ -20,24 +20,26 @@ import CoreBluetooth
 import Foundation
 
 class BLETransport: NSObject, Transport {
-    private var serviceUUID: UUID?
-    private var deviceNamePrefix: String?
+    var utility: Utility
+
     private var transportToken = DispatchSemaphore(value: 1)
     private var isBLEEnabled = false
     private var scanTimeout = 5.0
-    private var bleSessionCharacteristicUUID: String
+    private var readCounter = 0
+    private var bleSessionCharacteristicUUID = "ff51"
 
     var centralManager: CBCentralManager!
     var espressifPeripherals: [CBPeripheral] = []
     var currentPeripheral: CBPeripheral?
     var currentService: CBService?
     var sessionCharacteristic: CBCharacteristic!
-    var configUUIDMap: [String: String]?
 
     var peripheralCanRead: Bool = true
     var peripheralCanWrite: Bool = false
 
     var currentRequestCompletionHandler: ((Data?, Error?) -> Void)?
+
+    var legacyVersion = false
 
     public var delegate: BLETransportDelegate?
 
@@ -49,18 +51,9 @@ class BLETransport: NSObject, Transport {
     ///   - configUUIDMap: map of config paths and string representations of the BLE characteristic UUID
     ///   - deviceNamePrefix: device name prefix
     ///   - scanTimeout: timeout in seconds for which BLE scan should happen
-    init(serviceUUIDString: String?,
-         sessionUUIDString: String,
-         configUUIDMap: [String: String],
-         deviceNamePrefix: String,
-         scanTimeout: TimeInterval) {
-        if let serviceUUIDString = serviceUUIDString {
-            serviceUUID = UUID(uuidString: serviceUUIDString)
-        }
-        self.deviceNamePrefix = deviceNamePrefix
+    init(scanTimeout: TimeInterval) {
         self.scanTimeout = scanTimeout
-        bleSessionCharacteristicUUID = sessionUUIDString
-        self.configUUIDMap = configUUIDMap
+        utility = Utility()
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
@@ -79,7 +72,11 @@ class BLETransport: NSObject, Transport {
         }
 
         transportToken.wait()
-        espressifPeripheral.writeValue(data, for: sessionCharacteristic, type: .withResponse)
+        if legacyVersion {
+            espressifPeripheral.writeValue(data, for: sessionCharacteristic, type: .withResponse)
+        } else {
+            espressifPeripheral.writeValue(data, for: utility.sessionCharacteristic, type: .withResponse)
+        }
         currentRequestCompletionHandler = completionHandler
     }
 
@@ -99,10 +96,11 @@ class BLETransport: NSObject, Transport {
         }
 
         transportToken.wait()
+
         var characteristic: CBCharacteristic?
         if let characteristics = self.currentService?.characteristics {
             for c in characteristics {
-                if c.uuid.uuidString.lowercased() == configUUIDMap![path]?.lowercased() {
+                if c.uuid == utility.configUUIDMap[path] {
                     characteristic = c
                     break
                 }
@@ -150,23 +148,24 @@ class BLETransport: NSObject, Transport {
                                      selector: #selector(stopScan(timer:)),
                                      userInfo: nil,
                                      repeats: true)
-            var uuids: [CBUUID]?
-            if let serviceUUID = self.serviceUUID {
-                uuids = [CBUUID(string: serviceUUID.uuidString)]
-            }
-            centralManager.scanForPeripherals(withServices: uuids)
+            centralManager.scanForPeripherals(withServices: nil)
         }
     }
 
     @objc func stopScan(timer: Timer) {
         centralManager.stopScan()
+
         timer.invalidate()
         if espressifPeripherals.count > 0 {
             delegate?.peripheralsFound(peripherals: espressifPeripherals)
             espressifPeripherals.removeAll()
         } else {
-            delegate?.peripheralsNotFound(serviceUUID: serviceUUID)
+            delegate?.peripheralsNotFound(serviceUUID: UUID(uuidString: ""))
         }
+    }
+
+    func isDeviceConfigured() -> Bool {
+        return utility.peripheralConfigured ?? false
     }
 }
 
@@ -184,6 +183,8 @@ extension BLETransport: CBCentralManagerDelegate {
         case .poweredOff:
             if let currentPeripheral = currentPeripheral {
                 delegate?.peripheralDisconnected(peripheral: currentPeripheral, error: nil)
+            } else {
+                delegate?.bluetoothUnavailable()
             }
             print("Bluetooth state off")
         case .poweredOn:
@@ -194,11 +195,7 @@ extension BLETransport: CBCentralManagerDelegate {
                                      selector: #selector(stopScan(timer:)),
                                      userInfo: nil,
                                      repeats: true)
-            var uuids: [CBUUID]?
-            if let serviceUUID = self.serviceUUID {
-                uuids = [CBUUID(string: serviceUUID.uuidString)]
-            }
-            centralManager.scanForPeripherals(withServices: uuids)
+            centralManager.scanForPeripherals(withServices: nil)
         @unknown default: break
         }
     }
@@ -207,13 +204,18 @@ extension BLETransport: CBCentralManagerDelegate {
                         didDiscover peripheral: CBPeripheral,
                         advertisementData data: [String: Any],
                         rssi _: NSNumber) {
-        espressifPeripherals.append(peripheral)
+        if let peripheralName = peripheral.name {
+            if peripheralName.hasPrefix(Utility.deviceNamePrefix) {
+                if !(espressifPeripherals.filter { $0.name == peripheralName }.count > 0) {
+                    espressifPeripherals.append(peripheral)
+                }
+            }
+        }
     }
 
     func centralManager(_: CBCentralManager, didConnect _: CBPeripheral) {
-        var uuids: [CBUUID]?
-        if let serviceUUID = self.serviceUUID {
-            uuids = [CBUUID(string: serviceUUID.uuidString)]
+        if let deviceName = currentPeripheral?.name {
+            utility.deviceName = deviceName
         }
         currentPeripheral?.discoverServices(nil)
     }
@@ -233,6 +235,16 @@ extension BLETransport: CBPeripheralDelegate {
         currentPeripheral = peripheral
         currentService = services[0]
         if let currentService = currentService {
+            if currentService.uuid.data.count == 16 {
+                legacyVersion = false
+                utility = Utility()
+            } else {
+                legacyVersion = true
+                utility.scanPath = "prov-scan"
+                utility.configUUIDMap[utility.avsConfigPath] = CBUUID(string: "ff54")
+                utility.configUUIDMap[utility.scanPath!] = CBUUID(string: "ff50")
+                utility.configUUIDMap[utility.versionPath] = CBUUID(string: "ff53")
+            }
             currentPeripheral?.discoverCharacteristics(nil, for: currentService)
         }
     }
@@ -241,22 +253,36 @@ extension BLETransport: CBPeripheralDelegate {
         guard let characteristics = service.characteristics else { return }
 
         peripheralCanWrite = true
-        for characteristic in characteristics {
-            if characteristic.uuid.uuidString.lowercased() == bleSessionCharacteristicUUID.lowercased() {
-                sessionCharacteristic = characteristic
-            }
+        if legacyVersion {
+            for characteristic in characteristics {
+                if characteristic.uuid.uuidString.lowercased() == bleSessionCharacteristicUUID.lowercased() {
+                    sessionCharacteristic = characteristic
+                }
 
-            if !characteristic.properties.contains(.read) {
-                peripheralCanRead = false
+                if !characteristic.properties.contains(.read) {
+                    peripheralCanRead = false
+                }
+                if !characteristic.properties.contains(.write) {
+                    peripheralCanWrite = false
+                }
             }
-            if !characteristic.properties.contains(.write) {
-                peripheralCanWrite = false
+            if sessionCharacteristic != nil, peripheralCanRead, peripheralCanWrite {
+                utility.peripheralConfigured = true
+                delegate?.peripheralConfigured(peripheral: peripheral)
+            } else {
+                delegate?.peripheralNotConfigured(peripheral: peripheral)
             }
-        }
-        if sessionCharacteristic != nil, peripheralCanRead, peripheralCanWrite {
-            delegate?.peripheralConfigured(peripheral: peripheral)
         } else {
-            delegate?.peripheralNotConfigured(peripheral: peripheral)
+            readCounter = characteristics.count
+            for characteristic in characteristics {
+                if !characteristic.properties.contains(.read) {
+                    peripheralCanRead = false
+                }
+                if !characteristic.properties.contains(.write) {
+                    peripheralCanWrite = false
+                }
+                currentPeripheral?.discoverDescriptors(for: characteristic)
+            }
         }
     }
 
@@ -282,6 +308,22 @@ extension BLETransport: CBPeripheralDelegate {
             self.currentRequestCompletionHandler = nil
         }
         transportToken.signal()
+    }
+
+    func peripheral(_: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error _: Error?) {
+        for descriptor in characteristic.descriptors! {
+            currentPeripheral?.readValue(for: descriptor)
+        }
+    }
+
+    func peripheral(_: CBPeripheral, didUpdateValueFor descriptor: CBDescriptor, error _: Error?) {
+        utility.processDescriptor(descriptor: descriptor)
+        readCounter -= 1
+        if readCounter < 1 {
+            if utility.peripheralConfigured {
+                delegate?.peripheralConfigured(peripheral: currentPeripheral!)
+            }
+        }
     }
 }
 
@@ -317,4 +359,8 @@ protocol BLETransportDelegate {
     ///   - peripheral: peripheral device
     ///   - error: error
     func peripheralDisconnected(peripheral: CBPeripheral, error: Error?)
+
+    /// Device Bluetooth is Off
+    ///
+    func bluetoothUnavailable()
 }

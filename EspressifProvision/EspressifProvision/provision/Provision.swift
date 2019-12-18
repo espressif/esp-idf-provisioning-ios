@@ -62,28 +62,36 @@ class Provision {
     ///   - completionHandler: handler called when config data is sent
     func configureWifiAvs(ssid: String,
                           passphrase: String,
-                          avs: [String: String],
+                          avs: [String: String]?,
                           completionHandler: @escaping (Espressif_Status, Error?) -> Swift.Void) {
         if session.isEstablished {
             do {
-                putAVSDeviceDetails(config: avs) {
-                    do {
-                        let message = try self.createSetWifiConfigRequest(ssid: ssid, passphrase: passphrase)
-                        if let message = message {
-                            self.transport.SendConfigData(path: Provision.PROVISIONING_CONFIG_PATH, data: message) { response, error in
-                                guard error == nil, response != nil else {
-                                    completionHandler(Espressif_Status.internalError, error)
-                                    return
-                                }
-                                let status = self.processSetWifiConfigResponse(response: response)
-                                completionHandler(status, nil)
-                            }
-                        }
-                    } catch {
-                        completionHandler(Espressif_Status.internalError, error)
+                if let avsDetails = avs {
+                    putAVSDeviceDetails(config: avsDetails) {
+                        self.configureWifi(ssid: ssid, passphrase: passphrase, completionHandler: completionHandler)
                     }
+                } else {
+                    configureWifi(ssid: ssid, passphrase: passphrase, completionHandler: completionHandler)
                 }
             }
+        }
+    }
+
+    private func configureWifi(ssid: String, passphrase: String, completionHandler: @escaping (Espressif_Status, Error?) -> Swift.Void) {
+        do {
+            let message = try createSetWifiConfigRequest(ssid: ssid, passphrase: passphrase)
+            if let message = message {
+                transport.SendConfigData(path: Provision.PROVISIONING_CONFIG_PATH, data: message) { response, error in
+                    guard error == nil, response != nil else {
+                        completionHandler(Espressif_Status.internalError, error)
+                        return
+                    }
+                    let status = self.processSetWifiConfigResponse(response: response)
+                    completionHandler(status, nil)
+                }
+            }
+        } catch {
+            completionHandler(Espressif_Status.internalError, error)
         }
     }
 
@@ -215,52 +223,6 @@ class Provision {
             viewController.navigationController?.pushViewController(provisionLandingVC, animated: true)
         }
     }
-
-    //
-    //    #if AVS
-    //        /// Launch default UI for provisioning Wifi and Amazon login credentials on the device.
-    //        /// This UI will take the user through the following flow
-    //        /// 1. Login with your Amazon credentials
-    //        /// 2. Connect to the device via Wifi (AP) or Bluetooth (BLE)
-    //        /// 3. Provide Network information like SSID and Passphrase
-    //        ///
-    //        /// - Parameters:
-    //        ///   - viewController: view controller on which to show UI
-    //        ///   - productId: product ID in the Alexa Voice Services project
-    //        ///   - productDSN: device serial number
-    //        ///   - codeVerifier: random value used as a code challenge. This should typically be sent to
-    //        ///                   to received from the device to use in its communication with Alexa
-    //        ///   - config: provisioning config map.
-    //        ///             Currently supported configs are
-    //        ///    var config = [
-    //        ///      Provision.CONFIG_TRANSPORT_KEY: transport,
-    //        ///      Provision.CONFIG_SECURITY_KEY: security,
-    //        ///      Provision.CONFIG_PROOF_OF_POSSESSION_KEY: pop,
-    //        ///      Provision.CONFIG_BASE_URL_KEY: baseUrl,
-    //        ///      Provision.CONFIG_WIFI_AP_KEY: networkNamePrefix,
-    //        ///      Provision.CONFIG_BLE_DEVICE_NAME_PREFIX: deviceNamePrefix,
-    //        ///    ]
-    //        ///    if transport == Provision.CONFIG_TRANSPORT_BLE {
-    //        ///       config[Provision.CONFIG_BLE_SERVICE_UUID] = serviceUUIDString
-    //        ///       config[Provision.CONFIG_BLE_SESSION_UUID] = sessionUUIDString
-    //        ///       config[Provision.CONFIG_BLE_CONFIG_UUID] = configUUIDString
-    //        ///    }
-    //        static func showProvisioningWithAmazonUI(on viewController: UIViewController,
-    //                                                 productId: String,
-    //                                                 productDSN: String,
-    //                                                 codeVerifier: String,
-    //                                                 config: [String: String]) {
-    //            var amazonConfig = [
-    //                ConfigureAVS.PRODUCT_ID: productId,
-    //                ConfigureAVS.DEVICE_SERIAL_NUMBER: productDSN,
-    //                ConfigureAVS.CODE_CHALLENGE: codeVerifier,
-    //            ]
-    //            config.forEach { amazonConfig[$0] = $1 }
-    //            let amazonLoginVC = viewController.storyboard?.instantiateViewController(withIdentifier: "loginWithAmazon") as! LoginWithAmazonViewController
-    //            amazonLoginVC.provisionConfig = amazonConfig
-    //            viewController.navigationController?.pushViewController(amazonLoginVC, animated: true)
-    //        }
-    //    #endif
 
     private func pollForWifiConnectionStatus(completionHandler: @escaping (Espressif_WifiStationState, Espressif_WifiConnectFailedReason, Error?) -> Swift.Void) {
         do {
