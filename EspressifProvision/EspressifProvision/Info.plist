@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>APIKey</key>
-	<string>eyJhbGciOiJSU0EtU0hBMjU2IiwidmVyIjoiMSJ9.eyJ2ZXIiOiIzIiwiZW5kcG9pbnRzIjp7ImF1dGh6IjoiaHR0cHM6Ly93d3cuYW1hem9uLmNvbS9hcC9vYSIsInRva2VuRXhjaGFuZ2UiOiJodHRwczovL2FwaS5hbWF6b24uY29tL2F1dGgvbzIvdG9rZW4ifSwiY2xpZW50SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1vYTItY2xpZW50LmU4YzA2NTQ1ZDk3NjRhMDViOGI2ZDkxZWVjZmViMjNhIiwiYXBwRmFtaWx5SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi4wNjMyOTliODRiMWM0NzAwYThhODRhNDcwNzc3MmQ0MCIsImJ1bmRsZVNlZWRJZCI6ImNvbS5lc3ByZXNzaWYucHJvdmJsZWF2cyIsImJ1bmRsZUlkIjoiY29tLmVzcHJlc3NpZi5wcm92YmxlYXZzIiwiaXNzIjoiQW1hem9uIiwidHlwZSI6IkFQSUtleSIsImFwcFZhcmlhbnRJZCI6ImFtem4xLmFwcGxpY2F0aW9uLWNsaWVudC4yM2ZiYTMzMWIzZDk0MDM5OTMyMmJiYzUwY2YyNzQ5NSIsInRydXN0UG9vbCI6bnVsbCwiYXBwSWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1jbGllbnQuMjNmYmEzMzFiM2Q5NDAzOTkzMjJiYmM1MGNmMjc0OTUiLCJpZCI6IjJjNjc2ZDk1LTc4ODUtMTFlOS1hNjdiLWMzOGNmMjU3YTgwYSIsImlhdCI6IjE1NTgwODQ4OTgyMzMifQ==.UUg/wDgQHhGwbXIq9ev06zXeODbrdN1wv/hlvSTdN4s7zMLMnC4FJ17Ra1EmlK0FkD6QmoTKWlgBss/ne8WF7dUWgtsPG3KLaZv7MrQwx7skTXn05xdFENiWPPCvmCAWAvgW0lNp9QoxQzsIDS3KwD6k9KI4YhDQp5CtgxgZ/JfBVwsVyJ0XeBYpNnmQpphMU1U9zNh7Npzn66AMmJ0RCbsPL8mkP8na/7mGH5/HqDr+f605F1/tO2qo/WVZ/h0BEZO9y9Wwc4anEcFzbYeqyZU8jpR+Oyl4+tdDGZUB2lrj3L1d+uV4a3572ADNhqb7iOzWH4bSPmsFoDPbgouJRg==</string>
+	<string></string>
 	<key>BLEAVSConfigUUID</key>
 	<string>ff54</string>
 	<key>BLEConfigUUID</key>
@@ -38,10 +38,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.espressif.provbleavs</string>
+			<string>com.espressif.avs.provisioning.ble</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>amzn-com.espressif.provbleavs</string>
+				<string>amzn-com.espressif.avs.provisioning.ble</string>
 			</array>
 		</dict>
 	</array>
@@ -60,7 +60,7 @@
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Connect with BLE Compatible devices for Provisioning</string>
 	<key>ProductId</key>
-	<string>esp_avs_master</string>
+	<string></string>
 	<key>ProofOfPossession</key>
 	<string>abcd1234</string>
 	<key>UIBackgroundModes</key>
