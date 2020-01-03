@@ -36,6 +36,10 @@ struct Constants {
 
     static let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
     static let baseURL = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/"
+    static let githubURL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/authorize"
+    static let redirectURL = "com.espressif.rainmaker.intsoftap://success"
+    static let clientID = "78suluee2rmlltshrt2v4lvuo0"
+    static let idProvider = "Github"
 
     // AWS cognito APIs
     static let addDevice = Constants.baseURL + "user/nodes/mapping/"
@@ -51,4 +55,8 @@ struct Constants {
     static let newDeviceAdded = "com.espressif.newDeviceAdded"
     static let prefixKey = "com.espressif.prefix"
     static let userIDKey = "com.espressif.userid"
+
+    static func log(message: String) {
+        print(message)
+    }
 }

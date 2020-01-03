@@ -17,10 +17,11 @@ class User {
     var associatedDevices: [Device]?
     var associatedNodes: [String: Node] = [:]
     var username = ""
+    var password = ""
+    var automaticLogin = false
     var updateDeviceList = false
     var addDeviceStatusTimeout: Timer?
-    var uuid: String!
-
+    var currentAssociationInfo: AssociationConfig!
     private init() {
         // setup service configuration
         let serviceConfiguration = AWSServiceConfiguration(region: Constants.CognitoIdentityUserPoolRegion, credentialsProvider: nil)
@@ -49,11 +50,12 @@ class User {
         fetchDeviceAssociationStatus(nodeID: nodeID, requestID: requestID)
     }
 
-    func associateNodeWithUser(session: Session) {
-        uuid = UUID().uuidString
-        let deviceAssociation = DeviceAssociation(session: session, secretId: uuid)
+    func associateNodeWithUser(session: Session, delegate: DeviceAssociationProtocol) {
+        currentAssociationInfo = AssociationConfig()
+        currentAssociationInfo.uuid = UUID().uuidString
+        let deviceAssociation = DeviceAssociation(session: session, secretId: currentAssociationInfo.uuid)
         deviceAssociation.associateDeviceWithUser()
-        deviceAssociation.delegate = self
+        deviceAssociation.delegate = delegate
     }
 
     @objc func timeoutFetchingStatus() {
@@ -86,29 +88,17 @@ class User {
         }
     }
 
-    func sendRequestToAddDevice(nodeID: String, count: Int) {
-        let parameters = ["user_id": User.shared.userID, "node_id": nodeID, "secret_key": User.shared.uuid, "operation": "add"]
+    func sendRequestToAddDevice(count: Int) {
+        let parameters = ["user_id": User.shared.userID, "node_id": currentAssociationInfo.nodeID, "secret_key": currentAssociationInfo.uuid, "operation": "add"]
         NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, error in
             print(requestID)
             if error != nil, count > 0 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    self.sendRequestToAddDevice(nodeID: nodeID, count: count - 1)
+                    self.sendRequestToAddDevice(count: count - 1)
                 }
             } else {
                 if let requestid = requestID {
-                    User.shared.checkDeviceAssoicationStatus(nodeID: nodeID, requestID: requestid)
-                }
-            }
-        }
-    }
-}
-
-extension User: DeviceAssociationProtocol {
-    func deviceAssociationFinishedWith(success: Bool, nodeID: String?) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            if success {
-                if let deviceSecret = nodeID {
-                    self.sendRequestToAddDevice(nodeID: deviceSecret, count: 5)
+                    User.shared.checkDeviceAssoicationStatus(nodeID: self.currentAssociationInfo.nodeID, requestID: requestid)
                 }
             }
         }

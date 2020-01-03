@@ -28,7 +28,7 @@ class Provision {
     private let security: Security
 
     public static let CONFIG_TRANSPORT_KEY = "transport"
-    public static let CONFIG_SECURITY_KEY = "security"
+    public static let CONFIG_SECURITY_KEY = "security1"
     public static let CONFIG_PROOF_OF_POSSESSION_KEY = "proofOfPossession"
     public static let CONFIG_BASE_URL_KEY = "baseUrl"
     public static let CONFIG_WIFI_AP_KEY = "wifiAPPrefix"

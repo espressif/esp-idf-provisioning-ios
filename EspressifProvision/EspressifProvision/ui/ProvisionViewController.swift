@@ -200,7 +200,7 @@ class ProvisionViewController: UIViewController {
     func initialiseSessionAndConfigure(ssid: String, passPhrase: String) {
         if transport!.isDeviceConfigured() {
             if session!.isEstablished {
-                let provision = Provision(session: session!)
+                provision = Provision(session: session!)
 
                 provision.configureWifi(ssid: ssid,
                                         passphrase: passPhrase) { status, error in
@@ -209,7 +209,7 @@ class ProvisionViewController: UIViewController {
                         return
                     }
                     if status == Espressif_Status.success {
-                        self.applyConfigurations(provision: provision)
+                        User.shared.associateNodeWithUser(session: self.session!, delegate: self)
                     }
                 }
             } else {
@@ -297,6 +297,7 @@ class ProvisionViewController: UIViewController {
                 if let successVC = successVC {
                     if error != nil {
                         successVC.statusText = "Error in getting wifi state : \(error.debugDescription)"
+                        successVC.success = true
                     } else if wifiState == Espressif_WifiStationState.connected {
                         successVC.statusText = "Device has been successfully provisioned!"
                         successVC.success = true
@@ -586,6 +587,21 @@ extension UITextField {
         if let existingSelectedTextRange = selectedTextRange {
             selectedTextRange = nil
             selectedTextRange = existingSelectedTextRange
+        }
+    }
+}
+
+extension ProvisionViewController: DeviceAssociationProtocol {
+    func deviceAssociationFinishedWith(success: Bool, nodeID: String?) {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        User.shared.currentAssociationInfo.associationInfoDelievered = success
+        if success {
+            if let deviceSecret = nodeID {
+                User.shared.currentAssociationInfo.nodeID = deviceSecret
+//                    self.sendRequestToAddDevice(nodeID: deviceSecret, count: 5)
+            }
+            applyConfigurations(provision: provision)
+//            }
         }
     }
 }

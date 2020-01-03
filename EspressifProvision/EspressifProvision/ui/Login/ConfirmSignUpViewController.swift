@@ -29,13 +29,11 @@ class ConfirmSignUpViewController: UIViewController {
         super.viewDidLoad()
         sentToLabel.text = user!.username
         sentToLabel.text = "Code sent to: \(sentTo!)"
-        code.setBottomBorder()
         code.layer.sublayerTransform = CATransform3DMakeTranslation(5, 0, 0)
-        let colors = Colors()
-        view.backgroundColor = UIColor.clear
-        let backgroundLayer = colors.signUPLayer
-        backgroundLayer!.frame = view.frame
-        view.layer.insertSublayer(backgroundLayer!, at: 0)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.title = ""
+        navigationItem.backBarButtonItem?.tintColor = UIColor(red: 234.0 / 255.0, green: 92.0 / 255.0, blue: 97.0 / 255.0, alpha: 1.0)
+        code.setBottomBorder()
     }
 
     // MARK: IBActions
@@ -68,6 +66,7 @@ class ConfirmSignUpViewController: UIViewController {
 
                     strongSelf.present(alertController, animated: true, completion: nil)
                 } else {
+                    User.shared.automaticLogin = true
                     _ = strongSelf.navigationController?.popToRootViewController(animated: true)
                 }
             }

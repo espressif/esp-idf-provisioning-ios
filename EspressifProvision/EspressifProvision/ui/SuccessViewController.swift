@@ -33,8 +33,12 @@ class SuccessViewController: UIViewController {
         if let statusText = statusText {
             successLabel.text = statusText
         }
-        if success {
-            User.shared.associateNodeWithUser(session: session)
+        if success, User.shared.currentAssociationInfo.associationInfoDelievered {
+            // DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            User.shared.sendRequestToAddDevice(count: 7)
+            // }
+        } else {
+            User.shared.currentAssociationInfo = AssociationConfig()
         }
         // Do any additional setup after loading the view, typically from a nib.
 

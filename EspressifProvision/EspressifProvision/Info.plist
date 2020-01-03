@@ -2,6 +2,32 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AWS</key>
+	<dict>
+		<key>CognitoUserPool</key>
+		<dict>
+			<key>Default</key>
+			<dict>
+				<key>CognitoAuthScopes</key>
+				<array>
+					<string>email</string>
+					<string>openid</string>
+				</array>
+				<key>CognitoAuthSignInRedirectUri</key>
+				<string>com.espressif.rainmaker.intsoftap</string>
+				<key>CognitoAuthSignOutRedirectUri</key>
+				<string>com.amazonaws.cognito.auth.CognitoAuthSample://success</string>
+				<key>CognitoAuthWebDomain</key>
+				<string>https://rainmaker1.auth.us-east-1.amazoncognito.com</string>
+				<key>CognitoUserPoolAppClientId</key>
+				<string>4hqmnd09vvgr8ap92rm3b5ud6j</string>
+				<key>CognitoUserPoolAppClientSecret</key>
+				<string>1r41plao0cs675d4a6bghh5dljujh231c0bedfq7pngca771h79g</string>
+				<key>PoolIdForEnablingASF</key>
+				<string>us-east-1_kehH6cN2f</string>
+			</dict>
+		</dict>
+	</dict>
 	<key>BLEDeviceNamePrefix</key>
 	<string>PROV_</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -24,17 +50,7 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.espressif.provision.ble.1</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>espressif.provision.ble</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>None</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.espressif.rainmaker.intsoftap</string>
@@ -43,6 +59,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>itms-apps</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothPeripheralUsageDescription</key>

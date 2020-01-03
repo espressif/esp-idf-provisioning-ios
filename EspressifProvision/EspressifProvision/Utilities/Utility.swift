@@ -11,6 +11,11 @@ import Foundation
 import MBProgressHUD
 import UIKit
 
+public func print(items: Any..., separator: String = " ", terminator: String = "\n") {
+    let output = items.map { "*\($0)" }.joined(separator: separator)
+    Swift.print(output, terminator: terminator)
+}
+
 class Utility {
     static var deviceNamePrefix = UserDefaults.standard.value(forKey: Constants.prefixKey) as? String ?? (Bundle.main.infoDictionary?["BLEDeviceNamePrefix"] as? String ?? "PROV_")
     static let allowPrefixFilter = Bundle.main.infoDictionary?["AllowFilteringByPrefix"] as? Bool ?? false
