@@ -24,21 +24,22 @@ class ProvisionLandingViewController: UIViewController {
     var provisionConfig: [String: String] = [:]
     var deviceList: [Node]?
 
-    @IBOutlet var provisionInstructions: UILabel!
+//    @IBOutlet var provisionInstructions: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let wifiPrefix = provisionConfig[Provision.CONFIG_WIFI_AP_KEY]
-        if let text = provisionInstructions.text, let wifiPrefix = wifiPrefix {
-            let nonBoldRange = NSMakeRange(0, text.count)
-            provisionInstructions.attributedText = attributedString(from: text + " \(wifiPrefix)",
-                                                                    nonBoldRange: nonBoldRange)
-        }
-        let colors = Colors()
-        view.backgroundColor = UIColor.clear
-        let backgroundLayer = colors.backGroundLayer
-        backgroundLayer!.frame = view.frame
-        view.layer.insertSublayer(backgroundLayer!, at: 0)
+//        let wifiPrefix = provisionConfig[Provision.CONFIG_WIFI_AP_KEY]
+//        if let text = provisionInstructions.text, let wifiPrefix = wifiPrefix {
+//            let nonBoldRange = NSMakeRange(0, text.count)
+//            provisionInstructions.attributedText = attributedString(from: text + " \(wifiPrefix)",
+//                                                                    nonBoldRange: nonBoldRange)
+//        }
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     @IBAction func connectClicked(_: Any) {
@@ -47,6 +48,10 @@ class ProvisionLandingViewController: UIViewController {
                 _ = UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             }
         }
+    }
+
+    @IBAction func cancelClicked(_: Any) {
+        navigationController?.popViewController(animated: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {

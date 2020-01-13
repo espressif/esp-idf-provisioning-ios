@@ -30,13 +30,17 @@ class ForgotPasswordViewController: UIViewController {
     }
 
     override func viewWillAppear(_: Bool) {
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if let newPasswordViewController = segue.destination as? ConfirmForgotPasswordViewController {
             newPasswordViewController.user = user
         }
+    }
+
+    @IBAction func cancelPressed(_: Any) {
+        navigationController?.popViewController(animated: true)
     }
 
     // MARK: - IBActions

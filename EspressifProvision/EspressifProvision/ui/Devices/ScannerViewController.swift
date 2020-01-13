@@ -16,6 +16,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var previewLayer: AVCaptureVideoPreviewLayer!
     var provisionConfig: [String: String] = [:]
 
+    @IBOutlet var cancelButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -73,6 +74,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         view.layer.addSublayer(fillLayer)
 
         captureSession.startRunning()
+        view.bringSubviewToFront(cancelButton)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +83,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if captureSession?.isRunning == false {
             captureSession.startRunning()
         }
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,6 +92,10 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if captureSession?.isRunning == true {
             captureSession.stopRunning()
         }
+    }
+
+    @IBAction func cancelClickecd(_: Any) {
+        navigationController?.popToRootViewController(animated: false)
     }
 
     func metadataOutput(_: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from _: AVCaptureConnection) {

@@ -25,15 +25,36 @@ class SuccessViewController: UIViewController {
     var deviceID: String?
     var requestID: String?
     var success = false
+    var sessionInit = true
 
-    @IBOutlet var successLabel: UILabel!
+//    @IBOutlet var successLabel: UILabel!
+    @IBOutlet var popCheckImage: UIImageView!
+    @IBOutlet var wifiCheckImage: UIImageView!
+    @IBOutlet var assocPushedCheckImage: UIImageView!
+    @IBOutlet var deviceAssocCheckImage: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let statusText = statusText {
-            successLabel.text = statusText
+//        if let statusText = statusText {
+//            successLabel.text = statusText
+//        }
+        if sessionInit {
+            popCheckImage.image = UIImage(named: "checkbox_checked")
+        } else {
+            popCheckImage.image = UIImage(named: "checkbox_unchecked")
         }
-        if success, User.shared.currentAssociationInfo.associationInfoDelievered {
+        if success {
+            wifiCheckImage.image = UIImage(named: "checkbox_checked")
+        } else {
+            wifiCheckImage.image = UIImage(named: "checkbox_unchecked")
+        }
+        assocPushedCheckImage.image = UIImage(named: "checkbox_unchecked")
+        if let associatioInfo = User.shared.currentAssociationInfo {
+            if associatioInfo.associationInfoDelievered {
+                assocPushedCheckImage.image = UIImage(named: "checkbox_checked")
+            }
+        }
+        if success, let associatioInfo = User.shared.currentAssociationInfo, associatioInfo.associationInfoDelievered {
             // DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             User.shared.sendRequestToAddDevice(count: 7)
             // }
@@ -41,22 +62,11 @@ class SuccessViewController: UIViewController {
             User.shared.currentAssociationInfo = AssociationConfig()
         }
         // Do any additional setup after loading the view, typically from a nib.
-
-        let colors = Colors()
-        view.backgroundColor = UIColor.clear
-        let backgroundLayer = colors.successLayer
-        backgroundLayer!.frame = view.frame
-        view.layer.insertSublayer(backgroundLayer!, at: 0)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = false
     }
 
     @IBAction func goToFirstView(_: Any) {

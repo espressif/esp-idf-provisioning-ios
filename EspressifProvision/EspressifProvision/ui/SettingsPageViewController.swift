@@ -32,7 +32,7 @@ class SettingsPageViewController: UIViewController {
     }
 
     @IBAction func signOut(_: Any) {
-        User.shared.associatedDevices = nil
+//        User.shared.associatedDevices = nil
         User.shared.idToken = nil
         User.shared.currentUser()?.signOut()
         UserDefaults.standard.removeObject(forKey: Constants.userIDKey)

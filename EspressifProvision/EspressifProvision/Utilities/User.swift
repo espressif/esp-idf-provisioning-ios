@@ -14,14 +14,14 @@ class User {
     var userID: String?
     var pool: AWSCognitoIdentityUserPool!
     var idToken: String?
-    var associatedDevices: [Device]?
+    var associatedNodeList: [Node]?
     var associatedNodes: [String: Node] = [:]
     var username = ""
     var password = ""
     var automaticLogin = false
     var updateDeviceList = false
     var addDeviceStatusTimeout: Timer?
-    var currentAssociationInfo: AssociationConfig!
+    var currentAssociationInfo: AssociationConfig?
     private init() {
         // setup service configuration
         let serviceConfiguration = AWSServiceConfiguration(region: Constants.CognitoIdentityUserPoolRegion, credentialsProvider: nil)
@@ -52,8 +52,8 @@ class User {
 
     func associateNodeWithUser(session: Session, delegate: DeviceAssociationProtocol) {
         currentAssociationInfo = AssociationConfig()
-        currentAssociationInfo.uuid = UUID().uuidString
-        let deviceAssociation = DeviceAssociation(session: session, secretId: currentAssociationInfo.uuid)
+        currentAssociationInfo?.uuid = UUID().uuidString
+        let deviceAssociation = DeviceAssociation(session: session, secretId: currentAssociationInfo!.uuid)
         deviceAssociation.associateDeviceWithUser()
         deviceAssociation.delegate = delegate
     }
@@ -89,7 +89,7 @@ class User {
     }
 
     func sendRequestToAddDevice(count: Int) {
-        let parameters = ["user_id": User.shared.userID, "node_id": currentAssociationInfo.nodeID, "secret_key": currentAssociationInfo.uuid, "operation": "add"]
+        let parameters = ["user_id": User.shared.userID, "node_id": currentAssociationInfo!.nodeID, "secret_key": currentAssociationInfo!.uuid, "operation": "add"]
         NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, error in
             print(requestID)
             if error != nil, count > 0 {
@@ -98,7 +98,7 @@ class User {
                 }
             } else {
                 if let requestid = requestID {
-                    User.shared.checkDeviceAssoicationStatus(nodeID: self.currentAssociationInfo.nodeID, requestID: requestid)
+                    User.shared.checkDeviceAssoicationStatus(nodeID: self.currentAssociationInfo!.nodeID, requestID: requestid)
                 }
             }
         }

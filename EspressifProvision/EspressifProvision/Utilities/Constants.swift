@@ -30,27 +30,27 @@ struct Constants {
 
     // Amazon Cognito setup configuration
     static let CognitoIdentityUserPoolRegion: AWSRegionType = .USEast1
-    static let CognitoIdentityUserPoolId = "us-east-1_Vrr3pWTIy"
-    static let CognitoIdentityUserPoolAppClientId = "78suluee2rmlltshrt2v4lvuo0"
-    static let CognitoIdentityUserPoolAppClientSecret = "6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d"
+    static let CognitoIdentityUserPoolId = Bundle.main.infoDictionary!["USER_POOL_ID"] as? String ?? ""
+    static let CognitoIdentityUserPoolAppClientId = Bundle.main.infoDictionary!["APP_CLIENT_ID"] as? String ?? ""
+    static let CognitoIdentityUserPoolAppClientSecret = Bundle.main.infoDictionary!["APP_CLIENT_SECRET"] as? String ?? ""
 
     static let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
-    static let baseURL = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/"
+    static let baseURL = Bundle.main.infoDictionary!["BASE_API_URL_ENDPOINT"] as? String ?? ""
     static let githubURL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/authorize"
     static let redirectURL = "com.espressif.rainmaker.intsoftap://success"
     static let clientID = "78suluee2rmlltshrt2v4lvuo0"
     static let idProvider = "Github"
 
     // AWS cognito APIs
-    static let addDevice = Constants.baseURL + "user/nodes/mapping/"
-    static let getUserId = Constants.baseURL + "users/"
-    static let getNodes = Constants.baseURL + "user/nodes/mapping/"
-    static let getNodeConfig = Constants.baseURL + "user/nodes/config/"
+    static let addDevice = Constants.baseURL + "user/nodes/mapping"
+    static let getUserId = Constants.baseURL + "user"
+    static let getNodes = Constants.baseURL + "user/nodes/mapping"
+    static let getNodeConfig = Constants.baseURL + "user/nodes/config"
 //    static let addDeviceToUser = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
-    static let checkStatus = Constants.baseURL + "user/nodes/mapping/"
+    static let checkStatus = Constants.baseURL + "user/nodes/mapping"
 
-    static let updateThingsShadow = Constants.baseURL + "user/nodes/dynamic_params/"
-    static let getDeviceShadow = Constants.baseURL + "user/nodes/dynamic_params/"
+    static let updateThingsShadow = Constants.baseURL + "user/nodes/dynamic_params"
+    static let getDeviceShadow = Constants.baseURL + "user/nodes/dynamic_params"
 
     static let newDeviceAdded = "com.espressif.newDeviceAdded"
     static let prefixKey = "com.espressif.prefix"

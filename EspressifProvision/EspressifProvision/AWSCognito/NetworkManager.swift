@@ -23,7 +23,7 @@ class NetworkManager {
                 if idToken != nil {
                     User.shared.idToken = idToken
                     let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
-                    Alamofire.request(Constants.getUserId + "?user_name=" + User.shared.username, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                    Alamofire.request(Constants.getUserId, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                         if let json = response.result.value as? [String: String] {
                             print("JSON: \(json)")
                             if let userid = json[Constants.userID] {
@@ -66,7 +66,7 @@ class NetworkManager {
         })
     }
 
-    func getDeviceList(completionHandler: @escaping ([Device]?, Error?) -> Void) {
+    func getNodeList(completionHandler: @escaping ([Node]?, Error?) -> Void) {
         NetworkManager.shared.getUserId { userID, _ in
             if userID != nil {
                 User.shared.getAccessToken(completionHandler: { idToken in
@@ -90,19 +90,23 @@ class NetworkManager {
 //                            }
                             print(response)
                             if let json = response.result.value as? [String: Any], let tempArray = json["nodes"] as? [String] {
-                                var deviceList: [Device] = []
+                                var nodeList: [Node] = []
                                 let serviceGroup = DispatchGroup()
                                 for item in tempArray {
                                     serviceGroup.enter()
-                                    self.getNodeConfig(nodeID: item, headers: headers, completionHandler: { device, _ in
-                                        if let devices = device {
-                                            deviceList.append(contentsOf: devices)
+                                    self.getNodeConfig(nodeID: item, headers: headers, completionHandler: { node, _ in
+                                        if let newNode = node {
+                                            if newNode.devices?.count == 1 {
+                                                nodeList.insert(newNode, at: 0)
+                                            } else {
+                                                nodeList.append(newNode)
+                                            }
                                         }
                                         serviceGroup.leave()
                                     })
                                 }
                                 serviceGroup.notify(queue: .main) {
-                                    completionHandler(deviceList, nil)
+                                    completionHandler(nodeList, nil)
                                 }
                             } else {
                                 completionHandler(nil, NetworkError.keyNotPresent)
@@ -118,7 +122,7 @@ class NetworkManager {
         }
     }
 
-    func getNodeConfig(nodeID: String, headers: HTTPHeaders, completionHandler: @escaping ([Device]?, Error?) -> Void) {
+    func getNodeConfig(nodeID: String, headers: HTTPHeaders, completionHandler: @escaping (Node?, Error?) -> Void) {
         let url = Constants.getNodeConfig + "?nodeid=" + nodeID
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             print(response)

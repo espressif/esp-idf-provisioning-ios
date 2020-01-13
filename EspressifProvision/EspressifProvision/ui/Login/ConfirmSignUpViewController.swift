@@ -38,6 +38,10 @@ class ConfirmSignUpViewController: UIViewController {
 
     // MARK: IBActions
 
+    @IBAction func cancelClicked(_: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+
     // handle confirm sign up
     @IBAction func confirm(_: AnyObject) {
         guard let confirmationCodeValue = self.code.text, !confirmationCodeValue.isEmpty else {

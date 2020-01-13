@@ -9,7 +9,7 @@
 import Foundation
 
 struct JSONParser {
-    static func parseNodeData(data: [String: Any], nodeID: String) -> [Device] {
+    static func parseNodeData(data: [String: Any], nodeID: String) -> Node {
         var result: [Device] = []
         // Saving node related information
         var node = Node()
@@ -63,7 +63,7 @@ struct JSONParser {
                 result.append(newDevice)
             }
         }
-
-        return result
+        node.devices = result
+        return node
     }
 }

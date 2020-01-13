@@ -67,6 +67,7 @@ class ProvisionViewController: UIViewController {
         }
 
         tableView.tableFooterView = UIView()
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
 
         navigationItem.backBarButtonItem?.title = ""
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(showDeviceVersion))
@@ -75,12 +76,6 @@ class ProvisionViewController: UIViewController {
             transport = SoftAPTransport(baseUrl: Utility.baseUrl)
         }
         getDeviceVersionInfo()
-
-        let colors = Colors()
-        view.backgroundColor = UIColor.clear
-        let backgroundLayer = colors.backGroundLayer
-        backgroundLayer!.frame = view.frame
-        view.layer.insertSublayer(backgroundLayer!, at: 0)
     }
 
     private func showBusy(isBusy: Bool) {
@@ -129,7 +124,7 @@ class ProvisionViewController: UIViewController {
     }
 
     private func initialiseSession() {
-        let securityVersion = provisionConfig[Provision.CONFIG_SECURITY_KEY]
+        let securityVersion = Provision.CONFIG_SECURITY_SECURITY1
 
         if securityVersion == Provision.CONFIG_SECURITY_SECURITY1 {
             if let capability = self.capabilities, capability.contains(Constants.noProofCapability) {
@@ -141,22 +136,9 @@ class ProvisionViewController: UIViewController {
                 initSession()
             } else {
                 DispatchQueue.main.async {
-                    let input = UIAlertController(title: "Proof of Possession", message: nil, preferredStyle: .alert)
-
-                    input.addTextField { textField in
-                        textField.text = "abcd1234"
-                    }
-                    input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
-                        self.transport?.disconnect()
-                        self.navigationController?.popViewController(animated: true)
-                    }))
-                    input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
-                        let textField = input?.textFields![0]
-                        self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY] = textField?.text ?? ""
-                        self.security = Security1(proofOfPossession: self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]!)
-                        self.initSession()
-                    }))
-                    self.present(input, animated: true, completion: nil)
+                    self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY] = self.pop
+                    self.security = Security1(proofOfPossession: self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]!)
+                    self.initSession()
                 }
             }
         } else {
@@ -244,6 +226,11 @@ class ProvisionViewController: UIViewController {
                 print(error)
             }
         })
+    }
+
+    @IBAction func cancelClicked(_: Any) {
+        transport?.disconnect()
+        navigationController?.popToRootViewController(animated: false)
     }
 
     @objc func showDeviceVersion() {
@@ -397,6 +384,7 @@ class ProvisionViewController: UIViewController {
             let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as! SuccessViewController
             successVC.statusText = "Error establishing session.\n Check if Proof of Possession(POP) is correct!"
             successVC.session = self.session
+            successVC.sessionInit = false
             self.navigationController?.pushViewController(successVC, animated: true)
         }
     }
@@ -594,10 +582,10 @@ extension UITextField {
 extension ProvisionViewController: DeviceAssociationProtocol {
     func deviceAssociationFinishedWith(success: Bool, nodeID: String?) {
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-        User.shared.currentAssociationInfo.associationInfoDelievered = success
+        User.shared.currentAssociationInfo!.associationInfoDelievered = success
         if success {
             if let deviceSecret = nodeID {
-                User.shared.currentAssociationInfo.nodeID = deviceSecret
+                User.shared.currentAssociationInfo!.nodeID = deviceSecret
 //                    self.sendRequestToAddDevice(nodeID: deviceSecret, count: 5)
             }
             applyConfigurations(provision: provision)

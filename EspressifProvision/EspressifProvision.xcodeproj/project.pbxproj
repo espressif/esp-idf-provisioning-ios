@@ -47,6 +47,9 @@
 		F13F273E238CF6170003AABB /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13F273D238CF6170003AABB /* ScannerViewController.swift */; };
 		F1402AB8239677B300C989F8 /* StaticControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1402AB6239677B300C989F8 /* StaticControlTableViewCell.swift */; };
 		F1402AB9239677B300C989F8 /* StaticControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1402AB7239677B300C989F8 /* StaticControlTableViewCell.xib */; };
+		F176A41623C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */; };
+		F176A41823C4669300F2FCBC /* DeviceCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */; };
+		F176A41C23C8342200F2FCBC /* ClaimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41B23C8342200F2FCBC /* ClaimViewController.swift */; };
 		F17F1412239F96C3008326A4 /* VersionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17F1411239F96C3008326A4 /* VersionManager.swift */; };
 		F184C9E7228C4A780034C5B7 /* AESDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F184C9E6228C4A780034C5B7 /* AESDecryptor.m */; };
 		F18EC5C023BE0BF700F9188E /* AssociationConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F18EC5BF23BE0BF700F9188E /* AssociationConfig.swift */; };
@@ -181,6 +184,9 @@
 		F13F273D238CF6170003AABB /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		F1402AB6239677B300C989F8 /* StaticControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticControlTableViewCell.swift; sourceTree = "<group>"; };
 		F1402AB7239677B300C989F8 /* StaticControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StaticControlTableViewCell.xib; sourceTree = "<group>"; };
+		F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListCollectionReusableView.swift; sourceTree = "<group>"; };
+		F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCollectionViewLayout.swift; sourceTree = "<group>"; };
+		F176A41B23C8342200F2FCBC /* ClaimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimViewController.swift; sourceTree = "<group>"; };
 		F17F1411239F96C3008326A4 /* VersionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionManager.swift; sourceTree = "<group>"; };
 		F184C9E5228C4A780034C5B7 /* AESDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESDecryptor.h; sourceTree = "<group>"; };
 		F184C9E6228C4A780034C5B7 /* AESDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESDecryptor.m; sourceTree = "<group>"; };
@@ -405,6 +411,7 @@
 				F1CB6085233B549F0001D509 /* BLEDeviceListViewCell.swift */,
 				F1DDA06723588B110005F982 /* NodeDetailsViewController.swift */,
 				F1DDA06923588C890005F982 /* NodeDetailsTableViewCell.swift */,
+				F176A41B23C8342200F2FCBC /* ClaimViewController.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -542,6 +549,8 @@
 				F1F4514F232B7A780009DCE0 /* ControlListViewController.swift */,
 				F1DB6F61232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift */,
 				F13F273D238CF6170003AABB /* ScannerViewController.swift */,
+				F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */,
+				F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */,
 			);
 			path = Devices;
 			sourceTree = "<group>";
@@ -835,6 +844,7 @@
 				F19A9D1822C0ED4C00A450C3 /* ForgotPasswordViewController.swift in Sources */,
 				F1DD70AA22A9BFBE0092DAB9 /* ScanWifiList.swift in Sources */,
 				F18EC5C023BE0BF700F9188E /* AssociationConfig.swift in Sources */,
+				F176A41C23C8342200F2FCBC /* ClaimViewController.swift in Sources */,
 				F19A9D1B22C0ED4C00A450C3 /* ConfirmSignUpViewController.swift in Sources */,
 				F1F45152232B7ECB0009DCE0 /* Attribute.swift in Sources */,
 				F1F45147232A43510009DCE0 /* SliderTableViewCell.swift in Sources */,
@@ -847,7 +857,9 @@
 				14DE671E20ECD04100941522 /* BLETransport.swift in Sources */,
 				F194B60822CDD7BD00417347 /* Node.swift in Sources */,
 				149774DF210C87AB00022841 /* DataExtensions.swift in Sources */,
+				F176A41823C4669300F2FCBC /* DeviceCollectionViewLayout.swift in Sources */,
 				1431468E20E3823F0017E119 /* Provision.swift in Sources */,
+				F176A41623C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift in Sources */,
 				1431469920E387C60017E119 /* sec0.pb.swift in Sources */,
 				F1EEE0432347268900E90B1F /* BrightnessSlider.swift in Sources */,
 				F19A9D1922C0ED4C00A450C3 /* ConfirmForgotPasswordViewController.swift in Sources */,
@@ -1071,7 +1083,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EA24507D63588F8C9C0C451B /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */;
 			buildSettings = {
+				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
+				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1094,6 +1109,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
 			};
 			name = Debug;
 		};
@@ -1101,7 +1117,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8AEE1EA339EF845B350B9461 /* Pods-EspressifProvisionAll-EspressifProvision.release.xcconfig */;
 			buildSettings = {
+				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
+				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1123,6 +1142,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
 			};
 			name = Release;
 		};
@@ -1275,7 +1295,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C9F80AFFF914218F4C795369 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig */;
 			buildSettings = {
+				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
+				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1299,6 +1322,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
 			};
 			name = "WifiSec0-Debug";
 		};
@@ -1409,7 +1433,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BF983879081F440E18364B1E /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig */;
 			buildSettings = {
+				APP_CLIENT_ID = 1ufkb8giumr81k3fj8je1rptad;
+				APP_CLIENT_SECRET = cs78ke0mje48fbg0pd0mo6psl8dpqm9cq8acl3tgs89eb2frjk8;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_API_URL_ENDPOINT = "https://xjhudmcl11.execute-api.us-east-1.amazonaws.com/dev/v1/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1434,6 +1461,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_POOL_ID = "us-east-1_9959L4v1E";
 			};
 			name = "WifiSec1-Debug";
 		};
@@ -1544,7 +1572,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 10FBDE85E3C2325EA6CC75E3 /* Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig */;
 			buildSettings = {
+				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
+				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1568,6 +1599,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
 			};
 			name = "BLESec0-Debug";
 		};
@@ -1678,7 +1710,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1E3CE424F1633D750BE08C05 /* Pods-EspressifProvisionAll-EspressifProvision.blesec1-debug.xcconfig */;
 			buildSettings = {
+				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
+				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1701,6 +1736,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
 			};
 			name = "BLESec1-Debug";
 		};
@@ -1808,10 +1844,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5E4DB15129C36A08E6555745 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig */;
 			buildSettings = {
+				APP_CLIENT_ID = 5jenhe4glcr7iljq47tv3dt7lu;
+				APP_CLIENT_SECRET = cdjof6bud9f29k4uk6cglphcbh4q0js8q45a5q7286cojr71ear;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_API_URL_ENDPOINT = "https://p26kw0zis7.execute-api.us-east-1.amazonaws.com/dev/v1/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1827,12 +1866,13 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.intsoftap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "RainMaker Beta App Provisioning Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "RainMaker Beta App Development Profile";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_POOL_ID = "us-east-1_0Ti3U5edN";
 			};
 			name = "WifiSec1-Staging";
 		};
@@ -1940,7 +1980,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15A91E4930F72AD4D1D47C61 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig */;
 			buildSettings = {
+				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
+				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -1965,6 +2008,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
 			};
 			name = "WifiSec1-Release";
 		};

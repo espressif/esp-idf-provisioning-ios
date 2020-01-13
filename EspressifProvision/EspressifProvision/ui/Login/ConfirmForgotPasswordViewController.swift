@@ -23,22 +23,41 @@ class ConfirmForgotPasswordViewController: UIViewController {
 
     @IBOutlet var confirmationCode: UITextField!
     @IBOutlet var proposedPassword: UITextField!
+    @IBOutlet var confirmNewPassword: UITextField!
+    @IBOutlet var infoLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let username = self.user?.username {
+            infoLabel.text = "To set a new password we have sent a verification code to " + username
+        }
+    }
+
+    override func viewWillAppear(_: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     // MARK: - IBActions
 
+    @IBAction func cancelPressed(_: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+
+    @IBAction func backButtonPressed(_: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+
     @IBAction func updatePassword(_: AnyObject) {
         guard let confirmationCodeValue = self.confirmationCode.text, !confirmationCodeValue.isEmpty else {
-            let alertController = UIAlertController(title: "Password Field Empty",
-                                                    message: "Please enter a password of your choice.",
-                                                    preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-            alertController.addAction(okAction)
-
-            present(alertController, animated: true, completion: nil)
+            showAlert(title: "Code is empty", message: "Please enter a valid confirmation code.")
+            return
+        }
+        guard let newPassword = proposedPassword.text, !newPassword.isEmpty else {
+            showAlert(title: "Password Field Empty", message: "Please enter a password of your choice.")
+            return
+        }
+        guard let confirmPassword = confirmNewPassword.text, confirmPassword == newPassword else {
+            showAlert(title: "Password mismatch", message: "Re-entered password do not match.")
             return
         }
 
@@ -60,5 +79,15 @@ class ConfirmForgotPasswordViewController: UIViewController {
             }
             return nil
         }
+    }
+
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+
+        present(alertController, animated: true, completion: nil)
     }
 }

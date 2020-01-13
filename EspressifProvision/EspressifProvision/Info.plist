@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>APP_CLIENT_ID</key>
+	<string>$(APP_CLIENT_ID)</string>
+	<key>APP_CLIENT_SECRET</key>
+	<string>$(APP_CLIENT_SECRET)</string>
 	<key>AWS</key>
 	<dict>
 		<key>CognitoUserPool</key>
@@ -28,6 +32,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>BASE_API_URL_ENDPOINT</key>
+	<string>$(BASE_API_URL_ENDPOINT)</string>
 	<key>BLEDeviceNamePrefix</key>
 	<string>PROV_</string>
 	<key>CFBundleDevelopmentRegion</key>
@@ -92,6 +98,8 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>USER_POOL_ID</key>
+	<string>$(USER_POOL_ID)</string>
 	<key>WifiBaseUrl</key>
 	<string>192.168.4.1:80</string>
 	<key>WifiNetworkNamePrefix</key>
