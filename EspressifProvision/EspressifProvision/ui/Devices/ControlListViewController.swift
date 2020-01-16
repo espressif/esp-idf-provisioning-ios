@@ -20,6 +20,7 @@ import UIKit
 class ControlListViewController: UIViewController {
     var device: Device?
 
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -32,9 +33,7 @@ class ControlListViewController: UIViewController {
         tableView.register(UINib(nibName: "GenericControlTableViewCell", bundle: nil), forCellReuseIdentifier: "genericControlCell")
         tableView.register(UINib(nibName: "GenericSliderTableViewCell", bundle: nil), forCellReuseIdentifier: "GenericSliderTableViewCell")
         tableView.register(UINib(nibName: "StaticControlTableViewCell", bundle: nil), forCellReuseIdentifier: "staticControlTableViewCell")
-
-        navigationItem.title = device?.name ?? "Controls"
-
+        titleLabel.text = device?.name ?? "Details"
         updateDeviceAttributes()
     }
 
@@ -81,6 +80,10 @@ class ControlListViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    @IBAction func backButtonPressed(_: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+
     @objc func setBrightness(_: UISlider) {}
 
     func getTableViewGenericCell(attribute: DynamicAttribute, indexPath: IndexPath) -> GenericControlTableViewCell {
@@ -161,6 +164,15 @@ class ControlListViewController: UIViewController {
         } else {
             let cell: GenericControlTableViewCell = getTableViewGenericCell(attribute: dynamicAttribute, indexPath: indexPath)
             return cell
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
+        if segue.identifier == Constants.nodeDetailSegue {
+            let destination = segue.destination as! NodeDetailsViewController
+            if let i = User.shared.associatedNodeList!.firstIndex(where: { $0.node_id == self.device?.node_id }) {
+                destination.currentNode = User.shared.associatedNodeList![i]
+            }
         }
     }
 }

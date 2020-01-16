@@ -18,6 +18,7 @@ abstract_target 'EspressifProvisionAll' do
   pod 'RangeSeekSlider'
   pod 'ReachabilitySwift'
   pod 'CollectionViewCenteredFlowLayout'
+  pod 'JWTDecode', '~> 2.4'
 
   
   target 'EspressifProvision'

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "chip.png",
+      "filename" : "switch.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "chip@2x.png",
+      "filename" : "switch@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "chip@3x.png",
+      "filename" : "switch@3x.png",
       "scale" : "3x"
     }
   ],

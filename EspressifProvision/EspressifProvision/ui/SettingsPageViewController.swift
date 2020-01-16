@@ -10,8 +10,6 @@ import Foundation
 import UIKit
 
 class SettingsPageViewController: UIViewController {
-    @IBOutlet var headerView: UIView!
-    @IBOutlet var profileImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
 //        profileImage.image = imageWith(name: "V")
@@ -24,11 +22,6 @@ class SettingsPageViewController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let colors = Colors()
-        headerView.backgroundColor = UIColor.clear
-        let backgroundLayer = colors.hvl
-        backgroundLayer!.frame = headerView.frame
-        headerView.layer.insertSublayer(backgroundLayer!, at: 0)
     }
 
     @IBAction func signOut(_: Any) {

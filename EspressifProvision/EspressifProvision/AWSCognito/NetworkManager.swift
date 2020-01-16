@@ -48,9 +48,11 @@ class NetworkManager {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                 Alamofire.request(Constants.addDevice, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                     if let error = response.result.error {
+                        print("Add device error \(error)")
                         completionHandler(nil, error)
                         return
                     }
+                    print("Add device successfull)")
                     if let json = response.result.value as? [String: String] {
                         print("JSON: \(json)")
                         if let requestId = json[Constants.requestID] {
@@ -72,7 +74,7 @@ class NetworkManager {
                 User.shared.getAccessToken(completionHandler: { idToken in
                     if idToken != nil {
                         let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
-                        let url = Constants.getNodes + "?userid=" + userID!
+                        let url = Constants.getNodes
                         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
 //                            if let path = Bundle.main.path(forResource: "DeviceDetails", ofType: "json") {
 //                                do {
@@ -139,7 +141,7 @@ class NetworkManager {
             if userID != nil {
                 User.shared.getAccessToken(completionHandler: { idToken in
                     if idToken != nil {
-                        let url = Constants.checkStatus + "?userid=" + userID! + "&node_id=" + deviceID
+                        let url = Constants.checkStatus + "?node_id=" + deviceID
                         let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                         Alamofire.request(url + "&request_id=" + requestID + "&user_request=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                             if let json = response.result.value as? [String: String], let status = json["request_status"] as? String {
@@ -200,5 +202,10 @@ class NetworkManager {
                 completionHandler(nil)
             }
         }
+    }
+
+    func getIdToken(githubToken: String!, completionHandler _: @escaping (Bool) -> Void) {
+        let requestData = "grant_type=authorization_code&client_id=" + Constants.clientID + "&code=" + githubToken + "&client_secret="
+        let headers: HTTPHeaders = ["content-type": "application/x-www-form-urlencoded"]
     }
 }

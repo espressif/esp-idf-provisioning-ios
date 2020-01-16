@@ -10,6 +10,8 @@ import AWSCognitoIdentityProvider
 import Foundation
 
 struct Constants {
+    // Segue identifiers
+    static let nodeDetailSegue = "nodeDetailSegue"
     // JSON keys
     static let userID = "user_id"
     static let requestID = "request_id"
@@ -44,7 +46,7 @@ struct Constants {
     // AWS cognito APIs
     static let addDevice = Constants.baseURL + "user/nodes/mapping"
     static let getUserId = Constants.baseURL + "user"
-    static let getNodes = Constants.baseURL + "user/nodes/mapping"
+    static let getNodes = Constants.baseURL + "user/nodes"
     static let getNodeConfig = Constants.baseURL + "user/nodes/config"
 //    static let addDeviceToUser = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
     static let checkStatus = Constants.baseURL + "user/nodes/mapping"
@@ -55,6 +57,8 @@ struct Constants {
     static let newDeviceAdded = "com.espressif.newDeviceAdded"
     static let prefixKey = "com.espressif.prefix"
     static let userIDKey = "com.espressif.userid"
+
+    static let tokenURL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/token"
 
     static func log(message: String) {
         print(message)

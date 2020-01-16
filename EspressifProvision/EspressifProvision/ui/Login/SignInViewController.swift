@@ -19,6 +19,7 @@ import AuthenticationServices
 import AWSCognitoIdentityProvider
 import AWSMobileClient
 import Foundation
+import JWTDecode
 import SafariServices
 
 class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
@@ -145,7 +146,16 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
                                 let idTokenInfo = token.components(separatedBy: "=")
                                 if idTokenInfo.count > 1 {
                                     User.shared.idToken = idTokenInfo[1]
-                                    Constants.log(message: "Github token : " + User.shared.idToken!)
+                                    do {
+                                        let jwt = try decode(jwt: User.shared.idToken!)
+                                        if let userid = jwt.body["custom:user_id"] as? String {
+                                            User.shared.userID = userid
+                                            UserDefaults.standard.set(userid, forKey: Constants.userIDKey)
+                                        }
+                                        print(jwt)
+                                    } catch {
+                                        print("error")
+                                    }
                                     self.dismiss(animated: true, completion: nil)
                                     return
                                 }

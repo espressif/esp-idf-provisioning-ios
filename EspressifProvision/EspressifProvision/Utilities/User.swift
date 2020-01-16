@@ -89,6 +89,7 @@ class User {
     }
 
     func sendRequestToAddDevice(count: Int) {
+        print("sendRequestToAddDevice")
         let parameters = ["user_id": User.shared.userID, "node_id": currentAssociationInfo!.nodeID, "secret_key": currentAssociationInfo!.uuid, "operation": "add"]
         NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, error in
             print(requestID)
@@ -98,6 +99,7 @@ class User {
                 }
             } else {
                 if let requestid = requestID {
+                    print("Check device association status")
                     User.shared.checkDeviceAssoicationStatus(nodeID: self.currentAssociationInfo!.nodeID, requestID: requestid)
                 }
             }

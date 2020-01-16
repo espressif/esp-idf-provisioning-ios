@@ -42,7 +42,7 @@ class DevicesViewController: UIViewController {
 
         pickerView.layer.cornerRadius = 10.0
         pickerView.layer.borderWidth = 1.0
-        pickerView.layer.borderColor = UIColor(hexString: "#f2f1fc").cgColor
+        pickerView.layer.borderColor = UIColor(hexString: "#F2F1FC").cgColor
         pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
         collectionView.collectionViewLayout = DeviceCollectionViewLayout()
         if user == nil {
@@ -53,9 +53,9 @@ class DevicesViewController: UIViewController {
         }
         if let userID = UserDefaults.standard.value(forKey: Constants.userIDKey) as? String {
             User.shared.userID = userID
+        } else {
+            refresh()
         }
-
-        refresh()
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshDeviceList), name: Notification.Name(Constants.newDeviceAdded), object: nil)
         refreshControl.addTarget(self, action: #selector(refreshDeviceList), for: .valueChanged)
@@ -85,7 +85,6 @@ class DevicesViewController: UIViewController {
         reachability.stopNotifier()
         pickerView.isHidden = true
         addButton.setImage(UIImage(named: "add_icon"), for: .normal)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     override func viewWillAppear(_ animated: Bool) {

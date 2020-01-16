@@ -80,6 +80,8 @@
 		F1DD70AB22A9BFBE0092DAB9 /* WifiListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A922A9BFBE0092DAB9 /* WifiListTableViewCell.swift */; };
 		F1DDA06823588B110005F982 /* NodeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDA06723588B110005F982 /* NodeDetailsViewController.swift */; };
 		F1DDA06A23588C890005F982 /* NodeDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDA06923588C890005F982 /* NodeDetailsTableViewCell.swift */; };
+		F1E37E9023CF3AD500A5043F /* PrimaryControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E37E8E23CF3AD500A5043F /* PrimaryControlTableViewCell.swift */; };
+		F1E37E9123CF3AD500A5043F /* PrimaryControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1E37E8F23CF3AD500A5043F /* PrimaryControlTableViewCell.xib */; };
 		F1EEE0432347268900E90B1F /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EEE0422347268900E90B1F /* BrightnessSlider.swift */; };
 		F1F451372328C51A0009DCE0 /* DeviceDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */; };
 		F1F4513A2328C5D40009DCE0 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F451392328C5D40009DCE0 /* DevicesViewController.swift */; };
@@ -218,6 +220,8 @@
 		F1DD70A922A9BFBE0092DAB9 /* WifiListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WifiListTableViewCell.swift; sourceTree = "<group>"; };
 		F1DDA06723588B110005F982 /* NodeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeDetailsViewController.swift; sourceTree = "<group>"; };
 		F1DDA06923588C890005F982 /* NodeDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		F1E37E8E23CF3AD500A5043F /* PrimaryControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryControlTableViewCell.swift; sourceTree = "<group>"; };
+		F1E37E8F23CF3AD500A5043F /* PrimaryControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrimaryControlTableViewCell.xib; sourceTree = "<group>"; };
 		F1EEE0422347268900E90B1F /* BrightnessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
 		F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeviceDetail.storyboard; sourceTree = "<group>"; };
 		F1F451392328C5D40009DCE0 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
@@ -578,6 +582,8 @@
 				F1FB153B234D91000053B0ED /* GenericSliderTableViewCell.xib */,
 				F1402AB6239677B300C989F8 /* StaticControlTableViewCell.swift */,
 				F1402AB7239677B300C989F8 /* StaticControlTableViewCell.xib */,
+				F1E37E8E23CF3AD500A5043F /* PrimaryControlTableViewCell.swift */,
+				F1E37E8F23CF3AD500A5043F /* PrimaryControlTableViewCell.xib */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -710,6 +716,7 @@
 				F1F451372328C51A0009DCE0 /* DeviceDetail.storyboard in Resources */,
 				1431462E20DE994C0017E119 /* Assets.xcassets in Resources */,
 				F1F4513D2328C90E0009DCE0 /* DeviceDetails.json in Resources */,
+				F1E37E9123CF3AD500A5043F /* PrimaryControlTableViewCell.xib in Resources */,
 				F1F4514C232B74510009DCE0 /* SwitchTableViewCell.xib in Resources */,
 				F1F45148232A43510009DCE0 /* SliderTableViewCell.xib in Resources */,
 				1431462C20DE994B0017E119 /* Main.storyboard in Resources */,
@@ -906,6 +913,7 @@
 				1431462720DE994B0017E119 /* AppDelegate.swift in Sources */,
 				1431469D20E387C60017E119 /* session.pb.swift in Sources */,
 				F1CB6086233B549F0001D509 /* BLEDeviceListViewCell.swift in Sources */,
+				F1E37E9023CF3AD500A5043F /* PrimaryControlTableViewCell.swift in Sources */,
 				F19A9D1A22C0ED4C00A450C3 /* SignUpViewController.swift in Sources */,
 				F194B60A22CDD83200417347 /* DeviceListTableViewCell.swift in Sources */,
 				F13F273E238CF6170003AABB /* ScannerViewController.swift in Sources */,

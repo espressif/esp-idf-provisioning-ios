@@ -42,6 +42,10 @@ class NodeDetailsViewController: UIViewController {
         }
     }
 
+    @IBAction func backButtonPressed(_: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+
     /*
      // MARK: - Navigation
 
