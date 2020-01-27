@@ -10,7 +10,11 @@ import Foundation
 
 import Foundation
 
-struct Device {
+struct Device: Equatable {
+    static func == (lhs: Device, rhs: Device) -> Bool {
+        return lhs.staticParams == rhs.staticParams && lhs.dynamicParams == rhs.dynamicParams
+    }
+
     var name: String?
     var type: String?
     var node_id: String?

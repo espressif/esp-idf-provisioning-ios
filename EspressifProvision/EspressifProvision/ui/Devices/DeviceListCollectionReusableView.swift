@@ -8,6 +8,16 @@
 
 import UIKit
 
+protocol DeviceListHeaderProtocol {
+    func deviceInfoClicked(nodeID: String)
+}
+
 class DeviceListCollectionReusableView: UICollectionReusableView {
     @IBOutlet var headerLabel: UILabel!
+    var nodeID = ""
+    var delegate: DeviceListHeaderProtocol?
+
+    @IBAction func infoClicked(_: Any) {
+        delegate?.deviceInfoClicked(nodeID: nodeID)
+    }
 }

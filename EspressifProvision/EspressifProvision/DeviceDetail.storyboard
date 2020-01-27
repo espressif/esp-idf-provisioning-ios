@@ -198,7 +198,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EuC-HO-Qx5">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EuC-HO-Qx5">
                                 <rect key="frame" x="10" y="128" width="394" height="734"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -338,8 +338,8 @@
                                         <color key="textColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfJ-8E-rG2">
-                                        <rect key="frame" x="16" y="25" width="40" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfJ-8E-rG2">
+                                        <rect key="frame" x="16" y="25" width="318" height="19.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -352,8 +352,14 @@
                                     <constraint firstItem="auy-Gq-NNJ" firstAttribute="leading" secondItem="PeI-s2-n0v" secondAttribute="leading" constant="16" id="F0p-Bf-s4R"/>
                                     <constraint firstItem="jfJ-8E-rG2" firstAttribute="leading" secondItem="PeI-s2-n0v" secondAttribute="leading" constant="16" id="W60-aB-Zbt"/>
                                     <constraint firstItem="auy-Gq-NNJ" firstAttribute="top" secondItem="PeI-s2-n0v" secondAttribute="top" constant="8" id="XeL-tV-5Q2"/>
+                                    <constraint firstAttribute="trailing" secondItem="jfJ-8E-rG2" secondAttribute="trailing" constant="16" id="lVz-yB-WY2"/>
                                     <constraint firstItem="jfJ-8E-rG2" firstAttribute="top" secondItem="auy-Gq-NNJ" secondAttribute="bottom" constant="2" id="n9Y-iE-iE3"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7P3-r1-pH3">
                                 <rect key="frame" x="32" y="306" width="350" height="60"/>
@@ -380,6 +386,11 @@
                                     <constraint firstAttribute="height" constant="60" id="pCN-Uc-ILk"/>
                                     <constraint firstItem="s0U-I7-SZh" firstAttribute="leading" secondItem="7P3-r1-pH3" secondAttribute="leading" constant="16" id="ph5-Jc-BeA"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFp-6v-cow">
                                 <rect key="frame" x="32" y="368" width="350" height="60"/>
@@ -406,6 +417,11 @@
                                     <constraint firstItem="nVD-SR-j1k" firstAttribute="top" secondItem="1pZ-GM-nqH" secondAttribute="bottom" constant="2" id="rYV-TN-JBQ"/>
                                     <constraint firstItem="nVD-SR-j1k" firstAttribute="leading" secondItem="zFp-6v-cow" secondAttribute="leading" constant="16" id="yRB-gM-Ruh"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4MW-3Z-TaU">
                                 <rect key="frame" x="32" y="430" width="350" height="60"/>
@@ -432,6 +448,11 @@
                                     <constraint firstItem="kM0-9d-RKc" firstAttribute="top" secondItem="LUb-mB-hYE" secondAttribute="bottom" constant="2" id="vCF-Fn-vZ7"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="x7N-65-oCi"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y3k-JI-JnJ">
                                 <rect key="frame" x="32" y="492" width="350" height="60"/>
@@ -458,6 +479,11 @@
                                     <constraint firstAttribute="height" constant="60" id="kMU-nm-m4E"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="qES-Vj-Zcc"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJU-mh-8gg">
                                 <rect key="frame" x="32" y="592" width="350" height="56"/>

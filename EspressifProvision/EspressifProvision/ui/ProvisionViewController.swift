@@ -42,6 +42,9 @@ class ProvisionViewController: UIViewController {
     var alertTextField: UITextField?
     var showPasswordImageView: UIImageView!
     var connectAutomatically = false
+    var isScanFlow = false
+    var ssid = ""
+    var passphrase = ""
     var pop = ""
     @IBOutlet var headerView: UIView!
 
@@ -75,7 +78,11 @@ class ProvisionViewController: UIViewController {
         if transport == nil {
             transport = SoftAPTransport(baseUrl: Utility.baseUrl)
         }
-        getDeviceVersionInfo()
+        if isScanFlow {
+            getDeviceVersionInfo()
+        } else {
+            initialiseSession()
+        }
     }
 
     private func showBusy(isBusy: Bool) {
@@ -102,7 +109,7 @@ class ProvisionViewController: UIViewController {
     }
 
     private func provisionDevice(ssid: String, passphrase: String) {
-        showLoader(message: "Device connecting to Wi-Fi")
+        showLoader(message: "")
 
         let baseUrl = provisionConfig[Provision.CONFIG_BASE_URL_KEY]
         let transportVersion = provisionConfig[Provision.CONFIG_TRANSPORT_KEY]
@@ -182,50 +189,28 @@ class ProvisionViewController: UIViewController {
     func initialiseSessionAndConfigure(ssid: String, passPhrase: String) {
         if transport!.isDeviceConfigured() {
             if session!.isEstablished {
-                provision = Provision(session: session!)
-
-                provision.configureWifi(ssid: ssid,
-                                        passphrase: passPhrase) { status, error in
-                    guard error == nil else {
-                        print("Error in configuring wifi : \(error.debugDescription)")
-                        return
-                    }
-                    if status == Espressif_Status.success {
-                        User.shared.associateNodeWithUser(session: self.session!, delegate: self)
-                    }
-                }
+                self.ssid = ssid
+                passphrase = passPhrase
+                User.shared.associateNodeWithUser(session: session!, delegate: self)
+//                provision = Provision(session: session!)
+//
+//                provision.configureWifi(ssid: ssid,
+//                                        passphrase: passPhrase) { status, error in
+//                    guard error == nil else {
+//                        print("Error in configuring wifi : \(error.debugDescription)")
+//                        return
+//                    }
+//                    if status == Espressif_Status.success {
+//                        User.shared.associateNodeWithUser(session: self.session!, delegate: self)
+//                    }
+//                }
             } else {
                 print("Session is not established")
+                showError(errorMessage: "Session is not established")
             }
         } else {
             showError(errorMessage: "Peripheral device could not be configured.")
         }
-    }
-
-    func getDeviceVersionInfo() {
-        showLoader(message: "Connecting Device")
-        transport?.SendConfigData(path: (transport?.utility.versionPath)!, data: Data("ESP".utf8), completionHandler: { response, error in
-            guard error == nil else {
-                print("Error reading device version info")
-                DispatchQueue.main.async {
-                    MBProgressHUD.hide(for: self.view, animated: true)
-                }
-                self.showConnectionFailure()
-                return
-            }
-            do {
-                if let result = try JSONSerialization.jsonObject(with: response!, options: .mutableContainers) as? NSDictionary {
-                    self.transport?.utility.deviceVersionInfo = result
-                    if let prov = result[Constants.provKey] as? NSDictionary, let capabilities = prov[Constants.capabilitiesKey] as? [String] {
-                        self.capabilities = capabilities
-                        self.initialiseSession()
-                    }
-                }
-            } catch {
-                self.initialiseSession()
-                print(error)
-            }
-        })
     }
 
     @IBAction func cancelClicked(_: Any) {
@@ -268,43 +253,69 @@ class ProvisionViewController: UIViewController {
         provisionDevice(ssid: ssid, passphrase: passphrase)
     }
 
-    private func applyConfigurations(provision: Provision) {
-        provision.applyConfigurations(completionHandler: { status, error in
+    func getDeviceVersionInfo() {
+        showLoader(message: "Connecting Device")
+        transport?.SendConfigData(path: (transport?.utility.versionPath)!, data: Data("ESP".utf8), completionHandler: { response, error in
             guard error == nil else {
-                self.showError(errorMessage: "Error in applying configurations : \(error.debugDescription)")
+                print("Error reading device version info")
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                }
+                self.showConnectionFailure()
                 return
             }
-            print("Configurations applied ! \(status)")
-        },
-                                      wifiStatusUpdatedHandler: { wifiState, failReason, error in
-            DispatchQueue.main.async {
-                self.showBusy(isBusy: false)
-                let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as? SuccessViewController
-                successVC?.session = self.session
-                if let successVC = successVC {
-                    if error != nil {
-                        successVC.statusText = "Error in getting wifi state : \(error.debugDescription)"
-                        successVC.success = true
-                    } else if wifiState == Espressif_WifiStationState.connected {
-                        successVC.statusText = "Device has been successfully provisioned!"
-                        successVC.success = true
-                    } else if wifiState == Espressif_WifiStationState.disconnected {
-                        successVC.statusText = "Please check the device indicators for Provisioning status."
-                    } else {
-                        if failReason == Espressif_WifiConnectFailedReason.authError {
-                            successVC.statusText = "Device provisioning failed.\nReason : Wi-Fi Authentication failed.\nPlease reset device to factory settings and retry."
-                        } else if failReason == Espressif_WifiConnectFailedReason.networkNotFound {
-                            successVC.statusText = "Device provisioning failed.\nReason : Network not found.\nPlease reset device to factory settings and retry."
-                        } else {
-                            successVC.statusText = "Device provisioning failed.\nReason : \(failReason).\nPlease reset device to factory settings and retry."
-                        }
+            do {
+                if let result = try JSONSerialization.jsonObject(with: response!, options: .mutableContainers) as? NSDictionary {
+                    self.transport?.utility.deviceVersionInfo = result
+                    if let prov = result[Constants.provKey] as? NSDictionary, let capabilities = prov[Constants.capabilitiesKey] as? [String] {
+                        self.capabilities = capabilities
+                        self.initialiseSession()
                     }
-                    self.navigationController?.pushViewController(successVC, animated: true)
-                    self.provisionButton.isUserInteractionEnabled = true
                 }
+            } catch {
+                self.initialiseSession()
+                print(error)
             }
         })
     }
+
+//    private func applyConfigurations(provision: Provision) {
+//        provision.applyConfigurations(completionHandler: { status, error in
+//            guard error == nil else {
+//                self.showError(errorMessage: "Error in applying configurations : \(error.debugDescription)")
+//                return
+//            }
+//            print("Configurations applied ! \(status)")
+//        },
+//                                      wifiStatusUpdatedHandler: { wifiState, failReason, error in
+//            DispatchQueue.main.async {
+//                self.showBusy(isBusy: false)
+//                let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as? SuccessViewController
+//                successVC?.session = self.session
+//                if let successVC = successVC {
+//                    if error != nil {
+//                        successVC.statusText = "Error in getting wifi state : \(error.debugDescription)"
+//                        successVC.success = true
+//                    } else if wifiState == Espressif_WifiStationState.connected {
+//                        successVC.statusText = "Device has been successfully provisioned!"
+//                        successVC.success = true
+//                    } else if wifiState == Espressif_WifiStationState.disconnected {
+//                        successVC.statusText = "Please check the device indicators for Provisioning status."
+//                    } else {
+//                        if failReason == Espressif_WifiConnectFailedReason.authError {
+//                            successVC.statusText = "Device provisioning failed.\nReason : Wi-Fi Authentication failed.\nPlease reset device to factory settings and retry."
+//                        } else if failReason == Espressif_WifiConnectFailedReason.networkNotFound {
+//                            successVC.statusText = "Device provisioning failed.\nReason : Network not found.\nPlease reset device to factory settings and retry."
+//                        } else {
+//                            successVC.statusText = "Device provisioning failed.\nReason : \(failReason).\nPlease reset device to factory settings and retry."
+//                        }
+//                    }
+//                    self.navigationController?.pushViewController(successVC, animated: true)
+//                    self.provisionButton.isUserInteractionEnabled = true
+//                }
+//            }
+//        })
+//    }
 
     func showError(errorMessage: String) {
         let alertMessage = errorMessage
@@ -382,9 +393,10 @@ class ProvisionViewController: UIViewController {
     func showStatusScreen() {
         DispatchQueue.main.async {
             let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as! SuccessViewController
-            successVC.statusText = "Error establishing session.\n Check if Proof of Possession(POP) is correct!"
-            successVC.session = self.session
-            successVC.sessionInit = false
+            successVC.session = self.session!
+            successVC.transport = self.transport!
+            successVC.ssid = self.ssid
+            successVC.passphrase = self.passphrase
             self.navigationController?.pushViewController(successVC, animated: true)
         }
     }
@@ -555,30 +567,6 @@ extension ProvisionViewController: BLEStatusProtocol {
     }
 }
 
-extension UITextField {
-    func togglePasswordVisibility() {
-        isSecureTextEntry = !isSecureTextEntry
-
-        if let existingText = text, isSecureTextEntry {
-            /* When toggling to secure text, all text will be purged if the user
-             continues typing unless we intervene. This is prevented by first
-             deleting the existing text and then recovering the original text. */
-            deleteBackward()
-
-            if let textRange = textRange(from: beginningOfDocument, to: endOfDocument) {
-                replace(textRange, withText: existingText)
-            }
-        }
-
-        /* Reset the selected text range since the cursor can end up in the wrong
-         position after a toggle because the text might vary in width */
-        if let existingSelectedTextRange = selectedTextRange {
-            selectedTextRange = nil
-            selectedTextRange = existingSelectedTextRange
-        }
-    }
-}
-
 extension ProvisionViewController: DeviceAssociationProtocol {
     func deviceAssociationFinishedWith(success: Bool, nodeID: String?) {
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
@@ -588,7 +576,8 @@ extension ProvisionViewController: DeviceAssociationProtocol {
                 User.shared.currentAssociationInfo!.nodeID = deviceSecret
 //                    self.sendRequestToAddDevice(nodeID: deviceSecret, count: 5)
             }
-            applyConfigurations(provision: provision)
+//            applyConfigurations(provision: provision)
+            showStatusScreen()
 //            }
         }
     }

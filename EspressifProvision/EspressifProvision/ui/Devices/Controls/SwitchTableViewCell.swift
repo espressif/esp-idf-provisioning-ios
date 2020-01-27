@@ -12,8 +12,9 @@ class SwitchTableViewCell: UITableViewCell {
     @IBOutlet var backView: UIView!
     @IBOutlet var controlName: UILabel!
     @IBOutlet var toggleSwitch: UISwitch!
+    @IBOutlet var controlStateLabel: UILabel!
 
-    var attributeKey: String!
+    var attributeKey = ""
     var device: Device!
 
     override func awakeFromNib() {
@@ -41,6 +42,11 @@ class SwitchTableViewCell: UITableViewCell {
     }
 
     @IBAction func switchStateChanged(_ sender: UISwitch) {
-        NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [attributeKey: sender.isOn])
+        if sender.isOn {
+            controlStateLabel.text = "On"
+        } else {
+            controlStateLabel.text = "Off"
+        }
+        NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [attributeKey: sender.isOn]])
     }
 }

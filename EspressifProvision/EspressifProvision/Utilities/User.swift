@@ -6,21 +6,22 @@
 //  Copyright © 2019 Espressif. All rights reserved.
 //
 
+import Alamofire
 import AWSCognitoIdentityProvider
 import Foundation
+import JWTDecode
 
 class User {
     static let shared = User()
     var userID: String?
     var pool: AWSCognitoIdentityUserPool!
     var idToken: String?
+    var refreshToken: String?
     var associatedNodeList: [Node]?
-    var associatedNodes: [String: Node] = [:]
     var username = ""
     var password = ""
     var automaticLogin = false
     var updateDeviceList = false
-    var addDeviceStatusTimeout: Timer?
     var currentAssociationInfo: AssociationConfig?
     private init() {
         // setup service configuration
@@ -45,11 +46,6 @@ class User {
         return pool.currentUser()
     }
 
-    func checkDeviceAssoicationStatus(nodeID: String, requestID: String) {
-        addDeviceStatusTimeout = Timer.scheduledTimer(timeInterval: 180, target: self, selector: #selector(timeoutFetchingStatus), userInfo: nil, repeats: false)
-        fetchDeviceAssociationStatus(nodeID: nodeID, requestID: requestID)
-    }
-
     func associateNodeWithUser(session: Session, delegate: DeviceAssociationProtocol) {
         currentAssociationInfo = AssociationConfig()
         currentAssociationInfo?.uuid = UUID().uuidString
@@ -58,51 +54,56 @@ class User {
         deviceAssociation.delegate = delegate
     }
 
-    @objc func timeoutFetchingStatus() {
-        addDeviceStatusTimeout?.invalidate()
-    }
-
-    func fetchDeviceAssociationStatus(nodeID: String, requestID: String) {
-        if addDeviceStatusTimeout?.isValid ?? false {
-            NetworkManager.shared.deviceAssociationStatus(deviceID: nodeID, requestID: requestID) { status in
-                if status {
-                    NotificationCenter.default.post(name: Notification.Name(Constants.newDeviceAdded), object: nil)
-                    self.updateDeviceList = true
-                    self.addDeviceStatusTimeout?.invalidate()
+    func getAccessToken(completionHandler: @escaping (String?) -> Void) {
+        if let loginWith = UserDefaults.standard.value(forKey: Constants.loginIdKey) as? String {
+            if loginWith == Constants.cognito {
+                if idToken == nil, let user = currentUser(), user.isSignedIn {
+                    user.getSession().continueOnSuccessWith(block: { (task) -> Any? in
+                        completionHandler(task.result?.idToken?.tokenString)
+                    })
                 } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        self.fetchDeviceAssociationStatus(nodeID: nodeID, requestID: requestID)
+                    completionHandler(idToken)
+                }
+            } else {
+                let idTokenGithub = UserDefaults.standard.value(forKey: Constants.idTokenKey) as? String
+                if let refreshTokenInfo = UserDefaults.standard.value(forKey: Constants.refreshTokenKey) as? [String: Any] {
+                    let saveDate = refreshTokenInfo["time"] as! Date
+                    let difference = Calendar.current.dateComponents([.second], from: saveDate, to: Date())
+                    let expire = refreshTokenInfo["expire_in"] as! Int
+                    if difference.second! > expire {
+                        do {
+                            let json = try decode(jwt: idTokenGithub!)
+                            print(json)
+                            if let username = json.body["cognito:username"] as? String {
+                                let parameter = ["user_name": username, "refreshtoken": refreshTokenInfo["token"] as! String]
+                                let header: HTTPHeaders = ["Content-Type": "application/json"]
+                                let url = Constants.baseURL + "login"
+                                NetworkManager.shared.genericRequest(url: url, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: header) { response in
+                                    if let json = response {
+                                        if let idToken = json["idtoken"] as? String {
+                                            var refreshTokenUpdate = refreshTokenInfo
+                                            refreshTokenUpdate["time"] = Date()
+                                            UserDefaults.standard.setValue(refreshTokenUpdate, forKey: Constants.refreshTokenKey)
+                                            User.shared.idToken = idToken
+                                            completionHandler(idToken)
+                                            return
+                                        }
+                                    }
+                                    completionHandler(nil)
+                                }
+                            }
+
+                        } catch {
+                            print("unable to decode token")
+                            completionHandler(nil)
+                        }
+                    } else {
+                        completionHandler(idTokenGithub)
                     }
                 }
             }
-        }
-    }
-
-    func getAccessToken(completionHandler: @escaping (String?) -> Void) {
-        if idToken == nil, let user = currentUser(), user.isSignedIn {
-            user.getSession().continueOnSuccessWith(block: { (task) -> Any? in
-                completionHandler(task.result?.idToken?.tokenString)
-            })
         } else {
-            completionHandler(idToken)
-        }
-    }
-
-    func sendRequestToAddDevice(count: Int) {
-        print("sendRequestToAddDevice")
-        let parameters = ["user_id": User.shared.userID, "node_id": currentAssociationInfo!.nodeID, "secret_key": currentAssociationInfo!.uuid, "operation": "add"]
-        NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, error in
-            print(requestID)
-            if error != nil, count > 0 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    self.sendRequestToAddDevice(count: count - 1)
-                }
-            } else {
-                if let requestid = requestID {
-                    print("Check device association status")
-                    User.shared.checkDeviceAssoicationStatus(nodeID: self.currentAssociationInfo!.nodeID, requestID: requestid)
-                }
-            }
+            completionHandler(nil)
         }
     }
 }

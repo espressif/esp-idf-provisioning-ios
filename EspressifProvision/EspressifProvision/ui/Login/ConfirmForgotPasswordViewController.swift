@@ -31,10 +31,17 @@ class ConfirmForgotPasswordViewController: UIViewController {
         if let username = self.user?.username {
             infoLabel.text = "To set a new password we have sent a verification code to " + username
         }
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
 
     override func viewWillAppear(_: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    @objc func dismissKeyboard() {
+        // Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 
     // MARK: - IBActions

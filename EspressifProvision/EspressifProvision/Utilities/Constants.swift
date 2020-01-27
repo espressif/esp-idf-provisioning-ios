@@ -12,6 +12,7 @@ import Foundation
 struct Constants {
     // Segue identifiers
     static let nodeDetailSegue = "nodeDetailSegue"
+    static let claimVCIdentifier = "claimVC"
     // JSON keys
     static let userID = "user_id"
     static let requestID = "request_id"
@@ -40,7 +41,7 @@ struct Constants {
     static let baseURL = Bundle.main.infoDictionary!["BASE_API_URL_ENDPOINT"] as? String ?? ""
     static let githubURL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/authorize"
     static let redirectURL = "com.espressif.rainmaker.intsoftap://success"
-    static let clientID = "78suluee2rmlltshrt2v4lvuo0"
+    static let clientID = Bundle.main.infoDictionary!["APP_CLIENT_ID"] as? String ?? ""
     static let idProvider = "Github"
 
     // AWS cognito APIs
@@ -51,12 +52,19 @@ struct Constants {
 //    static let addDeviceToUser = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
     static let checkStatus = Constants.baseURL + "user/nodes/mapping"
 
-    static let updateThingsShadow = Constants.baseURL + "user/nodes/dynamic_params"
-    static let getDeviceShadow = Constants.baseURL + "user/nodes/dynamic_params"
+    static let updateThingsShadow = Constants.baseURL + "user/nodes/params"
+    static let getDeviceShadow = Constants.baseURL + "user/nodes/params"
 
     static let newDeviceAdded = "com.espressif.newDeviceAdded"
     static let prefixKey = "com.espressif.prefix"
     static let userIDKey = "com.espressif.userid"
+    static let idTokenKey = "com.espressif.idToken"
+    static let refreshTokenKey = "com.espressif.refreshToken"
+    static let expireTimeKey = "com.espressif.expiresIn"
+    static let loginIdKey = "com.espressif.loginIdKey"
+
+    static let cognito = "Cognito"
+    static let github = "Github"
 
     static let tokenURL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/token"
 

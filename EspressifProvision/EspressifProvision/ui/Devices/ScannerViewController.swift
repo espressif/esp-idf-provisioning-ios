@@ -190,6 +190,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             Utility.hideLoader(view: self.view)
             let provisionVC = self.storyboard?.instantiateViewController(withIdentifier: "provision") as! ProvisionViewController
             provisionVC.connectAutomatically = true
+            provisionVC.isScanFlow = true
             provisionVC.pop = pop
             provisionVC.provisionConfig = self.provisionConfig
             self.navigationController?.pushViewController(provisionVC, animated: true)

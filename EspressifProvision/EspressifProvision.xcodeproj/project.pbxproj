@@ -68,6 +68,7 @@
 		F1AB5118233216FE002401F9 /* GenericControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AB5116233216FE002401F9 /* GenericControlTableViewCell.swift */; };
 		F1AB5119233216FE002401F9 /* GenericControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1AB5117233216FE002401F9 /* GenericControlTableViewCell.xib */; };
 		F1AB511B23321B7E002401F9 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1AB511A23321B7E002401F9 /* JSONParser.swift */; };
+		F1B13AD823D85125006DD949 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B13AD723D85125006DD949 /* ChangePasswordViewController.swift */; };
 		F1B3558923B8DC4C004552FC /* ExtensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B3558823B8DC4C004552FC /* ExtensionManager.swift */; };
 		F1C8082C22CA17790098F3B4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C8082B22CA17790098F3B4 /* NetworkManager.swift */; };
 		F1CB6086233B549F0001D509 /* BLEDeviceListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CB6085233B549F0001D509 /* BLEDeviceListViewCell.swift */; };
@@ -82,6 +83,8 @@
 		F1DDA06A23588C890005F982 /* NodeDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DDA06923588C890005F982 /* NodeDetailsTableViewCell.swift */; };
 		F1E37E9023CF3AD500A5043F /* PrimaryControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E37E8E23CF3AD500A5043F /* PrimaryControlTableViewCell.swift */; };
 		F1E37E9123CF3AD500A5043F /* PrimaryControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1E37E8F23CF3AD500A5043F /* PrimaryControlTableViewCell.xib */; };
+		F1E37E9323D6CF4800A5043F /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E37E9223D6CF4700A5043F /* PasswordTextField.swift */; };
+		F1E37E9523D772EC00A5043F /* ThumbTextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E37E9423D772EC00A5043F /* ThumbTextSlider.swift */; };
 		F1EEE0432347268900E90B1F /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EEE0422347268900E90B1F /* BrightnessSlider.swift */; };
 		F1F451372328C51A0009DCE0 /* DeviceDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */; };
 		F1F4513A2328C5D40009DCE0 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F451392328C5D40009DCE0 /* DevicesViewController.swift */; };
@@ -208,6 +211,7 @@
 		F1AB5116233216FE002401F9 /* GenericControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericControlTableViewCell.swift; sourceTree = "<group>"; };
 		F1AB5117233216FE002401F9 /* GenericControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericControlTableViewCell.xib; sourceTree = "<group>"; };
 		F1AB511A23321B7E002401F9 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
+		F1B13AD723D85125006DD949 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		F1B3558823B8DC4C004552FC /* ExtensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionManager.swift; sourceTree = "<group>"; };
 		F1C8082B22CA17790098F3B4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F1CB6085233B549F0001D509 /* BLEDeviceListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceListViewCell.swift; sourceTree = "<group>"; };
@@ -222,6 +226,8 @@
 		F1DDA06923588C890005F982 /* NodeDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		F1E37E8E23CF3AD500A5043F /* PrimaryControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryControlTableViewCell.swift; sourceTree = "<group>"; };
 		F1E37E8F23CF3AD500A5043F /* PrimaryControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrimaryControlTableViewCell.xib; sourceTree = "<group>"; };
+		F1E37E9223D6CF4700A5043F /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		F1E37E9423D772EC00A5043F /* ThumbTextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbTextSlider.swift; sourceTree = "<group>"; };
 		F1EEE0422347268900E90B1F /* BrightnessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
 		F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeviceDetail.storyboard; sourceTree = "<group>"; };
 		F1F451392328C5D40009DCE0 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
@@ -416,6 +422,8 @@
 				F1DDA06723588B110005F982 /* NodeDetailsViewController.swift */,
 				F1DDA06923588C890005F982 /* NodeDetailsTableViewCell.swift */,
 				F176A41B23C8342200F2FCBC /* ClaimViewController.swift */,
+				F1E37E9223D6CF4700A5043F /* PasswordTextField.swift */,
+				F1B13AD723D85125006DD949 /* ChangePasswordViewController.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -584,6 +592,7 @@
 				F1402AB7239677B300C989F8 /* StaticControlTableViewCell.xib */,
 				F1E37E8E23CF3AD500A5043F /* PrimaryControlTableViewCell.swift */,
 				F1E37E8F23CF3AD500A5043F /* PrimaryControlTableViewCell.xib */,
+				F1E37E9423D772EC00A5043F /* ThumbTextSlider.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -863,6 +872,7 @@
 				F1FB153F234DED260053B0ED /* Errors.swift in Sources */,
 				14DE671E20ECD04100941522 /* BLETransport.swift in Sources */,
 				F194B60822CDD7BD00417347 /* Node.swift in Sources */,
+				F1B13AD823D85125006DD949 /* ChangePasswordViewController.swift in Sources */,
 				149774DF210C87AB00022841 /* DataExtensions.swift in Sources */,
 				F176A41823C4669300F2FCBC /* DeviceCollectionViewLayout.swift in Sources */,
 				1431468E20E3823F0017E119 /* Provision.swift in Sources */,
@@ -873,6 +883,7 @@
 				1431468420DF69C30017E119 /* Security1.swift in Sources */,
 				F12261A022C61695004D049F /* DeviceAssociation.swift in Sources */,
 				F1F4513A2328C5D40009DCE0 /* DevicesViewController.swift in Sources */,
+				F1E37E9523D772EC00A5043F /* ThumbTextSlider.swift in Sources */,
 				143146B520EB273B0017E119 /* ProvisionViewController.swift in Sources */,
 				149774DD210C799900022841 /* CryptoAES.swift in Sources */,
 				F1F45141232A3B260009DCE0 /* LightViewController.swift in Sources */,
@@ -881,6 +892,7 @@
 				F1DD70A622A8EA2A0092DAB9 /* Constants.swift in Sources */,
 				F1DB6F62232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift in Sources */,
 				F12261A422C620ED004D049F /* User.swift in Sources */,
+				F1E37E9323D6CF4800A5043F /* PasswordTextField.swift in Sources */,
 				1431469B20E387C60017E119 /* constants.pb.swift in Sources */,
 				149774E1210C89E600022841 /* ArrayExtensions.swift in Sources */,
 				F17F1412239F96C3008326A4 /* VersionManager.swift in Sources */,
@@ -1099,6 +1111,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1133,6 +1146,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1311,6 +1325,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1449,6 +1464,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1588,6 +1604,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1726,6 +1743,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1852,14 +1870,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5E4DB15129C36A08E6555745 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig */;
 			buildSettings = {
-				APP_CLIENT_ID = 5jenhe4glcr7iljq47tv3dt7lu;
-				APP_CLIENT_SECRET = cdjof6bud9f29k4uk6cglphcbh4q0js8q45a5q7286cojr71ear;
+				APP_CLIENT_ID = 375pp885nbr3nfbh3ms9vma3v3;
+				APP_CLIENT_SECRET = 1far8m99n7p0aokfop6msfbqop24ng4c1iir1ldm339uppiof4id;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_API_URL_ENDPOINT = "https://p26kw0zis7.execute-api.us-east-1.amazonaws.com/dev/v1/";
+				BASE_API_URL_ENDPOINT = "https://c6rw29xb88.execute-api.us-east-1.amazonaws.com/dev/v1/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1880,7 +1899,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_POOL_ID = "us-east-1_0Ti3U5edN";
+				USER_POOL_ID = "us-east-1_Kr951Rlo1";
 			};
 			name = "WifiSec1-Staging";
 		};
@@ -1996,6 +2015,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

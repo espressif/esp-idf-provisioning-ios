@@ -10,30 +10,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GenericSliderTableViewCell" rowHeight="70" id="KGk-i7-Jjw" customClass="GenericSliderTableViewCell" customModule="EspressifProvision" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GenericSliderTableViewCell" rowHeight="115" id="KGk-i7-Jjw" customClass="GenericSliderTableViewCell" customModule="EspressifProvision" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="115"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xz9-78-Glk">
-                        <rect key="frame" x="15" y="2" width="290" height="66"/>
+                        <rect key="frame" x="15" y="2" width="290" height="115"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fv6-kj-hye">
-                                <rect key="frame" x="8" y="4" width="10.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTi-8G-sPl">
-                                <rect key="frame" x="253.5" y="4" width="28.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gau-RP-e10">
-                                <rect key="frame" x="8" y="28" width="274" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gau-RP-e10" customClass="ThumbTextSlider" customModule="EspressifProvision" customModuleProvider="target">
+                                <rect key="frame" x="22" y="50" width="254" height="31"/>
                                 <color key="minimumTrackTintColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="maximumTrackTintColor" red="0.50588235294117645" green="0.50588235294117645" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="thumbTintColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -41,16 +29,37 @@
                                     <action selector="sliderValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="qIx-IS-CWi"/>
                                 </connections>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fv6-kj-hye">
+                                <rect key="frame" x="24" y="85" width="9" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.50588235294117645" green="0.50588235294117645" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNI-VA-cqz">
+                                <rect key="frame" x="16" y="8" width="35.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTi-8G-sPl">
+                                <rect key="frame" x="250" y="85" width="24" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.50588235294117645" green="0.50588235294117645" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="gau-RP-e10" secondAttribute="trailing" constant="10" id="1gh-n7-v7o"/>
-                            <constraint firstAttribute="trailing" secondItem="oTi-8G-sPl" secondAttribute="trailing" constant="8" id="EMp-bw-bXm"/>
-                            <constraint firstItem="oTi-8G-sPl" firstAttribute="top" secondItem="Xz9-78-Glk" secondAttribute="top" constant="4" id="H7m-uc-VAm"/>
-                            <constraint firstItem="fv6-kj-hye" firstAttribute="leading" secondItem="Xz9-78-Glk" secondAttribute="leading" constant="8" id="SIl-lk-hhg"/>
-                            <constraint firstItem="gau-RP-e10" firstAttribute="leading" secondItem="Xz9-78-Glk" secondAttribute="leading" constant="10" id="TuQ-QU-cSq"/>
-                            <constraint firstAttribute="bottom" secondItem="gau-RP-e10" secondAttribute="bottom" constant="8" id="pt4-ZC-DD9"/>
-                            <constraint firstItem="fv6-kj-hye" firstAttribute="top" secondItem="Xz9-78-Glk" secondAttribute="top" constant="4" id="w1L-tq-otg"/>
+                            <constraint firstItem="fv6-kj-hye" firstAttribute="leading" secondItem="gau-RP-e10" secondAttribute="leading" id="2bg-2G-fSD"/>
+                            <constraint firstItem="oTi-8G-sPl" firstAttribute="centerY" secondItem="fv6-kj-hye" secondAttribute="centerY" id="HJ5-c8-4JO"/>
+                            <constraint firstItem="jNI-VA-cqz" firstAttribute="leading" secondItem="Xz9-78-Glk" secondAttribute="leading" constant="16" id="QJa-YP-ILo"/>
+                            <constraint firstItem="gau-RP-e10" firstAttribute="leading" secondItem="Xz9-78-Glk" secondAttribute="leading" constant="24" id="XVj-6Q-qG0"/>
+                            <constraint firstItem="oTi-8G-sPl" firstAttribute="trailing" secondItem="gau-RP-e10" secondAttribute="trailing" id="agX-Rt-ihw"/>
+                            <constraint firstItem="jNI-VA-cqz" firstAttribute="top" secondItem="Xz9-78-Glk" secondAttribute="top" constant="8" id="di1-Nt-YV8"/>
+                            <constraint firstAttribute="bottom" secondItem="gau-RP-e10" secondAttribute="bottom" constant="35" id="gWk-Wk-BGg"/>
+                            <constraint firstAttribute="trailing" secondItem="gau-RP-e10" secondAttribute="trailing" constant="16" id="mJ9-cB-98H"/>
+                            <constraint firstAttribute="bottom" secondItem="fv6-kj-hye" secondAttribute="bottom" constant="13" id="rmC-AG-cei"/>
+                            <constraint firstAttribute="height" constant="115" id="vBm-Nh-mmq"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -58,7 +67,7 @@
                     <constraint firstItem="Xz9-78-Glk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="5He-qC-Teg"/>
                     <constraint firstAttribute="trailing" secondItem="Xz9-78-Glk" secondAttribute="trailing" constant="15" id="H5o-9f-a4e"/>
                     <constraint firstItem="Xz9-78-Glk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="hbk-xt-zZq"/>
-                    <constraint firstAttribute="bottom" secondItem="Xz9-78-Glk" secondAttribute="bottom" constant="2" id="kdF-2f-ekI"/>
+                    <constraint firstAttribute="bottom" secondItem="Xz9-78-Glk" secondAttribute="bottom" constant="-2" id="kdF-2f-ekI"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -67,8 +76,9 @@
                 <outlet property="maxLabel" destination="oTi-8G-sPl" id="Y25-Cy-fwc"/>
                 <outlet property="minLabel" destination="fv6-kj-hye" id="ijG-gk-jOB"/>
                 <outlet property="slider" destination="gau-RP-e10" id="Ktl-Di-6zT"/>
+                <outlet property="title" destination="jNI-VA-cqz" id="LAg-Co-G9z"/>
             </connections>
-            <point key="canvasLocation" x="47.826086956521742" y="56.919642857142854"/>
+            <point key="canvasLocation" x="47.826086956521742" y="56.584821428571423"/>
         </tableViewCell>
     </objects>
 </document>

@@ -26,47 +26,249 @@ class SuccessViewController: UIViewController {
     var requestID: String?
     var success = false
     var sessionInit = true
+    var transport: Transport!
+    var ssid: String!
+    var passphrase: String!
+    var provision: Provision!
+    var addDeviceStatusTimeout: Timer?
 
 //    @IBOutlet var successLabel: UILabel!
-    @IBOutlet var popCheckImage: UIImageView!
-    @IBOutlet var wifiCheckImage: UIImageView!
-    @IBOutlet var assocPushedCheckImage: UIImageView!
-    @IBOutlet var deviceAssocCheckImage: UIImageView!
+    @IBOutlet var step1Image: UIImageView!
+    @IBOutlet var step2Image: UIImageView!
+    @IBOutlet var step3Image: UIImageView!
+    @IBOutlet var step4Image: UIImageView!
+    @IBOutlet var step1Indicator: UIActivityIndicatorView!
+    @IBOutlet var step2Indicator: UIActivityIndicatorView!
+    @IBOutlet var step3Indicator: UIActivityIndicatorView!
+    @IBOutlet var step4Indicator: UIActivityIndicatorView!
+    @IBOutlet var step1ErrorLabel: UILabel!
+    @IBOutlet var step2ErrorLabel: UILabel!
+    @IBOutlet var step3ErrorLabel: UILabel!
+    @IBOutlet var step4ErrorLabel: UILabel!
+    @IBOutlet var finalStatusLabel: UILabel!
+    @IBOutlet var okayButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 //        if let statusText = statusText {
 //            successLabel.text = statusText
 //        }
-        if sessionInit {
-            popCheckImage.image = UIImage(named: "checkbox_checked")
-        } else {
-            popCheckImage.image = UIImage(named: "checkbox_unchecked")
-        }
-        if success {
-            wifiCheckImage.image = UIImage(named: "checkbox_checked")
-        } else {
-            wifiCheckImage.image = UIImage(named: "checkbox_unchecked")
-        }
-        assocPushedCheckImage.image = UIImage(named: "checkbox_unchecked")
-        if let associatioInfo = User.shared.currentAssociationInfo {
-            if associatioInfo.associationInfoDelievered {
-                assocPushedCheckImage.image = UIImage(named: "checkbox_checked")
+//        if sessionInit {
+//            popCheckImage.image = UIImage(named: "checkbox_checked")
+//        } else {
+//            popCheckImage.image = UIImage(named: "checkbox_unchecked")
+//        }
+//        if success {
+//            wifiCheckImage.image = UIImage(named: "checkbox_checked")
+//        } else {
+//            wifiCheckImage.image = UIImage(named: "checkbox_unchecked")
+//        }
+//        assocPushedCheckImage.image = UIImage(named: "checkbox_unchecked")
+//        if let associatioInfo = User.shared.currentAssociationInfo {
+//            if associatioInfo.associationInfoDelievered {
+//                assocPushedCheckImage.image = UIImage(named: "checkbox_checked")
+//            }
+//        }
+//        if success, let associatioInfo = User.shared.currentAssociationInfo, associatioInfo.associationInfoDelievered {
+//            // DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            User.shared.sendRequestToAddDevice(count: 7)
+//            // }
+//        } else {
+//            User.shared.currentAssociationInfo = AssociationConfig()
+//        }
+        // Do any additional setup after loading the view, typically from a nib.
+        startProvisioning()
+    }
+
+    func startProvisioning() {
+        step1Image.isHidden = true
+        step1Indicator.isHidden = false
+        step1Indicator.startAnimating()
+        provision = Provision(session: session)
+
+        provision.configureWifi(ssid: ssid, passphrase: passphrase) { status, error in
+            DispatchQueue.main.async {
+                guard error == nil else {
+                    print("Error in configuring wifi : \(error.debugDescription)")
+                    self.step1FailedWithMessage(message: "Configuration error!")
+                    return
+                }
+                switch status {
+                case .success:
+                    self.step2applyConfigurations()
+                case .invalidSecScheme:
+                    self.step1FailedWithMessage(message: "Invalid Scheme")
+                case .invalidProto:
+                    self.step1FailedWithMessage(message: "Invalid Proto")
+                case .tooManySessions:
+                    self.step1FailedWithMessage(message: "Too many sessions")
+                case .invalidArgument:
+                    self.step1FailedWithMessage(message: "Invalid argument")
+                case .internalError:
+                    self.step1FailedWithMessage(message: "Internal error")
+                case .cryptoError:
+                    self.step1FailedWithMessage(message: "Crypto error")
+                case .invalidSession:
+                    self.step1FailedWithMessage(message: "Invalid session")
+                case .UNRECOGNIZED:
+                    self.step1FailedWithMessage(message: "Unrecognized error")
+                }
             }
         }
-        if success, let associatioInfo = User.shared.currentAssociationInfo, associatioInfo.associationInfoDelievered {
-            // DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            User.shared.sendRequestToAddDevice(count: 7)
-            // }
-        } else {
-            User.shared.currentAssociationInfo = AssociationConfig()
+    }
+
+    private func step2applyConfigurations() {
+        provision.applyConfigurations(completionHandler: { _, error in
+            DispatchQueue.main.async {
+                guard error == nil else {
+                    self.step1FailedWithMessage(message: "Configuration error!")
+                    return
+                }
+                self.step1Indicator.stopAnimating()
+                self.step1Image.image = UIImage(named: "checkbox_checked")
+                self.step1Image.isHidden = false
+                self.step2Image.isHidden = true
+                self.step2Indicator.isHidden = false
+                self.step2Indicator.startAnimating()
+            }
+        },
+                                      wifiStatusUpdatedHandler: { wifiState, failReason, error in
+            DispatchQueue.main.async {
+                if error != nil {
+                    self.step2FailedWithMessage(message: "Unable to get Wi-Fi State")
+                } else if wifiState == Espressif_WifiStationState.connected {
+                    self.step2Indicator.stopAnimating()
+                    self.step2Image.image = UIImage(named: "checkbox_checked")
+                    self.step2Image.isHidden = false
+                    self.step3SendRequestToAddDevice()
+                } else if wifiState == Espressif_WifiStationState.disconnected {
+                    self.step2FailedWithMessage(message: "Wi-Fi state disconnected")
+                } else {
+                    if failReason == Espressif_WifiConnectFailedReason.authError {
+                        self.step2FailedWithMessage(message: "Wi-Fi Authentication failed")
+                    } else if failReason == Espressif_WifiConnectFailedReason.networkNotFound {
+                        self.step2FailedWithMessage(message: "Network not found")
+                    } else {
+                        self.step2FailedWithMessage(message: "\(failReason)")
+                    }
+                }
+            }
+        })
+    }
+
+    private func step3SendRequestToAddDevice() {
+        step3Image.isHidden = true
+        step3Indicator.isHidden = false
+        step3Indicator.startAnimating()
+        sendRequestToAddDevice(count: 5)
+    }
+
+    private func step4ConfirmNodeAssociation(requestID: String) {
+        step4Image.isHidden = true
+        step4Indicator.isHidden = false
+        step4Indicator.startAnimating()
+        checkDeviceAssoicationStatus(nodeID: User.shared.currentAssociationInfo!.nodeID, requestID: requestID)
+    }
+
+    func checkDeviceAssoicationStatus(nodeID: String, requestID: String) {
+        addDeviceStatusTimeout = Timer.scheduledTimer(timeInterval: 120, target: self, selector: #selector(timeoutFetchingStatus), userInfo: nil, repeats: false)
+        fetchDeviceAssociationStatus(nodeID: nodeID, requestID: requestID)
+    }
+
+    @objc func timeoutFetchingStatus() {
+        step4FailedWithMessage(message: "Node addition not confirmed")
+        addDeviceStatusTimeout?.invalidate()
+    }
+
+    func fetchDeviceAssociationStatus(nodeID: String, requestID: String) {
+        if addDeviceStatusTimeout?.isValid ?? false {
+            NetworkManager.shared.deviceAssociationStatus(deviceID: nodeID, requestID: requestID) { status in
+                if status {
+                    NotificationCenter.default.post(name: Notification.Name(Constants.newDeviceAdded), object: nil)
+                    User.shared.updateDeviceList = true
+                    self.step4Indicator.stopAnimating()
+                    self.step4Image.image = UIImage(named: "checkbox_checked")
+                    self.step4Image.isHidden = false
+                    self.addDeviceStatusTimeout?.invalidate()
+                    self.provisionFinsihedWithStatus(message: "Device added successfully!!")
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                        self.fetchDeviceAssociationStatus(nodeID: nodeID, requestID: requestID)
+                    }
+                }
+            }
         }
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+    }
+
+    func step1FailedWithMessage(message: String) {
+        step1Indicator.stopAnimating()
+        step1Image.image = UIImage(named: "error_icon")
+        step1Image.isHidden = false
+        step1ErrorLabel.text = message
+        step1ErrorLabel.isHidden = false
+        provisionFinsihedWithStatus(message: "Reboot your board and try again.")
+    }
+
+    func step2FailedWithMessage(message: String) {
+        step2Indicator.stopAnimating()
+        step2Image.image = UIImage(named: "error_icon")
+        step2Image.isHidden = false
+        step2ErrorLabel.text = message
+        step2ErrorLabel.isHidden = false
+        provisionFinsihedWithStatus(message: "Reset your board to factory defaults and retry.")
+    }
+
+    func step3FailedWithMessage(message: String) {
+        step3Indicator.stopAnimating()
+        step3Image.image = UIImage(named: "error_icon")
+        step3Image.isHidden = false
+        step3ErrorLabel.text = message
+        step3ErrorLabel.isHidden = false
+        provisionFinsihedWithStatus(message: "Reset your board to factory defaults and retry.")
+    }
+
+    func step4FailedWithMessage(message: String) {
+        step4Indicator.stopAnimating()
+        step4Image.image = UIImage(named: "error_icon")
+        step4Image.isHidden = false
+        step4ErrorLabel.text = message
+        step4ErrorLabel.isHidden = false
+        provisionFinsihedWithStatus(message: "Reset your board to factory defaults and retry.")
+    }
+
+    func provisionFinsihedWithStatus(message: String) {
+        okayButton.isEnabled = true
+        okayButton.alpha = 1.0
+        finalStatusLabel.text = message
+        finalStatusLabel.isHidden = false
+    }
+
+    func sendRequestToAddDevice(count: Int) {
+        print("sendRequestToAddDevice")
+        let parameters = ["user_id": User.shared.userID, "node_id": User.shared.currentAssociationInfo!.nodeID, "secret_key": User.shared.currentAssociationInfo!.uuid, "operation": "add"]
+        NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, error in
+            print(requestID)
+            if error != nil, count > 0 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    self.sendRequestToAddDevice(count: count - 1)
+                }
+            } else {
+                if let requestid = requestID {
+                    print("Check device association status")
+                    self.step3Indicator.stopAnimating()
+                    self.step3Image.image = UIImage(named: "checkbox_checked")
+                    self.step3Image.isHidden = false
+                    self.step4ConfirmNodeAssociation(requestID: requestid)
+                } else {
+                    self.step3FailedWithMessage(message: "Unrecognized error")
+                }
+            }
+        }
     }
 
     @IBAction func goToFirstView(_: Any) {

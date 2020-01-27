@@ -27,7 +27,6 @@ struct JSONParser {
                 node.attributes?.append(attribute)
             }
         }
-        User.shared.associatedNodes[nodeID] = node
 
         if let deviceList = data["devices"] as? [[String: Any]] {
             for item in deviceList {
@@ -39,8 +38,8 @@ struct JSONParser {
                     newDevice.dynamicParams = []
                     for attr in dynamicParams {
                         let dynamicAttr = DynamicAttribute()
-                        if let deviceName = newDevice.name, let attrName = attr["name"] as? String {
-                            dynamicAttr.name = deviceName + "." + attrName
+                        if let attrName = attr["name"] as? String {
+                            dynamicAttr.name = attrName
                         } else {
                             dynamicAttr.name = attr["name"] as? String
                         }

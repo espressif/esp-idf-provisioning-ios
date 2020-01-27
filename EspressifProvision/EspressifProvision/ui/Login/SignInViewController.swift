@@ -15,6 +15,7 @@
 // limitations under the License.
 //
 
+import Alamofire
 import AuthenticationServices
 import AWSCognitoIdentityProvider
 import AWSMobileClient
@@ -31,6 +32,7 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
     @IBOutlet var signUpView: UIView!
     @IBOutlet var signInView: UIView!
     @IBOutlet var segmentControl: UISegmentedControl!
+//    let passwordButtonRightView = UIButton(frame: CGRect(x: 0, y: 0, width: 22.0, height: 16.0))
 
     var pool: AWSCognitoIdentityUserPool?
     var sentTo: String?
@@ -52,6 +54,14 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         changeSegment()
         password.text = nil
         username.text = ""
+
+//        passwordImageRightView.image = UIImage(named: "show_password")
+//        let passwordRightView = UIView(frame: CGRect(x: 0, y: 0, width: 38.0, height: 16.0))
+//        passwordRightView.addSubview(passwordImageRightView)
+
+//        password.rightView = passwordRightView
+//        password.rightViewMode = .always
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -129,7 +139,7 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
     }
 
     func githubLogin() {
-        let githubLoginURL = Constants.githubURL + "?identity_provider=" + Constants.idProvider + "&redirect_uri=" + Constants.redirectURL + "&response_type=TOKEN&client_id="
+        let githubLoginURL = Constants.githubURL + "?identity_provider=" + Constants.idProvider + "&redirect_uri=" + Constants.redirectURL + "&response_type=CODE&client_id="
         session = SFAuthenticationSession(url: URL(string: githubLoginURL + Constants.clientID)!, callbackURLScheme: "com.espressif.rainmaker.intsoftap://") { url, error in
             if error != nil {
                 self.showAlert()
@@ -139,24 +149,15 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
             if let responseURL = url?.absoluteString {
                 let components = responseURL.components(separatedBy: "#")
                 for item in components {
-                    if item.contains("id_token") {
+                    if item.contains("code") {
                         let tokens = item.components(separatedBy: "&")
                         for token in tokens {
-                            if token.contains("id_token") {
+                            if token.contains("code") {
                                 let idTokenInfo = token.components(separatedBy: "=")
                                 if idTokenInfo.count > 1 {
-                                    User.shared.idToken = idTokenInfo[1]
-                                    do {
-                                        let jwt = try decode(jwt: User.shared.idToken!)
-                                        if let userid = jwt.body["custom:user_id"] as? String {
-                                            User.shared.userID = userid
-                                            UserDefaults.standard.set(userid, forKey: Constants.userIDKey)
-                                        }
-                                        print(jwt)
-                                    } catch {
-                                        print("error")
-                                    }
-                                    self.dismiss(animated: true, completion: nil)
+                                    let code = idTokenInfo[1]
+                                    self.requestToken(code: code)
+                                    // self.dismiss(animated: true, completion: nil)
                                     return
                                 }
                             }
@@ -164,15 +165,32 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
                     }
                 }
             }
-            if let idToken = dict["id_token"] {
-                User.shared.idToken = idToken
-                print("idToken : " + idToken)
-                self.dismiss(animated: true, completion: nil)
-                return
-            }
             self.showAlert()
         }
         session.start()
+    }
+
+    func requestToken(code: String) {
+        let url = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/token"
+        let parameters = ["grant_type": "authorization_code", "client_id": Constants.clientID, "code": code, "client_secret": Constants.CognitoIdentityUserPoolAppClientSecret, "redirect_uri": "com.espressif.rainmaker.intsoftap://success"]
+        let authorizationValue = Request.authorizationHeader(user: Constants.clientID, password: Constants.CognitoIdentityUserPoolAppClientSecret)
+        let headers: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded", authorizationValue?.key ?? "": authorizationValue?.value ?? ""]
+        NetworkManager.shared.genericRequest(url: url, method: .post, parameters: parameters, encoding: URLEncoding.default,
+                                             headers: headers) { response in
+            if let json = response {
+                if let idToken = json["id_token"] as? String, let refreshToken = json["refresh_token"] as? String {
+                    User.shared.idToken = idToken
+                    User.shared.refreshToken = refreshToken
+                    UserDefaults.standard.set(idToken, forKey: Constants.idTokenKey)
+                    let refreshTokenInfo = ["token": refreshToken, "time": Date(), "expire_in": json["expires_in"] as? Int ?? 3600] as [String: Any]
+                    UserDefaults.standard.set(refreshTokenInfo, forKey: Constants.refreshTokenKey)
+                    UserDefaults.standard.set(json["id_token"] as? String, forKey: Constants.expireTimeKey)
+                    UserDefaults.standard.set(Constants.github, forKey: Constants.loginIdKey)
+                    self.dismiss(animated: true, completion: nil)
+                }
+                print(response)
+            }
+        }
     }
 
     func getViewController() -> UIViewController {
@@ -287,7 +305,7 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
             })
         } else {
             UIView.animate(withDuration: 0.45, animations: {
-                self.signUpTopView.constant = -200.0
+                self.signUpTopView.constant = -50.0
             })
         }
     }
@@ -330,6 +348,7 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
             } else {
                 self.username.text = nil
                 User.shared.updateDeviceList = true
+                UserDefaults.standard.set(Constants.cognito, forKey: Constants.loginIdKey)
                 self.dismiss(animated: true, completion: nil)
             }
         }

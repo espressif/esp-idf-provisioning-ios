@@ -21,14 +21,14 @@
                         <rect key="frame" x="15" y="0.0" width="290" height="60"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Turn On/Off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLB-Of-xcU">
-                                <rect key="frame" x="16" y="8" width="72" height="16"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <rect key="frame" x="16" y="8" width="193" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4I4-iU-MGH">
-                                <rect key="frame" x="16" y="32" width="22" height="20"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <rect key="frame" x="16" y="30.5" width="24" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -52,8 +52,10 @@
                             <constraint firstItem="sLB-Of-xcU" firstAttribute="leading" secondItem="6jM-IR-wpL" secondAttribute="leading" constant="16" id="3bp-0i-Pbu"/>
                             <constraint firstItem="dTT-0l-2t4" firstAttribute="centerY" secondItem="6jM-IR-wpL" secondAttribute="centerY" id="ASb-aF-FV1"/>
                             <constraint firstAttribute="trailing" secondItem="dTT-0l-2t4" secondAttribute="trailing" constant="16" id="DjE-zS-iME"/>
+                            <constraint firstAttribute="height" constant="60" id="GoH-k5-aJX"/>
                             <constraint firstItem="sLB-Of-xcU" firstAttribute="top" secondItem="6jM-IR-wpL" secondAttribute="top" constant="8" id="REx-Eg-xTT"/>
                             <constraint firstItem="4I4-iU-MGH" firstAttribute="leading" secondItem="6jM-IR-wpL" secondAttribute="leading" constant="16" id="ROE-x9-nXh"/>
+                            <constraint firstItem="dTT-0l-2t4" firstAttribute="leading" secondItem="sLB-Of-xcU" secondAttribute="trailing" constant="16" id="Ubl-VW-IMB"/>
                             <constraint firstAttribute="bottom" secondItem="4I4-iU-MGH" secondAttribute="bottom" constant="8" id="lB3-yS-VTU"/>
                         </constraints>
                     </view>
@@ -70,6 +72,7 @@
             <connections>
                 <outlet property="backView" destination="6jM-IR-wpL" id="D75-jp-6Ue"/>
                 <outlet property="controlName" destination="sLB-Of-xcU" id="hXY-ba-jiA"/>
+                <outlet property="controlStateLabel" destination="4I4-iU-MGH" id="nZw-QW-c1u"/>
                 <outlet property="toggleSwitch" destination="dTT-0l-2t4" id="hsA-YC-1Kr"/>
             </connections>
             <point key="canvasLocation" x="139" y="129"/>

@@ -34,8 +34,6 @@
 	</dict>
 	<key>BASE_API_URL_ENDPOINT</key>
 	<string>$(BASE_API_URL_ENDPOINT)</string>
-	<key>BLEDeviceNamePrefix</key>
-	<string>PROV_</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -64,7 +62,9 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>DeviceNamePrefix</key>
+	<string>PROV_</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>itms-apps</string>

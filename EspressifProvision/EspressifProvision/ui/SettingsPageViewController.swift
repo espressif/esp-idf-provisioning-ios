@@ -7,11 +7,31 @@
 //
 
 import Foundation
+import JWTDecode
 import UIKit
 
 class SettingsPageViewController: UIViewController {
+    @IBOutlet var emailLabel: UILabel!
+    @IBOutlet var changePasswordView: UIView!
+    var username = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let idToken = User.shared.idToken {
+            do {
+                let json = try decode(jwt: idToken)
+                if let email = json.body["email"] as? String {
+                    emailLabel.text = email
+                }
+                username = json.body["cognito:username"] as? String ?? ""
+            } catch {
+                print("error parsing email")
+            }
+        }
+        if let loginWith = UserDefaults.standard.value(forKey: Constants.loginIdKey) as? String {
+            if loginWith == Constants.github {
+                changePasswordView.isHidden = true
+            }
+        }
 //        profileImage.image = imageWith(name: "V")
 //        headerView.layer.masksToBounds = false
 //        headerView.layer.shadowOffset = CGSize(width: 1, height: 1)
@@ -29,10 +49,12 @@ class SettingsPageViewController: UIViewController {
         User.shared.idToken = nil
         User.shared.currentUser()?.signOut()
         UserDefaults.standard.removeObject(forKey: Constants.userIDKey)
+        UserDefaults.standard.removeObject(forKey: Constants.refreshTokenKey)
+        UserDefaults.standard.removeObject(forKey: Constants.idTokenKey)
+        UserDefaults.standard.removeObject(forKey: Constants.loginIdKey)
         User.shared.userID = nil
-        dismiss(animated: true) {
-            self.refresh()
-        }
+        navigationController?.popViewController(animated: true)
+        refresh()
     }
 
     func refresh() {
@@ -40,6 +62,10 @@ class SettingsPageViewController: UIViewController {
             DispatchQueue.main.async {}
             return nil
         }
+    }
+
+    @IBAction func backButtonPressed(_: Any) {
+        navigationController?.popViewController(animated: true)
     }
 
     func imageWith(name: String?) -> UIImage? {
@@ -57,5 +83,12 @@ class SettingsPageViewController: UIViewController {
             return nameImage
         }
         return nil
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
+        if segue.identifier == "changePasswordSegue" {
+            let changePasswordVC = segue.destination as! ChangePasswordViewController
+            changePasswordVC.username = username
+        }
     }
 }

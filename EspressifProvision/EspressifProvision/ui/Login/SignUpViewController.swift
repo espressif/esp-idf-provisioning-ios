@@ -56,6 +56,9 @@ class SignUpViewController: UIViewController {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        email.text = ""
+        confirmPassword.text = ""
+        password.text = ""
     }
 
     override func viewWillDisappear(_ animated: Bool) {

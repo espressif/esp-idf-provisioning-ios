@@ -13,6 +13,9 @@ class DevicesCollectionViewCell: UICollectionViewCell {
     var infoButtonAction: () -> Void = {}
     @IBOutlet var deviceImageView: UIImageView!
     @IBOutlet var deviceName: UILabel!
+    @IBOutlet var switchButton: UIButton!
+    @IBOutlet var statusLabel: UILabel!
+    @IBOutlet var tempLabel: UILabel!
     @IBAction func showDeviceInfo(_: Any) {
         infoButtonAction()
     }

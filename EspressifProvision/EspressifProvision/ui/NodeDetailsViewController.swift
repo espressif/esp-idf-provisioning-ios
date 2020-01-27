@@ -30,14 +30,17 @@ class NodeDetailsViewController: UIViewController {
         let parameters = ["user_id": User.shared.userID, "node_id": currentNode.node_id!, "secret_key": "", "operation": "remove"]
         NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { _, error in
             if error == nil {
-                User.shared.associatedNodes.removeValue(forKey: self.currentNode.node_id!)
+                User.shared.associatedNodeList?.removeAll(where: { node -> Bool in
+                    node.node_id == self.currentNode.node_id
+                })
+
 //                User.shared.associatedDevices?.removeAll(where: { device -> Bool in
 //                    device.node_id == self.currentNode.node_id
 //                })
             }
             DispatchQueue.main.async {
                 Utility.hideLoader(view: self.view)
-                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popToRootViewController(animated: false)
             }
         }
     }

@@ -16,7 +16,7 @@ class GenericSliderTableViewCell: UITableViewCell {
     @IBOutlet var backView: UIView!
     @IBOutlet var title: UILabel!
 
-    var attributeKey: String!
+    var paramName: String = ""
     var device: Device!
     var dataType: String!
     var sliderValue = ""
@@ -47,11 +47,11 @@ class GenericSliderTableViewCell: UITableViewCell {
 
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         if dataType.lowercased() == "int" {
-            sliderValue = attributeKey + ": \(Int(slider.value))"
-            NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [attributeKey: Int(sender.value)])
+            sliderValue = paramName + ": \(Int(slider.value))"
+            NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [paramName: Int(sender.value)]])
         } else {
-            sliderValue = attributeKey + ": \(slider.value)"
-            NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [attributeKey: sender.value])
+            sliderValue = paramName + ": \(slider.value)"
+            NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [paramName: sender.value]])
         }
         let loader = MBProgressHUD.showAdded(to: window!, animated: true)
         loader.mode = MBProgressHUDMode.customView

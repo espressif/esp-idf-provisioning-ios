@@ -44,7 +44,7 @@ class DevicesViewController: UIViewController {
         pickerView.layer.borderWidth = 1.0
         pickerView.layer.borderColor = UIColor(hexString: "#F2F1FC").cgColor
         pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
-        collectionView.collectionViewLayout = DeviceCollectionViewLayout()
+//        collectionView.collectionViewLayout = DeviceCollectionViewLayout()
         if user == nil {
             user = pool?.currentUser()
         }
@@ -53,7 +53,9 @@ class DevicesViewController: UIViewController {
         }
         if let userID = UserDefaults.standard.value(forKey: Constants.userIDKey) as? String {
             User.shared.userID = userID
-        } else {
+        }
+
+        if (UserDefaults.standard.value(forKey: Constants.loginIdKey) as? String) == nil {
             refresh()
         }
 
@@ -77,6 +79,10 @@ class DevicesViewController: UIViewController {
         }
         if User.shared.updateDeviceList {
             refreshDeviceList()
+        }
+        if User.shared.associatedNodeList?.count == 0 {
+            initialView.isHidden = false
+            collectionView.isHidden = true
         }
     }
 
@@ -225,6 +231,17 @@ class DevicesViewController: UIViewController {
         }
         return User.shared.associatedNodeList![index].devices![indexPath.row]
     }
+
+    func getNodeAt(indexPath: IndexPath) -> Node {
+        var index = indexPath.section
+        if singleDeviceNodeCount > 0 {
+            if index == 0 {
+                return User.shared.associatedNodeList![indexPath.section]
+            }
+            index = index + singleDeviceNodeCount - 1
+        }
+        return User.shared.associatedNodeList![index]
+    }
 }
 
 extension DevicesViewController: UICollectionViewDelegate {
@@ -273,9 +290,36 @@ extension DevicesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "deviceCollectionViewCell", for: indexPath) as! DevicesCollectionViewCell
         cell.deviceName.text = getDeviceAt(indexPath: indexPath).name
-        cell.layer.cornerRadius = 14.0
-        cell.layer.borderWidth = 2.0
-        cell.layer.borderColor = UIColor(hexString: "#8181A8").cgColor
+
+        cell.layer.backgroundColor = UIColor.white.cgColor
+        cell.layer.shadowColor = UIColor.lightGray.cgColor
+        cell.layer.shadowOffset = CGSize(width: 1.0, height: 2.0)
+        cell.layer.shadowRadius = 1.0
+        cell.layer.shadowOpacity = 1.0
+        cell.layer.masksToBounds = false
+//        if indexPath.row == 1 {
+//            cell.switchButton.isHidden = true
+//        }
+//        if indexPath.row == 2 {
+//            cell.switchButton.isHidden = true
+//            cell.statusLabel.isHidden = true
+//        }
+//        if indexPath.row == 3 {
+//            cell.statusLabel.isHidden = true
+//            cell.switchButton.backgroundColor = UIColor.lightGray
+//        }
+//        if indexPath.row == 4 {
+//            cell.switchButton.isHidden = true
+//            cell.tempLabel.isHidden = false
+//            cell.deviceImageView.image = UIImage(named: "thermo_test")
+//            cell.statusLabel.isHidden = true
+//        }
+//        if indexPath.row == 5 {
+//            cell.deviceImageView.image = UIImage(named: "bulb_test_1")
+//        }
+//        cell.layer.cornerRadius = 14.0
+//        cell.layer.borderWidth = 2.0
+//        cell.layer.borderColor = UIColor(hexString: "#8181A8").cgColor
 //        if User.shared.associatedDevices?[indexPath.row].type == "esp.device.lightbulb" {
 //            cell.deviceImageView.image = UIImage(named: "light_bulb")
 //        } else if User.shared.associatedDevices?[indexPath.row].type == "esp.device.switch" {
@@ -296,14 +340,17 @@ extension DevicesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "deviceListCollectionReusableView", for: indexPath) as! DeviceListCollectionReusableView
-        headerView.headerLabel.text = getDeviceAt(indexPath: indexPath).node_id ?? ""
+        headerView.headerLabel.text = getNodeAt(indexPath: indexPath).info?.name ?? "Node"
+        headerView.delegate = self
+        headerView.nodeID = getNodeAt(indexPath: indexPath).node_id ?? ""
         return headerView
     }
 }
 
 extension DevicesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
-        return CGSize(width: 120.0, height: 120.0)
+        let width = (UIScreen.main.bounds.width - 30) / 2.0
+        return CGSize(width: width, height: width * (2 / 4))
     }
 }
 
@@ -313,4 +360,17 @@ extension DevicesViewController: UIPopoverPresentationControllerDelegate {
     }
 
     func popoverPresentationControllerDidDismissPopover(_: UIPopoverPresentationController) {}
+}
+
+extension DevicesViewController: DeviceListHeaderProtocol {
+    func deviceInfoClicked(nodeID: String) {
+        if let node = User.shared.associatedNodeList?.first(where: { item -> Bool in
+            item.node_id == nodeID
+        }) {
+            let deviceStoryboard = UIStoryboard(name: "DeviceDetail", bundle: nil)
+            let destination = deviceStoryboard.instantiateViewController(withIdentifier: "nodeDetailsVC") as! NodeDetailsViewController
+            destination.currentNode = node
+            navigationController?.pushViewController(destination, animated: true)
+        }
+    }
 }

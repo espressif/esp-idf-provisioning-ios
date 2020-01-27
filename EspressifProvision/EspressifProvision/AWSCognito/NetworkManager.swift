@@ -45,6 +45,7 @@ class NetworkManager {
     func addDeviceToUser(parameter: [String: String], completionHandler: @escaping (String?, Error?) -> Void) {
         User.shared.getAccessToken(completionHandler: { idToken in
             if idToken != nil {
+                User.shared.idToken = idToken
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                 Alamofire.request(Constants.addDevice, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                     if let error = response.result.error {
@@ -73,6 +74,7 @@ class NetworkManager {
             if userID != nil {
                 User.shared.getAccessToken(completionHandler: { idToken in
                     if idToken != nil {
+                        User.shared.idToken = idToken
                         let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                         let url = Constants.getNodes
                         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
@@ -141,6 +143,7 @@ class NetworkManager {
             if userID != nil {
                 User.shared.getAccessToken(completionHandler: { idToken in
                     if idToken != nil {
+                        User.shared.idToken = idToken
                         let url = Constants.checkStatus + "?node_id=" + deviceID
                         let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                         Alamofire.request(url + "&request_id=" + requestID + "&user_request=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
@@ -168,6 +171,7 @@ class NetworkManager {
             if userID != nil {
                 User.shared.getAccessToken(completionHandler: { idToken in
                     if idToken != nil {
+                        User.shared.idToken = idToken
                         let url = Constants.updateThingsShadow + "?nodeid=" + nodeID
                         let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                         Alamofire.request(url, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
@@ -185,11 +189,13 @@ class NetworkManager {
             if userID != nil {
                 User.shared.getAccessToken(completionHandler: { idToken in
                     if idToken != nil {
+                        User.shared.idToken = idToken
                         let url = Constants.getDeviceShadow + "?nodeid=" + nodeID
                         let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                             if let json = response.result.value as? [String: Any] {
                                 completionHandler(json)
+                                return
                             }
                             print(response.result.value)
                             completionHandler(nil)
@@ -204,8 +210,13 @@ class NetworkManager {
         }
     }
 
-    func getIdToken(githubToken: String!, completionHandler _: @escaping (Bool) -> Void) {
-        let requestData = "grant_type=authorization_code&client_id=" + Constants.clientID + "&code=" + githubToken + "&client_secret="
-        let headers: HTTPHeaders = ["content-type": "application/x-www-form-urlencoded"]
+    func genericRequest(url: URLConvertible, method _: HTTPMethod, parameters: Parameters, encoding: ParameterEncoding, headers: HTTPHeaders, completionHandler: @escaping ([String: Any]?) -> Void) {
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: encoding, headers: headers).responseJSON { response in
+            if let json = response.result.value as? [String: Any] {
+                completionHandler(json)
+                return
+            }
+            completionHandler(nil)
+        }
     }
 }
