@@ -53,6 +53,7 @@ class SettingsPageViewController: UIViewController {
         UserDefaults.standard.removeObject(forKey: Constants.idTokenKey)
         UserDefaults.standard.removeObject(forKey: Constants.loginIdKey)
         User.shared.userID = nil
+        User.shared.associatedNodeList = nil
         navigationController?.popViewController(animated: true)
         refresh()
     }

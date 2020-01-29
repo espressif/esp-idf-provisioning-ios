@@ -68,9 +68,9 @@ class User {
                 let idTokenGithub = UserDefaults.standard.value(forKey: Constants.idTokenKey) as? String
                 if let refreshTokenInfo = UserDefaults.standard.value(forKey: Constants.refreshTokenKey) as? [String: Any] {
                     let saveDate = refreshTokenInfo["time"] as! Date
-                    let difference = Calendar.current.dateComponents([.second], from: saveDate, to: Date())
+                    let difference = Date().timeIntervalSince(saveDate)
                     let expire = refreshTokenInfo["expire_in"] as! Int
-                    if difference.second! > expire {
+                    if Int(difference) > expire {
                         do {
                             let json = try decode(jwt: idTokenGithub!)
                             print(json)

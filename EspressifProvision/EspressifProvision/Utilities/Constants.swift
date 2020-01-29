@@ -66,6 +66,9 @@ struct Constants {
     static let cognito = "Cognito"
     static let github = "Github"
 
+    // Theme Color
+    static let backgroundColor = Bundle.main.infoDictionary!["APP_THEME_COLOR"] as? String
+
     static let tokenURL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/token"
 
     static func log(message: String) {

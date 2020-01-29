@@ -1,0 +1,222 @@
+
+/* Class = "UIButton"; normalTitle = "Add Using QR Code"; ObjectID = "1AQ-cj-4Aj"; */
+"1AQ-cj-4Aj.normalTitle" = "Add Using Test Code";
+
+/* Class = "UILabel"; text = "27° C"; ObjectID = "1er-CE-fgV"; */
+"1er-CE-fgV.text" = "27° C";
+
+/* Class = "UILabel"; text = "Passphrase Invalid"; ObjectID = "2Sq-DT-DvX"; */
+"2Sq-DT-DvX.text" = "Passphrase Invalid";
+
+/* Class = "UILabel"; text = "To provision a new device click on plus sign at the bottom."; ObjectID = "2tH-0H-ccg"; */
+"2tH-0H-ccg.text" = "To provision a new device click on plus sign at the bottom.";
+
+/* Class = "UILabel"; text = "Confirming Wi-Fi connection."; ObjectID = "3FX-Sr-St8"; */
+"3FX-Sr-St8.text" = "Confirming Wi-Fi connection.";
+
+/* Class = "UILabel"; text = "Connect to Device"; ObjectID = "3mQ-5Z-4P4"; */
+"3mQ-5Z-4P4.text" = "Connect to Device";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "3wc-0X-oGh"; */
+"3wc-0X-oGh.normalTitle" = "Next";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "4Fm-Rg-gyv"; */
+"4Fm-Rg-gyv.normalTitle" = "Back";
+
+/* Class = "UIButton"; normalTitle = "Connect"; ObjectID = "5RK-YN-Cai"; */
+"5RK-YN-Cai.normalTitle" = "Connect";
+
+/* Class = "UITextField"; placeholder = "New Password"; ObjectID = "6Yb-QL-qOJ"; */
+"6Yb-QL-qOJ.placeholder" = "New Password";
+
+/* Class = "UIButton"; normalTitle = "Change Password"; ObjectID = "6yZ-Rb-2QH"; */
+"6yZ-Rb-2QH.normalTitle" = "Change Password";
+
+/* Class = "UILabel"; text = "Select Wi-Fi Network"; ObjectID = "8cR-TX-8uW"; */
+"8cR-TX-8uW.text" = "Select Wi-Fi Network";
+
+/* Class = "UINavigationItem"; title = "Espressif"; ObjectID = "ACE-AV-Vhj"; */
+"ACE-AV-Vhj.title" = "Espressif";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "AIB-0T-05S"; */
+"AIB-0T-05S.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "AIV-Lv-nIQ"; */
+"AIV-Lv-nIQ.normalTitle" = "Back";
+
+/* Class = "UITextField"; placeholder = "abcd1234"; ObjectID = "Abk-rH-ckO"; */
+"Abk-rH-ckO.placeholder" = "abcd1234";
+
+/* Class = "UITextField"; text = "abcd1234"; ObjectID = "Abk-rH-ckO"; */
+"Abk-rH-ckO.text" = "abcd1234";
+
+/* Class = "UILabel"; text = "Networks"; ObjectID = "BVQ-0o-rMV"; */
+"BVQ-0o-rMV.text" = "Networks";
+
+/* Class = "UILabel"; text = "Offilne"; ObjectID = "CDm-e1-o9f"; */
+"CDm-e1-o9f.text" = "Offilne";
+
+/* Class = "UILabel"; text = "Smart Light"; ObjectID = "CEw-IX-uHX"; */
+"CEw-IX-uHX.text" = "Smart Light";
+
+/* Class = "UILabel"; text = "Passphrase Invalid"; ObjectID = "Cw5-TG-1Fq"; */
+"Cw5-TG-1Fq.text" = "Passphrase Invalid";
+
+/* Class = "UIButton"; normalTitle = "Set Password"; ObjectID = "EGj-8g-Y7z"; */
+"EGj-8g-Y7z.normalTitle" = "Set Password";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "FE8-lw-FvL"; */
+"FE8-lw-FvL.normalTitle" = "Cancel";
+
+/* Class = "UILabel"; text = "Devices"; ObjectID = "Hat-6w-6qK"; */
+"Hat-6w-6qK.text" = "Devices";
+
+/* Class = "UILabel"; text = "You can provision a device by scanning the QR code or you can do it manually my tapping on + icon on right-top of this screen."; ObjectID = "He7-0L-OSQ"; */
+"He7-0L-OSQ.text" = "You can provision a device by scanning the QR code or you can do it manually my tapping on + icon on right-top of this screen.";
+
+/* Class = "UILabel"; text = "Reset your board to factory defaults and retry"; ObjectID = "JSe-jX-Vog"; */
+"JSe-jX-Vog.text" = "Reset your board to factory defaults and retry";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "JV0-tz-FCd"; */
+"JV0-tz-FCd.text" = "Label";
+
+/* Class = "UIViewController"; title = "Espressif"; ObjectID = "Mpb-P7-MIc"; */
+"Mpb-P7-MIc.title" = "Espressif";
+
+/* Class = "UITextField"; placeholder = "Passphrase"; ObjectID = "NRC-Zo-NS6"; */
+"NRC-Zo-NS6.placeholder" = "Passphrase";
+
+/* Class = "UITextField"; placeholder = "Old Password"; ObjectID = "NWw-vv-Hvr"; */
+"NWw-vv-Hvr.placeholder" = "Old Password";
+
+/* Class = "UILabel"; text = "Sending Wi-Fi credentials."; ObjectID = "NYN-3i-eXB"; */
+"NYN-3i-eXB.text" = "Sending Wi-Fi credentials.";
+
+/* Class = "UIButton"; normalTitle = "Provision"; ObjectID = "Nct-ov-xQJ"; */
+"Nct-ov-xQJ.normalTitle" = "Provision";
+
+/* Class = "UILabel"; text = "To provision your device: make sure it is turned ON.\nConnect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX"; ObjectID = "Ngp-U3-nxr"; */
+"Ngp-U3-nxr.text" = "To provision your device: make sure it is turned ON.\nConnect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "OTC-kH-x81"; */
+"OTC-kH-x81.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Network Name"; ObjectID = "Pmo-qk-3BE"; */
+"Pmo-qk-3BE.placeholder" = "Network Name";
+
+/* Class = "UINavigationItem"; title = "Welcome"; ObjectID = "Pyf-5z-bsl"; */
+"Pyf-5z-bsl.title" = "Welcome";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "QD7-xR-GLz"; */
+"QD7-xR-GLz.title" = "Item";
+
+/* Class = "UILabel"; text = "Passphrase Invalid"; ObjectID = "Qap-st-sdH"; */
+"Qap-st-sdH.text" = "Passphrase Invalid";
+
+/* Class = "UILabel"; text = "User Profile"; ObjectID = "Rh2-tG-q5l"; */
+"Rh2-tG-q5l.text" = "User Profile";
+
+/* Class = "UILabel"; text = "Connect your device"; ObjectID = "UfM-3v-SMK"; */
+"UfM-3v-SMK.text" = "Connect your device";
+
+/* Class = "UILabel"; text = "Configuring Node association."; ObjectID = "VEc-gr-Bg4"; */
+"VEc-gr-Bg4.text" = "Configuring Node association.";
+
+/* Class = "UILabel"; text = "Version :"; ObjectID = "WjS-FD-9xO"; */
+"WjS-FD-9xO.text" = "Version :";
+
+/* Class = "UILabel"; text = "Passphrase Invalid"; ObjectID = "Xd6-eD-re5"; */
+"Xd6-eD-re5.text" = "Passphrase Invalid";
+
+/* Class = "UILabel"; text = "No Device Added"; ObjectID = "Xds-Fn-917"; */
+"Xds-Fn-917.text" = "No Device Added";
+
+/* Class = "UILabel"; text = "Devices"; ObjectID = "YQy-W4-Gvs"; */
+"YQy-W4-Gvs.text" = "Devices";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "YkR-wS-bbm"; */
+"YkR-wS-bbm.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UIButton"; normalTitle = "Logout"; ObjectID = "Yla-oM-gGj"; */
+"Yla-oM-gGj.normalTitle" = "Logout";
+
+/* Class = "UIButton"; normalTitle = "Terms and Conditions"; ObjectID = "ZtY-CX-ysb"; */
+"ZtY-CX-ysb.normalTitle" = "Terms and Conditions";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "ZuG-Pk-MI6"; */
+"ZuG-Pk-MI6.text" = "Label";
+
+/* Class = "UILabel"; text = "PROV_14"; ObjectID = "Zw3-DR-Kf5"; */
+"Zw3-DR-Kf5.text" = "PROV_14";
+
+/* Class = "UIButton"; normalTitle = "Ok"; ObjectID = "amZ-Q8-edP"; */
+"amZ-Q8-edP.normalTitle" = "Ok";
+
+/* Class = "UIViewController"; title = "Espressif"; ObjectID = "dpI-LH-jcG"; */
+"dpI-LH-jcG.title" = "Espressif";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "gDL-Sb-XKI"; */
+"gDL-Sb-XKI.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Add Manually"; ObjectID = "hfT-V6-QJk"; */
+"hfT-V6-QJk.normalTitle" = "Add Manually";
+
+/* Class = "UINavigationItem"; title = "Espressif"; ObjectID = "lG3-ro-MY2"; */
+"lG3-ro-MY2.title" = "Espressif";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "lW2-FA-tWT"; */
+"lW2-FA-tWT.normalTitle" = "Cancel";
+
+/* Class = "UINavigationController"; title = "Espressif"; ObjectID = "mgC-Sj-4EB"; */
+"mgC-Sj-4EB.title" = "Espressif";
+
+/* Class = "UIViewController"; title = "Provision"; ObjectID = "mnI-as-oAA"; */
+"mnI-as-oAA.title" = "Provision";
+
+/* Class = "UILabel"; text = "Devices"; ObjectID = "mzP-oQ-2UW"; */
+"mzP-oQ-2UW.text" = "Devices";
+
+/* Class = "UILabel"; text = "Proof of Possession"; ObjectID = "olS-t6-0xF"; */
+"olS-t6-0xF.text" = "Proof of Possession";
+
+/* Class = "UILabel"; text = "Provisioning"; ObjectID = "p9t-i1-0NK"; */
+"p9t-i1-0NK.text" = "Provisioning";
+
+/* Class = "UILabel"; text = "App Version - v1.0"; ObjectID = "sfG-Qq-wAK"; */
+"sfG-Qq-wAK.text" = "App Version - v1.0";
+
+/* Class = "UIButton"; normalTitle = "Privacy Policy"; ObjectID = "sng-Ad-SJ2"; */
+"sng-Ad-SJ2.normalTitle" = "Privacy Policy";
+
+/* Class = "UILabel"; text = "To provision your new device, please make sure that your Phone's Bluetooth is turned on and within range of your new device. \n"; ObjectID = "syt-NP-QP1"; */
+"syt-NP-QP1.text" = "To provision your new device, please make sure that your Phone's Bluetooth is turned on and within range of your new device. \n";
+
+/* Class = "UILabel"; text = "Password should contain at least one capital letter, one special character and a number."; ObjectID = "tbG-2X-Ubm"; */
+"tbG-2X-Ubm.text" = "Password should contain at least one capital letter, one special character and a number.";
+
+/* Class = "UILabel"; text = "Email :"; ObjectID = "u9l-oW-Yhm"; */
+"u9l-oW-Yhm.text" = "Email :";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "vIq-de-dc7"; */
+"vIq-de-dc7.text" = "Label";
+
+/* Class = "UILabel"; text = "Confirming Node association."; ObjectID = "vWJ-9B-2Ah"; */
+"vWJ-9B-2Ah.text" = "Confirming Node association.";
+
+/* Class = "UILabel"; text = "Prefix"; ObjectID = "vXC-Dj-5eq"; */
+"vXC-Dj-5eq.text" = "Prefix";
+
+/* Class = "UILabel"; text = "User Profile"; ObjectID = "vhi-wW-pMo"; */
+"vhi-wW-pMo.text" = "User Profile";
+
+/* Class = "UITextField"; placeholder = "Confirm New Password"; ObjectID = "wrL-7l-Ov7"; */
+"wrL-7l-Ov7.placeholder" = "Confirm New Password";
+
+/* Class = "UILabel"; text = "Enter your proof of possession PIN for\nPROV_XXXX"; ObjectID = "wtp-X4-sgV"; */
+"wtp-X4-sgV.text" = "Enter your proof of possession PIN for\nPROV_XXXX";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "zCP-EH-x15"; */
+"zCP-EH-x15.title" = "Item";
+
+/* Class = "UILabel"; text = "Powered by ESPRESSIF"; ObjectID = "zyI-b1-O5Q"; */
+"zyI-b1-O5Q.text" = "Powered by ESPRESSIF";

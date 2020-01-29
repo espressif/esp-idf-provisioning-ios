@@ -6,6 +6,8 @@
 	<string>$(APP_CLIENT_ID)</string>
 	<key>APP_CLIENT_SECRET</key>
 	<string>$(APP_CLIENT_SECRET)</string>
+	<key>APP_THEME_COLOR</key>
+	<string>123</string>
 	<key>AWS</key>
 	<dict>
 		<key>CognitoUserPool</key>

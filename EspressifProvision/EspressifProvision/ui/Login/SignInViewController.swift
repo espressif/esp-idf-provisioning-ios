@@ -52,8 +52,11 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         segmentControl.selectedSegmentIndex = 0
         changeSegment()
-        password.text = nil
+        password.text = ""
         username.text = ""
+        registerPassword.text = ""
+        confirmPassword.text = ""
+        email.text = ""
 
 //        passwordImageRightView.image = UIImage(named: "show_password")
 //        let passwordRightView = UIView(frame: CGRect(x: 0, y: 0, width: 38.0, height: 16.0))

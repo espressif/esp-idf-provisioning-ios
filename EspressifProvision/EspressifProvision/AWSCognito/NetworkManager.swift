@@ -8,6 +8,7 @@
 
 import Alamofire
 import Foundation
+import JWTDecode
 
 class NetworkManager {
     /// A singleton class that manages Network call of the entire application
@@ -19,26 +20,66 @@ class NetworkManager {
         if let userID = User.shared.userID {
             completionHandler(userID, nil)
         } else {
-            User.shared.getAccessToken(completionHandler: { idToken in
-                if idToken != nil {
-                    User.shared.idToken = idToken
-                    let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
-                    Alamofire.request(Constants.getUserId, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                        if let json = response.result.value as? [String: String] {
-                            print("JSON: \(json)")
-                            if let userid = json[Constants.userID] {
-                                User.shared.userID = userid
-                                UserDefaults.standard.set(userid, forKey: Constants.userIDKey)
-                                completionHandler(userid, nil)
-                                return
-                            }
-                        }
-                        completionHandler(nil, NetworkError.keyNotPresent)
+            if let idToken = User.shared.idToken {
+                print("idToken: \(idToken)")
+                do {
+                    let json = try decode(jwt: idToken)
+                    if let userID = json.body["custom:user_id"] as? String {
+                        User.shared.userID = userID
+                        print("userid: \(userID)")
+                        completionHandler(userID, nil)
+                    } else {
+                        print("error parsing user id")
+                        completionHandler(nil, NetworkError.emptyToken)
                     }
-                } else {
+                } catch {
+                    print("error parsing user id")
                     completionHandler(nil, NetworkError.emptyToken)
                 }
-            })
+            } else {
+                User.shared.getAccessToken(completionHandler: { idToken in
+                    if idToken != nil {
+                        User.shared.idToken = idToken
+                        do {
+                            let json = try decode(jwt: idToken!)
+                            if let userID = json.body["custom:user_id"] as? String {
+                                User.shared.userID = userID
+                                print("userid: \(userID)")
+                                completionHandler(userID, nil)
+                            } else {
+                                print("error parsing user id")
+                                completionHandler(nil, NetworkError.emptyToken)
+                            }
+                        } catch {
+                            print("error parsing user id")
+                            completionHandler(nil, NetworkError.emptyToken)
+                        }
+
+                    } else {
+                        completionHandler(nil, NetworkError.emptyToken)
+                    }
+                })
+            }
+//            User.shared.getAccessToken(completionHandler: { idToken in
+//                if idToken != nil {
+//                    User.shared.idToken = idToken
+//                    let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
+//                    Alamofire.request(Constants.getUserId, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//                        if let json = response.result.value as? [String: String] {
+//                            print("JSON: \(json)")
+//                            if let userid = json[Constants.userID] {
+//                                User.shared.userID = userid
+//                                UserDefaults.standard.set(userid, forKey: Constants.userIDKey)
+//                                completionHandler(userid, nil)
+//                                return
+//                            }
+//                        }
+//                        completionHandler(nil, NetworkError.keyNotPresent)
+//                    }
+//                } else {
+//                    completionHandler(nil, NetworkError.emptyToken)
+//                }
+//            })
         }
     }
 
