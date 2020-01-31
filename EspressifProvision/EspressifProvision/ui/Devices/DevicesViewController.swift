@@ -60,6 +60,7 @@ class DevicesViewController: UIViewController {
         }
 
         NotificationCenter.default.addObserver(self, selector: #selector(refreshDeviceList), name: Notification.Name(Constants.newDeviceAdded), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUIView), name: Notification.Name(Constants.uiViewUpdateNotification), object: nil)
         refreshControl.addTarget(self, action: #selector(refreshDeviceList), for: .valueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         collectionView.refreshControl = refreshControl
@@ -78,6 +79,7 @@ class DevicesViewController: UIViewController {
             refreshDeviceList()
         }
         if User.shared.updateDeviceList {
+            Utility.showLoader(message: "Fetching Device List", view: view)
             refreshDeviceList()
         }
         if User.shared.associatedNodeList?.count == 0 {
@@ -91,11 +93,18 @@ class DevicesViewController: UIViewController {
         reachability.stopNotifier()
         pickerView.isHidden = true
         addButton.setImage(UIImage(named: "add_icon"), for: .normal)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(appEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+    }
+
+    @objc func appEnterForeground() {
+        Utility.showLoader(message: "Fetching Device List", view: view)
+        refreshDeviceList()
     }
 
     func refresh() {
@@ -112,6 +121,12 @@ class DevicesViewController: UIViewController {
         refreshDeviceList()
     }
 
+    @objc func updateUIView() {
+        for subview in view.subviews {
+            subview.setNeedsDisplay()
+        }
+    }
+
     @objc func refreshDeviceList() {
         if reachability.connection != .unavailable {
             User.shared.updateDeviceList = false
@@ -121,11 +136,11 @@ class DevicesViewController: UIViewController {
 //                let device1 = Device(name: "Light Bulb1", type: "switch", node_id: "Test 1", staticParams: nil, dynamicParams: nil)
 //                let device2 = Device(name: "Light Bulb2", type: "switch", node_id: "Test 2", staticParams: nil, dynamicParams: nil)
 //                let device3 = Device(name: "Light Bulb3", type: "switch", node_id: "Test 3", staticParams: nil, dynamicParams: nil)
-//                let node1 = Node(node_id: "Test 1", config_version: "1.0", info: nil, devices: [device1], attributes: nil)
-//                let node2 = Node(node_id: "Test 2", config_version: "1.0", info: nil, devices: [device2], attributes: nil)
-//                let node3 = Node(node_id: "Test 3", config_version: "1.0", info: nil, devices: [device1, device2, device3], attributes: nil)
+                ////                let node1 = Node(node_id: "Test 1", config_version: "1.0", info: nil, devices: [device1], attributes: nil)
+                ////                let node2 = Node(node_id: "Test 2", config_version: "1.0", info: nil, devices: [device2], attributes: nil)
+                ////                let node3 = Node(node_id: "Test 3", config_version: "1.0", info: nil, devices: [device1, device2, device3], attributes: nil)
 //                let node4 = Node(node_id: "Test 4", config_version: "1.0", info: nil, devices: [device1, device2, device3, device1, device2], attributes: nil)
-//                User.shared.associatedNodeList = [node1, node2, node3, node4]
+//                User.shared.associatedNodeList = [node4]
                 User.shared.associatedNodeList = nodes
                 if nodes == nil || nodes?.count == 0 {
                     self.initialView.isHidden = false
@@ -246,10 +261,24 @@ class DevicesViewController: UIViewController {
 
 extension DevicesViewController: UICollectionViewDelegate {
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        Utility.showLoader(message: "", view: view)
         let currentDevice = getDeviceAt(indexPath: indexPath)
+        let currentNode = getNodeAt(indexPath: indexPath)
         let controlListVC = controlStoryBoard.instantiateViewController(withIdentifier: "controlListVC") as! ControlListViewController
         controlListVC.device = currentDevice
-        navigationController?.pushViewController(controlListVC, animated: true)
+        NetworkManager.shared.getNodeStatus(node: currentNode) { node, error in
+            if error == nil, node != nil {
+                if let index = User.shared.associatedNodeList?.firstIndex(where: { node -> Bool in
+                    node.node_id == currentNode.node_id
+                }) {
+                    User.shared.associatedNodeList![index] = node!
+                }
+            }
+            DispatchQueue.main.async {
+                Utility.hideLoader(view: self.view)
+                self.navigationController?.pushViewController(controlListVC, animated: true)
+            }
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -289,7 +318,9 @@ extension DevicesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "deviceCollectionViewCell", for: indexPath) as! DevicesCollectionViewCell
-        cell.deviceName.text = getDeviceAt(indexPath: indexPath).name
+        var device = getDeviceAt(indexPath: indexPath)
+        cell.deviceName.text = device.name
+        cell.device = device
 
         cell.layer.backgroundColor = UIColor.white.cgColor
         cell.layer.shadowColor = UIColor.lightGray.cgColor
@@ -297,24 +328,166 @@ extension DevicesViewController: UICollectionViewDataSource {
         cell.layer.shadowRadius = 1.0
         cell.layer.shadowOpacity = 1.0
         cell.layer.masksToBounds = false
+
+        if device.isConnected {
+            cell.statusView.isHidden = true
+        } else {
+            cell.statusView.isHidden = false
+        }
+
+        var primaryKeyFound = false
+        if let dynamicParams = device.dynamicParams {
+            for item in dynamicParams {
+                if item.name == "esp.param.output" {
+                    if item.dataType?.lowercased() == "bool" {
+                        primaryKeyFound = true
+                        if device.isConnected {
+                            if let value = item.value as? Bool {
+                                cell.switchButton.alpha = 1.0
+                                cell.switchButton.isEnabled = true
+                                if value {
+                                    cell.switchButton.setImage(UIImage(named: "switch_icon_enabled_on"), for: .normal)
+                                    cell.switchButton.alpha = 1.0
+                                } else {
+                                    cell.switchButton.alpha = 0.5
+                                }
+                                cell.switchValue = value
+                                cell.switchButton.isHidden = false
+                            } else {
+                                cell.switchButton.isEnabled = true
+                                cell.switchButton.isHidden = false
+                                cell.switchButton.alpha = 0.5
+                            }
+                        } else {
+                            cell.switchButton.isHidden = false
+                            cell.switchButton.alpha = 0.1
+                            cell.switchButton.isEnabled = false
+                        }
+                    }
+                }
+            }
+        }
+
+        if !primaryKeyFound {
+            if let dynamicParams = device.dynamicParams {
+                for item in dynamicParams {
+                    if item.name == "esp.param.temperature" {
+                        if item.dataType?.lowercased() == "string" {
+                            if let value = item.value as? String {
+                                cell.primaryValue.text = value + "º"
+                                cell.primaryValue.isHidden = false
+                                primaryKeyFound = true
+                            }
+                        } else if item.dataType?.lowercased() == "int" {
+                            if let value = item.value as? Int {
+                                cell.primaryValue.text = "\(value)" + "º"
+                                cell.primaryValue.isHidden = false
+                                primaryKeyFound = true
+                            }
+                        } else if item.dataType?.lowercased() == "float" {
+                            if let value = item.value as? Float {
+                                cell.primaryValue.text = "\(value)" + "º"
+                                cell.primaryValue.isHidden = false
+                                primaryKeyFound = true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if !primaryKeyFound {
+            if let staticParams = device.staticParams {
+                for item in staticParams {
+                    if item.name == "esp.param.temperature" {
+                        if let value = item.value as? String {
+                            primaryKeyFound = true
+                            cell.primaryValue.text = value + "º"
+                            cell.primaryValue.isHidden = false
+                        }
+                    }
+                }
+            }
+        }
+
+        if !primaryKeyFound {
+            if let dynamicParams = device.dynamicParams {
+                for item in dynamicParams {
+                    if item.name == "esp.param.text" {
+                        if item.dataType?.lowercased() == "string" {
+                            if let value = item.value as? String {
+                                cell.primaryValue.text = value
+                                cell.primaryValue.isHidden = false
+                                primaryKeyFound = true
+                            }
+                        } else if item.dataType?.lowercased() == "int" {
+                            if let value = item.value as? Int {
+                                cell.primaryValue.text = "\(value)"
+                                cell.primaryValue.isHidden = false
+                                primaryKeyFound = true
+                            }
+                        } else if item.dataType?.lowercased() == "float" {
+                            if let value = item.value as? Float {
+                                cell.primaryValue.text = "\(value)"
+                                cell.primaryValue.isHidden = false
+                                primaryKeyFound = true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if !primaryKeyFound {
+            if let staticParams = device.staticParams {
+                for item in staticParams {
+                    if item.name == "esp.param.text" {
+                        if let value = item.value as? String {
+                            primaryKeyFound = true
+                            cell.primaryValue.text = value
+                            cell.primaryValue.isHidden = false
+                        }
+                    }
+                }
+            }
+        }
+
+        if let deviceType = device.type {
+            var deviceImage: UIImage!
+            switch deviceType {
+            case "esp.device.switch":
+                deviceImage = UIImage(named: "switch_device_icon")
+            case "esp.device.lightbulb":
+                deviceImage = UIImage(named: "light_bulb_icon")
+            case "esp.device.fan":
+                deviceImage = UIImage(named: "fan_icon")
+            case "esp.device.thermostat":
+                deviceImage = UIImage(named: "thermostat_icon")
+            case "esp.device.temperature_sensor":
+                deviceImage = UIImage(named: "temperature_sensor_icon")
+            case "esp.device.lock":
+                deviceImage = UIImage(named: "lock_icon")
+            case "esp.device.sensor":
+                deviceImage = UIImage(named: "sensor_icon")
+            default:
+                deviceImage = UIImage(named: "dummy_device_icon")
+            }
+            cell.deviceImageView.image = deviceImage
+        }
+
+//        if indexPath.row == 0 {
+//            cell.deviceImageView.image = UIImage(named: "thermo_test")
+//        }
 //        if indexPath.row == 1 {
-//            cell.switchButton.isHidden = true
+//            cell.deviceImageView.image = UIImage(named: "bulb_test")
 //        }
 //        if indexPath.row == 2 {
-//            cell.switchButton.isHidden = true
-//            cell.statusLabel.isHidden = true
+//            cell.deviceImageView.image = UIImage(named: "test")
 //        }
 //        if indexPath.row == 3 {
-//            cell.statusLabel.isHidden = true
-//            cell.switchButton.backgroundColor = UIColor.lightGray
+//            cell.deviceImageView.image = UIImage(named: "red_test")
 //        }
 //        if indexPath.row == 4 {
-//            cell.switchButton.isHidden = true
-//            cell.tempLabel.isHidden = false
-//            cell.deviceImageView.image = UIImage(named: "thermo_test")
-//            cell.statusLabel.isHidden = true
-//        }
-//        if indexPath.row == 5 {
 //            cell.deviceImageView.image = UIImage(named: "bulb_test_1")
 //        }
 //        cell.layer.cornerRadius = 14.0
@@ -340,9 +513,15 @@ extension DevicesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "deviceListCollectionReusableView", for: indexPath) as! DeviceListCollectionReusableView
-        headerView.headerLabel.text = getNodeAt(indexPath: indexPath).info?.name ?? "Node"
+        let node = getNodeAt(indexPath: indexPath)
+        headerView.headerLabel.text = node.info?.name ?? "Node"
         headerView.delegate = self
-        headerView.nodeID = getNodeAt(indexPath: indexPath).node_id ?? ""
+        headerView.nodeID = node.node_id ?? ""
+        if node.isConnected {
+            headerView.statusIndicator.backgroundColor = UIColor.green
+        } else {
+            headerView.statusIndicator.backgroundColor = UIColor.lightGray
+        }
         return headerView
     }
 }
@@ -350,7 +529,7 @@ extension DevicesViewController: UICollectionViewDataSource {
 extension DevicesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         let width = (UIScreen.main.bounds.width - 30) / 2.0
-        return CGSize(width: width, height: width * (2 / 4))
+        return CGSize(width: width, height: 144.0)
     }
 }
 

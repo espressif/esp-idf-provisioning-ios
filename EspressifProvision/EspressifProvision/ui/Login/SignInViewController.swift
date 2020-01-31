@@ -24,6 +24,7 @@ import JWTDecode
 import SafariServices
 
 class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
+    @IBOutlet var checkBox: UIButton!
     @IBOutlet var signInTopSpace: NSLayoutConstraint!
     @IBOutlet var signUpTopView: NSLayoutConstraint!
     @IBOutlet var username: UITextField!
@@ -45,6 +46,7 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
     var usernameText: String?
     var auth: AWSCognitoAuth = AWSCognitoAuth.default()
     var session: SFAuthenticationSession!
+    var checked = false
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -116,6 +118,15 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
 
     @IBAction func segmentChange(sender _: UISegmentedControl) {
         changeSegment()
+    }
+
+    @IBAction func clickOnAgree(_: Any) {
+        checked = !checked
+        if checked {
+            checkBox.setImage(UIImage(named: "checkbox_checked"), for: .normal)
+        } else {
+            checkBox.setImage(UIImage(named: "checkbox_unchecked"), for: .normal)
+        }
     }
 
     func changeSegment() {
@@ -254,6 +265,17 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
             present(alertController, animated: true, completion: nil)
             return
         }
+
+        if !checked {
+            let alertController = UIAlertController(title: "Error!!",
+                                                    message: "Please accept our terms and condition before signing up",
+                                                    preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(okAction)
+
+            present(alertController, animated: true, completion: nil)
+            return
+        }
         Utility.showLoader(message: "", view: view)
 
         var attributes = [AWSCognitoIdentityUserAttributeType]()
@@ -323,6 +345,26 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
                 self.signUpTopView.constant = 0
             })
         }
+    }
+
+    @IBAction func openPrivacy(_: Any) {
+        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+    }
+
+    @IBAction func openDocumentation(_: Any) {
+        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+    }
+
+    @IBAction func openTC(_: Any) {
+        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+    }
+
+    func showDocumentVC(url: String) {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let documentVC = storyboard.instantiateViewController(withIdentifier: "documentVC") as! DocumentViewController
+        modalPresentationStyle = .popover
+        documentVC.documentLink = url
+        present(documentVC, animated: true, completion: nil)
     }
 }
 

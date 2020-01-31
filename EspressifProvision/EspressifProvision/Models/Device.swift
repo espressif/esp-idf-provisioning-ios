@@ -20,4 +20,5 @@ struct Device: Equatable {
     var node_id: String?
     var staticParams: [StaticAttribute]?
     var dynamicParams: [DynamicAttribute]?
+    var isConnected = false
 }

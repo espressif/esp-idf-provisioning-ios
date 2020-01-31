@@ -142,7 +142,12 @@ class SuccessViewController: UIViewController {
                     self.step2Image.isHidden = false
                     self.step3SendRequestToAddDevice()
                 } else if wifiState == Espressif_WifiStationState.disconnected {
-                    self.step2FailedWithMessage(message: "Wi-Fi state disconnected")
+                    self.step2Indicator.stopAnimating()
+                    self.step2Image.image = UIImage(named: "warning_icon")
+                    self.step2Image.isHidden = false
+                    self.step2ErrorLabel.text = "Wi-Fi state disconnected"
+                    self.step2ErrorLabel.isHidden = false
+                    self.step3SendRequestToAddDevice()
                 } else {
                     if failReason == Espressif_WifiConnectFailedReason.authError {
                         self.step2FailedWithMessage(message: "Wi-Fi Authentication failed")
@@ -171,7 +176,7 @@ class SuccessViewController: UIViewController {
     }
 
     func checkDeviceAssoicationStatus(nodeID: String, requestID: String) {
-        addDeviceStatusTimeout = Timer.scheduledTimer(timeInterval: 120, target: self, selector: #selector(timeoutFetchingStatus), userInfo: nil, repeats: false)
+        addDeviceStatusTimeout = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(timeoutFetchingStatus), userInfo: nil, repeats: false)
         fetchDeviceAssociationStatus(nodeID: nodeID, requestID: requestID)
     }
 
@@ -265,7 +270,7 @@ class SuccessViewController: UIViewController {
                     self.step3Image.isHidden = false
                     self.step4ConfirmNodeAssociation(requestID: requestid)
                 } else {
-                    self.step3FailedWithMessage(message: "Unrecognized error")
+                    self.step3FailedWithMessage(message: "Unrecognized error. Please check your internet.")
                 }
             }
         }

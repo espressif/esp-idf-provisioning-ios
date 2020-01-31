@@ -161,3 +161,57 @@ extension UIView {
         return nil
     }
 }
+
+extension UserDefaults {
+    func set(_ color: UIColor?, forKey defaultName: String) {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        guard let color = color, color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        else {
+            removeObject(forKey: defaultName)
+            return
+        }
+        let count = MemoryLayout<CGFloat>.size
+        set(Data(bytes: &red, count: count) +
+            Data(bytes: &green, count: count) +
+            Data(bytes: &blue, count: count) +
+            Data(bytes: &alpha, count: count), forKey: defaultName)
+    }
+
+    func color(forKey defaultName: String) -> UIColor? {
+        guard let data = data(forKey: defaultName) else {
+            return nil
+        }
+        let size = MemoryLayout<CGFloat>.size
+        return UIColor(red: data[size * 0 ..< size * 1].withUnsafeBytes { $0.load(as: CGFloat.self) },
+                       green: data[size * 1 ..< size * 2].withUnsafeBytes { $0.load(as: CGFloat.self) },
+                       blue: data[size * 2 ..< size * 3].withUnsafeBytes { $0.load(as: CGFloat.self) },
+                       alpha: data[size * 3 ..< size * 4].withUnsafeBytes { $0.load(as: CGFloat.self) })
+    }
+}
+
+extension UserDefaults {
+    var backgroundColor: UIColor? {
+        get {
+            return color(forKey: Constants.appThemeKey)
+        }
+        set {
+            set(newValue, forKey: Constants.appThemeKey)
+        }
+    }
+
+    func imageForKey(key: String) -> UIImage? {
+        var image: UIImage?
+        if let imageData = data(forKey: key) {
+            image = NSKeyedUnarchiver.unarchiveObject(with: imageData) as? UIImage
+        }
+        return image
+    }
+
+    func setImage(image: UIImage?, forKey key: String) {
+        var imageData: NSData?
+        if let image = image {
+            imageData = NSKeyedArchiver.archivedData(withRootObject: image) as NSData?
+        }
+        set(imageData, forKey: key)
+    }
+}

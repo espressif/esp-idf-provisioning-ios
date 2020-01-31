@@ -1,0 +1,51 @@
+
+/* Class = "UILabel"; text = "Controls"; ObjectID = "1b2-EM-xar"; */
+"1b2-EM-xar.text" = "Controls";
+
+/* Class = "UILabel"; text = "Type"; ObjectID = "1pZ-GM-nqH"; */
+"1pZ-GM-nqH.text" = "Type";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "6AQ-Qo-K9i"; */
+"6AQ-Qo-K9i.normalTitle" = "Back";
+
+/* Class = "UILabel"; text = "Firmware version"; ObjectID = "LUb-mB-hYE"; */
+"LUb-mB-hYE.text" = "Firmware version";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "NP1-FK-O9j"; */
+"NP1-FK-O9j.text" = "Label";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "TZa-Iv-mdu"; */
+"TZa-Iv-mdu.text" = "Name";
+
+/* Class = "UILabel"; text = "Node Id"; ObjectID = "auy-Gq-NNJ"; */
+"auy-Gq-NNJ.text" = "Node Id";
+
+/* Class = "UIButton"; normalTitle = "Remove"; ObjectID = "cJU-mh-8gg"; */
+"cJU-mh-8gg.normalTitle" = "Remove";
+
+/* Class = "UILabel"; text = "Bridge Details"; ObjectID = "cde-Gf-DWb"; */
+"cde-Gf-DWb.text" = "Bridge Details";
+
+/* Class = "UIButton"; normalTitle = "Back"; ObjectID = "h4N-aS-Znk"; */
+"h4N-aS-Znk.normalTitle" = "Back";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "jfJ-8E-rG2"; */
+"jfJ-8E-rG2.text" = "Label";
+
+/* Class = "UILabel"; text = "Config version"; ObjectID = "kAx-6A-Qi4"; */
+"kAx-6A-Qi4.text" = "Config version";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "kM0-9d-RKc"; */
+"kM0-9d-RKc.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "nVD-SR-j1k"; */
+"nVD-SR-j1k.text" = "Label";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "s0U-I7-SZh"; */
+"s0U-I7-SZh.text" = "Label";
+
+/* Class = "UILabel"; text = "Bridge Details"; ObjectID = "sUH-9C-huB"; */
+"sUH-9C-huB.text" = "Bridge Details";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "yJa-tb-4hh"; */
+"yJa-tb-4hh.text" = "Label";

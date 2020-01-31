@@ -20,46 +20,30 @@ class NetworkManager {
         if let userID = User.shared.userID {
             completionHandler(userID, nil)
         } else {
-            if let idToken = User.shared.idToken {
-                print("idToken: \(idToken)")
-                do {
-                    let json = try decode(jwt: idToken)
-                    if let userID = json.body["custom:user_id"] as? String {
-                        User.shared.userID = userID
-                        print("userid: \(userID)")
-                        completionHandler(userID, nil)
-                    } else {
-                        print("error parsing user id")
-                        completionHandler(nil, NetworkError.emptyToken)
-                    }
-                } catch {
-                    print("error parsing user id")
-                    completionHandler(nil, NetworkError.emptyToken)
-                }
-            } else {
-                User.shared.getAccessToken(completionHandler: { idToken in
-                    if idToken != nil {
-                        User.shared.idToken = idToken
-                        do {
-                            let json = try decode(jwt: idToken!)
-                            if let userID = json.body["custom:user_id"] as? String {
-                                User.shared.userID = userID
-                                print("userid: \(userID)")
-                                completionHandler(userID, nil)
-                            } else {
-                                print("error parsing user id")
-                                completionHandler(nil, NetworkError.emptyToken)
-                            }
-                        } catch {
+            User.shared.getAccessToken(completionHandler: { idToken in
+                if idToken != nil {
+                    User.shared.idToken = idToken
+                    print("idToken: \(idToken!)")
+                    do {
+                        let json = try decode(jwt: idToken!)
+                        if let userID = json.body["custom:user_id"] as? String {
+                            User.shared.userID = userID
+                            print("userid: \(userID)")
+                            completionHandler(userID, nil)
+                        } else {
                             print("error parsing user id")
                             completionHandler(nil, NetworkError.emptyToken)
                         }
-
-                    } else {
+                    } catch {
+                        print("error parsing user id")
                         completionHandler(nil, NetworkError.emptyToken)
                     }
-                })
-            }
+
+                } else {
+                    completionHandler(nil, NetworkError.emptyToken)
+                }
+            })
+        }
 //            User.shared.getAccessToken(completionHandler: { idToken in
 //                if idToken != nil {
 //                    User.shared.idToken = idToken
@@ -80,7 +64,6 @@ class NetworkManager {
 //                    completionHandler(nil, NetworkError.emptyToken)
 //                }
 //            })
-        }
     }
 
     func addDeviceToUser(parameter: [String: String], completionHandler: @escaping (String?, Error?) -> Void) {
@@ -172,9 +155,37 @@ class NetworkManager {
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             print(response)
             if let json = response.result.value as? [String: Any] {
-                completionHandler(JSONParser.parseNodeData(data: json, nodeID: nodeID), nil)
+                self.getNodeStatus(node: JSONParser.parseNodeData(data: json, nodeID: nodeID), completionHandler: completionHandler)
             } else {
                 completionHandler(nil, NetworkError.keyNotPresent)
+            }
+        }
+    }
+
+    func getNodeStatus(node: Node, completionHandler: @escaping (Node?, Error?) -> Void) {
+        User.shared.getAccessToken { idToken in
+            if idToken != nil {
+                let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
+                let url = Constants.getNodeStatus + "?nodeid=" + (node.node_id ?? "")
+                Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                    print(response)
+                    if let json = response.result.value as? [String: Any] {
+                        if let status = json["connected"] as? Bool {
+                            var newNode = node
+                            newNode.isConnected = status
+                            if let count = newNode.devices?.count, count > 0 {
+                                for i in 0 ..< count {
+                                    newNode.devices![i].isConnected = status
+                                }
+                            }
+                            completionHandler(newNode, nil)
+                            return
+                        }
+                    }
+                    completionHandler(node, nil)
+                }
+            } else {
+                completionHandler(node, nil)
             }
         }
     }

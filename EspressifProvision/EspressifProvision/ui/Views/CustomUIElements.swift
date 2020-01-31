@@ -16,10 +16,25 @@ class TopBarView: UIView {
          // Drawing code
      }
      */
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        if let bgColor = Constants.backgroundColor {
-            backgroundColor = UIColor(hexString: bgColor)
+//        if let color = AppConstants.shared.appThemeColor {
+//            backgroundColor = color
+//        } else {
+//            if let bgColor = Constants.backgroundColor {
+//                backgroundColor = UIColor(hexString: bgColor)
+//            }
+//        }
+    }
+
+    override func setNeedsDisplay() {
+        if let color = AppConstants.shared.appThemeColor {
+            backgroundColor = color
+        } else {
+            if let bgColor = Constants.backgroundColor {
+                backgroundColor = UIColor(hexString: bgColor)
+            }
         }
     }
 }
@@ -27,8 +42,64 @@ class TopBarView: UIView {
 class PrimaryButton: UIButton {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        if let bgColor = Constants.backgroundColor {
-            backgroundColor = UIColor(hexString: bgColor)
+//        if let color = AppConstants.shared.appThemeColor {
+//            backgroundColor = color
+//        } else {
+//            if let bgColor = Constants.backgroundColor {
+//                backgroundColor = UIColor(hexString: bgColor)
+//            }
+//        }
+    }
+
+    override func setNeedsDisplay() {
+        if let color = AppConstants.shared.appThemeColor {
+            backgroundColor = color
+        } else {
+            if let bgColor = Constants.backgroundColor {
+                backgroundColor = UIColor(hexString: bgColor)
+            }
+        }
+    }
+}
+
+class SecondaryButton: UIButton {
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        if let color = AppConstants.shared.appThemeColor {
+            setTitleColor(color, for: .normal)
+        } else {
+            if let bgColor = Constants.backgroundColor {
+                setTitleColor(UIColor(hexString: bgColor), for: .normal)
+            }
+        }
+    }
+
+    override func setNeedsDisplay() {
+        if let color = AppConstants.shared.appThemeColor {
+            setTitleColor(color, for: .normal)
+        } else {
+            if let bgColor = Constants.backgroundColor {
+                setTitleColor(UIColor(hexString: bgColor), for: .normal)
+            }
+        }
+    }
+}
+
+class BGImageView: UIImageView {
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        contentMode = .scaleAspectFill
+        backgroundColor = .clear
+        if let appBGImage = AppConstants.shared.appBGImage {
+            image = appBGImage
+        }
+    }
+
+    override func setNeedsDisplay() {
+        if let appBGImage = AppConstants.shared.appBGImage {
+            image = appBGImage
+        } else {
+            image = nil
         }
     }
 }

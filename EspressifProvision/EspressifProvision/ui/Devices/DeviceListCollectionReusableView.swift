@@ -14,6 +14,7 @@ protocol DeviceListHeaderProtocol {
 
 class DeviceListCollectionReusableView: UICollectionReusableView {
     @IBOutlet var headerLabel: UILabel!
+    @IBOutlet var statusIndicator: UIView!
     var nodeID = ""
     var delegate: DeviceListHeaderProtocol?
 

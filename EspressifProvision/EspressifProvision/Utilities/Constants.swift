@@ -49,6 +49,7 @@ struct Constants {
     static let getUserId = Constants.baseURL + "user"
     static let getNodes = Constants.baseURL + "user/nodes"
     static let getNodeConfig = Constants.baseURL + "user/nodes/config"
+    static let getNodeStatus = Constants.baseURL + "user/nodes/status"
 //    static let addDeviceToUser = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
     static let checkStatus = Constants.baseURL + "user/nodes/mapping"
 
@@ -62,6 +63,8 @@ struct Constants {
     static let refreshTokenKey = "com.espressif.refreshToken"
     static let expireTimeKey = "com.espressif.expiresIn"
     static let loginIdKey = "com.espressif.loginIdKey"
+    static let appThemeKey = "com.espressif.appTheme"
+    static let appBGKey = "com.espressif.appbg"
 
     static let cognito = "Cognito"
     static let github = "Github"
@@ -70,6 +73,8 @@ struct Constants {
     static let backgroundColor = Bundle.main.infoDictionary!["APP_THEME_COLOR"] as? String
 
     static let tokenURL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/token"
+
+    static let uiViewUpdateNotification = "com.espressif.updateuiview"
 
     static func log(message: String) {
         print(message)

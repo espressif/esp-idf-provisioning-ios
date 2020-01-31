@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "alertTriangle.png",
+      "filename" : "xCircle.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "alertTriangle@2x.png",
+      "filename" : "xCircle@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "alertTriangle@3x.png",
+      "filename" : "xCircle@3x.png",
       "scale" : "3x"
     }
   ],

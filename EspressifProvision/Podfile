@@ -19,6 +19,7 @@ abstract_target 'EspressifProvisionAll' do
   pod 'ReachabilitySwift'
   pod 'CollectionViewCenteredFlowLayout'
   pod 'JWTDecode', '~> 2.4'
+  pod 'M13Checkbox'
 
   
   target 'EspressifProvision'

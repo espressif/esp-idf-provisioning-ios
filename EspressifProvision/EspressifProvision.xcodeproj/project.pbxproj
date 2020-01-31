@@ -44,12 +44,14 @@
 		F12261A022C61695004D049F /* DeviceAssociation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F122619F22C61695004D049F /* DeviceAssociation.swift */; };
 		F12261A222C619A0004D049F /* cloud.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12261A122C6199F004D049F /* cloud.pb.swift */; };
 		F12261A422C620ED004D049F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12261A322C620ED004D049F /* User.swift */; };
+		F13A014023E359250067F8B8 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13A013F23E359250067F8B8 /* DocumentViewController.swift */; };
 		F13F273E238CF6170003AABB /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13F273D238CF6170003AABB /* ScannerViewController.swift */; };
 		F1402AB8239677B300C989F8 /* StaticControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1402AB6239677B300C989F8 /* StaticControlTableViewCell.swift */; };
 		F1402AB9239677B300C989F8 /* StaticControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1402AB7239677B300C989F8 /* StaticControlTableViewCell.xib */; };
 		F15EABF423E043DA008A766B /* CustomUIElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15EABF323E043DA008A766B /* CustomUIElements.swift */; };
 		F15EABFF23E05A51008A766B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F15EAC0123E05A51008A766B /* Localizable.strings */; };
-		F15EAC0923E1960B008A766B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F15EAC0823E1960B008A766B /* Login.storyboard */; };
+		F15EAC0A23E198FF008A766B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F15EAC0C23E198FF008A766B /* Login.storyboard */; };
+		F15EAC0F23E1994E008A766B /* DeviceDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F15EAC1123E1994E008A766B /* DeviceDetail.storyboard */; };
 		F176A41623C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */; };
 		F176A41823C4669300F2FCBC /* DeviceCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */; };
 		F176A41C23C8342200F2FCBC /* ClaimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41B23C8342200F2FCBC /* ClaimViewController.swift */; };
@@ -87,8 +89,15 @@
 		F1E37E9123CF3AD500A5043F /* PrimaryControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1E37E8F23CF3AD500A5043F /* PrimaryControlTableViewCell.xib */; };
 		F1E37E9323D6CF4800A5043F /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E37E9223D6CF4700A5043F /* PasswordTextField.swift */; };
 		F1E37E9523D772EC00A5043F /* ThumbTextSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E37E9423D772EC00A5043F /* ThumbTextSlider.swift */; };
+		F1EAAC8C23E2078300E9A6A8 /* AppSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EAAC8B23E2078300E9A6A8 /* AppSettingsViewController.swift */; };
+		F1EAAC8E23E29D9B00E9A6A8 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EAAC8D23E29D9B00E9A6A8 /* AppConstants.swift */; };
+		F1EAACA923E2A74300E9A6A8 /* ColorPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EAACA123E2A74300E9A6A8 /* ColorPickerCell.swift */; };
+		F1EAACAA23E2A74300E9A6A8 /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EAACA223E2A74300E9A6A8 /* ColorPickerView.swift */; };
+		F1EAACAB23E2A74300E9A6A8 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EAACA423E2A74300E9A6A8 /* UIColor+Extension.swift */; };
+		F1EAACAC23E2A74300E9A6A8 /* ColorPickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EAACA623E2A74300E9A6A8 /* ColorPickerViewDelegate.swift */; };
+		F1EAACAD23E2A74300E9A6A8 /* ColorPickerViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EAACA723E2A74300E9A6A8 /* ColorPickerViewDelegateFlowLayout.swift */; };
+		F1EAACAE23E2A74300E9A6A8 /* DefaultValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EAACA823E2A74300E9A6A8 /* DefaultValues.swift */; };
 		F1EEE0432347268900E90B1F /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EEE0422347268900E90B1F /* BrightnessSlider.swift */; };
-		F1F451372328C51A0009DCE0 /* DeviceDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */; };
 		F1F4513A2328C5D40009DCE0 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F451392328C5D40009DCE0 /* DevicesViewController.swift */; };
 		F1F4513F232A30C70009DCE0 /* SwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4513E232A30C70009DCE0 /* SwitchViewController.swift */; };
 		F1F45141232A3B260009DCE0 /* LightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F45140232A3B260009DCE0 /* LightViewController.swift */; };
@@ -187,6 +196,7 @@
 		F122619F22C61695004D049F /* DeviceAssociation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAssociation.swift; sourceTree = "<group>"; };
 		F12261A122C6199F004D049F /* cloud.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cloud.pb.swift; sourceTree = "<group>"; };
 		F12261A322C620ED004D049F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F13A013F23E359250067F8B8 /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
 		F13F273D238CF6170003AABB /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		F1402AB6239677B300C989F8 /* StaticControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticControlTableViewCell.swift; sourceTree = "<group>"; };
 		F1402AB7239677B300C989F8 /* StaticControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StaticControlTableViewCell.xib; sourceTree = "<group>"; };
@@ -195,7 +205,10 @@
 		F15EABFE23E05A16008A766B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		F15EAC0023E05A51008A766B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		F15EAC0223E05A59008A766B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F15EAC0823E1960B008A766B /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		F15EAC0B23E198FF008A766B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
+		F15EAC0E23E19909008A766B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Login.strings"; sourceTree = "<group>"; };
+		F15EAC1023E1994E008A766B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DeviceDetail.storyboard; sourceTree = "<group>"; };
+		F15EAC1323E19976008A766B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DeviceDetail.strings"; sourceTree = "<group>"; };
 		F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListCollectionReusableView.swift; sourceTree = "<group>"; };
 		F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCollectionViewLayout.swift; sourceTree = "<group>"; };
 		F176A41B23C8342200F2FCBC /* ClaimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimViewController.swift; sourceTree = "<group>"; };
@@ -234,8 +247,15 @@
 		F1E37E8F23CF3AD500A5043F /* PrimaryControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrimaryControlTableViewCell.xib; sourceTree = "<group>"; };
 		F1E37E9223D6CF4700A5043F /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		F1E37E9423D772EC00A5043F /* ThumbTextSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbTextSlider.swift; sourceTree = "<group>"; };
+		F1EAAC8B23E2078300E9A6A8 /* AppSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsViewController.swift; sourceTree = "<group>"; };
+		F1EAAC8D23E29D9B00E9A6A8 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		F1EAACA123E2A74300E9A6A8 /* ColorPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerCell.swift; sourceTree = "<group>"; };
+		F1EAACA223E2A74300E9A6A8 /* ColorPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
+		F1EAACA423E2A74300E9A6A8 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		F1EAACA623E2A74300E9A6A8 /* ColorPickerViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewDelegate.swift; sourceTree = "<group>"; };
+		F1EAACA723E2A74300E9A6A8 /* ColorPickerViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewDelegateFlowLayout.swift; sourceTree = "<group>"; };
+		F1EAACA823E2A74300E9A6A8 /* DefaultValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultValues.swift; sourceTree = "<group>"; };
 		F1EEE0422347268900E90B1F /* BrightnessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
-		F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DeviceDetail.storyboard; sourceTree = "<group>"; };
 		F1F451392328C5D40009DCE0 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
 		F1F4513E232A30C70009DCE0 /* SwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchViewController.swift; sourceTree = "<group>"; };
 		F1F45140232A3B260009DCE0 /* LightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightViewController.swift; sourceTree = "<group>"; };
@@ -307,6 +327,7 @@
 		1431462520DE994B0017E119 /* EspressifProvision */ = {
 			isa = PBXGroup;
 			children = (
+				F1EAAC8F23E2A55100E9A6A8 /* ColorPicker */,
 				F1F4513B2328C8F10009DCE0 /* Resources */,
 				F194B60622CDD79D00417347 /* Models */,
 				F122619E22C6166A004D049F /* AWSCognito */,
@@ -317,8 +338,8 @@
 				143146B120EB221E0017E119 /* ui */,
 				1431466320DEA9690017E119 /* provision */,
 				1431462620DE994B0017E119 /* AppDelegate.swift */,
-				F1F451362328C51A0009DCE0 /* DeviceDetail.storyboard */,
-				F15EAC0823E1960B008A766B /* Login.storyboard */,
+				F15EAC1123E1994E008A766B /* DeviceDetail.storyboard */,
+				F15EAC0C23E198FF008A766B /* Login.storyboard */,
 				1431462A20DE994B0017E119 /* Main.storyboard */,
 				1431462D20DE994C0017E119 /* Assets.xcassets */,
 				1431462F20DE994C0017E119 /* LaunchScreen.storyboard */,
@@ -430,6 +451,8 @@
 				F176A41B23C8342200F2FCBC /* ClaimViewController.swift */,
 				F1E37E9223D6CF4700A5043F /* PasswordTextField.swift */,
 				F1B13AD723D85125006DD949 /* ChangePasswordViewController.swift */,
+				F1EAAC8B23E2078300E9A6A8 /* AppSettingsViewController.swift */,
+				F13A013F23E359250067F8B8 /* DocumentViewController.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -552,6 +575,7 @@
 				F1FB153E234DED260053B0ED /* Errors.swift */,
 				F17F1411239F96C3008326A4 /* VersionManager.swift */,
 				F1B3558823B8DC4C004552FC /* ExtensionManager.swift */,
+				F1EAAC8D23E29D9B00E9A6A8 /* AppConstants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -563,6 +587,43 @@
 				F1DD70A922A9BFBE0092DAB9 /* WifiListTableViewCell.swift */,
 			);
 			path = wifi;
+			sourceTree = "<group>";
+		};
+		F1EAAC8F23E2A55100E9A6A8 /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				F1EAACA823E2A74300E9A6A8 /* DefaultValues.swift */,
+				F1EAACA323E2A74300E9A6A8 /* Extension */,
+				F1EAACA523E2A74300E9A6A8 /* Protocol */,
+				F1EAACA023E2A74300E9A6A8 /* View */,
+			);
+			path = ColorPicker;
+			sourceTree = "<group>";
+		};
+		F1EAACA023E2A74300E9A6A8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F1EAACA123E2A74300E9A6A8 /* ColorPickerCell.swift */,
+				F1EAACA223E2A74300E9A6A8 /* ColorPickerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F1EAACA323E2A74300E9A6A8 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F1EAACA423E2A74300E9A6A8 /* UIColor+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		F1EAACA523E2A74300E9A6A8 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				F1EAACA623E2A74300E9A6A8 /* ColorPickerViewDelegate.swift */,
+				F1EAACA723E2A74300E9A6A8 /* ColorPickerViewDelegateFlowLayout.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		F1F451382328C5B80009DCE0 /* Devices */ = {
@@ -732,13 +793,13 @@
 			files = (
 				F1AB5119233216FE002401F9 /* GenericControlTableViewCell.xib in Resources */,
 				F1402AB9239677B300C989F8 /* StaticControlTableViewCell.xib in Resources */,
-				F15EAC0923E1960B008A766B /* Login.storyboard in Resources */,
+				F15EAC0A23E198FF008A766B /* Login.storyboard in Resources */,
 				F15EABFF23E05A51008A766B /* Localizable.strings in Resources */,
 				F1FB153D234D91000053B0ED /* GenericSliderTableViewCell.xib in Resources */,
 				F122619B22C39EDA004D049F /* CognitoLogo.png in Resources */,
 				1431463120DE994C0017E119 /* LaunchScreen.storyboard in Resources */,
 				F1FB1539234C8AE20053B0ED /* ControlSectionHeaderView.xib in Resources */,
-				F1F451372328C51A0009DCE0 /* DeviceDetail.storyboard in Resources */,
+				F15EAC0F23E1994E008A766B /* DeviceDetail.storyboard in Resources */,
 				1431462E20DE994C0017E119 /* Assets.xcassets in Resources */,
 				F1E37E9123CF3AD500A5043F /* PrimaryControlTableViewCell.xib in Resources */,
 				F1F4514C232B74510009DCE0 /* SwitchTableViewCell.xib in Resources */,
@@ -869,6 +930,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F13A014023E359250067F8B8 /* DocumentViewController.swift in Sources */,
 				1431468220DEB6F50017E119 /* Security0.swift in Sources */,
 				F1DB6F60232F93D1004B1FA1 /* Colors.swift in Sources */,
 				F1F45150232B7A780009DCE0 /* ControlListViewController.swift in Sources */,
@@ -893,11 +955,15 @@
 				1431468E20E3823F0017E119 /* Provision.swift in Sources */,
 				F176A41623C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift in Sources */,
 				1431469920E387C60017E119 /* sec0.pb.swift in Sources */,
+				F1EAACAA23E2A74300E9A6A8 /* ColorPickerView.swift in Sources */,
 				F1EEE0432347268900E90B1F /* BrightnessSlider.swift in Sources */,
 				F19A9D1922C0ED4C00A450C3 /* ConfirmForgotPasswordViewController.swift in Sources */,
+				F1EAACAC23E2A74300E9A6A8 /* ColorPickerViewDelegate.swift in Sources */,
 				1431468420DF69C30017E119 /* Security1.swift in Sources */,
 				F12261A022C61695004D049F /* DeviceAssociation.swift in Sources */,
 				F1F4513A2328C5D40009DCE0 /* DevicesViewController.swift in Sources */,
+				F1EAACAE23E2A74300E9A6A8 /* DefaultValues.swift in Sources */,
+				F1EAACAB23E2A74300E9A6A8 /* UIColor+Extension.swift in Sources */,
 				F1E37E9523D772EC00A5043F /* ThumbTextSlider.swift in Sources */,
 				143146B520EB273B0017E119 /* ProvisionViewController.swift in Sources */,
 				149774DD210C799900022841 /* CryptoAES.swift in Sources */,
@@ -909,14 +975,17 @@
 				F1DB6F62232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift in Sources */,
 				F12261A422C620ED004D049F /* User.swift in Sources */,
 				F1E37E9323D6CF4800A5043F /* PasswordTextField.swift in Sources */,
+				F1EAACA923E2A74300E9A6A8 /* ColorPickerCell.swift in Sources */,
 				1431469B20E387C60017E119 /* constants.pb.swift in Sources */,
 				149774E1210C89E600022841 /* ArrayExtensions.swift in Sources */,
 				F17F1412239F96C3008326A4 /* VersionManager.swift in Sources */,
 				1431466720DEAC220017E119 /* Security.swift in Sources */,
 				1431468720DFA58E0017E119 /* HexUtils.swift in Sources */,
 				143146B320EB22470017E119 /* ProvisionLandingViewController.swift in Sources */,
+				F1EAAC8C23E2078300E9A6A8 /* AppSettingsViewController.swift in Sources */,
 				1431468B20E37B980017E119 /* Session.swift in Sources */,
 				F1DDA06823588B110005F982 /* NodeDetailsViewController.swift in Sources */,
+				F1EAAC8E23E29D9B00E9A6A8 /* AppConstants.swift in Sources */,
 				F1D4F1FB22AFBD6D000452EE /* DeviceInfoViewController.swift in Sources */,
 				1431469F20E387C60017E119 /* wifi_constants.pb.swift in Sources */,
 				F1AB511B23321B7E002401F9 /* JSONParser.swift in Sources */,
@@ -945,6 +1014,7 @@
 				F19A9D1A22C0ED4C00A450C3 /* SignUpViewController.swift in Sources */,
 				F194B60A22CDD83200417347 /* DeviceListTableViewCell.swift in Sources */,
 				F13F273E238CF6170003AABB /* ScannerViewController.swift in Sources */,
+				F1EAACAD23E2A74300E9A6A8 /* ColorPickerViewDelegateFlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1005,6 +1075,24 @@
 				F15EAC0223E05A59008A766B /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F15EAC0C23E198FF008A766B /* Login.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F15EAC0B23E198FF008A766B /* Base */,
+				F15EAC0E23E19909008A766B /* zh-Hans */,
+			);
+			name = Login.storyboard;
+			sourceTree = "<group>";
+		};
+		F15EAC1123E1994E008A766B /* DeviceDetail.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F15EAC1023E1994E008A766B /* Base */,
+				F15EAC1323E19976008A766B /* zh-Hans */,
+			);
+			name = DeviceDetail.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1140,7 +1228,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1175,7 +1263,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1355,7 +1443,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1495,7 +1583,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1636,7 +1724,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1776,7 +1864,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1912,7 +2000,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2050,7 +2138,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

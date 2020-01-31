@@ -156,7 +156,7 @@ class ControlListViewController: UIViewController {
             cell.controlValue = "\(value)"
         }
         cell.controlValueLabel.text = cell.controlValue
-        if attribute.properties?.contains("write") ?? true {
+        if attribute.properties?.contains("write") ?? true, device!.isConnected {
             cell.editButton.isHidden = false
         } else {
             cell.editButton.isHidden = true
@@ -199,7 +199,7 @@ class ControlListViewController: UIViewController {
                         if let attributeName = dynamicAttribute.name {
                             cell.paramName = attributeName
                         }
-                        if dynamicAttribute.properties?.contains("write") ?? true {
+                        if dynamicAttribute.properties?.contains("write") ?? true, device!.isConnected {
                             cell.slider.isEnabled = true
                         } else {
                             cell.slider.isEnabled = false
@@ -224,7 +224,7 @@ class ControlListViewController: UIViewController {
                 }
                 cell.toggleSwitch.setOn(switchState, animated: true)
             }
-            if dynamicAttribute.properties?.contains("write") ?? true {
+            if dynamicAttribute.properties?.contains("write") ?? true, device!.isConnected {
                 cell.toggleSwitch.isEnabled = true
             } else {
                 cell.toggleSwitch.isEnabled = false

@@ -14,6 +14,7 @@ struct Node {
     var info: Info?
     var devices: [Device]?
     var attributes: [Attribute]?
+    var isConnected = false
 }
 
 struct Info {

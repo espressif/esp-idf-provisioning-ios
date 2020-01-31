@@ -30,6 +30,11 @@ class PasswordTextField: UITextField {
 
     @objc func showPasswordTapped() {
         togglePasswordVisibility()
+        if passwordButton.image(for: .normal) == UIImage(named: "show_password") {
+            passwordButton.setImage(UIImage(named: "hide_password"), for: .normal)
+        } else {
+            passwordButton.setImage(UIImage(named: "show_password"), for: .normal)
+        }
     }
 
     /*
