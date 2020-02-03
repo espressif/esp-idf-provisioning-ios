@@ -153,9 +153,10 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
     }
 
     func githubLogin() {
-        let githubLoginURL = Constants.githubURL + "?identity_provider=" + Constants.idProvider + "&redirect_uri=" + Constants.redirectURL + "&response_type=CODE&client_id="
-        session = SFAuthenticationSession(url: URL(string: githubLoginURL + Constants.clientID)!, callbackURLScheme: "com.espressif.rainmaker.intsoftap://") { url, error in
+        let githubLoginURL = Constants.githubURL + "authorize" + "?identity_provider=" + Constants.idProvider + "&redirect_uri=" + Constants.redirectURL + "&response_type=CODE&client_id="
+        session = SFAuthenticationSession(url: URL(string: githubLoginURL + Constants.clientID)!, callbackURLScheme: Constants.redirectURL) { url, error in
             if error != nil {
+                print(error)
                 self.showAlert()
                 return
             }
@@ -185,8 +186,8 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
     }
 
     func requestToken(code: String) {
-        let url = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/token"
-        let parameters = ["grant_type": "authorization_code", "client_id": Constants.clientID, "code": code, "client_secret": Constants.CognitoIdentityUserPoolAppClientSecret, "redirect_uri": "com.espressif.rainmaker.intsoftap://success"]
+        let url = Constants.githubURL + "token"
+        let parameters = ["grant_type": "authorization_code", "client_id": Constants.clientID, "code": code, "client_secret": Constants.CognitoIdentityUserPoolAppClientSecret, "redirect_uri": Constants.redirectURL]
         let authorizationValue = Request.authorizationHeader(user: Constants.clientID, password: Constants.CognitoIdentityUserPoolAppClientSecret)
         let headers: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded", authorizationValue?.key ?? "": authorizationValue?.value ?? ""]
         NetworkManager.shared.genericRequest(url: url, method: .post, parameters: parameters, encoding: URLEncoding.default,

@@ -134,7 +134,7 @@
 
 /* Begin PBXFileReference section */
 		10FBDE85E3C2325EA6CC75E3 /* Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig"; sourceTree = "<group>"; };
-		1431462320DE994B0017E119 /* EspressifProvision.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EspressifProvision.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1431462320DE994B0017E119 /* RainMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1431462620DE994B0017E119 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1431462B20DE994B0017E119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1431462D20DE994C0017E119 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -317,7 +317,7 @@
 		1431462420DE994B0017E119 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1431462320DE994B0017E119 /* EspressifProvision.app */,
+				1431462320DE994B0017E119 /* RainMaker.app */,
 				1431463720DE994C0017E119 /* EspressifProvisionTests.xctest */,
 				1431464220DE994C0017E119 /* EspressifProvisionUITests.xctest */,
 			);
@@ -693,7 +693,7 @@
 			);
 			name = EspressifProvision;
 			productName = EspressifProvision;
-			productReference = 1431462320DE994B0017E119 /* EspressifProvision.app */;
+			productReference = 1431462320DE994B0017E119 /* RainMaker.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1431463620DE994C0017E119 /* EspressifProvisionTests */ = {
@@ -1228,20 +1228,22 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GITHUB_URL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/";
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RainMaker;
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
+				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1263,20 +1265,22 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GITHUB_URL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/";
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RainMaker;
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
+				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1443,12 +1447,13 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GITHUB_URL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/";
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1457,8 +1462,9 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RainMaker;
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
+				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1583,12 +1589,13 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GITHUB_URL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/";
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1597,8 +1604,9 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RainMaker;
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
+				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1724,12 +1732,13 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GITHUB_URL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/";
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1737,8 +1746,9 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DBLE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RainMaker;
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
+				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1864,12 +1874,13 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GITHUB_URL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/";
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1877,8 +1888,9 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DBLE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RainMaker;
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
+				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -2000,12 +2012,13 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GITHUB_URL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/";
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2014,8 +2027,9 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.intsoftap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RainMaker;
 				PROVISIONING_PROFILE_SPECIFIER = "RainMaker Beta App Development Profile";
+				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2130,20 +2144,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 15A91E4930F72AD4D1D47C61 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig */;
 			buildSettings = {
-				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
-				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
+				APP_CLIENT_ID = 2fmtjlo5cve01ukiisu1b6poft;
+				APP_CLIENT_SECRET = 181iq8dumcj3kca5k2757j1kn2mbm02k2vge3oa20pkoeai0hpop;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
+				BASE_API_URL_ENDPOINT = "https://r8ofygb120.execute-api.us-east-1.amazonaws.com/prod/v1/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GITHUB_URL = "https://rainmaker-prod.auth.us-east-1.amazoncognito.com/oauth2/";
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2152,14 +2167,15 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Profile";
+				PRODUCT_NAME = RainMaker;
+				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
+				REDIRECT_URL = "com.espressif.rainmaker.softap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
+				USER_POOL_ID = "us-east-1_jZEUVn7dv";
 			};
 			name = "WifiSec1-Release";
 		};

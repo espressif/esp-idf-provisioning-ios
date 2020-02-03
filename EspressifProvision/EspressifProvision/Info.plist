@@ -39,7 +39,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>ESP RainMaker Demo</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -62,23 +62,37 @@
 				<string>com.espressif.rainmaker.intsoftap</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.espressif.rainmaker.softap</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>DeviceNamePrefix</key>
 	<string>PROV_</string>
+	<key>GITHUB_URL</key>
+	<string>$(GITHUB_URL)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>itms-apps</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Provision</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Connect with BLE Compatible devices for Provisioning</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Reading QR code</string>
 	<key>ProofOfPossession</key>
 	<string>abcd1234</string>
+	<key>REDIRECT_URL</key>
+	<string>$(REDIRECT_URL)</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
