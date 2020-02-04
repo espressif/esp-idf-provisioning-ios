@@ -46,10 +46,10 @@ class SliderTableViewCell: UITableViewCell {
     @IBAction func sliderValueChanged(_ sender: UISlider) {
         if dataType.lowercased() == "int" {
             sliderValue.text = paramName + ": \(Int(slider.value))"
-            NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [paramName: Int(sender.value)]])
+            NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [paramName: Int(sender.value)]])
         } else {
             sliderValue.text = paramName + ": \(slider.value)"
-            NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [paramName: sender.value]])
+            NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [paramName: sender.value]])
         }
         let loader = MBProgressHUD.showAdded(to: window!, animated: true)
         loader.mode = MBProgressHUDMode.customView

@@ -1223,7 +1223,7 @@
 				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
 				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
+				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1260,7 +1260,7 @@
 				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
 				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
+				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1442,7 +1442,7 @@
 				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
 				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
+				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1584,7 +1584,7 @@
 				APP_CLIENT_ID = 1ufkb8giumr81k3fj8je1rptad;
 				APP_CLIENT_SECRET = cs78ke0mje48fbg0pd0mo6psl8dpqm9cq8acl3tgs89eb2frjk8;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_API_URL_ENDPOINT = "https://xjhudmcl11.execute-api.us-east-1.amazonaws.com/dev/v1/";
+				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1727,7 +1727,7 @@
 				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
 				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
+				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1869,7 +1869,7 @@
 				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
 				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_API_URL_ENDPOINT = "https://sxeznlpg30.execute-api.us-east-1.amazonaws.com/testing/v1/";
+				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2007,7 +2007,7 @@
 				APP_CLIENT_ID = 375pp885nbr3nfbh3ms9vma3v3;
 				APP_CLIENT_SECRET = 1far8m99n7p0aokfop6msfbqop24ng4c1iir1ldm339uppiof4id;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_API_URL_ENDPOINT = "https://c6rw29xb88.execute-api.us-east-1.amazonaws.com/dev/v1/";
+				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2147,7 +2147,7 @@
 				APP_CLIENT_ID = 2fmtjlo5cve01ukiisu1b6poft;
 				APP_CLIENT_SECRET = 181iq8dumcj3kca5k2757j1kn2mbm02k2vge3oa20pkoeai0hpop;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BASE_API_URL_ENDPOINT = "https://r8ofygb120.execute-api.us-east-1.amazonaws.com/prod/v1/";
+				BASE_API_URL_ENDPOINT = "https://api.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

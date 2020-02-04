@@ -18,7 +18,7 @@ class GenericControlTableViewCell: UITableViewCell {
     var dataType: String = "String"
     var device: Device!
     var boolTypeValidValues: [String: Int] = ["true": 1, "false": 0, "yes": 1, "no": 0, "0": 0, "1": 1]
-    var attribute: DynamicAttribute?
+    var attribute: Params?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -80,13 +80,13 @@ class GenericControlTableViewCell: UITableViewCell {
                 if let intValue = Int(value) {
                     if let bounds = attribute?.bounds, let max = bounds["max"] as? Int, let min = bounds["min"] as? Int {
                         if intValue >= min, intValue <= max {
-                            NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [attributeKey: intValue]])
+                            NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: intValue]])
                             controlValueLabel.text = value
                         } else {
                             showAlert(message: "Value out of bound.")
                         }
                     } else {
-                        NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [attributeKey: intValue]])
+                        NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: intValue]])
                         controlValueLabel.text = value
                     }
                 } else {
@@ -96,13 +96,13 @@ class GenericControlTableViewCell: UITableViewCell {
                 if let floatValue = Float(value) {
                     if let bounds = attribute?.bounds, let max = bounds["max"] as? Float, let min = bounds["min"] as? Float {
                         if floatValue >= min, floatValue <= max {
-                            NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [attributeKey: floatValue]])
+                            NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: floatValue]])
                             controlValueLabel.text = value
                         } else {
                             showAlert(message: "Value out of bound.")
                         }
                     } else {
-                        NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [attributeKey: floatValue]])
+                        NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: floatValue]])
                         controlValueLabel.text = value
                     }
                 } else {
@@ -112,10 +112,10 @@ class GenericControlTableViewCell: UITableViewCell {
                 if boolTypeValidValues.keys.contains(value) {
                     let validValue = boolTypeValidValues[value]!
                     if validValue == 0 {
-                        NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [attributeKey: false]])
+                        NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: false]])
                         controlValueLabel.text = value
                     } else {
-                        NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [attributeKey: true]])
+                        NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: true]])
                         controlValueLabel.text = value
                     }
                 } else {

@@ -10,15 +10,16 @@ import Foundation
 
 import Foundation
 
-struct Device: Equatable {
+class Device: Equatable {
     static func == (lhs: Device, rhs: Device) -> Bool {
-        return lhs.staticParams == rhs.staticParams && lhs.dynamicParams == rhs.dynamicParams
+        return lhs.attributes == rhs.attributes && lhs.params == rhs.params && lhs.name == rhs.name
     }
 
     var name: String?
     var type: String?
     var node_id: String?
-    var staticParams: [StaticAttribute]?
-    var dynamicParams: [DynamicAttribute]?
+    var attributes: [Attribute]?
+    var params: [Params]?
     var isConnected = false
+    weak var node: Node?
 }

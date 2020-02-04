@@ -96,7 +96,7 @@ class ControlListViewController: UIViewController {
 //                    }
 //                }
                 if let deviceName = self.device?.name, let attrbutes = image[deviceName] as? [String: Any] {
-                    if let dynamicParams = self.device?.dynamicParams {
+                    if let dynamicParams = self.device?.params {
                         for index in dynamicParams.indices {
                             if let reportedValue = attrbutes[dynamicParams[index].name ?? ""] {
                                 dynamicParams[index].value = reportedValue
@@ -149,7 +149,7 @@ class ControlListViewController: UIViewController {
 
     @objc func setBrightness(_: UISlider) {}
 
-    func getTableViewGenericCell(attribute: DynamicAttribute, indexPath: IndexPath) -> GenericControlTableViewCell {
+    func getTableViewGenericCell(attribute: Params, indexPath: IndexPath) -> GenericControlTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "genericControlCell", for: indexPath) as! GenericControlTableViewCell
         cell.controlName.text = attribute.name
         if let value = attribute.value {
@@ -172,7 +172,7 @@ class ControlListViewController: UIViewController {
         return cell
     }
 
-    func getTableViewCellBasedOn(dynamicAttribute: DynamicAttribute, indexPath: IndexPath) -> UITableViewCell {
+    func getTableViewCellBasedOn(dynamicAttribute: Params, indexPath: IndexPath) -> UITableViewCell {
         if dynamicAttribute.uiType == "esp-ui-slider" {
             if let dataType = dynamicAttribute.dataType?.lowercased(), dataType == "int" || dataType == "float" {
                 if let bounds = dynamicAttribute.bounds {
@@ -253,11 +253,11 @@ extension ControlListViewController: UITableViewDelegate {
 
     func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeaderView = SectionHeaderView.instanceFromNib()
-        if section >= device?.dynamicParams?.count ?? 0 {
-            let staticControl = device?.staticParams![section - (device?.dynamicParams?.count ?? 0)]
+        if section >= device?.params?.count ?? 0 {
+            let staticControl = device?.attributes![section - (device?.params?.count ?? 0)]
             sectionHeaderView.sectionTitle.text = staticControl?.name!.deletingPrefix(device!.name!)
         } else {
-            let control = device?.dynamicParams![section]
+            let control = device?.params![section]
             sectionHeaderView.sectionTitle.text = control?.name!.deletingPrefix(device!.name!)
         }
         return sectionHeaderView
@@ -270,19 +270,19 @@ extension ControlListViewController: UITableViewDataSource {
     }
 
     func numberOfSections(in _: UITableView) -> Int {
-        return (device?.dynamicParams?.count ?? 0) + (device?.staticParams?.count ?? 0)
+        return (device?.params?.count ?? 0) + (device?.attributes?.count ?? 0)
     }
 
     func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section >= device?.dynamicParams?.count ?? 0 {
-            let staticControl = device?.staticParams![indexPath.section - (device?.dynamicParams?.count ?? 0)]
+        if indexPath.section >= device?.params?.count ?? 0 {
+            let staticControl = device?.attributes![indexPath.section - (device?.params?.count ?? 0)]
             let cell = tableView.dequeueReusableCell(withIdentifier: "staticControlTableViewCell", for: indexPath) as! StaticControlTableViewCell
             cell.controlNameLabel.text = staticControl?.name ?? ""
             cell.controlValueLabel.text = staticControl?.value as? String ?? ""
             return cell
 
         } else {
-            let control = device?.dynamicParams![indexPath.section]
+            let control = device?.params![indexPath.section]
             return getTableViewCellBasedOn(dynamicAttribute: control!, indexPath: indexPath)
         }
     }

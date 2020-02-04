@@ -34,10 +34,11 @@ struct JSONParser {
                 newDevice.name = item["name"] as? String
                 newDevice.type = item["type"] as? String
                 newDevice.node_id = nodeID
+                newDevice.node = node
                 if let dynamicParams = item["params"] as? [[String: Any]] {
-                    newDevice.dynamicParams = []
+                    newDevice.params = []
                     for attr in dynamicParams {
-                        let dynamicAttr = DynamicAttribute()
+                        let dynamicAttr = Params()
                         if let attrName = attr["name"] as? String {
                             dynamicAttr.name = attrName
                         } else {
@@ -47,13 +48,13 @@ struct JSONParser {
                         dynamicAttr.dataType = attr["data_type"] as? String
                         dynamicAttr.properties = attr["properties"] as? [String]
                         dynamicAttr.bounds = attr["bounds"] as? [String: Any]
-                        newDevice.dynamicParams?.append(dynamicAttr)
+                        newDevice.params?.append(dynamicAttr)
                     }
                 }
                 if let staticParams = item["attributes"] as? [[String: Any]] {
                     newDevice.staticParams = []
                     for attr in staticParams {
-                        let staticAttr = StaticAttribute()
+                        let staticAttr = Attribute()
                         staticAttr.name = attr["name"] as? String
                         staticAttr.value = attr["value"] as? String
                         newDevice.staticParams?.append(staticAttr)

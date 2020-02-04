@@ -10,6 +10,7 @@ import AWSCognitoIdentityProvider
 import Foundation
 
 struct Constants {
+    static let apiVersion = "v1"
     // Segue identifiers
     static let nodeDetailSegue = "nodeDetailSegue"
     static let claimVCIdentifier = "claimVC"
@@ -45,16 +46,16 @@ struct Constants {
     static let idProvider = "Github"
 
     // AWS cognito APIs
-    static let addDevice = Constants.baseURL + "user/nodes/mapping"
-    static let getUserId = Constants.baseURL + "user"
-    static let getNodes = Constants.baseURL + "user/nodes"
-    static let getNodeConfig = Constants.baseURL + "user/nodes/config"
-    static let getNodeStatus = Constants.baseURL + "user/nodes/status"
+    static let addDevice = Constants.baseURL + Constants.apiVersion + "/user/nodes/mapping"
+    static let getUserId = Constants.baseURL + Constants.apiVersion + "/user"
+    static let getNodes = Constants.baseURL + Constants.apiVersion + "/user/nodes"
+    static let getNodeConfig = Constants.baseURL + Constants.apiVersion + "/user/nodes/config"
+    static let getNodeStatus = Constants.baseURL + Constants.apiVersion + "/user/nodes/status"
 //    static let addDeviceToUser = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
-    static let checkStatus = Constants.baseURL + "user/nodes/mapping"
+    static let checkStatus = Constants.baseURL + Constants.apiVersion + "/user/nodes/mapping"
 
-    static let updateThingsShadow = Constants.baseURL + "user/nodes/params"
-    static let getDeviceShadow = Constants.baseURL + "user/nodes/params"
+    static let updateThingsShadow = Constants.baseURL + Constants.apiVersion + "/user/nodes/params"
+    static let getDeviceShadow = Constants.baseURL + Constants.apiVersion + "/user/nodes/params"
 
     static let newDeviceAdded = "com.espressif.newDeviceAdded"
     static let prefixKey = "com.espressif.prefix"

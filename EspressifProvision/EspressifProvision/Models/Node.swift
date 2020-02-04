@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Node {
+class Node {
     var node_id: String?
     var config_version: String?
     var info: Info?
@@ -17,7 +17,7 @@ struct Node {
     var isConnected = false
 }
 
-struct Info {
+class Info {
     var name: String?
     var fw_version: String?
     var type: String?
