@@ -77,7 +77,7 @@ class User {
                             if let username = json.body["cognito:username"] as? String {
                                 let parameter = ["user_name": username, "refreshtoken": refreshTokenInfo["token"] as! String]
                                 let header: HTTPHeaders = ["Content-Type": "application/json"]
-                                let url = Constants.baseURL + "login"
+                                let url = Constants.baseURL + Constants.apiVersion + "/login"
                                 NetworkManager.shared.genericRequest(url: url, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: header) { response in
                                     if let json = response {
                                         if let idToken = json["idtoken"] as? String {
