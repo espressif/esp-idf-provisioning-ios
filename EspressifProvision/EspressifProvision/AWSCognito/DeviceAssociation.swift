@@ -72,10 +72,13 @@ class DeviceAssociation {
         }
     }
 
+    /// Method to convert device association payload into encrypted data
+    /// This info is sent to device
+    ///
     private func createAssociationConfigRequest() throws -> Data? {
         var configRequest = Cloud_CmdGetSetDetails()
         configRequest.secretKey = secretKey
-        configRequest.userID = User.shared.userID ?? ""
+        configRequest.userID = User.shared.userInfo.userID
         var payload = Cloud_CloudConfigPayload()
         payload.msg = Cloud_CloudConfigMsgType.typeCmdGetSetDetails
         payload.cmdGetSetDetails = configRequest

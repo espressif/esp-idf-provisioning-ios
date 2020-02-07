@@ -40,6 +40,7 @@ class ControlListViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         tableView.contentInset = insets
+        showLoader(message: "Getting info")
         updateDeviceAttributes()
     }
 
@@ -58,7 +59,7 @@ class ControlListViewController: UIViewController {
 
     @objc func appEnterForeground() {
         print("foreground")
-        pollingTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(fetchNodeInfo), userInfo: nil, repeats: true)
+        pollingTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(fetchNodeInfo), userInfo: nil, repeats: true)
     }
 
     @objc func appEnterBackground() {
@@ -67,26 +68,11 @@ class ControlListViewController: UIViewController {
     }
 
     @objc func fetchNodeInfo() {
-        User.shared.getAccessToken(completionHandler: { idToken in
-            if idToken != nil {
-                let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
-                NetworkManager.shared.getNodeConfig(nodeID: self.device?.node_id ?? "", headers: headers) { node, _ in
-                    if let newDevice = node?.devices?.first(where: { items -> Bool in
-                        items.name == self.device?.name
-                    }) {
-                        if newDevice != self.device {
-                            self.device = newDevice
-                            self.tableView.reloadData()
-                        }
-                    }
-                }
-            }
-        })
+        updateDeviceAttributes()
     }
 
     func updateDeviceAttributes() {
-        showLoader(message: "Getting info")
-        NetworkManager.shared.getDeviceThingShadow(nodeID: (device?.node_id)!) { response in
+        NetworkManager.shared.getDeviceThingShadow(nodeID: (device?.node?.node_id)!) { response in
             if let image = response {
 //                if let dynamicParams = self.device?.dynamicParams {
 //                    for item in dynamicParams {
@@ -156,7 +142,7 @@ class ControlListViewController: UIViewController {
             cell.controlValue = "\(value)"
         }
         cell.controlValueLabel.text = cell.controlValue
-        if attribute.properties?.contains("write") ?? true, device!.isConnected {
+        if attribute.properties?.contains("write") ?? false, device!.node?.isConnected ?? false {
             cell.editButton.isHidden = false
         } else {
             cell.editButton.isHidden = true
@@ -199,7 +185,7 @@ class ControlListViewController: UIViewController {
                         if let attributeName = dynamicAttribute.name {
                             cell.paramName = attributeName
                         }
-                        if dynamicAttribute.properties?.contains("write") ?? true, device!.isConnected {
+                        if dynamicAttribute.properties?.contains("write") ?? false, device!.node?.isConnected ?? false {
                             cell.slider.isEnabled = true
                         } else {
                             cell.slider.isEnabled = false
@@ -224,7 +210,7 @@ class ControlListViewController: UIViewController {
                 }
                 cell.toggleSwitch.setOn(switchState, animated: true)
             }
-            if dynamicAttribute.properties?.contains("write") ?? true, device!.isConnected {
+            if dynamicAttribute.properties?.contains("write") ?? false, device!.node?.isConnected ?? false {
                 cell.toggleSwitch.isEnabled = true
             } else {
                 cell.toggleSwitch.isEnabled = false
@@ -239,7 +225,7 @@ class ControlListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if segue.identifier == Constants.nodeDetailSegue {
             let destination = segue.destination as! NodeDetailsViewController
-            if let i = User.shared.associatedNodeList!.firstIndex(where: { $0.node_id == self.device?.node_id }) {
+            if let i = User.shared.associatedNodeList!.firstIndex(where: { $0.node_id == self.device?.node?.node_id }) {
                 destination.currentNode = User.shared.associatedNodeList![i]
             }
         }

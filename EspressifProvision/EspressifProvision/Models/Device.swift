@@ -17,9 +17,7 @@ class Device: Equatable {
 
     var name: String?
     var type: String?
-    var node_id: String?
     var attributes: [Attribute]?
     var params: [Params]?
-    var isConnected = false
     weak var node: Node?
 }

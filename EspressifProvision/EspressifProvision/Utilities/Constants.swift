@@ -10,7 +10,9 @@ import AWSCognitoIdentityProvider
 import Foundation
 
 struct Constants {
+    // API version for the current network request
     static let apiVersion = "v1"
+
     // Segue identifiers
     static let nodeDetailSegue = "nodeDetailSegue"
     static let claimVCIdentifier = "claimVC"
@@ -59,9 +61,10 @@ struct Constants {
 
     static let newDeviceAdded = "com.espressif.newDeviceAdded"
     static let prefixKey = "com.espressif.prefix"
-    static let userIDKey = "com.espressif.userid"
+    static let userInfoKey = "com.espressif.userinfo"
     static let idTokenKey = "com.espressif.idToken"
     static let refreshTokenKey = "com.espressif.refreshToken"
+    static let accessTokenKey = "com.espressif.accessToken"
     static let expireTimeKey = "com.espressif.expiresIn"
     static let loginIdKey = "com.espressif.loginIdKey"
     static let appThemeKey = "com.espressif.appTheme"

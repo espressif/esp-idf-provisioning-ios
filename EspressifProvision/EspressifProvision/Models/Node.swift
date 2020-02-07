@@ -15,9 +15,10 @@ class Node {
     var devices: [Device]?
     var attributes: [Attribute]?
     var isConnected = false
+    var primary: String?
 }
 
-class Info {
+struct Info {
     var name: String?
     var fw_version: String?
     var type: String?

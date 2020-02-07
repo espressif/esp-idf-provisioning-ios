@@ -13,6 +13,7 @@ enum CustomError: Error {
     case emptyResultCount
     case emptyToken
     case userIDNotPresent
+    case emptyNodeList
 }
 
 enum NetworkError: Error {

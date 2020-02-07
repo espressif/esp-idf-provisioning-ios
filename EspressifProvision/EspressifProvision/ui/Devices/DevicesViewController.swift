@@ -9,6 +9,7 @@
 import AWSAuthCore
 import AWSCognitoIdentityProvider
 import Foundation
+import JWTDecode
 import MBProgressHUD
 import Reachability
 import UIKit
@@ -48,14 +49,10 @@ class DevicesViewController: UIViewController {
         if user == nil {
             user = pool?.currentUser()
         }
-        if let username = UserDefaults.standard.value(forKey: Constants.usernameKey) as? String {
-            User.shared.username = username
-        }
-        if let userID = UserDefaults.standard.value(forKey: Constants.userIDKey) as? String {
-            User.shared.userID = userID
-        }
-
-        if (UserDefaults.standard.value(forKey: Constants.loginIdKey) as? String) == nil {
+        if let userInfo = UserDefaults.standard.value(forKey: Constants.userInfoKey) as? [String: Any] {
+            Utility.showLoader(message: "Fetching Device List", view: view)
+            refreshDeviceList()
+        } else {
             refresh()
         }
 
@@ -74,11 +71,17 @@ class DevicesViewController: UIViewController {
             print("could not start reachability notifier")
         }
         collectionView.reloadData()
-        if User.shared.associatedNodeList == nil {
+        if User.shared.updateUserInfo {
             Utility.showLoader(message: "Fetching Device List", view: view)
-            refreshDeviceList()
-        }
-        if User.shared.updateDeviceList {
+            User.shared.updateUserInfo = false
+            User.shared.getcognitoIdToken { idToken in
+                if idToken != nil {
+                    self.getUserInfo(token: idToken!, provider: .cognito)
+                } else {
+                    Utility.hideLoader(view: self.view)
+                }
+            }
+        } else if User.shared.updateDeviceList {
             Utility.showLoader(message: "Fetching Device List", view: view)
             refreshDeviceList()
         }
@@ -86,6 +89,20 @@ class DevicesViewController: UIViewController {
             initialView.isHidden = false
             collectionView.isHidden = true
         }
+    }
+
+    func getUserInfo(token: String, provider: ServiceProvider) {
+        do {
+            let json = try decode(jwt: token)
+            User.shared.userInfo.username = json.body["cognito:username"] as? String ?? ""
+            User.shared.userInfo.email = json.body["email"] as? String ?? ""
+            User.shared.userInfo.userID = json.body["custom:user_id"] as? String ?? ""
+            User.shared.userInfo.loggedInWith = provider
+            User.shared.userInfo.saveUserInfo()
+        } catch {
+            print("error parsing token")
+        }
+        refreshDeviceList()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -329,122 +346,54 @@ extension DevicesViewController: UICollectionViewDataSource {
         cell.layer.shadowOpacity = 1.0
         cell.layer.masksToBounds = false
 
-        if device.isConnected {
+        if device.node?.isConnected ?? false {
             cell.statusView.isHidden = true
         } else {
             cell.statusView.isHidden = false
         }
 
         var primaryKeyFound = false
-        if let dynamicParams = device.dynamicParams {
-            for item in dynamicParams {
-                if item.name == "esp.param.output" {
-                    if item.dataType?.lowercased() == "bool" {
-                        primaryKeyFound = true
-                        if device.isConnected {
-                            if let value = item.value as? Bool {
+
+        if let primary = device.node?.primary {
+            if let primaryParam = device.params?.first(where: { param -> Bool in
+                param.name == primary
+            }) {
+                primaryKeyFound = true
+                if primaryParam.dataType?.lowercased() == "bool" {
+                    if device.node?.isConnected ?? false, primaryParam.properties?.contains("write") ?? false {
+                        cell.switchButton.isEnabled = true
+                        cell.switchButton.alpha = 0.3
+                        if let value = primaryParam.value as? Bool {
+                            if value {
                                 cell.switchButton.alpha = 1.0
-                                cell.switchButton.isEnabled = true
-                                if value {
-                                    cell.switchButton.setImage(UIImage(named: "switch_icon_enabled_on"), for: .normal)
-                                    cell.switchButton.alpha = 1.0
-                                } else {
-                                    cell.switchButton.alpha = 0.5
-                                }
-                                cell.switchValue = value
-                                cell.switchButton.isHidden = false
-                            } else {
-                                cell.switchButton.isEnabled = true
-                                cell.switchButton.isHidden = false
-                                cell.switchButton.alpha = 0.5
+                                cell.switchValue = true
                             }
-                        } else {
-                            cell.switchButton.isHidden = false
-                            cell.switchButton.alpha = 0.1
-                            cell.switchButton.isEnabled = false
                         }
+                    } else {
+                        cell.switchButton.isEnabled = false
+                        cell.switchButton.alpha = 0.05
+                    }
+                    cell.switchButton.isHidden = false
+                    cell.switchButton.setImage(UIImage(named: "switch_icon_enabled_on"), for: .normal)
+                } else if primaryParam.dataType?.lowercased() == "string" {
+                    cell.switchButton.isHidden = true
+                    cell.primaryValue.text = primaryParam.value as? String ?? ""
+                } else {
+                    cell.switchButton.isHidden = true
+                    if let value = primaryParam.value {
+                        cell.primaryValue.text = "\(value)"
                     }
                 }
             }
         }
 
         if !primaryKeyFound {
-            if let dynamicParams = device.dynamicParams {
-                for item in dynamicParams {
-                    if item.name == "esp.param.temperature" {
-                        if item.dataType?.lowercased() == "string" {
-                            if let value = item.value as? String {
-                                cell.primaryValue.text = value + "º"
-                                cell.primaryValue.isHidden = false
-                                primaryKeyFound = true
-                            }
-                        } else if item.dataType?.lowercased() == "int" {
-                            if let value = item.value as? Int {
-                                cell.primaryValue.text = "\(value)" + "º"
-                                cell.primaryValue.isHidden = false
-                                primaryKeyFound = true
-                            }
-                        } else if item.dataType?.lowercased() == "float" {
-                            if let value = item.value as? Float {
-                                cell.primaryValue.text = "\(value)" + "º"
-                                cell.primaryValue.isHidden = false
-                                primaryKeyFound = true
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if !primaryKeyFound {
-            if let staticParams = device.staticParams {
+            if let staticParams = device.attributes {
                 for item in staticParams {
                     if item.name == "esp.param.temperature" {
                         if let value = item.value as? String {
                             primaryKeyFound = true
                             cell.primaryValue.text = value + "º"
-                            cell.primaryValue.isHidden = false
-                        }
-                    }
-                }
-            }
-        }
-
-        if !primaryKeyFound {
-            if let dynamicParams = device.dynamicParams {
-                for item in dynamicParams {
-                    if item.name == "esp.param.text" {
-                        if item.dataType?.lowercased() == "string" {
-                            if let value = item.value as? String {
-                                cell.primaryValue.text = value
-                                cell.primaryValue.isHidden = false
-                                primaryKeyFound = true
-                            }
-                        } else if item.dataType?.lowercased() == "int" {
-                            if let value = item.value as? Int {
-                                cell.primaryValue.text = "\(value)"
-                                cell.primaryValue.isHidden = false
-                                primaryKeyFound = true
-                            }
-                        } else if item.dataType?.lowercased() == "float" {
-                            if let value = item.value as? Float {
-                                cell.primaryValue.text = "\(value)"
-                                cell.primaryValue.isHidden = false
-                                primaryKeyFound = true
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if !primaryKeyFound {
-            if let staticParams = device.staticParams {
-                for item in staticParams {
-                    if item.name == "esp.param.text" {
-                        if let value = item.value as? String {
-                            primaryKeyFound = true
-                            cell.primaryValue.text = value
                             cell.primaryValue.isHidden = false
                         }
                     }
@@ -474,40 +423,6 @@ extension DevicesViewController: UICollectionViewDataSource {
             }
             cell.deviceImageView.image = deviceImage
         }
-
-//        if indexPath.row == 0 {
-//            cell.deviceImageView.image = UIImage(named: "thermo_test")
-//        }
-//        if indexPath.row == 1 {
-//            cell.deviceImageView.image = UIImage(named: "bulb_test")
-//        }
-//        if indexPath.row == 2 {
-//            cell.deviceImageView.image = UIImage(named: "test")
-//        }
-//        if indexPath.row == 3 {
-//            cell.deviceImageView.image = UIImage(named: "red_test")
-//        }
-//        if indexPath.row == 4 {
-//            cell.deviceImageView.image = UIImage(named: "bulb_test_1")
-//        }
-//        cell.layer.cornerRadius = 14.0
-//        cell.layer.borderWidth = 2.0
-//        cell.layer.borderColor = UIColor(hexString: "#8181A8").cgColor
-//        if User.shared.associatedDevices?[indexPath.row].type == "esp.device.lightbulb" {
-//            cell.deviceImageView.image = UIImage(named: "light_bulb")
-//        } else if User.shared.associatedDevices?[indexPath.row].type == "esp.device.switch" {
-//            cell.deviceImageView.image = UIImage(named: "switch")
-//        } else {
-//            cell.deviceImageView.image = UIImage(named: "generic_device")
-//        }
-//        cell.infoButtonAction = { [unowned self] in
-//            let storyboard = UIStoryboard(name: "DeviceDetail", bundle: nil)
-//            let nodeDetailVC = storyboard.instantiateViewController(withIdentifier: "nodeDetailsVC") as! NodeDetailsViewController
-//            if let currentDevice = User.shared.associatedDevices?[indexPath.row], let node = User.shared.associatedNodes[currentDevice.node_id!] {
-//                nodeDetailVC.currentNode = node
-//                self.navigationController?.pushViewController(nodeDetailVC, animated: true)
-//            }
-//        }
         return cell
     }
 
@@ -528,8 +443,21 @@ extension DevicesViewController: UICollectionViewDataSource {
 
 extension DevicesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
-        let width = (UIScreen.main.bounds.width - 30) / 2.0
-        return CGSize(width: width, height: 144.0)
+        let width = UIScreen.main.bounds.width
+        var cellWidth: CGFloat = 0
+        if width > 450 {
+            cellWidth = (width - 60) / 3.0
+        } else {
+            cellWidth = (width - 30) / 2.0
+        }
+        return CGSize(width: cellWidth, height: 144.0)
+    }
+
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt _: Int) -> CGFloat {
+        if UIScreen.main.bounds.width > 450 {
+            return 15.0
+        }
+        return 10.0
     }
 }
 
@@ -539,6 +467,10 @@ extension DevicesViewController: UIPopoverPresentationControllerDelegate {
     }
 
     func popoverPresentationControllerDidDismissPopover(_: UIPopoverPresentationController) {}
+
+    func popoverPresentationControllerShouldDismissPopover(_: UIPopoverPresentationController) -> Bool {
+        return false
+    }
 }
 
 extension DevicesViewController: DeviceListHeaderProtocol {

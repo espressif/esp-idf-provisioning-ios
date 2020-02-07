@@ -16,22 +16,12 @@ class SettingsPageViewController: UIViewController {
     var username = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let idToken = User.shared.idToken {
-            do {
-                let json = try decode(jwt: idToken)
-                if let email = json.body["email"] as? String {
-                    emailLabel.text = email
-                }
-                username = json.body["cognito:username"] as? String ?? ""
-            } catch {
-                print("error parsing email")
-            }
+
+        if User.shared.userInfo.loggedInWith == .github {
+            changePasswordView.isHidden = true
         }
-        if let loginWith = UserDefaults.standard.value(forKey: Constants.loginIdKey) as? String {
-            if loginWith == Constants.github {
-                changePasswordView.isHidden = true
-            }
-        }
+
+        emailLabel.text = User.shared.userInfo.email
         NotificationCenter.default.addObserver(self, selector: #selector(updateUIView), name: Notification.Name(Constants.uiViewUpdateNotification), object: nil)
 //        profileImage.image = imageWith(name: "V")
 //        headerView.layer.masksToBounds = false
@@ -55,14 +45,12 @@ class SettingsPageViewController: UIViewController {
     }
 
     @IBAction func signOut(_: Any) {
-//        User.shared.associatedDevices = nil
-        User.shared.idToken = nil
         User.shared.currentUser()?.signOut()
-        UserDefaults.standard.removeObject(forKey: Constants.userIDKey)
+        UserDefaults.standard.removeObject(forKey: Constants.userInfoKey)
         UserDefaults.standard.removeObject(forKey: Constants.refreshTokenKey)
-        UserDefaults.standard.removeObject(forKey: Constants.idTokenKey)
-        UserDefaults.standard.removeObject(forKey: Constants.loginIdKey)
-        User.shared.userID = nil
+        UserDefaults.standard.removeObject(forKey: Constants.accessTokenKey)
+        User.shared.accessToken = nil
+        User.shared.userInfo = UserInfo(username: "", email: "", userID: "", loggedInWith: .cognito)
         User.shared.associatedNodeList = nil
         navigationController?.popViewController(animated: true)
         refresh()

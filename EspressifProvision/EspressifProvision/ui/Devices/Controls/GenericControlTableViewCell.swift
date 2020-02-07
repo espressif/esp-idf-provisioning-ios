@@ -122,7 +122,7 @@ class GenericControlTableViewCell: UITableViewCell {
                     showAlert(message: "Please enter a valid boolean value.")
                 }
             } else {
-                NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [attributeKey: controlValue]])
+                NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: controlValue]])
                 controlValueLabel.text = value
             }
         }

@@ -11,11 +11,6 @@ import Foundation
 import MBProgressHUD
 import UIKit
 
-public func print(items: Any..., separator: String = " ", terminator: String = "\n") {
-    let output = items.map { "*\($0)" }.joined(separator: separator)
-    Swift.print(output, terminator: terminator)
-}
-
 class Utility {
     static var deviceNamePrefix = UserDefaults.standard.value(forKey: Constants.prefixKey) as? String ?? (Bundle.main.infoDictionary?["DeviceNamePrefix"] as? String ?? "PROV_")
     static let allowPrefixFilter = Bundle.main.infoDictionary?["AllowFilteringByPrefix"] as? Bool ?? false
@@ -56,6 +51,11 @@ class Utility {
         }
     }
 
+    /// This method can be invoked from any ViewController and will present MBProgressHUD loader with the given message
+    ///
+    /// - Parameters:
+    ///   - message: Text to be showed inside the loader
+    ///   - view: View in which loader is added
     class func showLoader(message: String, view: UIView) {
         DispatchQueue.main.async {
             let loader = MBProgressHUD.showAdded(to: view, animated: true)
@@ -65,6 +65,8 @@ class Utility {
         }
     }
 
+    /// This method hide the MBProgressHUD loader and can be invoked from any ViewController
+    ///
     class func hideLoader(view: UIView) {
         DispatchQueue.main.async {
             MBProgressHUD.hide(for: view, animated: true)

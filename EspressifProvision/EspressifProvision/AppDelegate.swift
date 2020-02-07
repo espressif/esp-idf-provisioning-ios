@@ -37,10 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // fetch the user pool client we initialized in above step
         storyboard = UIStoryboard(name: "Login", bundle: nil)
         User.shared.pool.delegate = self
-        //        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(red: 234.0 / 255.0, green: 92.0 / 255.0, blue: 97.0 / 255.0, alpha: 1.0)]
-//        let BarButtonItemAppearance = UIBarButtonItem.appearance()
-//        BarButtonItemAppearance.setTitleTextAttributes([.foregroundColor: UIColor.clear], for: .normal)
-//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Futura", size: 20)!, NSAttributedString.Key.foregroundColor: UIColor(red: 234.0 / 255.0, green: 92.0 / 255.0, blue: 97.0 / 255.0, alpha: 1.0)]
         return true
     }
 
@@ -78,18 +74,15 @@ extension AppDelegate: AWSCognitoIdentityInteractiveAuthenticationDelegate {
 
         if signInViewController == nil {
             signInViewController = navigationController?.viewControllers[0] as? SignInViewController
-            navigationController?.presentationController?.delegate = signInViewController
+            navigationController?.modalPresentationStyle = .fullScreen
         }
 
-        DispatchQueue.main.async {
-            self.navigationController!.popToRootViewController(animated: true)
-            if !self.navigationController!.isViewLoaded
-                || self.navigationController!.view.window == nil {
-                self.navigationController!.modalPresentationStyle = .fullScreen
-                self.window?.rootViewController?.present(self.navigationController!,
-                                                         animated: true,
-                                                         completion: nil)
-            }
+        navigationController!.popToRootViewController(animated: true)
+        if !navigationController!.isViewLoaded
+            || navigationController!.view.window == nil {
+            window?.rootViewController?.present(navigationController!,
+                                                animated: true,
+                                                completion: nil)
         }
         return signInViewController!
     }

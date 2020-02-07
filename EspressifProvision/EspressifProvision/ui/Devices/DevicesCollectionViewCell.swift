@@ -19,7 +19,7 @@ class DevicesCollectionViewCell: UICollectionViewCell {
     @IBOutlet var statusView: UIView!
     @IBAction func switchButtonPressed(_: Any) {
         switchValue = !switchValue
-        NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": ["esp.param.output": switchValue]])
+        NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": ["esp.param.output": switchValue]])
 
         if switchValue {
             switchButton.setImage(UIImage(named: "switch_icon_enabled_on"), for: .normal)
