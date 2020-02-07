@@ -40,6 +40,7 @@ class ControlListViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         tableView.contentInset = insets
+        showLoader(message: "Getting info")
         updateDeviceAttributes()
     }
 
@@ -58,7 +59,7 @@ class ControlListViewController: UIViewController {
 
     @objc func appEnterForeground() {
         print("foreground")
-        pollingTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(fetchNodeInfo), userInfo: nil, repeats: true)
+        pollingTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(fetchNodeInfo), userInfo: nil, repeats: true)
     }
 
     @objc func appEnterBackground() {
@@ -67,26 +68,11 @@ class ControlListViewController: UIViewController {
     }
 
     @objc func fetchNodeInfo() {
-        User.shared.getAccessToken(completionHandler: { idToken in
-            if idToken != nil {
-                let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
-                NetworkManager.shared.getNodeConfig(nodeID: self.device?.node_id ?? "", headers: headers) { node, _ in
-                    if let newDevice = node?.devices?.first(where: { items -> Bool in
-                        items.name == self.device?.name
-                    }) {
-                        if newDevice != self.device {
-                            self.device = newDevice
-                            self.tableView.reloadData()
-                        }
-                    }
-                }
-            }
-        })
+        updateDeviceAttributes()
     }
 
     func updateDeviceAttributes() {
-        showLoader(message: "Getting info")
-        NetworkManager.shared.getDeviceThingShadow(nodeID: (device?.node_id)!) { response in
+        NetworkManager.shared.getDeviceThingShadow(nodeID: (device?.node?.node_id)!) { response in
             if let image = response {
 //                if let dynamicParams = self.device?.dynamicParams {
 //                    for item in dynamicParams {
@@ -96,7 +82,7 @@ class ControlListViewController: UIViewController {
 //                    }
 //                }
                 if let deviceName = self.device?.name, let attrbutes = image[deviceName] as? [String: Any] {
-                    if let dynamicParams = self.device?.dynamicParams {
+                    if let dynamicParams = self.device?.params {
                         for index in dynamicParams.indices {
                             if let reportedValue = attrbutes[dynamicParams[index].name ?? ""] {
                                 dynamicParams[index].value = reportedValue
@@ -149,14 +135,14 @@ class ControlListViewController: UIViewController {
 
     @objc func setBrightness(_: UISlider) {}
 
-    func getTableViewGenericCell(attribute: DynamicAttribute, indexPath: IndexPath) -> GenericControlTableViewCell {
+    func getTableViewGenericCell(attribute: Params, indexPath: IndexPath) -> GenericControlTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "genericControlCell", for: indexPath) as! GenericControlTableViewCell
         cell.controlName.text = attribute.name
         if let value = attribute.value {
             cell.controlValue = "\(value)"
         }
         cell.controlValueLabel.text = cell.controlValue
-        if attribute.properties?.contains("write") ?? true, device!.isConnected {
+        if attribute.properties?.contains("write") ?? false, device!.node?.isConnected ?? false {
             cell.editButton.isHidden = false
         } else {
             cell.editButton.isHidden = true
@@ -172,7 +158,7 @@ class ControlListViewController: UIViewController {
         return cell
     }
 
-    func getTableViewCellBasedOn(dynamicAttribute: DynamicAttribute, indexPath: IndexPath) -> UITableViewCell {
+    func getTableViewCellBasedOn(dynamicAttribute: Params, indexPath: IndexPath) -> UITableViewCell {
         if dynamicAttribute.uiType == "esp-ui-slider" {
             if let dataType = dynamicAttribute.dataType?.lowercased(), dataType == "int" || dataType == "float" {
                 if let bounds = dynamicAttribute.bounds {
@@ -199,7 +185,7 @@ class ControlListViewController: UIViewController {
                         if let attributeName = dynamicAttribute.name {
                             cell.paramName = attributeName
                         }
-                        if dynamicAttribute.properties?.contains("write") ?? true, device!.isConnected {
+                        if dynamicAttribute.properties?.contains("write") ?? false, device!.node?.isConnected ?? false {
                             cell.slider.isEnabled = true
                         } else {
                             cell.slider.isEnabled = false
@@ -224,7 +210,7 @@ class ControlListViewController: UIViewController {
                 }
                 cell.toggleSwitch.setOn(switchState, animated: true)
             }
-            if dynamicAttribute.properties?.contains("write") ?? true, device!.isConnected {
+            if dynamicAttribute.properties?.contains("write") ?? false, device!.node?.isConnected ?? false {
                 cell.toggleSwitch.isEnabled = true
             } else {
                 cell.toggleSwitch.isEnabled = false
@@ -239,7 +225,7 @@ class ControlListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if segue.identifier == Constants.nodeDetailSegue {
             let destination = segue.destination as! NodeDetailsViewController
-            if let i = User.shared.associatedNodeList!.firstIndex(where: { $0.node_id == self.device?.node_id }) {
+            if let i = User.shared.associatedNodeList!.firstIndex(where: { $0.node_id == self.device?.node?.node_id }) {
                 destination.currentNode = User.shared.associatedNodeList![i]
             }
         }
@@ -253,11 +239,11 @@ extension ControlListViewController: UITableViewDelegate {
 
     func tableView(_: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionHeaderView = SectionHeaderView.instanceFromNib()
-        if section >= device?.dynamicParams?.count ?? 0 {
-            let staticControl = device?.staticParams![section - (device?.dynamicParams?.count ?? 0)]
+        if section >= device?.params?.count ?? 0 {
+            let staticControl = device?.attributes![section - (device?.params?.count ?? 0)]
             sectionHeaderView.sectionTitle.text = staticControl?.name!.deletingPrefix(device!.name!)
         } else {
-            let control = device?.dynamicParams![section]
+            let control = device?.params![section]
             sectionHeaderView.sectionTitle.text = control?.name!.deletingPrefix(device!.name!)
         }
         return sectionHeaderView
@@ -270,19 +256,19 @@ extension ControlListViewController: UITableViewDataSource {
     }
 
     func numberOfSections(in _: UITableView) -> Int {
-        return (device?.dynamicParams?.count ?? 0) + (device?.staticParams?.count ?? 0)
+        return (device?.params?.count ?? 0) + (device?.attributes?.count ?? 0)
     }
 
     func tableView(_: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section >= device?.dynamicParams?.count ?? 0 {
-            let staticControl = device?.staticParams![indexPath.section - (device?.dynamicParams?.count ?? 0)]
+        if indexPath.section >= device?.params?.count ?? 0 {
+            let staticControl = device?.attributes![indexPath.section - (device?.params?.count ?? 0)]
             let cell = tableView.dequeueReusableCell(withIdentifier: "staticControlTableViewCell", for: indexPath) as! StaticControlTableViewCell
             cell.controlNameLabel.text = staticControl?.name ?? ""
             cell.controlValueLabel.text = staticControl?.value as? String ?? ""
             return cell
 
         } else {
-            let control = device?.dynamicParams![indexPath.section]
+            let control = device?.params![indexPath.section]
             return getTableViewCellBasedOn(dynamicAttribute: control!, indexPath: indexPath)
         }
     }

@@ -27,8 +27,8 @@ class NodeDetailsViewController: UIViewController {
 
     @IBAction func deleteNode(_: Any) {
         Utility.showLoader(message: "Deleting node", view: view)
-        let parameters = ["user_id": User.shared.userID, "node_id": currentNode.node_id!, "secret_key": "", "operation": "remove"]
-        NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { _, error in
+        let parameters = ["user_id": User.shared.userInfo.userID, "node_id": currentNode.node_id!, "secret_key": "", "operation": "remove"]
+        NetworkManager.shared.addDeviceToUser(parameter: parameters) { _, error in
             if error == nil {
                 User.shared.associatedNodeList?.removeAll(where: { node -> Bool in
                     node.node_id == self.currentNode.node_id

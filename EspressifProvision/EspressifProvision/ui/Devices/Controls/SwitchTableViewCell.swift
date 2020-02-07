@@ -47,6 +47,6 @@ class SwitchTableViewCell: UITableViewCell {
         } else {
             controlStateLabel.text = "Off"
         }
-        NetworkManager.shared.updateThingShadow(nodeID: device.node_id!, parameter: [device.name ?? "": [attributeKey: sender.isOn]])
+        NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: sender.isOn]])
     }
 }

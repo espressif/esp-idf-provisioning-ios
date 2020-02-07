@@ -31,6 +31,7 @@ class SuccessViewController: UIViewController {
     var passphrase: String!
     var provision: Provision!
     var addDeviceStatusTimeout: Timer?
+    var step1Failed = false
 
 //    @IBOutlet var successLabel: UILabel!
     @IBOutlet var step1Image: UIImageView!
@@ -77,7 +78,11 @@ class SuccessViewController: UIViewController {
 //            User.shared.currentAssociationInfo = AssociationConfig()
 //        }
         // Do any additional setup after loading the view, typically from a nib.
-        startProvisioning()
+        if step1Failed {
+            step1FailedWithMessage(message: "Wrong pop entered!")
+        } else {
+            startProvisioning()
+        }
     }
 
     func startProvisioning() {
@@ -187,7 +192,7 @@ class SuccessViewController: UIViewController {
 
     func fetchDeviceAssociationStatus(nodeID: String, requestID: String) {
         if addDeviceStatusTimeout?.isValid ?? false {
-            NetworkManager.shared.deviceAssociationStatus(deviceID: nodeID, requestID: requestID) { status in
+            NetworkManager.shared.deviceAssociationStatus(nodeID: nodeID, requestID: requestID) { status in
                 if status {
                     NotificationCenter.default.post(name: Notification.Name(Constants.newDeviceAdded), object: nil)
                     User.shared.updateDeviceList = true
@@ -255,7 +260,7 @@ class SuccessViewController: UIViewController {
 
     func sendRequestToAddDevice(count: Int) {
         print("sendRequestToAddDevice")
-        let parameters = ["user_id": User.shared.userID, "node_id": User.shared.currentAssociationInfo!.nodeID, "secret_key": User.shared.currentAssociationInfo!.uuid, "operation": "add"]
+        let parameters = ["user_id": User.shared.userInfo.userID, "node_id": User.shared.currentAssociationInfo!.nodeID, "secret_key": User.shared.currentAssociationInfo!.uuid, "operation": "add"]
         NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, error in
             print(requestID)
             if error != nil, count > 0 {

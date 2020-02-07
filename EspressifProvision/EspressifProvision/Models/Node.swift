@@ -8,13 +8,14 @@
 
 import Foundation
 
-struct Node {
+class Node {
     var node_id: String?
     var config_version: String?
     var info: Info?
     var devices: [Device]?
     var attributes: [Attribute]?
     var isConnected = false
+    var primary: String?
 }
 
 struct Info {

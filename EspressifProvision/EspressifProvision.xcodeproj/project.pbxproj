@@ -40,11 +40,11 @@
 		14DE671E20ECD04100941522 /* BLETransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE671D20ECD04100941522 /* BLETransport.swift */; };
 		7E89B3398606A35D1BCB7893 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */; };
 		F1153F2A238E5E79009DF206 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1153F29238E5E79009DF206 /* NetworkExtension.framework */; };
-		F122619B22C39EDA004D049F /* CognitoLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = F122619A22C39ED9004D049F /* CognitoLogo.png */; };
 		F12261A022C61695004D049F /* DeviceAssociation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F122619F22C61695004D049F /* DeviceAssociation.swift */; };
 		F12261A222C619A0004D049F /* cloud.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12261A122C6199F004D049F /* cloud.pb.swift */; };
 		F12261A422C620ED004D049F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12261A322C620ED004D049F /* User.swift */; };
 		F13A014023E359250067F8B8 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13A013F23E359250067F8B8 /* DocumentViewController.swift */; };
+		F13A01BA23E98B690067F8B8 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13A01B923E98B680067F8B8 /* UserInfo.swift */; };
 		F13F273E238CF6170003AABB /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13F273D238CF6170003AABB /* ScannerViewController.swift */; };
 		F1402AB8239677B300C989F8 /* StaticControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1402AB6239677B300C989F8 /* StaticControlTableViewCell.swift */; };
 		F1402AB9239677B300C989F8 /* StaticControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1402AB7239677B300C989F8 /* StaticControlTableViewCell.xib */; };
@@ -191,12 +191,11 @@
 		D2B4EC5704D46C3EA9A47720 /* Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA24507D63588F8C9C0C451B /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; sourceTree = "<group>"; };
 		F1153F29238E5E79009DF206 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-		F122619A22C39ED9004D049F /* CognitoLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CognitoLogo.png; sourceTree = "<group>"; };
-		F122619C22C3A04B004D049F /* waltographUI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = waltographUI.ttf; sourceTree = "<group>"; };
 		F122619F22C61695004D049F /* DeviceAssociation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAssociation.swift; sourceTree = "<group>"; };
 		F12261A122C6199F004D049F /* cloud.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cloud.pb.swift; sourceTree = "<group>"; };
 		F12261A322C620ED004D049F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F13A013F23E359250067F8B8 /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
+		F13A01B923E98B680067F8B8 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		F13F273D238CF6170003AABB /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		F1402AB6239677B300C989F8 /* StaticControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticControlTableViewCell.swift; sourceTree = "<group>"; };
 		F1402AB7239677B300C989F8 /* StaticControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StaticControlTableViewCell.xib; sourceTree = "<group>"; };
@@ -331,7 +330,6 @@
 				F1F4513B2328C8F10009DCE0 /* Resources */,
 				F194B60622CDD79D00417347 /* Models */,
 				F122619E22C6166A004D049F /* AWSCognito */,
-				F122619922C39EC6004D049F /* SupportingFiles */,
 				F1DD70A222A8EA140092DAB9 /* Utilities */,
 				143146B020EA303C0017E119 /* EspressifProvision.entitlements */,
 				1431468F20E387C60017E119 /* proto */,
@@ -505,15 +503,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F122619922C39EC6004D049F /* SupportingFiles */ = {
-			isa = PBXGroup;
-			children = (
-				F122619A22C39ED9004D049F /* CognitoLogo.png */,
-				F122619C22C3A04B004D049F /* waltographUI.ttf */,
-			);
-			path = SupportingFiles;
-			sourceTree = "<group>";
-		};
 		F122619E22C6166A004D049F /* AWSCognito */ = {
 			isa = PBXGroup;
 			children = (
@@ -547,6 +536,7 @@
 				F1F4514D232B78100009DCE0 /* Device.swift */,
 				F1F45151232B7ECB0009DCE0 /* Attribute.swift */,
 				F18EC5BF23BE0BF700F9188E /* AssociationConfig.swift */,
+				F13A01B923E98B680067F8B8 /* UserInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -796,7 +786,6 @@
 				F15EAC0A23E198FF008A766B /* Login.storyboard in Resources */,
 				F15EABFF23E05A51008A766B /* Localizable.strings in Resources */,
 				F1FB153D234D91000053B0ED /* GenericSliderTableViewCell.xib in Resources */,
-				F122619B22C39EDA004D049F /* CognitoLogo.png in Resources */,
 				1431463120DE994C0017E119 /* LaunchScreen.storyboard in Resources */,
 				F1FB1539234C8AE20053B0ED /* ControlSectionHeaderView.xib in Resources */,
 				F15EAC0F23E1994E008A766B /* DeviceDetail.storyboard in Resources */,
@@ -974,6 +963,7 @@
 				F1DD70A622A8EA2A0092DAB9 /* Constants.swift in Sources */,
 				F1DB6F62232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift in Sources */,
 				F12261A422C620ED004D049F /* User.swift in Sources */,
+				F13A01BA23E98B690067F8B8 /* UserInfo.swift in Sources */,
 				F1E37E9323D6CF4800A5043F /* PasswordTextField.swift in Sources */,
 				F1EAACA923E2A74300E9A6A8 /* ColorPickerCell.swift in Sources */,
 				1431469B20E387C60017E119 /* constants.pb.swift in Sources */,

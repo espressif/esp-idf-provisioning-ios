@@ -18,6 +18,7 @@ struct JSONParser {
             node.info = Info(name: nodeInfo["name"], fw_version: nodeInfo["fw_version"], type: nodeInfo["type"])
         }
         node.config_version = data["config_version"] as? String
+        node.primary = data["primary"] as? String
         if let attributeList = data["attributes"] as? [[String: Any]] {
             node.attributes = []
             for attributeItem in attributeList {
@@ -33,11 +34,11 @@ struct JSONParser {
                 var newDevice = Device()
                 newDevice.name = item["name"] as? String
                 newDevice.type = item["type"] as? String
-                newDevice.node_id = nodeID
+                newDevice.node = node
                 if let dynamicParams = item["params"] as? [[String: Any]] {
-                    newDevice.dynamicParams = []
+                    newDevice.params = []
                     for attr in dynamicParams {
-                        let dynamicAttr = DynamicAttribute()
+                        let dynamicAttr = Params()
                         if let attrName = attr["name"] as? String {
                             dynamicAttr.name = attrName
                         } else {
@@ -47,16 +48,16 @@ struct JSONParser {
                         dynamicAttr.dataType = attr["data_type"] as? String
                         dynamicAttr.properties = attr["properties"] as? [String]
                         dynamicAttr.bounds = attr["bounds"] as? [String: Any]
-                        newDevice.dynamicParams?.append(dynamicAttr)
+                        newDevice.params?.append(dynamicAttr)
                     }
                 }
                 if let staticParams = item["attributes"] as? [[String: Any]] {
-                    newDevice.staticParams = []
+                    newDevice.attributes = []
                     for attr in staticParams {
-                        let staticAttr = StaticAttribute()
+                        let staticAttr = Attribute()
                         staticAttr.name = attr["name"] as? String
                         staticAttr.value = attr["value"] as? String
-                        newDevice.staticParams?.append(staticAttr)
+                        newDevice.attributes?.append(staticAttr)
                     }
                 }
                 result.append(newDevice)

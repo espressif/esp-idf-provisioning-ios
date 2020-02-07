@@ -13,9 +13,9 @@ import JWTDecode
 
 class User {
     static let shared = User()
-    var userID: String?
+    var userInfo = UserInfo.getUserInfo()
     var pool: AWSCognitoIdentityUserPool!
-    var idToken: String?
+    var accessToken: String?
     var refreshToken: String?
     var associatedNodeList: [Node]?
     var username = ""
@@ -23,6 +23,7 @@ class User {
     var automaticLogin = false
     var updateDeviceList = false
     var currentAssociationInfo: AssociationConfig?
+    var updateUserInfo = false
     private init() {
         // setup service configuration
         let serviceConfiguration = AWSServiceConfiguration(region: Constants.CognitoIdentityUserPoolRegion, credentialsProvider: nil)
@@ -36,10 +37,7 @@ class User {
         AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
 
         pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
-//        associatedDevices = []
-//        associatedDevices?.append(Device(name: "Test Device 1", device_id: "fafafe", type: nil))
-//        associatedDevices?.append(Device(name: "Test Device 2", device_id: "fafafe", type: nil))
-//        associatedDevices?.append(Device(name: "Test Device 3", device_id: "fafafe", type: nil))
+        accessToken = UserDefaults.standard.value(forKey: Constants.accessTokenKey) as? String
     }
 
     func currentUser() -> AWSCognitoIdentityUser? {
@@ -55,53 +53,48 @@ class User {
     }
 
     func getAccessToken(completionHandler: @escaping (String?) -> Void) {
-        if let loginWith = UserDefaults.standard.value(forKey: Constants.loginIdKey) as? String {
-            if loginWith == Constants.cognito {
-                if idToken == nil, let user = currentUser(), user.isSignedIn {
-                    user.getSession().continueOnSuccessWith(block: { (task) -> Any? in
-                        completionHandler(task.result?.idToken?.tokenString)
-                    })
-                } else {
-                    completionHandler(idToken)
-                }
+        if User.shared.userInfo.loggedInWith == .cognito {
+            if let user = currentUser() {
+                user.getSession().continueOnSuccessWith(block: { (task) -> Any? in
+                    completionHandler(task.result?.accessToken?.tokenString)
+                })
             } else {
-                let idTokenGithub = UserDefaults.standard.value(forKey: Constants.idTokenKey) as? String
-                if let refreshTokenInfo = UserDefaults.standard.value(forKey: Constants.refreshTokenKey) as? [String: Any] {
-                    let saveDate = refreshTokenInfo["time"] as! Date
-                    let difference = Date().timeIntervalSince(saveDate)
-                    let expire = refreshTokenInfo["expire_in"] as! Int
-                    if Int(difference) > expire {
-                        do {
-                            let json = try decode(jwt: idTokenGithub!)
-                            print(json)
-                            if let username = json.body["cognito:username"] as? String {
-                                let parameter = ["user_name": username, "refreshtoken": refreshTokenInfo["token"] as! String]
-                                let header: HTTPHeaders = ["Content-Type": "application/json"]
-                                let url = Constants.baseURL + Constants.apiVersion + "/login"
-                                NetworkManager.shared.genericRequest(url: url, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: header) { response in
-                                    if let json = response {
-                                        if let idToken = json["idtoken"] as? String {
-                                            var refreshTokenUpdate = refreshTokenInfo
-                                            refreshTokenUpdate["time"] = Date()
-                                            UserDefaults.standard.setValue(refreshTokenUpdate, forKey: Constants.refreshTokenKey)
-                                            User.shared.idToken = idToken
-                                            completionHandler(idToken)
-                                            return
-                                        }
-                                    }
-                                    completionHandler(nil)
-                                }
+                completionHandler(nil)
+            }
+        } else {
+            if let refreshTokenInfo = UserDefaults.standard.value(forKey: Constants.refreshTokenKey) as? [String: Any] {
+                let saveDate = refreshTokenInfo["time"] as! Date
+                let difference = Date().timeIntervalSince(saveDate)
+                let expire = refreshTokenInfo["expire_in"] as! Int
+                if Int(difference) > expire {
+                    let parameter = ["user_name": User.shared.userInfo.username, "refreshtoken": refreshTokenInfo["token"] as! String]
+                    let header: HTTPHeaders = ["Content-Type": "application/json"]
+                    let url = Constants.baseURL + Constants.apiVersion + "/login"
+                    NetworkManager.shared.genericRequest(url: url, method: .post, parameters: parameter, encoding: JSONEncoding.default, headers: header) { response in
+                        if let json = response {
+                            if let accessToken = json["accesstoken"] as? String {
+                                var refreshTokenUpdate = refreshTokenInfo
+                                refreshTokenUpdate["time"] = Date()
+                                UserDefaults.standard.setValue(refreshTokenUpdate, forKey: Constants.refreshTokenKey)
+                                User.shared.accessToken = accessToken
+                                completionHandler(accessToken)
+                                return
                             }
-
-                        } catch {
-                            print("unable to decode token")
-                            completionHandler(nil)
                         }
-                    } else {
-                        completionHandler(idTokenGithub)
+                        completionHandler(nil)
                     }
+                } else {
+                    completionHandler(User.shared.accessToken)
                 }
             }
+        }
+    }
+
+    func getcognitoIdToken(completionHandler: @escaping (String?) -> Void) {
+        if let user = currentUser() {
+            user.getSession().continueOnSuccessWith(block: { (task) -> Any? in
+                completionHandler(task.result?.idToken?.tokenString)
+            })
         } else {
             completionHandler(nil)
         }

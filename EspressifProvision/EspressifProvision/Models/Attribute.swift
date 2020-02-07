@@ -8,34 +8,34 @@
 
 import Foundation
 
-class Attribute {
+class Attribute: Equatable {
     var name: String?
     var value: Any?
-}
 
-class StaticAttribute: Attribute, Equatable {
-    static func == (lhs: StaticAttribute, rhs: StaticAttribute) -> Bool {
+    static func == (lhs: Attribute, rhs: Attribute) -> Bool {
         let lhsValue = lhs.value as? String
         let rhsValue = rhs.value as? String
-        return lhsValue == rhsValue
+        return lhsValue == rhsValue && lhs.name == rhs.name
     }
 }
 
-class DynamicAttribute: Attribute, Equatable {
-    static func == (lhs: DynamicAttribute, rhs: DynamicAttribute) -> Bool {
-        if lhs.dataType == rhs.dataType {
-            if lhs.dataType?.lowercased() == "int" {
-                let lhsValue = lhs.value as? Int
-                let rhsValue = rhs.value as? Int
-                return lhsValue == rhsValue
-            } else if lhs.dataType?.lowercased() == "float" {
-                let lhsValue = lhs.value as? Float
-                let rhsValue = rhs.value as? Float
-                return lhsValue == rhsValue
-            } else {
-                let lhsValue = lhs.value as? String
-                let rhsValue = rhs.value as? String
-                return lhsValue == rhsValue
+class Params: Attribute {
+    static func == (lhs: Params, rhs: Params) -> Bool {
+        if lhs.name == rhs.name {
+            if lhs.dataType == rhs.dataType {
+                if lhs.dataType?.lowercased() == "int" {
+                    let lhsValue = lhs.value as? Int
+                    let rhsValue = rhs.value as? Int
+                    return lhsValue == rhsValue
+                } else if lhs.dataType?.lowercased() == "float" {
+                    let lhsValue = lhs.value as? Float
+                    let rhsValue = rhs.value as? Float
+                    return lhsValue == rhsValue
+                } else {
+                    let lhsValue = lhs.value as? String
+                    let rhsValue = rhs.value as? String
+                    return lhsValue == rhsValue
+                }
             }
         }
         return false

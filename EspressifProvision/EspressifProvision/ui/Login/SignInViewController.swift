@@ -193,15 +193,15 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         NetworkManager.shared.genericRequest(url: url, method: .post, parameters: parameters, encoding: URLEncoding.default,
                                              headers: headers) { response in
             if let json = response {
-                if let idToken = json["id_token"] as? String, let refreshToken = json["refresh_token"] as? String {
-                    User.shared.idToken = idToken
-                    User.shared.refreshToken = refreshToken
-                    UserDefaults.standard.set(idToken, forKey: Constants.idTokenKey)
+                if let idToken = json["id_token"] as? String, let refreshToken = json["refresh_token"] as? String, let accessToken = json["access_token"] as? String {
+                    self.getUserInfo(token: idToken, provider: .github)
                     let refreshTokenInfo = ["token": refreshToken, "time": Date(), "expire_in": json["expires_in"] as? Int ?? 3600] as [String: Any]
+                    User.shared.accessToken = accessToken
                     UserDefaults.standard.set(refreshTokenInfo, forKey: Constants.refreshTokenKey)
-                    UserDefaults.standard.set(json["id_token"] as? String, forKey: Constants.expireTimeKey)
-                    UserDefaults.standard.set(Constants.github, forKey: Constants.loginIdKey)
-                    self.dismiss(animated: true, completion: nil)
+                    UserDefaults.standard.set(accessToken, forKey: Constants.accessTokenKey)
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
                 print(response)
             }
@@ -214,15 +214,16 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
 
     @IBAction func signInPressed(_: AnyObject) {
         dismissKeyboard()
-        if username.text != nil, password.text != nil {
-            signIn(username: username.text!, password: password.text!)
-        } else {
+        guard let usernameValue = username.text, !usernameValue.isEmpty, let password = password.text, !password.isEmpty else {
             let alertController = UIAlertController(title: "Missing information",
                                                     message: "Please enter a valid user name and password",
                                                     preferredStyle: .alert)
             let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
             alertController.addAction(retryAction)
+            present(alertController, animated: true, completion: nil)
+            return
         }
+        signIn(username: usernameValue, password: password)
     }
 
     func signIn(username: String, password: String) {
@@ -367,6 +368,20 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         documentVC.documentLink = url
         present(documentVC, animated: true, completion: nil)
     }
+
+    func getUserInfo(token: String, provider: ServiceProvider) {
+        do {
+            let json = try decode(jwt: token)
+            User.shared.userInfo.username = json.body["cognito:username"] as? String ?? ""
+            User.shared.userInfo.email = json.body["email"] as? String ?? ""
+            User.shared.userInfo.userID = json.body["custom:user_id"] as? String ?? ""
+            User.shared.userInfo.loggedInWith = provider
+            User.shared.userInfo.saveUserInfo()
+        } catch {
+            print("error parsing token")
+        }
+        User.shared.updateDeviceList = true
+    }
 }
 
 extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
@@ -393,8 +408,8 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
                 self.present(alertController, animated: true, completion: nil)
             } else {
                 self.username.text = nil
-                User.shared.updateDeviceList = true
-                UserDefaults.standard.set(Constants.cognito, forKey: Constants.loginIdKey)
+                self.password.text = nil
+                User.shared.updateUserInfo = true
                 self.dismiss(animated: true, completion: nil)
             }
         }

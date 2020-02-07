@@ -164,7 +164,7 @@ class ProvisionViewController: UIViewController {
 
             guard error == nil else {
                 print("Error in establishing session \(error.debugDescription)")
-                self.showStatusScreen()
+                self.showStatusScreen(step1Failed: true)
                 return
             }
             if let capability = self.capabilities, capability.contains(Constants.wifiScanCapability) {
@@ -390,13 +390,14 @@ class ProvisionViewController: UIViewController {
         }
     }
 
-    func showStatusScreen() {
+    func showStatusScreen(step1Failed: Bool = false) {
         DispatchQueue.main.async {
             let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as! SuccessViewController
             successVC.session = self.session!
             successVC.transport = self.transport!
             successVC.ssid = self.ssid
             successVC.passphrase = self.passphrase
+            successVC.step1Failed = step1Failed
             self.navigationController?.pushViewController(successVC, animated: true)
         }
     }
@@ -562,7 +563,7 @@ extension ProvisionViewController: BLEStatusProtocol {
     func peripheralDisconnected() {
         MBProgressHUD.hide(for: view, animated: true)
         if !(session?.isEstablished ?? false) {
-            showStatusScreen()
+            showStatusScreen(step1Failed: true)
         }
     }
 }
