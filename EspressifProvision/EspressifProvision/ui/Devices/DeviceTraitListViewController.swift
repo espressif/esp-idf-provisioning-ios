@@ -18,7 +18,7 @@ import Alamofire
 import MBProgressHUD
 import UIKit
 
-class ControlListViewController: UIViewController {
+class DeviceTraitListViewController: UIViewController {
     var device: Device?
     var pollingTimer: Timer!
 
@@ -232,7 +232,7 @@ class ControlListViewController: UIViewController {
     }
 }
 
-extension ControlListViewController: UITableViewDelegate {
+extension DeviceTraitListViewController: UITableViewDelegate {
     func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         return 40.0
     }
@@ -250,7 +250,7 @@ extension ControlListViewController: UITableViewDelegate {
     }
 }
 
-extension ControlListViewController: UITableViewDataSource {
+extension DeviceTraitListViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return 1
     }

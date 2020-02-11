@@ -281,8 +281,8 @@ extension DevicesViewController: UICollectionViewDelegate {
         Utility.showLoader(message: "", view: view)
         let currentDevice = getDeviceAt(indexPath: indexPath)
         let currentNode = getNodeAt(indexPath: indexPath)
-        let controlListVC = controlStoryBoard.instantiateViewController(withIdentifier: "controlListVC") as! ControlListViewController
-        controlListVC.device = currentDevice
+        let deviceTraitsVC = controlStoryBoard.instantiateViewController(withIdentifier: Constants.deviceTraitListVCIdentifier) as! DeviceTraitListViewController
+        deviceTraitsVC.device = currentDevice
         NetworkManager.shared.getNodeStatus(node: currentNode) { node, error in
             if error == nil, node != nil {
                 if let index = User.shared.associatedNodeList?.firstIndex(where: { node -> Bool in
@@ -293,7 +293,7 @@ extension DevicesViewController: UICollectionViewDelegate {
             }
             DispatchQueue.main.async {
                 Utility.hideLoader(view: self.view)
-                self.navigationController?.pushViewController(controlListVC, animated: true)
+                self.navigationController?.pushViewController(deviceTraitsVC, animated: true)
             }
         }
     }

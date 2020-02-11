@@ -13,9 +13,27 @@ struct Constants {
     // API version for the current network request
     static let apiVersion = "v1"
 
+    // User-Defined keys
+    static let deviceNamePrefix = "DeviceNamePrefix"
+    static let allowFilteringByPrefix = "AllowFilteringByPrefix"
+    static let wifiBaseUrl = "WifiBaseUrl"
+
+    // User-Defined Values
+    static let devicePrefixDefault = "PROV_"
+    static let wifiBaseUrlDefault = "192.168.4.1:80"
+
+    // Device path parameters
+    static let configPath = "prov-config"
+    static let versionPath = "proto-ver"
+    static let scanPath = "prov-scan"
+    static let sessionPath = "prov-session"
+    static let associationPath = "cloud_user_assoc"
+
     // Segue identifiers
+    static let deviceTraitListVCIdentifier = "deviceTrailListVC"
     static let nodeDetailSegue = "nodeDetailSegue"
     static let claimVCIdentifier = "claimVC"
+
     // JSON keys
     static let userID = "user_id"
     static let requestID = "request_id"
@@ -59,6 +77,7 @@ struct Constants {
     static let updateThingsShadow = Constants.baseURL + Constants.apiVersion + "/user/nodes/params"
     static let getDeviceShadow = Constants.baseURL + Constants.apiVersion + "/user/nodes/params"
 
+    // UserDefault keys
     static let newDeviceAdded = "com.espressif.newDeviceAdded"
     static let prefixKey = "com.espressif.prefix"
     static let userInfoKey = "com.espressif.userinfo"

@@ -14,6 +14,12 @@ enum ServiceProvider: String {
 }
 
 struct UserInfo {
+    // UserInfo keys
+    static let usernameKey = "username"
+    static let emailKey = "email"
+    static let userIdKey = "userID"
+    static let providerKey = "provider"
+
     var username: String
     var email: String
     var userID: String
@@ -26,10 +32,10 @@ struct UserInfo {
     static func getUserInfo() -> UserInfo {
         var userInfo = UserInfo(username: "", email: "", userID: "", loggedInWith: .cognito)
         if let json = UserDefaults.standard.value(forKey: Constants.userInfoKey) as? [String: Any] {
-            userInfo.username = json["username"] as? String ?? ""
-            userInfo.email = json["email"] as? String ?? ""
-            userInfo.userID = json["userID"] as? String ?? ""
-            let loggedIn = json["loggedInWith"] as? String ?? "cognito"
+            userInfo.username = json[UserInfo.usernameKey] as? String ?? ""
+            userInfo.email = json[UserInfo.emailKey] as? String ?? ""
+            userInfo.userID = json[UserInfo.userIdKey] as? String ?? ""
+            let loggedIn = json[UserInfo.providerKey] as? String ?? ServiceProvider.cognito.rawValue
             userInfo.loggedInWith = ServiceProvider(rawValue: loggedIn)!
         }
         return userInfo
@@ -39,7 +45,7 @@ struct UserInfo {
     /// This info is required when new app session is started.
     ///
     func saveUserInfo() {
-        let json: [String: Any] = ["username": self.username, "email": self.email, "userID": self.userID, "loggedInWith": self.loggedInWith.rawValue]
+        let json: [String: Any] = [UserInfo.usernameKey: self.username, UserInfo.emailKey: self.email, UserInfo.userIdKey: self.userID, UserInfo.providerKey: self.loggedInWith.rawValue]
         UserDefaults.standard.set(json, forKey: Constants.userInfoKey)
     }
 }

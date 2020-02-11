@@ -72,9 +72,6 @@ class ProvisionViewController: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
 
-        navigationItem.backBarButtonItem?.title = ""
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(showDeviceVersion))
-
         if transport == nil {
             transport = SoftAPTransport(baseUrl: Utility.baseUrl)
         }
@@ -216,12 +213,6 @@ class ProvisionViewController: UIViewController {
     @IBAction func cancelClicked(_: Any) {
         transport?.disconnect()
         navigationController?.popToRootViewController(animated: false)
-    }
-
-    @objc func showDeviceVersion() {
-        let deviceVersionVC = storyboard?.instantiateViewController(withIdentifier: Constants.deviceInfoStoryboardID) as! DeviceInfoViewController
-        deviceVersionVC.utility = transport!.utility
-        navigationController?.pushViewController(deviceVersionVC, animated: true)
     }
 
     @objc func passphraseEntered() {
