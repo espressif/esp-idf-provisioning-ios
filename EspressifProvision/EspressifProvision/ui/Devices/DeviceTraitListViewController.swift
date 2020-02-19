@@ -74,13 +74,6 @@ class DeviceTraitListViewController: UIViewController {
     func updateDeviceAttributes() {
         NetworkManager.shared.getDeviceThingShadow(nodeID: (device?.node?.node_id)!) { response in
             if let image = response {
-//                if let dynamicParams = self.device?.dynamicParams {
-//                    for item in dynamicParams {
-//                        if let prop = image[response] {
-//
-//                        }
-//                    }
-//                }
                 if let deviceName = self.device?.name, let attrbutes = image[deviceName] as? [String: Any] {
                     if let dynamicParams = self.device?.params {
                         for index in dynamicParams.indices {
@@ -90,20 +83,6 @@ class DeviceTraitListViewController: UIViewController {
                         }
                     }
                 }
-//                if let dynamicParams = self.device?.dynamicParams {
-//                    for index in dynamicParams.indices {
-//                        if let reportedValue = image[dynamicParams[index].name ?? ""] {
-//                            dynamicParams[index].value = reportedValue
-//                        }
-//                    }
-//                }
-//                if let staticParams = self.device?.staticParams {
-//                    for index in staticParams.indices {
-//                        if let reportedValue = image[staticParams[index].name ?? ""] {
-//                            staticParams[index].value = reportedValue
-//                        }
-//                    }
-//                }
             }
             Utility.hideLoader(view: self.view)
             self.tableView.reloadData()
@@ -135,7 +114,7 @@ class DeviceTraitListViewController: UIViewController {
 
     @objc func setBrightness(_: UISlider) {}
 
-    func getTableViewGenericCell(attribute: Params, indexPath: IndexPath) -> GenericControlTableViewCell {
+    func getTableViewGenericCell(attribute: Param, indexPath: IndexPath) -> GenericControlTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "genericControlCell", for: indexPath) as! GenericControlTableViewCell
         cell.controlName.text = attribute.name
         if let value = attribute.value {
@@ -158,7 +137,7 @@ class DeviceTraitListViewController: UIViewController {
         return cell
     }
 
-    func getTableViewCellBasedOn(dynamicAttribute: Params, indexPath: IndexPath) -> UITableViewCell {
+    func getTableViewCellBasedOn(dynamicAttribute: Param, indexPath: IndexPath) -> UITableViewCell {
         if dynamicAttribute.uiType == "esp-ui-slider" {
             if let dataType = dynamicAttribute.dataType?.lowercased(), dataType == "int" || dataType == "float" {
                 if let bounds = dynamicAttribute.bounds {
@@ -199,6 +178,7 @@ class DeviceTraitListViewController: UIViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableViewCell", for: indexPath) as! SwitchTableViewCell
             cell.controlName.text = dynamicAttribute.name?.deletingPrefix(device!.name!)
             cell.device = device
+            cell.param = dynamicAttribute
             if let attributeName = dynamicAttribute.name {
                 cell.attributeKey = attributeName
             }

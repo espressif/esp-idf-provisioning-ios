@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>APP_CLIENT_ID</key>
+	<string>$(APP_CLIENT_ID)</string>
+	<key>APP_CLIENT_SECRET</key>
+	<string>$(APP_CLIENT_SECRET)</string>
 	<key>APP_THEME_COLOR</key>
 	<string>#5330B9</string>
 	<key>AWS</key>
@@ -116,6 +120,8 @@
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>USER_POOL_ID</key>
+	<string>$(USER_POOL_ID)</string>
 	<key>WifiBaseUrl</key>
 	<string>192.168.4.1:80</string>
 	<key>WifiNetworkNamePrefix</key>

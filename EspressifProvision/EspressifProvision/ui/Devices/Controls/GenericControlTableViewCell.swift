@@ -18,7 +18,7 @@ class GenericControlTableViewCell: UITableViewCell {
     var dataType: String = "String"
     var device: Device!
     var boolTypeValidValues: [String: Int] = ["true": 1, "false": 0, "yes": 1, "no": 0, "0": 0, "1": 1]
-    var attribute: Params?
+    var attribute: Param?
 
     override func awakeFromNib() {
         super.awakeFromNib()

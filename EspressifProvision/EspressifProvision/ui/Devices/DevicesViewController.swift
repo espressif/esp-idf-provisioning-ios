@@ -35,6 +35,7 @@ class DevicesViewController: UIViewController {
     var deviceID: String?
     var requestID: String?
     var singleDeviceNodeCount = 0
+    var flag = false
 
     let reachability = try! Reachability()
 
@@ -89,6 +90,7 @@ class DevicesViewController: UIViewController {
             initialView.isHidden = false
             collectionView.isHidden = true
         }
+        flag = false
     }
 
     func getUserInfo(token: String, provider: ServiceProvider) {
@@ -146,6 +148,7 @@ class DevicesViewController: UIViewController {
 
     @objc func refreshDeviceList() {
         if reachability.connection != .unavailable {
+            collectionView.isUserInteractionEnabled = false
             User.shared.updateDeviceList = false
             NetworkManager.shared.getNodeList { nodes, _ in
                 Utility.hideLoader(view: self.view)
@@ -173,6 +176,7 @@ class DevicesViewController: UIViewController {
                     }
                     self.collectionView.reloadData()
                 }
+                self.collectionView.isUserInteractionEnabled = true
             }
         } else {
             Utility.hideLoader(view: view)
@@ -278,6 +282,10 @@ class DevicesViewController: UIViewController {
 
 extension DevicesViewController: UICollectionViewDelegate {
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if flag {
+            return
+        }
+        flag = true
         Utility.showLoader(message: "", view: view)
         let currentDevice = getDeviceAt(indexPath: indexPath)
         let currentNode = getNodeAt(indexPath: indexPath)
@@ -338,6 +346,8 @@ extension DevicesViewController: UICollectionViewDataSource {
         var device = getDeviceAt(indexPath: indexPath)
         cell.deviceName.text = device.name
         cell.device = device
+        cell.switchButton.isHidden = true
+        cell.primaryValue.isHidden = true
 
         cell.layer.backgroundColor = UIColor.white.cgColor
         cell.layer.shadowColor = UIColor.lightGray.cgColor
@@ -354,7 +364,7 @@ extension DevicesViewController: UICollectionViewDataSource {
 
         var primaryKeyFound = false
 
-        if let primary = device.node?.primary {
+        if let primary = device.primary {
             if let primaryParam = device.params?.first(where: { param -> Bool in
                 param.name == primary
             }) {
@@ -378,23 +388,24 @@ extension DevicesViewController: UICollectionViewDataSource {
                 } else if primaryParam.dataType?.lowercased() == "string" {
                     cell.switchButton.isHidden = true
                     cell.primaryValue.text = primaryParam.value as? String ?? ""
+                    cell.primaryValue.isHidden = false
                 } else {
                     cell.switchButton.isHidden = true
                     if let value = primaryParam.value {
                         cell.primaryValue.text = "\(value)"
+                        cell.primaryValue.isHidden = false
                     }
                 }
             }
-        }
-
-        if !primaryKeyFound {
-            if let staticParams = device.attributes {
-                for item in staticParams {
-                    if item.name == "esp.param.temperature" {
-                        if let value = item.value as? String {
-                            primaryKeyFound = true
-                            cell.primaryValue.text = value + "º"
-                            cell.primaryValue.isHidden = false
+            if !primaryKeyFound {
+                if let staticParams = device.attributes {
+                    for item in staticParams {
+                        if item.name == primary {
+                            if let value = item.value as? String {
+                                primaryKeyFound = true
+                                cell.primaryValue.text = value
+                                cell.primaryValue.isHidden = false
+                            }
                         }
                     }
                 }

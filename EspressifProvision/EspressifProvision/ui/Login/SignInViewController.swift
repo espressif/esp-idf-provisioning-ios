@@ -187,8 +187,9 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
 
     func requestToken(code: String) {
         let url = Constants.githubURL + "token"
-        let parameters = ["grant_type": "authorization_code", "client_id": Constants.clientID, "code": code, "client_secret": Constants.CognitoIdentityUserPoolAppClientSecret, "redirect_uri": Constants.redirectURL]
-        let authorizationValue = Request.authorizationHeader(user: Constants.clientID, password: Constants.CognitoIdentityUserPoolAppClientSecret)
+        let currentKeys = Keys.current
+        let parameters = ["grant_type": "authorization_code", "client_id": Constants.clientID, "code": code, "client_secret": currentKeys.clientSecret, "redirect_uri": Constants.redirectURL]
+        let authorizationValue = Request.authorizationHeader(user: Constants.clientID, password: currentKeys.clientSecret)
         let headers: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded", authorizationValue?.key ?? "": authorizationValue?.value ?? ""]
         NetworkManager.shared.genericRequest(url: url, method: .post, parameters: parameters, encoding: URLEncoding.default,
                                              headers: headers) { response in

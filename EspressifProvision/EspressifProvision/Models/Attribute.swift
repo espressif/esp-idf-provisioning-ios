@@ -19,8 +19,8 @@ class Attribute: Equatable {
     }
 }
 
-class Params: Attribute {
-    static func == (lhs: Params, rhs: Params) -> Bool {
+class Param: Attribute {
+    static func == (lhs: Param, rhs: Param) -> Bool {
         if lhs.name == rhs.name {
             if lhs.dataType == rhs.dataType {
                 if lhs.dataType?.lowercased() == "int" {
@@ -47,3 +47,14 @@ class Params: Attribute {
     var attributeKey: String?
     var dataType: String?
 }
+
+// extension Param {
+//    func update<T>(deviceName: String, nodeID: String, value: T) -> InputValidationError? {
+//        if dataType?.lowercased() == "bool" {
+//            if T.self == Bool.self {
+//                NetworkManager.shared.updateThingShadow(nodeID: nodeID, parameter: [deviceName: [attributeKey: value]])
+//            }
+//        }
+//        return .other
+//    }
+// }

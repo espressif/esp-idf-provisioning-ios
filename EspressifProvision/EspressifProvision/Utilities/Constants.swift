@@ -8,6 +8,7 @@
 
 import AWSCognitoIdentityProvider
 import Foundation
+import Keys
 
 struct Constants {
     // API version for the current network request
@@ -54,9 +55,6 @@ struct Constants {
 
     // Amazon Cognito setup configuration
     static let CognitoIdentityUserPoolRegion: AWSRegionType = .USEast1
-    static let CognitoIdentityUserPoolId = Bundle.main.infoDictionary!["USER_POOL_ID"] as? String ?? ""
-    static let CognitoIdentityUserPoolAppClientId = Bundle.main.infoDictionary!["APP_CLIENT_ID"] as? String ?? ""
-    static let CognitoIdentityUserPoolAppClientSecret = Bundle.main.infoDictionary!["APP_CLIENT_SECRET"] as? String ?? ""
 
     static let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
     static let baseURL = Bundle.main.infoDictionary!["BASE_API_URL_ENDPOINT"] as? String ?? ""
@@ -99,7 +97,30 @@ struct Constants {
 
     static let uiViewUpdateNotification = "com.espressif.updateuiview"
 
+    static let boolTypeValidValues: [String: Bool] = ["true": true, "false": false, "yes": true, "no": false, "0": false, "1": true]
+
     static func log(message: String) {
         print(message)
+    }
+}
+
+struct Keys {
+    let clientID: String
+    let clientSecret: String
+    let poolID: String
+
+    init(clientID: String, clientSecret: String, poolID: String) {
+        self.clientID = clientID
+        self.clientSecret = clientSecret
+        self.poolID = poolID
+    }
+
+    static var current: Keys {
+        let keys = EspressifProvisionKeys()
+        #if PROD
+            return Keys(clientID: keys.userPoolAppClientId, clientSecret: keys.userPoolAppClientSecret, poolID: keys.userPoolId)
+        #else
+            return Keys(clientID: keys.staging_UserPoolAppClientId, clientSecret: keys.staging_UserPoolAppClientSecret, poolID: keys.staging_UserPoolId)
+        #endif
     }
 }

@@ -15,7 +15,6 @@ class Node {
     var devices: [Device]?
     var attributes: [Attribute]?
     var isConnected = false
-    var primary: String?
 }
 
 struct Info {

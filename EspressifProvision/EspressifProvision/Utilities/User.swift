@@ -28,10 +28,12 @@ class User {
         // setup service configuration
         let serviceConfiguration = AWSServiceConfiguration(region: Constants.CognitoIdentityUserPoolRegion, credentialsProvider: nil)
 
+        let currentKeys = Keys.current
+
         // create pool configuration
-        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: Constants.CognitoIdentityUserPoolAppClientId,
-                                                                        clientSecret: Constants.CognitoIdentityUserPoolAppClientSecret,
-                                                                        poolId: Constants.CognitoIdentityUserPoolId)
+        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: currentKeys.clientID,
+                                                                        clientSecret: currentKeys.clientSecret,
+                                                                        poolId: currentKeys.poolID)
 
         // initialize user pool client
         AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)

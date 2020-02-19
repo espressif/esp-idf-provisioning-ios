@@ -18,6 +18,7 @@ class Device: Equatable {
     var name: String?
     var type: String?
     var attributes: [Attribute]?
-    var params: [Params]?
+    var params: [Param]?
     weak var node: Node?
+    var primary: String?
 }
