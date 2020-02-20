@@ -35,7 +35,7 @@ class DeviceTraitListViewController: UIViewController {
         tableView.register(UINib(nibName: "GenericControlTableViewCell", bundle: nil), forCellReuseIdentifier: "genericControlCell")
         tableView.register(UINib(nibName: "GenericSliderTableViewCell", bundle: nil), forCellReuseIdentifier: "GenericSliderTableViewCell")
         tableView.register(UINib(nibName: "StaticControlTableViewCell", bundle: nil), forCellReuseIdentifier: "staticControlTableViewCell")
-        titleLabel.text = device?.name ?? "Details"
+        titleLabel.text = device?.getDeviceName() ?? "Details"
         tableView.estimatedRowHeight = 70.0
         tableView.rowHeight = UITableView.automaticDimension
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
@@ -130,6 +130,7 @@ class DeviceTraitListViewController: UIViewController {
             cell.dataType = data_type
         }
         cell.device = device
+        cell.attribute = attribute
         if let attributeName = attribute.name {
             cell.attributeKey = attributeName
         }

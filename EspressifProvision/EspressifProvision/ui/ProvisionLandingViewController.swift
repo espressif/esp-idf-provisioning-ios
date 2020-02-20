@@ -142,6 +142,10 @@ class ProvisionLandingViewController: UIViewController {
     }
 
     @IBAction func cancelClicked(_: Any) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+
+    @IBAction func backClicked(_: Any) {
         navigationController?.popViewController(animated: true)
     }
 

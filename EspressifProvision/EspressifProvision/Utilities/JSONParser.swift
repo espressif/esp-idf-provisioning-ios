@@ -48,6 +48,7 @@ struct JSONParser {
                         dynamicAttr.dataType = attr["data_type"] as? String
                         dynamicAttr.properties = attr["properties"] as? [String]
                         dynamicAttr.bounds = attr["bounds"] as? [String: Any]
+                        dynamicAttr.type = attr["type"] as? String
                         newDevice.params?.append(dynamicAttr)
                     }
                 }

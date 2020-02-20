@@ -15,13 +15,14 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     var provisionConfig: [String: String] = [:]
+    @IBOutlet var scannerView: UIView!
+    @IBOutlet var addManuallyButton: PrimaryButton!
 
-    @IBOutlet var cancelButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = UIColor.black
+//        view.backgroundColor = UIColor.black
         captureSession = AVCaptureSession()
 
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
@@ -56,25 +57,24 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         }
 
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = view.layer.bounds
+        previewLayer.frame = scannerView.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(previewLayer)
+        scannerView.layer.addSublayer(previewLayer)
 
-        let pathBigRect = UIBezierPath(rect: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        let pathSmallRect = UIBezierPath(rect: CGRect(x: view.center.x - view.bounds.width / 3, y: view.center.y - view.bounds.width / 3, width: view.bounds.width / 1.5, height: view.bounds.width / 1.5))
+//        let pathBigRect = UIBezierPath(rect: CGRect(x: 0, y: 0, width: scannerView.bounds.width, height: scannerView.bounds.height))
+//        let pathSmallRect = UIBezierPath(rect: CGRect(x: scannerView.center.x - scannerView.bounds.width / 3, y: scannerView.center.y - scannerView.bounds.width / 3, width: scannerView.bounds.width / 1.5, height: scannerView.bounds.width / 1.5))
 
-        pathBigRect.append(pathSmallRect)
-        pathBigRect.usesEvenOddFillRule = true
+//        pathBigRect.append(pathSmallRect)
+//        pathBigRect.usesEvenOddFillRule = true
 
-        let fillLayer = CAShapeLayer()
-        fillLayer.path = pathBigRect.cgPath
-        fillLayer.fillRule = CAShapeLayerFillRule.evenOdd
-        fillLayer.fillColor = UIColor.black.cgColor
-        fillLayer.opacity = 0.4
-        view.layer.addSublayer(fillLayer)
+//        let fillLayer = CAShapeLayer()
+//        fillLayer.path = pathBigRect.cgPath
+//        fillLayer.fillRule = CAShapeLayerFillRule.evenOdd
+//        fillLayer.fillColor = UIColor.black.cgColor
+//        fillLayer.opacity = 0.4
+//        scannerView.layer.addSublayer(fillLayer)
 
         captureSession.startRunning()
-        view.bringSubviewToFront(cancelButton)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -116,7 +116,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             if let ssid = jsonArray["name"], let pop = jsonArray["pop"], let transport = jsonArray["transport"] {
                 let password = jsonArray["password"] ?? ""
                 if transport == "softap" {
-                    Utility.showLoader(message: "Applying configuration", view: view)
+                    Utility.showLoader(message: "Connecting to Device", view: view)
+                    addManuallyButton.isEnabled = false
                     connectToSoftApUsingCredentials(ssid: ssid, password: password, pop: pop)
                 } else {
                     retry(message: "QR code is not valid. Please try again.")
@@ -132,6 +133,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     func retry(message: String) {
         Utility.hideLoader(view: view)
+        addManuallyButton.isEnabled = true
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: { _ in
             DispatchQueue.main.async {

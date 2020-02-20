@@ -125,6 +125,7 @@ class GenericControlTableViewCell: UITableViewCell {
                 NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: controlValue]])
                 controlValueLabel.text = value
             }
+            attribute?.value = controlValue as Any
         }
     }
 }

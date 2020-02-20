@@ -89,6 +89,7 @@ class DevicesViewController: UIViewController {
         if User.shared.associatedNodeList?.count == 0 {
             initialView.isHidden = false
             collectionView.isHidden = true
+            addButton.isHidden = true
         }
         flag = false
     }
@@ -165,9 +166,11 @@ class DevicesViewController: UIViewController {
                 if nodes == nil || nodes?.count == 0 {
                     self.initialView.isHidden = false
                     self.collectionView.isHidden = true
+                    self.addButton.isHidden = true
                 } else {
                     self.initialView.isHidden = true
                     self.collectionView.isHidden = false
+                    self.addButton.isHidden = false
                     self.singleDeviceNodeCount = 0
                     for item in User.shared.associatedNodeList! {
                         if item.devices?.count == 1 {
@@ -184,21 +187,21 @@ class DevicesViewController: UIViewController {
         }
     }
 
-    @IBAction func addButtonClicked(_: Any) {
-//        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//        actionSheet.addAction(UIAlertAction(title: "Add using QR code", style: .default, handler: nil))
-//        actionSheet.addAction(UIAlertAction(title: "Add manually", style: .default, handler: nil))
-//        let popover = actionSheet.popoverPresentationController
-//        popover?.sourceView = addButton
-//        present(actionSheet, animated: false, completion: nil)
-        if pickerView.isHidden {
-            pickerView.isHidden = false
-            addButton.setImage(UIImage(named: "cross_icon"), for: .normal)
-        } else {
-            pickerView.isHidden = true
-            addButton.setImage(UIImage(named: "add_icon"), for: .normal)
-        }
-    }
+//    @IBAction func addButtonClicked(_: Any) {
+    ////        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    ////        actionSheet.addAction(UIAlertAction(title: "Add using QR code", style: .default, handler: nil))
+    ////        actionSheet.addAction(UIAlertAction(title: "Add manually", style: .default, handler: nil))
+    ////        let popover = actionSheet.popoverPresentationController
+    ////        popover?.sourceView = addButton
+    ////        present(actionSheet, animated: false, completion: nil)
+//        if pickerView.isHidden {
+//            pickerView.isHidden = false
+//            addButton.setImage(UIImage(named: "cross_icon"), for: .normal)
+//        } else {
+//            pickerView.isHidden = true
+//            addButton.setImage(UIImage(named: "add_icon"), for: .normal)
+//        }
+//    }
 
     @IBAction func provisionButtonClicked(_: Any) {
         var transport = Provision.CONFIG_TRANSPORT_WIFI
@@ -308,7 +311,7 @@ extension DevicesViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0, singleDeviceNodeCount > 0 {
-            return CGSize(width: 0, height: 0)
+            return CGSize(width: 0, height: 68.0)
         }
         return CGSize(width: collectionView.bounds.width, height: 68.0)
     }
@@ -343,8 +346,9 @@ extension DevicesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "deviceCollectionViewCell", for: indexPath) as! DevicesCollectionViewCell
+        cell.refresh()
         var device = getDeviceAt(indexPath: indexPath)
-        cell.deviceName.text = device.name
+        cell.deviceName.text = device.getDeviceName()
         cell.device = device
         cell.switchButton.isHidden = true
         cell.primaryValue.isHidden = true

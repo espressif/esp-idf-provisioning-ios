@@ -14,7 +14,7 @@ class Node {
     var info: Info?
     var devices: [Device]?
     var attributes: [Attribute]?
-    var isConnected = false
+    var isConnected = true
 }
 
 struct Info {

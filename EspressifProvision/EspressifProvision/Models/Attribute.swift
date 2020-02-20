@@ -46,6 +46,7 @@ class Param: Attribute {
     var bounds: [String: Any]?
     var attributeKey: String?
     var dataType: String?
+    var type: String?
 }
 
 // extension Param {
