@@ -37,11 +37,12 @@ struct Constants {
     static let languageListVCIdentifier = "languageListVC"
 
     // Method to show loader on any view
-    static func showLoader(message: String, view: UIView) {
+    static func showLoader(message: String, view: UIView, disableUserInteraction: Bool = false) {
         DispatchQueue.main.async {
             let loader = MBProgressHUD.showAdded(to: view, animated: true)
             loader.mode = MBProgressHUDMode.indeterminate
             loader.label.text = message
+            loader.isUserInteractionEnabled = disableUserInteraction
         }
     }
 

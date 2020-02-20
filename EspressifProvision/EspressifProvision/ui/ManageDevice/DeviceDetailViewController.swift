@@ -56,7 +56,8 @@ class DeviceDetailViewController: UIViewController {
     }
 
     @IBAction func signInAmazon(_: Any) {
-        Constants.showLoader(message: "Signing In", view: view)
+        Constants.showLoader(message: "Signing In", view: view, disableUserInteraction: true)
+        navigationItem.hidesBackButton = true
         if session.isEstablished {
             let prov = Provision(session: session)
             _ = prov.getAVSDeviceDetails(completionHandler: { _, error in
@@ -74,16 +75,21 @@ class DeviceDetailViewController: UIViewController {
                                 DispatchQueue.main.async {
                                     self.loginStatus = true
                                     self.updateUIView()
+                                    MBProgressHUD.hide(for: self.view, animated: true)
+                                    self.navigationItem.hidesBackButton = false
                                 }
                             })
+                        } else {
+                            MBProgressHUD.hide(for: self.view, animated: true)
+                            self.navigationItem.hidesBackButton = false
                         }
-                        MBProgressHUD.hide(for: self.view, animated: true)
                     })
                 }
             })
         } else {
             DispatchQueue.main.async {
                 MBProgressHUD.hide(for: self.view, animated: true)
+                self.navigationItem.hidesBackButton = false
             }
         }
     }
