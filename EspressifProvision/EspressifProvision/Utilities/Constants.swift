@@ -25,6 +25,7 @@ struct Constants {
     static let noProofCapability = "no_pop"
 
     static let friendlynameKey = "friendlyname"
+    static let versionKey = "version"
     static let UUIDKey = "uuid"
 
     // Reuse identifier

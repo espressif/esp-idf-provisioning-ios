@@ -13,6 +13,7 @@ class Utility {
     static let deviceNamePrefix = Bundle.main.infoDictionary?["BLEDeviceNamePrefix"] as? String ?? "ESP-Alexa-"
     static let allowPrefixFilter = Bundle.main.infoDictionary?["AllowFilteringByPrefix"] as? Bool ?? false
     static let baseUrl = Bundle.main.infoDictionary?["WifiBaseUrl"] as? String ?? "192.168.4.1:80"
+    static var pop = Bundle.main.infoDictionary?["ProofOfPossession"] as? String
 
     var deviceName = ""
     var configPath = "prov-config"

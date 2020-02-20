@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mgC-Sj-4EB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mgC-Sj-4EB">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -623,7 +623,7 @@ Please reset your device and retry again.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEh-Wx-c02">
-                                        <rect key="frame" x="16" y="24.5" width="113" height="21"/>
+                                        <rect key="frame" x="16" y="24.5" width="254" height="21"/>
                                         <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -635,7 +635,7 @@ Please reset your device and retry again.</string>
                                             <constraint firstAttribute="height" constant="1" id="5Lo-Di-PSf"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVV-eX-FYa">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVV-eX-FYa">
                                         <rect key="frame" x="280" y="25" width="42" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -671,6 +671,7 @@ Please reset your device and retry again.</string>
                                     <constraint firstItem="TVV-eX-FYa" firstAttribute="centerY" secondItem="4W4-DT-07r" secondAttribute="centerY" id="bSG-pS-UCz"/>
                                     <constraint firstAttribute="bottom" secondItem="Ma8-ws-GBR" secondAttribute="bottom" id="gzm-zW-h4Y"/>
                                     <constraint firstItem="UUm-p3-Sdg" firstAttribute="leading" secondItem="4W4-DT-07r" secondAttribute="leading" id="lAH-wh-sgc"/>
+                                    <constraint firstItem="TVV-eX-FYa" firstAttribute="leading" secondItem="WEh-Wx-c02" secondAttribute="trailing" constant="10" id="nSc-Y7-Dw2"/>
                                     <constraint firstItem="lek-lr-Kmo" firstAttribute="centerY" secondItem="4W4-DT-07r" secondAttribute="centerY" id="trU-qm-tNI"/>
                                     <constraint firstAttribute="height" constant="70" id="wvP-Mx-DEz"/>
                                 </constraints>

@@ -26,6 +26,7 @@ class DeviceSettingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        navigationItem.title = configureDevice.alexaDevice.deviceName
         deviceNameLabel.text = configureDevice.alexaDevice.deviceName ?? ""
         volumeSlider.value = Float(configureDevice.alexaDevice.volume ?? 0)
         volumeLabel.text = "\(configureDevice.alexaDevice.volume ?? 0)"
@@ -65,7 +66,7 @@ class DeviceSettingViewController: UIViewController {
         input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
             let textField = input?.textFields![0]
             if let name = textField?.text {
-                if name != self.configureDevice.alexaDevice.deviceName, name != "" {
+                if name != self.configureDevice.alexaDevice.deviceName, name != "", !name.contains("::") {
                     Constants.showLoader(message: "Setting device name", view: self.view)
                     self.configureDevice.setDeviceName(withName: name) { result in
                         DispatchQueue.main.async {
@@ -76,6 +77,10 @@ class DeviceSettingViewController: UIViewController {
                             }
                         }
                     }
+                } else {
+                    let alert = UIAlertController(title: "Error!", message: "Please enter a valid name which is not empty or does not contain ::", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }))

@@ -24,6 +24,7 @@ class AlexaDevice: NSObject {
     var endToneEnabled: Bool?
     var volume: UInt32?
     var language: Avs_Locale?
+    var version: String?
 
     init(hostAddr: String) {
         hostAddress = hostAddr

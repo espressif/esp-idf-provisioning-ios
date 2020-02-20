@@ -54,14 +54,14 @@ class LoginWithAmazonViewController: UIViewController {
         Constants.showLoader(message: "Signing in", view: view)
 
         do {
-            getDeviceDetails(tras: transport!, secu: security as! Security1) { _ in
+            getDeviceDetails(tras: transport!, secu: security!) { _ in
                 self.callLWA()
             }
         }
     }
 
     private func getDeviceDetails(tras _: Transport,
-                                  secu _: Security1,
+                                  secu _: Security,
                                   completionHandler: @escaping (String) -> Swift.Void) {
         let prov = Provision(session: session!)
         deviceDetails = prov.getAVSDeviceDetails(completionHandler: { _, error in
@@ -89,8 +89,8 @@ class LoginWithAmazonViewController: UIViewController {
             }))
             input.addAction(UIAlertAction(title: "Done", style: .default, handler: { [weak input] _ in
                 let textField = input?.textFields![0]
-                self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY] = textField?.text ?? ""
-                self.security = Security1(proofOfPossession: self.provisionConfig[Provision.CONFIG_PROOF_OF_POSSESSION_KEY]!)
+                Utility.pop = textField?.text ?? ""
+                self.security = Security1(proofOfPossession: Utility.pop ?? "")
                 Constants.hideLoader(view: self.view)
                 self.initSession()
             }))

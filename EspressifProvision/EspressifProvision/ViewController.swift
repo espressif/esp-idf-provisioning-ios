@@ -22,7 +22,6 @@ import UIKit
 
 class ViewController: UIViewController {
     // Provisioning
-    private let pop = Bundle.main.infoDictionary?["ProofOfPossession"] as! String
     private let avsdetails = ["codeChallenge": "6c7nGrky_ehjM40Ivk3p3-OeoEm9r7NCzmWexUULaa4", "redirectUri": "amzn-com.espressif.avs.provisioning.ble://?methodName=signin", "authCode": "", "clientId": "amzn1.application-oa2-"]
     // AVS
     private let productId = Bundle.main.infoDictionary?["ProductId"] as! String
@@ -65,7 +64,6 @@ class ViewController: UIViewController {
             var config = [
                 Provision.CONFIG_TRANSPORT_KEY: transport,
                 Provision.CONFIG_SECURITY_KEY: security,
-                Provision.CONFIG_PROOF_OF_POSSESSION_KEY: pop,
                 Provision.CONFIG_BASE_URL_KEY: baseUrl,
                 Provision.CONFIG_WIFI_AP_KEY: networkNamePrefix,
                 Provision.CONFIG_BLE_DEVICE_NAME_PREFIX: deviceNamePrefix,

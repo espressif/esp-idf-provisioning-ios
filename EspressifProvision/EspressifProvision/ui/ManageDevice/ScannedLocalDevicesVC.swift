@@ -110,6 +110,7 @@ extension ScannedLocalDevicesVC: SSDPDiscoveryDelegate {
             let newDevice = AlexaDevice(hostAddr: service.host)
             newDevice.uuid = uuid
             let stDictionary = parseResponse(header: service.searchTarget ?? "")
+            newDevice.version = stDictionary[Constants.versionKey]
             if stDictionary.keys.contains(Constants.friendlynameKey) {
                 if let found = alexaDevices.firstIndex(where: { $0.uuid == uuid }) {
                     alexaDevices.remove(at: found)
@@ -147,11 +148,18 @@ extension ScannedLocalDevicesVC: UITableViewDelegate {
         Constants.showLoader(message: "Getting device info", view: view)
         let alexaDevice = alexaDevices[indexPath.row]
         let transport = SoftAPTransport(baseUrl: alexaDevice.hostAddress! + ":80")
-        let security = Security0()
+        var security: Security
+        if alexaDevice.version != nil {
+            security = Security1(proofOfPossession: Utility.pop ?? "")
+        } else {
+            security = Security0()
+        }
         session = Session(transport: transport, security: security)
         session.initialize(response: nil) { error in
             guard error == nil else {
-                Constants.hideLoader(view: self.view)
+                DispatchQueue.main.async {
+                    Constants.hideLoader(view: self.view)
+                }
                 print("Error in establishing session \(error.debugDescription)")
                 return
             }
