@@ -64,11 +64,15 @@ class SettingsPageViewController: UIViewController {
     }
 
     @IBAction func openPrivacy(_: Any) {
-        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+        if Utility.isConnected(view: view) {
+            showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+        }
     }
 
     @IBAction func openTC(_: Any) {
-        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+        if Utility.isConnected(view: view) {
+            showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+        }
     }
 
     @IBAction func backButtonPressed(_: Any) {

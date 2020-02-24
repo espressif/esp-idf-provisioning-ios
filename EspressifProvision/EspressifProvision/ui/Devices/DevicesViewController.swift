@@ -86,7 +86,7 @@ class DevicesViewController: UIViewController {
             Utility.showLoader(message: "Fetching Device List", view: view)
             refreshDeviceList()
         }
-        if User.shared.associatedNodeList?.count == 0 {
+        if User.shared.associatedNodeList?.count == 0 || User.shared.associatedNodeList == nil {
             initialView.isHidden = false
             collectionView.isHidden = true
             addButton.isHidden = true
@@ -137,8 +137,10 @@ class DevicesViewController: UIViewController {
     }
 
     @IBAction func refreshClicked(_: Any) {
-        Utility.showLoader(message: "Fetching Device List", view: view)
-        refreshDeviceList()
+        if Utility.isConnected(view: view) {
+            Utility.showLoader(message: "Fetching Device List", view: view)
+            refreshDeviceList()
+        }
     }
 
     @objc func updateUIView() {
@@ -148,7 +150,7 @@ class DevicesViewController: UIViewController {
     }
 
     @objc func refreshDeviceList() {
-        if reachability.connection != .unavailable {
+        if Utility.isConnected(view: view) {
             collectionView.isUserInteractionEnabled = false
             User.shared.updateDeviceList = false
             NetworkManager.shared.getNodeList { nodes, _ in
@@ -184,6 +186,11 @@ class DevicesViewController: UIViewController {
         } else {
             Utility.hideLoader(view: view)
             refreshControl.endRefreshing()
+            if User.shared.associatedNodeList?.count == 0 || User.shared.associatedNodeList == nil {
+                initialView.isHidden = false
+                collectionView.isHidden = true
+                addButton.isHidden = true
+            }
         }
     }
 
@@ -294,18 +301,24 @@ extension DevicesViewController: UICollectionViewDelegate {
         let currentNode = getNodeAt(indexPath: indexPath)
         let deviceTraitsVC = controlStoryBoard.instantiateViewController(withIdentifier: Constants.deviceTraitListVCIdentifier) as! DeviceTraitListViewController
         deviceTraitsVC.device = currentDevice
-        NetworkManager.shared.getNodeStatus(node: currentNode) { node, error in
-            if error == nil, node != nil {
-                if let index = User.shared.associatedNodeList?.firstIndex(where: { node -> Bool in
-                    node.node_id == currentNode.node_id
-                }) {
-                    User.shared.associatedNodeList![index] = node!
+
+        if Utility.isConnected(view: view) {
+            NetworkManager.shared.getNodeStatus(node: currentNode) { node, error in
+                if error == nil, node != nil {
+                    if let index = User.shared.associatedNodeList?.firstIndex(where: { node -> Bool in
+                        node.node_id == currentNode.node_id
+                    }) {
+                        User.shared.associatedNodeList![index] = node!
+                    }
+                }
+                DispatchQueue.main.async {
+                    Utility.hideLoader(view: self.view)
+                    self.navigationController?.pushViewController(deviceTraitsVC, animated: true)
                 }
             }
-            DispatchQueue.main.async {
-                Utility.hideLoader(view: self.view)
-                self.navigationController?.pushViewController(deviceTraitsVC, animated: true)
-            }
+        } else {
+            Utility.hideLoader(view: view)
+            flag = false
         }
     }
 
@@ -352,6 +365,10 @@ extension DevicesViewController: UICollectionViewDataSource {
         cell.device = device
         cell.switchButton.isHidden = true
         cell.primaryValue.isHidden = true
+
+//        var backgroundLayer = Colors().gl
+//        backgroundLayer!.frame = cell.bgView.frame
+//        cell.bgView.layer.insertSublayer(backgroundLayer!, at: 0)
 
         cell.layer.backgroundColor = UIColor.white.cgColor
         cell.layer.shadowColor = UIColor.lightGray.cgColor
@@ -497,6 +514,56 @@ extension DevicesViewController: DeviceListHeaderProtocol {
             let destination = deviceStoryboard.instantiateViewController(withIdentifier: "nodeDetailsVC") as! NodeDetailsViewController
             destination.currentNode = node
             navigationController?.pushViewController(destination, animated: true)
+        }
+    }
+}
+
+class Colors {
+    var gl: CAGradientLayer!
+
+    init() {
+        let colorTop = UIColor.clear.cgColor
+        let colorBottom = UIColor.black.cgColor
+
+        gl = CAGradientLayer()
+        gl.colors = [colorTop, colorBottom]
+        gl.locations = [0.0, 1.0]
+    }
+}
+
+@IBDesignable
+class GradientView: UIView {
+    @IBInspectable var firstColor: UIColor = UIColor.clear {
+        didSet {
+            updateView()
+        }
+    }
+
+    @IBInspectable var secondColor: UIColor = UIColor.clear {
+        didSet {
+            updateView()
+        }
+    }
+
+    @IBInspectable var isHorizontal: Bool = true {
+        didSet {
+            updateView()
+        }
+    }
+
+    override class var layerClass: AnyClass {
+        return CAGradientLayer.self
+    }
+
+    func updateView() {
+        let layer = self.layer as! CAGradientLayer
+        layer.colors = [firstColor, secondColor].map { $0.cgColor }
+        if isHorizontal {
+            layer.startPoint = CGPoint(x: 0, y: 0.5)
+            layer.endPoint = CGPoint(x: 1, y: 0.5)
+        } else {
+            layer.startPoint = CGPoint(x: 0.75, y: 0)
+            layer.endPoint = CGPoint(x: 0.75, y: 1)
         }
     }
 }

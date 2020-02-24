@@ -215,16 +215,18 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
 
     @IBAction func signInPressed(_: AnyObject) {
         dismissKeyboard()
-        guard let usernameValue = username.text, !usernameValue.isEmpty, let password = password.text, !password.isEmpty else {
-            let alertController = UIAlertController(title: "Missing information",
-                                                    message: "Please enter a valid user name and password",
-                                                    preferredStyle: .alert)
-            let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
-            alertController.addAction(retryAction)
-            present(alertController, animated: true, completion: nil)
-            return
+        if Utility.isConnected(view: view) {
+            guard let usernameValue = username.text, !usernameValue.isEmpty, let password = password.text, !password.isEmpty else {
+                let alertController = UIAlertController(title: "Missing information",
+                                                        message: "Please enter a valid user name and password",
+                                                        preferredStyle: .alert)
+                let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
+                alertController.addAction(retryAction)
+                present(alertController, animated: true, completion: nil)
+                return
+            }
+            signIn(username: usernameValue, password: password)
         }
-        signIn(username: usernameValue, password: password)
     }
 
     func signIn(username: String, password: String) {
@@ -246,76 +248,78 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
 
     @IBAction func signUp(_ sender: AnyObject) {
         dismissKeyboard()
-        guard let userNameValue = self.email.text, !userNameValue.isEmpty,
-            let passwordValue = self.registerPassword.text, !passwordValue.isEmpty else {
-            let alertController = UIAlertController(title: "Missing Required Fields",
-                                                    message: "Username / Password are required for registration.",
-                                                    preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-            alertController.addAction(okAction)
+        if Utility.isConnected(view: view) {
+            guard let userNameValue = self.email.text, !userNameValue.isEmpty,
+                let passwordValue = self.registerPassword.text, !passwordValue.isEmpty else {
+                let alertController = UIAlertController(title: "Missing Required Fields",
+                                                        message: "Username / Password are required for registration.",
+                                                        preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alertController.addAction(okAction)
 
-            present(alertController, animated: true, completion: nil)
-            return
-        }
+                present(alertController, animated: true, completion: nil)
+                return
+            }
 
-        if let confirmPasswordValue = confirmPassword.text, confirmPasswordValue != passwordValue {
-            let alertController = UIAlertController(title: "Mismatch",
-                                                    message: "Re-entered password do not match.",
-                                                    preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-            alertController.addAction(okAction)
+            if let confirmPasswordValue = confirmPassword.text, confirmPasswordValue != passwordValue {
+                let alertController = UIAlertController(title: "Mismatch",
+                                                        message: "Re-entered password do not match.",
+                                                        preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alertController.addAction(okAction)
 
-            present(alertController, animated: true, completion: nil)
-            return
-        }
+                present(alertController, animated: true, completion: nil)
+                return
+            }
 
-        if !checked {
-            let alertController = UIAlertController(title: "Error!!",
-                                                    message: "Please accept our terms and condition before signing up",
-                                                    preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-            alertController.addAction(okAction)
+            if !checked {
+                let alertController = UIAlertController(title: "Error!!",
+                                                        message: "Please accept our terms and condition before signing up",
+                                                        preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alertController.addAction(okAction)
 
-            present(alertController, animated: true, completion: nil)
-            return
-        }
-        Utility.showLoader(message: "", view: view)
+                present(alertController, animated: true, completion: nil)
+                return
+            }
+            Utility.showLoader(message: "", view: view)
 
-        var attributes = [AWSCognitoIdentityUserAttributeType]()
+            var attributes = [AWSCognitoIdentityUserAttributeType]()
 
-        if let emailValue = self.email.text, !emailValue.isEmpty {
-            let email = AWSCognitoIdentityUserAttributeType()
-            email?.name = "email"
-            email?.value = emailValue
-            attributes.append(email!)
-        }
+            if let emailValue = self.email.text, !emailValue.isEmpty {
+                let email = AWSCognitoIdentityUserAttributeType()
+                email?.name = "email"
+                email?.value = emailValue
+                attributes.append(email!)
+            }
 
-        // sign up the user
-        pool?.signUp(userNameValue, password: passwordValue, userAttributes: attributes, validationData: nil).continueWith { [weak self] (task) -> Any? in
-            guard let strongSelf = self else { return nil }
-            DispatchQueue.main.async {
-                Utility.hideLoader(view: strongSelf.view)
-                if let error = task.error as NSError? {
-                    let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
-                                                            message: error.userInfo["message"] as? String,
-                                                            preferredStyle: .alert)
-                    let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
-                    alertController.addAction(retryAction)
+            // sign up the user
+            pool?.signUp(userNameValue, password: passwordValue, userAttributes: attributes, validationData: nil).continueWith { [weak self] (task) -> Any? in
+                guard let strongSelf = self else { return nil }
+                DispatchQueue.main.async {
+                    Utility.hideLoader(view: strongSelf.view)
+                    if let error = task.error as NSError? {
+                        let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
+                                                                message: error.userInfo["message"] as? String,
+                                                                preferredStyle: .alert)
+                        let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
+                        alertController.addAction(retryAction)
 
-                    self?.present(alertController, animated: true, completion: nil)
-                } else if let result = task.result {
-                    User.shared.username = userNameValue
-                    User.shared.password = passwordValue
-                    // handle the case where user has to confirm his identity via email / SMS
-                    if result.user.confirmedStatus != AWSCognitoIdentityUserStatus.confirmed {
-                        strongSelf.sentTo = result.codeDeliveryDetails?.destination
-                        strongSelf.performSegue(withIdentifier: "confirmSignUpSegue", sender: sender)
-                    } else {
-                        _ = strongSelf.navigationController?.popToRootViewController(animated: true)
+                        self?.present(alertController, animated: true, completion: nil)
+                    } else if let result = task.result {
+                        User.shared.username = userNameValue
+                        User.shared.password = passwordValue
+                        // handle the case where user has to confirm his identity via email / SMS
+                        if result.user.confirmedStatus != AWSCognitoIdentityUserStatus.confirmed {
+                            strongSelf.sentTo = result.codeDeliveryDetails?.destination
+                            strongSelf.performSegue(withIdentifier: "confirmSignUpSegue", sender: sender)
+                        } else {
+                            _ = strongSelf.navigationController?.popToRootViewController(animated: true)
+                        }
                     }
                 }
+                return nil
             }
-            return nil
         }
     }
 

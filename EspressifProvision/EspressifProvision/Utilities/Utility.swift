@@ -9,12 +9,14 @@
 import CoreBluetooth
 import Foundation
 import MBProgressHUD
+import Reachability
 import UIKit
 
 class Utility {
     static var deviceNamePrefix = UserDefaults.standard.value(forKey: Constants.prefixKey) as? String ?? (Bundle.main.infoDictionary?[Constants.deviceNamePrefix] as? String ?? Constants.devicePrefixDefault)
     static let allowPrefixFilter = Bundle.main.infoDictionary?[Constants.allowFilteringByPrefix] as? Bool ?? false
     static let baseUrl = Bundle.main.infoDictionary?[Constants.wifiBaseUrl] as? String ?? Constants.wifiBaseUrlDefault
+    static let reachability = try! Reachability()
 
     var deviceName = ""
     var configPath: String = Constants.configPath
@@ -75,5 +77,18 @@ class Utility {
         DispatchQueue.main.async {
             MBProgressHUD.hide(for: view, animated: true)
         }
+    }
+
+    class func isConnected(view: UIView) -> Bool {
+        do {
+            try reachability.startNotifier()
+        } catch {
+            return true
+        }
+        if reachability.connection == .unavailable {
+            view.addSubview(NoInternetConnection.instanceFromNib())
+            return false
+        }
+        return true
     }
 }

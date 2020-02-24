@@ -9,6 +9,7 @@
 import UIKit
 
 class DevicesCollectionViewCell: UICollectionViewCell {
+    @IBOutlet var bgView: UIView!
     var device: Device!
     var switchValue = false
     var switchActionButton: () -> Void = {}

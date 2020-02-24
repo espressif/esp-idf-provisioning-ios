@@ -55,6 +55,8 @@
 		F15EABFF23E05A51008A766B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F15EAC0123E05A51008A766B /* Localizable.strings */; };
 		F15EAC0A23E198FF008A766B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F15EAC0C23E198FF008A766B /* Login.storyboard */; };
 		F15EAC0F23E1994E008A766B /* DeviceDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F15EAC1123E1994E008A766B /* DeviceDetail.storyboard */; };
+		F15FFF882402643A00E72D01 /* NoInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15FFF872402643A00E72D01 /* NoInternetConnection.swift */; };
+		F15FFF8A2402645200E72D01 /* NoInternetConnection.xib in Resources */ = {isa = PBXBuildFile; fileRef = F15FFF892402645200E72D01 /* NoInternetConnection.xib */; };
 		F176A41623C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */; };
 		F176A41823C4669300F2FCBC /* DeviceCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */; };
 		F176A41C23C8342200F2FCBC /* ClaimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41B23C8342200F2FCBC /* ClaimViewController.swift */; };
@@ -218,6 +220,8 @@
 		F15EAC0E23E19909008A766B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Login.strings"; sourceTree = "<group>"; };
 		F15EAC1023E1994E008A766B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DeviceDetail.storyboard; sourceTree = "<group>"; };
 		F15EAC1323E19976008A766B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DeviceDetail.strings"; sourceTree = "<group>"; };
+		F15FFF872402643A00E72D01 /* NoInternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnection.swift; sourceTree = "<group>"; };
+		F15FFF892402645200E72D01 /* NoInternetConnection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoInternetConnection.xib; sourceTree = "<group>"; };
 		F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListCollectionReusableView.swift; sourceTree = "<group>"; };
 		F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCollectionViewLayout.swift; sourceTree = "<group>"; };
 		F176A41B23C8342200F2FCBC /* ClaimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimViewController.swift; sourceTree = "<group>"; };
@@ -538,6 +542,8 @@
 			isa = PBXGroup;
 			children = (
 				F15EABF323E043DA008A766B /* CustomUIElements.swift */,
+				F15FFF872402643A00E72D01 /* NoInternetConnection.swift */,
+				F15FFF892402645200E72D01 /* NoInternetConnection.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -811,6 +817,7 @@
 				F1FB1539234C8AE20053B0ED /* ControlSectionHeaderView.xib in Resources */,
 				F15EAC0F23E1994E008A766B /* DeviceDetail.storyboard in Resources */,
 				1431462E20DE994C0017E119 /* Assets.xcassets in Resources */,
+				F15FFF8A2402645200E72D01 /* NoInternetConnection.xib in Resources */,
 				F1E37E9123CF3AD500A5043F /* PrimaryControlTableViewCell.xib in Resources */,
 				F1F4514C232B74510009DCE0 /* SwitchTableViewCell.xib in Resources */,
 				F1F45148232A43510009DCE0 /* SliderTableViewCell.xib in Resources */,
@@ -1001,6 +1008,7 @@
 				149774E3210C8A0000022841 /* StringExtensions.swift in Sources */,
 				14A6EA0E2108DF95007F9407 /* wifi_config.pb.swift in Sources */,
 				F1C8082C22CA17790098F3B4 /* NetworkManager.swift in Sources */,
+				F15FFF882402643A00E72D01 /* NoInternetConnection.swift in Sources */,
 				F19A9D1322C0D23E00A450C3 /* SignInViewController.swift in Sources */,
 				F1DD70A422A8EA150092DAB9 /* Utility.swift in Sources */,
 				F1F4514E232B78100009DCE0 /* Device.swift in Sources */,

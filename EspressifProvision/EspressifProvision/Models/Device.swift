@@ -21,7 +21,7 @@ class Device: Equatable {
     var params: [Param]?
     weak var node: Node?
     var primary: String?
-    
+
     func getDeviceName() -> String? {
         if let deviceNameParam = self.params?.first(where: { param -> Bool in
             param.type == "esp.param.name"
@@ -30,6 +30,6 @@ class Device: Equatable {
                 return name
             }
         }
-        return self.name
+        return name
     }
 }
