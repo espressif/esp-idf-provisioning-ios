@@ -22,9 +22,9 @@ import UIKit
 
 class ViewController: UIViewController {
     // Provisioning
-    private let avsdetails = ["codeChallenge": "6c7nGrky_ehjM40Ivk3p3-OeoEm9r7NCzmWexUULaa4", "redirectUri": "amzn-com.espressif.avs.provisioning.ble://?methodName=signin", "authCode": "", "clientId": "amzn1.application-oa2-"]
+    private let avsdetails = ["codeChallenge": "6c7nGrky_ehjM40Ivk3p3-OeoEm9r7NCzmWexUULaa4", "redirectUri": "amzn-" +
+        (Bundle.main.bundleIdentifier ?? "") + "://?methodName=signin", "authCode": "", "clientId": "amzn1.application-oa2-"]
     // AVS
-    private let productId = Bundle.main.infoDictionary?["ProductId"] as! String
     private var productDSN = ""
     private let codeVerifier = Bundle.main.infoDictionary?["CodeVerifier"] as! String
     private let avsconfigUUIDString: String = Bundle.main.infoDictionary?["BLEAVSConfigUUID"] as! String
@@ -67,7 +67,6 @@ class ViewController: UIViewController {
                 Provision.CONFIG_BASE_URL_KEY: baseUrl,
                 Provision.CONFIG_WIFI_AP_KEY: networkNamePrefix,
                 Provision.CONFIG_BLE_DEVICE_NAME_PREFIX: deviceNamePrefix,
-                ConfigureAVS.PRODUCT_ID: productId,
                 ConfigureAVS.DEVICE_SERIAL_NUMBER: productDSN,
                 ConfigureAVS.CODE_CHALLENGE: codeVerifier,
             ]

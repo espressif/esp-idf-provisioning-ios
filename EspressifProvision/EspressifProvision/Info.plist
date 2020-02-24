@@ -38,10 +38,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.espressif.avs.provisioning.ble</string>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>amzn-com.espressif.avs.provisioning.ble</string>
+				<string>amzn-$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			</array>
 		</dict>
 	</array>
@@ -59,8 +59,6 @@
 	<string>Connect with BLE Compatible devices for Provisioning</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Connect with BLE Compatible devices for Provisioning</string>
-	<key>ProductId</key>
-	<string></string>
 	<key>ProofOfPossession</key>
 	<string>abcd1234</string>
 	<key>UIBackgroundModes</key>
