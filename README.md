@@ -55,14 +55,16 @@ This ensures that you have the following dependencies installed -
 
 ### Get Alexa credentials
 
-As we are building a mobile application that will provision network credentials as well AVS credentials, we will need to associate our application with a security profile for `Login with Amazon`.
+As we are building a mobile application that will provision network credentials as well AVS credentials, we will need to associate our application with a security profile for LWA (`Login with Amazon`).
 
 `Login with Amazon` is Amazon's OAuth2 provider. It allows third party developers like us to enable the user to use their existing Amazon account to sign in through our ESP32 device.
 
-- Product ID
-- API key from Login With Amazon (LWA)
+### Build Settings
 
-Please input these values in `Info.plist` file before building.
+- Enter a unique bundle identifier for your application in TARGETS -> General under Identity section.
+- Generate API key for this bundle id from LWA console. Put this as value for "APIKey" in Info.plist.
+
+Now your app is ready to build.
 
 # Resources
 
@@ -72,4 +74,5 @@ Please input these values in `Info.plist` file before building.
 
 * [Check the Issues section on github](https://github.com/espressif/esp-idf/issues) if you find a bug or have a feature request. Please check existing Issues before opening a new one.
 
-* If you're interested in contributing to ESP-IDF, please check the [Contributions Guide](https://docs.espressif.com/projects/esp-idf/en/latest/contribute/index.html).
+* Check out the latest release of this version on App Store [iOS Alexa app](https://apps.apple.com/app/esp-alexa/id1464127534) .
+
