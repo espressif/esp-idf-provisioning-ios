@@ -19,6 +19,7 @@ class TopBarView: UIView {
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        addBottomRoundedEdge(desiredCurve: 1.0)
 //        if let color = AppConstants.shared.appThemeColor {
 //            backgroundColor = color
 //        } else {
