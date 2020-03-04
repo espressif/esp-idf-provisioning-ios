@@ -17,7 +17,7 @@ class SettingsPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if User.shared.userInfo.loggedInWith == .github {
+        if User.shared.userInfo.loggedInWith == .other {
             changePasswordView.isHidden = true
         }
 
@@ -64,11 +64,15 @@ class SettingsPageViewController: UIViewController {
     }
 
     @IBAction func openPrivacy(_: Any) {
-        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+        if Utility.isConnected(view: view) {
+            showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+        }
     }
 
     @IBAction func openTC(_: Any) {
-        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+        if Utility.isConnected(view: view) {
+            showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+        }
     }
 
     @IBAction func backButtonPressed(_: Any) {

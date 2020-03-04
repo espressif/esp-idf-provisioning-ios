@@ -58,14 +58,24 @@ class AppSettingsViewController: UIViewController {
 
     func updateUIViews() {
         NotificationCenter.default.post(Notification(name: Notification.Name(Constants.uiViewUpdateNotification)))
+        var currentBGColor: UIColor = UIColor(hexString: "#5330b9")
         if let color = AppConstants.shared.appThemeColor {
             PrimaryButton.appearance().backgroundColor = color
             TopBarView.appearance().backgroundColor = color
+            currentBGColor = color
         } else {
             if let bgColor = Constants.backgroundColor {
                 PrimaryButton.appearance().backgroundColor = UIColor(hexString: bgColor)
                 TopBarView.appearance().backgroundColor = UIColor(hexString: bgColor)
+                currentBGColor = UIColor(hexString: bgColor)
             }
+        }
+        if currentBGColor == #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1) {
+            PrimaryButton.appearance().setTitleColor(UIColor(hexString: "#5330b9"), for: .normal)
+            BarButton.appearance().setTitleColor(UIColor(hexString: "#5330b9"), for: .normal)
+        } else {
+            PrimaryButton.appearance().setTitleColor(UIColor.white, for: .normal)
+            BarButton.appearance().setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1), for: .normal)
         }
         for subview in view.subviews {
             subview.setNeedsDisplay()

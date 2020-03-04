@@ -12,13 +12,12 @@ struct JSONParser {
     static func parseNodeData(data: [String: Any], nodeID: String) -> Node {
         var result: [Device] = []
         // Saving node related information
-        var node = Node()
+        let node = Node()
         node.node_id = nodeID
         if let nodeInfo = data["info"] as? [String: String] {
             node.info = Info(name: nodeInfo["name"], fw_version: nodeInfo["fw_version"], type: nodeInfo["type"])
         }
         node.config_version = data["config_version"] as? String
-        node.primary = data["primary"] as? String
         if let attributeList = data["attributes"] as? [[String: Any]] {
             node.attributes = []
             for attributeItem in attributeList {
@@ -31,23 +30,25 @@ struct JSONParser {
 
         if let deviceList = data["devices"] as? [[String: Any]] {
             for item in deviceList {
-                var newDevice = Device()
+                let newDevice = Device()
                 newDevice.name = item["name"] as? String
                 newDevice.type = item["type"] as? String
+                newDevice.primary = item["primary"] as? String
                 newDevice.node = node
                 if let dynamicParams = item["params"] as? [[String: Any]] {
                     newDevice.params = []
                     for attr in dynamicParams {
-                        let dynamicAttr = Params()
+                        let dynamicAttr = Param()
                         if let attrName = attr["name"] as? String {
                             dynamicAttr.name = attrName
                         } else {
                             dynamicAttr.name = attr["name"] as? String
                         }
-                        dynamicAttr.uiType = attr["ui-type"] as? String
+                        dynamicAttr.uiType = attr["ui_type"] as? String
                         dynamicAttr.dataType = attr["data_type"] as? String
                         dynamicAttr.properties = attr["properties"] as? [String]
                         dynamicAttr.bounds = attr["bounds"] as? [String: Any]
+                        dynamicAttr.type = attr["type"] as? String
                         newDevice.params?.append(dynamicAttr)
                     }
                 }

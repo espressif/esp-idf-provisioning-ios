@@ -16,6 +16,12 @@ enum CustomError: Error {
     case emptyNodeList
 }
 
+enum InputValidationError: String {
+    case outOfBound = "Input value is out of bound"
+    case invalid = "Input value is inavlid"
+    case other = "Unrecognized error"
+}
+
 enum NetworkError: Error {
     case keyNotPresent
     case emptyToken

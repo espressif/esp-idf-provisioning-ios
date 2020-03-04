@@ -35,6 +35,7 @@ class DevicesViewController: UIViewController {
     var deviceID: String?
     var requestID: String?
     var singleDeviceNodeCount = 0
+    var flag = false
 
     let reachability = try! Reachability()
 
@@ -85,10 +86,12 @@ class DevicesViewController: UIViewController {
             Utility.showLoader(message: "Fetching Device List", view: view)
             refreshDeviceList()
         }
-        if User.shared.associatedNodeList?.count == 0 {
+        if User.shared.associatedNodeList?.count == 0 || User.shared.associatedNodeList == nil {
             initialView.isHidden = false
             collectionView.isHidden = true
+            addButton.isHidden = true
         }
+        flag = false
     }
 
     func getUserInfo(token: String, provider: ServiceProvider) {
@@ -134,8 +137,10 @@ class DevicesViewController: UIViewController {
     }
 
     @IBAction func refreshClicked(_: Any) {
-        Utility.showLoader(message: "Fetching Device List", view: view)
-        refreshDeviceList()
+        if Utility.isConnected(view: view) {
+            Utility.showLoader(message: "Fetching Device List", view: view)
+            refreshDeviceList()
+        }
     }
 
     @objc func updateUIView() {
@@ -145,7 +150,8 @@ class DevicesViewController: UIViewController {
     }
 
     @objc func refreshDeviceList() {
-        if reachability.connection != .unavailable {
+        if Utility.isConnected(view: view) {
+            collectionView.isUserInteractionEnabled = false
             User.shared.updateDeviceList = false
             NetworkManager.shared.getNodeList { nodes, _ in
                 Utility.hideLoader(view: self.view)
@@ -162,9 +168,11 @@ class DevicesViewController: UIViewController {
                 if nodes == nil || nodes?.count == 0 {
                     self.initialView.isHidden = false
                     self.collectionView.isHidden = true
+                    self.addButton.isHidden = true
                 } else {
                     self.initialView.isHidden = true
                     self.collectionView.isHidden = false
+                    self.addButton.isHidden = false
                     self.singleDeviceNodeCount = 0
                     for item in User.shared.associatedNodeList! {
                         if item.devices?.count == 1 {
@@ -173,28 +181,34 @@ class DevicesViewController: UIViewController {
                     }
                     self.collectionView.reloadData()
                 }
+                self.collectionView.isUserInteractionEnabled = true
             }
         } else {
             Utility.hideLoader(view: view)
             refreshControl.endRefreshing()
+            if User.shared.associatedNodeList?.count == 0 || User.shared.associatedNodeList == nil {
+                initialView.isHidden = false
+                collectionView.isHidden = true
+                addButton.isHidden = true
+            }
         }
     }
 
-    @IBAction func addButtonClicked(_: Any) {
-//        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//        actionSheet.addAction(UIAlertAction(title: "Add using QR code", style: .default, handler: nil))
-//        actionSheet.addAction(UIAlertAction(title: "Add manually", style: .default, handler: nil))
-//        let popover = actionSheet.popoverPresentationController
-//        popover?.sourceView = addButton
-//        present(actionSheet, animated: false, completion: nil)
-        if pickerView.isHidden {
-            pickerView.isHidden = false
-            addButton.setImage(UIImage(named: "cross_icon"), for: .normal)
-        } else {
-            pickerView.isHidden = true
-            addButton.setImage(UIImage(named: "add_icon"), for: .normal)
-        }
-    }
+//    @IBAction func addButtonClicked(_: Any) {
+    ////        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    ////        actionSheet.addAction(UIAlertAction(title: "Add using QR code", style: .default, handler: nil))
+    ////        actionSheet.addAction(UIAlertAction(title: "Add manually", style: .default, handler: nil))
+    ////        let popover = actionSheet.popoverPresentationController
+    ////        popover?.sourceView = addButton
+    ////        present(actionSheet, animated: false, completion: nil)
+//        if pickerView.isHidden {
+//            pickerView.isHidden = false
+//            addButton.setImage(UIImage(named: "cross_icon"), for: .normal)
+//        } else {
+//            pickerView.isHidden = true
+//            addButton.setImage(UIImage(named: "add_icon"), for: .normal)
+//        }
+//    }
 
     @IBAction func provisionButtonClicked(_: Any) {
         var transport = Provision.CONFIG_TRANSPORT_WIFI
@@ -278,29 +292,39 @@ class DevicesViewController: UIViewController {
 
 extension DevicesViewController: UICollectionViewDelegate {
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if flag {
+            return
+        }
+        flag = true
         Utility.showLoader(message: "", view: view)
         let currentDevice = getDeviceAt(indexPath: indexPath)
         let currentNode = getNodeAt(indexPath: indexPath)
-        let controlListVC = controlStoryBoard.instantiateViewController(withIdentifier: "controlListVC") as! ControlListViewController
-        controlListVC.device = currentDevice
-        NetworkManager.shared.getNodeStatus(node: currentNode) { node, error in
-            if error == nil, node != nil {
-                if let index = User.shared.associatedNodeList?.firstIndex(where: { node -> Bool in
-                    node.node_id == currentNode.node_id
-                }) {
-                    User.shared.associatedNodeList![index] = node!
+        let deviceTraitsVC = controlStoryBoard.instantiateViewController(withIdentifier: Constants.deviceTraitListVCIdentifier) as! DeviceTraitListViewController
+        deviceTraitsVC.device = currentDevice
+
+        if Utility.isConnected(view: view) {
+            NetworkManager.shared.getNodeStatus(node: currentNode) { node, error in
+                if error == nil, node != nil {
+                    if let index = User.shared.associatedNodeList?.firstIndex(where: { node -> Bool in
+                        node.node_id == currentNode.node_id
+                    }) {
+                        User.shared.associatedNodeList![index] = node!
+                    }
+                }
+                DispatchQueue.main.async {
+                    Utility.hideLoader(view: self.view)
+                    self.navigationController?.pushViewController(deviceTraitsVC, animated: true)
                 }
             }
-            DispatchQueue.main.async {
-                Utility.hideLoader(view: self.view)
-                self.navigationController?.pushViewController(controlListVC, animated: true)
-            }
+        } else {
+            Utility.hideLoader(view: view)
+            flag = false
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0, singleDeviceNodeCount > 0 {
-            return CGSize(width: 0, height: 0)
+            return CGSize(width: 0, height: 68.0)
         }
         return CGSize(width: collectionView.bounds.width, height: 68.0)
     }
@@ -335,15 +359,22 @@ extension DevicesViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "deviceCollectionViewCell", for: indexPath) as! DevicesCollectionViewCell
+        cell.refresh()
         var device = getDeviceAt(indexPath: indexPath)
-        cell.deviceName.text = device.name
+        cell.deviceName.text = device.getDeviceName()
         cell.device = device
+        cell.switchButton.isHidden = true
+        cell.primaryValue.isHidden = true
+
+//        var backgroundLayer = Colors().gl
+//        backgroundLayer!.frame = cell.bgView.frame
+//        cell.bgView.layer.insertSublayer(backgroundLayer!, at: 0)
 
         cell.layer.backgroundColor = UIColor.white.cgColor
         cell.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.layer.shadowOffset = CGSize(width: 1.0, height: 2.0)
-        cell.layer.shadowRadius = 1.0
-        cell.layer.shadowOpacity = 1.0
+        cell.layer.shadowOffset = CGSize(width: 0.5, height: 1.0)
+        cell.layer.shadowRadius = 0.5
+        cell.layer.shadowOpacity = 0.5
         cell.layer.masksToBounds = false
 
         if device.node?.isConnected ?? false {
@@ -354,7 +385,7 @@ extension DevicesViewController: UICollectionViewDataSource {
 
         var primaryKeyFound = false
 
-        if let primary = device.node?.primary {
+        if let primary = device.primary {
             if let primaryParam = device.params?.first(where: { param -> Bool in
                 param.name == primary
             }) {
@@ -378,23 +409,24 @@ extension DevicesViewController: UICollectionViewDataSource {
                 } else if primaryParam.dataType?.lowercased() == "string" {
                     cell.switchButton.isHidden = true
                     cell.primaryValue.text = primaryParam.value as? String ?? ""
+                    cell.primaryValue.isHidden = false
                 } else {
                     cell.switchButton.isHidden = true
                     if let value = primaryParam.value {
                         cell.primaryValue.text = "\(value)"
+                        cell.primaryValue.isHidden = false
                     }
                 }
             }
-        }
-
-        if !primaryKeyFound {
-            if let staticParams = device.attributes {
-                for item in staticParams {
-                    if item.name == "esp.param.temperature" {
-                        if let value = item.value as? String {
-                            primaryKeyFound = true
-                            cell.primaryValue.text = value + "º"
-                            cell.primaryValue.isHidden = false
+            if !primaryKeyFound {
+                if let staticParams = device.attributes {
+                    for item in staticParams {
+                        if item.name == primary {
+                            if let value = item.value as? String {
+                                primaryKeyFound = true
+                                cell.primaryValue.text = value
+                                cell.primaryValue.isHidden = false
+                            }
                         }
                     }
                 }
@@ -450,7 +482,7 @@ extension DevicesViewController: UICollectionViewDelegateFlowLayout {
         } else {
             cellWidth = (width - 30) / 2.0
         }
-        return CGSize(width: cellWidth, height: 144.0)
+        return CGSize(width: cellWidth, height: 110.0)
     }
 
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt _: Int) -> CGFloat {
@@ -482,6 +514,56 @@ extension DevicesViewController: DeviceListHeaderProtocol {
             let destination = deviceStoryboard.instantiateViewController(withIdentifier: "nodeDetailsVC") as! NodeDetailsViewController
             destination.currentNode = node
             navigationController?.pushViewController(destination, animated: true)
+        }
+    }
+}
+
+class Colors {
+    var gl: CAGradientLayer!
+
+    init() {
+        let colorTop = UIColor.clear.cgColor
+        let colorBottom = UIColor.black.cgColor
+
+        gl = CAGradientLayer()
+        gl.colors = [colorTop, colorBottom]
+        gl.locations = [0.0, 1.0]
+    }
+}
+
+@IBDesignable
+class GradientView: UIView {
+    @IBInspectable var firstColor: UIColor = UIColor.clear {
+        didSet {
+            updateView()
+        }
+    }
+
+    @IBInspectable var secondColor: UIColor = UIColor.clear {
+        didSet {
+            updateView()
+        }
+    }
+
+    @IBInspectable var isHorizontal: Bool = true {
+        didSet {
+            updateView()
+        }
+    }
+
+    override class var layerClass: AnyClass {
+        return CAGradientLayer.self
+    }
+
+    func updateView() {
+        let layer = self.layer as! CAGradientLayer
+        layer.colors = [firstColor, secondColor].map { $0.cgColor }
+        if isHorizontal {
+            layer.startPoint = CGPoint(x: 0, y: 0.5)
+            layer.endPoint = CGPoint(x: 1, y: 0.5)
+        } else {
+            layer.startPoint = CGPoint(x: 0.75, y: 0)
+            layer.endPoint = CGPoint(x: 0.75, y: 1)
         }
     }
 }

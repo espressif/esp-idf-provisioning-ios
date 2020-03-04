@@ -9,6 +9,7 @@
 import UIKit
 
 class DevicesCollectionViewCell: UICollectionViewCell {
+    @IBOutlet var bgView: UIView!
     var device: Device!
     var switchValue = false
     var switchActionButton: () -> Void = {}
@@ -27,5 +28,14 @@ class DevicesCollectionViewCell: UICollectionViewCell {
         } else {
             switchButton.alpha = 0.3
         }
+    }
+
+    func refresh() {
+        device = nil
+        switchValue = false
+        primaryValue.text = ""
+        deviceImageView.image = UIImage(named: "dummy_device_icon")
+        deviceName.text = ""
+        statusView.isHidden = true
     }
 }

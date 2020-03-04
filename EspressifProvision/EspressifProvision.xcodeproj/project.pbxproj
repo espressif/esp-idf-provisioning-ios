@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D3C22341CC32F8CF59E7736 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */; };
 		1431462720DE994B0017E119 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1431462620DE994B0017E119 /* AppDelegate.swift */; };
 		1431462C20DE994B0017E119 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1431462A20DE994B0017E119 /* Main.storyboard */; };
 		1431462E20DE994C0017E119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1431462D20DE994C0017E119 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 		149774E3210C8A0000022841 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149774E2210C8A0000022841 /* StringExtensions.swift */; };
 		14A6EA0E2108DF95007F9407 /* wifi_config.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A6EA0D2108DF95007F9407 /* wifi_config.pb.swift */; };
 		14DE671E20ECD04100941522 /* BLETransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DE671D20ECD04100941522 /* BLETransport.swift */; };
+		73BFBFC2F1B254D8255A4400 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */; };
 		7E89B3398606A35D1BCB7893 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */; };
 		F1153F2A238E5E79009DF206 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1153F29238E5E79009DF206 /* NetworkExtension.framework */; };
 		F12261A022C61695004D049F /* DeviceAssociation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F122619F22C61695004D049F /* DeviceAssociation.swift */; };
@@ -45,6 +47,7 @@
 		F12261A422C620ED004D049F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12261A322C620ED004D049F /* User.swift */; };
 		F13A014023E359250067F8B8 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13A013F23E359250067F8B8 /* DocumentViewController.swift */; };
 		F13A01BA23E98B690067F8B8 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13A01B923E98B680067F8B8 /* UserInfo.swift */; };
+		F13A01BC23ED64BE0067F8B8 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13A01BB23ED64BE0067F8B8 /* LoginManager.swift */; };
 		F13F273E238CF6170003AABB /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13F273D238CF6170003AABB /* ScannerViewController.swift */; };
 		F1402AB8239677B300C989F8 /* StaticControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1402AB6239677B300C989F8 /* StaticControlTableViewCell.swift */; };
 		F1402AB9239677B300C989F8 /* StaticControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1402AB7239677B300C989F8 /* StaticControlTableViewCell.xib */; };
@@ -52,6 +55,8 @@
 		F15EABFF23E05A51008A766B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F15EAC0123E05A51008A766B /* Localizable.strings */; };
 		F15EAC0A23E198FF008A766B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F15EAC0C23E198FF008A766B /* Login.storyboard */; };
 		F15EAC0F23E1994E008A766B /* DeviceDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F15EAC1123E1994E008A766B /* DeviceDetail.storyboard */; };
+		F15FFF882402643A00E72D01 /* NoInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15FFF872402643A00E72D01 /* NoInternetConnection.swift */; };
+		F15FFF8A2402645200E72D01 /* NoInternetConnection.xib in Resources */ = {isa = PBXBuildFile; fileRef = F15FFF892402645200E72D01 /* NoInternetConnection.xib */; };
 		F176A41623C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */; };
 		F176A41823C4669300F2FCBC /* DeviceCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */; };
 		F176A41C23C8342200F2FCBC /* ClaimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41B23C8342200F2FCBC /* ClaimViewController.swift */; };
@@ -76,8 +81,6 @@
 		F1B3558923B8DC4C004552FC /* ExtensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B3558823B8DC4C004552FC /* ExtensionManager.swift */; };
 		F1C8082C22CA17790098F3B4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C8082B22CA17790098F3B4 /* NetworkManager.swift */; };
 		F1CB6086233B549F0001D509 /* BLEDeviceListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1CB6085233B549F0001D509 /* BLEDeviceListViewCell.swift */; };
-		F1D4F1FB22AFBD6D000452EE /* DeviceInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */; };
-		F1DB6F60232F93D1004B1FA1 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DB6F5F232F93D1004B1FA1 /* Colors.swift */; };
 		F1DB6F62232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DB6F61232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift */; };
 		F1DD70A422A8EA150092DAB9 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A322A8EA140092DAB9 /* Utility.swift */; };
 		F1DD70A622A8EA2A0092DAB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1DD70A522A8EA2A0092DAB9 /* Constants.swift */; };
@@ -106,7 +109,7 @@
 		F1F4514B232B74510009DCE0 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F45149232B74510009DCE0 /* SwitchTableViewCell.swift */; };
 		F1F4514C232B74510009DCE0 /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1F4514A232B74510009DCE0 /* SwitchTableViewCell.xib */; };
 		F1F4514E232B78100009DCE0 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4514D232B78100009DCE0 /* Device.swift */; };
-		F1F45150232B7A780009DCE0 /* ControlListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4514F232B7A780009DCE0 /* ControlListViewController.swift */; };
+		F1F45150232B7A780009DCE0 /* DeviceTraitListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4514F232B7A780009DCE0 /* DeviceTraitListViewController.swift */; };
 		F1F45152232B7ECB0009DCE0 /* Attribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F45151232B7ECB0009DCE0 /* Attribute.swift */; };
 		F1FB1539234C8AE20053B0ED /* ControlSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1FB1538234C8AE20053B0ED /* ControlSectionHeaderView.xib */; };
 		F1FB153C234D91000053B0ED /* GenericSliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FB153A234D91000053B0ED /* GenericSliderTableViewCell.swift */; };
@@ -133,7 +136,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		10FBDE85E3C2325EA6CC75E3 /* Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig"; sourceTree = "<group>"; };
+		093DF57918C1F89C203A3C0F /* Pods_EspressifProvisionAll_EspressifProvision_Staging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EspressifProvisionAll_EspressifProvision_Staging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		13D5C83D216F3C1B0FFF1747 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig"; sourceTree = "<group>"; };
 		1431462320DE994B0017E119 /* RainMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1431462620DE994B0017E119 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1431462B20DE994B0017E119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -174,28 +178,36 @@
 		14A6EA0D2108DF95007F9407 /* wifi_config.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_config.pb.swift; sourceTree = "<group>"; };
 		14DE671D20ECD04100941522 /* BLETransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLETransport.swift; sourceTree = "<group>"; };
 		155A75482820C8AA25B59E7B /* Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-staging.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-staging.xcconfig"; sourceTree = "<group>"; };
-		15A91E4930F72AD4D1D47C61 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig"; sourceTree = "<group>"; };
-		1E3CE424F1633D750BE08C05 /* Pods-EspressifProvisionAll-EspressifProvision.blesec1-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.blesec1-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.blesec1-debug.xcconfig"; sourceTree = "<group>"; };
+		36E81DD1CC6F7644E23BD232 /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; sourceTree = "<group>"; };
 		3E2F85E1747058D90D13B2FA /* Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-debug.xcconfig"; sourceTree = "<group>"; };
-		5E4DB15129C36A08E6555745 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig"; sourceTree = "<group>"; };
+		461829537A950DC0CD5E3CAD /* Pods-EspressifProvisionAll-EspressifProvision Staging.blesec1-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision Staging.blesec1-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision Staging/Pods-EspressifProvisionAll-EspressifProvision Staging.blesec1-debug.xcconfig"; sourceTree = "<group>"; };
+		73B8C1A5BA75B23854CAC955 /* Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig"; sourceTree = "<group>"; };
+		80845F3FD54E4161C643C594 /* Pods-EspressifProvisionAll-EspressifProvision.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.release.xcconfig"; sourceTree = "<group>"; };
 		82594A2ED75EE20241927EC3 /* Pods-EspressifProvisionAll-EspressifProvisionTests.blesec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.blesec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.blesec0-debug.xcconfig"; sourceTree = "<group>"; };
 		82ECC73D5F6285205C5D6B5C /* Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1-debug.xcconfig"; sourceTree = "<group>"; };
-		8AEE1EA339EF845B350B9461 /* Pods-EspressifProvisionAll-EspressifProvision.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.release.xcconfig"; sourceTree = "<group>"; };
+		8E1E6D22052EA3913BB30ABA /* Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-staging.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision Staging/Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-staging.xcconfig"; sourceTree = "<group>"; };
+		8FDFA8FBBD58F6A4BB2F3B58 /* Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision Staging/Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec0-debug.xcconfig"; sourceTree = "<group>"; };
+		993F912B9268263E402700A3 /* Pods-EspressifProvisionAll-EspressifProvision Staging.blesec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision Staging.blesec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision Staging/Pods-EspressifProvisionAll-EspressifProvision Staging.blesec0-debug.xcconfig"; sourceTree = "<group>"; };
 		9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EspressifProvisionAll_EspressifProvisionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F088A3EDAF9DEA78D22346C /* Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-release.xcconfig"; sourceTree = "<group>"; };
 		9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EspressifProvisionAll_EspressifProvision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B90EB42C67277C477D78C7B2 /* Pods-EspressifProvisionAll-EspressifProvision.blesec1-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.blesec1-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.blesec1-debug.xcconfig"; sourceTree = "<group>"; };
+		BA2555F901660FD681DEF837 /* Pods-EspressifProvisionAll-EspressifProvision Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision Staging.release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision Staging/Pods-EspressifProvisionAll-EspressifProvision Staging.release.xcconfig"; sourceTree = "<group>"; };
 		BC3DF191A3F77BDF0EE1FC71 /* Pods-EspressifProvisionAll-EspressifProvisionTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.debug.xcconfig"; sourceTree = "<group>"; };
-		BF983879081F440E18364B1E /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig"; sourceTree = "<group>"; };
+		BFEF838029D37DB64314D93F /* Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision Staging/Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-debug.xcconfig"; sourceTree = "<group>"; };
 		C285865721D96C24054F1647 /* Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec0-debug.xcconfig"; sourceTree = "<group>"; };
-		C9F80AFFF914218F4C795369 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig"; sourceTree = "<group>"; };
+		C9117C2DB5F3354B7BF0BA25 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig"; sourceTree = "<group>"; };
 		D2B4EC5704D46C3EA9A47720 /* Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvisionTests/Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig"; sourceTree = "<group>"; };
-		EA24507D63588F8C9C0C451B /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig"; sourceTree = "<group>"; };
+		D3AC08D4A7C235C633D9048A /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig"; sourceTree = "<group>"; };
+		D854C8A3BE3C61EAAD826FA5 /* Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-release.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision Staging/Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-release.xcconfig"; sourceTree = "<group>"; };
 		F1153F29238E5E79009DF206 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		F122619F22C61695004D049F /* DeviceAssociation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAssociation.swift; sourceTree = "<group>"; };
 		F12261A122C6199F004D049F /* cloud.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cloud.pb.swift; sourceTree = "<group>"; };
 		F12261A322C620ED004D049F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F13A013F23E359250067F8B8 /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
 		F13A01B923E98B680067F8B8 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		F13A01BB23ED64BE0067F8B8 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		F13A023523F2D0390067F8B8 /* EspressifProvision staging-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "EspressifProvision staging-Info.plist"; path = "/Users/vikaschandra/esp-idf-provisioning-ios/EspressifProvision/EspressifProvision staging-Info.plist"; sourceTree = "<absolute>"; };
 		F13F273D238CF6170003AABB /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		F1402AB6239677B300C989F8 /* StaticControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticControlTableViewCell.swift; sourceTree = "<group>"; };
 		F1402AB7239677B300C989F8 /* StaticControlTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StaticControlTableViewCell.xib; sourceTree = "<group>"; };
@@ -208,6 +220,8 @@
 		F15EAC0E23E19909008A766B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Login.strings"; sourceTree = "<group>"; };
 		F15EAC1023E1994E008A766B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/DeviceDetail.storyboard; sourceTree = "<group>"; };
 		F15EAC1323E19976008A766B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DeviceDetail.strings"; sourceTree = "<group>"; };
+		F15FFF872402643A00E72D01 /* NoInternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnection.swift; sourceTree = "<group>"; };
+		F15FFF892402645200E72D01 /* NoInternetConnection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoInternetConnection.xib; sourceTree = "<group>"; };
 		F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListCollectionReusableView.swift; sourceTree = "<group>"; };
 		F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCollectionViewLayout.swift; sourceTree = "<group>"; };
 		F176A41B23C8342200F2FCBC /* ClaimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimViewController.swift; sourceTree = "<group>"; };
@@ -233,8 +247,6 @@
 		F1B3558823B8DC4C004552FC /* ExtensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionManager.swift; sourceTree = "<group>"; };
 		F1C8082B22CA17790098F3B4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F1CB6085233B549F0001D509 /* BLEDeviceListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDeviceListViewCell.swift; sourceTree = "<group>"; };
-		F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewController.swift; sourceTree = "<group>"; };
-		F1DB6F5F232F93D1004B1FA1 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		F1DB6F61232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesCollectionViewCell.swift; sourceTree = "<group>"; };
 		F1DD70A322A8EA140092DAB9 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		F1DD70A522A8EA2A0092DAB9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -263,12 +275,14 @@
 		F1F45149232B74510009DCE0 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		F1F4514A232B74510009DCE0 /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
 		F1F4514D232B78100009DCE0 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
-		F1F4514F232B7A780009DCE0 /* ControlListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlListViewController.swift; sourceTree = "<group>"; };
+		F1F4514F232B7A780009DCE0 /* DeviceTraitListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTraitListViewController.swift; sourceTree = "<group>"; };
 		F1F45151232B7ECB0009DCE0 /* Attribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attribute.swift; sourceTree = "<group>"; };
 		F1FB1538234C8AE20053B0ED /* ControlSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ControlSectionHeaderView.xib; sourceTree = "<group>"; };
 		F1FB153A234D91000053B0ED /* GenericSliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericSliderTableViewCell.swift; sourceTree = "<group>"; };
 		F1FB153B234D91000053B0ED /* GenericSliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericSliderTableViewCell.xib; sourceTree = "<group>"; };
 		F1FB153E234DED260053B0ED /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		F69752FA1E35B222D7A513B2 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig"; sourceTree = "<group>"; };
+		FEE3BF04840CF3E025667620 /* Pods-EspressifProvisionAll-EspressifProvision Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision Staging.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision Staging/Pods-EspressifProvisionAll-EspressifProvision Staging.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +294,8 @@
 				F1153F2A238E5E79009DF206 /* NetworkExtension.framework in Frameworks */,
 				143146A320EA23150017E119 /* Security.framework in Frameworks */,
 				7E89B3398606A35D1BCB7893 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */,
+				0D3C22341CC32F8CF59E7736 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */,
+				73BFBFC2F1B254D8255A4400 /* Pods_EspressifProvisionAll_EspressifProvision.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +326,7 @@
 				1431462420DE994B0017E119 /* Products */,
 				56A4FE6F186D17F2A0F189AC /* Pods */,
 				CAE64040D79003E04BA4A14C /* Frameworks */,
+				F13A023523F2D0390067F8B8 /* EspressifProvision staging-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -441,7 +458,6 @@
 				143146B420EB273B0017E119 /* ProvisionViewController.swift */,
 				14706916211050EE00F8E1D8 /* BLELandingViewController.swift */,
 				144149432126AE09002AD5E1 /* SuccessViewController.swift */,
-				F1D4F1FA22AFBD6D000452EE /* DeviceInfoViewController.swift */,
 				F19F6FF222F02B3400C70DE3 /* SettingsPageViewController.swift */,
 				F1CB6085233B549F0001D509 /* BLEDeviceListViewCell.swift */,
 				F1DDA06723588B110005F982 /* NodeDetailsViewController.swift */,
@@ -471,22 +487,30 @@
 		56A4FE6F186D17F2A0F189AC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				EA24507D63588F8C9C0C451B /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */,
-				8AEE1EA339EF845B350B9461 /* Pods-EspressifProvisionAll-EspressifProvision.release.xcconfig */,
 				D2B4EC5704D46C3EA9A47720 /* Pods-EspressifProvisionAll-EspressifProvisionTests.release.xcconfig */,
-				C9F80AFFF914218F4C795369 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig */,
-				BF983879081F440E18364B1E /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig */,
 				C285865721D96C24054F1647 /* Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec0-debug.xcconfig */,
 				3E2F85E1747058D90D13B2FA /* Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-debug.xcconfig */,
-				10FBDE85E3C2325EA6CC75E3 /* Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig */,
-				1E3CE424F1633D750BE08C05 /* Pods-EspressifProvisionAll-EspressifProvision.blesec1-debug.xcconfig */,
 				82594A2ED75EE20241927EC3 /* Pods-EspressifProvisionAll-EspressifProvisionTests.blesec0-debug.xcconfig */,
 				82ECC73D5F6285205C5D6B5C /* Pods-EspressifProvisionAll-EspressifProvisionTests.blesec1-debug.xcconfig */,
 				BC3DF191A3F77BDF0EE1FC71 /* Pods-EspressifProvisionAll-EspressifProvisionTests.debug.xcconfig */,
-				15A91E4930F72AD4D1D47C61 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig */,
 				9F088A3EDAF9DEA78D22346C /* Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-release.xcconfig */,
-				5E4DB15129C36A08E6555745 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig */,
 				155A75482820C8AA25B59E7B /* Pods-EspressifProvisionAll-EspressifProvisionTests.wifisec1-staging.xcconfig */,
+				36E81DD1CC6F7644E23BD232 /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */,
+				F69752FA1E35B222D7A513B2 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig */,
+				73B8C1A5BA75B23854CAC955 /* Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig */,
+				13D5C83D216F3C1B0FFF1747 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig */,
+				C9117C2DB5F3354B7BF0BA25 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig */,
+				D3AC08D4A7C235C633D9048A /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig */,
+				B90EB42C67277C477D78C7B2 /* Pods-EspressifProvisionAll-EspressifProvision.blesec1-debug.xcconfig */,
+				80845F3FD54E4161C643C594 /* Pods-EspressifProvisionAll-EspressifProvision.release.xcconfig */,
+				FEE3BF04840CF3E025667620 /* Pods-EspressifProvisionAll-EspressifProvision Staging.debug.xcconfig */,
+				8FDFA8FBBD58F6A4BB2F3B58 /* Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec0-debug.xcconfig */,
+				993F912B9268263E402700A3 /* Pods-EspressifProvisionAll-EspressifProvision Staging.blesec0-debug.xcconfig */,
+				BFEF838029D37DB64314D93F /* Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-debug.xcconfig */,
+				D854C8A3BE3C61EAAD826FA5 /* Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-release.xcconfig */,
+				8E1E6D22052EA3913BB30ABA /* Pods-EspressifProvisionAll-EspressifProvision Staging.wifisec1-staging.xcconfig */,
+				461829537A950DC0CD5E3CAD /* Pods-EspressifProvisionAll-EspressifProvision Staging.blesec1-debug.xcconfig */,
+				BA2555F901660FD681DEF837 /* Pods-EspressifProvisionAll-EspressifProvision Staging.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -499,6 +523,7 @@
 				143146A220EA23150017E119 /* Security.framework */,
 				9FC5952F5F6F4A07A0ED190E /* Pods_EspressifProvisionAll_EspressifProvision.framework */,
 				9BEBDCCD5B5E7E9D6B8F9AE3 /* Pods_EspressifProvisionAll_EspressifProvisionTests.framework */,
+				093DF57918C1F89C203A3C0F /* Pods_EspressifProvisionAll_EspressifProvision_Staging.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -508,6 +533,7 @@
 			children = (
 				F122619F22C61695004D049F /* DeviceAssociation.swift */,
 				F1C8082B22CA17790098F3B4 /* NetworkManager.swift */,
+				F13A01BB23ED64BE0067F8B8 /* LoginManager.swift */,
 			);
 			path = AWSCognito;
 			sourceTree = "<group>";
@@ -516,6 +542,8 @@
 			isa = PBXGroup;
 			children = (
 				F15EABF323E043DA008A766B /* CustomUIElements.swift */,
+				F15FFF872402643A00E72D01 /* NoInternetConnection.swift */,
+				F15FFF892402645200E72D01 /* NoInternetConnection.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -560,7 +588,6 @@
 				F1DD70A322A8EA140092DAB9 /* Utility.swift */,
 				F1DD70A522A8EA2A0092DAB9 /* Constants.swift */,
 				F12261A322C620ED004D049F /* User.swift */,
-				F1DB6F5F232F93D1004B1FA1 /* Colors.swift */,
 				F1AB511A23321B7E002401F9 /* JSONParser.swift */,
 				F1FB153E234DED260053B0ED /* Errors.swift */,
 				F17F1411239F96C3008326A4 /* VersionManager.swift */,
@@ -623,7 +650,7 @@
 				F1F451392328C5D40009DCE0 /* DevicesViewController.swift */,
 				F1F4513E232A30C70009DCE0 /* SwitchViewController.swift */,
 				F1F45140232A3B260009DCE0 /* LightViewController.swift */,
-				F1F4514F232B7A780009DCE0 /* ControlListViewController.swift */,
+				F1F4514F232B7A780009DCE0 /* DeviceTraitListViewController.swift */,
 				F1DB6F61232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift */,
 				F13F273D238CF6170003AABB /* ScannerViewController.swift */,
 				F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */,
@@ -790,6 +817,7 @@
 				F1FB1539234C8AE20053B0ED /* ControlSectionHeaderView.xib in Resources */,
 				F15EAC0F23E1994E008A766B /* DeviceDetail.storyboard in Resources */,
 				1431462E20DE994C0017E119 /* Assets.xcassets in Resources */,
+				F15FFF8A2402645200E72D01 /* NoInternetConnection.xib in Resources */,
 				F1E37E9123CF3AD500A5043F /* PrimaryControlTableViewCell.xib in Resources */,
 				F1F4514C232B74510009DCE0 /* SwitchTableViewCell.xib in Resources */,
 				F1F45148232A43510009DCE0 /* SliderTableViewCell.xib in Resources */,
@@ -921,8 +949,7 @@
 			files = (
 				F13A014023E359250067F8B8 /* DocumentViewController.swift in Sources */,
 				1431468220DEB6F50017E119 /* Security0.swift in Sources */,
-				F1DB6F60232F93D1004B1FA1 /* Colors.swift in Sources */,
-				F1F45150232B7A780009DCE0 /* ControlListViewController.swift in Sources */,
+				F1F45150232B7A780009DCE0 /* DeviceTraitListViewController.swift in Sources */,
 				F19A9D1822C0ED4C00A450C3 /* ForgotPasswordViewController.swift in Sources */,
 				F1DD70AA22A9BFBE0092DAB9 /* ScanWifiList.swift in Sources */,
 				F18EC5C023BE0BF700F9188E /* AssociationConfig.swift in Sources */,
@@ -976,12 +1003,12 @@
 				1431468B20E37B980017E119 /* Session.swift in Sources */,
 				F1DDA06823588B110005F982 /* NodeDetailsViewController.swift in Sources */,
 				F1EAAC8E23E29D9B00E9A6A8 /* AppConstants.swift in Sources */,
-				F1D4F1FB22AFBD6D000452EE /* DeviceInfoViewController.swift in Sources */,
 				1431469F20E387C60017E119 /* wifi_constants.pb.swift in Sources */,
 				F1AB511B23321B7E002401F9 /* JSONParser.swift in Sources */,
 				149774E3210C8A0000022841 /* StringExtensions.swift in Sources */,
 				14A6EA0E2108DF95007F9407 /* wifi_config.pb.swift in Sources */,
 				F1C8082C22CA17790098F3B4 /* NetworkManager.swift in Sources */,
+				F15FFF882402643A00E72D01 /* NoInternetConnection.swift in Sources */,
 				F19A9D1322C0D23E00A450C3 /* SignInViewController.swift in Sources */,
 				F1DD70A422A8EA150092DAB9 /* Utility.swift in Sources */,
 				F1F4514E232B78100009DCE0 /* Device.swift in Sources */,
@@ -999,6 +1026,7 @@
 				F1FB153C234D91000053B0ED /* GenericSliderTableViewCell.swift in Sources */,
 				1431462720DE994B0017E119 /* AppDelegate.swift in Sources */,
 				1431469D20E387C60017E119 /* session.pb.swift in Sources */,
+				F13A01BC23ED64BE0067F8B8 /* LoginManager.swift in Sources */,
 				F1CB6086233B549F0001D509 /* BLEDeviceListViewCell.swift in Sources */,
 				F1E37E9023CF3AD500A5043F /* PrimaryControlTableViewCell.swift in Sources */,
 				F19A9D1A22C0ED4C00A450C3 /* SignUpViewController.swift in Sources */,
@@ -1208,10 +1236,8 @@
 		};
 		1431464C20DE994C0017E119 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA24507D63588F8C9C0C451B /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */;
+			baseConfigurationReference = 36E81DD1CC6F7644E23BD232 /* Pods-EspressifProvisionAll-EspressifProvision.debug.xcconfig */;
 			buildSettings = {
-				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
-				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
@@ -1239,16 +1265,13 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
 			};
 			name = Debug;
 		};
 		1431464D20DE994C0017E119 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8AEE1EA339EF845B350B9461 /* Pods-EspressifProvisionAll-EspressifProvision.release.xcconfig */;
+			baseConfigurationReference = 80845F3FD54E4161C643C594 /* Pods-EspressifProvisionAll-EspressifProvision.release.xcconfig */;
 			buildSettings = {
-				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
-				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
@@ -1275,7 +1298,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
 			};
 			name = Release;
 		};
@@ -1427,10 +1449,8 @@
 		};
 		14BB0D7F211C112400326DD9 /* WifiSec0-Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9F80AFFF914218F4C795369 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig */;
+			baseConfigurationReference = F69752FA1E35B222D7A513B2 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec0-debug.xcconfig */;
 			buildSettings = {
-				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
-				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
@@ -1459,7 +1479,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
 			};
 			name = "WifiSec0-Debug";
 		};
@@ -1569,10 +1588,8 @@
 		};
 		14BB0D83211C113300326DD9 /* WifiSec1-Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF983879081F440E18364B1E /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig */;
+			baseConfigurationReference = 13D5C83D216F3C1B0FFF1747 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig */;
 			buildSettings = {
-				APP_CLIENT_ID = 1ufkb8giumr81k3fj8je1rptad;
-				APP_CLIENT_SECRET = cs78ke0mje48fbg0pd0mo6psl8dpqm9cq8acl3tgs89eb2frjk8;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
@@ -1602,7 +1619,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_POOL_ID = "us-east-1_9959L4v1E";
 			};
 			name = "WifiSec1-Debug";
 		};
@@ -1712,10 +1728,8 @@
 		};
 		14BB0D8B211C12FF00326DD9 /* BLESec0-Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 10FBDE85E3C2325EA6CC75E3 /* Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig */;
+			baseConfigurationReference = 73B8C1A5BA75B23854CAC955 /* Pods-EspressifProvisionAll-EspressifProvision.blesec0-debug.xcconfig */;
 			buildSettings = {
-				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
-				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
@@ -1744,7 +1758,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
 			};
 			name = "BLESec0-Debug";
 		};
@@ -1854,10 +1867,8 @@
 		};
 		14BB0D93211C131500326DD9 /* BLESec1-Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1E3CE424F1633D750BE08C05 /* Pods-EspressifProvisionAll-EspressifProvision.blesec1-debug.xcconfig */;
+			baseConfigurationReference = B90EB42C67277C477D78C7B2 /* Pods-EspressifProvisionAll-EspressifProvision.blesec1-debug.xcconfig */;
 			buildSettings = {
-				APP_CLIENT_ID = 78suluee2rmlltshrt2v4lvuo0;
-				APP_CLIENT_SECRET = 6d9ekt3eun7osi0nplvip03gb3tnts1jgpnk45knimverpbu62d;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
@@ -1885,7 +1896,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_POOL_ID = "us-east-1_Vrr3pWTIy";
 			};
 			name = "BLESec1-Debug";
 		};
@@ -1992,10 +2002,8 @@
 		};
 		F155A31E2397C37E007EEC33 /* WifiSec1-Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5E4DB15129C36A08E6555745 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig */;
+			baseConfigurationReference = D3AC08D4A7C235C633D9048A /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-staging.xcconfig */;
 			buildSettings = {
-				APP_CLIENT_ID = 375pp885nbr3nfbh3ms9vma3v3;
-				APP_CLIENT_SECRET = 1far8m99n7p0aokfop6msfbqop24ng4c1iir1ldm339uppiof4id;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_API_URL_ENDPOINT = "https://api.staging.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
@@ -2008,6 +2016,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GITHUB_URL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/";
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2025,7 +2034,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_POOL_ID = "us-east-1_Kr951Rlo1";
 			};
 			name = "WifiSec1-Staging";
 		};
@@ -2132,10 +2140,8 @@
 		};
 		F172D299234352D3005F687A /* WifiSec1-Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15A91E4930F72AD4D1D47C61 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig */;
+			baseConfigurationReference = C9117C2DB5F3354B7BF0BA25 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-release.xcconfig */;
 			buildSettings = {
-				APP_CLIENT_ID = 2fmtjlo5cve01ukiisu1b6poft;
-				APP_CLIENT_SECRET = 181iq8dumcj3kca5k2757j1kn2mbm02k2vge3oa20pkoeai0hpop;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BASE_API_URL_ENDPOINT = "https://api.rainmaker.espressif.com/";
 				CLANG_ENABLE_MODULES = YES;
@@ -2148,6 +2154,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GITHUB_URL = "https://rainmaker-prod.auth.us-east-1.amazoncognito.com/oauth2/";
 				INFOPLIST_FILE = EspressifProvision/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2155,7 +2162,7 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
+				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI -DPROD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
 				PRODUCT_NAME = RainMaker;
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
@@ -2165,7 +2172,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_POOL_ID = "us-east-1_jZEUVn7dv";
 			};
 			name = "WifiSec1-Release";
 		};

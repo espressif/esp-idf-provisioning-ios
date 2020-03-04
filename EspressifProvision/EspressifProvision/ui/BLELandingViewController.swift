@@ -69,12 +69,6 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
             textTopConstraint.constant = -10
             view.layoutIfNeeded()
         }
-
-        let colors = Colors()
-        view.backgroundColor = UIColor.clear
-        let backgroundLayer = colors.backGroundLayer
-        backgroundLayer!.frame = view.frame
-        view.layer.insertSublayer(backgroundLayer!, at: 0)
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -34,7 +34,6 @@ class ChangePasswordViewController: UIViewController {
     }
 
     @IBAction func setPassword(_: Any) {
-        Utility.showLoader(message: "", view: view)
         let user = pool?.getUser(username)
         guard let oldPassword = self.oldPasswordTextField.text, !oldPassword.isEmpty else {
             showAlertWith(title: "Error", message: "Old password is required to change the password")
@@ -50,6 +49,7 @@ class ChangePasswordViewController: UIViewController {
             showAlertWith(title: "Error", message: "Re-entered password do not match.")
             return
         }
+        Utility.showLoader(message: "", view: view)
         user?.changePassword(oldPassword, proposedPassword: newPassword).continueWith { [weak self] (task: AWSTask) -> AnyObject? in
             guard let strongSelf = self else { return nil }
             DispatchQueue.main.async {

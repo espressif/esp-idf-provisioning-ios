@@ -18,7 +18,7 @@ class GenericControlTableViewCell: UITableViewCell {
     var dataType: String = "String"
     var device: Device!
     var boolTypeValidValues: [String: Int] = ["true": 1, "false": 0, "yes": 1, "no": 0, "0": 0, "1": 1]
-    var attribute: Params?
+    var attribute: Param?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -44,20 +44,22 @@ class GenericControlTableViewCell: UITableViewCell {
     }
 
     @IBAction func editButtonTapped(_: Any) {
-        let input = UIAlertController(title: attributeKey, message: "Enter new value", preferredStyle: .alert)
-        input.addTextField { textField in
-            textField.text = self.controlValue ?? ""
-            self.addHeightConstraint(textField: textField)
-        }
+        if Utility.isConnected(view: parentViewController!.view) {
+            let input = UIAlertController(title: attributeKey, message: "Enter new value", preferredStyle: .alert)
+            input.addTextField { textField in
+                textField.text = self.controlValue ?? ""
+                self.addHeightConstraint(textField: textField)
+            }
 
-        input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
-        }))
-        input.addAction(UIAlertAction(title: "Update", style: .default, handler: { [weak input] _ in
-            let valueTextField = input?.textFields![0]
-            self.controlValue = valueTextField?.text
-            self.doneButtonAction()
-        }))
-        parentViewController?.present(input, animated: true, completion: nil)
+            input.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: { _ in
+            }))
+            input.addAction(UIAlertAction(title: "Update", style: .default, handler: { [weak input] _ in
+                let valueTextField = input?.textFields![0]
+                self.controlValue = valueTextField?.text
+                self.doneButtonAction()
+            }))
+            parentViewController?.present(input, animated: true, completion: nil)
+        }
     }
 
     private func addHeightConstraint(textField: UITextField) {
@@ -125,6 +127,7 @@ class GenericControlTableViewCell: UITableViewCell {
                 NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: controlValue]])
                 controlValueLabel.text = value
             }
+            attribute?.value = controlValue as Any
         }
     }
 }

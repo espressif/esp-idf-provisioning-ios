@@ -32,32 +32,42 @@ class VersionManager {
 
     private func checkAppStore(callback: ((_ versionAvailable: Bool?, _ version: String?) -> Void)? = nil) {
         let ourBundleId = Bundle.main.infoDictionary!["CFBundleIdentifier"] as! String
-        Alamofire.request("https://itunes.apple.com/lookup?bundleId=com.espressif.provbleavs").responseJSON { response in
+        AF.request("https://itunes.apple.com/lookup?bundleId=com.espressif.provbleavs").responseJSON { response in
             var isNew: Bool?
             var versionStr: String?
 
-            if let json = response.result.value as? NSDictionary,
-                let results = json["results"] as? NSArray,
-                let entry = results.firstObject as? NSDictionary,
-                let appVersion = entry["version"] as? String,
-                let ourVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-                if let storeURL = entry["trackViewUrl"] as? String {
-                    self.appStoreURL = storeURL
+            switch response.result {
+            case let .success(value):
+                if let json = value as? NSDictionary,
+                    let results = json["results"] as? NSArray,
+                    let entry = results.firstObject as? NSDictionary,
+                    let appVersion = entry["version"] as? String,
+                    let ourVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                    if let storeURL = entry["trackViewUrl"] as? String {
+                        self.appStoreURL = storeURL
+                    }
+                    isNew = ourVersion != appVersion
+                    versionStr = appVersion
                 }
-                isNew = ourVersion != appVersion
-                versionStr = appVersion
+                callback?(isNew, versionStr)
+            case let .failure(error):
+                print(error)
             }
-            callback?(isNew, versionStr)
         }
     }
 
     private func checkIfAPIVersionIsSupported(callback: @escaping (Bool) -> Void) {
-        Alamofire.request(supportedVersionURL).responseJSON { response in
-            if let json = response.result.value as? [String: Any], let supportedVersion = json["supported_versions"] as? [String] {
-                if supportedVersion.contains(self.currentAPIVersion) {
-                    callback(true)
-                    return
+        AF.request(supportedVersionURL).responseJSON { response in
+            switch response.result {
+            case let .success(value):
+                if let json = value as? [String: Any], let supportedVersion = json["supported_versions"] as? [String] {
+                    if supportedVersion.contains(self.currentAPIVersion) {
+                        callback(true)
+                        return
+                    }
                 }
+            case let .failure(error):
+                print(error)
             }
             callback(false)
         }

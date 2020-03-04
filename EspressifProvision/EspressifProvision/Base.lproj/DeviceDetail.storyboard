@@ -190,10 +190,10 @@
             </objects>
             <point key="canvasLocation" x="2757" y="96"/>
         </scene>
-        <!--Control List View Controller-->
+        <!--Device Trait List View Controller-->
         <scene sceneID="R1M-4A-RYo">
             <objects>
-                <viewController storyboardIdentifier="controlListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nFQ-wA-GhO" customClass="ControlListViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="deviceTrailListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nFQ-wA-GhO" customClass="DeviceTraitListViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NJb-aA-9ZQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -210,7 +210,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4N-aS-Znk">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4N-aS-Znk" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="62.333333333333343" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="PF9-Xp-IDG"/>
@@ -308,7 +308,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AQ-Qo-K9i">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AQ-Qo-K9i" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="56.333333333333343" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="Khe-uG-5UJ"/>
@@ -349,7 +349,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfJ-8E-rG2">
-                                        <rect key="frame" x="16" y="25" width="318" height="19.333333333333329"/>
+                                        <rect key="frame" x="16" y="25" width="318" height="19.666666666666671"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>

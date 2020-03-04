@@ -9,25 +9,31 @@
 import CoreBluetooth
 import Foundation
 import MBProgressHUD
+import Reachability
 import UIKit
 
 class Utility {
-    static var deviceNamePrefix = UserDefaults.standard.value(forKey: Constants.prefixKey) as? String ?? (Bundle.main.infoDictionary?["DeviceNamePrefix"] as? String ?? "PROV_")
-    static let allowPrefixFilter = Bundle.main.infoDictionary?["AllowFilteringByPrefix"] as? Bool ?? false
-    static let baseUrl = Bundle.main.infoDictionary?["WifiBaseUrl"] as? String ?? "192.168.4.1:80"
+    static var deviceNamePrefix = UserDefaults.standard.value(forKey: Constants.prefixKey) as? String ?? (Bundle.main.infoDictionary?[Constants.deviceNamePrefix] as? String ?? Constants.devicePrefixDefault)
+    static let allowPrefixFilter = Bundle.main.infoDictionary?[Constants.allowFilteringByPrefix] as? Bool ?? false
+    static let baseUrl = Bundle.main.infoDictionary?[Constants.wifiBaseUrl] as? String ?? Constants.wifiBaseUrlDefault
+    static let reachability = try! Reachability()
 
-    var deviceName = "ESP Device"
-    var configPath: String = "prov-config"
-    var versionPath: String = "proto-ver"
-    var scanPath: String = "prov-scan"
-    var sessionPath: String = "prov-session"
-    var associationPath: String = "cloud_user_assoc"
+    var deviceName = ""
+    var configPath: String = Constants.configPath
+    var versionPath: String = Constants.versionPath
+    var scanPath: String = Constants.scanPath
+    var sessionPath: String = Constants.sessionPath
+    var associationPath: String = Constants.associationPath
     var peripheralConfigured = false
     var sessionCharacteristic: CBCharacteristic!
     var configUUIDMap: [String: CBCharacteristic] = [:]
     var deviceVersionInfo: NSDictionary?
     var currentSSID = ""
 
+    /// Method to process descriptor values read from BLE devices
+    ///
+    /// - Parameters:
+    ///   - descriptor: Contains BLE charactersitic and path value supported by BLE device
     func processDescriptor(descriptor: CBDescriptor) {
         if let value = descriptor.value as? String {
             if value.contains(Constants.scanCharacteristic) {
@@ -71,5 +77,18 @@ class Utility {
         DispatchQueue.main.async {
             MBProgressHUD.hide(for: view, animated: true)
         }
+    }
+
+    class func isConnected(view: UIView) -> Bool {
+        do {
+            try reachability.startNotifier()
+        } catch {
+            return true
+        }
+        if reachability.connection == .unavailable {
+            view.addSubview(NoInternetConnection.instanceFromNib())
+            return false
+        }
+        return true
     }
 }

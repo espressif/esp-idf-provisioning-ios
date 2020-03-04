@@ -25,10 +25,5 @@ class DeviceListTableView: UITableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         invalidateIntrinsicContentSize()
-//        let colors = Colors()
-//        backgroundColor = UIColor.clear
-//        let backgroundLayer = colors.bg
-//        backgroundLayer!.frame = frame
-//        layer.insertSublayer(backgroundLayer!, at: 0)
     }
 }

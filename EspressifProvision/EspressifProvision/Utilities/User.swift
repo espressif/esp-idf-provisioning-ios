@@ -16,7 +16,6 @@ class User {
     var userInfo = UserInfo.getUserInfo()
     var pool: AWSCognitoIdentityUserPool!
     var accessToken: String?
-    var refreshToken: String?
     var associatedNodeList: [Node]?
     var username = ""
     var password = ""
@@ -24,14 +23,17 @@ class User {
     var updateDeviceList = false
     var currentAssociationInfo: AssociationConfig?
     var updateUserInfo = false
+
     private init() {
         // setup service configuration
         let serviceConfiguration = AWSServiceConfiguration(region: Constants.CognitoIdentityUserPoolRegion, credentialsProvider: nil)
 
+        let currentKeys = Keys.current
+
         // create pool configuration
-        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: Constants.CognitoIdentityUserPoolAppClientId,
-                                                                        clientSecret: Constants.CognitoIdentityUserPoolAppClientSecret,
-                                                                        poolId: Constants.CognitoIdentityUserPoolId)
+        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: currentKeys.clientID!,
+                                                                        clientSecret: currentKeys.clientSecret,
+                                                                        poolId: currentKeys.poolID!)
 
         // initialize user pool client
         AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
@@ -40,10 +42,17 @@ class User {
         accessToken = UserDefaults.standard.value(forKey: Constants.accessTokenKey) as? String
     }
 
+    /// Get current signed-in user detail of cognito user
+    ///
     func currentUser() -> AWSCognitoIdentityUser? {
         return pool.currentUser()
     }
 
+    /// Method to configure and send association related information to the connected device
+    ///
+    /// - Parameters:
+    ///   - session: Current established session with the device for sending information.
+    ///   - delegate: Object that will recieve notification whether the info was delivered successfully
     func associateNodeWithUser(session: Session, delegate: DeviceAssociationProtocol) {
         currentAssociationInfo = AssociationConfig()
         currentAssociationInfo?.uuid = UUID().uuidString
@@ -52,6 +61,11 @@ class User {
         deviceAssociation.delegate = delegate
     }
 
+    /// Method to fetch accessToken of the signed-in user.
+    /// Used for authenticating APIs calls made by the user.
+    ///
+    /// - Parameters:
+    ///   - completionHandler: callback invoked with accessToken as parameter.
     func getAccessToken(completionHandler: @escaping (String?) -> Void) {
         if User.shared.userInfo.loggedInWith == .cognito {
             if let user = currentUser() {

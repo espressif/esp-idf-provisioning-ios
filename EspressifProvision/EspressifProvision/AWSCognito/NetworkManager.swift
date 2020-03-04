@@ -27,56 +27,61 @@ class NetworkManager {
             if accessToken != nil {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
                 let url = Constants.getNodes
-                Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                     print(response)
-                    // Parse response value to get list of nodes
-                    if let json = response.result.value as? [String: Any], let tempArray = json["nodes"] as? [String] {
-                        var nodeList: [Node] = []
-                        // Start a service group to schedule fetching of node related information
-                        // Configuration and status information for each node will be fetched on background thread
-                        let serviceGroup = DispatchGroup()
+                    switch response.result {
+                    case let .success(value):
+                        if let json = value as? [String: Any], let tempArray = json["nodes"] as? [String] {
+                            var nodeList: [Node] = []
+                            // Start a service group to schedule fetching of node related information
+                            // Configuration and status information for each node will be fetched on background thread
+                            let serviceGroup = DispatchGroup()
 
-                        for item in tempArray {
-                            serviceGroup.enter()
-                            // Fetch node config
-                            self.getNodeConfig(nodeID: item, headers: headers, completionHandler: { node, _ in
-                                if let newNode = node {
-                                    // Insert node with only one device in the first index of the array to allow ease in rendering
-                                    if newNode.devices?.count == 1 {
-                                        nodeList.insert(newNode, at: 0)
-                                    } else {
-                                        nodeList.append(newNode)
-                                    }
+                            for item in tempArray {
+                                serviceGroup.enter()
+                                // Fetch node config
+                                self.getNodeConfig(nodeID: item, headers: headers, completionHandler: { node, _ in
+                                    if let newNode = node {
+                                        // Insert node with only one device in the first index of the array to allow ease in rendering
+                                        if newNode.devices?.count == 1 {
+                                            nodeList.insert(newNode, at: 0)
+                                        } else {
+                                            nodeList.append(newNode)
+                                        }
 
-                                    // Get device thing shadow
-                                    self.getDeviceThingShadow(nodeID: item) { response in
-                                        if let image = response, let devices = node?.devices {
-                                            print(image)
-                                            for device in devices {
-                                                // Parse and fill device params and attributes
-                                                if let deviceName = device.name, let attrbutes = image[deviceName] as? [String: Any] {
-                                                    if let params = device.params {
-                                                        for index in params.indices {
-                                                            if let reportedValue = attrbutes[params[index].name ?? ""] {
-                                                                params[index].value = reportedValue
+                                        // Get device thing shadow
+                                        self.getDeviceThingShadow(nodeID: item) { response in
+                                            if let image = response, let devices = node?.devices {
+                                                print(image)
+                                                for device in devices {
+                                                    // Parse and fill device params and attributes
+                                                    if let deviceName = device.name, let attrbutes = image[deviceName] as? [String: Any] {
+                                                        if let params = device.params {
+                                                            for index in params.indices {
+                                                                if let reportedValue = attrbutes[params[index].name ?? ""] {
+                                                                    params[index].value = reportedValue
+                                                                }
                                                             }
                                                         }
                                                     }
                                                 }
                                             }
+                                            // Node related information is recieved so leave service group
+                                            serviceGroup.leave()
                                         }
-                                        // Node related information is recieved so leave service group
-                                        serviceGroup.leave()
                                     }
-                                }
-                            })
+                                })
+                            }
+                            // When node list is exhausted then call completionHandler with node list as parameter
+                            serviceGroup.notify(queue: .main) {
+                                completionHandler(nodeList, nil)
+                            }
+                        } else {
+                            completionHandler(nil, CustomError.emptyNodeList)
                         }
-                        // When node list is exhausted then call completionHandler with node list as parameter
-                        serviceGroup.notify(queue: .main) {
-                            completionHandler(nodeList, nil)
-                        }
-                    } else {
-                        completionHandler(nil, CustomError.emptyNodeList)
+                    case let .failure(error):
+                        print(error)
+                        completionHandler(nil, NetworkError.emptyToken)
                     }
                 }
             } else {
@@ -91,11 +96,17 @@ class NetworkManager {
     ///   - completionHandler: handler called when response to get node config is recieved
     func getNodeConfig(nodeID: String, headers: HTTPHeaders, completionHandler: @escaping (Node?, Error?) -> Void) {
         let url = Constants.getNodeConfig + "?nodeid=" + nodeID
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             print(response)
-            if let json = response.result.value as? [String: Any] {
-                self.getNodeStatus(node: JSONParser.parseNodeData(data: json, nodeID: nodeID), completionHandler: completionHandler)
-            } else {
+            switch response.result {
+            case let .success(value):
+                if let json = value as? [String: Any] {
+                    self.getNodeStatus(node: JSONParser.parseNodeData(data: json, nodeID: nodeID), completionHandler: completionHandler)
+                } else {
+                    completionHandler(nil, CustomError.emptyConfigData)
+                }
+            case let .failure(error):
+                print(error)
                 completionHandler(nil, CustomError.emptyConfigData)
             }
         }
@@ -110,16 +121,21 @@ class NetworkManager {
             if accessToken != nil {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
                 let url = Constants.getNodeStatus + "?nodeid=" + (node.node_id ?? "")
-                Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                     print(response)
                     // Parse the connected status of the node
-                    if let json = response.result.value as? [String: Any] {
-                        if let status = json["connected"] as? Bool {
-                            let newNode = node
-                            newNode.isConnected = status
-                            completionHandler(newNode, nil)
-                            return
+                    switch response.result {
+                    case let .success(value):
+                        if let json = value as? [String: Any], let connectivity = json["connectivity"] as? [String: Any] {
+                            if let status = connectivity["connected"] as? Bool {
+                                let newNode = node
+                                newNode.isConnected = status
+                                completionHandler(newNode, nil)
+                                return
+                            }
                         }
+                    case let .failure(error):
+                        print(error)
                     }
                     completionHandler(node, nil)
                 }
@@ -139,24 +155,27 @@ class NetworkManager {
         User.shared.getAccessToken(completionHandler: { accessToken in
             if accessToken != nil {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
-                Alamofire.request(Constants.addDevice, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                AF.request(Constants.addDevice, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
 
-                    // Check for any error on response
-                    if let error = response.result.error {
+                    switch response.result {
+                    case let .success(value):
+                        if let json = value as? [String: String] {
+                            print("Add device successfull)")
+                            // Get request id for add device request
+                            // This request id will be used for getting the status of add request
+                            print("JSON: \(json)")
+                            if let requestId = json[Constants.requestID] {
+                                completionHandler(requestId, nil)
+                                return
+                            }
+                        }
+                    case let .failure(error):
+                        // Check for any error on response
                         print("Add device error \(error)")
                         completionHandler(nil, error)
                         return
                     }
-                    print("Add device successfull)")
-                    // Get request id for add device request
-                    // This request id will be used for getting the status of add request
-                    if let json = response.result.value as? [String: String] {
-                        print("JSON: \(json)")
-                        if let requestId = json[Constants.requestID] {
-                            completionHandler(requestId, nil)
-                            return
-                        }
-                    }
+
                     completionHandler(nil, CustomError.emptyConfigData)
                 }
             } else {
@@ -170,23 +189,26 @@ class NetworkManager {
     /// - Parameters:
     ///   - nodeID: Id of the node for which association status is fetched
     ///   - completionHandler: handler called when response to deviceAssociationStatus is recieved
-    func deviceAssociationStatus(nodeID: String, requestID: String, completionHandler: @escaping (Bool) -> Void) {
+    func deviceAssociationStatus(nodeID: String, requestID: String, completionHandler: @escaping (String) -> Void) {
         User.shared.getAccessToken(completionHandler: { accessToken in
             if accessToken != nil {
                 let url = Constants.checkStatus + "?node_id=" + nodeID
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
-                Alamofire.request(url + "&request_id=" + requestID + "&user_request=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                    if let json = response.result.value as? [String: String], let status = json["request_status"] as? String {
-                        print(json)
-                        if status == "confirmed" {
-                            completionHandler(true)
+                AF.request(url + "&request_id=" + requestID + "&user_request=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                    switch response.result {
+                    case let .success(value):
+                        if let json = value as? [String: String], let status = json["request_status"] as? String {
+                            print(json)
+                            completionHandler(status)
                             return
                         }
+                    case let .failure(error):
+                        print(error)
                     }
-                    completionHandler(false)
+                    completionHandler("error")
                 }
             } else {
-                completionHandler(false)
+                completionHandler("error")
             }
         })
     }
@@ -205,9 +227,17 @@ class NetworkManager {
                 if idToken != nil {
                     let url = Constants.updateThingsShadow + "?nodeid=" + nodeid
                     let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
-                    Alamofire.request(url, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                    AF.request(url, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                         print(parameter)
-                        print(response.result.value)
+                        switch response.result {
+                        case let .success(value):
+                            if let json = value as? [String: Any] {
+                                print(json)
+                                return
+                            }
+                        case let .failure(error):
+                            print(error)
+                        }
                     }
                 } else {}
             })
@@ -225,12 +255,16 @@ class NetworkManager {
             if accessToken != nil {
                 let url = Constants.getDeviceShadow + "?nodeid=" + nodeID
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
-                Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                    if let json = response.result.value as? [String: Any] {
-                        completionHandler(json)
-                        return
+                AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                    switch response.result {
+                    case let .success(value):
+                        if let json = value as? [String: Any] {
+                            completionHandler(json)
+                            return
+                        }
+                    case let .failure(error):
+                        print(error)
                     }
-                    print(response.result.value)
                     completionHandler(nil)
                 }
             } else {
@@ -251,10 +285,15 @@ class NetworkManager {
     ///   - header: HTTp headers
     ///   - completionHandler: Callback invoked after api response is recieved
     func genericRequest(url: URLConvertible, method: HTTPMethod, parameters: Parameters, encoding: ParameterEncoding, headers: HTTPHeaders, completionHandler: @escaping ([String: Any]?) -> Void) {
-        Alamofire.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON { response in
-            if let json = response.result.value as? [String: Any] {
-                completionHandler(json)
-                return
+        AF.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON { response in
+            switch response.result {
+            case let .success(value):
+                if let json = value as? [String: Any] {
+                    completionHandler(json)
+                    return
+                }
+            case let .failure(error):
+                print(error)
             }
             completionHandler(nil)
         }
