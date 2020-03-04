@@ -44,7 +44,7 @@ struct JSONParser {
                         } else {
                             dynamicAttr.name = attr["name"] as? String
                         }
-                        dynamicAttr.uiType = attr["ui-type"] as? String
+                        dynamicAttr.uiType = attr["ui_type"] as? String
                         dynamicAttr.dataType = attr["data_type"] as? String
                         dynamicAttr.properties = attr["properties"] as? [String]
                         dynamicAttr.bounds = attr["bounds"] as? [String: Any]

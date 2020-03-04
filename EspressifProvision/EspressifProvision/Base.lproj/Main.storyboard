@@ -20,7 +20,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L77-Ja-ZBH" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provisioning" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9t-i1-0NK">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provisioning" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9t-i1-0NK" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="160.5" y="62.5" width="93.5" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -425,13 +425,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4z-Ju-jcf" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Profile" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhi-wW-pMo">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Profile" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhi-wW-pMo" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="162.5" y="62.5" width="89" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Fm-Rg-gyv">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Fm-Rg-gyv" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="62" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="pdn-Xr-v7s"/>
@@ -760,13 +760,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Asr-Gb-h5z" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VD0-Yl-GhJ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VD0-Yl-GhJ" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="175.5" y="62.5" width="63.5" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbV-lx-AYY">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbV-lx-AYY" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="62" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="Njc-jm-mdM"/>
@@ -1019,7 +1019,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIV-Lv-nIQ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIV-Lv-nIQ" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="62" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="etd-y9-t0X"/>
@@ -1284,13 +1284,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWq-JL-gi6" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Wi-Fi Network" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cR-TX-8uW">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Wi-Fi Network" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cR-TX-8uW" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="127" y="56.5" width="160" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lW2-FA-tWT">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lW2-FA-tWT" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="343" y="54" width="55" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="v4J-KF-djX"/>
@@ -1575,7 +1575,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGX-M0-fFn" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MyZ-fO-szp">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MyZ-fO-szp" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="62" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="e9q-6G-V9n"/>
@@ -1590,13 +1590,13 @@
                                             <action selector="backClicked:" destination="Mpb-P7-MIc" eventType="touchUpInside" id="05E-FB-YWl"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect to Device" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mQ-5Z-4P4">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect to Device" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mQ-5Z-4P4" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="138" y="62.5" width="138.5" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDL-Sb-XKI">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDL-Sb-XKI" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="343" y="60" width="55" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="2oQ-yJ-8XI"/>
@@ -1746,13 +1746,13 @@ Connect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX</str
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifC-gd-foU" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proof of Possession" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olS-t6-0xF">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proof of Possession" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olS-t6-0xF" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="132" y="62.5" width="150" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FE8-lw-FvL">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FE8-lw-FvL" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="343" y="60" width="55" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="gzj-qq-j61"/>
@@ -1900,7 +1900,7 @@ PROV_XXXX</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="upA-ME-fUd" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Devices" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hat-6w-6qK">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Devices" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hat-6w-6qK" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="177.5" y="59.5" width="59" height="22.5"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1938,7 +1938,7 @@ PROV_XXXX</string>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="0.384765625" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="mau-1E-fUS" secondAttribute="bottom" constant="8" id="9PN-qh-VK5"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="96" id="aJ2-OZ-v7i"/>
@@ -1948,11 +1948,6 @@ PROV_XXXX</string>
                                     <constraint firstItem="Hat-6w-6qK" firstAttribute="centerX" secondItem="upA-ME-fUd" secondAttribute="centerX" id="mGz-Za-MYH"/>
                                     <constraint firstItem="45b-ta-MgR" firstAttribute="leading" secondItem="upA-ME-fUd" secondAttribute="leading" constant="16" id="w4x-f2-UrW"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="88i-jH-Kbb">
                                 <rect key="frame" x="0.0" y="96" width="414" height="800"/>
@@ -2040,24 +2035,24 @@ PROV_XXXX</string>
                                                     <rect key="frame" x="0.0" y="0.0" width="231" height="150"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="unB-Hp-jbL">
-                                                            <rect key="frame" x="16" y="134" width="61" height="12"/>
+                                                            <rect key="frame" x="166" y="130" width="61" height="12"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offline" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z5Z-rk-SHC">
-                                                                    <rect key="frame" x="16" y="0.0" width="38" height="12"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <rect key="frame" x="14" y="-2" width="35.5" height="14"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enR-1Z-LOT">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="12" height="12"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="10" height="10"/>
                                                                     <color key="backgroundColor" red="0.50588235294117645" green="0.50588235294117645" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="12" id="Y8g-uu-Ccr"/>
-                                                                        <constraint firstAttribute="height" constant="12" id="uqi-Z0-zCC"/>
+                                                                        <constraint firstAttribute="width" constant="10" id="Y8g-uu-Ccr"/>
+                                                                        <constraint firstAttribute="height" constant="10" id="uqi-Z0-zCC"/>
                                                                     </constraints>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <real key="value" value="6"/>
+                                                                            <real key="value" value="5"/>
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
@@ -2074,7 +2069,7 @@ PROV_XXXX</string>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6hQ-LS-L2f">
-                                                            <rect key="frame" x="16" y="110.5" width="37" height="19.5"/>
+                                                            <rect key="frame" x="16" y="106.5" width="37" height="19.5"/>
                                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="15"/>
                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -2108,16 +2103,16 @@ PROV_XXXX</string>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="unB-Hp-jbL" firstAttribute="leading" secondItem="l61-BQ-GxC" secondAttribute="leading" constant="16" id="3so-VL-Zgr"/>
                                                         <constraint firstItem="mBU-Eh-Tz0" firstAttribute="height" secondItem="l61-BQ-GxC" secondAttribute="height" multiplier="0.35" id="7dX-ef-zNH"/>
                                                         <constraint firstItem="LJ1-l8-F6X" firstAttribute="top" secondItem="l61-BQ-GxC" secondAttribute="top" constant="30" id="90O-BA-gxV"/>
                                                         <constraint firstItem="l5P-vq-j5D" firstAttribute="top" secondItem="l61-BQ-GxC" secondAttribute="top" constant="16" id="A3m-H7-3Sz"/>
                                                         <constraint firstItem="mBU-Eh-Tz0" firstAttribute="leading" secondItem="l61-BQ-GxC" secondAttribute="leading" id="Ekk-wT-7uZ"/>
                                                         <constraint firstItem="6hQ-LS-L2f" firstAttribute="leading" secondItem="l61-BQ-GxC" secondAttribute="leading" constant="16" id="MJt-Co-8Cn"/>
                                                         <constraint firstAttribute="trailing" secondItem="LJ1-l8-F6X" secondAttribute="trailing" constant="30" id="PL3-Bh-849"/>
-                                                        <constraint firstAttribute="bottom" secondItem="unB-Hp-jbL" secondAttribute="bottom" constant="4" id="Pnb-Ai-bzb"/>
+                                                        <constraint firstAttribute="bottom" secondItem="unB-Hp-jbL" secondAttribute="bottom" constant="8" id="Pnb-Ai-bzb"/>
                                                         <constraint firstItem="unB-Hp-jbL" firstAttribute="top" secondItem="6hQ-LS-L2f" secondAttribute="bottom" constant="4" id="TfE-IA-Xna"/>
                                                         <constraint firstItem="LJ1-l8-F6X" firstAttribute="width" secondItem="l61-BQ-GxC" secondAttribute="width" multiplier="0.4" id="adc-RC-pkZ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="unB-Hp-jbL" secondAttribute="trailing" constant="4" id="lrE-NK-crv"/>
                                                         <constraint firstItem="mBU-Eh-Tz0" firstAttribute="top" secondItem="l61-BQ-GxC" secondAttribute="top" constant="16" id="p1q-eq-Acz"/>
                                                         <constraint firstAttribute="trailing" secondItem="l5P-vq-j5D" secondAttribute="trailing" constant="16" id="rBQ-qm-fp1"/>
                                                         <constraint firstItem="mBU-Eh-Tz0" firstAttribute="width" secondItem="l61-BQ-GxC" secondAttribute="width" multiplier="0.35" id="sbP-Nt-jbH"/>
@@ -2355,13 +2350,13 @@ PROV_XXXX</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMD-Of-QSn" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Device" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ny5-uF-did">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Device" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ny5-uF-did" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="164" y="62.5" width="86" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWm-Ki-gaO">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWm-Ki-gaO" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="343" y="60" width="55" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="A3x-vg-2m3"/>

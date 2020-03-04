@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>APP_THEME_COLOR</key>
-	<string>#5330B9</string>
+	<string>#FFFFFF</string>
 	<key>AWS</key>
 	<dict>
 		<key>CognitoUserPool</key>

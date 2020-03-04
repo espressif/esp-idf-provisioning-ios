@@ -105,11 +105,11 @@ struct Constants {
 }
 
 struct Keys {
-    let clientID: String
-    let clientSecret: String
-    let poolID: String
+    let clientID: String?
+    let clientSecret: String?
+    let poolID: String?
 
-    init(clientID: String, clientSecret: String, poolID: String) {
+    init(clientID: String?, clientSecret: String?, poolID: String?) {
         self.clientID = clientID
         self.clientSecret = clientSecret
         self.poolID = poolID
@@ -120,7 +120,7 @@ struct Keys {
         #if PROD
             return Keys(clientID: keys.userPoolAppClientId, clientSecret: keys.userPoolAppClientSecret, poolID: keys.userPoolId)
         #else
-            return Keys(clientID: keys.staging_UserPoolAppClientId, clientSecret: keys.staging_UserPoolAppClientSecret, poolID: keys.staging_UserPoolId)
+            return Keys(clientID: keys.staging_UserPoolAppClientId, clientSecret: nil, poolID: keys.staging_UserPoolId)
         #endif
     }
 }

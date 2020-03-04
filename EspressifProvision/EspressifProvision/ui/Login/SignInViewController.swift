@@ -33,7 +33,9 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
     @IBOutlet var signUpView: UIView!
     @IBOutlet var signInView: UIView!
     @IBOutlet var segmentControl: UISegmentedControl!
-//    let passwordButtonRightView = UIButton(frame: CGRect(x: 0, y: 0, width: 22.0, height: 16.0))
+    @IBOutlet var githubLoginButton: UIButton!
+    @IBOutlet var googleLoginButton: UIButton!
+    //    let passwordButtonRightView = UIButton(frame: CGRect(x: 0, y: 0, width: 22.0, height: 16.0))
 
     var pool: AWSCognitoIdentityUserPool?
     var sentTo: String?
@@ -60,6 +62,19 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         confirmPassword.text = ""
         email.text = ""
 
+        githubLoginButton.layer.backgroundColor = UIColor.white.cgColor
+        githubLoginButton.layer.shadowColor = UIColor.lightGray.cgColor
+        githubLoginButton.layer.shadowOffset = CGSize(width: 0.5, height: 1.0)
+        githubLoginButton.layer.shadowRadius = 0.5
+        githubLoginButton.layer.shadowOpacity = 0.5
+        githubLoginButton.layer.masksToBounds = false
+
+        googleLoginButton.layer.backgroundColor = UIColor.white.cgColor
+        googleLoginButton.layer.shadowColor = UIColor.lightGray.cgColor
+        googleLoginButton.layer.shadowOffset = CGSize(width: 0.5, height: 1.0)
+        googleLoginButton.layer.shadowRadius = 0.5
+        googleLoginButton.layer.shadowOpacity = 0.5
+        googleLoginButton.layer.masksToBounds = false
 //        passwordImageRightView.image = UIImage(named: "show_password")
 //        let passwordRightView = UIView(frame: CGRect(x: 0, y: 0, width: 38.0, height: 16.0))
 //        passwordRightView.addSubview(passwordImageRightView)
@@ -144,17 +159,18 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         segmentControl.changeUnderlinePosition()
     }
 
+    @IBAction func loginWithGoogle(_: Any) {
+        loginWith(idProvider: "Google")
+    }
+
     @IBAction func loginWithGithub(_: Any) {
-        githubLogin()
+        loginWith(idProvider: "Github")
     }
 
-    @IBAction func signUPWithGithub(_: Any) {
-        githubLogin()
-    }
-
-    func githubLogin() {
-        let githubLoginURL = Constants.githubURL + "authorize" + "?identity_provider=" + Constants.idProvider + "&redirect_uri=" + Constants.redirectURL + "&response_type=CODE&client_id="
-        session = SFAuthenticationSession(url: URL(string: githubLoginURL + Constants.clientID)!, callbackURLScheme: Constants.redirectURL) { url, error in
+    func loginWith(idProvider: String) {
+        let currentKeys = Keys.current
+        let githubLoginURL = Constants.githubURL + "authorize" + "?identity_provider=" + idProvider + "&redirect_uri=" + Constants.redirectURL + "&response_type=CODE&client_id="
+        session = SFAuthenticationSession(url: URL(string: githubLoginURL + currentKeys.clientID!)!, callbackURLScheme: Constants.redirectURL) { url, error in
             if error != nil {
                 print(error)
                 self.showAlert()
@@ -188,14 +204,15 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
     func requestToken(code: String) {
         let url = Constants.githubURL + "token"
         let currentKeys = Keys.current
-        let parameters = ["grant_type": "authorization_code", "client_id": Constants.clientID, "code": code, "client_secret": currentKeys.clientSecret, "redirect_uri": Constants.redirectURL]
-        let authorizationValue = Request.authorizationHeader(user: Constants.clientID, password: currentKeys.clientSecret)
-        let headers: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded", authorizationValue?.key ?? "": authorizationValue?.value ?? ""]
+        let parameters = ["grant_type": "authorization_code", "client_id": currentKeys.clientID!, "code": code, "redirect_uri": Constants.redirectURL]
+//        let authorizationValue = Request.authorizationHeader(user: Constants.clientID, password: currentKeys.clientSecret)
+//        let headers: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded", authorizationValue?.key ?? "": authorizationValue?.value ?? ""]
+        let headers: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded"]
         NetworkManager.shared.genericRequest(url: url, method: .post, parameters: parameters, encoding: URLEncoding.default,
                                              headers: headers) { response in
             if let json = response {
                 if let idToken = json["id_token"] as? String, let refreshToken = json["refresh_token"] as? String, let accessToken = json["access_token"] as? String {
-                    self.getUserInfo(token: idToken, provider: .github)
+                    self.getUserInfo(token: idToken, provider: .other)
                     let refreshTokenInfo = ["token": refreshToken, "time": Date(), "expire_in": json["expires_in"] as? Int ?? 3600] as [String: Any]
                     User.shared.accessToken = accessToken
                     UserDefaults.standard.set(refreshTokenInfo, forKey: Constants.refreshTokenKey)

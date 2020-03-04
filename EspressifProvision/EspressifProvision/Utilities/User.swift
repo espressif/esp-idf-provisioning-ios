@@ -31,9 +31,9 @@ class User {
         let currentKeys = Keys.current
 
         // create pool configuration
-        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: currentKeys.clientID,
+        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: currentKeys.clientID!,
                                                                         clientSecret: currentKeys.clientSecret,
-                                                                        poolId: currentKeys.poolID)
+                                                                        poolId: currentKeys.poolID!)
 
         // initialize user pool client
         AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)

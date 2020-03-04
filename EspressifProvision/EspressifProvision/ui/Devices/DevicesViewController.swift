@@ -372,9 +372,9 @@ extension DevicesViewController: UICollectionViewDataSource {
 
         cell.layer.backgroundColor = UIColor.white.cgColor
         cell.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.layer.shadowOffset = CGSize(width: 1.0, height: 2.0)
-        cell.layer.shadowRadius = 1.0
-        cell.layer.shadowOpacity = 1.0
+        cell.layer.shadowOffset = CGSize(width: 0.5, height: 1.0)
+        cell.layer.shadowRadius = 0.5
+        cell.layer.shadowOpacity = 0.5
         cell.layer.masksToBounds = false
 
         if device.node?.isConnected ?? false {
@@ -482,7 +482,7 @@ extension DevicesViewController: UICollectionViewDelegateFlowLayout {
         } else {
             cellWidth = (width - 30) / 2.0
         }
-        return CGSize(width: cellWidth, height: 144.0)
+        return CGSize(width: cellWidth, height: 110.0)
     }
 
     func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt _: Int) -> CGFloat {

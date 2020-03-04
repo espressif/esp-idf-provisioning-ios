@@ -139,7 +139,7 @@ class DeviceTraitListViewController: UIViewController {
     }
 
     func getTableViewCellBasedOn(dynamicAttribute: Param, indexPath: IndexPath) -> UITableViewCell {
-        if dynamicAttribute.uiType == "esp-ui-slider" {
+        if dynamicAttribute.uiType == "esp.ui.slider" {
             if let dataType = dynamicAttribute.dataType?.lowercased(), dataType == "int" || dataType == "float" {
                 if let bounds = dynamicAttribute.bounds {
                     let maxValue = bounds["max"] as? Float ?? 100
@@ -175,7 +175,7 @@ class DeviceTraitListViewController: UIViewController {
                     }
                 }
             }
-        } else if dynamicAttribute.uiType == "esp-ui-toggle", dynamicAttribute.dataType?.lowercased() == "bool" {
+        } else if dynamicAttribute.uiType == "esp.ui.toggle", dynamicAttribute.dataType?.lowercased() == "bool" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SwitchTableViewCell", for: indexPath) as! SwitchTableViewCell
             cell.controlName.text = dynamicAttribute.name?.deletingPrefix(device!.name!)
             cell.device = device

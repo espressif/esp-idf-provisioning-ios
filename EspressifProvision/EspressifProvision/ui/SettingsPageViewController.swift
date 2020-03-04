@@ -17,7 +17,7 @@ class SettingsPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if User.shared.userInfo.loggedInWith == .github {
+        if User.shared.userInfo.loggedInWith == .other {
             changePasswordView.isHidden = true
         }
 

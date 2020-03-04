@@ -32,13 +32,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uco-WI-bQ6" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2v-5h-wSd">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2v-5h-wSd" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="143.33333333333334" y="62.666666666666664" width="127.33333333333334" height="19.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f29-Y5-riN">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f29-Y5-riN" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="343" y="60" width="55" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="NvG-iQ-1Fw"/>
@@ -138,13 +138,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mzs-oO-38O" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oS-bc-CpR">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verification" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oS-bc-CpR" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="164" y="62.666666666666664" width="86.333333333333314" height="19.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Js-sE-gsW">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Js-sE-gsW" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="343" y="60" width="55" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="55" id="ZdJ-dx-bg1"/>
@@ -320,7 +320,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBJ-5n-hTK" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQe-69-CWe">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQe-69-CWe" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="60" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="1DJ-2W-N2d"/>
@@ -334,13 +334,13 @@
                                             <action selector="backButtonPressed:" destination="KIl-sx-Or1" eventType="touchUpInside" id="zau-EG-M4w"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lav-jU-c1A">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Password" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lav-jU-c1A" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="146.66666666666666" y="62.666666666666664" width="120.66666666666666" height="19.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ss1-4G-4US">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ss1-4G-4US" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="343" y="60" width="55" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="55" id="WEd-f0-54L"/>
@@ -497,40 +497,71 @@
                                         <color key="textColor" red="0.50588235294117645" green="0.50588235294117645" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rD6-gP-i6F">
-                                        <rect key="frame" x="32" y="65" width="350" height="56"/>
-                                        <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <button opaque="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rD6-gP-i6F">
+                                        <rect key="frame" x="117" y="65" width="60" height="60"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="56" id="oID-xy-bh6"/>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="zgh-5z-mHU"/>
+                                            <constraint firstAttribute="height" constant="60" id="oID-xy-bh6"/>
+                                            <constraint firstAttribute="width" constant="60" id="zgh-5z-mHU"/>
                                         </constraints>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" image="github_logo"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.20000000000000001"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="loginWithGithub:" destination="LX5-kB-9Sg" eventType="touchUpInside" id="Dby-ms-muy"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66L-qr-T3Y">
+                                        <rect key="frame" x="237" y="65" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="lkG-6k-Fdw"/>
+                                            <constraint firstAttribute="width" constant="60" id="rl2-yH-pCL"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="google_logo"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.20000000000000001"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="loginWithGoogle:" destination="LX5-kB-9Sg" eventType="touchUpInside" id="swH-A0-757"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or use your email id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFy-79-By5">
-                                        <rect key="frame" x="144" y="176.99999999999997" width="126" height="17"/>
+                                        <rect key="frame" x="144" y="180.99999999999997" width="126" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.50588235290000005" green="0.50588235290000005" blue="0.6588235294" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HT5-AL-XVD">
-                                        <rect key="frame" x="32" y="209.99999999999997" width="350" height="60.000000000000028"/>
+                                        <rect key="frame" x="32" y="213.99999999999997" width="350" height="60.000000000000028"/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="lpf-yB-dFX"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="zet-mg-5Ka"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ju-xn-L6Y" customClass="PasswordTextField" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="32" y="274" width="350" height="60"/>
+                                        <rect key="frame" x="32" y="278" width="350" height="60"/>
                                         <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="zAg-v6-bkX"/>
@@ -539,7 +570,7 @@
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dkG-ck-a8M" customClass="PrimaryButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="32" y="350" width="350" height="56"/>
+                                        <rect key="frame" x="32" y="354" width="350" height="56"/>
                                         <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="gec-Q6-YYt"/>
@@ -558,7 +589,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0c-II-QAS">
-                                        <rect key="frame" x="142" y="430" width="130" height="32"/>
+                                        <rect key="frame" x="142" y="434" width="130" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Forgot password?">
                                             <color key="titleColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -609,29 +640,30 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="66L-qr-T3Y" firstAttribute="centerX" secondItem="NOm-gh-05c" secondAttribute="centerX" constant="60" id="4HB-nB-qJk"/>
                                     <constraint firstItem="UHd-4C-Y0a" firstAttribute="centerX" secondItem="NOm-gh-05c" secondAttribute="centerX" id="5gb-BM-KZZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="HT5-AL-XVD" secondAttribute="trailing" priority="999" constant="32" id="61S-X1-OAH"/>
                                     <constraint firstItem="vs0-mr-40V" firstAttribute="centerX" secondItem="NOm-gh-05c" secondAttribute="centerX" id="8Im-EZ-EP5"/>
-                                    <constraint firstItem="HT5-AL-XVD" firstAttribute="trailing" secondItem="rD6-gP-i6F" secondAttribute="trailing" id="8u9-lu-4ew"/>
-                                    <constraint firstItem="9ju-xn-L6Y" firstAttribute="leading" secondItem="rD6-gP-i6F" secondAttribute="leading" id="Bjr-cz-gKo"/>
+                                    <constraint firstItem="9ju-xn-L6Y" firstAttribute="trailing" secondItem="HT5-AL-XVD" secondAttribute="trailing" id="AR5-up-yDu"/>
                                     <constraint firstItem="FFy-79-By5" firstAttribute="centerX" secondItem="NOm-gh-05c" secondAttribute="centerX" id="EUJ-n4-yTz"/>
                                     <constraint firstItem="rD6-gP-i6F" firstAttribute="top" secondItem="vs0-mr-40V" secondAttribute="bottom" constant="16" id="G1u-pz-NkG"/>
                                     <constraint firstItem="FFy-79-By5" firstAttribute="top" secondItem="rD6-gP-i6F" secondAttribute="bottom" constant="56" id="GUD-MT-6W1"/>
+                                    <constraint firstItem="9ju-xn-L6Y" firstAttribute="leading" secondItem="HT5-AL-XVD" secondAttribute="leading" id="IKc-NY-LMs"/>
                                     <constraint firstItem="UHd-4C-Y0a" firstAttribute="centerY" secondItem="Nte-Hn-u6r" secondAttribute="centerY" id="K8a-A3-jqu"/>
                                     <constraint firstAttribute="bottom" secondItem="UHd-4C-Y0a" secondAttribute="bottom" constant="26" id="KiH-lX-fyV"/>
-                                    <constraint firstItem="rD6-gP-i6F" firstAttribute="leading" secondItem="NOm-gh-05c" secondAttribute="leading" priority="999" constant="20" id="OKG-0Q-T0Z"/>
-                                    <constraint firstItem="rD6-gP-i6F" firstAttribute="centerX" secondItem="NOm-gh-05c" secondAttribute="centerX" id="TxD-3T-Y6J"/>
-                                    <constraint firstItem="dkG-ck-a8M" firstAttribute="leading" secondItem="rD6-gP-i6F" secondAttribute="leading" id="UDo-jy-DRn"/>
+                                    <constraint firstItem="rD6-gP-i6F" firstAttribute="centerX" secondItem="NOm-gh-05c" secondAttribute="centerX" constant="-60" id="TxD-3T-Y6J"/>
                                     <constraint firstItem="UHd-4C-Y0a" firstAttribute="leading" secondItem="Nte-Hn-u6r" secondAttribute="trailing" constant="10" id="YTt-uN-yNh"/>
-                                    <constraint firstItem="9ju-xn-L6Y" firstAttribute="trailing" secondItem="rD6-gP-i6F" secondAttribute="trailing" id="blv-5S-cjX"/>
+                                    <constraint firstItem="dkG-ck-a8M" firstAttribute="leading" secondItem="HT5-AL-XVD" secondAttribute="leading" id="bDN-g9-K9t"/>
                                     <constraint firstItem="vs0-mr-40V" firstAttribute="top" secondItem="NOm-gh-05c" secondAttribute="top" constant="32" id="cTi-RO-yL2"/>
                                     <constraint firstItem="9ju-xn-L6Y" firstAttribute="top" secondItem="HT5-AL-XVD" secondAttribute="bottom" constant="4" id="eeJ-e0-8ZE"/>
+                                    <constraint firstItem="HT5-AL-XVD" firstAttribute="centerX" secondItem="NOm-gh-05c" secondAttribute="centerX" id="etm-QG-jjq"/>
                                     <constraint firstItem="N0c-II-QAS" firstAttribute="centerX" secondItem="NOm-gh-05c" secondAttribute="centerX" id="f19-9K-ff5"/>
                                     <constraint firstItem="dkG-ck-a8M" firstAttribute="top" secondItem="9ju-xn-L6Y" secondAttribute="bottom" constant="16" id="hyY-Oy-fLL"/>
-                                    <constraint firstItem="HT5-AL-XVD" firstAttribute="leading" secondItem="rD6-gP-i6F" secondAttribute="leading" id="iQU-Kb-4cg"/>
-                                    <constraint firstItem="dkG-ck-a8M" firstAttribute="trailing" secondItem="rD6-gP-i6F" secondAttribute="trailing" id="lCL-II-j2T"/>
-                                    <constraint firstAttribute="trailing" secondItem="rD6-gP-i6F" secondAttribute="trailing" priority="999" constant="20" id="lyX-dn-QSt"/>
+                                    <constraint firstItem="HT5-AL-XVD" firstAttribute="leading" secondItem="NOm-gh-05c" secondAttribute="leading" priority="999" constant="32" id="kRy-j0-AMk"/>
+                                    <constraint firstItem="dkG-ck-a8M" firstAttribute="trailing" secondItem="HT5-AL-XVD" secondAttribute="trailing" id="mui-Wg-eSy"/>
                                     <constraint firstItem="N0c-II-QAS" firstAttribute="top" secondItem="dkG-ck-a8M" secondAttribute="bottom" constant="24" id="tHD-ue-hMY"/>
                                     <constraint firstItem="bdv-Bv-ccB" firstAttribute="centerY" secondItem="Nte-Hn-u6r" secondAttribute="centerY" id="udD-OQ-1fj"/>
+                                    <constraint firstItem="66L-qr-T3Y" firstAttribute="centerY" secondItem="rD6-gP-i6F" secondAttribute="centerY" id="x2L-Vk-DUy"/>
                                     <constraint firstItem="HT5-AL-XVD" firstAttribute="top" secondItem="FFy-79-By5" secondAttribute="bottom" constant="16" id="zPI-rE-gyQ"/>
                                     <constraint firstItem="bdv-Bv-ccB" firstAttribute="leading" secondItem="UHd-4C-Y0a" secondAttribute="trailing" id="zrc-4O-R4q"/>
                                 </constraints>
@@ -779,6 +811,8 @@
                         <outlet property="checkBox" destination="0zy-Lk-qHe" id="tFO-fl-w1r"/>
                         <outlet property="confirmPassword" destination="8mB-EP-5Ss" id="O5x-DV-7rO"/>
                         <outlet property="email" destination="h4Y-lz-Rgy" id="hDg-me-pbw"/>
+                        <outlet property="githubLoginButton" destination="rD6-gP-i6F" id="alB-1T-TJn"/>
+                        <outlet property="googleLoginButton" destination="66L-qr-T3Y" id="apY-nE-AEt"/>
                         <outlet property="password" destination="9ju-xn-L6Y" id="f4a-ME-kj8"/>
                         <outlet property="registerPassword" destination="iHL-JY-aSZ" id="lUE-NH-P08"/>
                         <outlet property="segmentControl" destination="88g-vZ-6Pe" id="Azc-uX-6sh"/>
@@ -841,7 +875,8 @@
     <resources>
         <image name="brand_name_icon" width="143" height="37"/>
         <image name="checkbox_unchecked" width="24" height="24"/>
-        <image name="github_logo" width="82" height="24"/>
+        <image name="github_logo" width="42.666667938232422" height="42.666667938232422"/>
+        <image name="google_logo" width="85.333335876464844" height="85.333335876464844"/>
         <image name="right_arrow" width="16" height="16"/>
     </resources>
 </document>

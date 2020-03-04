@@ -174,6 +174,8 @@ class SuccessViewController: UIViewController {
     }
 
     private func step4ConfirmNodeAssociation(requestID: String) {
+        okayButton.isEnabled = true
+        okayButton.alpha = 1.0
         step4Image.isHidden = true
         step4Indicator.isHidden = false
         step4Indicator.startAnimating()
@@ -181,7 +183,7 @@ class SuccessViewController: UIViewController {
     }
 
     func checkDeviceAssoicationStatus(nodeID: String, requestID: String) {
-        addDeviceStatusTimeout = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(timeoutFetchingStatus), userInfo: nil, repeats: false)
+//        addDeviceStatusTimeout = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(timeoutFetchingStatus), userInfo: nil, repeats: false)
         fetchDeviceAssociationStatus(nodeID: nodeID, requestID: requestID)
     }
 
@@ -191,23 +193,26 @@ class SuccessViewController: UIViewController {
     }
 
     func fetchDeviceAssociationStatus(nodeID: String, requestID: String) {
-        if addDeviceStatusTimeout?.isValid ?? false {
-            NetworkManager.shared.deviceAssociationStatus(nodeID: nodeID, requestID: requestID) { status in
-                if status {
-                    NotificationCenter.default.post(name: Notification.Name(Constants.newDeviceAdded), object: nil)
-                    User.shared.updateDeviceList = true
-                    self.step4Indicator.stopAnimating()
-                    self.step4Image.image = UIImage(named: "checkbox_checked")
-                    self.step4Image.isHidden = false
-                    self.addDeviceStatusTimeout?.invalidate()
-                    self.provisionFinsihedWithStatus(message: "Device added successfully!!")
-                } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                        self.fetchDeviceAssociationStatus(nodeID: nodeID, requestID: requestID)
-                    }
+//        if addDeviceStatusTimeout?.isValid ?? false {
+        NetworkManager.shared.deviceAssociationStatus(nodeID: nodeID, requestID: requestID) { status in
+            print("Status :" + status)
+            if status == "confirmed" {
+                NotificationCenter.default.post(name: Notification.Name(Constants.newDeviceAdded), object: nil)
+                User.shared.updateDeviceList = true
+                self.step4Indicator.stopAnimating()
+                self.step4Image.image = UIImage(named: "checkbox_checked")
+                self.step4Image.isHidden = false
+                self.addDeviceStatusTimeout?.invalidate()
+                self.provisionFinsihedWithStatus(message: "Device added successfully!!")
+            } else if status == "timedout" {
+                self.step4FailedWithMessage(message: "Node addition not confirmed")
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    self.fetchDeviceAssociationStatus(nodeID: nodeID, requestID: requestID)
                 }
             }
         }
+//        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -252,8 +257,8 @@ class SuccessViewController: UIViewController {
     }
 
     func provisionFinsihedWithStatus(message: String) {
-        okayButton.isEnabled = true
-        okayButton.alpha = 1.0
+//        okayButton.isEnabled = true
+//        okayButton.alpha = 1.0
         finalStatusLabel.text = message
         finalStatusLabel.isHidden = false
     }

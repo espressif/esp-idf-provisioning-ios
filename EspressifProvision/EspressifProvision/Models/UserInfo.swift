@@ -9,7 +9,7 @@
 import Foundation
 
 enum ServiceProvider: String {
-    case github
+    case other
     case cognito
 }
 
