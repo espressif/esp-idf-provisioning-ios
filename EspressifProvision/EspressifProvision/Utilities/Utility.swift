@@ -79,16 +79,26 @@ class Utility {
         }
     }
 
-    class func isConnected(view: UIView) -> Bool {
-        do {
-            try reachability.startNotifier()
-        } catch {
+    class func isConnected(view _: UIView) -> Bool {
+        if let currentWindow = UIApplication.shared.keyWindow {
+            for subView in currentWindow.subviews {
+                if subView.isKind(of: NoInternetConnection.self) {
+                    subView.removeFromSuperview()
+                }
+            }
+            do {
+                try reachability.startNotifier()
+            } catch {
+                return true
+            }
+            if reachability.connection == .unavailable {
+                let noConnectionView = NoInternetConnection.instanceFromNib()
+                noConnectionView.frame = UIScreen.main.bounds
+                currentWindow.addSubview(noConnectionView)
+                return false
+            }
             return true
         }
-        if reachability.connection == .unavailable {
-            view.addSubview(NoInternetConnection.instanceFromNib())
-            return false
-        }
-        return true
+        return false
     }
 }
