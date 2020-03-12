@@ -392,20 +392,26 @@ extension DevicesViewController: UICollectionViewDataSource {
                 primaryKeyFound = true
                 if primaryParam.dataType?.lowercased() == "bool" {
                     if device.node?.isConnected ?? false, primaryParam.properties?.contains("write") ?? false {
+                        cell.switchButton.alpha = 1.0
+                        cell.switchButton.backgroundColor = UIColor.white
                         cell.switchButton.isEnabled = true
-                        cell.switchButton.alpha = 0.3
+                        cell.switchButton.setImage(UIImage(named: "switch_icon_enabled_off"), for: .normal)
                         if let value = primaryParam.value as? Bool {
+                            cell.switchButton.isHidden = false
                             if value {
-                                cell.switchButton.alpha = 1.0
+                                cell.switchButton.setImage(UIImage(named: "switch_icon_enabled_on"), for: .normal)
                                 cell.switchValue = true
                             }
                         }
                     } else {
+                        cell.switchButton.isHidden = false
                         cell.switchButton.isEnabled = false
-                        cell.switchButton.alpha = 0.05
+                        cell.switchButton.backgroundColor = UIColor(hexString: "#E5E5E5")
+                        cell.switchButton.alpha = 0.4
+                        cell.switchButton.setImage(UIImage(named: "switch_icon_disabled"), for: .normal)
                     }
-                    cell.switchButton.isHidden = false
-                    cell.switchButton.setImage(UIImage(named: "switch_icon_enabled_on"), for: .normal)
+//                    cell.switchButton.isHidden = false
+//                    cell.switchButton.setImage(UIImage(named: "switch_icon_enabled_on"), for: .normal)
                 } else if primaryParam.dataType?.lowercased() == "string" {
                     cell.switchButton.isHidden = true
                     cell.primaryValue.text = primaryParam.value as? String ?? ""

@@ -13,8 +13,25 @@ import JWTDecode
 class NetworkManager {
     /// A singleton class that manages Network call for this application
     static let shared = NetworkManager()
+    var session: Session!
 
-    private init() {}
+    private init() {
+//        let serverTrustPolicy: [String: ServerTrustEvaluating] = ["" : .pinPublicKeys( kSecPublicKeyAttrs: ServerTrustEvaluating)]
+//        let configuration = URLSessionConfiguration.default
+        let trustManager = ServerTrustManager(evaluators: [
+            "api.staging.rainmaker.espressif.com": PinnedCertificatesTrustEvaluator(certificates: [NetworkManager.certificate(filename: "amazonRootCA")]), "rainmaker-staging.auth.us-east-1.amazoncognito.com": PinnedCertificatesTrustEvaluator(certificates: [NetworkManager.certificate(filename: "amazonRootCA")]),
+        ])
+        session = Session(serverTrustManager: trustManager)
+        try! print(trustManager.serverTrustEvaluator(forHost: "api.staging.rainmaker.espressif.com") ?? "")
+    }
+
+    private static func certificate(filename: String) -> SecCertificate {
+        let filePath = Bundle.main.path(forResource: filename, ofType: "der")!
+        let data = try! Data(contentsOf: URL(fileURLWithPath: filePath))
+        let certificate = SecCertificateCreateWithData(nil, data as CFData)!
+
+        return certificate
+    }
 
     // MARK: - Node APIs
 
@@ -27,7 +44,7 @@ class NetworkManager {
             if accessToken != nil {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
                 let url = Constants.getNodes
-                AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                self.session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                     print(response)
                     switch response.result {
                     case let .success(value):
@@ -96,7 +113,7 @@ class NetworkManager {
     ///   - completionHandler: handler called when response to get node config is recieved
     func getNodeConfig(nodeID: String, headers: HTTPHeaders, completionHandler: @escaping (Node?, Error?) -> Void) {
         let url = Constants.getNodeConfig + "?nodeid=" + nodeID
-        AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             print(response)
             switch response.result {
             case let .success(value):
@@ -121,7 +138,7 @@ class NetworkManager {
             if accessToken != nil {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
                 let url = Constants.getNodeStatus + "?nodeid=" + (node.node_id ?? "")
-                AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                self.session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                     print(response)
                     // Parse the connected status of the node
                     switch response.result {
@@ -155,7 +172,7 @@ class NetworkManager {
         User.shared.getAccessToken(completionHandler: { accessToken in
             if accessToken != nil {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
-                AF.request(Constants.addDevice, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                self.session.request(Constants.addDevice, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
 
                     switch response.result {
                     case let .success(value):
@@ -194,7 +211,7 @@ class NetworkManager {
             if accessToken != nil {
                 let url = Constants.checkStatus + "?node_id=" + nodeID
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
-                AF.request(url + "&request_id=" + requestID + "&user_request=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                self.session.request(url + "&request_id=" + requestID + "&user_request=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                     switch response.result {
                     case let .success(value):
                         if let json = value as? [String: String], let status = json["request_status"] as? String {
@@ -227,7 +244,7 @@ class NetworkManager {
                 if idToken != nil {
                     let url = Constants.updateThingsShadow + "?nodeid=" + nodeid
                     let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
-                    AF.request(url, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                    self.session.request(url, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                         print(parameter)
                         switch response.result {
                         case let .success(value):
@@ -255,7 +272,7 @@ class NetworkManager {
             if accessToken != nil {
                 let url = Constants.getDeviceShadow + "?nodeid=" + nodeID
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
-                AF.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                self.session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                     switch response.result {
                     case let .success(value):
                         if let json = value as? [String: Any] {
@@ -285,7 +302,7 @@ class NetworkManager {
     ///   - header: HTTp headers
     ///   - completionHandler: Callback invoked after api response is recieved
     func genericRequest(url: URLConvertible, method: HTTPMethod, parameters: Parameters, encoding: ParameterEncoding, headers: HTTPHeaders, completionHandler: @escaping ([String: Any]?) -> Void) {
-        AF.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON { response in
+        session.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON { response in
             switch response.result {
             case let .success(value):
                 if let json = value as? [String: Any] {

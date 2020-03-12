@@ -37,7 +37,7 @@ class ProvisionViewController: UIViewController {
     var ssidList: [String] = []
     var wifiDetailList: [String: Espressif_WiFiScanResult] = [:]
     var versionInfo: String?
-    var session: Session?
+    var session: ESPSession?
     var capabilities: [String]?
     var alertTextField: UITextField?
     var showPasswordImageView: UIImageView!
@@ -152,8 +152,8 @@ class ProvisionViewController: UIViewController {
     }
 
     func initSession() {
-        session = Session(transport: transport!,
-                          security: security!)
+        session = ESPSession(transport: transport!,
+                             security: security!)
         session!.initialize(response: nil) { error in
             DispatchQueue.main.async {
                 MBProgressHUD.hide(for: self.view, animated: true)

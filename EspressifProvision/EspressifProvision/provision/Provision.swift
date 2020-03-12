@@ -23,7 +23,7 @@ import UIKit
 /// the device with Wifi credentials.
 
 class Provision {
-    private let session: Session
+    private let session: ESPSession
     private let transport: Transport
     private let security: Security
 
@@ -43,7 +43,7 @@ class Provision {
     /// which has been successfully initialised by calling Session.initialize
     ///
     /// - Parameter session: Initialised session object
-    init(session: Session) {
+    init(session: ESPSession) {
         self.session = session
         transport = session.transport
         security = session.security

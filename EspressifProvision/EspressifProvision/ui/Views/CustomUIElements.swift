@@ -9,17 +9,15 @@
 import UIKit
 
 class TopBarView: UIView {
-    /*
-     // Only override draw() if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func draw(_ rect: CGRect) {
-         // Drawing code
-     }
-     */
+    override func draw(_: CGRect) {
+//        addBottomRoundedEdge(desiredCurve: 1.0)
+        borderWidth = 1.0
+        borderColor = UIColor.lightGray
+    }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        addBottomRoundedEdge(desiredCurve: 1.0)
+//        addBottomRoundedEdge(desiredCurve: 1.0)
     }
 
     override func setNeedsDisplay() {

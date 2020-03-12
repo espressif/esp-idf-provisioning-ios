@@ -25,6 +25,7 @@ abstract_target 'EspressifProvisionAll' do
   pod 'CollectionViewCenteredFlowLayout'
   pod 'JWTDecode', '~> 2.4'
   pod 'M13Checkbox'
+  pod 'Socket.IO-Client-Swift', '~> 15.2.0'
 
   target 'EspressifProvision'
   target 'EspressifProvisionTests' do

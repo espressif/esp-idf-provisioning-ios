@@ -18,7 +18,7 @@
 
 import Foundation
 
-class Session {
+class ESPSession {
     private var transportPrivate: Transport
 
     var transport: Transport {

@@ -21,7 +21,7 @@ import UIKit
 
 class SuccessViewController: UIViewController {
     var statusText: String?
-    var session: Session!
+    var session: ESPSession!
     var deviceID: String?
     var requestID: String?
     var success = false

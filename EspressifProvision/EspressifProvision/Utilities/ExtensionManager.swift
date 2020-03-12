@@ -237,12 +237,12 @@ extension UIView {
         // Set the newly created shape layer as the mask for the view's layer
         layer.mask = maskLayer
 
-        let borderLayer = CAShapeLayer()
-        borderLayer.path = ovalPath.cgPath // Reuse the Bezier path
-        borderLayer.fillColor = UIColor.clear.cgColor
-        borderLayer.strokeColor = UIColor.lightGray.cgColor
-        borderLayer.lineWidth = 1.0
-        borderLayer.frame = bounds
-        layer.addSublayer(borderLayer)
+//        let borderLayer = CAShapeLayer()
+//        borderLayer.path = ovalPath.cgPath // Reuse the Bezier path
+//        borderLayer.fillColor = UIColor.clear.cgColor
+//        borderLayer.strokeColor = UIColor.lightGray.cgColor
+//        borderLayer.lineWidth = 1.0
+//        borderLayer.frame = bounds
+//        layer.addSublayer(borderLayer)
     }
 }
