@@ -19,7 +19,7 @@ class ScanWifiList {
 
     var delegate: ScanWifiListProtocol?
 
-    init(session: Session) {
+    init(session: ESPSession) {
         transport = session.transport
         security = session.security
     }

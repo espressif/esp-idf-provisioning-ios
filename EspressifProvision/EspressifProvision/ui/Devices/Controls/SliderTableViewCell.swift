@@ -33,14 +33,10 @@ class SliderTableViewCell: UITableViewCell {
         layer.shadowRadius = 2
         layer.shadowColor = UIColor.black.cgColor
         layer.masksToBounds = false
-//        slider.setMinimumTrackImage(UIImage(named: "min_track_image"), for: .normal)
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     @IBAction func sliderValueChanged(_ sender: UISlider) {
@@ -53,12 +49,5 @@ class SliderTableViewCell: UITableViewCell {
                 NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [paramName: sender.value]])
             }
         }
-//        let loader = MBProgressHUD.showAdded(to: window!, animated: true)
-//        loader.mode = MBProgressHUDMode.customView
-//        loader.label.text = sliderValue.text
-//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30.0, height: 30.0))
-//        imageView.image = UIImage(named: "brightness")
-//        loader.customView = imageView
-//        loader.hide(animated: true, afterDelay: 1.0)
     }
 }

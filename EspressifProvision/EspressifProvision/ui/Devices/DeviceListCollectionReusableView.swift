@@ -13,6 +13,7 @@ protocol DeviceListHeaderProtocol {
 }
 
 class DeviceListCollectionReusableView: UICollectionReusableView {
+    @IBOutlet var infoButton: UIButton!
     @IBOutlet var headerLabel: UILabel!
     @IBOutlet var statusIndicator: UIView!
     var nodeID = ""

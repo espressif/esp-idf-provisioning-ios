@@ -75,12 +75,6 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         googleLoginButton.layer.shadowRadius = 0.5
         googleLoginButton.layer.shadowOpacity = 0.5
         googleLoginButton.layer.masksToBounds = false
-//        passwordImageRightView.image = UIImage(named: "show_password")
-//        let passwordRightView = UIView(frame: CGRect(x: 0, y: 0, width: 38.0, height: 16.0))
-//        passwordRightView.addSubview(passwordImageRightView)
-
-//        password.rightView = passwordRightView
-//        password.rightViewMode = .always
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -372,15 +366,15 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
     }
 
     @IBAction func openPrivacy(_: Any) {
-        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy")
     }
 
     @IBAction func openDocumentation(_: Any) {
-        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+        showDocumentVC(url: "https://rainmaker.espressif.com")
     }
 
     @IBAction func openTC(_: Any) {
-        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+        showDocumentVC(url: "https://rainmaker.espressif.com/docs/terms-of-use.html")
     }
 
     func showDocumentVC(url: String) {

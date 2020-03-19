@@ -20,7 +20,7 @@
 		1431468220DEB6F50017E119 /* Security0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1431468120DEB6F50017E119 /* Security0.swift */; };
 		1431468420DF69C30017E119 /* Security1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1431468320DF69C30017E119 /* Security1.swift */; };
 		1431468720DFA58E0017E119 /* HexUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1431468620DFA58E0017E119 /* HexUtils.swift */; };
-		1431468B20E37B980017E119 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1431468A20E37B980017E119 /* Session.swift */; };
+		1431468B20E37B980017E119 /* ESPSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1431468A20E37B980017E119 /* ESPSession.swift */; };
 		1431468E20E3823F0017E119 /* Provision.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1431468D20E3823F0017E119 /* Provision.swift */; };
 		1431469820E387C60017E119 /* sec1.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1431469020E387C60017E119 /* sec1.pb.swift */; };
 		1431469920E387C60017E119 /* sec0.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1431469120E387C60017E119 /* sec0.pb.swift */; };
@@ -57,6 +57,7 @@
 		F15EAC0F23E1994E008A766B /* DeviceDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F15EAC1123E1994E008A766B /* DeviceDetail.storyboard */; };
 		F15FFF882402643A00E72D01 /* NoInternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15FFF872402643A00E72D01 /* NoInternetConnection.swift */; };
 		F15FFF8A2402645200E72D01 /* NoInternetConnection.xib in Resources */ = {isa = PBXBuildFile; fileRef = F15FFF892402645200E72D01 /* NoInternetConnection.xib */; };
+		F17581792418DF0B00FF7407 /* amazonRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = F17581782418D1F400FF7407 /* amazonRootCA.der */; };
 		F176A41623C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */; };
 		F176A41823C4669300F2FCBC /* DeviceCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */; };
 		F176A41C23C8342200F2FCBC /* ClaimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F176A41B23C8342200F2FCBC /* ClaimViewController.swift */; };
@@ -156,7 +157,7 @@
 		1431468120DEB6F50017E119 /* Security0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Security0.swift; sourceTree = "<group>"; };
 		1431468320DF69C30017E119 /* Security1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Security1.swift; sourceTree = "<group>"; };
 		1431468620DFA58E0017E119 /* HexUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexUtils.swift; sourceTree = "<group>"; };
-		1431468A20E37B980017E119 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		1431468A20E37B980017E119 /* ESPSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPSession.swift; sourceTree = "<group>"; };
 		1431468D20E3823F0017E119 /* Provision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Provision.swift; sourceTree = "<group>"; };
 		1431469020E387C60017E119 /* sec1.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sec1.pb.swift; sourceTree = "<group>"; };
 		1431469120E387C60017E119 /* sec0.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sec0.pb.swift; sourceTree = "<group>"; };
@@ -222,6 +223,7 @@
 		F15EAC1323E19976008A766B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/DeviceDetail.strings"; sourceTree = "<group>"; };
 		F15FFF872402643A00E72D01 /* NoInternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetConnection.swift; sourceTree = "<group>"; };
 		F15FFF892402645200E72D01 /* NoInternetConnection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoInternetConnection.xib; sourceTree = "<group>"; };
+		F17581782418D1F400FF7407 /* amazonRootCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = amazonRootCA.der; sourceTree = "<group>"; };
 		F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListCollectionReusableView.swift; sourceTree = "<group>"; };
 		F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCollectionViewLayout.swift; sourceTree = "<group>"; };
 		F176A41B23C8342200F2FCBC /* ClaimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		1431462520DE994B0017E119 /* EspressifProvision */ = {
 			isa = PBXGroup;
 			children = (
+				F17581782418D1F400FF7407 /* amazonRootCA.der */,
 				F1EAAC8F23E2A55100E9A6A8 /* ColorPicker */,
 				F1F4513B2328C8F10009DCE0 /* Resources */,
 				F194B60622CDD79D00417347 /* Models */,
@@ -417,7 +420,7 @@
 		1431468920E37B8B0017E119 /* session */ = {
 			isa = PBXGroup;
 			children = (
-				1431468A20E37B980017E119 /* Session.swift */,
+				1431468A20E37B980017E119 /* ESPSession.swift */,
 			);
 			path = session;
 			sourceTree = "<group>";
@@ -808,6 +811,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F17581792418DF0B00FF7407 /* amazonRootCA.der in Resources */,
 				F1AB5119233216FE002401F9 /* GenericControlTableViewCell.xib in Resources */,
 				F1402AB9239677B300C989F8 /* StaticControlTableViewCell.xib in Resources */,
 				F15EAC0A23E198FF008A766B /* Login.storyboard in Resources */,
@@ -1000,7 +1004,7 @@
 				1431468720DFA58E0017E119 /* HexUtils.swift in Sources */,
 				143146B320EB22470017E119 /* ProvisionLandingViewController.swift in Sources */,
 				F1EAAC8C23E2078300E9A6A8 /* AppSettingsViewController.swift in Sources */,
-				1431468B20E37B980017E119 /* Session.swift in Sources */,
+				1431468B20E37B980017E119 /* ESPSession.swift in Sources */,
 				F1DDA06823588B110005F982 /* NodeDetailsViewController.swift in Sources */,
 				F1EAAC8E23E29D9B00E9A6A8 /* AppConstants.swift in Sources */,
 				1431469F20E387C60017E119 /* wifi_constants.pb.swift in Sources */,

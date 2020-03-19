@@ -37,7 +37,7 @@ class ProvisionViewController: UIViewController {
     var ssidList: [String] = []
     var wifiDetailList: [String: Espressif_WiFiScanResult] = [:]
     var versionInfo: String?
-    var session: Session?
+    var session: ESPSession?
     var capabilities: [String]?
     var alertTextField: UITextField?
     var showPasswordImageView: UIImageView!
@@ -84,9 +84,6 @@ class ProvisionViewController: UIViewController {
 
     private func showBusy(isBusy: Bool) {
         if isBusy {
-//            grayView = UIView(frame: UIScreen.main.bounds)
-//            grayView?.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
-//            view.addSubview(grayView!)
 
             activityView = UIActivityIndicatorView(style: .gray)
             activityView?.center = view.center
@@ -94,7 +91,6 @@ class ProvisionViewController: UIViewController {
 
             view.addSubview(activityView!)
         } else {
-//            grayView?.removeFromSuperview()
             activityView?.removeFromSuperview()
         }
 
@@ -152,8 +148,8 @@ class ProvisionViewController: UIViewController {
     }
 
     func initSession() {
-        session = Session(transport: transport!,
-                          security: security!)
+        session = ESPSession(transport: transport!,
+                             security: security!)
         session!.initialize(response: nil) { error in
             DispatchQueue.main.async {
                 MBProgressHUD.hide(for: self.view, animated: true)
@@ -269,44 +265,6 @@ class ProvisionViewController: UIViewController {
             }
         })
     }
-
-//    private func applyConfigurations(provision: Provision) {
-//        provision.applyConfigurations(completionHandler: { status, error in
-//            guard error == nil else {
-//                self.showError(errorMessage: "Error in applying configurations : \(error.debugDescription)")
-//                return
-//            }
-//            print("Configurations applied ! \(status)")
-//        },
-//                                      wifiStatusUpdatedHandler: { wifiState, failReason, error in
-//            DispatchQueue.main.async {
-//                self.showBusy(isBusy: false)
-//                let successVC = self.storyboard?.instantiateViewController(withIdentifier: "successViewController") as? SuccessViewController
-//                successVC?.session = self.session
-//                if let successVC = successVC {
-//                    if error != nil {
-//                        successVC.statusText = "Error in getting wifi state : \(error.debugDescription)"
-//                        successVC.success = true
-//                    } else if wifiState == Espressif_WifiStationState.connected {
-//                        successVC.statusText = "Device has been successfully provisioned!"
-//                        successVC.success = true
-//                    } else if wifiState == Espressif_WifiStationState.disconnected {
-//                        successVC.statusText = "Please check the device indicators for Provisioning status."
-//                    } else {
-//                        if failReason == Espressif_WifiConnectFailedReason.authError {
-//                            successVC.statusText = "Device provisioning failed.\nReason : Wi-Fi Authentication failed.\nPlease reset device to factory settings and retry."
-//                        } else if failReason == Espressif_WifiConnectFailedReason.networkNotFound {
-//                            successVC.statusText = "Device provisioning failed.\nReason : Network not found.\nPlease reset device to factory settings and retry."
-//                        } else {
-//                            successVC.statusText = "Device provisioning failed.\nReason : \(failReason).\nPlease reset device to factory settings and retry."
-//                        }
-//                    }
-//                    self.navigationController?.pushViewController(successVC, animated: true)
-//                    self.provisionButton.isUserInteractionEnabled = true
-//                }
-//            }
-//        })
-//    }
 
     func showError(errorMessage: String) {
         let alertMessage = errorMessage

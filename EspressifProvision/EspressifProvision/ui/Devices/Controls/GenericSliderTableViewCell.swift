@@ -55,12 +55,5 @@ class GenericSliderTableViewCell: UITableViewCell {
                 NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [paramName: sender.value]])
             }
         }
-//        let loader = MBProgressHUD.showAdded(to: window!, animated: true)
-//        loader.mode = MBProgressHUDMode.customView
-//        loader.label.text = sliderValue
-//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30.0, height: 30.0))
-//        imageView.image = UIImage(named: "brightness")
-//        loader.customView = imageView
-//        loader.hide(animated: true, afterDelay: 1.0)
     }
 }

@@ -25,7 +25,7 @@ class DeviceAssociation {
     /// - Parameters:
     ///   - session: Initialised session object
     ///   - secretId: a unique key to authenticate user-device mapping
-    init(session: Session, secretId: String) {
+    init(session: ESPSession, secretId: String) {
         transport = session.transport
         security = session.security
         secretKey = secretId

@@ -98,7 +98,6 @@ class AppSettingsViewController: UIViewController {
 
 extension AppSettingsViewController: ColorPickerViewDelegate {
     func colorPickerView(_: ColorPickerView, didSelectItemAt _: IndexPath) {
-//        let color = colorPickerView.colors[colorPickerView.indexOfSelectedColor]
         if let index = self.colorPicker.indexOfSelectedColor {
             AppConstants.shared.appThemeColor = colorPicker.colors[index]
             UserDefaults.standard.backgroundColor = colorPicker.colors[index]
