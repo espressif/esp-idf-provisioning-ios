@@ -17,7 +17,7 @@ class NodeDetailsViewController: UIViewController {
     @IBOutlet var typeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Do any additional setup after loading the view.
         deviceNameLabel.text = currentNode.info?.name ?? ""
         nodeIDLabel.text = currentNode.node_id ?? ""
@@ -56,4 +56,3 @@ class NodeDetailsViewController: UIViewController {
      }
      */
 }
-

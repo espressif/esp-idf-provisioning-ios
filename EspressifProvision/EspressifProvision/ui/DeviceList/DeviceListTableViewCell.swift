@@ -31,6 +31,5 @@ class DeviceListTableViewCell: UITableViewCell {
         layer.masksToBounds = false
     }
 
-    @IBAction func toggle(_: UISwitch) {
-    }
+    @IBAction func toggle(_: UISwitch) {}
 }
