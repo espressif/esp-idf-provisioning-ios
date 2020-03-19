@@ -84,7 +84,6 @@ class ProvisionViewController: UIViewController {
 
     private func showBusy(isBusy: Bool) {
         if isBusy {
-
             activityView = UIActivityIndicatorView(style: .gray)
             activityView?.center = view.center
             activityView?.startAnimating()

@@ -9,7 +9,6 @@
 import UIKit
 
 class TopBarView: UIView {
-
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         borderWidth = 1.0
