@@ -24,7 +24,6 @@ class PasswordTextField: UITextField {
     override func rightViewRect(forBounds bounds: CGRect) -> CGRect {
         var rect = super.rightViewRect(forBounds: bounds)
         rect.origin.x = rect.origin.x - 16
-//        tapGesture = UITapGestureRecognizer(target: passwordImageRightView, action: #selector(showPasswordTapped))
         return rect
     }
 
@@ -36,12 +35,4 @@ class PasswordTextField: UITextField {
             passwordButton.setImage(UIImage(named: "show_password"), for: .normal)
         }
     }
-
-    /*
-     // Only override draw() if you perform custom drawing.
-     // An empty implementation adversely affects performance during animation.
-     override func draw(_ rect: CGRect) {
-         // Drawing code
-     }
-     */
 }

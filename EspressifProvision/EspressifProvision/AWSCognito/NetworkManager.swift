@@ -18,8 +18,9 @@ class NetworkManager {
     private init() {
 //        let serverTrustPolicy: [String: ServerTrustEvaluating] = ["" : .pinPublicKeys( kSecPublicKeyAttrs: ServerTrustEvaluating)]
 //        let configuration = URLSessionConfiguration.default
+        let certificate = [NetworkManager.certificate(filename: "amazonRootCA")]
         let trustManager = ServerTrustManager(evaluators: [
-            "api.staging.rainmaker.espressif.com": PinnedCertificatesTrustEvaluator(certificates: [NetworkManager.certificate(filename: "amazonRootCA")]), "rainmaker-staging.auth.us-east-1.amazoncognito.com": PinnedCertificatesTrustEvaluator(certificates: [NetworkManager.certificate(filename: "amazonRootCA")]),
+            "api.staging.rainmaker.espressif.com": PinnedCertificatesTrustEvaluator(certificates: certificate), "rainmaker-staging.auth.us-east-1.amazoncognito.com": PinnedCertificatesTrustEvaluator(certificates: certificate), "rainmaker-prod.auth.us-east-1.amazoncognito.com": PinnedCertificatesTrustEvaluator(certificates: certificate), "api.rainmaker.espressif.com": PinnedCertificatesTrustEvaluator(certificates: certificate),
         ])
         session = Session(serverTrustManager: trustManager)
         try! print(trustManager.serverTrustEvaluator(forHost: "api.staging.rainmaker.espressif.com") ?? "")
@@ -172,8 +173,11 @@ class NetworkManager {
         User.shared.getAccessToken(completionHandler: { accessToken in
             if accessToken != nil {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
+                self.session.sessionConfiguration.timeoutIntervalForResource = 5
+                self.session.sessionConfiguration.timeoutIntervalForRequest = 5
                 self.session.request(Constants.addDevice, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-
+                    self.session.sessionConfiguration.timeoutIntervalForResource = 60
+                    self.session.sessionConfiguration.timeoutIntervalForRequest = 60
                     switch response.result {
                     case let .success(value):
                         if let json = value as? [String: String] {

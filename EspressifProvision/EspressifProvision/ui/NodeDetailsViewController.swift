@@ -17,12 +17,13 @@ class NodeDetailsViewController: UIViewController {
     @IBOutlet var typeLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
         deviceNameLabel.text = currentNode.info?.name ?? ""
         nodeIDLabel.text = currentNode.node_id ?? ""
         configVersionLabel.text = currentNode.config_version ?? ""
         fwVersionLabel.text = currentNode.info?.fw_version ?? ""
         typeLabel.text = currentNode.info?.type ?? ""
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func deleteNode(_: Any) {
@@ -33,10 +34,6 @@ class NodeDetailsViewController: UIViewController {
                 User.shared.associatedNodeList?.removeAll(where: { node -> Bool in
                     node.node_id == self.currentNode.node_id
                 })
-
-//                User.shared.associatedDevices?.removeAll(where: { device -> Bool in
-//                    device.node_id == self.currentNode.node_id
-//                })
             }
             DispatchQueue.main.async {
                 Utility.hideLoader(view: self.view)
@@ -60,11 +57,3 @@ class NodeDetailsViewController: UIViewController {
      */
 }
 
-// extension NodeDetailsViewController: UITableViewDataSource {
-//
-//
-// }
-//
-// extension NodeDetailsViewController: UITableViewDelegate {
-//
-// }

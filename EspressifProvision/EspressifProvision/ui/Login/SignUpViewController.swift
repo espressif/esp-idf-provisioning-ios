@@ -130,13 +130,6 @@ class SignUpViewController: UIViewController {
 
         var attributes = [AWSCognitoIdentityUserAttributeType]()
 
-//        if let phoneValue = self.phone.text, !phoneValue.isEmpty {
-//            let phone = AWSCognitoIdentityUserAttributeType()
-//            phone?.name = "phone_number"
-//            phone?.value = phoneValue
-//            attributes.append(phone!)
-//        }
-
         if let emailValue = self.email.text, !emailValue.isEmpty {
             let email = AWSCognitoIdentityUserAttributeType()
             email?.name = "email"

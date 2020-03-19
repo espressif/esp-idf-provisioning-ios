@@ -24,19 +24,13 @@ class DeviceListTableViewCell: UITableViewCell {
         backView.layer.masksToBounds = true
 
         let shadowSize: CGFloat = 5.0
-        ////        let shadowPath = UIBezierPath(rect: CGRect(x: -shadowSize / 2,
-//                                                   y: -shadowSize / 2,
-//                                                   width: backView.frame.size.width + shadowSize,
-//                                                   height: backView.frame.size.height + shadowSize))
         layer.shadowOpacity = 0.18
         layer.shadowOffset = CGSize(width: 1, height: 2)
         layer.shadowRadius = 2
         layer.shadowColor = UIColor.black.cgColor
         layer.masksToBounds = false
-//        layer.shadowPath = shadowPath.cgPath
     }
 
     @IBAction func toggle(_: UISwitch) {
-//        NetworkManager.shared.toggleDevice(deviceID: node?.node_id ?? "", output: sender.isOn)
     }
 }

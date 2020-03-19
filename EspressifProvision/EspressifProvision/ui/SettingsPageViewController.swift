@@ -23,12 +23,6 @@ class SettingsPageViewController: UIViewController {
 
         emailLabel.text = User.shared.userInfo.email
         NotificationCenter.default.addObserver(self, selector: #selector(updateUIView), name: Notification.Name(Constants.uiViewUpdateNotification), object: nil)
-//        profileImage.image = imageWith(name: "V")
-//        headerView.layer.masksToBounds = false
-//        headerView.layer.shadowOffset = CGSize(width: 1, height: 1)
-//        headerView.layer.shadowRadius = 0.5
-//        headerView.layer.shadowColor = UIColor.gray.cgColor
-//        headerView.layer.shadowOpacity = 1.0
     }
 
     override func viewDidLayoutSubviews() {
@@ -65,13 +59,13 @@ class SettingsPageViewController: UIViewController {
 
     @IBAction func openPrivacy(_: Any) {
         if Utility.isConnected(view: view) {
-            showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+            showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy")
         }
     }
 
     @IBAction func openTC(_: Any) {
         if Utility.isConnected(view: view) {
-            showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy/")
+            showDocumentVC(url: "https://rainmaker.espressif.com/docs/terms-of-use.html")
         }
     }
 

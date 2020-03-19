@@ -61,20 +61,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         previewLayer.videoGravity = .resizeAspectFill
         scannerView.layer.addSublayer(previewLayer)
 
-//        let pathBigRect = UIBezierPath(rect: CGRect(x: 0, y: 0, width: scannerView.bounds.width, height: scannerView.bounds.height))
-//        let pathSmallRect = UIBezierPath(rect: CGRect(x: scannerView.center.x - scannerView.bounds.width / 3, y: scannerView.center.y - scannerView.bounds.width / 3, width: scannerView.bounds.width / 1.5, height: scannerView.bounds.width / 1.5))
-
-//        pathBigRect.append(pathSmallRect)
-//        pathBigRect.usesEvenOddFillRule = true
-
-//        let fillLayer = CAShapeLayer()
-//        fillLayer.path = pathBigRect.cgPath
-//        fillLayer.fillRule = CAShapeLayerFillRule.evenOdd
-//        fillLayer.fillColor = UIColor.black.cgColor
-//        fillLayer.opacity = 0.4
-//        scannerView.layer.addSublayer(fillLayer)
-
         captureSession.startRunning()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        previewLayer.frame = scannerView.bounds
     }
 
     override func viewWillAppear(_ animated: Bool) {

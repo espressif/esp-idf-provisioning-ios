@@ -9,15 +9,11 @@
 import UIKit
 
 class TopBarView: UIView {
-    override func draw(_: CGRect) {
-//        addBottomRoundedEdge(desiredCurve: 1.0)
-        borderWidth = 1.0
-        borderColor = UIColor.lightGray
-    }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-//        addBottomRoundedEdge(desiredCurve: 1.0)
+        borderWidth = 1.0
+        borderColor = UIColor.lightGray
     }
 
     override func setNeedsDisplay() {
@@ -51,7 +47,6 @@ class PrimaryButton: UIButton {
             }
         }
         if currentBGColor == #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1) {
-//            borderColor = UIColor(hexString: "#5330b9")
             PrimaryButton.appearance().setTitleColor(UIColor(hexString: "#5330b9"), for: .normal)
         } else {
             setTitleColor(UIColor.white, for: .normal)
@@ -62,13 +57,6 @@ class PrimaryButton: UIButton {
 class SecondaryButton: UIButton {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-//        if let color = AppConstants.shared.appThemeColor {
-//            setTitleColor(color, for: .normal)
-//        } else {
-//            if let bgColor = Constants.backgroundColor {
-//                setTitleColor(UIColor(hexString: bgColor), for: .normal)
-//            }
-//        }
     }
 
     override func setNeedsDisplay() {
@@ -83,13 +71,8 @@ class SecondaryButton: UIButton {
             }
         }
         if currentBGColor == #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1) {
-//                   borderColor = UIColor(hexString: "#5330b9")
             setTitleColor(UIColor(hexString: "#5330b9"), for: .normal)
         }
-//               } else {
-//                   borderColor = UIColor.lightGray
-//                   setTitleColor(UIColor.white, for: .normal)
-//               }
     }
 }
 

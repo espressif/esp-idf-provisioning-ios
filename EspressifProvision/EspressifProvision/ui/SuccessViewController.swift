@@ -51,32 +51,6 @@ class SuccessViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if let statusText = statusText {
-//            successLabel.text = statusText
-//        }
-//        if sessionInit {
-//            popCheckImage.image = UIImage(named: "checkbox_checked")
-//        } else {
-//            popCheckImage.image = UIImage(named: "checkbox_unchecked")
-//        }
-//        if success {
-//            wifiCheckImage.image = UIImage(named: "checkbox_checked")
-//        } else {
-//            wifiCheckImage.image = UIImage(named: "checkbox_unchecked")
-//        }
-//        assocPushedCheckImage.image = UIImage(named: "checkbox_unchecked")
-//        if let associatioInfo = User.shared.currentAssociationInfo {
-//            if associatioInfo.associationInfoDelievered {
-//                assocPushedCheckImage.image = UIImage(named: "checkbox_checked")
-//            }
-//        }
-//        if success, let associatioInfo = User.shared.currentAssociationInfo, associatioInfo.associationInfoDelievered {
-//            // DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//            User.shared.sendRequestToAddDevice(count: 7)
-//            // }
-//        } else {
-//            User.shared.currentAssociationInfo = AssociationConfig()
-//        }
         // Do any additional setup after loading the view, typically from a nib.
         if step1Failed {
             step1FailedWithMessage(message: "Wrong pop entered!")
@@ -170,7 +144,7 @@ class SuccessViewController: UIViewController {
         step3Image.isHidden = true
         step3Indicator.isHidden = false
         step3Indicator.startAnimating()
-        sendRequestToAddDevice(count: 5)
+        sendRequestToAddDevice(5)
     }
 
     private func step4ConfirmNodeAssociation(requestID: String) {
@@ -193,7 +167,6 @@ class SuccessViewController: UIViewController {
     }
 
     func fetchDeviceAssociationStatus(nodeID: String, requestID: String) {
-//        if addDeviceStatusTimeout?.isValid ?? false {
         NetworkManager.shared.deviceAssociationStatus(nodeID: nodeID, requestID: requestID) { status in
             print("Status :" + status)
             if status == "confirmed" {
@@ -212,7 +185,6 @@ class SuccessViewController: UIViewController {
                 }
             }
         }
-//        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -257,20 +229,20 @@ class SuccessViewController: UIViewController {
     }
 
     func provisionFinsihedWithStatus(message: String) {
-//        okayButton.isEnabled = true
-//        okayButton.alpha = 1.0
+        okayButton.isEnabled = true
+        okayButton.alpha = 1.0
         finalStatusLabel.text = message
         finalStatusLabel.isHidden = false
     }
 
-    func sendRequestToAddDevice(count: Int) {
+    @objc func sendRequestToAddDevice(_ count: Int) {
         print("sendRequestToAddDevice")
         let parameters = ["user_id": User.shared.userInfo.userID, "node_id": User.shared.currentAssociationInfo!.nodeID, "secret_key": User.shared.currentAssociationInfo!.uuid, "operation": "add"]
         NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, error in
             print(requestID)
             if error != nil, count > 0 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    self.sendRequestToAddDevice(count: count - 1)
+                    self.perform(#selector(self.sendRequestToAddDevice(_:)), with: count - 1, afterDelay: 5.0)
                 }
             } else {
                 if let requestid = requestID {
@@ -293,13 +265,5 @@ class SuccessViewController: UIViewController {
         destinationVC.requestID = requestID
         navigationController?.navigationBar.isHidden = false
         navigationController?.popToRootViewController(animated: true)
-
-//        if segue.identifier == "goToFirstScreen" {
-//            if let destinationVC = segue.destination as? ViewController {
-//                destinationVC.checkDeviceAssociation = true
-//                destinationVC.deviceID = deviceID
-//                destinationVC.requestID = requestID
-//            }
-//        }
     }
 }

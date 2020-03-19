@@ -38,8 +38,6 @@ class SwitchTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     @IBAction func switchStateChanged(_ sender: UISwitch) {
@@ -51,12 +49,5 @@ class SwitchTableViewCell: UITableViewCell {
             }
             NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: sender.isOn]])
         }
-//        if let error = param.update(deviceName: device.name ?? "", nodeID: device.node?.node_id ?? "", value: sender.isOn) {} else {
-//            if sender.isOn {
-//                controlStateLabel.text = "On"
-//            } else {
-//                controlStateLabel.text = "Off"
-//            }
-//        }
     }
 }

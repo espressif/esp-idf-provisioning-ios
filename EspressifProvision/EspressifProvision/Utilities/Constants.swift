@@ -93,7 +93,11 @@ struct Constants {
     // Theme Color
     static let backgroundColor = Bundle.main.infoDictionary!["APP_THEME_COLOR"] as? String
 
-    static let tokenURL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/token"
+    #if PROD
+        static let tokenURL = "https://rainmaker-prod.auth.us-east-1.amazoncognito.com/oauth2/token"
+    #else
+        static let tokenURL = "https://rainmaker-staging.auth.us-east-1.amazoncognito.com/oauth2/token"
+    #endif
 
     static let uiViewUpdateNotification = "com.espressif.updateuiview"
 
@@ -118,7 +122,7 @@ struct Keys {
     static var current: Keys {
         let keys = EspressifProvisionKeys()
         #if PROD
-            return Keys(clientID: keys.userPoolAppClientId, clientSecret: keys.userPoolAppClientSecret, poolID: keys.userPoolId)
+            return Keys(clientID: keys.userPoolAppClientId, clientSecret: nil, poolID: keys.userPoolId)
         #else
             return Keys(clientID: keys.staging_UserPoolAppClientId, clientSecret: nil, poolID: keys.staging_UserPoolId)
         #endif

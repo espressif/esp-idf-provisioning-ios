@@ -71,6 +71,14 @@ class DevicesViewController: UIViewController {
         } catch {
             print("could not start reachability notifier")
         }
+        singleDeviceNodeCount = 0
+        if let nodeList = User.shared.associatedNodeList {
+            for item in nodeList {
+                if item.devices?.count == 1 {
+                    singleDeviceNodeCount += 1
+                }
+            }
+        }
         collectionView.reloadData()
         if User.shared.updateUserInfo {
             Utility.showLoader(message: "Fetching Device List", view: view)
@@ -194,22 +202,6 @@ class DevicesViewController: UIViewController {
         }
     }
 
-//    @IBAction func addButtonClicked(_: Any) {
-    ////        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-    ////        actionSheet.addAction(UIAlertAction(title: "Add using QR code", style: .default, handler: nil))
-    ////        actionSheet.addAction(UIAlertAction(title: "Add manually", style: .default, handler: nil))
-    ////        let popover = actionSheet.popoverPresentationController
-    ////        popover?.sourceView = addButton
-    ////        present(actionSheet, animated: false, completion: nil)
-//        if pickerView.isHidden {
-//            pickerView.isHidden = false
-//            addButton.setImage(UIImage(named: "cross_icon"), for: .normal)
-//        } else {
-//            pickerView.isHidden = true
-//            addButton.setImage(UIImage(named: "add_icon"), for: .normal)
-//        }
-//    }
-
     @IBAction func provisionButtonClicked(_: Any) {
         var transport = Provision.CONFIG_TRANSPORT_WIFI
         #if BLE
@@ -271,7 +263,7 @@ class DevicesViewController: UIViewController {
         var index = indexPath.section
         if singleDeviceNodeCount > 0 {
             if index == 0 {
-                return User.shared.associatedNodeList![indexPath.section].devices![0]
+                return User.shared.associatedNodeList![indexPath.row].devices![0]
             }
             index = index + singleDeviceNodeCount - 1
         }
@@ -395,9 +387,9 @@ extension DevicesViewController: UICollectionViewDataSource {
                         cell.switchButton.alpha = 1.0
                         cell.switchButton.backgroundColor = UIColor.white
                         cell.switchButton.isEnabled = true
+                        cell.switchButton.isHidden = false
                         cell.switchButton.setImage(UIImage(named: "switch_icon_enabled_off"), for: .normal)
                         if let value = primaryParam.value as? Bool {
-                            cell.switchButton.isHidden = false
                             if value {
                                 cell.switchButton.setImage(UIImage(named: "switch_icon_enabled_on"), for: .normal)
                                 cell.switchValue = true
@@ -467,6 +459,17 @@ extension DevicesViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "deviceListCollectionReusableView", for: indexPath) as! DeviceListCollectionReusableView
         let node = getNodeAt(indexPath: indexPath)
+        if singleDeviceNodeCount > 0 {
+            if indexPath.section == 0 {
+                headerView.headerLabel.isHidden = true
+                headerView.infoButton.isHidden = true
+                headerView.statusIndicator.isHidden = true
+                return headerView
+            }
+        }
+        headerView.headerLabel.isHidden = false
+        headerView.infoButton.isHidden = false
+        headerView.statusIndicator.isHidden = false
         headerView.headerLabel.text = node.info?.name ?? "Node"
         headerView.delegate = self
         headerView.nodeID = node.node_id ?? ""

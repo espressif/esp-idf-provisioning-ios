@@ -215,34 +215,3 @@ extension UserDefaults {
         set(imageData, forKey: key)
     }
 }
-
-extension UIView {
-    /* Usage Example
-     * bgView.addBottomRoundedEdge(desiredCurve: 1.5)
-     */
-    func addBottomRoundedEdge(desiredCurve: CGFloat?) {
-        let offset: CGFloat = frame.width / desiredCurve!
-        let bounds: CGRect = self.bounds
-
-        let rectBounds: CGRect = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.size.width, height: bounds.size.height / 2)
-        let rectPath: UIBezierPath = UIBezierPath(rect: rectBounds)
-        let ovalBounds: CGRect = CGRect(x: bounds.origin.x - offset / 2, y: bounds.origin.y, width: bounds.size.width + offset, height: bounds.size.height)
-        let ovalPath: UIBezierPath = UIBezierPath(ovalIn: ovalBounds)
-        rectPath.append(ovalPath)
-
-        // Create the shape layer and set its path
-        let maskLayer: CAShapeLayer = CAShapeLayer()
-        maskLayer.frame = bounds
-        maskLayer.path = rectPath.cgPath
-        // Set the newly created shape layer as the mask for the view's layer
-        layer.mask = maskLayer
-
-//        let borderLayer = CAShapeLayer()
-//        borderLayer.path = ovalPath.cgPath // Reuse the Bezier path
-//        borderLayer.fillColor = UIColor.clear.cgColor
-//        borderLayer.strokeColor = UIColor.lightGray.cgColor
-//        borderLayer.lineWidth = 1.0
-//        borderLayer.frame = bounds
-//        layer.addSublayer(borderLayer)
-    }
-}

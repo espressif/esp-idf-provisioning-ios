@@ -253,10 +253,6 @@ extension DeviceTraitListViewController: UITableViewDataSource {
             return getTableViewCellBasedOn(dynamicAttribute: control!, indexPath: indexPath)
         }
     }
-
-//    func tableView(_: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
 }
 
 class SectionHeaderView: UIView {
