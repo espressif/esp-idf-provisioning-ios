@@ -13,9 +13,11 @@ class TopBarView: UIView {
         super.init(coder: coder)
         borderWidth = 1.0
         borderColor = UIColor.lightGray
+        changeTheme()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeTheme), name: Notification.Name(Constants.uiViewUpdateNotification), object: nil)
     }
 
-    override func setNeedsDisplay() {
+    @objc func changeTheme() {
         if let color = AppConstants.shared.appThemeColor {
             backgroundColor = color
         } else {
@@ -32,9 +34,11 @@ class PrimaryButton: UIButton {
         cornerRadius = 10.0
         borderWidth = 1.0
         borderColor = UIColor.lightGray
+        changeTheme()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeTheme), name: Notification.Name(Constants.uiViewUpdateNotification), object: nil)
     }
 
-    override func setNeedsDisplay() {
+    @objc func changeTheme() {
         var currentBGColor: UIColor = UIColor(hexString: "#5330b9")
         if let color = AppConstants.shared.appThemeColor {
             backgroundColor = color
@@ -46,7 +50,7 @@ class PrimaryButton: UIButton {
             }
         }
         if currentBGColor == #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1) {
-            PrimaryButton.appearance().setTitleColor(UIColor(hexString: "#5330b9"), for: .normal)
+            setTitleColor(UIColor(hexString: "#5330b9"), for: .normal)
         } else {
             setTitleColor(UIColor.white, for: .normal)
         }
@@ -56,9 +60,11 @@ class PrimaryButton: UIButton {
 class SecondaryButton: UIButton {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        changeTheme()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeTheme), name: Notification.Name(Constants.uiViewUpdateNotification), object: nil)
     }
 
-    override func setNeedsDisplay() {
+    @objc func changeTheme() {
         var currentBGColor: UIColor = UIColor(hexString: "#5330b9")
         if let color = AppConstants.shared.appThemeColor {
             setTitleColor(color, for: .normal)
@@ -97,9 +103,11 @@ class BGImageView: UIImageView {
 class BarButton: UIButton {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        changeTheme()
+        NotificationCenter.default.addObserver(self, selector: #selector(changeTheme), name: Notification.Name(Constants.uiViewUpdateNotification), object: nil)
     }
 
-    override func setNeedsDisplay() {
+    @objc func changeTheme() {
         var currentBGColor: UIColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1)
         if let color = AppConstants.shared.appThemeColor {
             currentBGColor = color
@@ -109,9 +117,9 @@ class BarButton: UIButton {
             }
         }
         if currentBGColor == #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1) {
-            BarButton.appearance().setTitleColor(UIColor(hexString: "#5330b9"), for: .normal)
+            setTitleColor(UIColor(hexString: "#5330b9"), for: .normal)
         } else {
-            BarButton.appearance().setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1), for: .normal)
+            setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1), for: .normal)
         }
     }
 }

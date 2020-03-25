@@ -34,6 +34,32 @@ class NetworkManager {
         return certificate
     }
 
+    func getNodes(completionHandler: @escaping ([Node]?, Error?) -> Void) {
+        User.shared.getAccessToken(completionHandler: { accessToken in
+            if accessToken != nil {
+                let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
+                let url = Constants.getNodes + "?node_details=true"
+                self.session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                    print(response)
+                    switch response.result {
+                    case let .success(value):
+                        if let json = value as? [String: Any], let nodeArray = json["node_details"] as? [[String: Any]] {
+                            completionHandler(JSONParser.parseNodeArray(data: nodeArray), nil)
+                            return
+                        }
+                    case let .failure(error):
+                        print(error)
+                        completionHandler(nil, NetworkError.emptyToken)
+                        return
+                    }
+                    completionHandler(nil, CustomError.emptyConfigData)
+                }
+            } else {
+                completionHandler(nil, NetworkError.emptyToken)
+            }
+        })
+    }
+
     // MARK: - Node APIs
 
     /// Get list of nodes associated with the user

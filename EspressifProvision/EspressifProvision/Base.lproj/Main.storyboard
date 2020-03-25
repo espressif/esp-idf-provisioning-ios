@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mgC-Sj-4EB">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mgC-Sj-4EB">
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,16 +12,16 @@
         <!--Success View Controller-->
         <scene sceneID="1NK-5s-vK5">
             <objects>
-                <viewController storyboardIdentifier="successViewController" id="kI4-hk-B8X" customClass="SuccessViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="successViewController" id="kI4-hk-B8X" customClass="SuccessViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cg9-vu-1LI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L77-Ja-ZBH" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L77-Ja-ZBH" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provisioning" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9t-i1-0NK" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="160.5" y="62.5" width="93.5" height="19.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provisioning" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9t-i1-0NK" customClass="BarTitle" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="337.5" y="62.5" width="93.5" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -35,66 +35,66 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkbox_unchecked" translatesAutoresizingMaskIntoConstraints="NO" id="IUQ-NS-jJI">
-                                <rect key="frame" x="79.5" y="324" width="24" height="24"/>
+                                <rect key="frame" x="256.5" y="324" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="WQs-pm-fYh"/>
                                     <constraint firstAttribute="width" constant="24" id="sul-24-jrY"/>
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkbox_unchecked" translatesAutoresizingMaskIntoConstraints="NO" id="q1m-Bi-DiU">
-                                <rect key="frame" x="79.5" y="376" width="24" height="24"/>
+                                <rect key="frame" x="256.5" y="376" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="fQ7-0v-n7R"/>
                                     <constraint firstAttribute="height" constant="24" id="zIw-ml-hMN"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sending Wi-Fi credentials." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NYN-3i-eXB">
-                                <rect key="frame" x="111.5" y="326" width="191" height="20"/>
+                                <rect key="frame" x="288.5" y="326" width="191" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirming Wi-Fi connection." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3FX-Sr-St8">
-                                <rect key="frame" x="111.5" y="378" width="213" height="20"/>
+                                <rect key="frame" x="288.5" y="378" width="213" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkbox_unchecked" translatesAutoresizingMaskIntoConstraints="NO" id="uMA-0j-pNB">
-                                <rect key="frame" x="79.5" y="428" width="24" height="24"/>
+                                <rect key="frame" x="256.5" y="428" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="OVe-Zb-yNV"/>
                                     <constraint firstAttribute="height" constant="24" id="W3r-Vp-Igt"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Configuring Node association." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEc-gr-Bg4">
-                                <rect key="frame" x="111.5" y="430" width="218.5" height="20"/>
+                                <rect key="frame" x="288.5" y="430" width="218.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkbox_unchecked" translatesAutoresizingMaskIntoConstraints="NO" id="9Hx-yl-6LM">
-                                <rect key="frame" x="79.5" y="480" width="24" height="24"/>
+                                <rect key="frame" x="256.5" y="480" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="VHC-zi-YVc"/>
                                     <constraint firstAttribute="height" constant="24" id="h9c-bh-ySB"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirming Node association." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWJ-9B-2Ah">
-                                <rect key="frame" x="111.5" y="482" width="214" height="20"/>
+                                <rect key="frame" x="288.5" y="482" width="214" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="status_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Mlj-rw-jwQ">
-                                <rect key="frame" x="157" y="176" width="100" height="90"/>
+                                <rect key="frame" x="334" y="176" width="100" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="0hQ-4O-KMW"/>
                                     <constraint firstAttribute="height" constant="90" id="PxC-zN-R9O"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amZ-Q8-edP" customClass="PrimaryButton" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="32" y="628.5" width="350" height="56"/>
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amZ-Q8-edP" customClass="PrimaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="209" y="628.5" width="350" height="56"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="2Vj-lV-vsc"/>
@@ -115,43 +115,43 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="rR4-Un-raQ">
-                                <rect key="frame" x="79.5" y="324" width="24" height="24"/>
+                                <rect key="frame" x="256.5" y="324" width="24" height="24"/>
                             </activityIndicatorView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="OhJ-yX-ugT">
-                                <rect key="frame" x="79.5" y="376" width="24" height="24"/>
+                                <rect key="frame" x="256.5" y="376" width="24" height="24"/>
                             </activityIndicatorView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="NIz-Dd-0MV">
-                                <rect key="frame" x="79.5" y="428" width="24" height="24"/>
+                                <rect key="frame" x="256.5" y="428" width="24" height="24"/>
                             </activityIndicatorView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Etb-cb-2Dn">
-                                <rect key="frame" x="79.5" y="480" width="24" height="24"/>
+                                <rect key="frame" x="256.5" y="480" width="24" height="24"/>
                             </activityIndicatorView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase Invalid" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cw5-TG-1Fq">
-                                <rect key="frame" x="111.5" y="352" width="105" height="14.5"/>
+                                <rect key="frame" x="288.5" y="352" width="105" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="0.32156862745098036" blue="0.027450980392156862" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase Invalid" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sq-DT-DvX">
-                                <rect key="frame" x="111.5" y="404" width="105" height="14.5"/>
+                                <rect key="frame" x="288.5" y="404" width="105" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="0.32156862749999998" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase Invalid" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xd6-eD-re5">
-                                <rect key="frame" x="111.5" y="456" width="105" height="14.5"/>
+                                <rect key="frame" x="288.5" y="456" width="105" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="0.32156862749999998" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passphrase Invalid" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qap-st-sdH">
-                                <rect key="frame" x="111.5" y="508" width="105" height="14.5"/>
+                                <rect key="frame" x="288.5" y="508" width="105" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="1" green="0.32156862749999998" blue="0.027450980390000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset your board to factory defaults and retry" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSe-jX-Vog">
-                                <rect key="frame" x="32" y="587.5" width="350" height="17"/>
+                                <rect key="frame" x="209" y="587.5" width="350" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -240,17 +240,17 @@
         <!--Welcome-->
         <scene sceneID="vpc-50-hsG">
             <objects>
-                <viewController id="ZH1-Yn-aSM" customClass="ViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZH1-Yn-aSM" customClass="ViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="63H-8f-fMi">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hn0-yC-bpB">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zdP-RM-W8y">
-                                <rect key="frame" x="0.0" y="112.5" width="414" height="48"/>
+                                <rect key="frame" x="0.0" y="46.5" width="768" height="48"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQy-W4-Gvs">
                                         <rect key="frame" x="8" y="23" width="66" height="25"/>
@@ -266,20 +266,20 @@
                                     <constraint firstAttribute="height" constant="48" id="qic-1D-k8x"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="544" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T2E-Nc-t0P" customClass="DeviceListTableView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="180.5" width="414" height="715.5"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="544" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="T2E-Nc-t0P" customClass="DeviceListTableView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="114.5" width="768" height="909.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="deviceListCell" id="uL4-1M-5X9" customClass="DeviceListTableViewCell" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="4"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="deviceListCell" id="uL4-1M-5X9" customClass="DeviceListTableViewCell" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="768" height="4"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uL4-1M-5X9" id="j6i-z1-KAi">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="4"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="4"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nui-Z5-cnv">
-                                                    <rect key="frame" x="15" y="2" width="384" height="0.0"/>
+                                                    <rect key="frame" x="15" y="2" width="738" height="0.0"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIq-de-dc7">
                                                             <rect key="frame" x="20" y="-10.5" width="42" height="21"/>
@@ -317,7 +317,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPD-Ds-Esl">
-                                <rect key="frame" x="304" y="727" width="80" height="80"/>
+                                <rect key="frame" x="658" y="889" width="80" height="80"/>
                                 <color key="backgroundColor" red="0.68548921630050752" green="0.30206120564526845" blue="0.29564329967181668" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="Q8C-5H-guf"/>
@@ -338,7 +338,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To provision a new device click on plus sign at the bottom." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2tH-0H-ccg">
-                                <rect key="frame" x="20" y="60" width="374" height="44.5"/>
+                                <rect key="frame" x="20" y="16" width="728" height="22.5"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -390,7 +390,7 @@
                 <navigationController storyboardIdentifier="startViewController" title="Espressif" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="mgC-Sj-4EB" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="e8O-Ax-H59">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.94901960780000005" green="0.94509803920000002" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -414,25 +414,25 @@
         <!--Settings Page View Controller-->
         <scene sceneID="5Kp-wz-nQU">
             <objects>
-                <viewController id="WJ1-o6-tnt" customClass="SettingsPageViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="WJ1-o6-tnt" customClass="SettingsPageViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SOM-0H-TRg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kyI-Tv-wet" customClass="BGImageView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kyI-Tv-wet" customClass="BGImageView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4z-Ju-jcf" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4z-Ju-jcf" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Profile" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhi-wW-pMo" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="162.5" y="62.5" width="89" height="19.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Profile" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vhi-wW-pMo" customClass="BarTitle" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="339.5" y="62.5" width="89" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Fm-Rg-gyv" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="62" width="40" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Fm-Rg-gyv" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="62.5" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="pdn-Xr-v7s"/>
                                             <constraint firstAttribute="height" constant="20" id="ydM-f2-sfQ"/>
@@ -456,7 +456,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDf-0O-WMb">
-                                <rect key="frame" x="32" y="128" width="350" height="60"/>
+                                <rect key="frame" x="134" y="128" width="500" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9l-oW-Yhm">
                                         <rect key="frame" x="16" y="8" width="37.5" height="15"/>
@@ -508,9 +508,9 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MvJ-pf-Oif">
-                                <rect key="frame" x="32" y="220" width="350" height="60"/>
+                                <rect key="frame" x="134" y="220" width="500" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yZ-Rb-2QH" customClass="SecondaryButton" customModule="RainMaker" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yZ-Rb-2QH" customClass="SecondaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="14" width="131" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Change Password">
@@ -540,9 +540,9 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wAD-Xx-PiU">
-                                <rect key="frame" x="32" y="282" width="350" height="60"/>
+                                <rect key="frame" x="134" y="282" width="500" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sng-Ad-SJ2" customClass="SecondaryButton" customModule="RainMaker" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sng-Ad-SJ2" customClass="SecondaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="14" width="101" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Privacy Policy">
@@ -572,9 +572,9 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nF3-zT-x17">
-                                <rect key="frame" x="32" y="344" width="350" height="60"/>
+                                <rect key="frame" x="134" y="344" width="500" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtY-CX-ysb" customClass="SecondaryButton" customModule="RainMaker" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtY-CX-ysb" customClass="SecondaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="14" width="158" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Terms and Conditions">
@@ -604,9 +604,9 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rpm-p3-XiK">
-                                <rect key="frame" x="32" y="406" width="350" height="60"/>
+                                <rect key="frame" x="134" y="406" width="500" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rC0-zE-8nW" customClass="SecondaryButton" customModule="RainMaker" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rC0-zE-8nW" customClass="SecondaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="14" width="60" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Settings">
@@ -636,7 +636,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9t-mo-n4D">
-                                <rect key="frame" x="32" y="498" width="350" height="60"/>
+                                <rect key="frame" x="134" y="498" width="500" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yla-oM-gGj">
                                         <rect key="frame" x="16" y="14" width="51" height="32"/>
@@ -668,13 +668,13 @@
                                 </variation>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Version - v1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfG-Qq-wAK">
-                                <rect key="frame" x="155.5" y="825.5" width="103.5" height="14.5"/>
+                                <rect key="frame" x="332.5" y="953.5" width="103.5" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by ESPRESSIF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyI-b1-O5Q">
-                                <rect key="frame" x="140.5" y="806.5" width="133" height="15"/>
+                                <rect key="frame" x="317.5" y="934.5" width="133" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -748,26 +748,26 @@
         <!--App Settings View Controller-->
         <scene sceneID="xwJ-Vt-4ea">
             <objects>
-                <viewController id="OGC-Yo-WfT" customClass="AppSettingsViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OGC-Yo-WfT" customClass="AppSettingsViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f4K-It-y7D">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="05F-hC-kzd" customClass="BGImageView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="05F-hC-kzd" customClass="BGImageView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Asr-Gb-h5z" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Asr-Gb-h5z" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VD0-Yl-GhJ" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="175.5" y="62.5" width="63.5" height="19.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VD0-Yl-GhJ" customClass="BarTitle" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="352.5" y="62.5" width="63.5" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbV-lx-AYY" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="62" width="40" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbV-lx-AYY" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="62.5" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="Njc-jm-mdM"/>
                                             <constraint firstAttribute="height" constant="20" id="TYP-xr-2uW"/>
@@ -792,10 +792,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRb-0D-i2b">
-                                <rect key="frame" x="32" y="176" width="350" height="60"/>
+                                <rect key="frame" x="134" y="176" width="500" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bL-ex-zEf" customClass="SecondaryButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bL-ex-zEf" customClass="SecondaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="500" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Choose Theme">
@@ -839,10 +839,10 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mBB-fi-HK2">
-                                <rect key="frame" x="32" y="268" width="350" height="60"/>
+                                <rect key="frame" x="134" y="268" width="500" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxl-hr-q6O" customClass="SecondaryButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vxl-hr-q6O" customClass="SecondaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="500" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Change Background">
@@ -874,10 +874,10 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yb0-DG-OFa">
-                                <rect key="frame" x="32" y="360" width="350" height="60"/>
+                                <rect key="frame" x="134" y="360" width="500" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MjU-gH-Qyq" customClass="SecondaryButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MjU-gH-Qyq" customClass="SecondaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="500" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Remove Background">
@@ -909,7 +909,7 @@
                                 </variation>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUe-bs-Pm3">
-                                <rect key="frame" x="187" y="828" width="40" height="40"/>
+                                <rect key="frame" x="364" y="956" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="LHq-6b-gpu"/>
                                     <constraint firstAttribute="width" constant="40" id="arJ-br-KOf"/>
@@ -932,8 +932,8 @@
                                     <action selector="cancelClicked:" destination="OGC-Yo-WfT" eventType="touchUpInside" id="DzX-1M-9po"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ve3-Ae-FWa" customClass="ColorPickerView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="10" y="876" width="394" height="0.0"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ve3-Ae-FWa" customClass="ColorPickerView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="10" y="1004" width="748" height="0.0"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="tna-mG-vgA"/>
@@ -1005,22 +1005,22 @@
         <!--Change Password View Controller-->
         <scene sceneID="VAk-tE-iXD">
             <objects>
-                <viewController id="ABP-GT-p8R" customClass="ChangePasswordViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ABP-GT-p8R" customClass="ChangePasswordViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CJG-j7-rFK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfJ-H0-AjK" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfJ-H0-AjK" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="96"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rh2-tG-q5l">
-                                        <rect key="frame" x="139" y="62.5" width="136" height="19.5"/>
+                                        <rect key="frame" x="316" y="62.5" width="136" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIV-Lv-nIQ" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="62" width="40" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIV-Lv-nIQ" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="62.5" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="etd-y9-t0X"/>
                                             <constraint firstAttribute="height" constant="20" id="iga-q8-wJm"/>
@@ -1043,8 +1043,8 @@
                                     <constraint firstItem="Rh2-tG-q5l" firstAttribute="centerX" secondItem="vfJ-H0-AjK" secondAttribute="centerX" id="xzN-YS-ca9"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Old Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NWw-vv-Hvr" customClass="PasswordTextField" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="32" y="128" width="350" height="60"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Old Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NWw-vv-Hvr" customClass="PasswordTextField" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="32" y="128" width="704" height="60"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="dAV-5Y-mgy"/>
@@ -1056,9 +1056,12 @@
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="ABP-GT-p8R" id="fHB-nE-4u7"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Yb-QL-qOJ" customClass="PasswordTextField" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="32" y="192" width="350" height="60"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Yb-QL-qOJ" customClass="PasswordTextField" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="32" y="192" width="704" height="60"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="ark-x1-J4h"/>
@@ -1070,29 +1073,35 @@
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="ABP-GT-p8R" id="eRr-s7-cyc"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wrL-7l-Ov7" customClass="PasswordTextField" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="32" y="256" width="350" height="60"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm New Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wrL-7l-Ov7" customClass="PasswordTextField" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="32" y="256" width="704" height="60"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="xen-ro-QiZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="ABP-GT-p8R" id="ozA-WZ-MMm"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password should contain at least one capital letter, one special character and a number." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbG-2X-Ubm">
-                                <rect key="frame" x="32" y="324" width="350" height="41"/>
+                                <rect key="frame" x="32" y="324" width="704" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.50588235294117645" green="0.50588235294117645" blue="0.6588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGj-8g-Y7z" customClass="PrimaryButton" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="32" y="381" width="350" height="56"/>
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGj-8g-Y7z" customClass="PrimaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="32" y="360.5" width="704" height="56"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="uLu-7b-R3U"/>
@@ -1153,13 +1162,13 @@
         <!--Provision-->
         <scene sceneID="2ha-RX-ZtH">
             <objects>
-                <viewController storyboardIdentifier="provision" title="Provision" id="mnI-as-oAA" customClass="ProvisionViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="provision" title="Provision" id="mnI-as-oAA" customClass="ProvisionViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ITW-SI-mor">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nct-ov-xQJ" customClass="PrimaryButton" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="62" y="658" width="290" height="50"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nct-ov-xQJ" customClass="PrimaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="107" y="834" width="498" height="50"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Rpa-Mh-XwD"/>
@@ -1179,7 +1188,7 @@
                                 </connections>
                             </button>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Network Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pmo-qk-3BE">
-                                <rect key="frame" x="62" y="158" width="290" height="50"/>
+                                <rect key="frame" x="107" y="164" width="498" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="pLr-VH-xHJ"/>
                                 </constraints>
@@ -1187,7 +1196,7 @@
                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="next" textContentType="name"/>
                             </textField>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Passphrase" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NRC-Zo-NS6">
-                                <rect key="frame" x="62" y="240" width="290" height="50"/>
+                                <rect key="frame" x="107" y="246" width="498" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Jfx-VR-v3o"/>
                                 </constraints>
@@ -1195,31 +1204,31 @@
                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="go" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L4z-EE-TMh">
-                                <rect key="frame" x="0.0" y="172" width="414" height="636"/>
+                                <rect key="frame" x="0.0" y="178" width="712" height="806"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wifiListCell" rowHeight="60" id="20W-h8-WPV" customClass="WifiListTableViewCell" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wifiListCell" rowHeight="60" id="20W-h8-WPV" customClass="WifiListTableViewCell" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="712" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="20W-h8-WPV" id="mai-ke-66w">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="712" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTC-kH-x81">
-                                                    <rect key="frame" x="15" y="18.5" width="307" height="23"/>
+                                                    <rect key="frame" x="15" y="18.5" width="605" height="23"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                     <color key="textColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="0.89552119006849318" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifi_symbol_weak" translatesAutoresizingMaskIntoConstraints="NO" id="a2y-Kk-gtc">
-                                                    <rect key="frame" x="364" y="19" width="30" height="22.5"/>
+                                                    <rect key="frame" x="662" y="19" width="30" height="22.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="a2y-Kk-gtc" secondAttribute="height" multiplier="4:3" id="Mlg-0O-x8G"/>
                                                         <constraint firstAttribute="width" constant="30" id="Smd-3e-mSn"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xlC-is-5Vn">
-                                                    <rect key="frame" x="332" y="22.5" width="20" height="15"/>
+                                                    <rect key="frame" x="630" y="22.5" width="20" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="20" id="9Uf-8V-a9W"/>
                                                         <constraint firstAttribute="width" secondItem="xlC-is-5Vn" secondAttribute="height" multiplier="4:3" id="xdg-Pd-d4c"/>
@@ -1251,16 +1260,16 @@
                                 </connections>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkE-fK-pMi">
-                                <rect key="frame" x="0.0" y="122" width="414" height="30"/>
+                                <rect key="frame" x="0.0" y="128" width="712" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Networks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVQ-0o-rMV">
-                                        <rect key="frame" x="16" y="4.5" width="382" height="21"/>
+                                        <rect key="frame" x="16" y="4.5" width="680" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h1T-Sz-Tda">
-                                        <rect key="frame" x="369" y="2.5" width="25" height="25"/>
+                                        <rect key="frame" x="667" y="2.5" width="25" height="25"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="25" id="Naj-JE-5RC"/>
                                             <constraint firstAttribute="width" constant="25" id="SRI-xB-pXa"/>
@@ -1281,17 +1290,17 @@
                                     <constraint firstAttribute="height" constant="30" id="op0-XK-lNp"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWq-JL-gi6" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWq-JL-gi6" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="712" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Wi-Fi Network" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cR-TX-8uW" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="127" y="56.5" width="160" height="19.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Wi-Fi Network" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cR-TX-8uW" customClass="BarTitle" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="276" y="62.5" width="160" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lW2-FA-tWT" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="343" y="54" width="55" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lW2-FA-tWT" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="641" y="60" width="55" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="v4J-KF-djX"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="vb1-Rm-cHD"/>
@@ -1317,7 +1326,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qYF-JW-4bB">
-                                <rect key="frame" x="103" y="774" width="48" height="4"/>
+                                <rect key="frame" x="252" y="916" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="TaK-6c-Qxu"/>
@@ -1326,7 +1335,7 @@
                                 <viewLayoutGuide key="safeArea" id="0ay-z2-KzB"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YzG-kc-0qe">
-                                <rect key="frame" x="215" y="774" width="48" height="4"/>
+                                <rect key="frame" x="364" y="916" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="DrZ-Kk-32h"/>
@@ -1335,7 +1344,7 @@
                                 <viewLayoutGuide key="safeArea" id="wFr-i2-xTr"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2cM-qU-ezK">
-                                <rect key="frame" x="159" y="774" width="48" height="4"/>
+                                <rect key="frame" x="308" y="916" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="Wos-cc-IEE"/>
@@ -1344,7 +1353,7 @@
                                 <viewLayoutGuide key="safeArea" id="wzH-2A-dju"/>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GZh-4t-7S1">
-                                <rect key="frame" x="271" y="774" width="48" height="4"/>
+                                <rect key="frame" x="420" y="916" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94509803921568625" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="Jmw-4H-vH6"/>
@@ -1407,16 +1416,16 @@
         <!--Espressif-->
         <scene sceneID="7GO-57-yej">
             <objects>
-                <viewController storyboardIdentifier="bleLanding" title="Espressif" id="dpI-LH-jcG" customClass="BLELandingViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="bleLanding" title="Espressif" id="dpI-LH-jcG" customClass="BLELandingViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fxz-s1-VWM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8b2-wc-6wd">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jK-1F-0tE">
-                                        <rect key="frame" x="363" y="190.5" width="27" height="27"/>
+                                        <rect key="frame" x="717" y="126" width="27" height="27"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="27" id="MIm-yO-pkM"/>
                                             <constraint firstAttribute="width" constant="27" id="vxy-eh-dsy"/>
@@ -1433,7 +1442,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syt-NP-QP1">
-                                <rect key="frame" x="16" y="96" width="382" height="81.5"/>
+                                <rect key="frame" x="16" y="52" width="736" height="61"/>
                                 <string key="text">To provision your new device, please make sure that your Phone's Bluetooth is turned on and within range of your new device. 
 </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1441,14 +1450,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qLI-QR-yT6">
-                                <rect key="frame" x="0.0" y="239.5" width="414" height="622.5"/>
+                                <rect key="frame" x="0.0" y="175" width="768" height="849"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="bleDeviceCell" rowHeight="70" id="ipi-YE-E5z" customClass="BLEDeviceListViewCell" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="70"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="bleDeviceCell" rowHeight="70" id="ipi-YE-E5z" customClass="BLEDeviceListViewCell" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="768" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ipi-YE-E5z" id="4a4-uK-Hhg">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bluetooth_icon" translatesAutoresizingMaskIntoConstraints="NO" id="hKu-Tg-C0n">
@@ -1485,16 +1494,16 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzP-oQ-2UW">
-                                <rect key="frame" x="16" y="193.5" width="61" height="21"/>
+                                <rect key="frame" x="16" y="129" width="61" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQA-y7-wcT">
-                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="40"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gpc-Hf-Skf">
-                                        <rect key="frame" x="84" y="0.0" width="330" height="38"/>
+                                        <rect key="frame" x="84" y="0.0" width="684" height="38"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -1567,16 +1576,16 @@
         <!--Espressif-->
         <scene sceneID="FrL-c3-Ay3">
             <objects>
-                <viewController storyboardIdentifier="provisionLanding" title="Espressif" modalPresentationStyle="fullScreen" id="Mpb-P7-MIc" customClass="ProvisionLandingViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="provisionLanding" title="Espressif" modalPresentationStyle="fullScreen" id="Mpb-P7-MIc" customClass="ProvisionLandingViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tx7-x4-FNK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGX-M0-fFn" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGX-M0-fFn" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="96"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MyZ-fO-szp" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="62" width="40" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MyZ-fO-szp" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="62.5" width="40" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="e9q-6G-V9n"/>
                                             <constraint firstAttribute="width" constant="40" id="z0j-rD-VET"/>
@@ -1590,14 +1599,14 @@
                                             <action selector="backClicked:" destination="Mpb-P7-MIc" eventType="touchUpInside" id="05E-FB-YWl"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect to Device" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mQ-5Z-4P4" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="138" y="62.5" width="138.5" height="19.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect to Device" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mQ-5Z-4P4" customClass="BarTitle" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="315" y="62.5" width="138.5" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDL-Sb-XKI" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="343" y="60" width="55" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDL-Sb-XKI" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="697" y="60" width="55" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="2oQ-yJ-8XI"/>
                                             <constraint firstAttribute="height" constant="20" id="K7q-cp-7UB"/>
@@ -1624,7 +1633,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ngp-U3-nxr">
-                                <rect key="frame" x="32" y="466.5" width="350" height="50.5"/>
+                                <rect key="frame" x="32" y="530.5" width="704" height="33.5"/>
                                 <string key="text">To provision your device: make sure it is turned ON.
 Connect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1632,20 +1641,20 @@ Connect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX</str
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="provision_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Ibc-PJ-ajh">
-                                <rect key="frame" x="157" y="321.5" width="100" height="92"/>
+                                <rect key="frame" x="334" y="385.5" width="100" height="92"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="ZbJ-ZA-9cL"/>
                                     <constraint firstAttribute="height" constant="92" id="aUz-I4-TaI"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect your device" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UfM-3v-SMK">
-                                <rect key="frame" x="123.5" y="437.5" width="167" height="21"/>
+                                <rect key="frame" x="300.5" y="501.5" width="167" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ff-LH-2Cj">
-                                <rect key="frame" x="215" y="828" width="48" height="4"/>
+                                <rect key="frame" x="392" y="956" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94509803921568625" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="TDK-i4-eOH"/>
@@ -1653,7 +1662,7 @@ Connect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX</str
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d6L-GO-b7x">
-                                <rect key="frame" x="279" y="828" width="48" height="4"/>
+                                <rect key="frame" x="456" y="956" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94509803921568625" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="03z-Gh-qkW"/>
@@ -1661,7 +1670,7 @@ Connect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX</str
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zTg-KE-Ojs">
-                                <rect key="frame" x="151" y="828" width="48" height="4"/>
+                                <rect key="frame" x="328" y="956" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94509803921568625" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="6bf-VC-Gd7"/>
@@ -1669,15 +1678,15 @@ Connect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX</str
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="drT-Ix-19w">
-                                <rect key="frame" x="87" y="828" width="48" height="4"/>
+                                <rect key="frame" x="264" y="956" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="UVZ-8y-IhC"/>
                                     <constraint firstAttribute="width" constant="48" id="djl-Ha-heQ"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5RK-YN-Cai" customClass="PrimaryButton" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="32" y="557" width="350" height="56"/>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5RK-YN-Cai" customClass="PrimaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="209" y="604" width="350" height="56"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="umg-wP-hz2"/>
@@ -1738,22 +1747,22 @@ Connect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX</str
         <!--Claim View Controller-->
         <scene sceneID="Qqi-j1-iNj">
             <objects>
-                <viewController storyboardIdentifier="claimVC" id="zSA-RH-jsX" customClass="ClaimViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="claimVC" id="zSA-RH-jsX" customClass="ClaimViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oXz-g7-dtA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifC-gd-foU" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifC-gd-foU" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proof of Possession" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olS-t6-0xF" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="132" y="62.5" width="150" height="19.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proof of Possession" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olS-t6-0xF" customClass="BarTitle" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="309" y="62.5" width="150" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FE8-lw-FvL" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="343" y="60" width="55" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FE8-lw-FvL" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="697" y="60" width="55" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="gzj-qq-j61"/>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="mOM-mc-zdP"/>
@@ -1778,7 +1787,7 @@ Connect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX</str
                                 </constraints>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="abcd1234" borderStyle="roundedRect" placeholder="abcd1234" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Abk-rH-ckO">
-                                <rect key="frame" x="32" y="177.5" width="350" height="60"/>
+                                <rect key="frame" x="209" y="177.5" width="350" height="60"/>
                                 <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="6Ag-Kc-2lb"/>
@@ -1788,7 +1797,7 @@ Connect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX</str
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtp-X4-sgV">
-                                <rect key="frame" x="32" y="128" width="330" height="33.5"/>
+                                <rect key="frame" x="209" y="128" width="330" height="33.5"/>
                                 <string key="text">Enter your proof of possession PIN for
 PROV_XXXX</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1796,7 +1805,7 @@ PROV_XXXX</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3wc-0X-oGh">
-                                <rect key="frame" x="32" y="253.5" width="350" height="56"/>
+                                <rect key="frame" x="209" y="253.5" width="350" height="56"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="BNN-rF-no7"/>
@@ -1817,7 +1826,7 @@ PROV_XXXX</string>
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UbI-vd-0zP">
-                                <rect key="frame" x="279" y="828" width="48" height="4"/>
+                                <rect key="frame" x="456" y="956" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.94509803920000002" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="h9s-mC-WU7"/>
@@ -1825,7 +1834,7 @@ PROV_XXXX</string>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOm-hu-uU4">
-                                <rect key="frame" x="87" y="828" width="48" height="4"/>
+                                <rect key="frame" x="264" y="956" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="OdQ-tL-9hf"/>
@@ -1833,7 +1842,7 @@ PROV_XXXX</string>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecW-Nl-83r">
-                                <rect key="frame" x="151" y="828" width="48" height="4"/>
+                                <rect key="frame" x="328" y="956" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="Vb1-Ql-2MP"/>
@@ -1841,7 +1850,7 @@ PROV_XXXX</string>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CWo-mN-XQe">
-                                <rect key="frame" x="215" y="828" width="48" height="4"/>
+                                <rect key="frame" x="392" y="956" width="48" height="4"/>
                                 <color key="backgroundColor" red="0.94901960780000005" green="0.94509803920000002" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="bce-hF-t4x"/>
@@ -1889,19 +1898,19 @@ PROV_XXXX</string>
         <!--Devices View Controller-->
         <scene sceneID="5mO-Wm-mPa">
             <objects>
-                <viewController storyboardIdentifier="devicesVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aZq-BT-0rQ" customClass="DevicesViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="devicesVC" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aZq-BT-0rQ" customClass="DevicesViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gAh-G1-HgU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nGw-5k-Dm0" customClass="BGImageView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nGw-5k-Dm0" customClass="BGImageView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="upA-ME-fUd" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="upA-ME-fUd" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Devices" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hat-6w-6qK" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="177.5" y="59.5" width="59" height="22.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Devices" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hat-6w-6qK" customClass="BarTitle" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="354.5" y="59.5" width="59" height="22.5"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -1918,7 +1927,7 @@ PROV_XXXX</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mau-1E-fUS">
-                                        <rect key="frame" x="362" y="52" width="36" height="36"/>
+                                        <rect key="frame" x="716" y="52" width="36" height="36"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="36" id="Nlx-Eb-GyA"/>
@@ -1938,7 +1947,7 @@ PROV_XXXX</string>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MiU-uw-iDj">
-                                        <rect key="frame" x="0.0" y="95" width="414" height="1"/>
+                                        <rect key="frame" x="0.0" y="95" width="768" height="1"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="DLV-VG-FAJ"/>
@@ -1960,23 +1969,23 @@ PROV_XXXX</string>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="88i-jH-Kbb">
-                                <rect key="frame" x="0.0" y="96" width="414" height="800"/>
+                                <rect key="frame" x="0.0" y="96" width="768" height="928"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_device_icon" translatesAutoresizingMaskIntoConstraints="NO" id="2f3-uf-TkS">
-                                        <rect key="frame" x="167" y="291" width="80" height="80"/>
+                                        <rect key="frame" x="344" y="355" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="Geu-fr-SXZ"/>
                                             <constraint firstAttribute="width" constant="80" id="zE3-ce-0Y2"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Device Added" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xds-Fn-917">
-                                        <rect key="frame" x="124" y="387" width="166" height="26"/>
+                                        <rect key="frame" x="301" y="451" width="166" height="26"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZbS-Qc-msd">
-                                        <rect key="frame" x="192" y="433" width="30" height="30"/>
+                                        <rect key="frame" x="369" y="497" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="5e1-Cf-WPx"/>
                                             <constraint firstAttribute="width" constant="30" id="CmH-Cm-xXI"/>
@@ -1986,8 +1995,8 @@ PROV_XXXX</string>
                                             <action selector="refreshClicked:" destination="aZq-BT-0rQ" eventType="touchUpInside" id="jD9-pB-Gua"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a4G-TT-dZn" customClass="PrimaryButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="32" y="664" width="350" height="56"/>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a4G-TT-dZn" customClass="PrimaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="32" y="792" width="704" height="56"/>
                                         <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="56" id="B9d-3i-xGG"/>
@@ -2025,7 +2034,7 @@ PROV_XXXX</string>
                                 </constraints>
                             </view>
                             <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Pf8-Uy-Y4N">
-                                <rect key="frame" x="0.0" y="96" width="414" height="800"/>
+                                <rect key="frame" x="0.0" y="96" width="768" height="928"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="hbU-M6-zxO">
                                     <size key="itemSize" width="231" height="150"/>
@@ -2034,8 +2043,8 @@ PROV_XXXX</string>
                                     <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="deviceCollectionViewCell" id="xk3-na-oA1" customClass="DevicesCollectionViewCell" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="91.5" y="50" width="231" height="150"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="deviceCollectionViewCell" id="xk3-na-oA1" customClass="DevicesCollectionViewCell" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="10" y="50" width="231" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ab4-Ra-Qx9">
                                             <rect key="frame" x="0.0" y="0.0" width="231" height="150"/>
@@ -2172,8 +2181,8 @@ PROV_XXXX</string>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="deviceListCollectionReusableView" id="l4z-cd-0JT" customClass="DeviceListCollectionReusableView" customModule="RainMaker" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="deviceListCollectionReusableView" id="l4z-cd-0JT" customClass="DeviceListCollectionReusableView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T2H-nW-9qI">
@@ -2190,7 +2199,7 @@ PROV_XXXX</string>
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuG-Pk-MI6">
-                                            <rect key="frame" x="18" y="14" width="332" height="22.5"/>
+                                            <rect key="frame" x="18" y="14" width="686" height="22.5"/>
                                             <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -2211,7 +2220,7 @@ PROV_XXXX</string>
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJQ-d5-Xw0">
-                                            <rect key="frame" x="370" y="15" width="20" height="20"/>
+                                            <rect key="frame" x="724" y="15" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="2qA-YX-N9Q"/>
                                                 <constraint firstAttribute="height" constant="20" id="Yua-vq-NXT"/>
@@ -2244,7 +2253,7 @@ PROV_XXXX</string>
                                 </connections>
                             </collectionView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sru-kD-b2a">
-                                <rect key="frame" x="216" y="96" width="182" height="112"/>
+                                <rect key="frame" x="570" y="96" width="182" height="112"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YVv-v5-5RL">
                                         <rect key="frame" x="0.0" y="0.0" width="182" height="56"/>
@@ -2362,22 +2371,22 @@ PROV_XXXX</string>
         <!--Scanner View Controller-->
         <scene sceneID="lRR-bk-R8N">
             <objects>
-                <viewController storyboardIdentifier="scannerVC" modalPresentationStyle="fullScreen" id="w6s-C3-JJh" customClass="ScannerViewController" customModule="RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="scannerVC" modalPresentationStyle="fullScreen" id="w6s-C3-JJh" customClass="ScannerViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cTi-Kl-D4N">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMD-Of-QSn" customClass="TopBarView" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jMD-Of-QSn" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Device" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ny5-uF-did" customClass="BarTitle" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="164" y="62.5" width="86" height="19.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Device" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ny5-uF-did" customClass="BarTitle" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="341" y="62.5" width="86" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWm-Ki-gaO" customClass="BarButton" customModule="RainMaker" customModuleProvider="target">
-                                        <rect key="frame" x="343" y="60" width="55" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWm-Ki-gaO" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="697" y="60" width="55" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="A3x-vg-2m3"/>
                                             <constraint firstAttribute="height" constant="20" id="tMb-gL-rP3"/>
@@ -2402,11 +2411,11 @@ PROV_XXXX</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z7t-GW-4k2">
-                                <rect key="frame" x="0.0" y="96" width="414" height="448"/>
+                                <rect key="frame" x="0.0" y="96" width="768" height="512"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pp9-yW-cFb" customClass="PrimaryButton" customModule="RainMaker" customModuleProvider="target">
-                                <rect key="frame" x="32" y="756" width="350" height="56"/>
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pp9-yW-cFb" customClass="PrimaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                <rect key="frame" x="32" y="918" width="704" height="56"/>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="g0u-lI-ZyJ"/>
