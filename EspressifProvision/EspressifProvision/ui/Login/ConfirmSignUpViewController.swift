@@ -56,8 +56,10 @@ class ConfirmSignUpViewController: UIViewController {
         }
         Utility.showLoader(message: "", view: view)
         user?.confirmSignUp(code.text!, forceAliasCreation: true).continueWith { [weak self] (task: AWSTask) -> AnyObject? in
-            if let viewContainer = self?.view {
-                Utility.hideLoader(view: viewContainer)
+            DispatchQueue.main.async {
+                if let viewContainer = self?.view {
+                    Utility.hideLoader(view: viewContainer)
+                }
             }
             guard let strongSelf = self else { return nil }
             DispatchQueue.main.async {
@@ -102,5 +104,13 @@ class ConfirmSignUpViewController: UIViewController {
             }
             return nil
         }
+    }
+}
+
+extension ConfirmSignUpViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        code.resignFirstResponder()
+        confirm(textField)
+        return true
     }
 }

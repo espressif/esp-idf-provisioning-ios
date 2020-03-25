@@ -18,7 +18,7 @@
 import AWSCognitoIdentityProvider
 import Foundation
 
-class ConfirmForgotPasswordViewController: UIViewController {
+class ResetPasswordViewController: UIViewController {
     var user: AWSCognitoIdentityUser?
 
     @IBOutlet var confirmationCode: UITextField!
@@ -96,5 +96,26 @@ class ConfirmForgotPasswordViewController: UIViewController {
         alertController.addAction(okAction)
 
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension ResetPasswordViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case proposedPassword:
+            confirmNewPassword.becomeFirstResponder()
+        case confirmNewPassword:
+            confirmationCode.becomeFirstResponder()
+        case confirmationCode:
+            confirmationCode.resignFirstResponder()
+            updatePassword(textField)
+        default:
+            print("default")
+        }
+        return true
     }
 }

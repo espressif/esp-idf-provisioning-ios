@@ -34,7 +34,7 @@ class ForgotPasswordViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
-        if let newPasswordViewController = segue.destination as? ConfirmForgotPasswordViewController {
+        if let newPasswordViewController = segue.destination as? ResetPasswordViewController {
             newPasswordViewController.user = user
         }
     }
@@ -76,5 +76,13 @@ class ForgotPasswordViewController: UIViewController {
             }
             return nil
         }
+    }
+}
+
+extension ForgotPasswordViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        username.resignFirstResponder()
+        forgotPassword(textField)
+        return true
     }
 }

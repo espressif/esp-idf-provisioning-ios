@@ -118,6 +118,11 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         segmentControl.addUnderlineForSelectedSegment()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        segmentControl.addUnderlineForSelectedSegment()
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
         if let signUpConfirmationViewController = segue.destination as? ConfirmSignUpViewController {
             signUpConfirmationViewController.sentTo = sentTo
@@ -443,5 +448,30 @@ extension SignInViewController: ASWebAuthenticationPresentationContextProviding 
 
     func presentationAnchor(for _: ASWebAuthenticationSession) -> ASPresentationAnchor {
         return view.window ?? ASPresentationAnchor()
+    }
+}
+
+extension SignInViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case username:
+            password.becomeFirstResponder()
+        case password:
+            password.resignFirstResponder()
+            signInPressed(textField)
+        case email:
+            registerPassword.becomeFirstResponder()
+        case registerPassword:
+            confirmPassword.becomeFirstResponder()
+        case confirmPassword:
+            confirmPassword.resignFirstResponder()
+        default:
+            print("default")
+        }
+        return true
     }
 }

@@ -69,7 +69,7 @@
 		F19A9D1022BB6DD800A450C3 /* MFAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D0E22BB6DD800A450C3 /* MFAViewController.swift */; };
 		F19A9D1322C0D23E00A450C3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1222C0D23E00A450C3 /* SignInViewController.swift */; };
 		F19A9D1822C0ED4C00A450C3 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1422C0ED4C00A450C3 /* ForgotPasswordViewController.swift */; };
-		F19A9D1922C0ED4C00A450C3 /* ConfirmForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1522C0ED4C00A450C3 /* ConfirmForgotPasswordViewController.swift */; };
+		F19A9D1922C0ED4C00A450C3 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1522C0ED4C00A450C3 /* ResetPasswordViewController.swift */; };
 		F19A9D1A22C0ED4C00A450C3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1622C0ED4C00A450C3 /* SignUpViewController.swift */; };
 		F19A9D1B22C0ED4C00A450C3 /* ConfirmSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1722C0ED4C00A450C3 /* ConfirmSignUpViewController.swift */; };
 		F19F6FF322F02B3400C70DE3 /* SettingsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F6FF222F02B3400C70DE3 /* SettingsPageViewController.swift */; };
@@ -139,7 +139,7 @@
 /* Begin PBXFileReference section */
 		093DF57918C1F89C203A3C0F /* Pods_EspressifProvisionAll_EspressifProvision_Staging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EspressifProvisionAll_EspressifProvision_Staging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13D5C83D216F3C1B0FFF1747 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig"; sourceTree = "<group>"; };
-		1431462320DE994B0017E119 /* RainMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1431462320DE994B0017E119 /* ESP Rainmaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ESP Rainmaker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1431462620DE994B0017E119 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1431462B20DE994B0017E119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1431462D20DE994C0017E119 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 		F19A9D0E22BB6DD800A450C3 /* MFAViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFAViewController.swift; sourceTree = "<group>"; };
 		F19A9D1222C0D23E00A450C3 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		F19A9D1422C0ED4C00A450C3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
-		F19A9D1522C0ED4C00A450C3 /* ConfirmForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		F19A9D1522C0ED4C00A450C3 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		F19A9D1622C0ED4C00A450C3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		F19A9D1722C0ED4C00A450C3 /* ConfirmSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmSignUpViewController.swift; sourceTree = "<group>"; };
 		F19F6FF222F02B3400C70DE3 /* SettingsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageViewController.swift; sourceTree = "<group>"; };
@@ -335,7 +335,7 @@
 		1431462420DE994B0017E119 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1431462320DE994B0017E119 /* RainMaker.app */,
+				1431462320DE994B0017E119 /* ESP Rainmaker.app */,
 				1431463720DE994C0017E119 /* EspressifProvisionTests.xctest */,
 				1431464220DE994C0017E119 /* EspressifProvisionUITests.xctest */,
 			);
@@ -421,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				1431468A20E37B980017E119 /* ESPSession.swift */,
+				14DE671D20ECD04100941522 /* BLETransport.swift */,
 			);
 			path = session;
 			sourceTree = "<group>";
@@ -430,7 +431,6 @@
 			children = (
 				1431466820DEAD1A0017E119 /* SoftAPTransport.swift */,
 				1431466420DEA97C0017E119 /* Transport.swift */,
-				14DE671D20ECD04100941522 /* BLETransport.swift */,
 			);
 			path = transport;
 			sourceTree = "<group>";
@@ -575,7 +575,7 @@
 		F19A9D0D22BB6DD800A450C3 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				F19A9D1522C0ED4C00A450C3 /* ConfirmForgotPasswordViewController.swift */,
+				F19A9D1522C0ED4C00A450C3 /* ResetPasswordViewController.swift */,
 				F19A9D1722C0ED4C00A450C3 /* ConfirmSignUpViewController.swift */,
 				F19A9D1422C0ED4C00A450C3 /* ForgotPasswordViewController.swift */,
 				F19A9D1622C0ED4C00A450C3 /* SignUpViewController.swift */,
@@ -713,7 +713,7 @@
 			);
 			name = EspressifProvision;
 			productName = EspressifProvision;
-			productReference = 1431462320DE994B0017E119 /* RainMaker.app */;
+			productReference = 1431462320DE994B0017E119 /* ESP Rainmaker.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1431463620DE994C0017E119 /* EspressifProvisionTests */ = {
@@ -977,7 +977,7 @@
 				1431469920E387C60017E119 /* sec0.pb.swift in Sources */,
 				F1EAACAA23E2A74300E9A6A8 /* ColorPickerView.swift in Sources */,
 				F1EEE0432347268900E90B1F /* BrightnessSlider.swift in Sources */,
-				F19A9D1922C0ED4C00A450C3 /* ConfirmForgotPasswordViewController.swift in Sources */,
+				F19A9D1922C0ED4C00A450C3 /* ResetPasswordViewController.swift in Sources */,
 				F1EAACAC23E2A74300E9A6A8 /* ColorPickerViewDelegate.swift in Sources */,
 				1431468420DF69C30017E119 /* Security1.swift in Sources */,
 				F12261A022C61695004D049F /* DeviceAssociation.swift in Sources */,
@@ -1261,7 +1261,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = RainMaker;
+				PRODUCT_NAME = "ESP Rainmaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
@@ -1295,7 +1295,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = RainMaker;
+				PRODUCT_NAME = "ESP Rainmaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
@@ -1476,7 +1476,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = RainMaker;
+				PRODUCT_NAME = "ESP Rainmaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -1615,7 +1615,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = RainMaker;
+				PRODUCT_NAME = "ESP Rainmaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
@@ -1754,7 +1754,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DBLE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = RainMaker;
+				PRODUCT_NAME = "ESP Rainmaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
@@ -1893,7 +1893,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DBLE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = RainMaker;
+				PRODUCT_NAME = "ESP Rainmaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -2030,7 +2030,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.intsoftap;
-				PRODUCT_NAME = RainMaker;
+				PRODUCT_NAME = "ESP Rainmaker";
 				PROVISIONING_PROFILE_SPECIFIER = "RainMaker Beta App Development Profile";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
@@ -2168,7 +2168,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI -DPROD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = RainMaker;
+				PRODUCT_NAME = "ESP Rainmaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.softap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;

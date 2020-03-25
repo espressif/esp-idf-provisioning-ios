@@ -96,3 +96,24 @@ class ChangePasswordViewController: UIViewController {
      }
      */
 }
+
+extension ChangePasswordViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case oldPasswordTextField:
+            newPasswordTextField.becomeFirstResponder()
+        case newPasswordTextField:
+            confirmNewPasswordTextField.becomeFirstResponder()
+        case confirmNewPasswordTextField:
+            confirmNewPasswordTextField.resignFirstResponder()
+            setPassword(textField)
+        default:
+            print("default")
+        }
+        return true
+    }
+}

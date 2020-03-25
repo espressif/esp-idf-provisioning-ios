@@ -161,7 +161,7 @@ class DevicesViewController: UIViewController {
         if Utility.isConnected(view: view) {
             collectionView.isUserInteractionEnabled = false
             User.shared.updateDeviceList = false
-            NetworkManager.shared.getNodeList { nodes, _ in
+            NetworkManager.shared.getNodes { nodes, _ in
                 Utility.hideLoader(view: self.view)
                 self.refreshControl.endRefreshing()
 //                let device1 = Device(name: "Light Bulb1", type: "switch", node_id: "Test 1", staticParams: nil, dynamicParams: nil)
