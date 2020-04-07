@@ -18,6 +18,7 @@ class DevicesCollectionViewCell: UICollectionViewCell {
     @IBOutlet var deviceName: UILabel!
     @IBOutlet var switchButton: UIButton!
     @IBOutlet var statusView: UIView!
+    @IBOutlet var offlineLabel: UILabel!
     @IBAction func switchButtonPressed(_: Any) {
         switchValue = !switchValue
         NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [device.primary ?? "": switchValue]])

@@ -34,7 +34,7 @@ class NetworkManager {
         return certificate
     }
 
-    func getNodes(completionHandler: @escaping ([Node]?, Error?) -> Void) {
+    func getNodes(completionHandler: @escaping ([Node]?, ESPNetworkError?) -> Void) {
         User.shared.getAccessToken(completionHandler: { accessToken in
             if accessToken != nil {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
@@ -43,21 +43,67 @@ class NetworkManager {
                     print(response)
                     switch response.result {
                     case let .success(value):
-                        if let json = value as? [String: Any], let nodeArray = json["node_details"] as? [[String: Any]] {
-                            completionHandler(JSONParser.parseNodeArray(data: nodeArray), nil)
-                            return
+                        if let json = value as? [String: Any] {
+                            if let nodeArray = json["node_details"] as? [[String: Any]] {
+                                completionHandler(JSONParser.parseNodeArray(data: nodeArray), nil)
+                                return
+                            } else if let status = json["status"] as? String, let description = json["description"] as? String {
+                                if status == "failure" {
+                                    completionHandler(nil, ESPNetworkError.serverError(description))
+                                    return
+                                }
+                            }
                         }
+                        completionHandler(nil, nil)
+                        return
                     case let .failure(error):
                         print(error)
-                        completionHandler(nil, NetworkError.emptyToken)
+                        completionHandler(nil, ESPNetworkError.serverError(error.localizedDescription))
                         return
                     }
-                    completionHandler(nil, CustomError.emptyConfigData)
                 }
             } else {
-                completionHandler(nil, NetworkError.emptyToken)
+                completionHandler(nil, .emptyToken)
             }
         })
+    }
+
+    func getNodeInfo(nodeId: String, completionHandler: @escaping (Node?, ESPNetworkError?) -> Void) {
+        User.shared.getAccessToken { accessToken in
+            if accessToken != nil {
+                let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
+                let url = Constants.getNodes + "?node_id=" + nodeId
+                self.session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+                    print(response)
+                    switch response.result {
+                    case let .success(value):
+                        if let json = value as? [String: Any] {
+                            if let nodeArray = json["node_details"] as? [[String: Any]] {
+                                if let node = JSONParser.parseNodeArray(data: nodeArray)?[0] {
+                                    completionHandler(node, nil)
+                                    return
+                                }
+                                completionHandler(nil, ESPNetworkError.emptyConfigData)
+                                return
+                            } else if let status = json["status"] as? String, let description = json["description"] as? String {
+                                if status == "failure" {
+                                    completionHandler(nil, ESPNetworkError.serverError(description))
+                                    return
+                                }
+                            }
+                        }
+                        completionHandler(nil, ESPNetworkError.emptyConfigData)
+                        return
+                    case let .failure(error):
+                        print(error)
+                        completionHandler(nil, ESPNetworkError.serverError(error.localizedDescription))
+                        return
+                    }
+                }
+            } else {
+                completionHandler(nil, ESPNetworkError.emptyToken)
+            }
+        }
     }
 
     // MARK: - Node APIs
@@ -66,95 +112,95 @@ class NetworkManager {
     ///
     /// - Parameters:
     ///   - completionHandler: handler called when response to get node list is recieved
-    func getNodeList(completionHandler: @escaping ([Node]?, Error?) -> Void) {
-        User.shared.getAccessToken(completionHandler: { accessToken in
-            if accessToken != nil {
-                let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
-                let url = Constants.getNodes
-                self.session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                    print(response)
-                    switch response.result {
-                    case let .success(value):
-                        if let json = value as? [String: Any], let tempArray = json["nodes"] as? [String] {
-                            var nodeList: [Node] = []
-                            // Start a service group to schedule fetching of node related information
-                            // Configuration and status information for each node will be fetched on background thread
-                            let serviceGroup = DispatchGroup()
-
-                            for item in tempArray {
-                                serviceGroup.enter()
-                                // Fetch node config
-                                self.getNodeConfig(nodeID: item, headers: headers, completionHandler: { node, _ in
-                                    if let newNode = node {
-                                        // Insert node with only one device in the first index of the array to allow ease in rendering
-                                        if newNode.devices?.count == 1 {
-                                            nodeList.insert(newNode, at: 0)
-                                        } else {
-                                            nodeList.append(newNode)
-                                        }
-
-                                        // Get device thing shadow
-                                        self.getDeviceThingShadow(nodeID: item) { response in
-                                            if let image = response, let devices = node?.devices {
-                                                print(image)
-                                                for device in devices {
-                                                    // Parse and fill device params and attributes
-                                                    if let deviceName = device.name, let attrbutes = image[deviceName] as? [String: Any] {
-                                                        if let params = device.params {
-                                                            for index in params.indices {
-                                                                if let reportedValue = attrbutes[params[index].name ?? ""] {
-                                                                    params[index].value = reportedValue
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            // Node related information is recieved so leave service group
-                                            serviceGroup.leave()
-                                        }
-                                    }
-                                })
-                            }
-                            // When node list is exhausted then call completionHandler with node list as parameter
-                            serviceGroup.notify(queue: .main) {
-                                completionHandler(nodeList, nil)
-                            }
-                        } else {
-                            completionHandler(nil, CustomError.emptyNodeList)
-                        }
-                    case let .failure(error):
-                        print(error)
-                        completionHandler(nil, NetworkError.emptyToken)
-                    }
-                }
-            } else {
-                completionHandler(nil, NetworkError.emptyToken)
-            }
-        })
-    }
+//    func getNodeList(completionHandler: @escaping ([Node]?, Error?) -> Void) {
+//        User.shared.getAccessToken(completionHandler: { accessToken in
+//            if accessToken != nil {
+//                let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
+//                let url = Constants.getNodes
+//                self.session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//                    print(response)
+//                    switch response.result {
+//                    case let .success(value):
+//                        if let json = value as? [String: Any], let tempArray = json["nodes"] as? [String] {
+//                            var nodeList: [Node] = []
+//                            // Start a service group to schedule fetching of node related information
+//                            // Configuration and status information for each node will be fetched on background thread
+//                            let serviceGroup = DispatchGroup()
+//
+//                            for item in tempArray {
+//                                serviceGroup.enter()
+//                                // Fetch node config
+//                                self.getNodeConfig(nodeID: item, headers: headers, completionHandler: { node, _ in
+//                                    if let newNode = node {
+//                                        // Insert node with only one device in the first index of the array to allow ease in rendering
+//                                        if newNode.devices?.count == 1 {
+//                                            nodeList.insert(newNode, at: 0)
+//                                        } else {
+//                                            nodeList.append(newNode)
+//                                        }
+//
+//                                        // Get device thing shadow
+//                                        self.getDeviceThingShadow(nodeID: item) { response in
+//                                            if let image = response, let devices = node?.devices {
+//                                                print(image)
+//                                                for device in devices {
+//                                                    // Parse and fill device params and attributes
+//                                                    if let deviceName = device.name, let attrbutes = image[deviceName] as? [String: Any] {
+//                                                        if let params = device.params {
+//                                                            for index in params.indices {
+//                                                                if let reportedValue = attrbutes[params[index].name ?? ""] {
+//                                                                    params[index].value = reportedValue
+//                                                                }
+//                                                            }
+//                                                        }
+//                                                    }
+//                                                }
+//                                            }
+//                                            // Node related information is recieved so leave service group
+//                                            serviceGroup.leave()
+//                                        }
+//                                    }
+//                                })
+//                            }
+//                            // When node list is exhausted then call completionHandler with node list as parameter
+//                            serviceGroup.notify(queue: .main) {
+//                                completionHandler(nodeList, nil)
+//                            }
+//                        } else {
+//                            completionHandler(nil, CustomError.emptyNodeList)
+//                        }
+//                    case let .failure(error):
+//                        print(error)
+//                        completionHandler(nil, .emptyToken)
+//                    }
+//                }
+//            } else {
+//                completionHandler(nil, .emptyToken)
+//            }
+//        })
+//    }
 
     /// Get node config json
     ///
     /// - Parameters:
     ///   - completionHandler: handler called when response to get node config is recieved
-    func getNodeConfig(nodeID: String, headers: HTTPHeaders, completionHandler: @escaping (Node?, Error?) -> Void) {
-        let url = Constants.getNodeConfig + "?nodeid=" + nodeID
-        session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            print(response)
-            switch response.result {
-            case let .success(value):
-                if let json = value as? [String: Any] {
-                    self.getNodeStatus(node: JSONParser.parseNodeData(data: json, nodeID: nodeID), completionHandler: completionHandler)
-                } else {
-                    completionHandler(nil, CustomError.emptyConfigData)
-                }
-            case let .failure(error):
-                print(error)
-                completionHandler(nil, CustomError.emptyConfigData)
-            }
-        }
-    }
+//    func getNodeConfig(nodeID: String, headers: HTTPHeaders, completionHandler: @escaping (Node?, Error?) -> Void) {
+//        let url = Constants.getNodeConfig + "?nodeid=" + nodeID
+//        session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//            print(response)
+//            switch response.result {
+//            case let .success(value):
+//                if let json = value as? [String: Any] {
+//                    self.getNodeStatus(node: JSONParser.parseNodeData(data: json, nodeID: nodeID), completionHandler: completionHandler)
+//                } else {
+//                    completionHandler(nil, CustomError.emptyConfigData)
+//                }
+//            case let .failure(error):
+//                print(error)
+//                completionHandler(nil, CustomError.emptyConfigData)
+//            }
+//        }
+//    }
 
     /// Method to fetch online/offline status of associated nodes
     ///
@@ -226,7 +272,7 @@ class NetworkManager {
                     completionHandler(nil, CustomError.emptyConfigData)
                 }
             } else {
-                completionHandler(nil, NetworkError.emptyToken)
+                completionHandler(nil, ESPNetworkError.emptyToken)
             }
         })
     }

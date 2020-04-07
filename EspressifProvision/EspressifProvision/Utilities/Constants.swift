@@ -11,6 +11,8 @@ import Foundation
 import Keys
 
 struct Constants {
+    static let bundleIdentifier = Bundle.main.infoDictionary!["CFBundleIdentifier"] as! String
+
     // API version for the current network request
     static let apiVersion = "v1"
 
@@ -76,16 +78,16 @@ struct Constants {
     static let getDeviceShadow = Constants.baseURL + Constants.apiVersion + "/user/nodes/params"
 
     // UserDefault keys
-    static let newDeviceAdded = "com.espressif.newDeviceAdded"
-    static let prefixKey = "com.espressif.prefix"
-    static let userInfoKey = "com.espressif.userinfo"
-    static let idTokenKey = "com.espressif.idToken"
-    static let refreshTokenKey = "com.espressif.refreshToken"
-    static let accessTokenKey = "com.espressif.accessToken"
-    static let expireTimeKey = "com.espressif.expiresIn"
-    static let loginIdKey = "com.espressif.loginIdKey"
-    static let appThemeKey = "com.espressif.appTheme"
-    static let appBGKey = "com.espressif.appbg"
+    static let newDeviceAdded = Constants.bundleIdentifier + ".newDeviceAdded"
+    static let prefixKey = Constants.bundleIdentifier + ".prefix"
+    static let userInfoKey = Constants.bundleIdentifier + ".userinfo"
+    static let idTokenKey = Constants.bundleIdentifier + ".idToken"
+    static let refreshTokenKey = Constants.bundleIdentifier + ".refreshToken"
+    static let accessTokenKey = Constants.bundleIdentifier + ".accessToken"
+    static let expireTimeKey = Constants.bundleIdentifier + ".expiresIn"
+    static let loginIdKey = Constants.bundleIdentifier + ".loginIdKey"
+    static let appThemeKey = Constants.bundleIdentifier + ".appTheme"
+    static let appBGKey = Constants.bundleIdentifier + ".appbg"
 
     static let cognito = "Cognito"
     static let github = "Github"

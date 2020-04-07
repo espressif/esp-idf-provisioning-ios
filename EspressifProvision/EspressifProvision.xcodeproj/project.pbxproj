@@ -103,8 +103,6 @@
 		F1EAACAE23E2A74300E9A6A8 /* DefaultValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EAACA823E2A74300E9A6A8 /* DefaultValues.swift */; };
 		F1EEE0432347268900E90B1F /* BrightnessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EEE0422347268900E90B1F /* BrightnessSlider.swift */; };
 		F1F4513A2328C5D40009DCE0 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F451392328C5D40009DCE0 /* DevicesViewController.swift */; };
-		F1F4513F232A30C70009DCE0 /* SwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F4513E232A30C70009DCE0 /* SwitchViewController.swift */; };
-		F1F45141232A3B260009DCE0 /* LightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F45140232A3B260009DCE0 /* LightViewController.swift */; };
 		F1F45147232A43510009DCE0 /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F45145232A43510009DCE0 /* SliderTableViewCell.swift */; };
 		F1F45148232A43510009DCE0 /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1F45146232A43510009DCE0 /* SliderTableViewCell.xib */; };
 		F1F4514B232B74510009DCE0 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F45149232B74510009DCE0 /* SwitchTableViewCell.swift */; };
@@ -139,7 +137,7 @@
 /* Begin PBXFileReference section */
 		093DF57918C1F89C203A3C0F /* Pods_EspressifProvisionAll_EspressifProvision_Staging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EspressifProvisionAll_EspressifProvision_Staging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13D5C83D216F3C1B0FFF1747 /* Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig"; path = "Pods/Target Support Files/Pods-EspressifProvisionAll-EspressifProvision/Pods-EspressifProvisionAll-EspressifProvision.wifisec1-debug.xcconfig"; sourceTree = "<group>"; };
-		1431462320DE994B0017E119 /* ESP Rainmaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ESP Rainmaker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1431462320DE994B0017E119 /* ESP RainMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ESP RainMaker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1431462620DE994B0017E119 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1431462B20DE994B0017E119 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1431462D20DE994C0017E119 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -270,8 +268,6 @@
 		F1EAACA823E2A74300E9A6A8 /* DefaultValues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultValues.swift; sourceTree = "<group>"; };
 		F1EEE0422347268900E90B1F /* BrightnessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrightnessSlider.swift; sourceTree = "<group>"; };
 		F1F451392328C5D40009DCE0 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
-		F1F4513E232A30C70009DCE0 /* SwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchViewController.swift; sourceTree = "<group>"; };
-		F1F45140232A3B260009DCE0 /* LightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightViewController.swift; sourceTree = "<group>"; };
 		F1F45145232A43510009DCE0 /* SliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
 		F1F45146232A43510009DCE0 /* SliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
 		F1F45149232B74510009DCE0 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
@@ -335,7 +331,7 @@
 		1431462420DE994B0017E119 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1431462320DE994B0017E119 /* ESP Rainmaker.app */,
+				1431462320DE994B0017E119 /* ESP RainMaker.app */,
 				1431463720DE994C0017E119 /* EspressifProvisionTests.xctest */,
 				1431464220DE994C0017E119 /* EspressifProvisionUITests.xctest */,
 			);
@@ -651,8 +647,6 @@
 			children = (
 				F1F45142232A424C0009DCE0 /* Controls */,
 				F1F451392328C5D40009DCE0 /* DevicesViewController.swift */,
-				F1F4513E232A30C70009DCE0 /* SwitchViewController.swift */,
-				F1F45140232A3B260009DCE0 /* LightViewController.swift */,
 				F1F4514F232B7A780009DCE0 /* DeviceTraitListViewController.swift */,
 				F1DB6F61232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift */,
 				F13F273D238CF6170003AABB /* ScannerViewController.swift */,
@@ -713,7 +707,7 @@
 			);
 			name = EspressifProvision;
 			productName = EspressifProvision;
-			productReference = 1431462320DE994B0017E119 /* ESP Rainmaker.app */;
+			productReference = 1431462320DE994B0017E119 /* ESP RainMaker.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1431463620DE994C0017E119 /* EspressifProvisionTests */ = {
@@ -964,7 +958,6 @@
 				F1DDA06A23588C890005F982 /* NodeDetailsTableViewCell.swift in Sources */,
 				F1DD70AB22A9BFBE0092DAB9 /* WifiListTableViewCell.swift in Sources */,
 				F19F6FF322F02B3400C70DE3 /* SettingsPageViewController.swift in Sources */,
-				F1F4513F232A30C70009DCE0 /* SwitchViewController.swift in Sources */,
 				1431469820E387C60017E119 /* sec1.pb.swift in Sources */,
 				F1FB153F234DED260053B0ED /* Errors.swift in Sources */,
 				14DE671E20ECD04100941522 /* BLETransport.swift in Sources */,
@@ -987,7 +980,6 @@
 				F1E37E9523D772EC00A5043F /* ThumbTextSlider.swift in Sources */,
 				143146B520EB273B0017E119 /* ProvisionViewController.swift in Sources */,
 				149774DD210C799900022841 /* CryptoAES.swift in Sources */,
-				F1F45141232A3B260009DCE0 /* LightViewController.swift in Sources */,
 				1431466920DEAD1A0017E119 /* SoftAPTransport.swift in Sources */,
 				F15EABF423E043DA008A766B /* CustomUIElements.swift in Sources */,
 				F1F4514B232B74510009DCE0 /* SwitchTableViewCell.swift in Sources */,
@@ -1248,7 +1240,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1261,7 +1253,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "ESP Rainmaker";
+				PRODUCT_NAME = "ESP RainMaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
@@ -1282,7 +1274,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1295,7 +1287,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "ESP Rainmaker";
+				PRODUCT_NAME = "ESP RainMaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
@@ -1461,7 +1453,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1476,7 +1468,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "ESP Rainmaker";
+				PRODUCT_NAME = "ESP RainMaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -1600,7 +1592,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1615,7 +1607,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "ESP Rainmaker";
+				PRODUCT_NAME = "ESP RainMaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
@@ -1740,7 +1732,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1754,7 +1746,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC0 -DBLE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "ESP Rainmaker";
+				PRODUCT_NAME = "ESP RainMaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
@@ -1879,7 +1871,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1893,7 +1885,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DBLE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "ESP Rainmaker";
+				PRODUCT_NAME = "ESP RainMaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_OBJC_BRIDGING_HEADER = "EspressifProvision/EspressifProvision-Bridging-Header.h";
@@ -2014,7 +2006,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2030,7 +2022,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.intsoftap;
-				PRODUCT_NAME = "ESP Rainmaker";
+				PRODUCT_NAME = "ESP RainMaker";
 				PROVISIONING_PROFILE_SPECIFIER = "RainMaker Beta App Development Profile";
 				REDIRECT_URL = "com.espressif.rainmaker.intsoftap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;
@@ -2152,7 +2144,7 @@
 				CODE_SIGN_ENTITLEMENTS = EspressifProvision/EspressifProvision.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2168,7 +2160,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited) -DSEC1 -DWIFI -DPROD";
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.rainmaker.softap;
-				PRODUCT_NAME = "ESP Rainmaker";
+				PRODUCT_NAME = "ESP RainMaker";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP RainMaker SoftAp Provisioning Development";
 				REDIRECT_URL = "com.espressif.rainmaker.softap://success";
 				SWIFT_ENFORCE_EXCLUSIVE_ACCESS = off;

@@ -215,3 +215,19 @@ extension UserDefaults {
         set(imageData, forKey: key)
     }
 }
+
+extension Int {
+    func getShortDate() -> String {
+        let date = Date(timeIntervalSince1970: Double(self) / 1000.0)
+        let dataFormatter = DateFormatter()
+//        dataFormatter.timeStyle = DateFormatter.Style.short
+//        dataFormatter.dateStyle = DateFormatter.Style.short
+        dataFormatter.timeZone = .current
+        if Calendar.current.isDateInToday(date) {
+            dataFormatter.dateFormat = "HH:mm"
+            return dataFormatter.string(from: date)
+        }
+        dataFormatter.dateFormat = "dd/MM/yy, HH:mm"
+        return dataFormatter.string(from: date)
+    }
+}

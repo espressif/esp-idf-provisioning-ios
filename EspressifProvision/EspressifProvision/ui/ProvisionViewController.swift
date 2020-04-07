@@ -423,28 +423,21 @@ extension ProvisionViewController: BLETransportDelegate {
 }
 
 extension ProvisionViewController: ScanWifiListProtocol {
-    func wifiScanFinished(wifiList: [String: Espressif_WiFiScanResult]?, error: Error?) {
+    func wifiScanFinished(wifiList: [String: Espressif_WiFiScanResult]?, error _: Error?) {
+        ssidList.removeAll()
         if wifiList?.count != 0, wifiList != nil {
             wifiDetailList = wifiList!
             let sortedList = (wifiList?.sorted(by: { $0.value.rssi > $1.value.rssi }))!
-            ssidList.removeAll()
             for item in sortedList {
                 ssidList.append(item.key)
             }
-            DispatchQueue.main.async {
-                self.tableView.isHidden = false
-                self.ssidTextfield.isHidden = true
-                self.passphraseTextfield.isHidden = true
-                self.headerView.isHidden = false
-                self.tableView.reloadData()
-            }
-        } else {
-            showTextFieldUI()
-            if error != nil {
-                print("Unable to fetch wifi list :\(String(describing: error))")
-            }
         }
         DispatchQueue.main.async {
+            self.tableView.isHidden = false
+            self.ssidTextfield.isHidden = true
+            self.passphraseTextfield.isHidden = true
+            self.headerView.isHidden = false
+            self.tableView.reloadData()
             MBProgressHUD.hide(for: self.view, animated: true)
         }
     }

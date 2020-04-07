@@ -6,6 +6,7 @@
 //  Copyright © 2019 Espressif. All rights reserved.
 //
 
+import Alamofire
 import AWSAuthCore
 import AWSCognitoIdentityProvider
 import Foundation
@@ -19,6 +20,8 @@ class DevicesViewController: UIViewController {
     @IBOutlet var addButton: UIButton!
     @IBOutlet var initialView: UIView!
     @IBOutlet var pickerView: UIView!
+    @IBOutlet var emptyListIcon: UIImageView!
+    @IBOutlet var infoLabel: UILabel!
 
 //    var currentNode: Node!
     let controlStoryBoard = UIStoryboard(name: "DeviceDetail", bundle: nil)
@@ -161,22 +164,16 @@ class DevicesViewController: UIViewController {
         if Utility.isConnected(view: view) {
             collectionView.isUserInteractionEnabled = false
             User.shared.updateDeviceList = false
-            NetworkManager.shared.getNodes { nodes, _ in
+            NetworkManager.shared.getNodes { nodes, error in
                 Utility.hideLoader(view: self.view)
                 self.refreshControl.endRefreshing()
-//                let device1 = Device(name: "Light Bulb1", type: "switch", node_id: "Test 1", staticParams: nil, dynamicParams: nil)
-//                let device2 = Device(name: "Light Bulb2", type: "switch", node_id: "Test 2", staticParams: nil, dynamicParams: nil)
-//                let device3 = Device(name: "Light Bulb3", type: "switch", node_id: "Test 3", staticParams: nil, dynamicParams: nil)
-                ////                let node1 = Node(node_id: "Test 1", config_version: "1.0", info: nil, devices: [device1], attributes: nil)
-                ////                let node2 = Node(node_id: "Test 2", config_version: "1.0", info: nil, devices: [device2], attributes: nil)
-                ////                let node3 = Node(node_id: "Test 3", config_version: "1.0", info: nil, devices: [device1, device2, device3], attributes: nil)
-//                let node4 = Node(node_id: "Test 4", config_version: "1.0", info: nil, devices: [device1, device2, device3, device1, device2], attributes: nil)
-//                User.shared.associatedNodeList = [node4]
+                if error != nil {
+                    self.unhideInitialView(error: error)
+                    return
+                }
                 User.shared.associatedNodeList = nodes
                 if nodes == nil || nodes?.count == 0 {
-                    self.initialView.isHidden = false
-                    self.collectionView.isHidden = true
-                    self.addButton.isHidden = true
+                    self.unhideInitialView(error: nil)
                 } else {
                     self.initialView.isHidden = true
                     self.collectionView.isHidden = false
@@ -199,6 +196,23 @@ class DevicesViewController: UIViewController {
                 collectionView.isHidden = true
                 addButton.isHidden = true
             }
+        }
+    }
+
+    func unhideInitialView(error: ESPNetworkError?) {
+        DispatchQueue.main.async {
+            if error == nil {
+                self.infoLabel.text = "No Device Added"
+                self.emptyListIcon.image = UIImage(named: "no_device_icon")
+                self.infoLabel.textColor = .black
+            } else {
+                self.infoLabel.text = error?.description ?? "Something went wrong!!"
+                self.emptyListIcon.image = UIImage(named: "api_error_icon")
+                self.infoLabel.textColor = .red
+            }
+            self.initialView.isHidden = false
+            self.collectionView.isHidden = true
+            self.addButton.isHidden = true
         }
     }
 
@@ -294,24 +308,8 @@ extension DevicesViewController: UICollectionViewDelegate {
         let deviceTraitsVC = controlStoryBoard.instantiateViewController(withIdentifier: Constants.deviceTraitListVCIdentifier) as! DeviceTraitListViewController
         deviceTraitsVC.device = currentDevice
 
-        if Utility.isConnected(view: view) {
-            NetworkManager.shared.getNodeStatus(node: currentNode) { node, error in
-                if error == nil, node != nil {
-                    if let index = User.shared.associatedNodeList?.firstIndex(where: { node -> Bool in
-                        node.node_id == currentNode.node_id
-                    }) {
-                        User.shared.associatedNodeList![index] = node!
-                    }
-                }
-                DispatchQueue.main.async {
-                    Utility.hideLoader(view: self.view)
-                    self.navigationController?.pushViewController(deviceTraitsVC, animated: true)
-                }
-            }
-        } else {
-            Utility.hideLoader(view: view)
-            flag = false
-        }
+        Utility.hideLoader(view: view)
+        navigationController?.pushViewController(deviceTraitsVC, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout _: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -358,10 +356,6 @@ extension DevicesViewController: UICollectionViewDataSource {
         cell.switchButton.isHidden = true
         cell.primaryValue.isHidden = true
 
-//        var backgroundLayer = Colors().gl
-//        backgroundLayer!.frame = cell.bgView.frame
-//        cell.bgView.layer.insertSublayer(backgroundLayer!, at: 0)
-
         cell.layer.backgroundColor = UIColor.white.cgColor
         cell.layer.shadowColor = UIColor.lightGray.cgColor
         cell.layer.shadowOffset = CGSize(width: 0.5, height: 1.0)
@@ -373,6 +367,7 @@ extension DevicesViewController: UICollectionViewDataSource {
             cell.statusView.isHidden = true
         } else {
             cell.statusView.isHidden = false
+            cell.offlineLabel.text = "Offline at " + (device.node?.timestamp.getShortDate() ?? "")
         }
 
         var primaryKeyFound = false
@@ -402,8 +397,6 @@ extension DevicesViewController: UICollectionViewDataSource {
                         cell.switchButton.alpha = 0.4
                         cell.switchButton.setImage(UIImage(named: "switch_icon_disabled"), for: .normal)
                     }
-//                    cell.switchButton.isHidden = false
-//                    cell.switchButton.setImage(UIImage(named: "switch_icon_enabled_on"), for: .normal)
                 } else if primaryParam.dataType?.lowercased() == "string" {
                     cell.switchButton.isHidden = true
                     cell.primaryValue.text = primaryParam.value as? String ?? ""
@@ -442,7 +435,7 @@ extension DevicesViewController: UICollectionViewDataSource {
                 deviceImage = UIImage(named: "fan_icon")
             case "esp.device.thermostat":
                 deviceImage = UIImage(named: "thermostat_icon")
-            case "esp.device.temperature_sensor":
+            case "esp.device.temperature-sensor":
                 deviceImage = UIImage(named: "temperature_sensor_icon")
             case "esp.device.lock":
                 deviceImage = UIImage(named: "lock_icon")

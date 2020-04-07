@@ -32,7 +32,7 @@ class VersionManager {
 
     private func checkAppStore(callback: ((_ versionAvailable: Bool?, _ version: String?) -> Void)? = nil) {
         let ourBundleId = Bundle.main.infoDictionary!["CFBundleIdentifier"] as! String
-        AF.request("https://itunes.apple.com/lookup?bundleId=com.espressif.provbleavs").responseJSON { response in
+        AF.request("https://itunes.apple.com/lookup?bundleId=" + ourBundleId).responseJSON { response in
             var isNew: Bool?
             var versionStr: String?
 

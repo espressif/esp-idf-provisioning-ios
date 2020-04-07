@@ -24,6 +24,7 @@ class DeviceTraitListViewController: UIViewController {
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var offlineLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +60,7 @@ class DeviceTraitListViewController: UIViewController {
 
     @objc func appEnterForeground() {
         print("foreground")
-        pollingTimer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(fetchNodeInfo), userInfo: nil, repeats: true)
+        pollingTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(fetchNodeInfo), userInfo: nil, repeats: true)
     }
 
     @objc func appEnterBackground() {
@@ -68,24 +69,93 @@ class DeviceTraitListViewController: UIViewController {
     }
 
     @objc func fetchNodeInfo() {
-        updateDeviceAttributes()
+        refreshDeviceAttributes()
+    }
+
+    func refreshDeviceAttributes() {
+        NetworkManager.shared.getNodeInfo(nodeId: (device?.node?.node_id)!) { node, error in
+            if error != nil {
+                print(error?.description)
+                return
+            }
+            if let index = User.shared.associatedNodeList?.firstIndex(where: { node -> Bool in
+                node.node_id == (self.device?.node?.node_id)!
+            }) {
+                User.shared.associatedNodeList![index] = node!
+                if let currentDevice = node!.devices?.first(where: { nodeDevice -> Bool in
+                    nodeDevice.name == self.device?.name
+                }) {
+                    self.device = currentDevice
+                }
+            }
+            DispatchQueue.main.async {
+                self.checkOfflineStatus()
+                Utility.hideLoader(view: self.view)
+                self.tableView.reloadData()
+            }
+        }
     }
 
     func updateDeviceAttributes() {
-        NetworkManager.shared.getDeviceThingShadow(nodeID: (device?.node?.node_id)!) { response in
-            if let image = response {
-                if let deviceName = self.device?.name, let attrbutes = image[deviceName] as? [String: Any] {
-                    if let dynamicParams = self.device?.params {
-                        for index in dynamicParams.indices {
-                            if let reportedValue = attrbutes[dynamicParams[index].name ?? ""] {
-                                dynamicParams[index].value = reportedValue
-                            }
+        if Utility.isConnected(view: view) {
+            NetworkManager.shared.getNodeInfo(nodeId: (device?.node?.node_id)!) { node, error in
+                if error != nil {
+                    print(error?.description)
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "Error!!",
+                                                                message: error?.description,
+                                                                preferredStyle: .alert)
+                        let retryAction = UIAlertAction(title: "Ok", style: .default) { _ in
+                            Utility.hideLoader(view: self.view)
+                        }
+                        alertController.addAction(retryAction)
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                } else {
+                    if let index = User.shared.associatedNodeList?.firstIndex(where: { node -> Bool in
+                        node.node_id == (self.device?.node?.node_id)!
+                    }) {
+                        User.shared.associatedNodeList![index] = node!
+                        if let currentDevice = node!.devices?.first(where: { nodeDevice -> Bool in
+                            nodeDevice.name == self.device?.name
+                        }) {
+                            self.device = currentDevice
                         }
                     }
                 }
+                DispatchQueue.main.async {
+                    self.checkOfflineStatus()
+                    Utility.hideLoader(view: self.view)
+                    self.tableView.reloadData()
+                }
             }
-            Utility.hideLoader(view: self.view)
-            self.tableView.reloadData()
+        } else {
+            Utility.hideLoader(view: view)
+        }
+
+//        NetworkManager.shared.getDeviceThingShadow(nodeID: (device?.node?.node_id)!) { response in
+//            if let image = response {
+//                if let deviceName = self.device?.name, let attrbutes = image[deviceName] as? [String: Any] {
+//                    if let dynamicParams = self.device?.params {
+//                        for index in dynamicParams.indices {
+//                            if let reportedValue = attrbutes[dynamicParams[index].name ?? ""] {
+//                                dynamicParams[index].value = reportedValue
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            Utility.hideLoader(view: self.view)
+//            self.tableView.reloadData()
+//        }
+    }
+
+    func checkOfflineStatus() {
+        if device?.node?.isConnected ?? true {
+            offlineLabel.isHidden = true
+        } else {
+            offlineLabel.text = "Offline at " + (device?.node?.timestamp.getShortDate() ?? "")
+            offlineLabel.isHidden = false
         }
     }
 

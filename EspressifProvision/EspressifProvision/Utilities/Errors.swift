@@ -22,7 +22,26 @@ enum InputValidationError: String {
     case other = "Unrecognized error"
 }
 
-enum NetworkError: Error {
+enum ESPNetworkError: Error {
     case keyNotPresent
     case emptyToken
+    case serverError(_ description: String = "Oops!! Something went bad. Please try again after sometime")
+    case emptyConfigData
+
+    var description: String {
+        switch self {
+        case let .serverError(description):
+            return description
+        case .keyNotPresent:
+            return "Key not present."
+        case .emptyToken:
+            return "No access token found. Please signout and login then try again!!"
+        case .emptyConfigData:
+            return "Node info is not present"
+        default:
+            return "Oops!! Something went bad. Please try again after sometime"
+        }
+    }
+
+//    case errorResponse(String)
 }

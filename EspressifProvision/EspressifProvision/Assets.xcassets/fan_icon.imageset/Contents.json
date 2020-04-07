@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ezgif.com-gif-maker.png",
+      "filename" : "fan.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ezgif.com-gif-maker (1).png",
+      "filename" : "fan@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ezgif.com-gif-maker (2).png",
+      "filename" : "fan@3x.png",
       "scale" : "3x"
     }
   ],
