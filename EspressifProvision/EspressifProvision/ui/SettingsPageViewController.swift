@@ -59,7 +59,7 @@ class SettingsPageViewController: UIViewController {
 
     @IBAction func openPrivacy(_: Any) {
         if Utility.isConnected(view: view) {
-            showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy")
+            showDocumentVC(url: "https://rainmaker.espressif.com/docs/privacy-policy.html")
         }
     }
 
@@ -67,6 +67,10 @@ class SettingsPageViewController: UIViewController {
         if Utility.isConnected(view: view) {
             showDocumentVC(url: "https://rainmaker.espressif.com/docs/terms-of-use.html")
         }
+    }
+
+    @IBAction func openDocumentation(_: Any) {
+        showDocumentVC(url: "https://rainmaker.espressif.com")
     }
 
     @IBAction func backButtonPressed(_: Any) {

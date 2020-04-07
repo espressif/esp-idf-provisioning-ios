@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1431462220DE994B0017E119"
-               BuildableName = "ESP Rainmaker.app"
+               BuildableName = "RM Staging.app"
                BlueprintName = "EspressifProvision"
                ReferencedContainer = "container:EspressifProvision.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1431462220DE994B0017E119"
-            BuildableName = "ESP Rainmaker.app"
+            BuildableName = "RM Staging.app"
             BlueprintName = "EspressifProvision"
             ReferencedContainer = "container:EspressifProvision.xcodeproj">
          </BuildableReference>
@@ -63,7 +63,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1431462220DE994B0017E119"
-            BuildableName = "ESP Rainmaker.app"
+            BuildableName = "RM Staging.app"
             BlueprintName = "EspressifProvision"
             ReferencedContainer = "container:EspressifProvision.xcodeproj">
          </BuildableReference>

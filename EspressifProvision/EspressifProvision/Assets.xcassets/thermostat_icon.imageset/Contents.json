@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "defaultSensor.png",
+      "filename" : "iconfinder_icon-70-thermometer-three-quarters_315944 (1).png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "defaultSensor@2x.png",
+      "filename" : "iconfinder_icon-70-thermometer-three-quarters_315944.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "defaultSensor@3x.png",
+      "filename" : "iconfinder_icon-70-thermometer-three-quarters_315944 (2).png",
       "scale" : "3x"
     }
   ],

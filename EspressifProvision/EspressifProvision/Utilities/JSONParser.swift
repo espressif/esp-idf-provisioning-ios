@@ -127,12 +127,12 @@ struct JSONParser {
                         result.append(newDevice)
                     }
                 }
-
                 node.devices = result
             }
 
             if let statusInfo = node_details["status"] as? [String: Any], let connectivity = statusInfo["connectivity"] as? [String: Any], let status = connectivity["connected"] as? Bool {
                 node.isConnected = status
+                node.timestamp = connectivity["timestamp"] as? Int ?? 0
             }
 
             if let paramInfo = node_details["params"] as? [String: Any], let devices = node.devices {
@@ -148,8 +148,11 @@ struct JSONParser {
                     }
                 }
             }
-
-            nodeList.append(node)
+            if node.devices?.count == 1 {
+                nodeList.insert(node, at: 0)
+            } else {
+                nodeList.append(node)
+            }
         }
         if nodeList.isEmpty {
             return nil

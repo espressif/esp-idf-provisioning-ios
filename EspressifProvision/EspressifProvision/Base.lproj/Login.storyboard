@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7xV-BH-yep">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7xV-BH-yep">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,11 +41,11 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f29-Y5-riN" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
-                                        <rect key="frame" x="343" y="60" width="55" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f29-Y5-riN" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="338" y="52.333333333333343" width="60" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="NvG-iQ-1Fw"/>
-                                            <constraint firstAttribute="width" constant="55" id="Tbl-fv-p1C"/>
+                                            <constraint firstAttribute="height" constant="40" id="NvG-iQ-1Fw"/>
+                                            <constraint firstAttribute="width" constant="60" id="Tbl-fv-p1C"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Cancel">
@@ -62,7 +62,7 @@
                                     <constraint firstAttribute="height" constant="96" id="RdY-ti-x49"/>
                                     <constraint firstItem="N2v-5h-wSd" firstAttribute="centerX" secondItem="uco-WI-bQ6" secondAttribute="centerX" id="U2g-Ng-yMY"/>
                                     <constraint firstAttribute="bottom" secondItem="N2v-5h-wSd" secondAttribute="bottom" constant="14" id="VU6-hY-Bjw"/>
-                                    <constraint firstAttribute="bottom" secondItem="f29-Y5-riN" secondAttribute="bottom" constant="16" id="yr1-3y-xtX"/>
+                                    <constraint firstItem="f29-Y5-riN" firstAttribute="centerY" secondItem="N2v-5h-wSd" secondAttribute="centerY" id="rMq-sg-SKN"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your registered email id to reset your password." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKX-ex-fKU">
@@ -147,11 +147,11 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Js-sE-gsW" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
-                                        <rect key="frame" x="343" y="60" width="55" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Js-sE-gsW" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="338" y="52.333333333333343" width="60" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="55" id="ZdJ-dx-bg1"/>
-                                            <constraint firstAttribute="height" constant="20" id="mDV-6a-Kng"/>
+                                            <constraint firstAttribute="width" constant="60" id="ZdJ-dx-bg1"/>
+                                            <constraint firstAttribute="height" constant="40" id="mDV-6a-Kng"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Cancel">
@@ -168,7 +168,7 @@
                                     <constraint firstAttribute="trailing" secondItem="9Js-sE-gsW" secondAttribute="trailing" constant="16" id="2CV-Pf-Dam"/>
                                     <constraint firstAttribute="bottom" secondItem="4oS-bc-CpR" secondAttribute="bottom" constant="14" id="79p-9x-UnD"/>
                                     <constraint firstItem="4oS-bc-CpR" firstAttribute="centerX" secondItem="Mzs-oO-38O" secondAttribute="centerX" id="M7k-AD-pLr"/>
-                                    <constraint firstAttribute="bottom" secondItem="9Js-sE-gsW" secondAttribute="bottom" constant="16" id="Os5-Vt-AqZ"/>
+                                    <constraint firstItem="9Js-sE-gsW" firstAttribute="centerY" secondItem="4oS-bc-CpR" secondAttribute="centerY" id="VIz-Hy-vbP"/>
                                     <constraint firstAttribute="height" constant="96" id="yoi-CS-mFe"/>
                                 </constraints>
                             </view>
@@ -326,11 +326,11 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBJ-5n-hTK" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQe-69-CWe" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="60" width="40" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQe-69-CWe" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="30" width="50" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="1DJ-2W-N2d"/>
-                                            <constraint firstAttribute="height" constant="20" id="MB4-1Z-Rwl"/>
+                                            <constraint firstAttribute="width" constant="50" id="1DJ-2W-N2d"/>
+                                            <constraint firstAttribute="height" constant="50" id="MB4-1Z-Rwl"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Back">
@@ -346,11 +346,11 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ss1-4G-4US" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
-                                        <rect key="frame" x="343" y="60" width="55" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ss1-4G-4US" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                        <rect key="frame" x="338" y="52.333333333333343" width="60" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="55" id="WEd-f0-54L"/>
-                                            <constraint firstAttribute="height" constant="20" id="du5-jE-Yaz"/>
+                                            <constraint firstAttribute="width" constant="60" id="WEd-f0-54L"/>
+                                            <constraint firstAttribute="height" constant="40" id="du5-jE-Yaz"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Cancel">
@@ -363,9 +363,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="Ss1-4G-4US" firstAttribute="centerY" secondItem="lav-jU-c1A" secondAttribute="centerY" id="3i8-rX-zeJ"/>
                                     <constraint firstAttribute="trailing" secondItem="Ss1-4G-4US" secondAttribute="trailing" constant="16" id="9mb-iv-knz"/>
                                     <constraint firstAttribute="bottom" secondItem="SQe-69-CWe" secondAttribute="bottom" constant="16" id="BwP-Xs-6SI"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ss1-4G-4US" secondAttribute="bottom" constant="16" id="FSd-ie-TJq"/>
                                     <constraint firstItem="SQe-69-CWe" firstAttribute="leading" secondItem="eBJ-5n-hTK" secondAttribute="leading" constant="16" id="O80-X4-dwf"/>
                                     <constraint firstItem="lav-jU-c1A" firstAttribute="centerX" secondItem="eBJ-5n-hTK" secondAttribute="centerX" id="RwP-ks-rWn"/>
                                     <constraint firstAttribute="height" constant="96" id="hxM-XX-D5H"/>
@@ -609,7 +609,7 @@
                                             <action selector="signInPressed:" destination="LX5-kB-9Sg" eventType="touchUpInside" id="OND-zQ-fkw"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0c-II-QAS">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0c-II-QAS" customClass="SecondaryButton" customModule="ESP_Rainmaker" customModuleProvider="target">
                                         <rect key="frame" x="142" y="434" width="130" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="Forgot password?">
@@ -758,9 +758,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TTe-Mf-ssw">
-                                        <rect key="frame" x="167" y="274.66666666666663" width="127" height="29"/>
+                                        <rect key="frame" x="167" y="274.66666666666663" width="89" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="Terms &amp; Conditions"/>
+                                        <state key="normal" title="Terms Of Use"/>
                                         <connections>
                                             <action selector="openTC:" destination="LX5-kB-9Sg" eventType="touchUpInside" id="kqu-JT-Kef"/>
                                         </connections>

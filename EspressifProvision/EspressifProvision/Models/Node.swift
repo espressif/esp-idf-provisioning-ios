@@ -15,6 +15,7 @@ class Node {
     var devices: [Device]?
     var attributes: [Attribute]?
     var isConnected = true
+    var timestamp: Int = 0
 }
 
 struct Info {

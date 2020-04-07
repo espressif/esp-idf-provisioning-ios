@@ -90,6 +90,7 @@ class User {
                                 var refreshTokenUpdate = refreshTokenInfo
                                 refreshTokenUpdate["time"] = Date()
                                 UserDefaults.standard.setValue(refreshTokenUpdate, forKey: Constants.refreshTokenKey)
+                                UserDefaults.standard.set(accessToken, forKey: Constants.accessTokenKey)
                                 User.shared.accessToken = accessToken
                                 completionHandler(accessToken)
                                 return

@@ -61,6 +61,8 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         registerPassword.text = ""
         confirmPassword.text = ""
         email.text = ""
+        checked = false
+        checkBox.setImage(UIImage(named: "checkbox_unchecked"), for: .normal)
 
         githubLoginButton.layer.backgroundColor = UIColor.white.cgColor
         githubLoginButton.layer.shadowColor = UIColor.lightGray.cgColor
@@ -78,6 +80,20 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        var currentBGColor: UIColor!
+        if let color = AppConstants.shared.appThemeColor {
+            currentBGColor = color
+        } else {
+            if let bgColor = Constants.backgroundColor {
+                currentBGColor = UIColor(hexString: bgColor)
+            }
+        }
+        if currentBGColor == #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1) {
+            currentBGColor = UIColor(hexString: "#5330b9")
+        }
+        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: currentBGColor], for: .normal)
+        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: currentBGColor], for: .selected)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -371,7 +387,7 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
     }
 
     @IBAction func openPrivacy(_: Any) {
-        showDocumentVC(url: "https://espressif.github.io/esp-jumpstart/privacy-policy")
+        showDocumentVC(url: "https://rainmaker.espressif.com/docs/privacy-policy.html")
     }
 
     @IBAction func openDocumentation(_: Any) {

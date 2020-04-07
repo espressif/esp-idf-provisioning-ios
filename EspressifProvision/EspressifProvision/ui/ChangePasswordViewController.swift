@@ -53,16 +53,24 @@ class ChangePasswordViewController: UIViewController {
         user?.changePassword(oldPassword, proposedPassword: newPassword).continueWith { [weak self] (task: AWSTask) -> AnyObject? in
             guard let strongSelf = self else { return nil }
             DispatchQueue.main.async {
+                Utility.hideLoader(view: strongSelf.view)
                 if let error = task.error as NSError? {
-                    strongSelf.showAlertWith(title: error.userInfo["__type"] as? String ?? "",
-                                             message: error.userInfo["message"] as? String ?? "")
+                    let alertController = UIAlertController(title: error.userInfo["__type"] as? String ?? "",
+                                                            message: error.userInfo["message"] as? String ?? "",
+                                                            preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
+                        strongSelf.navigationController?.popToRootViewController(animated: false)
+                    }
+                    alertController.addAction(okAction)
+
+                    strongSelf.present(alertController, animated: true, completion: nil)
+                    return
                 } else {
-                    Utility.hideLoader(view: strongSelf.view)
                     let alertController = UIAlertController(title: "Success",
                                                             message: "Password changed successfully",
                                                             preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
-                        strongSelf.navigationController?.popViewController(animated: true)
+                        strongSelf.navigationController?.popToRootViewController(animated: false)
                     }
                     alertController.addAction(okAction)
 
