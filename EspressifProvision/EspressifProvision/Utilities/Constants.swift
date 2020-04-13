@@ -102,6 +102,7 @@ struct Constants {
     #endif
 
     static let uiViewUpdateNotification = "com.espressif.updateuiview"
+    static let paramUpdateNotification = "com.espressif.paramUpdate"
 
     static let boolTypeValidValues: [String: Bool] = ["true": true, "false": false, "yes": true, "no": false, "0": false, "1": true]
 

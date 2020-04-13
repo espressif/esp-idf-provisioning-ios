@@ -35,6 +35,7 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
     @IBOutlet var segmentControl: UISegmentedControl!
     @IBOutlet var githubLoginButton: UIButton!
     @IBOutlet var googleLoginButton: UIButton!
+    @IBOutlet var appleLoginButton: UIButton!
     //    let passwordButtonRightView = UIButton(frame: CGRect(x: 0, y: 0, width: 22.0, height: 16.0))
 
     var pool: AWSCognitoIdentityUserPool?
@@ -77,6 +78,13 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         googleLoginButton.layer.shadowRadius = 0.5
         googleLoginButton.layer.shadowOpacity = 0.5
         googleLoginButton.layer.masksToBounds = false
+
+//        appleLoginButton.layer.backgroundColor = UIColor.lightGray.cgColor
+        appleLoginButton.layer.shadowColor = UIColor.lightGray.cgColor
+        appleLoginButton.layer.shadowOffset = CGSize(width: 0.5, height: 1.0)
+        appleLoginButton.layer.shadowRadius = 0.5
+        appleLoginButton.layer.shadowOpacity = 0.5
+        appleLoginButton.layer.masksToBounds = false
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -178,6 +186,10 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         loginWith(idProvider: "Google")
     }
 
+    @IBAction func loginWithApple(_: Any) {
+        loginWith(idProvider: "SignInWithApple")
+    }
+
     @IBAction func loginWithGithub(_: Any) {
         loginWith(idProvider: "Github")
     }
@@ -193,6 +205,7 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
             }
             let dict = [String: String]()
             if let responseURL = url?.absoluteString {
+                print(responseURL)
                 let components = responseURL.components(separatedBy: "#")
                 for item in components {
                     if item.contains("code") {

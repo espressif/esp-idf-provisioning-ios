@@ -21,6 +21,7 @@ import UIKit
 class DeviceTraitListViewController: UIViewController {
     var device: Device?
     var pollingTimer: Timer!
+    var skipNextAttributeUpdate = false
 
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var tableView: UITableView!
@@ -50,6 +51,7 @@ class DeviceTraitListViewController: UIViewController {
         pollingTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(fetchNodeInfo), userInfo: nil, repeats: true)
         NotificationCenter.default.addObserver(self, selector: #selector(appEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(paramUpdated), name: Notification.Name(Constants.paramUpdateNotification), object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,7 +71,15 @@ class DeviceTraitListViewController: UIViewController {
     }
 
     @objc func fetchNodeInfo() {
-        refreshDeviceAttributes()
+        if skipNextAttributeUpdate {
+            skipNextAttributeUpdate = false
+        } else {
+            refreshDeviceAttributes()
+        }
+    }
+
+    @objc func paramUpdated() {
+        skipNextAttributeUpdate = true
     }
 
     func refreshDeviceAttributes() {
