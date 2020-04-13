@@ -32,6 +32,7 @@ class SuccessViewController: UIViewController {
     var provision: Provision!
     var addDeviceStatusTimeout: Timer?
     var step1Failed = false
+    var count: Int = 0
 
 //    @IBOutlet var successLabel: UILabel!
     @IBOutlet var step1Image: UIImageView!
@@ -144,7 +145,8 @@ class SuccessViewController: UIViewController {
         step3Image.isHidden = true
         step3Indicator.isHidden = false
         step3Indicator.startAnimating()
-        sendRequestToAddDevice(5)
+        count = 5
+        sendRequestToAddDevice()
     }
 
     private func step4ConfirmNodeAssociation(requestID: String) {
@@ -235,14 +237,15 @@ class SuccessViewController: UIViewController {
         finalStatusLabel.isHidden = false
     }
 
-    @objc func sendRequestToAddDevice(_ count: Int) {
+    @objc func sendRequestToAddDevice() {
         print("sendRequestToAddDevice")
         let parameters = ["user_id": User.shared.userInfo.userID, "node_id": User.shared.currentAssociationInfo!.nodeID, "secret_key": User.shared.currentAssociationInfo!.uuid, "operation": "add"]
         NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, error in
             print(requestID)
-            if error != nil, count > 0 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    self.perform(#selector(self.sendRequestToAddDevice(_:)), with: count - 1, afterDelay: 5.0)
+            if error != nil, self.count > 0 {
+                self.count = self.count - 1
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    self.perform(#selector(self.sendRequestToAddDevice), with: nil, afterDelay: 5.0)
                 }
             } else {
                 if let requestid = requestID {
@@ -252,7 +255,7 @@ class SuccessViewController: UIViewController {
                     self.step3Image.isHidden = false
                     self.step4ConfirmNodeAssociation(requestID: requestid)
                 } else {
-                    self.step3FailedWithMessage(message: "Unrecognized error. Please check your internet.")
+                    self.step3FailedWithMessage(message: error?.description ?? "Unrecognized error. Please check your internet.")
                 }
             }
         }

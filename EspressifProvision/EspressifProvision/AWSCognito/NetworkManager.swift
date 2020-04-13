@@ -241,7 +241,7 @@ class NetworkManager {
     ///
     /// - Parameters:
     ///   - completionHandler: handler called when response to add device to user is recieved with id of the request
-    func addDeviceToUser(parameter: [String: String], completionHandler: @escaping (String?, Error?) -> Void) {
+    func addDeviceToUser(parameter: [String: String], completionHandler: @escaping (String?, ESPNetworkError?) -> Void) {
         User.shared.getAccessToken(completionHandler: { accessToken in
             if accessToken != nil {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
@@ -260,16 +260,21 @@ class NetworkManager {
                             if let requestId = json[Constants.requestID] {
                                 completionHandler(requestId, nil)
                                 return
+                            } else if let status = json["status"], let description = json["description"] as? String {
+                                if status == "failure" {
+                                    completionHandler(nil, ESPNetworkError.serverError(description))
+                                    return
+                                }
                             }
                         }
                     case let .failure(error):
                         // Check for any error on response
                         print("Add device error \(error)")
-                        completionHandler(nil, error)
+                        completionHandler(nil, ESPNetworkError.serverError(error.localizedDescription))
                         return
                     }
 
-                    completionHandler(nil, CustomError.emptyConfigData)
+                    completionHandler(nil, ESPNetworkError.emptyConfigData)
                 }
             } else {
                 completionHandler(nil, ESPNetworkError.emptyToken)
@@ -315,6 +320,7 @@ class NetworkManager {
     ///   - nodeID: Id of the node for which thing shadow is updated
     ///   - completionHandler: handler called when response to updateThingShadow is recieved
     func updateThingShadow(nodeID: String?, parameter: [String: Any]) {
+        NotificationCenter.default.post(Notification(name: Notification.Name(Constants.paramUpdateNotification)))
         if let nodeid = nodeID {
             User.shared.getAccessToken(completionHandler: { idToken in
                 if idToken != nil {
