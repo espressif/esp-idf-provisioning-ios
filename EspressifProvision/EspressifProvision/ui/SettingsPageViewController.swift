@@ -13,6 +13,7 @@ import UIKit
 class SettingsPageViewController: UIViewController {
     @IBOutlet var emailLabel: UILabel!
     @IBOutlet var changePasswordView: UIView!
+    @IBOutlet var appVersionLabel: UILabel!
     var username = ""
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,7 @@ class SettingsPageViewController: UIViewController {
 
         emailLabel.text = User.shared.userInfo.email
         NotificationCenter.default.addObserver(self, selector: #selector(updateUIView), name: Notification.Name(Constants.uiViewUpdateNotification), object: nil)
+        appVersionLabel.text = "App Version - v" + Constants.appVersion
     }
 
     override func viewDidLayoutSubviews() {

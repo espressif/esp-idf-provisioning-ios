@@ -39,6 +39,11 @@ extension UISegmentedControl {
         addSubview(underline)
     }
 
+    func changeUnderlineColor(color: UIColor) {
+        guard let underline = self.viewWithTag(1) else { return }
+        underline.backgroundColor = color
+    }
+
     func changeUnderlinePosition() {
         guard let underline = self.viewWithTag(1) else { return }
         let underlineFinalXPosition = (UIScreen.main.bounds.size.width / CGFloat(numberOfSegments)) * CGFloat(selectedSegmentIndex)

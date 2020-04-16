@@ -11,24 +11,24 @@
         <!--Device Trait List View Controller-->
         <scene sceneID="R1M-4A-RYo">
             <objects>
-                <viewController storyboardIdentifier="deviceTrailListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nFQ-wA-GhO" customClass="DeviceTraitListViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="deviceTrailListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nFQ-wA-GhO" customClass="DeviceTraitListViewController" customModule="ESP_RainMaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NJb-aA-9ZQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0gr-bE-NUZ" customClass="BGImageView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0gr-bE-NUZ" customClass="BGImageView" customModule="ESP_RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fts-gK-0Xe" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fts-gK-0Xe" customClass="TopBarView" customModule="ESP_RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bridge Details" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cde-Gf-DWb" customClass="BarTitle" customModule="ESP_Rainmaker" customModuleProvider="target">
-                                        <rect key="frame" x="154" y="62.666666666666664" width="106" height="19.333333333333336"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bridge Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cde-Gf-DWb" customClass="BarTitle" customModule="ESP_RainMaker" customModuleProvider="target">
+                                        <rect key="frame" x="82" y="62.666666666666664" width="240" height="19.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4N-aS-Znk" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4N-aS-Znk" customClass="BarButton" customModule="ESP_RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="16" y="47.333333333333343" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="PF9-Xp-IDG"/>
@@ -73,10 +73,11 @@
                                 <constraints>
                                     <constraint firstItem="h4N-aS-Znk" firstAttribute="leading" secondItem="Fts-gK-0Xe" secondAttribute="leading" constant="16" id="CEc-Nn-tDR"/>
                                     <constraint firstItem="cde-Gf-DWb" firstAttribute="centerY" secondItem="h4N-aS-Znk" secondAttribute="centerY" id="K2e-4p-y36"/>
+                                    <constraint firstItem="cde-Gf-DWb" firstAttribute="leading" secondItem="h4N-aS-Znk" secondAttribute="trailing" constant="16" id="Pn1-2B-R0w"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="96" id="VXh-Vl-C6q"/>
                                     <constraint firstAttribute="bottom" secondItem="4St-yp-dzE" secondAttribute="bottom" constant="8" id="j1L-Rj-uTy"/>
                                     <constraint firstAttribute="bottom" secondItem="cde-Gf-DWb" secondAttribute="bottom" constant="14" id="j4e-b9-FvR"/>
-                                    <constraint firstItem="cde-Gf-DWb" firstAttribute="centerX" secondItem="Fts-gK-0Xe" secondAttribute="centerX" id="rnO-vQ-R5A"/>
+                                    <constraint firstItem="4St-yp-dzE" firstAttribute="leading" secondItem="cde-Gf-DWb" secondAttribute="trailing" constant="40" id="qSU-U9-KZT"/>
                                     <constraint firstAttribute="trailing" secondItem="4St-yp-dzE" secondAttribute="trailing" constant="16" id="zT9-eA-TLv"/>
                                 </constraints>
                             </view>
@@ -127,24 +128,24 @@
         <!--Node Details View Controller-->
         <scene sceneID="0Vn-C9-7u4">
             <objects>
-                <viewController storyboardIdentifier="nodeDetailsVC" id="qCN-Y8-vPf" customClass="NodeDetailsViewController" customModule="ESP_Rainmaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="nodeDetailsVC" id="qCN-Y8-vPf" customClass="NodeDetailsViewController" customModule="ESP_RainMaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2Ry-Rk-Uzd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w8m-sN-Xmb" customClass="BGImageView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="w8m-sN-Xmb" customClass="BGImageView" customModule="ESP_RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xw-gS-LQp" customClass="TopBarView" customModule="ESP_Rainmaker" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xw-gS-LQp" customClass="TopBarView" customModule="ESP_RainMaker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Node Details" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUH-9C-huB" customClass="BarTitle" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Node Details" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUH-9C-huB" customClass="BarTitle" customModule="ESP_RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="158.66666666666666" y="56.666666666666664" width="96.666666666666657" height="19.333333333333336"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AQ-Qo-K9i" customClass="BarButton" customModule="ESP_Rainmaker" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AQ-Qo-K9i" customClass="BarButton" customModule="ESP_RainMaker" customModuleProvider="target">
                                         <rect key="frame" x="17" y="41.333333333333371" width="50" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Khe-uG-5UJ"/>

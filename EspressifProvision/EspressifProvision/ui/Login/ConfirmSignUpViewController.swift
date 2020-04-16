@@ -21,6 +21,7 @@ import Foundation
 class ConfirmSignUpViewController: UIViewController {
     var sentTo: String?
     var user: AWSCognitoIdentityUser?
+    var confirmExistingUser = false
 
     @IBOutlet var sentToLabel: UILabel!
     @IBOutlet var code: UITextField!
@@ -72,8 +73,22 @@ class ConfirmSignUpViewController: UIViewController {
 
                     strongSelf.present(alertController, animated: true, completion: nil)
                 } else {
-                    User.shared.automaticLogin = true
-                    _ = strongSelf.navigationController?.popToRootViewController(animated: true)
+                    if strongSelf.confirmExistingUser {
+                        strongSelf.confirmExistingUser = false
+                        let alertController = UIAlertController(title: "Success",
+                                                                message: "User has been confirmed. Please enter your credentials in login page to sign in with this user.",
+                                                                preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
+                            strongSelf.navigationController?.popToRootViewController(animated: true)
+                        }
+
+                        alertController.addAction(okAction)
+
+                        strongSelf.present(alertController, animated: true, completion: nil)
+                    } else {
+                        User.shared.automaticLogin = true
+                        _ = strongSelf.navigationController?.popToRootViewController(animated: true)
+                    }
                 }
             }
             return nil

@@ -45,7 +45,12 @@ class GenericControlTableViewCell: UITableViewCell {
 
     @IBAction func editButtonTapped(_: Any) {
         if Utility.isConnected(view: parentViewController!.view) {
-            let input = UIAlertController(title: attributeKey, message: "Enter new value", preferredStyle: .alert)
+            var input: UIAlertController!
+            if attribute?.type == "esp.param.name" {
+                input = UIAlertController(title: attributeKey, message: "Enter device name of length 1-32 characters", preferredStyle: .alert)
+            } else {
+                input = UIAlertController(title: attributeKey, message: "Enter new value", preferredStyle: .alert)
+            }
             input.addTextField { textField in
                 textField.text = self.controlValue ?? ""
                 self.addHeightConstraint(textField: textField)
@@ -124,6 +129,12 @@ class GenericControlTableViewCell: UITableViewCell {
                     showAlert(message: "Please enter a valid boolean value.")
                 }
             } else {
+                if attribute?.type == "esp.param.name" {
+                    if value.count < 1 || value.count > 32 || value.isEmpty || value.trimmingCharacters(in: .whitespaces).isEmpty {
+                        showAlert(message: "Please enter a valid device name within a range of 1-32 characters")
+                        return
+                    }
+                }
                 NetworkManager.shared.updateThingShadow(nodeID: device.node?.node_id, parameter: [device.name ?? "": [attributeKey: controlValue]])
                 controlValueLabel.text = value
             }

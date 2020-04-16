@@ -13,67 +13,46 @@ import UIKit
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
-    var previewLayer: AVCaptureVideoPreviewLayer!
+    var previewLayer: AVCaptureVideoPreviewLayer?
     var provisionConfig: [String: String] = [:]
     @IBOutlet var scannerView: UIView!
     @IBOutlet var addManuallyButton: PrimaryButton!
+    @IBOutlet var scannerHeading: UILabel!
+    @IBOutlet var scannerDescription: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-//        view.backgroundColor = UIColor.black
-        captureSession = AVCaptureSession()
-
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-            showAlertWith(message: "")
-            return
+        getAuthorizationStatus { authorized in
+            DispatchQueue.main.async {
+                if authorized {
+                    self.scannerHeading.text = "Looking for QR Code"
+                    self.scannerDescription.text = "Please position the camera to point at the QR Code."
+                    self.startCaptureSession()
+                } else {
+                    self.scannerHeading.text = "Camera Access Denied"
+                    self.scannerDescription.text = "Go to iPhone Settings -> ESP RainMaker -> Enable Camera in order to scan QR code"
+                }
+            }
         }
-        let videoInput: AVCaptureDeviceInput
-
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            return
-        }
-
-        if captureSession.canAddInput(videoInput) {
-            captureSession.addInput(videoInput)
-        } else {
-            showAlertWith(message: "")
-            return
-        }
-
-        let metadataOutput = AVCaptureMetadataOutput()
-
-        if captureSession.canAddOutput(metadataOutput) {
-            captureSession.addOutput(metadataOutput)
-
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
-        } else {
-            showAlertWith(message: "")
-            return
-        }
-
-        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        previewLayer.frame = scannerView.layer.bounds
-        previewLayer.videoGravity = .resizeAspectFill
-        scannerView.layer.addSublayer(previewLayer)
-
-        captureSession.startRunning()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        previewLayer.frame = scannerView.bounds
+        previewLayer?.frame = scannerView.bounds
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if captureSession?.isRunning == false {
-            captureSession.startRunning()
+        getAuthorizationStatus { authorized in
+            DispatchQueue.main.async {
+                if authorized {
+                    if self.captureSession?.isRunning == false {
+                        self.captureSession.startRunning()
+                    }
+                } else {}
+            }
         }
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
@@ -83,6 +62,68 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
         if captureSession?.isRunning == true {
             captureSession.stopRunning()
+        }
+    }
+
+    func startCaptureSession() {
+        DispatchQueue.main.async {
+            self.captureSession = AVCaptureSession()
+            guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
+                self.showAlertWith(message: "Camera is not available in this device.")
+                return
+            }
+            let videoInput: AVCaptureDeviceInput
+
+            do {
+                videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+            } catch {
+                return
+            }
+
+            if self.captureSession.canAddInput(videoInput) {
+                self.captureSession.addInput(videoInput)
+            } else {
+                self.showAlertWith(message: "Camera is not available in this device.")
+                return
+            }
+
+            let metadataOutput = AVCaptureMetadataOutput()
+
+            if self.captureSession.canAddOutput(metadataOutput) {
+                self.captureSession.addOutput(metadataOutput)
+
+                metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+                metadataOutput.metadataObjectTypes = [.qr]
+            } else {
+                self.showAlertWith(message: "Camera is not available in this device.")
+                return
+            }
+
+            self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+            self.previewLayer?.frame = self.scannerView.layer.bounds
+            self.previewLayer?.videoGravity = .resizeAspectFill
+            self.scannerView.layer.addSublayer(self.previewLayer!)
+
+            self.captureSession.startRunning()
+        }
+    }
+
+    func getAuthorizationStatus(completionHandler: @escaping (Bool) -> Void) {
+        switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
+        case .authorized:
+            completionHandler(true)
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                guard granted else {
+                    completionHandler(false)
+                    return
+                }
+                completionHandler(true)
+            }
+        case .denied, .restricted:
+            completionHandler(false)
+        default:
+            completionHandler(false)
         }
     }
 

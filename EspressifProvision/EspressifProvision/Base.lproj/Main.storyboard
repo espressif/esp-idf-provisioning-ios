@@ -630,6 +630,7 @@
                     <navigationItem key="navigationItem" id="KXi-I9-O2M"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="appVersionLabel" destination="sfG-Qq-wAK" id="Xmf-fr-ftQ"/>
                         <outlet property="changePasswordView" destination="MvJ-pf-Oif" id="iEQ-Nq-hKg"/>
                         <outlet property="emailLabel" destination="6cf-AT-tEd" id="jof-oM-Cpx"/>
                     </connections>
@@ -2375,6 +2376,8 @@ PROV_XXXX</string>
                     <navigationItem key="navigationItem" id="1be-9s-gtr"/>
                     <connections>
                         <outlet property="addManuallyButton" destination="Pp9-yW-cFb" id="Cj7-k8-bLE"/>
+                        <outlet property="scannerDescription" destination="Rh0-m4-VXP" id="aUT-6i-9sA"/>
+                        <outlet property="scannerHeading" destination="nPS-ye-tBK" id="YeT-5t-c0P"/>
                         <outlet property="scannerView" destination="z7t-GW-4k2" id="A3c-gM-Hwu"/>
                     </connections>
                 </viewController>

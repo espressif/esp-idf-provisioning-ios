@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // fetch the user pool client we initialized in above step
         storyboard = UIStoryboard(name: "Login", bundle: nil)
         User.shared.pool.delegate = self
+        VersionManager.shared.checkForAppUpdate()
         return true
     }
 

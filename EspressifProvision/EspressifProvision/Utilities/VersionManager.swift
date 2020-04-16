@@ -16,7 +16,7 @@ class VersionManager {
     let currentAppVersion = "1.0"
     let currentAPIVersion = "v1"
 
-    private let supportedVersionURL = "https://yv4hu5b4oj.execute-api.us-east-1.amazonaws.com/dev/getapiversions"
+    private let supportedVersionURL = Constants.baseURL + "apiversions"
     private var appStoreURL = "itms-apps://"
 
     private var mainWindow: UIWindow?
@@ -41,12 +41,16 @@ class VersionManager {
                 if let json = value as? NSDictionary,
                     let results = json["results"] as? NSArray,
                     let entry = results.firstObject as? NSDictionary,
-                    let appVersion = entry["version"] as? String,
-                    let ourVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                    let appVersion = entry["version"] as? String {
+                    let currentVersion = Constants.appVersion
                     if let storeURL = entry["trackViewUrl"] as? String {
                         self.appStoreURL = storeURL
                     }
-                    isNew = ourVersion != appVersion
+                    let compareVersion = currentVersion.compare(appVersion, options: .numeric)
+                    isNew = false
+                    if compareVersion == .orderedAscending {
+                        isNew = true
+                    }
                     versionStr = appVersion
                 }
                 callback?(isNew, versionStr)
@@ -61,25 +65,38 @@ class VersionManager {
             switch response.result {
             case let .success(value):
                 if let json = value as? [String: Any], let supportedVersion = json["supported_versions"] as? [String] {
-                    if supportedVersion.contains(self.currentAPIVersion) {
-                        callback(true)
+                    if !supportedVersion.contains(self.currentAPIVersion) {
+                        callback(false)
                         return
                     }
                 }
             case let .failure(error):
                 print(error)
             }
-            callback(false)
+            callback(true)
         }
     }
 
     func checkForAppUpdate() {
-        checkAppStore { isAvailable, _ in
+        checkAppStore { isAvailable, version in
             if let available = isAvailable {
                 if available {
                     self.checkIfAPIVersionIsSupported { isSupported in
                         if isSupported {
+                            if let versionStrings = UserDefaults.standard.value(forKey: Constants.ignoreVersionKey) as? [String], let updatedVersion = version {
+                                if versionStrings.contains(updatedVersion) {
+                                    return
+                                }
+                            }
                             let ignoreAction = UIAlertAction(title: "Ignore", style: .default) { _ in
+                                var ignoreVersions: [String] = []
+                                if let versionStrings = UserDefaults.standard.value(forKey: Constants.ignoreVersionKey) as? [String] {
+                                    ignoreVersions.append(contentsOf: versionStrings)
+                                }
+                                if let updatedVersion = version {
+                                    ignoreVersions.append(updatedVersion)
+                                }
+                                UserDefaults.standard.setValue(ignoreVersions, forKey: Constants.ignoreVersionKey)
                             }
                             let updateAction = UIAlertAction(title: "Update", style: .default) { _ in
                                 self.goToAppStore()
