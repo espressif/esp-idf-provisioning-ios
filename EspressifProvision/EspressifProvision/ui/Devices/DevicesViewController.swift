@@ -206,7 +206,7 @@ class DevicesViewController: UIViewController {
                 self.emptyListIcon.image = UIImage(named: "no_device_icon")
                 self.infoLabel.textColor = .black
             } else {
-                self.infoLabel.text = error?.description ?? "Something went wrong!!"
+                self.infoLabel.text = "No devices to show\n" + (error?.description ?? "Something went wrong!!")
                 self.emptyListIcon.image = UIImage(named: "api_error_icon")
                 self.infoLabel.textColor = .red
             }

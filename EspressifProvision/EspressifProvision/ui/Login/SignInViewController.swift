@@ -40,6 +40,7 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
 
     var pool: AWSCognitoIdentityUserPool?
     var sentTo: String?
+    var user: AWSCognitoIdentityUser?
 
     @IBOutlet var registerPassword: UITextField!
     @IBOutlet var confirmPassword: UITextField!
@@ -100,8 +101,9 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         if currentBGColor == #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1) {
             currentBGColor = UIColor(hexString: "#5330b9")
         }
-        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: currentBGColor], for: .normal)
-        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: currentBGColor], for: .selected)
+        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: currentBGColor as Any], for: .normal)
+        segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: currentBGColor as Any], for: .selected)
+        segmentControl.changeUnderlineColor(color: currentBGColor)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -432,6 +434,36 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         }
         User.shared.updateDeviceList = true
     }
+
+    func goToConfirmUserScreen() {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let confirmUserVC = storyboard.instantiateViewController(withIdentifier: "confirmSignUpVC") as! ConfirmSignUpViewController
+        confirmUserVC.confirmExistingUser = true
+        confirmUserVC.user = user
+        confirmUserVC.sentTo = username.text ?? ""
+        navigationController?.pushViewController(confirmUserVC, animated: true)
+    }
+
+    func resendConfirmationCode() {
+        user = pool?.getUser(username.text ?? "")
+        user?.resendConfirmationCode().continueWith { [weak self] (task: AWSTask) -> AnyObject? in
+            guard let strongSelf = self else { return nil }
+            DispatchQueue.main.async {
+                if let error = task.error as NSError? {
+                    let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
+                                                            message: error.userInfo["message"] as? String,
+                                                            preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                    alertController.addAction(okAction)
+
+                    self?.present(alertController, animated: true, completion: nil)
+                } else if let result = task.result {
+                    strongSelf.goToConfirmUserScreen()
+                }
+            }
+            return nil
+        }
+    }
 }
 
 extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
@@ -449,6 +481,10 @@ extension SignInViewController: AWSCognitoIdentityPasswordAuthentication {
         DispatchQueue.main.async {
             Utility.hideLoader(view: self.view)
             if let error = error as NSError? {
+                if error.code == 33 {
+                    self.resendConfirmationCode()
+                    return
+                }
                 let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
                                                         message: error.userInfo["message"] as? String,
                                                         preferredStyle: .alert)

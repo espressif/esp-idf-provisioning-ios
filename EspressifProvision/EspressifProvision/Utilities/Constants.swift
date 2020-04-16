@@ -12,6 +12,7 @@ import Keys
 
 struct Constants {
     static let bundleIdentifier = Bundle.main.infoDictionary!["CFBundleIdentifier"] as! String
+    static let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
 
     // API version for the current network request
     static let apiVersion = "v1"
@@ -88,6 +89,7 @@ struct Constants {
     static let loginIdKey = Constants.bundleIdentifier + ".loginIdKey"
     static let appThemeKey = Constants.bundleIdentifier + ".appTheme"
     static let appBGKey = Constants.bundleIdentifier + ".appbg"
+    static let ignoreVersionKey = Constants.bundleIdentifier + ".ignoreVersions"
 
     static let cognito = "Cognito"
     static let github = "Github"

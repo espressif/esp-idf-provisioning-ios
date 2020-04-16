@@ -125,7 +125,7 @@
         <!--Confirm SignUp-->
         <scene sceneID="pu1-RN-5D0">
             <objects>
-                <viewController id="0hd-Au-BpE" userLabel="Confirm SignUp" customClass="ConfirmSignUpViewController" customModule="ESP_RainMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="confirmSignUpVC" id="0hd-Au-BpE" userLabel="Confirm SignUp" customClass="ConfirmSignUpViewController" customModule="ESP_RainMaker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nZT-Af-Dcg"/>
                         <viewControllerLayoutGuide type="bottom" id="XlW-9i-wAK"/>
@@ -484,7 +484,7 @@
                                         <rect key="frame" x="0.0" y="102.5" width="375" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <segments>
-                                            <segment title="LOGIN"/>
+                                            <segment title="SIGN IN"/>
                                             <segment title="SIGN UP"/>
                                         </segments>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -516,10 +516,10 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="0.20000000000000001"/>
+                                                <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="10"/>
@@ -529,7 +529,7 @@
                                             <action selector="loginWithGithub:" destination="LX5-kB-9Sg" eventType="touchUpInside" id="Dby-ms-muy"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="github_logo" translatesAutoresizingMaskIntoConstraints="NO" id="S77-dl-nOK">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="github_logo" translatesAutoresizingMaskIntoConstraints="NO" id="S77-dl-nOK">
                                         <rect key="frame" x="42" y="20" width="40" height="41.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="fCF-gn-xXA"/>
@@ -537,18 +537,18 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xFD-Uk-9IC">
                                         <rect key="frame" x="32" y="71.5" width="311" height="41"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <inset key="imageEdgeInsets" minX="10" minY="0.0" maxX="40" maxY="0.0"/>
                                         <state key="normal" title="Sign in with Apple">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="0.20000000000000001"/>
+                                                <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="10"/>
@@ -559,7 +559,7 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="apple_icon" translatesAutoresizingMaskIntoConstraints="NO" id="oXl-Q8-zlA">
-                                        <rect key="frame" x="42" y="71.5" width="40" height="41"/>
+                                        <rect key="frame" x="42" y="73.5" width="40" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="tgk-fY-9ya"/>
                                         </constraints>
@@ -573,10 +573,10 @@
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="0.20000000000000001"/>
+                                                <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="10"/>
@@ -623,7 +623,7 @@
                                         <rect key="frame" x="32" y="326.5" width="311" height="41"/>
                                         <color key="backgroundColor" red="0.32549019610000002" green="0.18823529410000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <inset key="imageEdgeInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Login">
+                                        <state key="normal" title="Sign in">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -693,7 +693,7 @@
                                     <constraint firstItem="9ju-xn-L6Y" firstAttribute="height" secondItem="HT5-AL-XVD" secondAttribute="height" id="7wx-pz-dua"/>
                                     <constraint firstItem="xFD-Uk-9IC" firstAttribute="leading" secondItem="66L-qr-T3Y" secondAttribute="leading" id="8mc-9Z-hTS"/>
                                     <constraint firstItem="rD6-gP-i6F" firstAttribute="trailing" secondItem="HT5-AL-XVD" secondAttribute="trailing" id="9hY-5p-a1N"/>
-                                    <constraint firstItem="oXl-Q8-zlA" firstAttribute="top" secondItem="xFD-Uk-9IC" secondAttribute="top" id="9pc-dc-ESn"/>
+                                    <constraint firstItem="oXl-Q8-zlA" firstAttribute="top" secondItem="xFD-Uk-9IC" secondAttribute="top" constant="2" id="9pc-dc-ESn"/>
                                     <constraint firstItem="rD6-gP-i6F" firstAttribute="top" secondItem="NOm-gh-05c" secondAttribute="top" constant="20" id="A6L-gw-6QR"/>
                                     <constraint firstItem="9ju-xn-L6Y" firstAttribute="trailing" secondItem="HT5-AL-XVD" secondAttribute="trailing" id="AR5-up-yDu"/>
                                     <constraint firstItem="FFy-79-By5" firstAttribute="centerX" secondItem="NOm-gh-05c" secondAttribute="centerX" id="EUJ-n4-yTz"/>
@@ -704,7 +704,7 @@
                                     <constraint firstAttribute="bottom" secondItem="UHd-4C-Y0a" secondAttribute="bottom" constant="26" id="KiH-lX-fyV"/>
                                     <constraint firstItem="xFD-Uk-9IC" firstAttribute="trailing" secondItem="66L-qr-T3Y" secondAttribute="trailing" id="O5u-tB-tOn"/>
                                     <constraint firstItem="oXl-Q8-zlA" firstAttribute="leading" secondItem="xFD-Uk-9IC" secondAttribute="leading" constant="10" id="QaC-Fv-UjX"/>
-                                    <constraint firstItem="oXl-Q8-zlA" firstAttribute="bottom" secondItem="xFD-Uk-9IC" secondAttribute="bottom" id="Qem-YZ-Rba"/>
+                                    <constraint firstItem="oXl-Q8-zlA" firstAttribute="bottom" secondItem="xFD-Uk-9IC" secondAttribute="bottom" constant="-2" id="Qem-YZ-Rba"/>
                                     <constraint firstItem="S77-dl-nOK" firstAttribute="top" secondItem="rD6-gP-i6F" secondAttribute="top" id="U2G-c3-vao"/>
                                     <constraint firstItem="UHd-4C-Y0a" firstAttribute="leading" secondItem="Nte-Hn-u6r" secondAttribute="trailing" constant="10" id="YTt-uN-yNh"/>
                                     <constraint firstItem="dkG-ck-a8M" firstAttribute="leading" secondItem="HT5-AL-XVD" secondAttribute="leading" id="bDN-g9-K9t"/>
