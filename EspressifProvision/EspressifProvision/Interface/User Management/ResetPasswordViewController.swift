@@ -114,7 +114,7 @@ extension ResetPasswordViewController: UITextFieldDelegate {
             confirmationCode.resignFirstResponder()
             updatePassword(textField)
         default:
-            print("default")
+            return true
         }
         return true
     }

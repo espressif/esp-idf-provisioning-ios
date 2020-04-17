@@ -33,12 +33,6 @@ class ProvisionLandingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let wifiPrefix = provisionConfig[Provision.CONFIG_WIFI_AP_KEY]
-//        if let text = provisionInstructions.text, let wifiPrefix = wifiPrefix {
-//            let nonBoldRange = NSMakeRange(0, text.count)
-//            provisionInstructions.attributedText = attributedString(from: text + " \(wifiPrefix)",
-//                                                                    nonBoldRange: nonBoldRange)
-//        }
         navigationController?.setNavigationBarHidden(true, animated: false)
         checkConnectivity()
     }
@@ -52,7 +46,6 @@ class ProvisionLandingViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        print("viewWillDisappear")
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -69,17 +62,14 @@ class ProvisionLandingViewController: UIViewController {
     }
 
     @objc func appEnterForeground() {
-        print("foreground")
         checkConnectivity()
     }
 
     @objc func appEnterBackground() {
-        print("appEnterBackground")
         task?.cancel()
     }
 
     @objc func timeoutFetchingStatus() {
-        print("timeout")
         Utility.hideLoader(view: view)
         deviceStatusTimer?.invalidate()
         connectButton.alpha = 1.0
@@ -89,7 +79,6 @@ class ProvisionLandingViewController: UIViewController {
     func getDeviceVersionInfo() {
         SendHTTPData(path: "proto-ver", data: Data("ESP".utf8), completionHandler: { response, error in
             DispatchQueue.main.async {
-                print("response recieved")
                 if error == nil {
                     do {
                         if let result = try JSONSerialization.jsonObject(with: response!, options: .mutableContainers) as? NSDictionary {
@@ -112,7 +101,6 @@ class ProvisionLandingViewController: UIViewController {
                         self.goToClaimVC(ssid: self.verifyConnection() ?? "")
                     }
                 } else {
-                    print(error)
                     Utility.hideLoader(view: self.view)
                     self.timeoutFetchingStatus()
                 }

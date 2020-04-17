@@ -146,7 +146,6 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        segmentControl.addUnderlineForSelectedSegment()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender _: Any?) {
@@ -201,7 +200,6 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         let githubLoginURL = Constants.githubURL + "authorize" + "?identity_provider=" + idProvider + "&redirect_uri=" + Constants.redirectURL + "&response_type=CODE&client_id="
         session = SFAuthenticationSession(url: URL(string: githubLoginURL + currentKeys.clientID!)!, callbackURLScheme: Constants.redirectURL) { url, error in
             if error != nil {
-                print(error)
                 self.showAlert()
                 return
             }
@@ -235,8 +233,6 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
         let url = Constants.githubURL + "token"
         let currentKeys = Keys.current
         let parameters = ["grant_type": "authorization_code", "client_id": currentKeys.clientID!, "code": code, "redirect_uri": Constants.redirectURL]
-//        let authorizationValue = Request.authorizationHeader(user: Constants.clientID, password: currentKeys.clientSecret)
-//        let headers: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded", authorizationValue?.key ?? "": authorizationValue?.value ?? ""]
         let headers: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded"]
         NetworkManager.shared.genericRequest(url: url, method: .post, parameters: parameters, encoding: URLEncoding.default,
                                              headers: headers) { response in
@@ -457,7 +453,7 @@ class SignInViewController: UIViewController, AWSCognitoAuthDelegate {
                     alertController.addAction(okAction)
 
                     self?.present(alertController, animated: true, completion: nil)
-                } else if let result = task.result {
+                } else if task.result != nil {
                     strongSelf.goToConfirmUserScreen()
                 }
             }
@@ -535,7 +531,7 @@ extension SignInViewController: UITextFieldDelegate {
         case confirmPassword:
             confirmPassword.resignFirstResponder()
         default:
-            print("default")
+            return true
         }
         return true
     }

@@ -16,16 +16,18 @@ class NetworkManager {
     var session: Session!
 
     private init() {
-//        let serverTrustPolicy: [String: ServerTrustEvaluating] = ["" : .pinPublicKeys( kSecPublicKeyAttrs: ServerTrustEvaluating)]
-//        let configuration = URLSessionConfiguration.default
+        // Validate api calls with server certificate
         let certificate = [NetworkManager.certificate(filename: "amazonRootCA")]
         let trustManager = ServerTrustManager(evaluators: [
             "api.staging.rainmaker.espressif.com": PinnedCertificatesTrustEvaluator(certificates: certificate), "rainmaker-staging.auth.us-east-1.amazoncognito.com": PinnedCertificatesTrustEvaluator(certificates: certificate), "rainmaker-prod.auth.us-east-1.amazoncognito.com": PinnedCertificatesTrustEvaluator(certificates: certificate), "api.rainmaker.espressif.com": PinnedCertificatesTrustEvaluator(certificates: certificate),
         ])
         session = Session(serverTrustManager: trustManager)
-        try! print(trustManager.serverTrustEvaluator(forHost: "api.staging.rainmaker.espressif.com") ?? "")
     }
 
+    /// Method to get security certificate from bundle resource
+    ///
+    /// - Parameters:
+    ///   - filename: name of the certificate file
     private static func certificate(filename: String) -> SecCertificate {
         let filePath = Bundle.main.path(forResource: filename, ofType: "der")!
         let data = try! Data(contentsOf: URL(fileURLWithPath: filePath))
@@ -34,13 +36,18 @@ class NetworkManager {
         return certificate
     }
 
+    // MARK: - Node APIs
+
+    /// Method to fetch node and devices associated with the user
+    ///
+    /// - Parameters:
+    ///   - completionHandler: after response is parsed this block will be called with node array and error(if any) as argument
     func getNodes(completionHandler: @escaping ([Node]?, ESPNetworkError?) -> Void) {
         User.shared.getAccessToken(completionHandler: { accessToken in
             if accessToken != nil {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
                 let url = Constants.getNodes + "?node_details=true"
                 self.session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                    print(response)
                     switch response.result {
                     case let .success(value):
                         if let json = value as? [String: Any] {
@@ -57,7 +64,6 @@ class NetworkManager {
                         completionHandler(nil, nil)
                         return
                     case let .failure(error):
-                        print(error)
                         completionHandler(nil, ESPNetworkError.serverError(error.localizedDescription))
                         return
                     }
@@ -68,13 +74,16 @@ class NetworkManager {
         })
     }
 
+    /// Get node info like device list, param list and online/offline status
+    ///
+    /// - Parameters:
+    ///   - completionHandler: handler called when response to get node info is recieved
     func getNodeInfo(nodeId: String, completionHandler: @escaping (Node?, ESPNetworkError?) -> Void) {
         User.shared.getAccessToken { accessToken in
             if accessToken != nil {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
                 let url = Constants.getNodes + "?node_id=" + nodeId
                 self.session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                    print(response)
                     switch response.result {
                     case let .success(value):
                         if let json = value as? [String: Any] {
@@ -95,7 +104,6 @@ class NetworkManager {
                         completionHandler(nil, ESPNetworkError.emptyConfigData)
                         return
                     case let .failure(error):
-                        print(error)
                         completionHandler(nil, ESPNetworkError.serverError(error.localizedDescription))
                         return
                     }
@@ -105,102 +113,6 @@ class NetworkManager {
             }
         }
     }
-
-    // MARK: - Node APIs
-
-    /// Get list of nodes associated with the user
-    ///
-    /// - Parameters:
-    ///   - completionHandler: handler called when response to get node list is recieved
-//    func getNodeList(completionHandler: @escaping ([Node]?, Error?) -> Void) {
-//        User.shared.getAccessToken(completionHandler: { accessToken in
-//            if accessToken != nil {
-//                let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
-//                let url = Constants.getNodes
-//                self.session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-//                    print(response)
-//                    switch response.result {
-//                    case let .success(value):
-//                        if let json = value as? [String: Any], let tempArray = json["nodes"] as? [String] {
-//                            var nodeList: [Node] = []
-//                            // Start a service group to schedule fetching of node related information
-//                            // Configuration and status information for each node will be fetched on background thread
-//                            let serviceGroup = DispatchGroup()
-//
-//                            for item in tempArray {
-//                                serviceGroup.enter()
-//                                // Fetch node config
-//                                self.getNodeConfig(nodeID: item, headers: headers, completionHandler: { node, _ in
-//                                    if let newNode = node {
-//                                        // Insert node with only one device in the first index of the array to allow ease in rendering
-//                                        if newNode.devices?.count == 1 {
-//                                            nodeList.insert(newNode, at: 0)
-//                                        } else {
-//                                            nodeList.append(newNode)
-//                                        }
-//
-//                                        // Get device thing shadow
-//                                        self.getDeviceThingShadow(nodeID: item) { response in
-//                                            if let image = response, let devices = node?.devices {
-//                                                print(image)
-//                                                for device in devices {
-//                                                    // Parse and fill device params and attributes
-//                                                    if let deviceName = device.name, let attrbutes = image[deviceName] as? [String: Any] {
-//                                                        if let params = device.params {
-//                                                            for index in params.indices {
-//                                                                if let reportedValue = attrbutes[params[index].name ?? ""] {
-//                                                                    params[index].value = reportedValue
-//                                                                }
-//                                                            }
-//                                                        }
-//                                                    }
-//                                                }
-//                                            }
-//                                            // Node related information is recieved so leave service group
-//                                            serviceGroup.leave()
-//                                        }
-//                                    }
-//                                })
-//                            }
-//                            // When node list is exhausted then call completionHandler with node list as parameter
-//                            serviceGroup.notify(queue: .main) {
-//                                completionHandler(nodeList, nil)
-//                            }
-//                        } else {
-//                            completionHandler(nil, CustomError.emptyNodeList)
-//                        }
-//                    case let .failure(error):
-//                        print(error)
-//                        completionHandler(nil, .emptyToken)
-//                    }
-//                }
-//            } else {
-//                completionHandler(nil, .emptyToken)
-//            }
-//        })
-//    }
-
-    /// Get node config json
-    ///
-    /// - Parameters:
-    ///   - completionHandler: handler called when response to get node config is recieved
-//    func getNodeConfig(nodeID: String, headers: HTTPHeaders, completionHandler: @escaping (Node?, Error?) -> Void) {
-//        let url = Constants.getNodeConfig + "?nodeid=" + nodeID
-//        session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-//            print(response)
-//            switch response.result {
-//            case let .success(value):
-//                if let json = value as? [String: Any] {
-//                    self.getNodeStatus(node: JSONParser.parseNodeData(data: json, nodeID: nodeID), completionHandler: completionHandler)
-//                } else {
-//                    completionHandler(nil, CustomError.emptyConfigData)
-//                }
-//            case let .failure(error):
-//                print(error)
-//                completionHandler(nil, CustomError.emptyConfigData)
-//            }
-//        }
-//    }
 
     /// Method to fetch online/offline status of associated nodes
     ///
@@ -212,7 +124,6 @@ class NetworkManager {
                 let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": accessToken!]
                 let url = Constants.getNodeStatus + "?nodeid=" + (node.node_id ?? "")
                 self.session.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                    print(response)
                     // Parse the connected status of the node
                     switch response.result {
                     case let .success(value):
@@ -253,14 +164,12 @@ class NetworkManager {
                     switch response.result {
                     case let .success(value):
                         if let json = value as? [String: String] {
-                            print("Add device successfull)")
                             // Get request id for add device request
                             // This request id will be used for getting the status of add request
-                            print("JSON: \(json)")
                             if let requestId = json[Constants.requestID] {
                                 completionHandler(requestId, nil)
                                 return
-                            } else if let status = json["status"], let description = json["description"] as? String {
+                            } else if let status = json["status"], let description = json["description"] {
                                 if status == "failure" {
                                     completionHandler(nil, ESPNetworkError.serverError(description))
                                     return
@@ -269,7 +178,6 @@ class NetworkManager {
                         }
                     case let .failure(error):
                         // Check for any error on response
-                        print("Add device error \(error)")
                         completionHandler(nil, ESPNetworkError.serverError(error.localizedDescription))
                         return
                     }
@@ -295,8 +203,7 @@ class NetworkManager {
                 self.session.request(url + "&request_id=" + requestID + "&user_request=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
                     switch response.result {
                     case let .success(value):
-                        if let json = value as? [String: String], let status = json["request_status"] as? String {
-                            print(json)
+                        if let json = value as? [String: String], let status = json["request_status"] {
                             completionHandler(status)
                             return
                         }
@@ -327,11 +234,9 @@ class NetworkManager {
                     let url = Constants.updateThingsShadow + "?nodeid=" + nodeid
                     let headers: HTTPHeaders = ["Content-Type": "application/json", "Authorization": idToken!]
                     self.session.request(url, method: .put, parameters: parameter, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-                        print(parameter)
                         switch response.result {
                         case let .success(value):
                             if let json = value as? [String: Any] {
-                                print(json)
                                 return
                             }
                         case let .failure(error):

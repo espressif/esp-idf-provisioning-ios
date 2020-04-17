@@ -225,8 +225,6 @@ extension Int {
     func getShortDate() -> String {
         let date = Date(timeIntervalSince1970: Double(self) / 1000.0)
         let dataFormatter = DateFormatter()
-//        dataFormatter.timeStyle = DateFormatter.Style.short
-//        dataFormatter.dateStyle = DateFormatter.Style.short
         dataFormatter.timeZone = .current
         if Calendar.current.isDateInToday(date) {
             dataFormatter.dateFormat = "HH:mm"

@@ -105,6 +105,9 @@ class User {
         }
     }
 
+    /// Method to fetch accessToken of the signed-in user.
+    /// Applicable when user is logged in with cognito id.
+    ///
     func getcognitoIdToken(completionHandler: @escaping (String?) -> Void) {
         if let user = currentUser() {
             user.getSession().continueOnSuccessWith(block: { (task) -> Any? in

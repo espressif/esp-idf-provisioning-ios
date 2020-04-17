@@ -170,7 +170,6 @@ class SuccessViewController: UIViewController {
 
     func fetchDeviceAssociationStatus(nodeID: String, requestID: String) {
         NetworkManager.shared.deviceAssociationStatus(nodeID: nodeID, requestID: requestID) { status in
-            print("Status :" + status)
             if status == "confirmed" {
                 NotificationCenter.default.post(name: Notification.Name(Constants.newDeviceAdded), object: nil)
                 User.shared.updateDeviceList = true
@@ -238,10 +237,8 @@ class SuccessViewController: UIViewController {
     }
 
     @objc func sendRequestToAddDevice() {
-        print("sendRequestToAddDevice")
         let parameters = ["user_id": User.shared.userInfo.userID, "node_id": User.shared.currentAssociationInfo!.nodeID, "secret_key": User.shared.currentAssociationInfo!.uuid, "operation": "add"]
         NetworkManager.shared.addDeviceToUser(parameter: parameters as! [String: String]) { requestID, error in
-            print(requestID)
             if error != nil, self.count > 0 {
                 self.count = self.count - 1
                 DispatchQueue.main.asyncAfter(deadline: .now()) {
@@ -249,7 +246,6 @@ class SuccessViewController: UIViewController {
                 }
             } else {
                 if let requestid = requestID {
-                    print("Check device association status")
                     self.step3Indicator.stopAnimating()
                     self.step3Image.image = UIImage(named: "checkbox_checked")
                     self.step3Image.isHidden = false

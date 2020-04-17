@@ -49,7 +49,6 @@ class DevicesViewController: UIViewController {
         pickerView.layer.borderWidth = 1.0
         pickerView.layer.borderColor = UIColor(hexString: "#F2F1FC").cgColor
         pool = AWSCognitoIdentityUserPool(forKey: Constants.AWSCognitoUserPoolsSignInProviderKey)
-//        collectionView.collectionViewLayout = DeviceCollectionViewLayout()
         if user == nil {
             user = pool?.currentUser()
         }

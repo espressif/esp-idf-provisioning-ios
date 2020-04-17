@@ -72,7 +72,6 @@ struct Constants {
     static let getNodes = Constants.baseURL + Constants.apiVersion + "/user/nodes"
     static let getNodeConfig = Constants.baseURL + Constants.apiVersion + "/user/nodes/config"
     static let getNodeStatus = Constants.baseURL + Constants.apiVersion + "/user/nodes/status"
-//    static let addDeviceToUser = "https://wb9f74l5i7.execute-api.us-east-1.amazonaws.com/dev/user/nodes/mapping/"
     static let checkStatus = Constants.baseURL + Constants.apiVersion + "/user/nodes/mapping"
 
     static let updateThingsShadow = Constants.baseURL + Constants.apiVersion + "/user/nodes/params"
@@ -90,6 +89,9 @@ struct Constants {
     static let appThemeKey = Constants.bundleIdentifier + ".appTheme"
     static let appBGKey = Constants.bundleIdentifier + ".appbg"
     static let ignoreVersionKey = Constants.bundleIdentifier + ".ignoreVersions"
+
+    // Device param keys
+    static let deviceNameParam = "esp.param.name"
 
     static let cognito = "Cognito"
     static let github = "Github"

@@ -47,7 +47,6 @@
 		F12261A422C620ED004D049F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F12261A322C620ED004D049F /* User.swift */; };
 		F13A014023E359250067F8B8 /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13A013F23E359250067F8B8 /* DocumentViewController.swift */; };
 		F13A01BA23E98B690067F8B8 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13A01B923E98B680067F8B8 /* UserInfo.swift */; };
-		F13A01BC23ED64BE0067F8B8 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13A01BB23ED64BE0067F8B8 /* LoginManager.swift */; };
 		F13F273E238CF6170003AABB /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13F273D238CF6170003AABB /* ScannerViewController.swift */; };
 		F1402AB8239677B300C989F8 /* StaticControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1402AB6239677B300C989F8 /* StaticControlTableViewCell.swift */; };
 		F1402AB9239677B300C989F8 /* StaticControlTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1402AB7239677B300C989F8 /* StaticControlTableViewCell.xib */; };
@@ -70,7 +69,6 @@
 		F19A9D1322C0D23E00A450C3 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1222C0D23E00A450C3 /* SignInViewController.swift */; };
 		F19A9D1822C0ED4C00A450C3 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1422C0ED4C00A450C3 /* ForgotPasswordViewController.swift */; };
 		F19A9D1922C0ED4C00A450C3 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1522C0ED4C00A450C3 /* ResetPasswordViewController.swift */; };
-		F19A9D1A22C0ED4C00A450C3 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1622C0ED4C00A450C3 /* SignUpViewController.swift */; };
 		F19A9D1B22C0ED4C00A450C3 /* ConfirmSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19A9D1722C0ED4C00A450C3 /* ConfirmSignUpViewController.swift */; };
 		F19F6FF322F02B3400C70DE3 /* SettingsPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F6FF222F02B3400C70DE3 /* SettingsPageViewController.swift */; };
 		F19F6FF522F45A1500C70DE3 /* DeviceListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F6FF422F45A1500C70DE3 /* DeviceListTableView.swift */; };
@@ -205,7 +203,6 @@
 		F12261A322C620ED004D049F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F13A013F23E359250067F8B8 /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
 		F13A01B923E98B680067F8B8 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		F13A01BB23ED64BE0067F8B8 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		F13A023523F2D0390067F8B8 /* EspressifProvision staging-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "EspressifProvision staging-Info.plist"; path = "/Users/vikaschandra/esp-idf-provisioning-ios/EspressifProvision/EspressifProvision staging-Info.plist"; sourceTree = "<absolute>"; };
 		F13F273D238CF6170003AABB /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		F1402AB6239677B300C989F8 /* StaticControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticControlTableViewCell.swift; sourceTree = "<group>"; };
@@ -235,7 +232,6 @@
 		F19A9D1222C0D23E00A450C3 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		F19A9D1422C0ED4C00A450C3 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		F19A9D1522C0ED4C00A450C3 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
-		F19A9D1622C0ED4C00A450C3 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		F19A9D1722C0ED4C00A450C3 /* ConfirmSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmSignUpViewController.swift; sourceTree = "<group>"; };
 		F19F6FF222F02B3400C70DE3 /* SettingsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPageViewController.swift; sourceTree = "<group>"; };
 		F19F6FF422F45A1500C70DE3 /* DeviceListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceListTableView.swift; sourceTree = "<group>"; };
@@ -349,7 +345,7 @@
 				F1DD70A222A8EA140092DAB9 /* Utilities */,
 				143146B020EA303C0017E119 /* EspressifProvision.entitlements */,
 				1431468F20E387C60017E119 /* proto */,
-				143146B120EB221E0017E119 /* ui */,
+				143146B120EB221E0017E119 /* Interface */,
 				1431466320DEA9690017E119 /* provision */,
 				1431462620DE994B0017E119 /* AppDelegate.swift */,
 				F15EAC1123E1994E008A766B /* DeviceDetail.storyboard */,
@@ -446,28 +442,19 @@
 			path = proto;
 			sourceTree = "<group>";
 		};
-		143146B120EB221E0017E119 /* ui */ = {
+		143146B120EB221E0017E119 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				F15EABF223E04386008A766B /* Views */,
+				F132F753244985F200CA713B /* Node Addition */,
+				F132F752244985B100CA713B /* Settings */,
+				F15EABF223E04386008A766B /* Generic Views */,
 				F1F451382328C5B80009DCE0 /* Devices */,
-				F194B60522CDD6AD00417347 /* DeviceList */,
-				F19A9D0D22BB6DD800A450C3 /* Login */,
-				143146B220EB22470017E119 /* ProvisionLandingViewController.swift */,
-				143146B420EB273B0017E119 /* ProvisionViewController.swift */,
-				144149432126AE09002AD5E1 /* SuccessViewController.swift */,
-				F19F6FF222F02B3400C70DE3 /* SettingsPageViewController.swift */,
+				F194B60522CDD6AD00417347 /* Device List */,
+				F19A9D0D22BB6DD800A450C3 /* User Management */,
 				F1CB6085233B549F0001D509 /* BLEDeviceListViewCell.swift */,
-				F1DDA06723588B110005F982 /* NodeDetailsViewController.swift */,
-				F1DDA06923588C890005F982 /* NodeDetailsTableViewCell.swift */,
-				14706916211050EE00F8E1D8 /* BLELandingViewController.swift */,
-				F176A41B23C8342200F2FCBC /* ClaimViewController.swift */,
-				F1E37E9223D6CF4700A5043F /* PasswordTextField.swift */,
-				F1B13AD723D85125006DD949 /* ChangePasswordViewController.swift */,
-				F1EAAC8B23E2078300E9A6A8 /* AppSettingsViewController.swift */,
 				F13A013F23E359250067F8B8 /* DocumentViewController.swift */,
 			);
-			path = ui;
+			path = Interface;
 			sourceTree = "<group>";
 		};
 		149774D5210C711500022841 /* crypto */ = {
@@ -532,28 +519,50 @@
 			children = (
 				F122619F22C61695004D049F /* DeviceAssociation.swift */,
 				F1C8082B22CA17790098F3B4 /* NetworkManager.swift */,
-				F13A01BB23ED64BE0067F8B8 /* LoginManager.swift */,
 			);
 			path = AWSCognito;
 			sourceTree = "<group>";
 		};
-		F15EABF223E04386008A766B /* Views */ = {
+		F132F752244985B100CA713B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				F1EAAC8B23E2078300E9A6A8 /* AppSettingsViewController.swift */,
+				F19F6FF222F02B3400C70DE3 /* SettingsPageViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		F132F753244985F200CA713B /* Node Addition */ = {
+			isa = PBXGroup;
+			children = (
+				F13F273D238CF6170003AABB /* ScannerViewController.swift */,
+				14706916211050EE00F8E1D8 /* BLELandingViewController.swift */,
+				143146B220EB22470017E119 /* ProvisionLandingViewController.swift */,
+				F176A41B23C8342200F2FCBC /* ClaimViewController.swift */,
+				143146B420EB273B0017E119 /* ProvisionViewController.swift */,
+				144149432126AE09002AD5E1 /* SuccessViewController.swift */,
+			);
+			path = "Node Addition";
+			sourceTree = "<group>";
+		};
+		F15EABF223E04386008A766B /* Generic Views */ = {
+			isa = PBXGroup;
+			children = (
+				F1E37E9223D6CF4700A5043F /* PasswordTextField.swift */,
 				F15EABF323E043DA008A766B /* CustomUIElements.swift */,
 				F15FFF872402643A00E72D01 /* NoInternetConnection.swift */,
 				F15FFF892402645200E72D01 /* NoInternetConnection.xib */,
 			);
-			path = Views;
+			path = "Generic Views";
 			sourceTree = "<group>";
 		};
-		F194B60522CDD6AD00417347 /* DeviceList */ = {
+		F194B60522CDD6AD00417347 /* Device List */ = {
 			isa = PBXGroup;
 			children = (
 				F194B60922CDD83200417347 /* DeviceListTableViewCell.swift */,
 				F19F6FF422F45A1500C70DE3 /* DeviceListTableView.swift */,
 			);
-			path = DeviceList;
+			path = "Device List";
 			sourceTree = "<group>";
 		};
 		F194B60622CDD79D00417347 /* Models */ = {
@@ -568,17 +577,17 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		F19A9D0D22BB6DD800A450C3 /* Login */ = {
+		F19A9D0D22BB6DD800A450C3 /* User Management */ = {
 			isa = PBXGroup;
 			children = (
+				F1B13AD723D85125006DD949 /* ChangePasswordViewController.swift */,
 				F19A9D1522C0ED4C00A450C3 /* ResetPasswordViewController.swift */,
 				F19A9D1722C0ED4C00A450C3 /* ConfirmSignUpViewController.swift */,
 				F19A9D1422C0ED4C00A450C3 /* ForgotPasswordViewController.swift */,
-				F19A9D1622C0ED4C00A450C3 /* SignUpViewController.swift */,
 				F19A9D1222C0D23E00A450C3 /* SignInViewController.swift */,
 				F19A9D0E22BB6DD800A450C3 /* MFAViewController.swift */,
 			);
-			path = Login;
+			path = "User Management";
 			sourceTree = "<group>";
 		};
 		F1DD70A222A8EA140092DAB9 /* Utilities */ = {
@@ -649,9 +658,10 @@
 				F1F451392328C5D40009DCE0 /* DevicesViewController.swift */,
 				F1F4514F232B7A780009DCE0 /* DeviceTraitListViewController.swift */,
 				F1DB6F61232FA6CB004B1FA1 /* DevicesCollectionViewCell.swift */,
-				F13F273D238CF6170003AABB /* ScannerViewController.swift */,
 				F176A41523C3B17D00F2FCBC /* DeviceListCollectionReusableView.swift */,
 				F176A41723C4669300F2FCBC /* DeviceCollectionViewLayout.swift */,
+				F1DDA06723588B110005F982 /* NodeDetailsViewController.swift */,
+				F1DDA06923588C890005F982 /* NodeDetailsTableViewCell.swift */,
 			);
 			path = Devices;
 			sourceTree = "<group>";
@@ -1022,10 +1032,8 @@
 				F1FB153C234D91000053B0ED /* GenericSliderTableViewCell.swift in Sources */,
 				1431462720DE994B0017E119 /* AppDelegate.swift in Sources */,
 				1431469D20E387C60017E119 /* session.pb.swift in Sources */,
-				F13A01BC23ED64BE0067F8B8 /* LoginManager.swift in Sources */,
 				F1CB6086233B549F0001D509 /* BLEDeviceListViewCell.swift in Sources */,
 				F1E37E9023CF3AD500A5043F /* PrimaryControlTableViewCell.swift in Sources */,
-				F19A9D1A22C0ED4C00A450C3 /* SignUpViewController.swift in Sources */,
 				F194B60A22CDD83200417347 /* DeviceListTableViewCell.swift in Sources */,
 				F13F273E238CF6170003AABB /* ScannerViewController.swift in Sources */,
 				F1EAACAD23E2A74300E9A6A8 /* ColorPickerViewDelegateFlowLayout.swift in Sources */,

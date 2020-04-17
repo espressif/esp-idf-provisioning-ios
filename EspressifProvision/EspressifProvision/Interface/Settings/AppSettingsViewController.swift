@@ -106,14 +106,12 @@ extension AppSettingsViewController: ColorPickerViewDelegate {
             AppConstants.shared.appThemeColor = nil
             UserDefaults.standard.removeObject(forKey: Constants.appThemeKey)
         }
-        print("select item")
     }
 
     func colorPickerView(_: ColorPickerView, didDeselectItemAt _: IndexPath) {
         AppConstants.shared.appThemeColor = nil
         UserDefaults.standard.backgroundColor = nil
         updateUIViews()
-        print("deselect item")
     }
 }
 
@@ -136,7 +134,6 @@ extension AppSettingsViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[.originalImage] as? UIImage else {
-            print("Unable to import image")
             return
         }
         AppConstants.shared.appBGImage = image

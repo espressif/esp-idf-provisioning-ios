@@ -42,6 +42,4 @@ enum ESPNetworkError: Error {
             return "Oops!! Something went bad. Please try again after sometime"
         }
     }
-
-//    case errorResponse(String)
 }

@@ -239,7 +239,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="55T-vs-eK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3571.0144927536235" y="31.473214285714285"/>
+            <point key="canvasLocation" x="2318" y="70"/>
         </scene>
         <!--Espressif-->
         <scene sceneID="vP2-nv-Q6V">
@@ -266,7 +266,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RNp-Qq-dWP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="444" y="-684"/>
+            <point key="canvasLocation" x="-1208" y="-462"/>
         </scene>
         <!--Settings Page View Controller-->
         <scene sceneID="5Kp-wz-nQU">
@@ -637,7 +637,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7WD-0F-Wd3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3288.8000000000002" y="-692.20389805097454"/>
+            <point key="canvasLocation" x="-330" y="309"/>
         </scene>
         <!--App Settings View Controller-->
         <scene sceneID="xwJ-Vt-4ea">
@@ -894,7 +894,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="66l-IS-o2b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4186.9565217391309" y="-935.49107142857133"/>
+            <point key="canvasLocation" x="438" y="996"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="VAk-tE-iXD">
@@ -1051,7 +1051,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xWk-79-Ym9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4377" y="-248"/>
+            <point key="canvasLocation" x="-1061" y="996"/>
         </scene>
         <!--Provision-->
         <scene sceneID="2ha-RX-ZtH">
@@ -1305,7 +1305,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2326" y="220"/>
+            <point key="canvasLocation" x="1398" y="52"/>
         </scene>
         <!--Espressif-->
         <scene sceneID="7GO-57-yej">
@@ -1465,7 +1465,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7G-ht-1sF" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5074" y="-560"/>
+            <point key="canvasLocation" x="5595" y="-707"/>
         </scene>
         <!--Espressif-->
         <scene sceneID="FrL-c3-Ay3">
@@ -1636,7 +1636,7 @@ Connect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX</str
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qTs-65-Eh7" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="616.79999999999995" y="31.773399014778327"/>
+            <point key="canvasLocation" x="1467" y="-877"/>
         </scene>
         <!--Claim View Controller-->
         <scene sceneID="Qqi-j1-iNj">
@@ -1787,7 +1787,7 @@ PROV_XXXX</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mGl-rH-PBZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1391" y="41"/>
+            <point key="canvasLocation" x="2278" y="-851"/>
         </scene>
         <!--Devices View Controller-->
         <scene sceneID="5mO-Wm-mPa">
@@ -2268,7 +2268,7 @@ PROV_XXXX</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sxn-wB-5GI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1389.8550724637682" y="-1009.1517857142857"/>
+            <point key="canvasLocation" x="-374" y="-462"/>
         </scene>
         <!--Scanner View Controller-->
         <scene sceneID="lRR-bk-R8N">
@@ -2383,7 +2383,7 @@ PROV_XXXX</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Ok-ep-3cV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2325.5999999999999" y="-1079.0104947526238"/>
+            <point key="canvasLocation" x="565" y="-876"/>
         </scene>
     </scenes>
     <resources>

@@ -60,12 +60,10 @@ class DeviceTraitListViewController: UIViewController {
     }
 
     @objc func appEnterForeground() {
-        print("foreground")
         pollingTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(fetchNodeInfo), userInfo: nil, repeats: true)
     }
 
     @objc func appEnterBackground() {
-        print("appEnterBackground")
         pollingTimer.invalidate()
     }
 
@@ -84,7 +82,6 @@ class DeviceTraitListViewController: UIViewController {
     func refreshDeviceAttributes() {
         NetworkManager.shared.getNodeInfo(nodeId: (device?.node?.node_id)!) { node, error in
             if error != nil {
-                print(error?.description)
                 return
             }
             if let index = User.shared.associatedNodeList?.firstIndex(where: { node -> Bool in
@@ -109,7 +106,6 @@ class DeviceTraitListViewController: UIViewController {
         if Utility.isConnected(view: view) {
             NetworkManager.shared.getNodeInfo(nodeId: (device?.node?.node_id)!) { node, error in
                 if error != nil {
-                    print(error?.description)
                     DispatchQueue.main.async {
                         let alertController = UIAlertController(title: "Error!!",
                                                                 message: error?.description,
@@ -141,22 +137,6 @@ class DeviceTraitListViewController: UIViewController {
         } else {
             Utility.hideLoader(view: view)
         }
-
-//        NetworkManager.shared.getDeviceThingShadow(nodeID: (device?.node?.node_id)!) { response in
-//            if let image = response {
-//                if let deviceName = self.device?.name, let attrbutes = image[deviceName] as? [String: Any] {
-//                    if let dynamicParams = self.device?.params {
-//                        for index in dynamicParams.indices {
-//                            if let reportedValue = attrbutes[dynamicParams[index].name ?? ""] {
-//                                dynamicParams[index].value = reportedValue
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            Utility.hideLoader(view: self.view)
-//            self.tableView.reloadData()
-//        }
     }
 
     func checkOfflineStatus() {

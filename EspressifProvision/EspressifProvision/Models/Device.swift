@@ -24,7 +24,7 @@ class Device: Equatable {
 
     func getDeviceName() -> String? {
         if let deviceNameParam = self.params?.first(where: { param -> Bool in
-            param.type == "esp.param.name"
+            param.type == Constants.deviceNameParam
         }) {
             if let name = deviceNameParam.value as? String {
                 return name

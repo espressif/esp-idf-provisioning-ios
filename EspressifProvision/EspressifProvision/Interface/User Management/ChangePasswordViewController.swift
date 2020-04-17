@@ -120,7 +120,7 @@ extension ChangePasswordViewController: UITextFieldDelegate {
             confirmNewPasswordTextField.resignFirstResponder()
             setPassword(textField)
         default:
-            print("default")
+            return true
         }
         return true
     }

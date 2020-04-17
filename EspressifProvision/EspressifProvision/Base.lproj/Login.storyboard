@@ -120,7 +120,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hX4-5f-wZ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-842" y="-1905"/>
+            <point key="canvasLocation" x="-1036" y="-1543"/>
         </scene>
         <!--Confirm SignUp-->
         <scene sceneID="pu1-RN-5D0">
@@ -266,7 +266,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xEt-YU-IiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1517" y="-2758"/>
+            <point key="canvasLocation" x="-1036" y="-2508"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YZ4-dZ-N4h">
@@ -460,7 +460,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5d9-St-kFY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8.8000000000000007" y="-1905.6650246305419"/>
+            <point key="canvasLocation" x="-30" y="-1543"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="XMR-54-iFt">
@@ -944,14 +944,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KWq-yb-HiX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2568.1159420289855" y="-1285.0446428571429"/>
+            <point key="canvasLocation" x="-2479" y="-1280"/>
         </scene>
     </scenes>
     <resources>
         <image name="apple_icon" width="39" height="44"/>
         <image name="brand_name_icon" width="143" height="37"/>
         <image name="checkbox_unchecked" width="24" height="24"/>
-        <image name="github_logo" width="32" height="32"/>
+        <image name="github_logo" width="24" height="24"/>
         <image name="google_logo" width="32" height="32"/>
         <image name="right_arrow" width="16" height="16"/>
     </resources>

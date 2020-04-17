@@ -184,20 +184,7 @@ class ProvisionViewController: UIViewController {
                 self.ssid = ssid
                 passphrase = passPhrase
                 User.shared.associateNodeWithUser(session: session!, delegate: self)
-//                provision = Provision(session: session!)
-//
-//                provision.configureWifi(ssid: ssid,
-//                                        passphrase: passPhrase) { status, error in
-//                    guard error == nil else {
-//                        print("Error in configuring wifi : \(error.debugDescription)")
-//                        return
-//                    }
-//                    if status == Espressif_Status.success {
-//                        User.shared.associateNodeWithUser(session: self.session!, delegate: self)
-//                    }
-//                }
             } else {
-                print("Session is not established")
                 showError(errorMessage: "Session is not established")
             }
         } else {
@@ -243,7 +230,6 @@ class ProvisionViewController: UIViewController {
         showLoader(message: "Connecting Device")
         transport?.SendConfigData(path: (transport?.utility.versionPath)!, data: Data("ESP".utf8), completionHandler: { response, error in
             guard error == nil else {
-                print("Error reading device version info")
                 DispatchQueue.main.async {
                     MBProgressHUD.hide(for: self.view, animated: true)
                 }
@@ -511,16 +497,12 @@ extension ProvisionViewController: BLEStatusProtocol {
 
 extension ProvisionViewController: DeviceAssociationProtocol {
     func deviceAssociationFinishedWith(success: Bool, nodeID: String?) {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
         User.shared.currentAssociationInfo!.associationInfoDelievered = success
         if success {
             if let deviceSecret = nodeID {
                 User.shared.currentAssociationInfo!.nodeID = deviceSecret
-//                    self.sendRequestToAddDevice(nodeID: deviceSecret, count: 5)
             }
-//            applyConfigurations(provision: provision)
             showStatusScreen()
-//            }
         }
     }
 }

@@ -143,9 +143,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
 
     func parseQrCode(code: String) {
-        print(code)
         if let jsonArray = try? JSONSerialization.jsonObject(with: Data(code.utf8), options: []) as? [String: String] {
-            print(jsonArray) // use the json here
             if let ssid = jsonArray["name"], let pop = jsonArray["pop"], let transport = jsonArray["transport"] {
                 let password = jsonArray["password"] ?? ""
                 if transport == "softap" {
@@ -160,7 +158,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             }
         } else {
             retry(message: "QR code is not valid. Please try again.")
-            print("bad json")
         }
     }
 
@@ -187,7 +184,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         NEHotspotConfigurationManager.shared.apply(hotSpotConfig) { error in
             if error != nil {
                 if error?.localizedDescription == "already associated." {
-                    print("already associated")
                     self.goToProvision(pop: pop)
                 } else {
                     DispatchQueue.main.async {

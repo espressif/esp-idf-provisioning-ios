@@ -48,14 +48,3 @@ class Param: Attribute {
     var dataType: String?
     var type: String?
 }
-
-// extension Param {
-//    func update<T>(deviceName: String, nodeID: String, value: T) -> InputValidationError? {
-//        if dataType?.lowercased() == "bool" {
-//            if T.self == Bool.self {
-//                NetworkManager.shared.updateThingShadow(nodeID: nodeID, parameter: [deviceName: [attributeKey: value]])
-//            }
-//        }
-//        return .other
-//    }
-// }
