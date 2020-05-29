@@ -1,0 +1,17 @@
+language: objective-c
+osx_image: xcode11.5
+xcode_workspace: ESPProvision.xcworkspace
+xcode_scheme: ESPProvision
+xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone X
+before_install:
+- pod install
+after_success:
+    - gem install jazzy
+    - make documentation
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_TOKEN  # Set in the settings page of your repository, as a secure variable
+  local-dir: docs
+  on:
+    branch: master

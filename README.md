@@ -1,82 +1,130 @@
-# ESP-IDF Provisioning - iOS
+# ESPProvision
 
-ESP-IDF consists of a provisioning mechanism, which is used to provide network credentials and/or custom data to an ESP32 device.
-This repository contains the source code for the companion iOS app for this provisioning mechanism.
+ESPProvision is a provisioning library written in Swift. It provides mechanism to provide network credentials and/or custom data to an ESP32 or ESP32-S2 devices.
 
-This is licensed under Apache 2.0. The complete license for the same can be found in the LICENSE file.
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#using-ESPProvision)
+    - [****Introduction****](#introduction)
+    - [****Getting ESPDevice****](#getting-ESPDevice)
+    - [****Provisioning****](#provisioning)
+- [License](#license)
 
-## Setup
+## Features
 
-To build this app, you will need a macOS development machines, with XCode installed. Make sure you have a developer account with Apple setup. More about the same can be found [here](https://developer.apple.com/support/compare-memberships/)
+- [x] Search for available BLE devices.
+- [x] Scan device QR code to provide reference to ESP device.
+- [x] Create reference of ESPDevice manually.
+- [x] Data Encryption
+- [x] Data transmission through BLE and SoftAP.
+- [x] Provision device.
+- [x] Scan for available Wi-Fi networks.
+- [x] Console logs
 
-### Install Dependencies
-#### swiftformat
-The app depends on `swiftformat`. To install the same, you will need `brew`. Brew can be installed from [brew.sh](https://brew.sh). Once you have `brew` installed and setup, run -
+## Requirements
 
-```
-brew install swiftformat
-```
+- iOS 11.0+ / macOS 10.12+
+- Xcode 11+
+- Swift 5.1+
+- Enable Hotspot Configuration capability in Xcode.
+- Enable Access WiFI Information capability in Xcode.
 
-#### protoc-gen-swift
-We use protobuf files across different platforms(C, iOS, Android, Python) to serialize the data to be sent. The source files are the same across all these platforms and can be found in the `proto` directory in the root folder of this repository.
+## Installation
 
-To convert these files to swift, we need `protoc-gen-swift`. We depend on version `1.0.3` of the same. This is part of [swift-protobuf](https://github.com/apple/swift-protobuf) project maintained by Apple Inc. This project consists of two things -
- - a runtime library
- - a command line utility
+### CocoaPods
 
-The runtime library is installed as part of the next section. In this section, we will install the `protoc-gen-swift` command line utility.
+[CocoaPods](https://cocoapods.org) is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate ESPProvision into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
-To install, run the following command -
+```ruby
 
-```
-brew install swift-protobuf
-```
-Next, confirm that the version that you have installed is greater than `1.1.1`.
-
-```
-$ protoc-gen-swift --version
-protoc-gen-swift 1.1.1
-```
-
-Note that this version need to match the version number of SwiftProtobuf in `EspressifProvision/Podfile`
-
-
-#### Cocoapods
-Make sure you have Cocoapods installed. Installation steps can be found on [cocoapods.org](https://cocoapods.org)  
-Now navigate to `EspressifProvision` directory from the root directory, and run -
+pod 'ESPProvision'
 
 ```
-pod install
+
+## Using ESPProvision
+
+## Introduction
+
+ESPProvision provides a simpler mechanism to communicate with an ESP-32 and ESP32-S2 devices. It gives an efficient search and scan model to listen and return devices which are in provisioning mode. ESProvision embeds security protocol and allow for safe transmission of data by doing end to end encryption. It supports BLE and SoftAP as mode of transmission which are configurable at runtime. Its primarily use is to provide home network credentials to a device and ensure device connectivity status is returned to the application.
+
+
+## Getting ESPDevice
+
+`ESPDevice` object is virtual representation of ESP-32/ESP32-S2 devices. It provides interface to interact with devices directly in a simpler manner. `ESPProvisionManager` is a singleton class that encompasses APIs for managing these objects. `ESPDevice` instances can be obtained from any of the following techniques : 
+
+
+### Search
+
+ESPProvision supports searching of BLE devices which are currently in provisioning mode. It returns list of devices that are discoverable and matches the parameter criteria.
+
+```swift
+
+ESPProvisionManager.shared.searchESPDevices(devicePrefix:"Prefix",    transport:.ble, security:.secure) { deviceList, _ in
+}
+
 ```
 
-This ensures that you have the following dependencies installed -
-- SwiftProtobuf
-- Curve25519
-
-## Build
-
-There are multiple app variants that you can build using this repository. You will need to select the right variant from the following available ones -
+> Transport parameter is medium of data transmission, ESPProvision support .softAP and .ble transport.
+> Security parameter describe if connection needed to be secure or unsecure.
+> SoftAP search is not supported in iOS currently.
 
 
-|XCode Project Scheme|Transport|Security Scheme|ESP-IDF Example| ESP-IDF Example menuconfig|
-|:----:|:-------:|:------------:|:-------------:|:-------------------------:|
-|WifiSec0 Debug|Wi-Fi|0|`examples/provisioning/softap_prov`|`Example Configuration` -> Deselect `Use Security Version 1`|
-|WifiSec1 Debug|Wi-Fi|1|`examples/provisioning/softap_prov`|`Example Configuration` -> Select `Use Security Version 1`|
-|BLESec0 Debug|BLE|0|`examples/provisioning/ble_prov`|`Example Configuration` -> Deselect `Use Security Version 1`|
-|BLESec1 Debug|BLE|1|`examples/provisioning/ble_prov`|`Example Configuration` -> Select `Use Security Version 1`|
-|BLESec1 Release|BLE|1|`examples/provisioning/ble_prov`|`Example Configuration` -> Select `Use Security Version 1`|
-|WifiSec1 Release|Wi-Fi|1|`examples/provisioning/softap_prov`|`Example Configuration` -> Select `Use Security Version 1`|
+### Scan
+
+Device information can be extracted from scanning valid QR code. User of this API decides the camera preview layer frame by providing `UIView` as parameter. It return single `ESPDevice` instance on success. Supports both SoftAP and BLE.
+
+```swift
+
+ESPProvisionManager.shared.scanQRCode(scanView: scannerView) { espDevice, _ in
+}
+
+```
 
 
-For Security 1, for BLE or Wi-Fi, you can set an optional `Proof of Possession` key. Make sure that the key present in `Example Configuration` -> `Proof-of-possession` under ESP-IDF example menuconfig is the same as the one set in `Info.plist` file in the `./EspressifProvision/EspressifProvision/` folder
+### Create
+
+`ESPDevice` can be also created by passing necessary parameters as argument of below function.
+
+```swift
+
+ESPProvisionManager.shared.createESPDevice(deviceName: deviceName, transport: transport, security: security){ espDevice, _ in
+}
+
+```
 
 
-# Resources
 
-* Documentation for the latest version: https://docs.espressif.com/projects/esp-idf/. This documentation is built from the [docs directory](docs) of this repository.
+## Provisioning
 
-* The [esp32.com forum](https://esp32.com/) is a place to ask questions and find community resources.
+The main feature of ESPProvision library is to provision ESP devices. Once we get instance of `ESPDevice` from above APIs we need to establish session with the device before we can transmit/receive data from it. This can be achieved by calling `connect` as shown below :
 
-* [Check the Issues section on github](https://github.com/espressif/esp-idf/issues) if you find a bug or have a feature request. Please check existing Issues before opening a new one.
+```swift
 
-* If you're interested in contributing to ESP-IDF, please check the [Contributions Guide](https://docs.espressif.com/projects/esp-idf/en/latest/contribute/index.html).
+espDevice.connect(delegate: self) { status in
+}
+
+```
+> Delegate is required to get Proof of Possession from user, if device has pop capability.
+
+If status is connected then application can proceed to scan list of available networks visible to device. This list can be used to give option to the user to choose network of their own choice.
+
+```swift
+
+espDevice.scanWifiList { wifiList, _ in 
+}
+
+```
+
+User can choose to apply Wi-Fi settings from the above list or choose other Wi-Fi network to provision the device.
+
+```swift
+
+espDevice.provision(ssid: ssid, passPhrase: passphrase) { status in
+}
+
+```
+
+## License
+
+ESPProvision is released under the Apache License Version 2.0.
