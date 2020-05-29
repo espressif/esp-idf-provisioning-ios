@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>README  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="README  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">ESPProvision 2.0 Docs</a> (61% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">ESPProvision Reference</a>
+        <img id="carat" src="img/carat.png" />
+        README  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/CryptoAES.html">CryptoAES</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ESPBleTransport.html">ESPBleTransport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ESPDevice.html">ESPDevice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ESPLog.html">ESPLog</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ESPProvision.html">ESPProvision</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ESPProvisionManager.html">ESPProvisionManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ESPSecurity0.html">ESPSecurity0</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ESPSecurity1.html">ESPSecurity1</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ESPSession.html">ESPSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ESPSoftAPTransport.html">ESPSoftAPTransport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ESPUtility.html">ESPUtility</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Classes/ESPWiFiManager.html">ESPWiFiManager</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/ESPDeviceCSSError.html">ESPDeviceCSSError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ESPProvisionError.html">ESPProvisionError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ESPProvisionStatus.html">ESPProvisionStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ESPSecurity.html">ESPSecurity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ESPSessionError.html">ESPSessionError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ESPSessionStatus.html">ESPSessionStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ESPTransport.html">ESPTransport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ESPTransportError.html">ESPTransportError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ESPWiFiScanError.html">ESPWiFiScanError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Espressif_Sec0MsgType.html">Espressif_Sec0MsgType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Espressif_Sec1MsgType.html">Espressif_Sec1MsgType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Espressif_SecSchemeVersion.html">Espressif_SecSchemeVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Espressif_Status.html">Espressif_Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Espressif_WiFiConfigMsgType.html">Espressif_WiFiConfigMsgType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Espressif_WiFiScanMsgType.html">Espressif_WiFiScanMsgType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Espressif_WifiAuthMode.html">Espressif_WifiAuthMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Espressif_WifiConnectFailedReason.html">Espressif_WifiConnectFailedReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Espressif_WifiStationState.html">Espressif_WifiStationState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Security0SessionState.html">Security0SessionState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Security1SessionState.html">Security1SessionState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/SecurityError.html">SecurityError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Data.html">Data</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/Data/HexEncodingOptions.html">– HexEncodingOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/ESPBLEStatusDelegate.html">ESPBLEStatusDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ESPBLETransportDelegate.html">ESPBLETransportDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ESPCodeable.html">ESPCodeable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ESPCommunicable.html">ESPCommunicable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ESPDeviceConnectionDelegate.html">ESPDeviceConnectionDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ESPError.html">ESPError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/ESPScanWifiListProtocol.html">ESPScanWifiListProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/ESPConstants.html">ESPConstants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ESPWifiNetwork.html">ESPWifiNetwork</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_CmdApplyConfig.html">Espressif_CmdApplyConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_CmdGetStatus.html">Espressif_CmdGetStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_CmdScanResult.html">Espressif_CmdScanResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_CmdScanStart.html">Espressif_CmdScanStart</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_CmdScanStatus.html">Espressif_CmdScanStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_CmdSetConfig.html">Espressif_CmdSetConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_RespApplyConfig.html">Espressif_RespApplyConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_RespGetStatus.html">Espressif_RespGetStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_RespGetStatus/OneOf_State.html">– OneOf_State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_RespScanResult.html">Espressif_RespScanResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_RespScanStart.html">Espressif_RespScanStart</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_RespScanStatus.html">Espressif_RespScanStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_RespSetConfig.html">Espressif_RespSetConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_S0SessionCmd.html">Espressif_S0SessionCmd</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_S0SessionResp.html">Espressif_S0SessionResp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_Sec0Payload.html">Espressif_Sec0Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_Sec0Payload/OneOf_Payload.html">– OneOf_Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_Sec1Payload.html">Espressif_Sec1Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_Sec1Payload/OneOf_Payload.html">– OneOf_Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_SessionCmd0.html">Espressif_SessionCmd0</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_SessionCmd1.html">Espressif_SessionCmd1</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_SessionData.html">Espressif_SessionData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_SessionData/OneOf_Proto.html">– OneOf_Proto</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_SessionResp0.html">Espressif_SessionResp0</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_SessionResp1.html">Espressif_SessionResp1</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_WiFiConfigPayload.html">Espressif_WiFiConfigPayload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_WiFiConfigPayload/OneOf_Payload.html">– OneOf_Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_WiFiScanPayload.html">Espressif_WiFiScanPayload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_WiFiScanPayload/OneOf_Payload.html">– OneOf_Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_WiFiScanResult.html">Espressif_WiFiScanResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_WifiConnectedState.html">Espressif_WifiConnectedState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/HexUtils.html">HexUtils</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='espprovision' class='heading'>ESPProvision</h1>
+
+<p>ESPProvision is a provisioning library written in Swift. It provides mechanism to provide network credentials and/or custom data to an ESP32 or ESP32-S2 devices.</p>
+
+<ul>
+<li><a href="#features">Features</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#using-ESPProvision">Usage</a>
+
+<ul>
+<li><a href="#introduction">*<strong><em>Introduction</em></strong>*</a></li>
+<li><a href="#getting-ESPDevice">*<strong><em>Getting ESPDevice</em></strong>*</a></li>
+<li><a href="#provisioning">*<strong><em>Provisioning</em></strong>*</a></li>
+</ul></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2 id='features' class='heading'>Features</h2>
+
+<ul>
+<li>[x] Search for available BLE devices.</li>
+<li>[x] Scan device QR code to provide reference to ESP device.</li>
+<li>[x] Create reference of ESPDevice manually.</li>
+<li>[x] Data Encryption</li>
+<li>[x] Data transmission through BLE and SoftAP.</li>
+<li>[x] Provision device.</li>
+<li>[x] Scan for available Wi-Fi networks.</li>
+<li>[x] Console logs</li>
+</ul>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>iOS 11.0+ / macOS 10.12+</li>
+<li>Xcode 11+</li>
+<li>Swift 5.1+</li>
+<li>Enable Hotspot Configuration capability in Xcode.</li>
+<li>Enable Access WiFI Information capability in Xcode.</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='cocoapods' class='heading'>CocoaPods</h3>
+
+<p><a href="https://cocoapods.org">CocoaPods</a> is a dependency manager for Cocoa projects. For usage and installation instructions, visit their website. To integrate ESPProvision into your Xcode project using CocoaPods, specify it in your <code>Podfile</code>:</p>
+<pre class="highlight ruby"><code>
+<span class="n">pod</span> <span class="s1">'ESPProvision'</span>
+
+</code></pre>
+<h2 id='using-espprovision' class='heading'>Using ESPProvision</h2>
+<h2 id='introduction' class='heading'>Introduction</h2>
+
+<p>ESPProvision provides a simpler mechanism to communicate with an ESP-32 and ESP32-S2 devices. It gives an efficient search and scan model to listen and return devices which are in provisioning mode. ESProvision embeds security protocol and allow for safe transmission of data by doing end to end encryption. It supports BLE and SoftAP as mode of transmission which are configurable at runtime. Its primarily use is to provide home network credentials to a device and ensure device connectivity status is returned to the application.</p>
+<h2 id='getting-espdevice' class='heading'>Getting ESPDevice</h2>
+
+<p><code><a href="Classes/ESPDevice.html">ESPDevice</a></code> object is virtual representation of ESP-32/ESP32-S2 devices. It provides interface to interact with devices directly in a simpler manner. <code><a href="Classes/ESPProvisionManager.html">ESPProvisionManager</a></code> is a singleton class that encompasses APIs for managing these objects. <code><a href="Classes/ESPDevice.html">ESPDevice</a></code> instances can be obtained from any of the following techniques : </p>
+<h3 id='search' class='heading'>Search</h3>
+
+<p>ESPProvision supports searching of BLE devices which are currently in provisioning mode. It returns list of devices that are discoverable and matches the parameter criteria.</p>
+<pre class="highlight swift"><code>
+<span class="kt">ESPProvisionManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">searchESPDevices</span><span class="p">(</span><span class="nv">devicePrefix</span><span class="p">:</span><span class="s">"Prefix"</span><span class="p">,</span>    <span class="nv">transport</span><span class="p">:</span><span class="o">.</span><span class="n">ble</span><span class="p">,</span> <span class="nv">security</span><span class="p">:</span><span class="o">.</span><span class="n">secure</span><span class="p">)</span> <span class="p">{</span> <span class="n">deviceList</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span>
+<span class="p">}</span>
+
+</code></pre>
+
+<blockquote>
+<p>Transport parameter is medium of data transmission, ESPProvision support .softAP and .ble transport.
+Security parameter describe if connection needed to be secure or unsecure.
+SoftAP search is not supported in iOS currently.</p>
+</blockquote>
+<h3 id='scan' class='heading'>Scan</h3>
+
+<p>Device information can be extracted from scanning valid QR code. User of this API decides the camera preview layer frame by providing <code>UIView</code> as parameter. It return single <code><a href="Classes/ESPDevice.html">ESPDevice</a></code> instance on success. Supports both SoftAP and BLE.</p>
+<pre class="highlight swift"><code>
+<span class="kt">ESPProvisionManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">scanQRCode</span><span class="p">(</span><span class="nv">scanView</span><span class="p">:</span> <span class="n">scannerView</span><span class="p">)</span> <span class="p">{</span> <span class="n">espDevice</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span>
+<span class="p">}</span>
+
+</code></pre>
+<h3 id='create' class='heading'>Create</h3>
+
+<p><code><a href="Classes/ESPDevice.html">ESPDevice</a></code> can be also created by passing necessary parameters as argument of below function.</p>
+<pre class="highlight swift"><code>
+<span class="kt">ESPProvisionManager</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">createESPDevice</span><span class="p">(</span><span class="nv">deviceName</span><span class="p">:</span> <span class="n">deviceName</span><span class="p">,</span> <span class="nv">transport</span><span class="p">:</span> <span class="n">transport</span><span class="p">,</span> <span class="nv">security</span><span class="p">:</span> <span class="n">security</span><span class="p">){</span> <span class="n">espDevice</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span>
+<span class="p">}</span>
+
+</code></pre>
+<h2 id='provisioning' class='heading'>Provisioning</h2>
+
+<p>The main feature of ESPProvision library is to provision ESP devices. Once we get instance of <code><a href="Classes/ESPDevice.html">ESPDevice</a></code> from above APIs we need to establish session with the device before we can transmit/receive data from it. This can be achieved by calling <code>connect</code> as shown below :</p>
+<pre class="highlight swift"><code>
+<span class="n">espDevice</span><span class="o">.</span><span class="nf">connect</span><span class="p">(</span><span class="nv">delegate</span><span class="p">:</span> <span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">status</span> <span class="k">in</span>
+<span class="p">}</span>
+
+</code></pre>
+
+<blockquote>
+<p>Delegate is required to get Proof of Possession from user, if device has pop capability.</p>
+</blockquote>
+
+<p>If status is connected then application can proceed to scan list of available networks visible to device. This list can be used to give option to the user to choose network of their own choice.</p>
+<pre class="highlight swift"><code>
+<span class="n">espDevice</span><span class="o">.</span><span class="n">scanWifiList</span> <span class="p">{</span> <span class="n">wifiList</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span> 
+<span class="p">}</span>
+
+</code></pre>
+
+<p>User can choose to apply Wi-Fi settings from the above list or choose other Wi-Fi network to provision the device.</p>
+<pre class="highlight swift"><code>
+<span class="n">espDevice</span><span class="o">.</span><span class="nf">provision</span><span class="p">(</span><span class="nv">ssid</span><span class="p">:</span> <span class="n">ssid</span><span class="p">,</span> <span class="nv">passPhrase</span><span class="p">:</span> <span class="n">passphrase</span><span class="p">)</span> <span class="p">{</span> <span class="n">status</span> <span class="k">in</span>
+<span class="p">}</span>
+
+</code></pre>
+<h2 id='license' class='heading'>License</h2>
+
+<p>ESPProvision is released under the Apache License Version 2.0.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://github.com/espressif/esp-idf-provisioning-ios" target="_blank" rel="external">Espressif Systems</a>. All rights reserved. (Last updated: 2020-05-29)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

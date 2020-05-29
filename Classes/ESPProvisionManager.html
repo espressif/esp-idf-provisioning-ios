@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ESPProvisionManager Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/ESPProvisionManager" class="dashAnchor"></a>
+    <a title="ESPProvisionManager Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">ESPProvision 2.0 Docs</a> (61% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">ESPProvision Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ESPProvisionManager Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CryptoAES.html">CryptoAES</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ESPBleTransport.html">ESPBleTransport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ESPDevice.html">ESPDevice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ESPLog.html">ESPLog</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ESPProvision.html">ESPProvision</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ESPProvisionManager.html">ESPProvisionManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ESPSecurity0.html">ESPSecurity0</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ESPSecurity1.html">ESPSecurity1</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ESPSession.html">ESPSession</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ESPSoftAPTransport.html">ESPSoftAPTransport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ESPUtility.html">ESPUtility</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ESPWiFiManager.html">ESPWiFiManager</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/ESPDeviceCSSError.html">ESPDeviceCSSError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ESPProvisionError.html">ESPProvisionError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ESPProvisionStatus.html">ESPProvisionStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ESPSecurity.html">ESPSecurity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ESPSessionError.html">ESPSessionError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ESPSessionStatus.html">ESPSessionStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ESPTransport.html">ESPTransport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ESPTransportError.html">ESPTransportError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ESPWiFiScanError.html">ESPWiFiScanError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Espressif_Sec0MsgType.html">Espressif_Sec0MsgType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Espressif_Sec1MsgType.html">Espressif_Sec1MsgType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Espressif_SecSchemeVersion.html">Espressif_SecSchemeVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Espressif_Status.html">Espressif_Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Espressif_WiFiConfigMsgType.html">Espressif_WiFiConfigMsgType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Espressif_WiFiScanMsgType.html">Espressif_WiFiScanMsgType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Espressif_WifiAuthMode.html">Espressif_WifiAuthMode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Espressif_WifiConnectFailedReason.html">Espressif_WifiConnectFailedReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Espressif_WifiStationState.html">Espressif_WifiStationState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Security0SessionState.html">Security0SessionState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Security1SessionState.html">Security1SessionState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/SecurityError.html">SecurityError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Data.html">Data</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/Data/HexEncodingOptions.html">– HexEncodingOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/String.html">String</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/ESPBLEStatusDelegate.html">ESPBLEStatusDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ESPBLETransportDelegate.html">ESPBLETransportDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ESPCodeable.html">ESPCodeable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ESPCommunicable.html">ESPCommunicable</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ESPDeviceConnectionDelegate.html">ESPDeviceConnectionDelegate</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ESPError.html">ESPError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/ESPScanWifiListProtocol.html">ESPScanWifiListProtocol</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/ESPConstants.html">ESPConstants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ESPWifiNetwork.html">ESPWifiNetwork</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_CmdApplyConfig.html">Espressif_CmdApplyConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_CmdGetStatus.html">Espressif_CmdGetStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_CmdScanResult.html">Espressif_CmdScanResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_CmdScanStart.html">Espressif_CmdScanStart</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_CmdScanStatus.html">Espressif_CmdScanStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_CmdSetConfig.html">Espressif_CmdSetConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_RespApplyConfig.html">Espressif_RespApplyConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_RespGetStatus.html">Espressif_RespGetStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_RespGetStatus/OneOf_State.html">– OneOf_State</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_RespScanResult.html">Espressif_RespScanResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_RespScanStart.html">Espressif_RespScanStart</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_RespScanStatus.html">Espressif_RespScanStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_RespSetConfig.html">Espressif_RespSetConfig</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_S0SessionCmd.html">Espressif_S0SessionCmd</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_S0SessionResp.html">Espressif_S0SessionResp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_Sec0Payload.html">Espressif_Sec0Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_Sec0Payload/OneOf_Payload.html">– OneOf_Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_Sec1Payload.html">Espressif_Sec1Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_Sec1Payload/OneOf_Payload.html">– OneOf_Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_SessionCmd0.html">Espressif_SessionCmd0</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_SessionCmd1.html">Espressif_SessionCmd1</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_SessionData.html">Espressif_SessionData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_SessionData/OneOf_Proto.html">– OneOf_Proto</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_SessionResp0.html">Espressif_SessionResp0</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_SessionResp1.html">Espressif_SessionResp1</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_WiFiConfigPayload.html">Espressif_WiFiConfigPayload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_WiFiConfigPayload/OneOf_Payload.html">– OneOf_Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_WiFiScanPayload.html">Espressif_WiFiScanPayload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_WiFiScanPayload/OneOf_Payload.html">– OneOf_Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_WiFiScanResult.html">Espressif_WiFiScanResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_WifiConnectedState.html">Espressif_WifiConnectedState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HexUtils.html">HexUtils</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ESPProvisionManager</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ESPProvisionManager</span> <span class="p">:</span> <span class="kt">NSObject</span><span class="p">,</span> <span class="kt">AVCaptureMetadataOutputObjectsDelegate</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ESPProvisionManager</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ESPBLETransportDelegate.html">ESPBLETransportDelegate</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>The <code>ESPProvisionManager</code> class is a singleton class. It provides methods for getting <code><a href="../Classes/ESPDevice.html">ESPDevice</a></code> object.
+Provide option to</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision0A7ManagerC6sharedACvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/shared" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision0A7ManagerC6sharedACvpZ">shared</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Member to access singleton object of class.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">shared</span><span class="p">:</span> <span class="kt">ESPProvisionManager</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision0A7ManagerC16searchESPDevices12devicePrefix9transport8security17completionHandlerySS_AA12ESPTransportOAA11ESPSecurityOySayAA9ESPDeviceCGSg_AA0M8CSSErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/searchESPDevices(devicePrefix:transport:security:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision0A7ManagerC16searchESPDevices12devicePrefix9transport8security17completionHandlerySS_AA12ESPTransportOAA11ESPSecurityOySayAA9ESPDeviceCGSg_AA0M8CSSErrorOSgtctF">searchESPDevices(devicePrefix:<wbr>transport:<wbr>security:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Search for <code><a href="../Classes/ESPDevice.html">ESPDevice</a></code> using bluetooth scan.
+SoftAp search is not yet supported in iOS</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">searchESPDevices</span><span class="p">(</span><span class="nv">devicePrefix</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">transport</span><span class="p">:</span> <span class="kt"><a href="../Enums/ESPTransport.html">ESPTransport</a></span><span class="p">,</span> <span class="nv">security</span><span class="p">:</span> <span class="kt"><a href="../Enums/ESPSecurity.html">ESPSecurity</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">secure</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Classes/ESPDevice.html">ESPDevice</a></span><span class="p">]?,</span> <span class="kt"><a href="../Enums/ESPDeviceCSSError.html">ESPDeviceCSSError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>devicePrefix</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Prefix of found device should match with devicePrefix.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>transport</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Mode of transport.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>security</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Security mode for communication.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The completion handler is called when search for devices is complete. Result
+               of search is returned as parameter of this function. When search is successful
+               array of found devices are returned. When search fails then reaon for failure is
+               returned as <code><a href="../Enums/ESPDeviceCSSError.html">ESPDeviceCSSError</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision0A7ManagerC10scanQRCode0C4View17completionHandlerySo6UIViewC_yAA9ESPDeviceCSg_AA0I8CSSErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/scanQRCode(scanView:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision0A7ManagerC10scanQRCode0C4View17completionHandlerySo6UIViewC_yAA9ESPDeviceCSg_AA0I8CSSErrorOSgtctF">scanQRCode(scanView:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Search for <code><a href="../Classes/ESPDevice.html">ESPDevice</a></code> using bluetooth scan.
+SoftAp search is not yet supported in iOS</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">scanQRCode</span><span class="p">(</span><span class="nv">scanView</span><span class="p">:</span> <span class="kt">UIView</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/ESPDevice.html">ESPDevice</a></span><span class="p">?,</span> <span class="kt"><a href="../Enums/ESPDeviceCSSError.html">ESPDeviceCSSError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>scanView</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Camera preview layer will be added as subview of this <code>UIView</code> parameter.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The completion handler is called when scan method is completed. Result
+               of scan is returned as parameter of this function. When scan is successful
+               found device is returned. When scan fails then reaon for failure is
+               returned as <code><a href="../Enums/ESPDeviceCSSError.html">ESPDeviceCSSError</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision0A7ManagerC17refreshDeviceList17completionHandleryySayAA9ESPDeviceCGSg_AA0H8CSSErrorOSgtc_tF"></a>
+                    <a name="//apple_ref/swift/Method/refreshDeviceList(completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision0A7ManagerC17refreshDeviceList17completionHandleryySayAA9ESPDeviceCGSg_AA0H8CSSErrorOSgtc_tF">refreshDeviceList(completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Refresh device list with current transport and security settings.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">refreshDeviceList</span><span class="p">(</span><span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">([</span><span class="kt"><a href="../Classes/ESPDevice.html">ESPDevice</a></span><span class="p">]?,</span> <span class="kt"><a href="../Enums/ESPDeviceCSSError.html">ESPDeviceCSSError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The completion handler is called when refresh is completed. Result
+                           of refresh is returned as parameter of this function.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@M@ESPProvision@objc(cs)ESPProvisionManager(im)captureOutput:didOutputMetadataObjects:fromConnection:"></a>
+                    <a name="//apple_ref/swift/Method/metadataOutput(_:didOutput:from:)" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@M@ESPProvision@objc(cs)ESPProvisionManager(im)captureOutput:didOutputMetadataObjects:fromConnection:">metadataOutput(_:<wbr>didOutput:<wbr>from:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">metadataOutput</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">AVCaptureMetadataOutput</span><span class="p">,</span> <span class="n">didOutput</span> <span class="nv">metadataObjects</span><span class="p">:</span> <span class="p">[</span><span class="kt">AVMetadataObject</span><span class="p">],</span> <span class="n">from</span> <span class="nv">_</span><span class="p">:</span> <span class="kt">AVCaptureConnection</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision0A7ManagerC15createESPDevice10deviceName9transport8security17proofOfPossession14softAPPassword17completionHandlerySS_AA12ESPTransportOAA11ESPSecurityOSSSgAOyAA0D0CSg_AA0D8CSSErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createESPDevice(deviceName:transport:security:proofOfPossession:softAPPassword:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision0A7ManagerC15createESPDevice10deviceName9transport8security17proofOfPossession14softAPPassword17completionHandlerySS_AA12ESPTransportOAA11ESPSecurityOSSSgAOyAA0D0CSg_AA0D8CSSErrorOSgtctF">createESPDevice(deviceName:<wbr>transport:<wbr>security:<wbr>proofOfPossession:<wbr>softAPPassword:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Manually create <code><a href="../Classes/ESPDevice.html">ESPDevice</a></code> object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createESPDevice</span><span class="p">(</span><span class="nv">deviceName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">transport</span><span class="p">:</span> <span class="kt"><a href="../Enums/ESPTransport.html">ESPTransport</a></span><span class="p">,</span> <span class="nv">security</span><span class="p">:</span> <span class="kt"><a href="../Enums/ESPSecurity.html">ESPSecurity</a></span> <span class="o">=</span> <span class="o">.</span><span class="n">secure</span><span class="p">,</span> <span class="nv">proofOfPossession</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">softAPPassword</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Classes/ESPDevice.html">ESPDevice</a></span><span class="p">?,</span> <span class="kt"><a href="../Enums/ESPDeviceCSSError.html">ESPDeviceCSSError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>deviceName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Name of <code><a href="../Classes/ESPDevice.html">ESPDevice</a></code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>transport</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Mode of transport.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>security</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Security mode for communication.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The completion handler is invoked with parameters containing newly created device object.
+               Error in case where method fails to return a device object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision0A7ManagerC10enableLogsyySbF"></a>
+                    <a name="//apple_ref/swift/Method/enableLogs(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision0A7ManagerC10enableLogsyySbF">enableLogs(_:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Method to enable/disable library logs.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">enableLogs</span><span class="p">(</span><span class="n">_</span> <span class="nv">enable</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>enable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Bool to enable/disable console logs`.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision23ESPBLETransportDelegateP16peripheralsFound0D0ySaySo12CBPeripheralCG_tF"></a>
+                    <a name="//apple_ref/swift/Method/peripheralsFound(peripherals:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision23ESPBLETransportDelegateP16peripheralsFound0D0ySaySo12CBPeripheralCG_tF">peripheralsFound(peripherals:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">peripheralsFound</span><span class="p">(</span><span class="nv">peripherals</span><span class="p">:</span> <span class="p">[</span><span class="kt">CBPeripheral</span><span class="p">])</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision23ESPBLETransportDelegateP19peripheralsNotFound11serviceUUIDy10Foundation0H0VSg_tF"></a>
+                    <a name="//apple_ref/swift/Method/peripheralsNotFound(serviceUUID:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision23ESPBLETransportDelegateP19peripheralsNotFound11serviceUUIDy10Foundation0H0VSg_tF">peripheralsNotFound(serviceUUID:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">peripheralsNotFound</span><span class="p">(</span><span class="n">serviceUUID</span> <span class="nv">_</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision23ESPBLETransportDelegateP20peripheralConfigured0D0ySo12CBPeripheralC_tF"></a>
+                    <a name="//apple_ref/swift/Method/peripheralConfigured(peripheral:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision23ESPBLETransportDelegateP20peripheralConfigured0D0ySo12CBPeripheralC_tF">peripheralConfigured(peripheral:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">peripheralConfigured</span><span class="p">(</span><span class="n">peripheral</span> <span class="nv">_</span><span class="p">:</span> <span class="kt">CBPeripheral</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision23ESPBLETransportDelegateP23peripheralNotConfigured0D0ySo12CBPeripheralC_tF"></a>
+                    <a name="//apple_ref/swift/Method/peripheralNotConfigured(peripheral:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision23ESPBLETransportDelegateP23peripheralNotConfigured0D0ySo12CBPeripheralC_tF">peripheralNotConfigured(peripheral:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">peripheralNotConfigured</span><span class="p">(</span><span class="n">peripheral</span> <span class="nv">_</span><span class="p">:</span> <span class="kt">CBPeripheral</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision23ESPBLETransportDelegateP22peripheralDisconnected0D05errorySo12CBPeripheralC_s5Error_pSgtF"></a>
+                    <a name="//apple_ref/swift/Method/peripheralDisconnected(peripheral:error:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision23ESPBLETransportDelegateP22peripheralDisconnected0D05errorySo12CBPeripheralC_s5Error_pSgtF">peripheralDisconnected(peripheral:<wbr>error:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">peripheralDisconnected</span><span class="p">(</span><span class="nv">peripheral</span><span class="p">:</span> <span class="kt">CBPeripheral</span><span class="p">,</span> <span class="n">error</span> <span class="nv">_</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision0A7ManagerC20bluetoothUnavailableyyF"></a>
+                    <a name="//apple_ref/swift/Method/bluetoothUnavailable()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision0A7ManagerC20bluetoothUnavailableyyF">bluetoothUnavailable()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">bluetoothUnavailable</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="https://github.com/espressif/esp-idf-provisioning-ios" target="_blank" rel="external">Espressif Systems</a>. All rights reserved. (Last updated: 2020-05-29)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
