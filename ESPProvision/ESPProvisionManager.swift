@@ -280,7 +280,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
 extension ESPProvisionManager: ESPBLETransportDelegate {
     func peripheralsFound(peripherals: [CBPeripheral]) {
         
-        ESPLog.log("Ble devices found.")
+        ESPLog.log("Ble devices found :\(peripherals)")
         
         espDevices.removeAll()
         for peripehral in peripherals {

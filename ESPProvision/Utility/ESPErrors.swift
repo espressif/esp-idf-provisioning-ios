@@ -79,6 +79,8 @@ public enum ESPSessionError: ESPError {
     case versionInfoError(Error)
     /// The attempt to connect with ESPDevice of bluetooth capability failed.
     case bleFailedToConnect
+    /// Encryption error
+    case encryptionError
     
     public var description: String {
         switch self {
@@ -96,6 +98,8 @@ public enum ESPSessionError: ESPError {
             return "Failed to get device version information with error: \(error.localizedDescription)"
         case .bleFailedToConnect:
             return "Failed to connect with BLE device"
+        case .encryptionError:
+            return "Unable to encrypt data"
         }
     }
     
@@ -115,6 +119,8 @@ public enum ESPSessionError: ESPError {
             return 16
         case .bleFailedToConnect:
             return 17
+        case .encryptionError:
+            return 18
         }
     }
 }
@@ -200,6 +206,8 @@ public enum ESPProvisionError: ESPError {
     case wifiStatusNetworkNotFound
     /// Wi-Fi status of ESPDevice is unknown.
     case wifiStatusUnknownError
+    /// Unkown error
+    case unknownError
     
     public var description: String {
         switch self {
@@ -217,6 +225,8 @@ public enum ESPProvisionError: ESPError {
             return "Wi-Fi status netowrk not found"
         case .wifiStatusUnknownError:
             return "Wi-Fi status unknown error"
+        case .unknownError:
+            return "Unknown error"
         }
     }
     
@@ -236,6 +246,8 @@ public enum ESPProvisionError: ESPError {
             return 36
         case .wifiStatusUnknownError:
             return 37
+        case .unknownError:
+            return 38
         }
     }
 }
