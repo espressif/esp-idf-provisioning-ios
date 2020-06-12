@@ -17,6 +17,7 @@
 //
 
 import Foundation
+import Network
 
 import NetworkExtension
 
@@ -26,6 +27,7 @@ class ESPSoftAPTransport: ESPCommunicable {
     
     /// Instance of `ESPUtility`.
     var utility: ESPUtility
+    var session:URLSession
 
     /// Check device configuration status.
     ///
@@ -43,6 +45,9 @@ class ESPSoftAPTransport: ESPCommunicable {
     init(baseUrl: String) {
         self.baseUrl = baseUrl
         utility = ESPUtility()
+        let config = URLSessionConfiguration.default
+        config.allowsCellularAccess  = false
+        session = URLSession(configuration: config)
     }
 
     /// Implementation of generic HTTP Request.
@@ -62,10 +67,11 @@ class ESPSoftAPTransport: ESPCommunicable {
 
         request.httpMethod = "POST"
         request.httpBody = data
+        request.timeoutInterval = 30
         
-        ESPLog.log("URLSession request initiated...")
+        ESPLog.log("URLSession request initiated with data...\(data)")
         
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = session.dataTask(with: request) { data, response, error in
             ESPLog.log("Processing response..")
             guard let data = data, error == nil else {
                 ESPLog.log("Error occured on HTTP request. Error: \(error.debugDescription)")
