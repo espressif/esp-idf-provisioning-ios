@@ -1,116 +1,116 @@
 {
   "images" : [
     {
-      "size" : "20x20",
+      "filename" : "ezgif.com-gif-maker (15).png",
       "idiom" : "iphone",
-      "filename" : "resize-15650835681126092262bluetoothlogo.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "20x20"
     },
     {
-      "size" : "20x20",
+      "filename" : "ezgif.com-gif-maker (17).png",
       "idiom" : "iphone",
-      "filename" : "resize-15650836471568594322bluetoothlogo.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "20x20"
     },
     {
-      "size" : "29x29",
+      "filename" : "ezgif.com-gif-maker (16).png",
       "idiom" : "iphone",
-      "filename" : "resize-15650836081696870936bluetoothlogo.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "29x29"
     },
     {
-      "size" : "29x29",
+      "filename" : "ezgif.com-gif-maker (18).png",
       "idiom" : "iphone",
-      "filename" : "resize-15650837081229774650bluetoothlogo.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "29x29"
     },
     {
-      "size" : "40x40",
+      "filename" : "ezgif.com-gif-maker (20).png",
       "idiom" : "iphone",
-      "filename" : "resize-15650837741856376183bluetoothlogo-1.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "40x40"
     },
     {
-      "size" : "40x40",
+      "filename" : "ezgif.com-gif-maker (19)-1.png",
       "idiom" : "iphone",
-      "filename" : "resize-15650838131526701880bluetoothlogo-1.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "40x40"
     },
     {
-      "size" : "60x60",
+      "filename" : "ezgif.com-gif-maker (19).png",
       "idiom" : "iphone",
-      "filename" : "resize-15650838131526701880bluetoothlogo.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "60x60"
     },
     {
-      "size" : "60x60",
+      "filename" : "ezgif.com-gif-maker (25).png",
       "idiom" : "iphone",
-      "filename" : "resize-15650839261404014066bluetoothlogo.png",
-      "scale" : "3x"
+      "scale" : "3x",
+      "size" : "60x60"
     },
     {
-      "size" : "20x20",
+      "filename" : "ezgif.com-gif-maker (13).png",
       "idiom" : "ipad",
-      "filename" : "resize-15650834921549123065bluetoothlogo.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "20x20"
     },
     {
-      "size" : "20x20",
+      "filename" : "ezgif.com-gif-maker (15)-2.png",
       "idiom" : "ipad",
-      "filename" : "resize-15650835681126092262bluetoothlogo-2.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "20x20"
     },
     {
-      "size" : "29x29",
+      "filename" : "ezgif.com-gif-maker (14).png",
       "idiom" : "ipad",
-      "filename" : "resize-15650835351050782579bluetoothlogo.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "29x29"
     },
     {
-      "size" : "29x29",
+      "filename" : "ezgif.com-gif-maker (16)-1.png",
       "idiom" : "ipad",
-      "filename" : "resize-15650836081696870936bluetoothlogo-1.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "29x29"
     },
     {
-      "size" : "40x40",
+      "filename" : "ezgif.com-gif-maker (15)-1.png",
       "idiom" : "ipad",
-      "filename" : "resize-15650835681126092262bluetoothlogo-1.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "40x40"
     },
     {
-      "size" : "40x40",
+      "filename" : "ezgif.com-gif-maker (20)-1.png",
       "idiom" : "ipad",
-      "filename" : "resize-15650837741856376183bluetoothlogo.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "40x40"
     },
     {
-      "size" : "76x76",
+      "filename" : "ezgif.com-gif-maker (21).png",
       "idiom" : "ipad",
-      "filename" : "resize-15650836791213422126bluetoothlogo.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "76x76"
     },
     {
-      "size" : "76x76",
+      "filename" : "ezgif.com-gif-maker (22).png",
       "idiom" : "ipad",
-      "filename" : "resize-15650838561728894202bluetoothlogo.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "76x76"
     },
     {
-      "size" : "83.5x83.5",
+      "filename" : "ezgif.com-gif-maker (23).png",
       "idiom" : "ipad",
-      "filename" : "resize-1565083885721511224bluetoothlogo.png",
-      "scale" : "2x"
+      "scale" : "2x",
+      "size" : "83.5x83.5"
     },
     {
-      "size" : "1024x1024",
+      "filename" : "ezgif.com-gif-maker (24).png",
       "idiom" : "ios-marketing",
-      "filename" : "resize-15650839681547502050bluetoothlogo.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "size" : "1024x1024"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
