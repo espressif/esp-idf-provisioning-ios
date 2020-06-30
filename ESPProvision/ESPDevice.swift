@@ -58,10 +58,6 @@ public class ESPDevice {
     var session:ESPSession!
     /// Name of device.
     var deviceName: String
-    /// Security implementation.
-    var security: ESPSecurity
-    /// Mode of transport.
-    var transport: ESPTransport
     /// BLE transport layer.
     var espBleTransport: ESPBleTransport!
     /// SoftAp transport layer.
@@ -76,6 +72,10 @@ public class ESPDevice {
     var bleConnectionStatusHandler: ((ESPSessionStatus) -> Void)?
     /// List of capabilities of a device.
     var capabilities: [String]?
+    /// Security implementation.
+    public var security: ESPSecurity
+    /// Mode of transport.
+    public var transport: ESPTransport
     /// Delegate of `ESPDevice` object.
     public var delegate:ESPDeviceConnectionDelegate?
     /// Security layer of device.
@@ -342,7 +342,14 @@ public class ESPDevice {
     }
     
     /// Disconnect `ESPDevice`.
-    func disconnect() {
+    public func disconnect() {
+        ESPLog.log("Disconnecting device..")
+        switch transport {
+        case .ble:
+            espBleTransport.disconnect()
+        default:
+            NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: self.name)
+        }
         
     }
     
@@ -367,7 +374,7 @@ public class ESPDevice {
     /// - Parameter completionHandler: The completion handler that is called when session is initalised
     ///                                Parameter of block include status of session.
     private func initialiseSession(completionHandler: @escaping (ESPSessionStatus) -> Void) {
-        print("Initialise session")
+        ESPLog.log("Initialise session")
         
         if let capability = self.capabilities, capability.contains(ESPConstants.noSecCapability) {
             if security != .unsecure {
@@ -390,17 +397,17 @@ public class ESPDevice {
                     pop = self.proofOfPossession ?? ""
                 }
             }
-            print("Initialise session security 1")
+            ESPLog.log("Initialise session security 1")
             securityLayer = ESPSecurity1(proofOfPossession: pop)
         case .unsecure:
-            print("Initialise session security 0")
+            ESPLog.log("Initialise session security 0")
             securityLayer = ESPSecurity0()
         }
         initSession(completionHandler: completionHandler)
     }
     
     private func initSession(completionHandler: @escaping (ESPSessionStatus) -> Void) {
-        print("Init session")
+        ESPLog.log("Init session")
         switch transport {
         case .ble:
             session = ESPSession(transport: espBleTransport, security: securityLayer)
@@ -409,13 +416,13 @@ public class ESPDevice {
         }
         session.initialize(response: nil) { error in
             guard error == nil else {
-                print("Init session error")
-                print("Error in establishing session \(error.debugDescription)")
+                ESPLog.log("Init session error")
+                ESPLog.log("Error in establishing session \(error.debugDescription)")
                 self.connectionStatus = .failedToConnect(.sessionInitError)
                 completionHandler(self.connectionStatus)
                 return
             }
-            print("Init session success")
+            ESPLog.log("Init session success")
             self.connectionStatus = .connected
             completionHandler(.connected)
         }
@@ -427,7 +434,7 @@ public class ESPDevice {
     private func getDeviceVersionInfo(completionHandler: @escaping (ESPSessionStatus) -> Void) {
         switch transport {
         case .ble:
-            print("Get Device Version Info")
+            ESPLog.log("Get Device Version Info")
             espBleTransport.SendConfigData(path: espBleTransport.utility.versionPath, data: Data("ESP".utf8)) { response, error in
                 self.processVersionInfoResponse(response: response, error: error, completionHandler: completionHandler)
             }
@@ -445,16 +452,16 @@ public class ESPDevice {
     ///     - error: Error encountered if any.
     ///     - completionHandler: Invoked when error is encountered while processing version information.
     private func processVersionInfoResponse(response: Data?, error: Error?, completionHandler: @escaping (ESPSessionStatus) -> Void) {
-        print("Process version info start")
+        ESPLog.log("Process version info start")
         guard error == nil else {
-            print("Process version info error")
+            ESPLog.log("Process version info error")
             self.connectionStatus = .failedToConnect(.versionInfoError(error!))
             completionHandler(self.connectionStatus)
             return
         }
         do {
             if let result = try JSONSerialization.jsonObject(with: response!, options: .mutableContainers) as? NSDictionary {
-                print("Process version info success")
+                ESPLog.log("Process version info success")
                 switch transport {
                     case .ble:
                         self.espBleTransport.utility.deviceVersionInfo = result
@@ -463,13 +470,17 @@ public class ESPDevice {
                 }
                 if let prov = result[ESPConstants.provKey] as? NSDictionary, let capabilities = prov[ESPConstants.capabilitiesKey] as? [String] {
                     self.capabilities = capabilities
-                    self.initialiseSession(completionHandler: completionHandler)
+                    DispatchQueue.main.async {
+                        self.initialiseSession(completionHandler: completionHandler)
+                    }
                 }
             }
         } catch {
-            print("Process version info catch")
-            self.initialiseSession(completionHandler: completionHandler)
-            print(error)
+            ESPLog.log("Process version info catch")
+            DispatchQueue.main.async {
+                self.initialiseSession(completionHandler: completionHandler)
+            }
+            ESPLog.log(error.localizedDescription)
         }
     }
     
@@ -518,7 +529,7 @@ extension ESPDevice: ESPScanWifiListProtocol {
 
 extension ESPDevice: ESPBLEStatusDelegate {
     func peripheralConnected() {
-        print("Peripheral Connected")
+        ESPLog.log("Peripheral Connected")
         self.getDeviceVersionInfo(completionHandler: bleConnectionStatusHandler!)
     }
     

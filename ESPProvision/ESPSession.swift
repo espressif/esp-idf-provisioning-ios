@@ -66,7 +66,7 @@ class ESPSession {
         ESPLog.log("Initializing the session handshake to establish a secure session with the device.")
         do {
             let request = try securityLayerPrivate.getNextRequestInSession(data: response)
-            print("session intialize")
+            ESPLog.log("session intialize")
             if let request = request {
                 transportLayerPrivate.SendSessionData(data: request) { responseData, error in
                     

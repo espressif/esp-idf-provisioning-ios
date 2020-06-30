@@ -104,7 +104,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     /// - Parameters:
     ///   - deviceNamePrefix: Device name prefix.
     ///   - scanTimeout: Timeout in seconds for which BLE scan should happen.
-    init(scanTimeout: TimeInterval, deviceNamePrefix: String, proofOfPossession:String = "") {
+    init(scanTimeout: TimeInterval, deviceNamePrefix: String, proofOfPossession:String? = nil) {
         ESPLog.log("Initalising BLE transport class with scan timeout \(scanTimeout)")
         self.scanTimeout = scanTimeout
         self.deviceNamePrefix = deviceNamePrefix

@@ -199,7 +199,7 @@ class ESPProvision {
             let configResponse = try Espressif_WiFiConfigPayload(serializedData: decryptedResponse)
             responseStatus = configResponse.respGetStatus.status
         } catch {
-            print(error)
+            ESPLog.log(error.localizedDescription)
         }
         return responseStatus
     }
@@ -216,7 +216,7 @@ class ESPProvision {
             let configResponse = try Espressif_WiFiConfigPayload(serializedData: decryptedResponse)
             responseStatus = configResponse.respApplyConfig.status
         } catch {
-            print(error)
+            ESPLog.log(error.localizedDescription)
         }
         return responseStatus
     }
