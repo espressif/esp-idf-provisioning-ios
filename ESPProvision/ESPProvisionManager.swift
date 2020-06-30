@@ -93,8 +93,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
         
     }
     
-    /// Search for `ESPDevice` using bluetooth scan.
-    /// SoftAp search is not yet supported in iOS
+    /// Scan for `ESPDevice` using QR code.
     ///
     /// - Parameters:
     ///   - scanView: Camera preview layer will be added as subview of this `UIView` parameter.
@@ -113,6 +112,15 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
             } else {
                 completionHandler(nil, error)
             }
+        }
+    }
+    
+    /// Stop camera session that is capturing QR code. Call this method when your `Scan View` goes out of scope.
+    ///
+    public func stopScan() {
+        ESPLog.log("Stopping Camera Session..")
+        if self.captureSession != nil {
+            self.captureSession.stopRunning()
         }
     }
     
@@ -260,7 +268,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
             self.searchCompletionHandler = nil
             self.scanCompletionHandler = completionHandler
             self.security = security
-            espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: deviceName, proofOfPossession: proofOfPossession ?? "")
+            espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: deviceName, proofOfPossession: proofOfPossession)
             espBleTransport.scan(delegate: self)
         default:
             let newDevice = ESPDevice(name: deviceName, security: security, transport: transport,proofOfPossession: proofOfPossession, softAPPassword: softAPPassword)

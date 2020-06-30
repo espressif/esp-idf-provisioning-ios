@@ -1,6 +1,7 @@
+
 # ESPProvision
 
-ESPProvision is a provisioning library written in Swift. It provides mechanism to provide network credentials and/or custom data to an ESP32 or ESP32-S2 devices.
+ESPProvision is a provisioning library written in Swift. It provides mechanism to provide network credentials and/or custom data to an ESP32, ESP32-S2 or ESP8266 devices.
 
 - [Features](#features)
 - [Requirements](#requirements)
@@ -10,6 +11,7 @@ ESPProvision is a provisioning library written in Swift. It provides mechanism t
     - [****Getting ESPDevice****](#getting-ESPDevice)
     - [****Provisioning****](#provisioning)
 - [License](#license)
+- [API Documentation](https://espressif.github.io/esp-idf-provisioning-ios/)
 
 ## Features
 
@@ -46,12 +48,12 @@ pod 'ESPProvision'
 
 ## Introduction
 
-ESPProvision provides a simpler mechanism to communicate with an ESP-32 and ESP32-S2 devices. It gives an efficient search and scan model to listen and return devices which are in provisioning mode. ESProvision embeds security protocol and allow for safe transmission of data by doing end to end encryption. It supports BLE and SoftAP as mode of transmission which are configurable at runtime. Its primarily use is to provide home network credentials to a device and ensure device connectivity status is returned to the application.
+ESPProvision provides a simpler mechanism to communicate with an ESP-32, ESP32-S2 and ESP8266 devices. It gives an efficient search and scan model to listen and return devices which are in provisioning mode. ESProvision embeds security protocol and allow for safe transmission of data by doing end to end encryption. It supports BLE and SoftAP as mode of transmission which are configurable at runtime. Its primarily use is to provide home network credentials to a device and ensure device connectivity status is returned to the application.
 
 
 ## Getting ESPDevice
 
-`ESPDevice` object is virtual representation of ESP-32/ESP32-S2 devices. It provides interface to interact with devices directly in a simpler manner. `ESPProvisionManager` is a singleton class that encompasses APIs for managing these objects. `ESPDevice` instances can be obtained from any of the following techniques : 
+`ESPDevice` object is virtual representation of ESP-32/ESP32-S2/ESP8266 devices. It provides interface to interact with devices directly in a simpler manner. `ESPProvisionManager` is a singleton class that encompasses APIs for managing these objects. `ESPDevice` instances can be obtained from any of the following techniques : 
 
 
 ### Search

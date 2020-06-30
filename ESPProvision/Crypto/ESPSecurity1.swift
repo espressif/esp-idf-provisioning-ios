@@ -212,7 +212,7 @@ class ESPSecurity1: ESPCodeable {
             ESPLog.log("Step0 response processed.")
             clientVerify = verifyBytes
         } catch {
-            print(error)
+            ESPLog.log(error.localizedDescription)
         }
     }
     

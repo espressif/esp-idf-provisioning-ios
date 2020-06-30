@@ -1,9 +1,9 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "ESPProvision"
-  spec.version      = "2.0.1"
+  spec.version      = "2.0.2"
   spec.summary      = "ESP-IDF provisioning in Swift"
-  spec.description  = "It provides mechanism to provide network credentials and/or custom data to an ESP32 or ESP32-S2 devices"
+  spec.description  = "It provides mechanism to provide network credentials and/or custom data to an ESP32, ESP32-S2 or ESP8266 devices"
   spec.homepage     = "https://github.com/espressif/esp-idf-provisioning-ios"
 
   spec.license     = { :type => 'Apache License, Version 2.0',
