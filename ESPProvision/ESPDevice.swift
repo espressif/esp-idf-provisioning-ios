@@ -363,11 +363,15 @@ public class ESPDevice {
     }
     
     private func scanDeviceForWifiList(completionHandler: @escaping ([ESPWifiNetwork]?,ESPWiFiScanError?) -> Void) {
-        self.wifiListCompletionHandler = completionHandler
-        let scanWifiManager: ESPWiFiManager = ESPWiFiManager(session: self.session!)
-        scanWifiManager.delegate = self
-        wifiListCompletionHandler = completionHandler
-        scanWifiManager.startWifiScan()
+        if let capability = self.capabilities, capability.contains(ESPConstants.wifiScanCapability) {
+            self.wifiListCompletionHandler = completionHandler
+            let scanWifiManager: ESPWiFiManager = ESPWiFiManager(session: self.session!)
+            scanWifiManager.delegate = self
+            wifiListCompletionHandler = completionHandler
+            scanWifiManager.startWifiScan()
+        } else {
+            completionHandler(nil,.emptyResultCount)
+        }
     }
     /// Initialise session with `ESPDevice`.
     ///
