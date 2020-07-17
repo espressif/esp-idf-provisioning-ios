@@ -705,7 +705,7 @@
 			baseConfigurationReference = 6666AA3DAEAA14F81770F363 /* Pods-ESPProvisionSample.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				APP_DISPLAY_NAME = "ESP PROV DEMO";
+				APP_DISPLAY_NAME = "ESP Prov";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "ESPProvisionSample/ESP BLE PROV.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -723,7 +723,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP PROV SAMPLE";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP SoftAP Provisioning With Capability";
@@ -737,7 +737,7 @@
 			baseConfigurationReference = A600497E31230F4B3C5197C8 /* Pods-ESPProvisionSample.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				APP_DISPLAY_NAME = "ESP PROV DEMO";
+				APP_DISPLAY_NAME = "ESP Prov";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "ESPProvisionSample/ESP BLE PROV.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -755,7 +755,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP PROV SAMPLE";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP SoftAP Provisioning With Capability";
@@ -912,7 +912,7 @@
 			baseConfigurationReference = EC84FE067C3D5E9CDC5AEF05 /* Pods-ESPProvisionSample.ble.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				APP_DISPLAY_NAME = "ESP PROV BLE";
+				APP_DISPLAY_NAME = "ESP BLE Prov";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-BLE";
 				CODE_SIGN_ENTITLEMENTS = "ESPProvisionSample/ESP BLE PROV.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -930,7 +930,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provble;
 				PRODUCT_NAME = "ESP PROV SAMPLE";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP BLE Provisioning App Development";
@@ -1043,11 +1043,11 @@
 			baseConfigurationReference = B36C550D24F7A5870D2A8184 /* Pods-ESPProvisionSample.softap.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				APP_DISPLAY_NAME = "ESP PROV SOFTAP";
+				APP_DISPLAY_NAME = "ESP SoftAP Prov";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-SoftAP";
 				CODE_SIGN_ENTITLEMENTS = "ESPProvisionSample/ESP BLE PROV.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				ESP_ALLOW_PREFIX_SEARCH = YES;
@@ -1061,10 +1061,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP PROV SAMPLE";
-				PROVISIONING_PROFILE_SPECIFIER = "ESP SoftAP Provisioning With Capability";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
