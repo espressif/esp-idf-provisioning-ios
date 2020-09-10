@@ -71,7 +71,7 @@ public class ESPDevice {
     /// Completion handler for BLE connection status.
     var bleConnectionStatusHandler: ((ESPSessionStatus) -> Void)?
     /// List of capabilities of a device.
-    var capabilities: [String]?
+    public var capabilities: [String]?
     /// Security implementation.
     public var security: ESPSecurity
     /// Mode of transport.
