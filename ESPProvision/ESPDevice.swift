@@ -80,6 +80,8 @@ public class ESPDevice {
     public var delegate:ESPDeviceConnectionDelegate?
     /// Security layer of device.
     public var securityLayer: ESPCodeable!
+    /// Storing device version information
+    public var versionInfo:NSDictionary?
     
     private var transportLayer: ESPCommunicable!
     private var provision: ESPProvision!
@@ -472,6 +474,9 @@ public class ESPDevice {
                     default:
                         self.espSoftApTransport.utility.deviceVersionInfo = result
                 }
+                
+                self.versionInfo = result
+                
                 if let prov = result[ESPConstants.provKey] as? NSDictionary, let capabilities = prov[ESPConstants.capabilitiesKey] as? [String] {
                     self.capabilities = capabilities
                     DispatchQueue.main.async {
