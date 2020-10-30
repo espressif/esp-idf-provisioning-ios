@@ -386,11 +386,14 @@ public class ESPDevice {
             if security != .unsecure {
                 completionHandler(.failedToConnect(.securityMismatch))
                 return
-            } else if security != .secure {
+            }
+        } else {
+            if security != .secure {
                 completionHandler(.failedToConnect(.securityMismatch))
                 return
             }
         }
+
         switch security {
         case .secure:
             var pop:String!
