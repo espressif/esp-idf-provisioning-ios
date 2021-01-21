@@ -154,6 +154,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
             espressifPeripheral.writeValue(data, for: characteristic, type: .withResponse)
             currentRequestCompletionHandler = completionHandler
         } else {
+            completionHandler(nil,NSError(domain: "com.espressif.ble", code: 1, userInfo: [NSLocalizedDescriptionKey:"BLE characteristic does not exist."]))
             transportToken.signal()
         }
     }
