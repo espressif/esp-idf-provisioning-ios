@@ -238,9 +238,9 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
                     let pop = jsonArray["pop"] ?? ""
                     switch transport {
                     case .ble:
-                        createESPDevice(deviceName: deviceName, transport: transport, security: security, proofOfPossession: pop, completionHandler: self.scanCompletionHandler!)
+                        createESPDevice(deviceName: deviceName, transport: transport, advertisementData: [:], security: security, proofOfPossession: pop, completionHandler: self.scanCompletionHandler!)
                     default:
-                        createESPDevice(deviceName: deviceName, transport: transport, security: security, proofOfPossession: pop, softAPPassword: jsonArray["password"] ?? "", completionHandler: self.scanCompletionHandler!)
+                        createESPDevice(deviceName: deviceName, transport: transport, advertisementData: [:], security: security, proofOfPossession: pop, softAPPassword: jsonArray["password"] ?? "", completionHandler: self.scanCompletionHandler!)
                         
                     }
                     return
@@ -259,7 +259,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     ///   - security: Security mode for communication.
     ///   - completionHandler: The completion handler is invoked with parameters containing newly created device object.
     ///                        Error in case where method fails to return a device object.
-    public func createESPDevice(deviceName: String, transport: ESPTransport, security: ESPSecurity = .secure, proofOfPossession:String? = nil, softAPPassword:String? = nil, completionHandler: @escaping (ESPDevice?,ESPDeviceCSSError?) -> Void) {
+    public func createESPDevice(deviceName: String, transport: ESPTransport, advertisementData: [String: Any], security: ESPSecurity = .secure, proofOfPossession:String? = nil, softAPPassword:String? = nil, completionHandler: @escaping (ESPDevice?,ESPDeviceCSSError?) -> Void) {
         
         ESPLog.log("Creating ESPDevice...")
         
@@ -271,7 +271,14 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
             espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: deviceName, proofOfPossession: proofOfPossession)
             espBleTransport.scan(delegate: self)
         default:
-            let newDevice = ESPDevice(name: deviceName, security: security, transport: transport,proofOfPossession: proofOfPossession, softAPPassword: softAPPassword)
+            let newDevice = ESPDevice(
+                name: deviceName,
+                security: security,
+                transport: transport,
+                advertisementData: advertisementData,
+                proofOfPossession: proofOfPossession,
+                softAPPassword: softAPPassword
+            )
             ESPLog.log("SoftAp device created successfully.")
             completionHandler(newDevice, nil)
         }
@@ -286,14 +293,20 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
 }
 
 extension ESPProvisionManager: ESPBLETransportDelegate {
-    func peripheralsFound(peripherals: [String:CBPeripheral]) {
+    func peripheralsFound(peripherals: [String: FoundPeripheral]) {
         
         ESPLog.log("Ble devices found :\(peripherals)")
         
         espDevices.removeAll()
-        for key in peripherals.keys {
-           let newESPDevice = ESPDevice(name: key, security: self.security, transport: .ble, proofOfPossession: espBleTransport.proofOfPossession)
-            newESPDevice.peripheral = peripherals[key]
+        for (key, foundPeripheral) in peripherals {
+            let newESPDevice = ESPDevice(
+                name: key,
+                security: self.security,
+                transport: .ble,
+                advertisementData: foundPeripheral.advertisementData,
+                proofOfPossession: espBleTransport.proofOfPossession
+            )
+            newESPDevice.peripheral = foundPeripheral.cbPeripheral
             newESPDevice.espBleTransport = espBleTransport
             espDevices.append(newESPDevice)
         }

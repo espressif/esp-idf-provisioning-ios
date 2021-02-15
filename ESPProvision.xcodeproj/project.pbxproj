@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20D0729D25DADA1500C15FE6 /* FoundPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0729C25DADA1500C15FE6 /* FoundPeripheral.swift */; };
 		E9645E43CF7B1380FC310F19 /* Pods_ESPProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247B21F19D9AA0FB3A6A6B94 /* Pods_ESPProvision.framework */; };
 		F151FF03247B1C40006F514E /* ESPProvisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151FEF8247B17B3006F514E /* ESPProvisionTests.swift */; };
 		F1C34D30244EEF0000340B04 /* ESPProvision.h in Headers */ = {isa = PBXBuildFile; fileRef = F1C34D22244EEEFF00340B04 /* ESPProvision.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		20D0729C25DADA1500C15FE6 /* FoundPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundPeripheral.swift; sourceTree = "<group>"; };
 		247B21F19D9AA0FB3A6A6B94 /* Pods_ESPProvision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESPProvision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44F8E73C277B503EAD29F630 /* Pods-ESPProvision-ESPProvisionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision-ESPProvisionTests.release.xcconfig"; path = "Target Support Files/Pods-ESPProvision-ESPProvisionTests/Pods-ESPProvision-ESPProvisionTests.release.xcconfig"; sourceTree = "<group>"; };
 		93F6B39AD52298DB1DAAFAAB /* Pods-ESPProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision.debug.xcconfig"; path = "Target Support Files/Pods-ESPProvision/Pods-ESPProvision.debug.xcconfig"; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 		F1C34D7E24618A5800340B04 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				20D0729C25DADA1500C15FE6 /* FoundPeripheral.swift */,
 				F1C34D8024618ACC00340B04 /* ESPWifiNetwork.swift */,
 			);
 			path = Model;
@@ -396,6 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20D0729D25DADA1500C15FE6 /* FoundPeripheral.swift in Sources */,
 				F1C34D502457479C00340B04 /* CryptoAES.swift in Sources */,
 				F1C34D76245F178E00340B04 /* ESPProvisionManager.swift in Sources */,
 				F1C34D6024596C8500340B04 /* wifi_constants.pb.swift in Sources */,

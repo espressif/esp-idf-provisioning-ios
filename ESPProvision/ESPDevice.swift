@@ -53,7 +53,6 @@ public protocol ESPDeviceConnectionDelegate {
 /// The `ESPDevice` class is the main inteface for managing a device. It encapsulates method and properties
 /// required to provision, connect and communicate with the device.
 public class ESPDevice {
-    
     /// Session instance of device.
     var session:ESPSession!
     /// Name of device.
@@ -82,6 +81,8 @@ public class ESPDevice {
     public var securityLayer: ESPCodeable!
     /// Storing device version information
     public var versionInfo:NSDictionary?
+    /// BLE advertisement data
+    public let advertisementData: [String: Any]
     
     private var transportLayer: ESPCommunicable!
     private var provision: ESPProvision!
@@ -102,11 +103,12 @@ public class ESPDevice {
     ///   - transport: Mode of transport.
     ///   - proofOfPossession: Pop of device.
     ///   - softAPPassword: Password in case SoftAP device.
-    init(name: String, security: ESPSecurity, transport: ESPTransport, proofOfPossession:String? = nil, softAPPassword:String? = nil) {
+    init(name: String, security: ESPSecurity, transport: ESPTransport, advertisementData: [String: Any], proofOfPossession:String? = nil, softAPPassword:String? = nil) {
         ESPLog.log("Intializing ESPDevice with name:\(name), security:\(security), transport:\(transport), proofOfPossession:\(proofOfPossession ?? "nil") and softAPPassword:\(softAPPassword ?? "nil")")
         self.deviceName = name
         self.security = security
         self.transport = transport
+        self.advertisementData = advertisementData
         self.proofOfPossession = proofOfPossession
         self.softAPPassword = softAPPassword
     }
