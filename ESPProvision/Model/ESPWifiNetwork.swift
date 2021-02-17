@@ -24,6 +24,14 @@ import SwiftProtobuf
 /// Array of this object is returned when scan Wi-Fi command is given to ESPDevice.
 public struct ESPWifiNetwork {
 
+    public static func createWith(ssid: String, auth: Espressif_WifiAuthMode, rssi: Int32) -> ESPWifiNetwork {
+        var nw = ESPWifiNetwork()
+        nw.ssid = ssid
+        nw.auth = auth
+        nw.rssi = rssi
+        return nw
+    }
+
     /// The name of wireless network.
     public var ssid: String = ""
     /// The numbers of Wi-Fi channel.

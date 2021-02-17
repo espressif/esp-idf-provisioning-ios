@@ -103,7 +103,7 @@ public class ESPDevice {
     ///   - transport: Mode of transport.
     ///   - proofOfPossession: Pop of device.
     ///   - softAPPassword: Password in case SoftAP device.
-    init(name: String, security: ESPSecurity, transport: ESPTransport, advertisementData: [String: Any], proofOfPossession:String? = nil, softAPPassword:String? = nil) {
+    public init(name: String, security: ESPSecurity, transport: ESPTransport, advertisementData: [String: Any], proofOfPossession:String? = nil, softAPPassword:String? = nil) {
         ESPLog.log("Intializing ESPDevice with name:\(name), security:\(security), transport:\(transport), proofOfPossession:\(proofOfPossession ?? "nil") and softAPPassword:\(softAPPassword ?? "nil")")
         self.deviceName = name
         self.security = security
