@@ -61,15 +61,11 @@ There are multiple app variants that you can build using this repository. You ca
 |`ESP Allow QR Code Scan`|`true`, `false`|`true`|Set false when QR code is not available or supported for device|
 |`ESP Allow Prefix Search`|`true`, `false`|`true`|Set false when search by prefix is not required for BLE devices|
 
+## Permissions
 
+- Since iOS 13, apps that want to access SSID (Wi-Fi network name) are required to have the location permission. Allow location access in app in order to verify that iOS device is currently connected with the SoftAP.
 
-
-
-
-
-
-  
-
+- Since iOS 14, apps that communicate over local network are required to have the local network permission. Allow access to this permission in app in order to send/receive provisioning data with SoftAP devices.
   
 
 # Resources
@@ -88,4 +84,4 @@ There are multiple app variants that you can build using this repository. You ca
 
   
 
-* If you're interested in contributing to ESP-IDF, please check the [Contributions Guide](https://docs.espressif.com/projects/esp-idf/en/latest/contribute/index.html).
+* If you're interested in contributing to this project, please check the [Contributions Guide](https://docs.espressif.com/projects/esp-idf/en/latest/contribute/index.html).

@@ -218,13 +218,13 @@ public enum ESPProvisionError: ESPError {
         case .wifiStatusError(let error):
             return "Unable to fetch wifi status with error: \(error.localizedDescription)"
         case .wifiStatusDisconnected:
-            return "Wi-Fi status disconnected"
+            return "Wi-Fi status: disconnected"
         case .wifiStatusAuthenticationError:
-            return "Wi-Fi status authentication error"
+            return "Wi-Fi status: authentication error"
         case .wifiStatusNetworkNotFound:
-            return "Wi-Fi status netowrk not found"
+            return "Wi-Fi status: network not found"
         case .wifiStatusUnknownError:
-            return "Wi-Fi status unknown error"
+            return "Wi-Fi status: unknown error"
         case .unknownError:
             return "Unknown error"
         }

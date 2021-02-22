@@ -45,7 +45,7 @@ protocol ESPCommunicable {
     /// - Parameters:
     ///   - path: Endpoint of base url.
     ///   - data: Config data to be sent.
-    ///   - completionHandler: Handler called when data is successfully sent and response is recieved.
+    ///   - completionHandler: Handler called when data is successfully sent and response is received.
     func SendConfigData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void)
 
     /// Check device configuration status.

@@ -71,7 +71,7 @@ class ESPProvision {
                             completionHandler(Espressif_Status.internalError, error)
                             return
                         }
-                        ESPLog.log("Recieved response.")
+                        ESPLog.log("Received response.")
                         let status = self.processSetWifiConfigResponse(response: response)
                         completionHandler(status, nil)
                     }
@@ -104,7 +104,7 @@ class ESPProvision {
                             completionHandler(Espressif_Status.internalError, error)
                             return
                         }
-                        ESPLog.log("Recieved response.")
+                        ESPLog.log("Received response.")
                         let status = self.processApplyConfigResponse(response: response)
                         completionHandler(status, nil)
                         self.pollForWifiConnectionStatus { wifiStatus, failReason, error in
@@ -132,7 +132,7 @@ class ESPProvision {
                         return
                     }
                     
-                    ESPLog.log("Response recieved.")
+                    ESPLog.log("Response received.")
                     do {
                         let (stationState, failReason) = try
                             self.processGetWifiConfigStatusResponse(response: response)

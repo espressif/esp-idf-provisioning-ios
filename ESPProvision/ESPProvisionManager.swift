@@ -219,7 +219,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
             guard let stringValue = readableObject.stringValue else { return }
             captureSession.stopRunning()
             parseQrCode(code: stringValue)
-            ESPLog.log("Recieved QR code response.")
+            ESPLog.log("Received QR code response.")
         }
     }
     

@@ -25,9 +25,9 @@ import SwiftProtobuf
 enum Security1SessionState: Int {
     /// Initial resuest of a session.
     case Request1
-    /// Recieved response for first state.
+    /// Received response for first state.
     case Response1Request2
-    /// Response recieved for second state.
+    /// Response Receive for second state.
     case Response2
     /// Handshake finished.
     case Finished
@@ -89,7 +89,7 @@ class ESPSecurity1: ESPCodeable {
         return request
     }
 
-    /// Encrypt data recieved in argument.
+    /// Encrypt data received in argument.
     ///
     /// - Parameter data: Data to be sent.
     /// - Returns: Encrypted data.
@@ -101,7 +101,7 @@ class ESPSecurity1: ESPCodeable {
         return cryptoAES.encrypt(data: data)
     }
 
-    /// Decrypt data recieved in argument.
+    /// Decrypt data received in argument.
     ///
     /// - Parameter data: Data to be sent.
     /// - Returns: Decrypted data.
@@ -176,7 +176,7 @@ class ESPSecurity1: ESPCodeable {
         }
     }
 
-    /// Processes data recieved as reponse of Step 0 request.
+    /// Processes data received as reponse of Step 0 request.
     ///
     /// - Parameter response: Step 0 response.
     /// - Throws: Security errors.
@@ -216,7 +216,7 @@ class ESPSecurity1: ESPCodeable {
         }
     }
     
-    /// Processes data recieved as reponse of Step 1 request.
+    /// Processes data received as reponse of Step 1 request.
     ///
     /// - Parameter response: Step 1 response.
     /// - Throws: Security errors.
