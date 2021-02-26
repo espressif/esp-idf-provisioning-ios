@@ -22,7 +22,7 @@ import Foundation
 enum Security0SessionState: Int {
     /// Initial state of a session.
     case State0
-    /// State of session after first response is recieved.
+    /// State of session after first response is received.
     case State1
 }
 
@@ -73,7 +73,7 @@ class ESPSecurity0: ESPCodeable {
     /// Send unsecured data.
     ///
     /// - Parameter data: Data from device.
-    /// - Returns: Data as recieved in the argument.
+    /// - Returns: Data as received in the argument.
     func decrypt(data: Data) -> Data? {
         
         ESPLog.log("Decrypted data security 0.")
@@ -102,7 +102,7 @@ class ESPSecurity0: ESPCodeable {
         return request
     }
 
-    /// Processes data recieved as reponse of Step 0 request.
+    /// Processes data received as reponse of Step 0 request.
     ///
     /// - Parameter response: Step 0 response.
     /// - Throws: Security errors.

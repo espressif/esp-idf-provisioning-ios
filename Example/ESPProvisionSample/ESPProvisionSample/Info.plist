@@ -41,6 +41,8 @@
 	<string>Connect with BLE Compatible devices for Provisioning</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Reading QR code</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>App requires access to local network in order to connect to SoftAP devices.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App requires your location permission in order to get current WiFi network ssid</string>
 	<key>UIApplicationSceneManifest</key>

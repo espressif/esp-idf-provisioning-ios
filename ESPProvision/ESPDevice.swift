@@ -200,7 +200,7 @@ public class ESPDevice {
     ///     - path: Enpoint of device.
     ///     - data: Data to be sent to device.
     ///     - completionHandler: The completion handler that is called when data transmission is successful.
-    ///                          Parameter of block include response recieved from the HTTP request or error if any.
+    ///                          Parameter of block include response received from the HTTP request or error if any.
     public func sendData(path:String, data:Data, completionHandler: @escaping (Data?, ESPSessionError?) -> Swift.Void) {
         if session == nil, !session.isEstablished {
             completionHandler(nil,.sessionNotEstablished)
@@ -282,7 +282,7 @@ public class ESPDevice {
         provision = ESPProvision(session: session)
         ESPLog.log("Configure wi-fi credentials in device.")
         provision.configureWifi(ssid: ssid, passphrase: passPhrase) { status, error in
-            ESPLog.log("Recieved configuration response.")
+            ESPLog.log("Received configuration response.")
             switch status {
                 case .success:
                     self.provision.applyConfigurations(completionHandler: { _, error in
@@ -457,7 +457,7 @@ public class ESPDevice {
     /// Process response for version information request.
     ///
     /// - Parameters:
-    ///     - response: Response recieved from version info request..
+    ///     - response: Response received from version info request..
     ///     - error: Error encountered if any.
     ///     - completionHandler: Invoked when error is encountered while processing version information.
     private func processVersionInfoResponse(response: Data?, error: Error?, completionHandler: @escaping (ESPSessionStatus) -> Void) {

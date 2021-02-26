@@ -127,6 +127,14 @@ espDevice.provision(ssid: ssid, passPhrase: passphrase) { status in
 
 ```
 
+## Permissions
+
+- Since iOS 13, apps that want to access SSID (Wi-Fi network name) are required to have the location permission. Add key `NSLocationWhenInUseUsageDescription` in Info.plist with proper description. This permission is required to verify iOS device is currently connected with the SoftAP. 
+
+- Since iOS 14, apps that communicate over local network are required to have the local network permission. Add key `NSLocalNetworkUsageDescription` in Info.plist with proper description. This permission is required to send/receive provisioning data with the SoftAP devices.
+
+
+
 ## License
 
 ESPProvision is released under the Apache License Version 2.0.

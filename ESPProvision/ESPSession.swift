@@ -76,7 +76,7 @@ class ESPSession {
                         return
                     }
                     
-                    ESPLog.log("Recieved response.")
+                    ESPLog.log("Received response.")
                     if let responseData = responseData {
                         self.initialize(response: responseData,
                                         completionHandler: completionHandler)
