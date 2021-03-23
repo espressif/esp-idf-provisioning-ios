@@ -78,7 +78,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     private var isBLEEnabled = false
     private var scanTimeout = 5.0
     private var readCounter = 0
-    private var deviceNamePrefix:String!
+    private var acceptanceHandler: ESPPeripheralAcceptanceHandler
     
     /// Stores Proof of Possesion for a device.
     var proofOfPossession:String?
@@ -102,12 +102,16 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     /// Create BLETransport object.
     ///
     /// - Parameters:
-    ///   - deviceNamePrefix: Device name prefix.
+    ///   - acceptanceHandler: Used to determine whether to keep a BLE scan result.
     ///   - scanTimeout: Timeout in seconds for which BLE scan should happen.
-    init(scanTimeout: TimeInterval, deviceNamePrefix: String, proofOfPossession:String? = nil) {
+    init(
+        scanTimeout: TimeInterval,
+        proofOfPossession:String? = nil,
+        acceptanceHandler: @escaping ESPPeripheralAcceptanceHandler
+    ) {
         ESPLog.log("Initalising BLE transport class with scan timeout \(scanTimeout)")
         self.scanTimeout = scanTimeout
-        self.deviceNamePrefix = deviceNamePrefix
+        self.acceptanceHandler = acceptanceHandler
         self.proofOfPossession = proofOfPossession
         utility = ESPUtility()
         super.init()
@@ -276,7 +280,7 @@ extension ESPBleTransport: CBCentralManagerDelegate {
                         rssi signalStrength: NSNumber) {
         ESPLog.log("Peripheral devices discovered.\(data.debugDescription)")
         if let peripheralName = data["kCBAdvDataLocalName"] as? String ?? peripheral.name  {
-            if peripheralName.lowercased().hasPrefix(deviceNamePrefix.lowercased()) {
+            if acceptanceHandler(peripheralName, data) {
                 espressifPeripherals[peripheralName] =
                     FoundPeripheral(
                         cbPeripheral: peripheral,

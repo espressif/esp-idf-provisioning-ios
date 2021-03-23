@@ -21,6 +21,10 @@ import UIKit
 import CoreBluetooth
 import AVFoundation
 
+/// A closure used to determine whether a BLE peripheral with given name and
+/// advertisement should be included in scan results.
+public typealias ESPPeripheralAcceptanceHandler = (String, [String: Any]) -> Bool
+
 /// Supported mode of communication with device.
 public enum ESPTransport {
     /// Communicate using bluetooth.
@@ -43,7 +47,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     
     private var espDevices:[ESPDevice] = []
     private var espBleTransport:ESPBleTransport!
-    private var devicePrefix = ""
+    private var acceptanceHandler: ESPPeripheralAcceptanceHandler?
     private var transport:ESPTransport = .ble
     private var security: ESPSecurity = .secure
     private var searchCompletionHandler: (([ESPDevice]?,ESPDeviceCSSError?) -> Void)?
@@ -69,8 +73,12 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     ///                        of search is returned as parameter of this function. When search is successful
     ///                        array of found devices are returned. When search fails then reaon for failure is
     ///                        returned as `ESPDeviceCSSError`.
-    public func searchESPDevices(devicePrefix: String,transport: ESPTransport, security:ESPSecurity = .secure, completionHandler: @escaping ([ESPDevice]?,ESPDeviceCSSError?) -> Void) {
-        
+    public func searchESPDevices(
+        acceptanceHandler: @escaping ESPPeripheralAcceptanceHandler,
+        transport: ESPTransport,
+        security: ESPSecurity = .secure,
+        completionHandler: @escaping ([ESPDevice]?,ESPDeviceCSSError?
+    ) -> Void) {
         ESPLog.log("Search ESPDevices called.")
         
         // Store handler to call when search is complete
@@ -79,12 +87,12 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
         
         // Store configuration related properties
         self.transport = transport
-        self.devicePrefix = devicePrefix
+        self.acceptanceHandler = acceptanceHandler
         self.security = security
         
         switch transport {
             case .ble:
-                espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: devicePrefix)
+                espBleTransport = ESPBleTransport(scanTimeout: 5.0, acceptanceHandler: acceptanceHandler)
                 espBleTransport.scan(delegate: self)
             case .softap:
                 ESPLog.log("ESP SoftAp Devices search is not yet supported in iOS.")
@@ -129,7 +137,8 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     /// - Parameter completionHandler: The completion handler is called when refresh is completed. Result
     ///                                of refresh is returned as parameter of this function.
     public func refreshDeviceList(completionHandler: @escaping ([ESPDevice]?,ESPDeviceCSSError?) -> Void) {
-        searchESPDevices(devicePrefix: self.devicePrefix, transport: self.transport, security: self.security, completionHandler: completionHandler)
+        guard let acceptanceHandler = acceptanceHandler else { return }
+        searchESPDevices(acceptanceHandler: acceptanceHandler, transport: self.transport, security: self.security, completionHandler: completionHandler)
     }
     
     /// Get authorization status of Camera.
@@ -268,7 +277,9 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
             self.searchCompletionHandler = nil
             self.scanCompletionHandler = completionHandler
             self.security = security
-            espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: deviceName, proofOfPossession: proofOfPossession)
+            espBleTransport = ESPBleTransport(scanTimeout: 5.0, proofOfPossession: proofOfPossession) { name, _ in
+                name == deviceName
+            }
             espBleTransport.scan(delegate: self)
         default:
             let newDevice = ESPDevice(

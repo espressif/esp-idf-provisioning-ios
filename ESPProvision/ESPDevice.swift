@@ -126,7 +126,7 @@ public class ESPDevice {
                 ESPLog.log("Start connecting ble device.")
                 bleConnectionStatusHandler = completionHandler
                 if espBleTransport == nil {
-                    espBleTransport = ESPBleTransport(scanTimeout: 0, deviceNamePrefix: "")
+                    espBleTransport = ESPBleTransport(scanTimeout: 0) { _, _ in true }
             }
                 espBleTransport.connect(peripheral: peripheral, withOptions: nil, delegate: self)
             case .softap:
