@@ -125,12 +125,6 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: - Helper Methods
     
-    func goToClaimVC(device: ESPDevice) {
-        let claimVC = storyboard?.instantiateViewController(withIdentifier: "claimVC") as! ClaimViewController
-        claimVC.espDevice = device
-        navigationController?.pushViewController(claimVC, animated: true)
-    }
-    
     func goToProvision(device: ESPDevice) {
         DispatchQueue.main.async {
             Utility.hideLoader(view: self.view)
@@ -139,15 +133,40 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
             self.navigationController?.pushViewController(provisionVC, animated: true)
         }
     }
-
-    private func showBusy(isBusy: Bool, message: String = "") {
-        DispatchQueue.main.async {
-            if isBusy {
-                let loader = MBProgressHUD.showAdded(to: self.view, animated: true)
-                loader.mode = MBProgressHUDMode.indeterminate
-                loader.label.text = message
-            } else {
-                MBProgressHUD.hide(for: self.view, animated: true)
+    
+    private func showAlert(error: String, action: UIAlertAction) {
+        let alertController = UIAlertController(title: "Error!", message: error, preferredStyle: .alert)
+        alertController.addAction(action)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func connectDevice(device:ESPDevice) {
+        device.connect(delegate: self) { status in
+            DispatchQueue.main.async {
+                Utility.hideLoader(view: self.view)
+            }
+            switch status {
+            case .connected:
+                DispatchQueue.main.async {
+                    self.goToProvision(device: device)
+                }
+            case let .failedToConnect(error):
+                DispatchQueue.main.async {
+                    var errorDescription = ""
+                    switch error {
+                    case .securityMismatch, .versionInfoError:
+                        errorDescription = error.description
+                    default:
+                        errorDescription = error.description + "\nCheck if POP is correct."
+                    }
+                    let action = UIAlertAction(title: "Retry", style: .default, handler: nil)
+                    self.showAlert(error: errorDescription, action: action)
+                }
+            default:
+                DispatchQueue.main.async {
+                    let action = UIAlertAction(title: "Retry", style: .default, handler: nil)
+                    self.showAlert(error: "Device disconnected", action: action)
+                }
             }
         }
     }
@@ -177,7 +196,7 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         Utility.showLoader(message: "Connecting to device", view: self.view)
-        self.goToClaimVC(device: self.bleDevices![indexPath.row])
+        self.connectDevice(device: self.bleDevices![indexPath.row])
     }
     
 }
@@ -186,5 +205,14 @@ extension BLELandingViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_: UITextField) -> Bool {
         view.endEditing(true)
         return false
+    }
+}
+
+extension BLELandingViewController: ESPDeviceConnectionDelegate {
+    func getProofOfPossesion(forDevice: ESPDevice, completionHandler: @escaping (String) -> Void) {
+        let connectVC = self.storyboard?.instantiateViewController(withIdentifier: "connectVC") as! ConnectViewController
+        connectVC.espDevice = forDevice
+        connectVC.popHandler = completionHandler
+        self.navigationController?.pushViewController(connectVC, animated: true)
     }
 }

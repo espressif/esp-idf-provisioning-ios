@@ -30,7 +30,7 @@
 		F1A0A47424A27E5000CB347C /* SoftAPLandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A0A47324A27E5000CB347C /* SoftAPLandingViewController.swift */; };
 		F1A0A47724A287E800CB347C /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1A0A47624A287E800CB347C /* NetworkExtension.framework */; };
 		F1A0A47A24A29C9900CB347C /* GitVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A0A47924A29C9800CB347C /* GitVersion.swift */; };
-		F1A3DBCA24A0E934005AF0ED /* ClaimViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A3DBC924A0E934005AF0ED /* ClaimViewController.swift */; };
+		F1A3DBCA24A0E934005AF0ED /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A3DBC924A0E934005AF0ED /* ConnectViewController.swift */; };
 		F1A3DBCC24A1072E005AF0ED /* ESPAppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A3DBCB24A1072E005AF0ED /* ESPAppSettings.swift */; };
 /* End PBXBuildFile section */
 
@@ -93,7 +93,7 @@
 		F1A0A47524A287DD00CB347C /* ESP BLE PROV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ESP BLE PROV.entitlements"; sourceTree = "<group>"; };
 		F1A0A47624A287E800CB347C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		F1A0A47924A29C9800CB347C /* GitVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitVersion.swift; sourceTree = "<group>"; };
-		F1A3DBC924A0E934005AF0ED /* ClaimViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimViewController.swift; sourceTree = "<group>"; };
+		F1A3DBC924A0E934005AF0ED /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
 		F1A3DBCB24A1072E005AF0ED /* ESPAppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPAppSettings.swift; sourceTree = "<group>"; };
 		F48E37150E222A0F06AED170 /* Pods-ESPProvisionSampleTests.softap.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvisionSampleTests.softap.xcconfig"; path = "Target Support Files/Pods-ESPProvisionSampleTests/Pods-ESPProvisionSampleTests.softap.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -247,7 +247,7 @@
 		F1A0A48A24A5DB5900CB347C /* Provision */ = {
 			isa = PBXGroup;
 			children = (
-				F1A3DBC924A0E934005AF0ED /* ClaimViewController.swift */,
+				F1A3DBC924A0E934005AF0ED /* ConnectViewController.swift */,
 				F19AEBD8249FD0D50078E5A1 /* WifiListTableViewCell.swift */,
 				F19AEBDA249FD8C10078E5A1 /* DeviceTypeViewController.swift */,
 				F19AEBD2249B926F0078E5A1 /* ScannerViewController.swift */,
@@ -514,7 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1A3DBCA24A0E934005AF0ED /* ClaimViewController.swift in Sources */,
+				F1A3DBCA24A0E934005AF0ED /* ConnectViewController.swift in Sources */,
 				F19AEBD7249BAB4D0078E5A1 /* StatusViewController.swift in Sources */,
 				F19AEBDF249FE1310078E5A1 /* BLEDeviceListViewCell.swift in Sources */,
 				F1A3DBCC24A1072E005AF0ED /* ESPAppSettings.swift in Sources */,

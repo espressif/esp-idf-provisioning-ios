@@ -109,6 +109,16 @@ espDevice.connect(delegate: self) { status in
 ```
 > Delegate is required to get Proof of Possession from user, if device has pop capability.
 
+Return proof of possession for the device as shown below from delegate class :
+
+```swift
+
+func getProofOfPossesion(forDevice: ESPDevice, completionHandler: @escaping (String) -> Void) {
+    completionHandler(proofOfPossession)
+}
+
+```
+
 If status is connected then application can proceed to scan list of available networks visible to device. This list can be used to give option to the user to choose network of their own choice.
 
 ```swift
