@@ -137,7 +137,7 @@ class SoftAPLandingViewController: UIViewController {
         if let ssid = connectedNetwork() {
             ESPProvisionManager.shared.createESPDevice(deviceName: ssid, transport: .softap, completionHandler: { device, _ in
                 if device != nil {
-                    self.goToClaimVC(device: device!)
+                    self.connectDevice(device: device!)
                 } else {
                     DispatchQueue.main.async {
                         self.retry(message: "Device could not be connected. Please try again")
@@ -150,6 +150,7 @@ class SoftAPLandingViewController: UIViewController {
             }
         }
     }
+    
     
     // MARK: - Notifications
 
@@ -170,30 +171,57 @@ class SoftAPLandingViewController: UIViewController {
 
     // MARK: - Helper Methods
     
-    func retry(message: String) {
+    private func connectDevice(device:ESPDevice) {
+        device.connect(delegate: self) { status in
+            DispatchQueue.main.async {
+                Utility.hideLoader(view: self.view)
+            }
+            switch status {
+            case .connected:
+                DispatchQueue.main.async {
+                    self.goToProvision(device: device)
+                }
+            case let .failedToConnect(error):
+                DispatchQueue.main.async {
+                    var errorDescription = ""
+                    switch error {
+                    case .securityMismatch, .versionInfoError:
+                        errorDescription = error.description
+                    default:
+                        errorDescription = error.description + "\nCheck if POP is correct."
+                    }
+                    let action = UIAlertAction(title: "Retry", style: .default, handler: nil)
+                    self.showAlert(error: errorDescription, action: action)
+                }
+            default:
+                DispatchQueue.main.async {
+                    let action = UIAlertAction(title: "Retry", style: .default, handler: nil)
+                    self.showAlert(error: "Device disconnected", action: action)
+                }
+            }
+        }
+    }
+    
+    private func goToProvision(device: ESPDevice) {
+        DispatchQueue.main.async {
+            Utility.hideLoader(view: self.view)
+            let provisionVC = self.storyboard?.instantiateViewController(withIdentifier: "provision") as! ProvisionViewController
+            provisionVC.espDevice = device
+            self.navigationController?.pushViewController(provisionVC, animated: true)
+        }
+    }
+    
+    private func showAlert(error: String, action: UIAlertAction) {
+        let alertController = UIAlertController(title: "Error!", message: error, preferredStyle: .alert)
+        alertController.addAction(action)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func retry(message: String) {
         Utility.hideLoader(view: view)
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
-    }
-
-    func showAlert(error: ESPDeviceCSSError, action: UIAlertAction) {
-        let alertController = UIAlertController(title: "Error!", message: error.description, preferredStyle: .alert)
-        alertController.addAction(action)
-        present(alertController, animated: true, completion: nil)
-    }
-
-    func goToClaimVC(device: ESPDevice) {
-        let claimVC = storyboard?.instantiateViewController(withIdentifier: "claimVC") as! ClaimViewController
-        claimVC.espDevice = device
-        claimVC.capabilities = capabilities
-        navigationController?.pushViewController(claimVC, animated: true)
-    }
-
-    func goToProvision(device: ESPDevice) {
-        let provVC = storyboard?.instantiateViewController(withIdentifier: "provision") as! ProvisionViewController
-        provVC.espDevice = device
-        navigationController?.pushViewController(provVC, animated: true)
     }
 
     private func SendHTTPData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void) {
@@ -228,4 +256,13 @@ class SoftAPLandingViewController: UIViewController {
 // Helper function inserted by Swift 4.2 migrator.
 private func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
     return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value) })
+}
+
+extension SoftAPLandingViewController: ESPDeviceConnectionDelegate {
+    func getProofOfPossesion(forDevice: ESPDevice, completionHandler: @escaping (String) -> Void) {
+        let connectVC = self.storyboard?.instantiateViewController(withIdentifier: "connectVC") as! ConnectViewController
+        connectVC.espDevice = forDevice
+        connectVC.popHandler = completionHandler
+        self.navigationController?.pushViewController(connectVC, animated: true)
+    }
 }

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-//  ClaimViewController.swift
+//  ConnectViewController.swift
 //  ESPProvisionSample
 //
 
@@ -20,12 +20,13 @@ import ESPProvision
 import UIKit
 
 // Class to let user enter the POP and establish connection with the device.
-class ClaimViewController: UIViewController {
+class ConnectViewController: UIViewController {
     
     @IBOutlet var popTextField: UITextField!
     @IBOutlet var headerLabel: UILabel!
     @IBOutlet var nextButton: UIButton!
     
+    var popHandler: ((String) -> Void)?
     var capabilities: [String]?
     var espDevice: ESPDevice!
     var pop = ""
@@ -46,20 +47,20 @@ class ClaimViewController: UIViewController {
     // On click of next button, establish session with device using connect API.
     @IBAction func nextBtnClicked(_: Any) {
         pop = popTextField.text ?? ""
-        Utility.showLoader(message: "Connecting to device", view: view)
-        espDevice.security = Utility.shared.espAppSettings.securityMode
-        espDevice.connect(delegate: self) { status in
-            DispatchQueue.main.async {
-                Utility.hideLoader(view: self.view)
-                switch status {
-                case .connected:
-                    self.goToProvision()
-                case let .failedToConnect(error):
-                    self.showStatusScreen(error: error)
-                default:
-                    let action = UIAlertAction(title: "Retry", style: .default, handler: nil)
-                    self.showAlert(error: "Device disconnected", action: action)
-                }
+            Utility.showLoader(message: "Connecting to device", view: view)
+            espDevice.security = Utility.shared.espAppSettings.securityMode
+            espDevice.connect(delegate: self) { status in
+                DispatchQueue.main.async {
+                    Utility.hideLoader(view: self.view)
+                    switch status {
+                    case .connected:
+                        self.goToProvision()
+                    case let .failedToConnect(error):
+                        self.showStatusScreen(error: error)
+                    default:
+                        let action = UIAlertAction(title: "Retry", style: .default, handler: nil)
+                        self.showAlert(error: "Device disconnected", action: action)
+                    }
             }
         }
     }
@@ -95,8 +96,8 @@ class ClaimViewController: UIViewController {
     }
 }
 
-extension ClaimViewController: ESPDeviceConnectionDelegate {
-    func getProofOfPossesion(forDevice _: ESPDevice) -> String? {
-        return pop
+    extension ConnectViewController: ESPDeviceConnectionDelegate {
+        func getProofOfPossesion(forDevice: ESPDevice, completionHandler: @escaping (String) -> Void) {
+            completionHandler(pop)
+        }
     }
-}
