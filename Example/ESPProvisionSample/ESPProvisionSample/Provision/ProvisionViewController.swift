@@ -143,14 +143,13 @@ class ProvisionViewController: UIViewController {
         if rssi > Int32(-50) {
             cell.signalImageView.image = UIImage(named: "wifi_symbol_strong")
         } else if rssi > Int32(-60) {
-            cell.signalImageView?.image = UIImage(named: "wifi_symbol_good")
+            cell.signalImageView.image = UIImage(named: "wifi_symbol_good")
         } else if rssi > Int32(-67) {
-            cell.signalImageView?.image = UIImage(named: "wifi_symbol_fair")
+            cell.signalImageView.image = UIImage(named: "wifi_symbol_fair")
         } else {
-            cell.signalImageView?.image = UIImage(named: "wifi_symbol_weak")
+            cell.signalImageView.image = UIImage(named: "wifi_symbol_weak")
         }
         if network.auth != .open {
-            cell.authenticationImageView.image = UIImage(named: "wifi_security")
             cell.authenticationImageView.isHidden = false
         } else {
             cell.authenticationImageView.isHidden = true
@@ -289,8 +288,10 @@ extension ProvisionViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "wifiListCell", for: indexPath) as! WifiListTableViewCell
         if indexPath.row >= wifiDetailList.count {
             cell.ssidLabel.text = "Join Other Network"
-            cell.signalImageView.image = UIImage(named: "add_icon")
+            cell.authenticationImageView.isHidden = true
+            cell.signalImageView.isHidden = true
         } else {
+            cell.signalImageView.isHidden = false
             cell.ssidLabel.text = wifiDetailList[indexPath.row].ssid
             setWifiIconImageFor(cell: cell, network: wifiDetailList[indexPath.row])
         }

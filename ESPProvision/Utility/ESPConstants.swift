@@ -39,17 +39,6 @@ struct ESPConstants {
     /// Path for establishing session with device.
     static let sessionPath = "prov-session"
 
-    // MARK: BLE Characteristics
-    
-    /// Key fo BLE scan characterstic.
-    static let scanCharacteristic = "scan"
-    /// Key for BLE session characterstic.
-    static let sessionCharacterstic = "session"
-    /// Key for BLE configuration characterstic.
-    static let configCharacterstic = "config"
-    /// Key for BLE version characterstic.
-    static let versionCharacterstic = "ver"
-
     // MARK: JSON Keys
     
     /// Key for getting device information.
