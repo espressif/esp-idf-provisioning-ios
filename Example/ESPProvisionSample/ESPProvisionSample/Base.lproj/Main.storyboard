@@ -541,18 +541,18 @@
                                                     <color key="textColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="0.89552119009999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifi_symbol_weak" translatesAutoresizingMaskIntoConstraints="NO" id="hvs-sL-RVc">
-                                                    <rect key="frame" x="364" y="19" width="30" height="22.5"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifi_security" translatesAutoresizingMaskIntoConstraints="NO" id="hvs-sL-RVc">
+                                                    <rect key="frame" x="374" y="22.5" width="20" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="2N8-Rp-WX8"/>
+                                                        <constraint firstAttribute="width" constant="20" id="2N8-Rp-WX8"/>
                                                         <constraint firstAttribute="width" secondItem="hvs-sL-RVc" secondAttribute="height" multiplier="4:3" id="MdF-DD-hoV"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LMw-rl-Ubd">
-                                                    <rect key="frame" x="332" y="22.5" width="20" height="15"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifi_symbol_good" translatesAutoresizingMaskIntoConstraints="NO" id="LMw-rl-Ubd">
+                                                    <rect key="frame" x="332" y="19" width="30" height="22.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="LMw-rl-Ubd" secondAttribute="height" multiplier="4:3" id="NGd-9l-3r4"/>
-                                                        <constraint firstAttribute="width" constant="20" id="soY-7z-Iap"/>
+                                                        <constraint firstAttribute="width" constant="30" id="soY-7z-Iap"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -569,8 +569,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="authenticationImageView" destination="LMw-rl-Ubd" id="oBF-k4-Nti"/>
-                                            <outlet property="signalImageView" destination="hvs-sL-RVc" id="3DC-e9-o5V"/>
+                                            <outlet property="authenticationImageView" destination="hvs-sL-RVc" id="MGb-Mm-KQN"/>
+                                            <outlet property="signalImageView" destination="LMw-rl-Ubd" id="W7b-P4-WlC"/>
                                             <outlet property="ssidLabel" destination="tCq-Zl-bQb" id="4s8-53-7t1"/>
                                         </connections>
                                     </tableViewCell>
@@ -1531,7 +1531,8 @@ Connect your mobile phone to the Wi-Fi network with a name like PROV_XXXXXX</str
         <image name="refresh_icon" width="128" height="128"/>
         <image name="settings_icon" width="24" height="24"/>
         <image name="status_icon" width="100" height="90"/>
-        <image name="wifi_symbol_weak" width="18" height="14"/>
+        <image name="wifi_security" width="13" height="14"/>
+        <image name="wifi_symbol_good" width="18" height="14"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
