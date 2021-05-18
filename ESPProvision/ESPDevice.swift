@@ -89,6 +89,7 @@ public class ESPDevice {
     private var softAPPassword:String?
     private var proofOfPossession:String?
     private var retryScan = false
+    private var deviceAccessToken: String?
     
     /// Get name of current `ESPDevice`.
     public var name:String {
@@ -364,6 +365,84 @@ public class ESPDevice {
     public func scanWifiList(completionHandler: @escaping ([ESPWifiNetwork]?,ESPWiFiScanError?) -> Void) {
         retryScan = true
         scanDeviceForWifiList(completionHandler: completionHandler)
+    }
+
+    /// Send Enterprise Wi-Fi credentials to device for provisioning
+    /// - Parameters:
+    ///     - username: of the WiFi being configured on the device
+    ///     - password: of the WiFi being configured on the device
+    ///     - completionHandler: The completion handler that is called when Wi-Fi is either successfully connected or error in case of failure
+    public func setEnterpriseCredentials(username: String, password: String, completionHandler: @escaping (Data?, ESPSessionError?) -> Void) {
+        let dict: [String: Any] = ["device_token": deviceAccessToken ?? "",
+                                   "username": username,
+                                   "password": password]
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
+            sendJSONObjectTo(endpoint: "set-wpa2-ent-creds", data: jsonData, completionHandler: completionHandler)
+        } catch (let parsingError) {
+            ESPLog.log("error: \(parsingError.localizedDescription)")
+            completionHandler(nil, ESPSessionError.sendDataError(parsingError))
+        }
+
+    }
+
+    /// setEnterPriseCertificate sends chunks of a given certificate to the device for provisioning
+    /// - Parameters:
+    ///     - certificate: Certificate of the enterprise network
+    ///     - completionHandler: block to be executed once we got a response back from the device
+    public func setEnterpriseCertificate(certificate: String, completionHandler: @escaping (Data?, ESPSessionError?) -> Void) {
+        setEnterpriseCertificate(certificate: certificate, sequence: 0, completionHandler: completionHandler)
+    }
+
+    /// setEnterpriseCertificate this private method is used to send chunks of data to the device
+    /// BLE only accepts lengths no more greater than 256 bits each
+    /// - Parameters:
+    ///     - certificate: to be chunked into small pieces
+    ///     - sequence: the index of the current sequence
+    ///     - completionHandler: completion handler that is called either success or error response from the device
+    private func setEnterpriseCertificate(certificate: String, sequence: Int, completionHandler: @escaping (Data?,  ESPSessionError?) -> Void) {
+        let startIndex = sequence * 256
+        let endIndex = min(certificate.count, (sequence + 1) * 256)
+        let last = endIndex < 256
+
+        let chunk = certificate[startIndex...endIndex]
+        do {
+            let dictionary: [String: Any]  = ["device_token": deviceAccessToken,
+                                               "seq": sequence,
+                                               "last": last,
+                                               "chunk": chunk]
+            let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
+
+            sendJSONObjectTo(endpoint: "set-wpa2-ent-ca", data: jsonData) { data, error in
+                if let error = error { completionHandler(nil, ESPSessionError.sendDataError(error)) }
+                guard let data = data else {
+                    completionHandler(nil, ESPSessionError.sessionNotEstablished)
+                }
+                if isLast {
+                    completionHandler(data, nil)
+                } else {
+                    setEnterpriseCertificate(certificate: certificate, sequence: sequence + 1, completionHandler: completionHandler)
+                }
+            }
+        } catch (let parsinError) {
+            ESPLog.log("parsing error: \(parsinError.localizedDescription)")
+            completionHandler(nil, ESPSessionError.sendDataError(parsinError))
+        }
+    }
+
+    /// Send JSONObject to custom endpoint of the device
+    /// - Parameters:
+    ///     - path: Endpoint
+    ///     - data: jsonObject data to be sent
+    ///     - completionHandler: listener for the operation's result
+    private func sendJSONObjectTo(endpoint path: String, data: Data, completionHandler: @escaping (Data?, ESPSessionError?) -> Void) {
+        do {
+            var stringMessage = ProtoMessage()
+            stringMessage.payload = String(data: data, encoding: .utf8)!
+            try sendData(path: path, data: stringMessage.jsonUTF8Data(), completionHandler: completionHandler)
+        } catch (let error) {
+            completionHandler(nil, ESPSessionError.sendDataError(error))
+        }
     }
     
     private func scanDeviceForWifiList(completionHandler: @escaping ([ESPWifiNetwork]?,ESPWiFiScanError?) -> Void) {
