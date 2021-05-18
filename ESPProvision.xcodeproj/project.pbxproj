@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		20D0729D25DADA1500C15FE6 /* FoundPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0729C25DADA1500C15FE6 /* FoundPeripheral.swift */; };
-		E9645E43CF7B1380FC310F19 /* Pods_ESPProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247B21F19D9AA0FB3A6A6B94 /* Pods_ESPProvision.framework */; };
+		40DF527B26542B9000924FBC /* stringmessage.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DF527A26542B9000924FBC /* stringmessage.pb.swift */; };
+		E3CACB9D3FFF05E6078BFA5C /* Pods_ESPProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19AF870770343FC0BF61462 /* Pods_ESPProvision.framework */; };
 		F151FF03247B1C40006F514E /* ESPProvisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151FEF8247B17B3006F514E /* ESPProvisionTests.swift */; };
 		F1C34D30244EEF0000340B04 /* ESPProvision.h in Headers */ = {isa = PBXBuildFile; fileRef = F1C34D22244EEEFF00340B04 /* ESPProvision.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F1C34D3C245017C900340B04 /* ESPDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D3B245017C900340B04 /* ESPDevice.swift */; };
@@ -65,11 +66,10 @@
 
 /* Begin PBXFileReference section */
 		20D0729C25DADA1500C15FE6 /* FoundPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundPeripheral.swift; sourceTree = "<group>"; };
-		247B21F19D9AA0FB3A6A6B94 /* Pods_ESPProvision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESPProvision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		44F8E73C277B503EAD29F630 /* Pods-ESPProvision-ESPProvisionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision-ESPProvisionTests.release.xcconfig"; path = "Target Support Files/Pods-ESPProvision-ESPProvisionTests/Pods-ESPProvision-ESPProvisionTests.release.xcconfig"; sourceTree = "<group>"; };
-		93F6B39AD52298DB1DAAFAAB /* Pods-ESPProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision.debug.xcconfig"; path = "Target Support Files/Pods-ESPProvision/Pods-ESPProvision.debug.xcconfig"; sourceTree = "<group>"; };
-		BE27ACFD5040E40697CB0D68 /* Pods-ESPProvision-ESPProvisionTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision-ESPProvisionTests.debug.xcconfig"; path = "Target Support Files/Pods-ESPProvision-ESPProvisionTests/Pods-ESPProvision-ESPProvisionTests.debug.xcconfig"; sourceTree = "<group>"; };
-		D591BD3AF972AF7922FC5B53 /* Pods_ESPProvision_ESPProvisionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESPProvision_ESPProvisionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40DF527A26542B9000924FBC /* stringmessage.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stringmessage.pb.swift; sourceTree = "<group>"; };
+		8F53C6BB025296989ED6C69D /* Pods-ESPProvision.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision.release.xcconfig"; path = "Target Support Files/Pods-ESPProvision/Pods-ESPProvision.release.xcconfig"; sourceTree = "<group>"; };
+		A19AF870770343FC0BF61462 /* Pods_ESPProvision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESPProvision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E48849F9286A8A8E49489F1C /* Pods-ESPProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision.debug.xcconfig"; path = "Target Support Files/Pods-ESPProvision/Pods-ESPProvision.debug.xcconfig"; sourceTree = "<group>"; };
 		F151FEE7247B1684006F514E /* ESPProvisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ESPProvisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F151FEF8247B17B3006F514E /* ESPProvisionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESPProvisionTests.swift; sourceTree = "<group>"; };
 		F151FEF9247B17B3006F514E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,7 +104,6 @@
 		F1C34D77245F17B900340B04 /* ESPProvision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPProvision.swift; sourceTree = "<group>"; };
 		F1C34D8024618ACC00340B04 /* ESPWifiNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPWifiNetwork.swift; sourceTree = "<group>"; };
 		F1C34DEE24673D7100340B04 /* ESPLogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPLogging.swift; sourceTree = "<group>"; };
-		F5BA5C9A9D78D7F36EF44D27 /* Pods-ESPProvision.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision.release.xcconfig"; path = "Target Support Files/Pods-ESPProvision/Pods-ESPProvision.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,18 +118,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9645E43CF7B1380FC310F19 /* Pods_ESPProvision.framework in Frameworks */,
+				E3CACB9D3FFF05E6078BFA5C /* Pods_ESPProvision.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E788B946D6509AFA326015D5 /* Frameworks */ = {
+		2C8959592BDA110432E0F117 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				247B21F19D9AA0FB3A6A6B94 /* Pods_ESPProvision.framework */,
-				D591BD3AF972AF7922FC5B53 /* Pods_ESPProvision_ESPProvisionTests.framework */,
+				A19AF870770343FC0BF61462 /* Pods_ESPProvision.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -151,7 +149,7 @@
 				F1C34D21244EEEFF00340B04 /* ESPProvision */,
 				F1C34D20244EEEFF00340B04 /* Products */,
 				F958A4511193B309B0C83AE5 /* Pods */,
-				E788B946D6509AFA326015D5 /* Frameworks */,
+				2C8959592BDA110432E0F117 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -209,6 +207,7 @@
 		F1C34D552459696400340B04 /* Proto */ = {
 			isa = PBXGroup;
 			children = (
+				40DF527A26542B9000924FBC /* stringmessage.pb.swift */,
 				F1C34D5624596C8500340B04 /* constants.pb.swift */,
 				F1C34D5B24596C8500340B04 /* sec0.pb.swift */,
 				F1C34D5824596C8500340B04 /* sec1.pb.swift */,
@@ -245,10 +244,8 @@
 		F958A4511193B309B0C83AE5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				93F6B39AD52298DB1DAAFAAB /* Pods-ESPProvision.debug.xcconfig */,
-				F5BA5C9A9D78D7F36EF44D27 /* Pods-ESPProvision.release.xcconfig */,
-				BE27ACFD5040E40697CB0D68 /* Pods-ESPProvision-ESPProvisionTests.debug.xcconfig */,
-				44F8E73C277B503EAD29F630 /* Pods-ESPProvision-ESPProvisionTests.release.xcconfig */,
+				E48849F9286A8A8E49489F1C /* Pods-ESPProvision.debug.xcconfig */,
+				8F53C6BB025296989ED6C69D /* Pods-ESPProvision.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -290,7 +287,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1C34D33244EEF0000340B04 /* Build configuration list for PBXNativeTarget "ESPProvision" */;
 			buildPhases = (
-				11D4E191FCCD29AA06822DDD /* [CP] Check Pods Manifest.lock */,
+				1639EC18919FAE96FCD46791 /* [CP] Check Pods Manifest.lock */,
 				F1C34D1A244EEEFF00340B04 /* Headers */,
 				F1C34D1B244EEEFF00340B04 /* Sources */,
 				F1C34D1C244EEEFF00340B04 /* Frameworks */,
@@ -362,7 +359,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		11D4E191FCCD29AA06822DDD /* [CP] Check Pods Manifest.lock */ = {
+		1639EC18919FAE96FCD46791 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -402,6 +399,7 @@
 				20D0729D25DADA1500C15FE6 /* FoundPeripheral.swift in Sources */,
 				F1C34D502457479C00340B04 /* CryptoAES.swift in Sources */,
 				F1C34D76245F178E00340B04 /* ESPProvisionManager.swift in Sources */,
+				40DF527B26542B9000924FBC /* stringmessage.pb.swift in Sources */,
 				F1C34D6024596C8500340B04 /* wifi_constants.pb.swift in Sources */,
 				F1C34D4B2457463700340B04 /* AESDecryptor.m in Sources */,
 				F1C34D702459F60900340B04 /* ESPErrors.swift in Sources */,
@@ -608,7 +606,7 @@
 		};
 		F1C34D34244EEF0000340B04 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93F6B39AD52298DB1DAAFAAB /* Pods-ESPProvision.debug.xcconfig */;
+			baseConfigurationReference = E48849F9286A8A8E49489F1C /* Pods-ESPProvision.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -640,7 +638,7 @@
 		};
 		F1C34D35244EEF0000340B04 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5BA5C9A9D78D7F36EF44D27 /* Pods-ESPProvision.release.xcconfig */;
+			baseConfigurationReference = 8F53C6BB025296989ED6C69D /* Pods-ESPProvision.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
