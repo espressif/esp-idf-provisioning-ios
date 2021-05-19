@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		20D0729D25DADA1500C15FE6 /* FoundPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D0729C25DADA1500C15FE6 /* FoundPeripheral.swift */; };
 		40DF527B26542B9000924FBC /* stringmessage.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40DF527A26542B9000924FBC /* stringmessage.pb.swift */; };
-		E3CACB9D3FFF05E6078BFA5C /* Pods_ESPProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A19AF870770343FC0BF61462 /* Pods_ESPProvision.framework */; };
+		CA29FF80A0A6D28611745A93 /* Pods_ESPProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B398A540CCE2CFEACB9AF1A /* Pods_ESPProvision.framework */; };
 		F151FF03247B1C40006F514E /* ESPProvisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151FEF8247B17B3006F514E /* ESPProvisionTests.swift */; };
 		F1C34D30244EEF0000340B04 /* ESPProvision.h in Headers */ = {isa = PBXBuildFile; fileRef = F1C34D22244EEEFF00340B04 /* ESPProvision.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F1C34D3C245017C900340B04 /* ESPDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D3B245017C900340B04 /* ESPDevice.swift */; };
@@ -67,9 +67,8 @@
 /* Begin PBXFileReference section */
 		20D0729C25DADA1500C15FE6 /* FoundPeripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundPeripheral.swift; sourceTree = "<group>"; };
 		40DF527A26542B9000924FBC /* stringmessage.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stringmessage.pb.swift; sourceTree = "<group>"; };
-		8F53C6BB025296989ED6C69D /* Pods-ESPProvision.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision.release.xcconfig"; path = "Target Support Files/Pods-ESPProvision/Pods-ESPProvision.release.xcconfig"; sourceTree = "<group>"; };
-		A19AF870770343FC0BF61462 /* Pods_ESPProvision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESPProvision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E48849F9286A8A8E49489F1C /* Pods-ESPProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision.debug.xcconfig"; path = "Target Support Files/Pods-ESPProvision/Pods-ESPProvision.debug.xcconfig"; sourceTree = "<group>"; };
+		7B398A540CCE2CFEACB9AF1A /* Pods_ESPProvision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESPProvision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86FFDD22EA61FF42E3FF2D9A /* Pods-ESPProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision.debug.xcconfig"; path = "Target Support Files/Pods-ESPProvision/Pods-ESPProvision.debug.xcconfig"; sourceTree = "<group>"; };
 		F151FEE7247B1684006F514E /* ESPProvisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ESPProvisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F151FEF8247B17B3006F514E /* ESPProvisionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESPProvisionTests.swift; sourceTree = "<group>"; };
 		F151FEF9247B17B3006F514E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,6 +103,7 @@
 		F1C34D77245F17B900340B04 /* ESPProvision.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPProvision.swift; sourceTree = "<group>"; };
 		F1C34D8024618ACC00340B04 /* ESPWifiNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPWifiNetwork.swift; sourceTree = "<group>"; };
 		F1C34DEE24673D7100340B04 /* ESPLogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPLogging.swift; sourceTree = "<group>"; };
+		FFC4C30CA0A3291B19B43191 /* Pods-ESPProvision.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision.release.xcconfig"; path = "Target Support Files/Pods-ESPProvision/Pods-ESPProvision.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,17 +118,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3CACB9D3FFF05E6078BFA5C /* Pods_ESPProvision.framework in Frameworks */,
+				CA29FF80A0A6D28611745A93 /* Pods_ESPProvision.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2C8959592BDA110432E0F117 /* Frameworks */ = {
+		085D54B5DFCF2700F1B00B2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A19AF870770343FC0BF61462 /* Pods_ESPProvision.framework */,
+				7B398A540CCE2CFEACB9AF1A /* Pods_ESPProvision.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -149,7 +149,7 @@
 				F1C34D21244EEEFF00340B04 /* ESPProvision */,
 				F1C34D20244EEEFF00340B04 /* Products */,
 				F958A4511193B309B0C83AE5 /* Pods */,
-				2C8959592BDA110432E0F117 /* Frameworks */,
+				085D54B5DFCF2700F1B00B2B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -244,8 +244,8 @@
 		F958A4511193B309B0C83AE5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E48849F9286A8A8E49489F1C /* Pods-ESPProvision.debug.xcconfig */,
-				8F53C6BB025296989ED6C69D /* Pods-ESPProvision.release.xcconfig */,
+				86FFDD22EA61FF42E3FF2D9A /* Pods-ESPProvision.debug.xcconfig */,
+				FFC4C30CA0A3291B19B43191 /* Pods-ESPProvision.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -287,7 +287,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1C34D33244EEF0000340B04 /* Build configuration list for PBXNativeTarget "ESPProvision" */;
 			buildPhases = (
-				1639EC18919FAE96FCD46791 /* [CP] Check Pods Manifest.lock */,
+				D5578AA0F36482E88121AB30 /* [CP] Check Pods Manifest.lock */,
 				F1C34D1A244EEEFF00340B04 /* Headers */,
 				F1C34D1B244EEEFF00340B04 /* Sources */,
 				F1C34D1C244EEEFF00340B04 /* Frameworks */,
@@ -310,7 +310,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = Espressif;
 				TargetAttributes = {
 					F151FEE6247B1684006F514E = {
@@ -359,7 +359,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1639EC18919FAE96FCD46791 /* [CP] Check Pods Manifest.lock */ = {
+		D5578AA0F36482E88121AB30 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -447,7 +447,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				INFOPLIST_FILE = ESPProvisionTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -469,7 +469,7 @@
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				INFOPLIST_FILE = ESPProvisionTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -510,6 +510,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -535,7 +536,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -573,6 +574,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -592,7 +594,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -606,7 +608,7 @@
 		};
 		F1C34D34244EEF0000340B04 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E48849F9286A8A8E49489F1C /* Pods-ESPProvision.debug.xcconfig */;
+			baseConfigurationReference = 86FFDD22EA61FF42E3FF2D9A /* Pods-ESPProvision.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -617,7 +619,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ESPProvision/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -638,7 +640,7 @@
 		};
 		F1C34D35244EEF0000340B04 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F53C6BB025296989ED6C69D /* Pods-ESPProvision.release.xcconfig */;
+			baseConfigurationReference = FFC4C30CA0A3291B19B43191 /* Pods-ESPProvision.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -649,7 +651,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ESPProvision/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
