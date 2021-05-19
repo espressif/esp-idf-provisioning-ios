@@ -404,7 +404,7 @@ public class ESPDevice {
         let endIndex = min(certificate.count, (sequence + 1) * 256)
         let isLast = endIndex < 256
         do {
-            let chunk = certificate[startIndex...endIndex]
+            let chunk = certificate[startIndex..<endIndex]
             let dictionary: [String: Any]  = ["device_token": "",
                                                "seq": sequence,
                                                "last": isLast,
