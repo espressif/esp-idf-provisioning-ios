@@ -93,6 +93,13 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
         
     }
     
+    /// Stops searching for Bluetooth devices. Not applicable for SoftAP device type.
+    /// Any intermediate search result will be ignored. Delegate for peripheralsNotFound is called.
+    public func stopESPDevicesSearch() {
+        ESPLog.log("Stop ESPDevices search called.")
+        espBleTransport.stopSearch()
+    }
+    
     /// Scan for `ESPDevice` using QR code.
     ///
     /// - Parameters:
@@ -286,16 +293,17 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
 }
 
 extension ESPProvisionManager: ESPBLETransportDelegate {
-    func peripheralsFound(peripherals: [String:CBPeripheral]) {
+    
+    func peripheralsFound(peripherals: [String:ESPDevice]) {
         
         ESPLog.log("Ble devices found :\(peripherals)")
         
         espDevices.removeAll()
-        for key in peripherals.keys {
-           let newESPDevice = ESPDevice(name: key, security: self.security, transport: .ble, proofOfPossession: espBleTransport.proofOfPossession)
-            newESPDevice.peripheral = peripherals[key]
-            newESPDevice.espBleTransport = espBleTransport
-            espDevices.append(newESPDevice)
+        for device in peripherals.values {
+            device.security = self.security
+            device.proofOfPossession  = espBleTransport.proofOfPossession
+            device.espBleTransport = espBleTransport
+            espDevices.append(device)
         }
         self.searchCompletionHandler?(espDevices,nil)
         self.scanCompletionHandler?(espDevices.first,nil)
@@ -308,12 +316,4 @@ extension ESPProvisionManager: ESPBLETransportDelegate {
         self.searchCompletionHandler?(nil,.espDeviceNotFound)
         self.scanCompletionHandler?(nil,.espDeviceNotFound)
     }
-
-    func peripheralConfigured(peripheral _: CBPeripheral) {}
-
-    func peripheralNotConfigured(peripheral _: CBPeripheral) {}
-
-    func peripheralDisconnected(peripheral: CBPeripheral, error _: Error?) {}
-
-    func bluetoothUnavailable() {}
 }
