@@ -89,6 +89,7 @@ public class ESPDevice {
     private var softAPPassword:String?
     private var proofOfPossession:String?
     private var retryScan = false
+    private var chunkSize = 256
     
     /// Get name of current `ESPDevice`.
     public var name:String {
@@ -400,9 +401,9 @@ public class ESPDevice {
     ///     - sequence: the index of the current sequence
     ///     - completionHandler: completion handler that is called either success or error response from the device
     private func setEnterpriseCertificate(certificate: String, sequence: Int, completionHandler: @escaping (Data?,  ESPSessionError?) -> Void) {
-        let startIndex = sequence * 256
-        let endIndex = min(certificate.count, (sequence + 1) * 256)
-        let isLast = endIndex < 256
+        let startIndex = sequence * chunkSize
+        let endIndex = min(certificate.count, (sequence + 1) * chunkSize)
+        let isLast = endIndex < chunkSize
         do {
             let chunk = certificate[startIndex..<endIndex]
             let dictionary: [String: Any]  = [ESPConstants.deviceTokenKey: "",
