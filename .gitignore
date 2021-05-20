@@ -70,3 +70,4 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 EspressifProvision/EspressifProvision/proto/*.swift
+*.lock
