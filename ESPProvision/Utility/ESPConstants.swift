@@ -38,6 +38,10 @@ struct ESPConstants {
     static let scanPath = "prov-scan"
     /// Path for establishing session with device.
     static let sessionPath = "prov-session"
+    /// Path for set trusted certificate to enterprise networks
+    static let certificatePath = "set-wpa2-ent-ca"
+    /// Path for getting access token from device
+    static let accessTokenPath = "set-wpa2-ent-creds"
 
     // MARK: BLE Characteristics
     
@@ -62,6 +66,18 @@ struct ESPConstants {
     static let noProofCapability = "no_pop"
     /// Key for getting security capability of device.
     static let noSecCapability = "no_sec"
+    /// Key for access token of device
+    static let deviceTokenKey = "device_token"
+    /// Key for certificate chunk
+    static let chunkKey = "chunk"
+    /// Key for sequence of certificate chunk
+    static let sequenceKey = "seq"
+    /// Key for last piece of chunk flag
+    static let lastKey = "last"
+    /// Key for username of a Wi-Fi network
+    static let username = "username"
+    /// Key for password of a Wi-Fi network
+    static let password = "password"
     
 }
 

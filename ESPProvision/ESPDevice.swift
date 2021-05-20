@@ -372,12 +372,12 @@ public class ESPDevice {
     ///     - password: of the WiFi being configured on the device
     ///     - completionHandler: The completion handler that is called when Wi-Fi is either successfully connected or error in case of failure
     public func setEnterpriseCredentials(username: String, password: String, completionHandler: @escaping (Data?, ESPSessionError?) -> Void) {
-        let dict: [String: Any] = ["device_token": "",
-                                   "username": username,
-                                   "password": password]
+        let dict: [String: Any] = [ESPConstants.deviceTokenKey: "",
+                                   ESPConstants.username: username,
+                                   ESPConstants.password: password]
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
-            sendJSONObjectTo(endpoint: "set-wpa2-ent-creds", data: jsonData, completionHandler: completionHandler)
+            sendJSONObjectTo(endpoint: ESPConstants.accessTokenPath, data: jsonData, completionHandler: completionHandler)
         } catch (let parsingError) {
             ESPLog.log("error: \(parsingError.localizedDescription)")
             completionHandler(nil, ESPSessionError.sendDataError(parsingError))
@@ -405,13 +405,13 @@ public class ESPDevice {
         let isLast = endIndex < 256
         do {
             let chunk = certificate[startIndex..<endIndex]
-            let dictionary: [String: Any]  = ["device_token": "",
-                                               "seq": sequence,
-                                               "last": isLast,
-                                               "chunk": chunk]
+            let dictionary: [String: Any]  = [ESPConstants.deviceTokenKey: "",
+                                              ESPConstants.sequenceKey: sequence,
+                                              ESPConstants.lastKey: isLast,
+                                              ESPConstants.chunkKey: chunk]
             let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
 
-            sendJSONObjectTo(endpoint: "set-wpa2-ent-ca", data: jsonData) { [weak self] data, error in
+            sendJSONObjectTo(endpoint: ESPConstants.certificatePath, data: jsonData) { [weak self] data, error in
                 if let error = error { completionHandler(nil, ESPSessionError.sendDataError(error)) }
                 guard let data = data else {
                     completionHandler(nil, ESPSessionError.sessionNotEstablished)
