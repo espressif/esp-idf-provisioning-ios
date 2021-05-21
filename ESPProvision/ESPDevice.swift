@@ -41,7 +41,30 @@ public enum ESPProvisionStatus {
     case configApplied
 }
 
-/// Class needs to conform to `ESPDeviceConnectionDelegate` protcol when trying to establish a connection.
+/// Class needs to conform to `ESPBLEDelegate` protocol in order to receive callbacks related with BLE devices.
+public protocol ESPBLEDelegate {
+    /// Peripheral associated with this ESPDevice is connected
+    ///
+    /// - Parameters:
+    ///  - peripheral: CBPeripheral for which callback is recieved.
+    func peripheralConnected()
+    /// Peripheral associated with this ESPDevice is disconnected.
+    ///
+    /// - Parameters:
+    ///  - peripheral: CBPeripheral for which callback is recieved.
+    ///  - error: Error description.
+    func peripheralDisconnected(peripheral: CBPeripheral, error: Error?)
+    
+    /// Failed to connect with the peripheral associated with this ESPDevice.
+    ///
+    /// - Parameters:
+    ///  - peripheral: CBPeripheral for which callback is recieved.
+    ///  - error: Error description.
+    func peripheralFailedToConnect(peripheral: CBPeripheral?, error: Error?)
+}
+
+
+/// Class needs to conform to `ESPDeviceConnectionDelegate` protocol when trying to establish a connection.
 public protocol ESPDeviceConnectionDelegate {
     /// Get Proof of possession for an `ESPDevice` from object conforming `ESPDeviceConnectionDelegate` protocol.
     ///
@@ -71,6 +94,8 @@ public class ESPDevice {
     var wifiListCompletionHandler: (([ESPWifiNetwork]?,ESPWiFiScanError?) -> Void)?
     /// Completion handler for BLE connection status.
     var bleConnectionStatusHandler: ((ESPSessionStatus) -> Void)?
+    /// Proof of possession 
+    var proofOfPossession:String?
     /// List of capabilities of a device.
     public var capabilities: [String]?
     /// Security implementation.
@@ -83,11 +108,15 @@ public class ESPDevice {
     public var securityLayer: ESPCodeable!
     /// Storing device version information
     public var versionInfo:NSDictionary?
+    /// Store BLE delegate information
+    public var bleDelegate: ESPBLEDelegate?
+    /// Advertisement data for BLE device
+    /// This property is read-only
+    public private(set) var advertisementData:[String:Any]?
     
     private var transportLayer: ESPCommunicable!
     private var provision: ESPProvision!
     private var softAPPassword:String?
-    private var proofOfPossession:String?
     private var retryScan = false
     
     /// Get name of current `ESPDevice`.
@@ -103,13 +132,14 @@ public class ESPDevice {
     ///   - transport: Mode of transport.
     ///   - proofOfPossession: Pop of device.
     ///   - softAPPassword: Password in case SoftAP device.
-    init(name: String, security: ESPSecurity, transport: ESPTransport, proofOfPossession:String? = nil, softAPPassword:String? = nil) {
+    init(name: String, security: ESPSecurity, transport: ESPTransport, proofOfPossession:String? = nil, softAPPassword:String? = nil, advertisementData: [String:Any]? = nil) {
         ESPLog.log("Intializing ESPDevice with name:\(name), security:\(security), transport:\(transport), proofOfPossession:\(proofOfPossession ?? "nil") and softAPPassword:\(softAPPassword ?? "nil")")
         self.deviceName = name
         self.security = security
         self.transport = transport
         self.proofOfPossession = proofOfPossession
         self.softAPPassword = softAPPassword
+        self.advertisementData = advertisementData
     }
     
     /// Establish session with device to allow data transmission.
@@ -549,14 +579,26 @@ extension ESPDevice: ESPScanWifiListProtocol {
 
 extension ESPDevice: ESPBLEStatusDelegate {
     func peripheralConnected() {
-        ESPLog.log("Peripheral Connected")
+        ESPLog.log("Peripheral connected.")
         self.getDeviceVersionInfo(completionHandler: bleConnectionStatusHandler!)
+        bleDelegate?.peripheralConnected()
     }
     
-    func peripheralDisconnected() {}
+    func peripheralDisconnected(peripheral: CBPeripheral, error: Error?) {
+        ESPLog.log("Peripheral disconnected.")
+        if self.peripheral.identifier.uuidString == peripheral.identifier.uuidString {
+            bleDelegate?.peripheralDisconnected(peripheral: peripheral, error: error)
+        }
+    }
     
-    func peripheralFailedToConnect() {
+    func peripheralFailedToConnect(peripheral: CBPeripheral?, error: Error?) {
+        ESPLog.log("Peripheral failed to connect.")
         bleConnectionStatusHandler?(.failedToConnect(.bleFailedToConnect))
+        if peripheral == nil {
+            bleDelegate?.peripheralFailedToConnect(peripheral: self.peripheral, error: error)
+        } else if self.peripheral.identifier.uuidString == peripheral?.identifier.uuidString {
+            bleDelegate?.peripheralFailedToConnect(peripheral: peripheral, error: error)
+        }
     }
     
     
