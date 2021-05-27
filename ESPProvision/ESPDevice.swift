@@ -377,7 +377,7 @@ public class ESPDevice {
                                    ESPConstants.username: username,
                                    ESPConstants.password: password]
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
+            let jsonData = try JSONSerialization.data(withJSONObject: dict, options: [])
             sendJSONObjectTo(endpoint: ESPConstants.accessTokenPath, data: jsonData, completionHandler: completionHandler)
         } catch (let parsingError) {
             ESPLog.log("error: \(parsingError.localizedDescription)")
@@ -438,8 +438,8 @@ public class ESPDevice {
     private func sendJSONObjectTo(endpoint path: String, data: Data, completionHandler: @escaping (Data?, ESPSessionError?) -> Void) {
         do {
             var stringMessage = ProtoMessage()
-            stringMessage.payload = String(data: data, encoding: .utf8)!
-            try sendData(path: path, data: stringMessage.jsonUTF8Data(), completionHandler: completionHandler)
+            stringMessage.payload = String(data: data, encoding: String.Encoding.ascii)!
+            try sendData(path: path, data: stringMessage.serializedData(), completionHandler: completionHandler)
         } catch (let error) {
             completionHandler(nil, ESPSessionError.sendDataError(error))
         }
