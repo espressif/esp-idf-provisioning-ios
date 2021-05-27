@@ -410,7 +410,7 @@ public class ESPDevice {
                                               ESPConstants.sequenceKey: sequence,
                                               ESPConstants.lastKey: isLast,
                                               ESPConstants.chunkKey: chunk]
-            let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: .prettyPrinted)
+            let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
 
             sendJSONObjectTo(endpoint: ESPConstants.certificatePath, data: jsonData) { [weak self] data, error in
                 if let error = error { completionHandler(nil, ESPSessionError.sendDataError(error)) }
