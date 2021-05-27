@@ -402,8 +402,9 @@ public class ESPDevice {
     ///     - completionHandler: completion handler that is called either success or error response from the device
     private func setEnterpriseCertificate(certificate: String, sequence: Int, completionHandler: @escaping (Data?,  ESPSessionError?) -> Void) {
         let startIndex = sequence * chunkSize
-        let endIndex = min(certificate.count, (sequence + 1) * chunkSize)
-        let isLast = endIndex < chunkSize
+        let nChars = min(chunkSize, certificate.count - startIndex)
+        let endIndex = startIndex + nChars
+        let isLast = (endIndex >= certificate.count)
         do {
             let chunk = certificate[startIndex..<endIndex]
             let dictionary: [String: Any]  = [ESPConstants.deviceTokenKey: "",
