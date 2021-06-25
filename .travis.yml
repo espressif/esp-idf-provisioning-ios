@@ -1,13 +1,14 @@
 language: objective-c
 osx_image: xcode11.5
-xcode_workspace: ESPProvision.xcworkspace
-xcode_scheme: ESPProvision
-xcode_destination: platform=iOS Simulator,OS=12.1,name=iPhone X
+script:
+  - set -o pipefail
+  - xcodebuild -workspace ESPProvision.xcworkspace -scheme ESPProvision build | xcpretty
 before_install:
-- pod install
+  - gem install cocoapods
+  - pod install
 after_success:
-    - gem install jazzy
-    - make documentation
+  - gem install jazzy
+  - make documentation
 deploy:
   provider: pages
   skip-cleanup: true
