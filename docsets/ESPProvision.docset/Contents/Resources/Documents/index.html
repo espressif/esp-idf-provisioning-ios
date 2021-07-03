@@ -8,12 +8,20 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a title="ESPProvision  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">ESPProvision 2.0 Docs</a> (61% documented)</p>
+        <p><a href="index.html">ESPProvision 2.0.12 Docs</a> (61% documented)</p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -164,6 +172,9 @@
             <a href="Protocols.html">Protocols</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Protocols/ESPBLEDelegate.html">ESPBLEDelegate</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Protocols/ESPBLEStatusDelegate.html">ESPBLEStatusDelegate</a>
               </li>
               <li class="nav-group-task">
@@ -301,7 +312,7 @@
             
             <h1 id='espprovision' class='heading'>ESPProvision</h1>
 
-<p>ESPProvision is a provisioning library written in Swift. It provides mechanism to provide network credentials and/or custom data to an ESP32 or ESP32-S2 devices.</p>
+<p>ESPProvision is a provisioning library written in Swift. It provides mechanism to provide network credentials and/or custom data to an ESP32, ESP32-S2 or ESP8266 devices.</p>
 
 <ul>
 <li><a href="#features">Features</a></li>
@@ -315,6 +326,7 @@
 <li><a href="#provisioning">*<strong><em>Provisioning</em></strong>*</a></li>
 </ul></li>
 <li><a href="#license">License</a></li>
+<li><a href="https://espressif.github.io/esp-idf-provisioning-ios/">API Documentation</a></li>
 </ul>
 <h2 id='features' class='heading'>Features</h2>
 
@@ -348,10 +360,10 @@
 <h2 id='using-espprovision' class='heading'>Using ESPProvision</h2>
 <h2 id='introduction' class='heading'>Introduction</h2>
 
-<p>ESPProvision provides a simpler mechanism to communicate with an ESP-32 and ESP32-S2 devices. It gives an efficient search and scan model to listen and return devices which are in provisioning mode. ESProvision embeds security protocol and allow for safe transmission of data by doing end to end encryption. It supports BLE and SoftAP as mode of transmission which are configurable at runtime. Its primarily use is to provide home network credentials to a device and ensure device connectivity status is returned to the application.</p>
+<p>ESPProvision provides a simpler mechanism to communicate with an ESP-32, ESP32-S2 and ESP8266 devices. It gives an efficient search and scan model to listen and return devices which are in provisioning mode. ESProvision embeds security protocol and allow for safe transmission of data by doing end to end encryption. It supports BLE and SoftAP as mode of transmission which are configurable at runtime. Its primarily use is to provide home network credentials to a device and ensure device connectivity status is returned to the application.</p>
 <h2 id='getting-espdevice' class='heading'>Getting ESPDevice</h2>
 
-<p><code><a href="Classes/ESPDevice.html">ESPDevice</a></code> object is virtual representation of ESP-32/ESP32-S2 devices. It provides interface to interact with devices directly in a simpler manner. <code><a href="Classes/ESPProvisionManager.html">ESPProvisionManager</a></code> is a singleton class that encompasses APIs for managing these objects. <code><a href="Classes/ESPDevice.html">ESPDevice</a></code> instances can be obtained from any of the following techniques : </p>
+<p><code><a href="Classes/ESPDevice.html">ESPDevice</a></code> object is virtual representation of ESP-32/ESP32-S2/ESP8266 devices. It provides interface to interact with devices directly in a simpler manner. <code><a href="Classes/ESPProvisionManager.html">ESPProvisionManager</a></code> is a singleton class that encompasses APIs for managing these objects. <code><a href="Classes/ESPDevice.html">ESPDevice</a></code> instances can be obtained from any of the following techniques : </p>
 <h3 id='search' class='heading'>Search</h3>
 
 <p>ESPProvision supports searching of BLE devices which are currently in provisioning mode. It returns list of devices that are discoverable and matches the parameter criteria.</p>
@@ -395,6 +407,14 @@ SoftAP search is not supported in iOS currently.</p>
 <p>Delegate is required to get Proof of Possession from user, if device has pop capability.</p>
 </blockquote>
 
+<p>Return proof of possession for the device as shown below from delegate class :</p>
+<pre class="highlight swift"><code>
+<span class="kd">func</span> <span class="nf">getProofOfPossesion</span><span class="p">(</span><span class="nv">forDevice</span><span class="p">:</span> <span class="kt">ESPDevice</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">completionHandler</span><span class="p">(</span><span class="n">proofOfPossession</span><span class="p">)</span>
+<span class="p">}</span>
+
+</code></pre>
+
 <p>If status is connected then application can proceed to scan list of available networks visible to device. This list can be used to give option to the user to choose network of their own choice.</p>
 <pre class="highlight swift"><code>
 <span class="n">espDevice</span><span class="o">.</span><span class="n">scanWifiList</span> <span class="p">{</span> <span class="n">wifiList</span><span class="p">,</span> <span class="n">_</span> <span class="k">in</span> 
@@ -408,6 +428,16 @@ SoftAP search is not supported in iOS currently.</p>
 <span class="p">}</span>
 
 </code></pre>
+<h2 id='permissions' class='heading'>Permissions</h2>
+<div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>Since iOS 13, apps that want to access SSID (Wi-Fi network name) are required to have the location permission. Add key <code>NSLocationWhenInUseUsageDescription</code> in Info.plist with proper description. This permission is required to verify iOS device is currently connected with the SoftAP. </p>
+
+</div><div class="aside aside-since">
+    <p class="aside-title">Since</p>
+    <p>Since iOS 14, apps that communicate over local network are required to have the local network permission. Add key <code>NSLocalNetworkUsageDescription</code> in Info.plist with proper description. This permission is required to send/receive provisioning data with the SoftAP devices.</p>
+
+</div>
 <h2 id='license' class='heading'>License</h2>
 
 <p>ESPProvision is released under the Apache License Version 2.0.</p>
@@ -415,8 +445,8 @@ SoftAP search is not supported in iOS currently.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="https://github.com/espressif/esp-idf-provisioning-ios" target="_blank" rel="external">Espressif Systems</a>. All rights reserved. (Last updated: 2020-05-29)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2021 <a class="link" href="https://github.com/espressif/esp-idf-provisioning-ios" target="_blank" rel="external">Espressif Systems</a>. All rights reserved. (Last updated: 2021-06-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>
