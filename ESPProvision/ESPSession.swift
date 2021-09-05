@@ -60,15 +60,16 @@ class ESPSession {
     ///
     /// - Parameters:
     ///   - response: Response received from the device.
+    ///   - sessionPath: Path for sending session related data.
     ///   - completionHandler: Handler called when the session establishment completes.
-    func initialize(response: Data?, completionHandler: @escaping (Error?) -> Swift.Void) {
+    func initialize(response: Data?, sessionPath: String?, completionHandler: @escaping (Error?) -> Swift.Void) {
         
         ESPLog.log("Initializing the session handshake to establish a secure session with the device.")
         do {
             let request = try securityLayerPrivate.getNextRequestInSession(data: response)
             ESPLog.log("session intialize")
             if let request = request {
-                transportLayerPrivate.SendSessionData(data: request) { responseData, error in
+                transportLayerPrivate.SendSessionData(data: request, sessionPath: sessionPath) { responseData, error in
                     
                     guard error == nil else {
                         ESPLog.log("Session error: \(error.debugDescription)")
@@ -78,7 +79,7 @@ class ESPSession {
                     
                     ESPLog.log("Received response.")
                     if let responseData = responseData {
-                        self.initialize(response: responseData,
+                        self.initialize(response: responseData, sessionPath: sessionPath,
                                         completionHandler: completionHandler)
                     } else {
                         ESPLog.log("Session establishment failed.")

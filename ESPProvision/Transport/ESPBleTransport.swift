@@ -109,9 +109,9 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     ///
     /// - Parameters:
     ///   - data: Data to be sent.
+    ///   - sessionPath: Not required.
     ///   - completionHandler: Handler called when data is sent.
-    func SendSessionData(data: Data,
-                         completionHandler: @escaping (Data?, Error?) -> Void) {
+    func SendSessionData(data: Data, sessionPath: String?, completionHandler: @escaping (Data?, Error?) -> Void) {
         ESPLog.log("Sending session data.")
         guard peripheralCanWrite, peripheralCanRead,
             let espressifPeripheral = currentPeripheral else {

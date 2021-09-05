@@ -37,8 +37,9 @@ protocol ESPCommunicable {
     ///
     /// - Parameters:
     ///   - data: Data to be sent.
+    ///   - sessionPath: Path for sending session related data.
     ///   - completionHandler: Handler called when data is successfully sent and response is received.
-    func SendSessionData(data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void)
+    func SendSessionData(data: Data, sessionPath: String?, completionHandler: @escaping (Data?, Error?) -> Swift.Void)
 
     /// Send data related to device configurations.
     ///
