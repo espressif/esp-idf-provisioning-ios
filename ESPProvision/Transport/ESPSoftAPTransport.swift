@@ -23,7 +23,7 @@ import NetworkExtension
 
 /// The `ESPSoftAPTransport` class conforms and implememnt methods of `ESPCommunicable` protocol.
 /// This class provides methods for sending configuration and session related data to  `ESPDevice`.
-class ESPSoftAPTransport: ESPCommunicable {
+public class ESPSoftAPTransport: ESPCommunicable {
     
     /// Instance of `ESPUtility`.
     var utility: ESPUtility
@@ -42,7 +42,7 @@ class ESPSoftAPTransport: ESPCommunicable {
     /// Create HTTP implementation of Transport protocol
     ///
     /// - Parameter baseUrl: base URL for the HTTP endpoints
-    init(baseUrl: String) {
+    public init(baseUrl: String) {
         self.baseUrl = baseUrl
         utility = ESPUtility()
         let config = URLSessionConfiguration.default
@@ -93,10 +93,15 @@ class ESPSoftAPTransport: ESPCommunicable {
     ///
     /// - Parameters:
     ///   - data: Data to be sent.
+    ///   - sessionPath: Path for sending session related data.
     ///   - completionHandler: Handler called when data is successfully sent and response received.
-    func SendSessionData(data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void) {
+    func SendSessionData(data: Data, sessionPath: String?, completionHandler: @escaping (Data?, Error?) -> Swift.Void) {
         ESPLog.log("Sending session data.")
-        SendHTTPData(path: "prov-session", data: data, completionHandler: completionHandler)
+        if let path = sessionPath {
+            SendHTTPData(path: path, data: data, completionHandler: completionHandler)
+        } else {
+            SendHTTPData(path: "esp_local_ctrl/session", data: data, completionHandler: completionHandler)
+        }
     }
 
     /// HTTP implementation of the Transport protocol
@@ -105,7 +110,7 @@ class ESPSoftAPTransport: ESPCommunicable {
     ///   - path: Endpoint of base url.
     ///   - data: Data to be sent.
     ///   - completionHandler: Handler called when data is successfully sent and response received.
-    func SendConfigData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void) {
+    public func SendConfigData(path: String, data: Data, completionHandler: @escaping (Data?, Error?) -> Swift.Void) {
         ESPLog.log("Send config data to path \(path)")
         SendHTTPData(path: path, data: data, completionHandler: completionHandler)
     }
