@@ -52,7 +52,9 @@ class ESPUtility {
                 peripheralConfigured = true
                 sessionCharacteristic = descriptor.characteristic
             }
-            configUUIDMap.updateValue(descriptor.characteristic, forKey: value)
+            if let associatedCharacteristic = descriptor.characteristic {
+                configUUIDMap.updateValue(associatedCharacteristic, forKey: value)
+            }
         }
     }
 }
