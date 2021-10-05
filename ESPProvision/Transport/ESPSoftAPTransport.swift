@@ -100,7 +100,7 @@ public class ESPSoftAPTransport: ESPCommunicable {
         if let path = sessionPath {
             SendHTTPData(path: path, data: data, completionHandler: completionHandler)
         } else {
-            SendHTTPData(path: "esp_local_ctrl/session", data: data, completionHandler: completionHandler)
+            SendHTTPData(path: "prov-session", data: data, completionHandler: completionHandler)
         }
     }
 
