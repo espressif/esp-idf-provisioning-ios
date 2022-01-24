@@ -210,7 +210,25 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
                 return
             }
 
-            self.previewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+            let aPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession)
+            
+            if aPreviewLayer.connection?.isVideoOrientationSupported ?? false {
+                
+                var interfaceOrientation:UIInterfaceOrientation = .portrait
+                var videoOrientation:AVCaptureVideoOrientation  = .portrait
+                
+                if #available(iOS 13.0, *) {
+                    interfaceOrientation = UIApplication.shared.windows.first?.windowScene?.interfaceOrientation ?? .portrait
+                    
+                } else {
+                    interfaceOrientation = UIApplication.shared.statusBarOrientation
+                }
+                
+                videoOrientation = interfaceOrientation.videoOrientation ?? videoOrientation
+                aPreviewLayer.connection?.videoOrientation = videoOrientation
+            }
+            
+            self.previewLayer = aPreviewLayer
             self.previewLayer?.frame = scanView.layer.bounds
             self.previewLayer?.videoGravity = .resizeAspectFill
             scanView.layer.addSublayer(self.previewLayer!)
@@ -317,5 +335,17 @@ extension ESPProvisionManager: ESPBLETransportDelegate {
         
         self.searchCompletionHandler?(nil,.espDeviceNotFound)
         self.scanCompletionHandler?(nil,.espDeviceNotFound)
+    }
+}
+
+extension UIInterfaceOrientation {
+    var videoOrientation: AVCaptureVideoOrientation? {
+        switch self {
+        case .portraitUpsideDown: return .portraitUpsideDown
+        case .landscapeRight: return .landscapeRight
+        case .landscapeLeft: return .landscapeLeft
+        case .portrait: return .portrait
+        default: return nil
+        }
     }
 }
