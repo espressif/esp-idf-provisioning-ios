@@ -275,7 +275,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
             }
         }
         ESPLog.log("Invalid QR code.")
-        scanCompletionHandler?(nil,.invalidQRCode)
+        scanCompletionHandler?(nil,.invalidQRCode(code))
     }
         
     /// Manually create `ESPDevice` object.
