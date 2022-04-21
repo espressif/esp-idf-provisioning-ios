@@ -50,20 +50,20 @@ class ESPUtility {
         if let value = descriptor.value as? String {
             if value.contains(ESPConstants.scanCharacteristic) {
                 scanPath = value
-                configUUIDMap.updateValue(descriptor.characteristic, forKey: scanPath)
+                configUUIDMap.updateValue(descriptor.characteristic!, forKey: scanPath)
             } else if value.contains(ESPConstants.sessionCharacterstic) {
                 sessionPath = value
                 peripheralConfigured = true
                 sessionCharacteristic = descriptor.characteristic
-                configUUIDMap.updateValue(descriptor.characteristic, forKey: sessionPath)
+                configUUIDMap.updateValue(descriptor.characteristic!, forKey: sessionPath)
             } else if value.contains(ESPConstants.configCharacterstic) {
                 configPath = value
-                configUUIDMap.updateValue(descriptor.characteristic, forKey: configPath)
+                configUUIDMap.updateValue(descriptor.characteristic!, forKey: configPath)
             } else if value.contains(ESPConstants.versionCharacterstic) {
                 versionPath = value
-                configUUIDMap.updateValue(descriptor.characteristic, forKey: versionPath)
+                configUUIDMap.updateValue(descriptor.characteristic!, forKey: versionPath)
             } else {
-                configUUIDMap.updateValue(descriptor.characteristic, forKey: value)
+                configUUIDMap.updateValue(descriptor.characteristic!, forKey: value)
             }
         }
     }
