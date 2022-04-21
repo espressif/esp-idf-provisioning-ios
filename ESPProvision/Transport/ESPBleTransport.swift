@@ -64,7 +64,6 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     /// Instance of 'ESPUtility' class.
     var utility: ESPUtility
 
-    private var transportToken = DispatchSemaphore(value: 1)
     private var isBLEEnabled = false
     private var scanTimeout = 5.0
     private var readCounter = 0
@@ -118,8 +117,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
             completionHandler(nil, ESPTransportError.deviceUnreachableError("BLE device unreachable"))
             return
         }
-
-        transportToken.wait()
+        
         espressifPeripheral.writeValue(data, for: utility.sessionCharacteristic, type: .withResponse)
         currentRequestCompletionHandler = completionHandler
     }
@@ -139,14 +137,12 @@ class ESPBleTransport: NSObject, ESPCommunicable {
             completionHandler(nil, ESPTransportError.deviceUnreachableError("BLE device unreachable"))
             return
         }
-
-        transportToken.wait()
+        
         if let characteristic = utility.configUUIDMap[path] {
             espressifPeripheral.writeValue(data, for: characteristic, type: .withResponse)
             currentRequestCompletionHandler = completionHandler
         } else {
             completionHandler(nil,NSError(domain: "com.espressif.ble", code: 1, userInfo: [NSLocalizedDescriptionKey:"BLE characteristic does not exist."]))
-            transportToken.signal()
         }
     }
 
@@ -353,7 +349,6 @@ extension ESPBleTransport: CBPeripheralDelegate {
             }
             self.currentRequestCompletionHandler = nil
         }
-        transportToken.signal()
     }
 
     func peripheral(_: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error _: Error?) {
