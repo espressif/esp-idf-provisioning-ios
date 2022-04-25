@@ -319,6 +319,11 @@ open class ESPDevice {
         
     }
     
+    /// Returns the wireless network IP 4 address after successful provision.
+    public func wifiConnectedIp4Addr() -> String? {
+        return self.provision?.wifiConnectedIp4Addr
+    }
+    
     private func provisionDevice(ssid: String, passPhrase: String = "", retryOnce: Bool, completionHandler: @escaping (ESPProvisionStatus) -> Void) {
         provision = ESPProvision(session: session)
         ESPLog.log("Configure wi-fi credentials in device.")
