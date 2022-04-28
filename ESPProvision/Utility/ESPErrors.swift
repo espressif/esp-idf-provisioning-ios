@@ -140,7 +140,7 @@ public enum ESPDeviceCSSError: ESPError {
     /// AVCaptureOutput instance can not be added to session.
     case videoOutputError
     /// QR code has some missing parameters or unsupported type. Please refer to RainMaker docs for more details.
-    case invalidQRCode
+    case invalidQRCode(String)
     /// No ESPDevice is found on search.
     case espDeviceNotFound
     /// SoftAp ESPDeivce search is not currently supported in iOS.
