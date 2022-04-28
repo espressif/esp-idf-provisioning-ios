@@ -27,7 +27,7 @@ ESPProvision is a provisioning library written in Swift. It provides mechanism t
 ## Requirements
 
 - iOS 11.0+ / macOS 10.12+
-- Xcode 11+
+- Xcode 13+
 - Swift 5.1+
 - Enable Hotspot Configuration capability in Xcode.
 - Enable Access WiFI Information capability in Xcode.
