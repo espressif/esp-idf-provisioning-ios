@@ -723,7 +723,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP PROV SAMPLE";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP SoftAP Provisioning With Capability";
@@ -755,7 +755,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP PROV SAMPLE";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP SoftAP Provisioning With Capability";
@@ -930,7 +930,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provble;
 				PRODUCT_NAME = "ESP PROV SAMPLE";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1061,7 +1061,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.5;
+				MARKETING_VERSION = 2.0.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP PROV SAMPLE";
 				PROVISIONING_PROFILE_SPECIFIER = "";
