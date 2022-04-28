@@ -243,12 +243,14 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
                     let transport:ESPTransport = transportInfo.lowercased() == "softap" ? .softap:.ble
                     let security:ESPSecurity = jsonArray["security"] ?? "1" == "0" ? .unsecure:.secure
                     let pop = jsonArray["pop"] ?? ""
-                    switch transport {
-                    case .ble:
-                        createESPDevice(deviceName: deviceName, transport: transport, security: security, proofOfPossession: pop, completionHandler: self.scanCompletionHandler!)
-                    default:
-                        createESPDevice(deviceName: deviceName, transport: transport, security: security, proofOfPossession: pop, softAPPassword: jsonArray["password"] ?? "", completionHandler: self.scanCompletionHandler!)
-                        
+                    if let scanCompletionHandler = scanCompletionHandler {
+                        switch transport {
+                        case .ble:
+                            createESPDevice(deviceName: deviceName, transport: transport, security: security, proofOfPossession: pop, completionHandler: scanCompletionHandler)
+                        default:
+                            createESPDevice(deviceName: deviceName, transport: transport, security: security, proofOfPossession: pop, softAPPassword: jsonArray["password"] ?? "", completionHandler: scanCompletionHandler)
+                            
+                        }
                     }
                     return
                 }
