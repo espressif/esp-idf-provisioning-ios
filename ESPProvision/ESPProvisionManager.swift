@@ -77,6 +77,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
         acceptanceHandler: @escaping ESPPeripheralAcceptanceHandler,
         transport: ESPTransport,
         security: ESPSecurity = .secure,
+        scanTimeout: TimeInterval = 5.0,
         completionHandler: @escaping ([ESPDevice]?,ESPDeviceCSSError?
     ) -> Void) {
         ESPLog.log("Search ESPDevices called.")
@@ -92,7 +93,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
         
         switch transport {
             case .ble:
-                espBleTransport = ESPBleTransport(scanTimeout: 5.0, acceptanceHandler: acceptanceHandler)
+                espBleTransport = ESPBleTransport(scanTimeout: scanTimeout, acceptanceHandler: acceptanceHandler)
                 espBleTransport.scan(delegate: self)
             case .softap:
                 ESPLog.log("ESP SoftAp Devices search is not yet supported in iOS.")

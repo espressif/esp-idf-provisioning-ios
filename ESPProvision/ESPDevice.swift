@@ -95,6 +95,10 @@ public class ESPDevice {
     public var name:String {
         return deviceName
     }
+ 
+    public var rssi: Float {
+        return espBleTransport.espressifPeripherals[name]?.rssi.floatValue ?? -100.0
+    }
 
     /// Create `ESPDevice` object.
     ///
