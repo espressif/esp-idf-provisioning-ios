@@ -93,6 +93,7 @@ class Utility {
     ///   - view: View in which loader is added
     class func showLoader(message: String, view: UIView) {
         DispatchQueue.main.async {
+            MBProgressHUD.hide(for: view, animated: true)
             let loader = MBProgressHUD.showAdded(to: view, animated: true)
             loader.mode = MBProgressHUDMode.indeterminate
             loader.label.text = message

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E9645E43CF7B1380FC310F19 /* Pods_ESPProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247B21F19D9AA0FB3A6A6B94 /* Pods_ESPProvision.framework */; };
 		F151FF03247B1C40006F514E /* ESPProvisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151FEF8247B17B3006F514E /* ESPProvisionTests.swift */; };
+		F17B313C28476DB50052D80F /* ESPScanStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17B313B28476DB50052D80F /* ESPScanStatus.swift */; };
 		F1C34D30244EEF0000340B04 /* ESPProvision.h in Headers */ = {isa = PBXBuildFile; fileRef = F1C34D22244EEEFF00340B04 /* ESPProvision.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F1C34D3C245017C900340B04 /* ESPDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D3B245017C900340B04 /* ESPDevice.swift */; };
 		F1C34D402451810200340B04 /* ESPCommunicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D3F2451810200340B04 /* ESPCommunicable.swift */; };
@@ -71,6 +72,7 @@
 		F151FEE7247B1684006F514E /* ESPProvisionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ESPProvisionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F151FEF8247B17B3006F514E /* ESPProvisionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESPProvisionTests.swift; sourceTree = "<group>"; };
 		F151FEF9247B17B3006F514E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F17B313B28476DB50052D80F /* ESPScanStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPScanStatus.swift; sourceTree = "<group>"; };
 		F1C34D1F244EEEFF00340B04 /* ESPProvision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESPProvision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1C34D22244EEEFF00340B04 /* ESPProvision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPProvision.h; sourceTree = "<group>"; };
 		F1C34D23244EEEFF00340B04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				F1C34D8024618ACC00340B04 /* ESPWifiNetwork.swift */,
+				F17B313B28476DB50052D80F /* ESPScanStatus.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				F1C34D72245C7EEB00340B04 /* ESPSecurity1.swift in Sources */,
 				F1C34D482451F46400340B04 /* ESPSecurity0.swift in Sources */,
 				F1C34D4224518F3900340B04 /* ESPSoftAPTransport.swift in Sources */,
+				F17B313C28476DB50052D80F /* ESPScanStatus.swift in Sources */,
 				F1C34D462451B33100340B04 /* ESPCodeable.swift in Sources */,
 				F1C34D6E2459B4FF00340B04 /* ESPConstants.swift in Sources */,
 				F1C34DEF24673D7300340B04 /* ESPLogging.swift in Sources */,
