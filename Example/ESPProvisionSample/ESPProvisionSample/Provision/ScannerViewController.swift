@@ -91,13 +91,31 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 if let device = espDevice {
                     if self.isDeviceSupported(device: device) {
                         Utility.showLoader(message: "Connecting to device", view: self.view)
-                        self.connectDevice(espDevice: device)
+                        switch device.transport {
+                            case .ble:
+                                self.connectDevice(espDevice: device)
+                            case .softap:
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    self.connectDevice(espDevice: device)
+                            }
+                        }
                     } else {
                        self.retry(message: "Device type not supported. Please choose another device and try again.")
                     }
                 } else {
                     self.retry(message: "Device could not be scanned. Please try again")
                 }
+            }
+        } scanStatus: { status in
+            switch status {
+            case .readingCode:
+                Utility.showLoader(message: "Reading QR code", view: self.view)
+            case .searchingBLE(let device):
+                Utility.showLoader(message: "Searching BLE device: \(device)", view: self.view)
+            case .joiningSoftAP(let device):
+                Utility.showLoader(message: "Joining network: \(device)", view: self.view)
+            default:
+                break
             }
         }
     }

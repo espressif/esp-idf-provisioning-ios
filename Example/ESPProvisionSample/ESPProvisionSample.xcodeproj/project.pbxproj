@@ -66,7 +66,7 @@
 		B36C550D24F7A5870D2A8184 /* Pods-ESPProvisionSample.softap.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvisionSample.softap.xcconfig"; path = "Target Support Files/Pods-ESPProvisionSample/Pods-ESPProvisionSample.softap.xcconfig"; sourceTree = "<group>"; };
 		BE43C01EF1AC16134D8B9F8F /* Pods-ESPProvisionSampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvisionSampleTests.release.xcconfig"; path = "Target Support Files/Pods-ESPProvisionSampleTests/Pods-ESPProvisionSampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		EC84FE067C3D5E9CDC5AEF05 /* Pods-ESPProvisionSample.ble.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvisionSample.ble.xcconfig"; path = "Target Support Files/Pods-ESPProvisionSample/Pods-ESPProvisionSample.ble.xcconfig"; sourceTree = "<group>"; };
-		F19AEB9B2498E66A0078E5A1 /* ESP PROV SAMPLE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ESP PROV SAMPLE.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F19AEB9B2498E66A0078E5A1 /* ESP PROV Debug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ESP PROV Debug.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F19AEB9E2498E66A0078E5A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F19AEBA02498E66A0078E5A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F19AEBA22498E66A0078E5A1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 		F19AEB9C2498E66A0078E5A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F19AEB9B2498E66A0078E5A1 /* ESP PROV SAMPLE.app */,
+				F19AEB9B2498E66A0078E5A1 /* ESP PROV Debug.app */,
 				F19AEBB12498E66F0078E5A1 /* ESPProvisionSampleTests.xctest */,
 				F19AEBBC2498E66F0078E5A1 /* ESPProvisionSampleUITests.xctest */,
 			);
@@ -277,7 +277,7 @@
 			);
 			name = ESPProvisionSample;
 			productName = ESPProvisionSample;
-			productReference = F19AEB9B2498E66A0078E5A1 /* ESP PROV SAMPLE.app */;
+			productReference = F19AEB9B2498E66A0078E5A1 /* ESP PROV Debug.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F19AEBB02498E66F0078E5A1 /* ESPProvisionSampleTests */ = {
@@ -723,9 +723,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.15;
+				MARKETING_VERSION = 2.0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
-				PRODUCT_NAME = "ESP PROV SAMPLE";
+				PRODUCT_NAME = "ESP PROV Debug";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP SoftAP Provisioning With Capability";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -755,9 +755,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.15;
+				MARKETING_VERSION = 2.0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
-				PRODUCT_NAME = "ESP PROV SAMPLE";
+				PRODUCT_NAME = "ESP PROV Release";
 				PROVISIONING_PROFILE_SPECIFIER = "ESP SoftAP Provisioning With Capability";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -930,9 +930,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.15;
+				MARKETING_VERSION = 2.0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provble;
-				PRODUCT_NAME = "ESP PROV SAMPLE";
+				PRODUCT_NAME = "ESP BLE Prov";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1061,9 +1061,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.15;
+				MARKETING_VERSION = 2.0.16;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
-				PRODUCT_NAME = "ESP PROV SAMPLE";
+				PRODUCT_NAME = "ESP SoftAP Prov";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

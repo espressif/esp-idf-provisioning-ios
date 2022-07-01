@@ -50,6 +50,8 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     private var scanCompletionHandler: ((ESPDevice?,ESPDeviceCSSError?) -> Void)?
     private var captureSession: AVCaptureSession!
     private var previewLayer: AVCaptureVideoPreviewLayer?
+    // Stores block that will be invoked during QR code processing.
+    private var scanStatusBlock: ((ESPScanStatus) -> Void)?
     
     /// Member to access singleton object of class.
     public static let shared = ESPProvisionManager()
@@ -108,13 +110,16 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     ///                        of scan is returned as parameter of this function. When scan is successful
     ///                        found device is returned. When scan fails then reaon for failure is
     ///                        returned as `ESPDeviceCSSError`.
-    public func scanQRCode(scanView: UIView, completionHandler: @escaping (ESPDevice?,ESPDeviceCSSError?) -> Void) {
+    ///   - scanStatus: Callback invoked during QR code processing with current status as `ESPScanStatus`.
+    public func scanQRCode(scanView: UIView, completionHandler: @escaping (ESPDevice?,ESPDeviceCSSError?) -> Void, scanStatus: ((ESPScanStatus) -> ())? = nil) {
         ESPLog.log("Checking Camera Permission..")
         getAuthorizationStatus { authorized,error in
             if authorized {
                 ESPLog.log("Scanning QR Code..")
                 self.searchCompletionHandler = nil
                 self.scanCompletionHandler = completionHandler
+                self.scanStatusBlock = scanStatus
+                self.scanStatusBlock?(.scanStarted)
                 self.startCaptureSession(scanView: scanView)
             } else {
                 completionHandler(nil, error)
@@ -254,6 +259,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     private func parseQrCode(code: String) {
         
         ESPLog.log("Parsing QR code response...code:\(code)")
+        self.scanStatusBlock?(.readingCode)
         
         if let jsonArray = try? JSONSerialization.jsonObject(with: Data(code.utf8), options: []) as? [String: String] {
             if let deviceName = jsonArray["name"], let transportInfo = jsonArray["transport"] {
@@ -295,13 +301,16 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
             self.searchCompletionHandler = nil
             self.scanCompletionHandler = completionHandler
             self.security = security
+            self.scanStatusBlock?(.searchingBLE(deviceName))
             espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: deviceName, proofOfPossession: proofOfPossession)
             espBleTransport.scan(delegate: self)
         default:
+            self.scanStatusBlock?(.joiningSoftAP(deviceName))
             let newDevice = ESPDevice(name: deviceName, security: security, transport: transport,proofOfPossession: proofOfPossession, softAPPassword: softAPPassword)
             ESPLog.log("SoftAp device created successfully.")
             completionHandler(newDevice, nil)
         }
+        self.scanStatusBlock = nil
     }
     
     /// Method to enable/disable library logs.

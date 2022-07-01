@@ -6,7 +6,7 @@ target 'ESPProvisionSample' do
   use_frameworks!
 
   # Pods for ESPProvisionSample
-  pod 'ESPProvision'
+  pod 'ESPProvision', '2.0.16'
   pod 'MBProgressHUD'
 
   target 'ESPProvisionSampleTests' do
