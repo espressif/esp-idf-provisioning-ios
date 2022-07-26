@@ -127,6 +127,8 @@ public enum Espressif_WifiAuthMode: SwiftProtobuf.Enum {
     case wpa2Psk // = 3
     case wpaWpa2Psk // = 4
     case wpa2Enterprise // = 5
+    case wpa3Psk // = 6
+    case wpa2Wpa3Psk // = 7
     case UNRECOGNIZED(Int)
 
     public init() {
@@ -141,6 +143,8 @@ public enum Espressif_WifiAuthMode: SwiftProtobuf.Enum {
         case 3: self = .wpa2Psk
         case 4: self = .wpaWpa2Psk
         case 5: self = .wpa2Enterprise
+        case 6: self = .wpa3Psk
+        case 7: self = .wpa2Wpa3Psk
         default: self = .UNRECOGNIZED(rawValue)
         }
     }
@@ -153,6 +157,8 @@ public enum Espressif_WifiAuthMode: SwiftProtobuf.Enum {
         case .wpa2Psk: return 3
         case .wpaWpa2Psk: return 4
         case .wpa2Enterprise: return 5
+        case .wpa3Psk: return 6
+        case .wpa2Wpa3Psk: return 7
         case let .UNRECOGNIZED(i): return i
         }
     }
@@ -169,6 +175,8 @@ public enum Espressif_WifiAuthMode: SwiftProtobuf.Enum {
             .wpa2Psk,
             .wpaWpa2Psk,
             .wpa2Enterprise,
+            .wpa3Psk,
+            .wpa2Wpa3Psk,
         ]
     }
 
@@ -222,6 +230,8 @@ extension Espressif_WifiAuthMode: SwiftProtobuf._ProtoNameProviding {
         3: .same(proto: "WPA2_PSK"),
         4: .same(proto: "WPA_WPA2_PSK"),
         5: .same(proto: "WPA2_ENTERPRISE"),
+        6: .same(proto: "WPA3_PSK"),
+        7: .same(proto: "WPA2_WPA3_PSK"),
     ]
 }
 
