@@ -310,13 +310,11 @@ open class ESPDevice {
     ///                          Parameter of block include status of provision.
     public func provision(ssid: String, passPhrase: String = "", completionHandler: @escaping (ESPProvisionStatus) -> Void) {
         ESPLog.log("Provisioning started.. with ssid:\(ssid) and password:\(passPhrase)")
-        if session == nil, !session.isEstablished {
+        if session == nil || !session.isEstablished {
             completionHandler(.failure(.sessionError))
         } else {
             provisionDevice(ssid: ssid, passPhrase: passPhrase, retryOnce: true, completionHandler: completionHandler)
         }
-      
-        
     }
     
     /// Returns the wireless network IP 4 address after successful provision.
