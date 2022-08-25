@@ -152,8 +152,12 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 print("Connected to device")
             default:
                 DispatchQueue.main.async {
-                    self.retry(message: "Device could not be connected. Please try again")
-                    print("Failed to connect")
+                    switch status {
+                    case .failedToConnect(let error):
+                        self.retry(message: error.description)
+                    default:
+                        self.retry(message: "Device could not be connected. Please try again")
+                    }
                 }
             }
         }
@@ -204,5 +208,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 extension ScannerViewController: ESPDeviceConnectionDelegate {
     func getProofOfPossesion(forDevice: ESPDevice, completionHandler: @escaping (String) -> Void)  {
         completionHandler("")
+    }
+    
+    func getUsername(forDevice: ESPProvision.ESPDevice, completionHandler: @escaping (String?) -> Void) {
+        completionHandler(Utility.shared.espAppSettings.username)
     }
 }

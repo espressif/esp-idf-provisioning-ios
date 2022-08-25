@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jeC-rF-a1H">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jeC-rF-a1H">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="s3E-BJ-1Im">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a8E-qi-toN" customClass="ViewController" customModule="ESP_PROV_SAMPLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a8E-qi-toN" customClass="ViewController" customModule="ESP_BLE_Prov" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="u6s-IO-ixO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -141,7 +141,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="jeC-rF-a1H" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="jZn-GT-jnS">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.94901960780000005" green="0.94509803920000002" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -165,7 +165,7 @@
         <!--Settings View Controller-->
         <scene sceneID="CHm-kY-doK">
             <objects>
-                <viewController id="5a4-ho-9Gc" customClass="SettingsViewController" customModule="ESP_PROV_SAMPLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5a4-ho-9Gc" customClass="SettingsViewController" customModule="ESP_BLE_Prov" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="chZ-H6-8Yx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -284,6 +284,43 @@
                                     <constraint firstAttribute="trailing" secondItem="LTb-Qe-LTZ" secondAttribute="trailing" constant="20" id="wiG-Z7-Wcs"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wtg-WC-RFj">
+                                <rect key="frame" x="0.0" y="289" width="414" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TmI-52-Nzm">
+                                        <rect key="frame" x="20" y="8" width="114" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Applicable for security version 2)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T2U-N3-f1q">
+                                        <rect key="frame" x="20" y="37" width="192" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="wifiprov" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0yq-es-qWp">
+                                        <rect key="frame" x="154" y="1.5" width="240" height="34"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="5a4-ho-9Gc" id="wcl-Kl-0YJ"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="TmI-52-Nzm" firstAttribute="top" secondItem="wtg-WC-RFj" secondAttribute="top" constant="8" id="6bv-PD-qQY"/>
+                                    <constraint firstAttribute="trailing" secondItem="0yq-es-qWp" secondAttribute="trailing" constant="20" id="906-Vp-ojb"/>
+                                    <constraint firstItem="TmI-52-Nzm" firstAttribute="leading" secondItem="wtg-WC-RFj" secondAttribute="leading" constant="20" id="Ddt-g8-taa"/>
+                                    <constraint firstItem="T2U-N3-f1q" firstAttribute="leading" secondItem="wtg-WC-RFj" secondAttribute="leading" constant="20" id="Y4j-9z-OLu"/>
+                                    <constraint firstItem="0yq-es-qWp" firstAttribute="leading" secondItem="TmI-52-Nzm" secondAttribute="trailing" constant="20" id="j0m-Ne-E4b"/>
+                                    <constraint firstItem="0yq-es-qWp" firstAttribute="centerY" secondItem="TmI-52-Nzm" secondAttribute="centerY" id="lEE-ex-xcT"/>
+                                    <constraint firstItem="T2U-N3-f1q" firstAttribute="top" secondItem="TmI-52-Nzm" secondAttribute="bottom" constant="8" id="lpb-xs-wdX"/>
+                                    <constraint firstAttribute="height" constant="60" id="oUb-6a-baY"/>
+                                </constraints>
+                            </view>
                             <pickerView hidden="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Ipi-ln-Oja">
                                 <rect key="frame" x="0.0" y="243" width="414" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -320,14 +357,17 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="v8O-0m-UiG" firstAttribute="leading" secondItem="o9y-V7-WZT" secondAttribute="leading" constant="20" id="00W-u8-FMA"/>
+                            <constraint firstItem="wtg-WC-RFj" firstAttribute="top" secondItem="po4-x0-fRu" secondAttribute="bottom" constant="8" id="0cg-9d-ilK"/>
                             <constraint firstItem="Ipi-ln-Oja" firstAttribute="top" secondItem="4vU-jv-V2l" secondAttribute="bottom" constant="-20" id="0fJ-B7-dt0"/>
                             <constraint firstItem="QRR-KJ-SWs" firstAttribute="top" secondItem="v8O-0m-UiG" secondAttribute="bottom" constant="16" id="0sQ-2Q-SOm"/>
                             <constraint firstItem="QRR-KJ-SWs" firstAttribute="leading" secondItem="o9y-V7-WZT" secondAttribute="leading" id="3FT-5c-E49"/>
                             <constraint firstItem="AWV-iF-Px5" firstAttribute="top" secondItem="chZ-H6-8Yx" secondAttribute="top" id="8Gi-T2-Gw2"/>
+                            <constraint firstItem="wtg-WC-RFj" firstAttribute="leading" secondItem="o9y-V7-WZT" secondAttribute="leading" id="Gog-uN-JYX"/>
                             <constraint firstItem="4vU-jv-V2l" firstAttribute="trailing" secondItem="o9y-V7-WZT" secondAttribute="trailing" id="K9L-BA-Orf"/>
                             <constraint firstItem="QRR-KJ-SWs" firstAttribute="trailing" secondItem="o9y-V7-WZT" secondAttribute="trailing" id="KdR-PB-ehr"/>
                             <constraint firstItem="po4-x0-fRu" firstAttribute="trailing" secondItem="o9y-V7-WZT" secondAttribute="trailing" id="L14-vZ-kan"/>
                             <constraint firstItem="Ipi-ln-Oja" firstAttribute="leading" secondItem="o9y-V7-WZT" secondAttribute="leading" id="LjD-kO-gW6"/>
+                            <constraint firstItem="wtg-WC-RFj" firstAttribute="trailing" secondItem="o9y-V7-WZT" secondAttribute="trailing" id="Vnu-E2-88r"/>
                             <constraint firstItem="v8O-0m-UiG" firstAttribute="top" secondItem="AWV-iF-Px5" secondAttribute="bottom" constant="20" id="YHg-zY-LFs"/>
                             <constraint firstItem="4vU-jv-V2l" firstAttribute="leading" secondItem="o9y-V7-WZT" secondAttribute="leading" id="dqr-Fr-pvh"/>
                             <constraint firstItem="AWV-iF-Px5" firstAttribute="trailing" secondItem="o9y-V7-WZT" secondAttribute="trailing" id="gfC-Zs-dgM"/>
@@ -347,6 +387,8 @@
                         <outlet property="securityLabel" destination="Oed-bA-bra" id="L0W-0y-HWK"/>
                         <outlet property="securityToggle" destination="LTb-Qe-LTZ" id="c8t-zE-UDH"/>
                         <outlet property="selectionLabel" destination="KKS-gs-QOY" id="yu8-f1-q4t"/>
+                        <outlet property="usernamTextField" destination="0yq-es-qWp" id="TfS-bb-c32"/>
+                        <outlet property="usernameView" destination="wtg-WC-RFj" id="LE0-jI-V2R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mwH-eh-oi1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -356,7 +398,7 @@
         <!--Scanner View Controller-->
         <scene sceneID="F1x-a5-jcC">
             <objects>
-                <viewController storyboardIdentifier="scannerVC" modalPresentationStyle="fullScreen" id="5il-br-8UP" customClass="ScannerViewController" customModule="ESP_PROV_SAMPLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="scannerVC" modalPresentationStyle="fullScreen" id="5il-br-8UP" customClass="ScannerViewController" customModule="ESP_BLE_Prov" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9TR-sb-7yw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -485,7 +527,7 @@
         <!--Provision-->
         <scene sceneID="HMC-Ag-ENg">
             <objects>
-                <viewController storyboardIdentifier="provision" title="Provision" id="4Lu-aA-lsb" customClass="ProvisionViewController" customModule="ESP_PROV_SAMPLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="provision" title="Provision" id="4Lu-aA-lsb" customClass="ProvisionViewController" customModule="ESP_BLE_Prov" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rOu-J1-idi">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -528,8 +570,8 @@
                                 <rect key="frame" x="0.0" y="220.5" width="414" height="641.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wifiListCell" rowHeight="60" id="lqj-V1-gYr" customClass="WifiListTableViewCell" customModule="ESP_PROV_SAMPLE" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="wifiListCell" rowHeight="60" id="lqj-V1-gYr" customClass="WifiListTableViewCell" customModule="ESP_BLE_Prov" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lqj-V1-gYr" id="kr4-7i-cuk">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -711,7 +753,7 @@
         <!--Status View Controller-->
         <scene sceneID="UlG-cN-x5A">
             <objects>
-                <viewController storyboardIdentifier="statusVC" id="cAR-u1-wn5" customClass="StatusViewController" customModule="ESP_PROV_SAMPLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="statusVC" id="cAR-u1-wn5" customClass="StatusViewController" customModule="ESP_BLE_Prov" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Mq9-Hp-le2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -887,7 +929,7 @@
         <!--Device Type View Controller-->
         <scene sceneID="hG4-u0-2b4">
             <objects>
-                <viewController storyboardIdentifier="deviceTypeVC" id="WsS-sm-15H" customClass="DeviceTypeViewController" customModule="ESP_PROV_SAMPLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="deviceTypeVC" id="WsS-sm-15H" customClass="DeviceTypeViewController" customModule="ESP_BLE_Prov" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VVM-h5-eZY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1042,7 +1084,7 @@
         <!--Landing View Controller-->
         <scene sceneID="AwK-2i-7jM">
             <objects>
-                <viewController storyboardIdentifier="bleLandingVC" modalPresentationStyle="fullScreen" id="Q89-K5-hj9" customClass="BLELandingViewController" customModule="ESP_PROV_SAMPLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="bleLandingVC" modalPresentationStyle="fullScreen" id="Q89-K5-hj9" customClass="BLELandingViewController" customModule="ESP_BLE_Prov" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gyk-A8-c7B">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1158,8 +1200,8 @@
                                 <rect key="frame" x="0.0" y="282.5" width="414" height="579.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="bleDeviceCell" rowHeight="70" id="ltH-N5-EqV" customClass="BLEDeviceListViewCell" customModule="ESP_PROV_SAMPLE" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="70"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="bleDeviceCell" rowHeight="70" id="ltH-N5-EqV" customClass="BLEDeviceListViewCell" customModule="ESP_BLE_Prov" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ltH-N5-EqV" id="LEG-if-TZX">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
@@ -1255,7 +1297,7 @@
         <!--Connect View Controller-->
         <scene sceneID="EOB-sZ-KdN">
             <objects>
-                <viewController storyboardIdentifier="connectVC" id="age-Jc-xiO" customClass="ConnectViewController" customModule="ESP_PROV_SAMPLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="connectVC" id="age-Jc-xiO" customClass="ConnectViewController" customModule="ESP_BLE_Prov" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vgk-SX-0IC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1263,7 +1305,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Cn-a3-O0d">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proof of Possession" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rl-ER-LJ5" customClass="BarTitle" customModule="ESP_PROV_SAMPLE" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proof of Possession" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4rl-ER-LJ5" customClass="BarTitle" customModule="ESP_BLE_Prov" customModuleProvider="target">
                                         <rect key="frame" x="132" y="62.5" width="150" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1381,7 +1423,7 @@ PROV_XXXX</string>
         <!--Espressif-->
         <scene sceneID="qN6-2B-bDB">
             <objects>
-                <viewController storyboardIdentifier="softAPLandingVC" title="Espressif" modalPresentationStyle="fullScreen" id="IxS-fg-9bb" customClass="SoftAPLandingViewController" customModule="ESP_PROV_SAMPLE" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="softAPLandingVC" title="Espressif" modalPresentationStyle="fullScreen" id="IxS-fg-9bb" customClass="SoftAPLandingViewController" customModule="ESP_BLE_Prov" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YFa-OP-gFt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1403,7 +1445,7 @@ PROV_XXXX</string>
                                             <action selector="backClicked:" destination="IxS-fg-9bb" eventType="touchUpInside" id="YAf-tV-7lw"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect to Device" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hL-TT-618" customClass="BarTitle" customModule="ESP_PROV_SAMPLE" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect to Device" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1hL-TT-618" customClass="BarTitle" customModule="ESP_BLE_Prov" customModuleProvider="target">
                                         <rect key="frame" x="138" y="62.5" width="138.5" height="19.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

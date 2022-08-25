@@ -81,6 +81,10 @@ public enum ESPSessionError: ESPError {
     case bleFailedToConnect
     /// Encryption error
     case encryptionError
+    /// Proof of possession is not present
+    case noPOP
+    /// Username is not present
+    case noUsername
     
     public var description: String {
         switch self {
@@ -100,6 +104,10 @@ public enum ESPSessionError: ESPError {
             return "Failed to connect with BLE device"
         case .encryptionError:
             return "Unable to encrypt data"
+        case .noPOP:
+            return "Proof of possession is not present."
+        case .noUsername:
+            return "Username is not present."
         }
     }
     
@@ -121,6 +129,10 @@ public enum ESPSessionError: ESPError {
             return 17
         case .encryptionError:
             return 18
+        case .noPOP:
+            return 19
+        case .noUsername:
+            return 20
         }
     }
 }

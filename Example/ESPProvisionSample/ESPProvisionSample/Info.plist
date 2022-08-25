@@ -32,6 +32,8 @@
 		<string>$(ESP_SETTINGS_ENABLED)</string>
 		<key>ESP Securtiy Mode</key>
 		<string>$(ESP_SECURITY_MODE)</string>
+		<key>ESP Device Username</key>
+		<string>$(ESP_DEVICE_USERNAME)</string>
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

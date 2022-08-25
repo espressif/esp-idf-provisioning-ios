@@ -72,7 +72,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "SoftAP"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
