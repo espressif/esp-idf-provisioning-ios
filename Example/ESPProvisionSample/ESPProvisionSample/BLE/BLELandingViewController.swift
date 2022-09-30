@@ -141,6 +141,7 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     private func connectDevice(device:ESPDevice) {
+        device.security = Utility.shared.espAppSettings.securityMode
         device.connect(delegate: self) { status in
             DispatchQueue.main.async {
                 Utility.hideLoader(view: self.view)
@@ -210,9 +211,16 @@ extension BLELandingViewController: UITextFieldDelegate {
 
 extension BLELandingViewController: ESPDeviceConnectionDelegate {
     func getProofOfPossesion(forDevice: ESPDevice, completionHandler: @escaping (String) -> Void) {
+        goToConnectVC(forDevice: forDevice)
+    }
+    
+    func getUsername(forDevice: ESPDevice, completionHandler: @escaping (String?) -> Void) {
+        goToConnectVC(forDevice: forDevice)
+    }
+    
+    func goToConnectVC(forDevice: ESPDevice) {
         let connectVC = self.storyboard?.instantiateViewController(withIdentifier: "connectVC") as! ConnectViewController
         connectVC.espDevice = forDevice
-        connectVC.popHandler = completionHandler
         self.navigationController?.pushViewController(connectVC, animated: true)
     }
 }

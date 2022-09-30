@@ -71,6 +71,8 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     
     /// Stores Proof of Possesion for a device.
     var proofOfPossession:String?
+    /// Store username for device
+    var username:String?
 
     
     var centralManager: CBCentralManager!
@@ -94,11 +96,12 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     /// - Parameters:
     ///   - deviceNamePrefix: Device name prefix.
     ///   - scanTimeout: Timeout in seconds for which BLE scan should happen.
-    init(scanTimeout: TimeInterval, deviceNamePrefix: String, proofOfPossession:String? = nil) {
+    init(scanTimeout: TimeInterval, deviceNamePrefix: String, proofOfPossession:String? = nil, username: String? = nil) {
         ESPLog.log("Initalising BLE transport class with scan timeout \(scanTimeout)")
         self.scanTimeout = scanTimeout
         self.deviceNamePrefix = deviceNamePrefix
         self.proofOfPossession = proofOfPossession
+        self.username = username
         utility = ESPUtility()
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)

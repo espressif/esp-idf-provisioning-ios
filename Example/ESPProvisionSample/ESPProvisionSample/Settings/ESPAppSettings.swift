@@ -25,5 +25,5 @@ struct ESPAppSettings {
     var deviceType:DeviceType
     var securityMode:ESPSecurity
     var allowPrefixSearch:Bool
-    
+    var username = ""
 }

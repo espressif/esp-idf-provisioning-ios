@@ -23,10 +23,12 @@ ESPProvision is a provisioning library written in Swift. It provides mechanism t
 - [x] Provision device.
 - [x] Scan for available Wi-Fi networks.
 - [x] Console logs
+- [x] Support for security version 2.
+
 
 ## Requirements
 
-- iOS 11.0+ / macOS 10.12+
+- iOS 13.0+ / macOS 10.12+
 - Xcode 13+
 - Swift 5.1+
 - Enable Hotspot Configuration capability in Xcode.
@@ -118,6 +120,17 @@ func getProofOfPossesion(forDevice: ESPDevice, completionHandler: @escaping (Str
 }
 
 ```
+
+For security version 2, provide username as shown below from delegate class :
+
+```swift
+
+func getUsername(forDevice: ESPProvision.ESPDevice, completionHandler: @escaping (String?) -> Void) {
+    completionHandler(username)
+}
+
+```
+
 
 If status is connected then application can proceed to scan list of available networks visible to device. This list can be used to give option to the user to choose network of their own choice.
 

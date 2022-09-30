@@ -25,7 +25,9 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var pickerToolbar: UIToolbar!
     @IBOutlet weak var selectionLabel: UILabel!
     @IBOutlet weak var securityLabel: UILabel!
+    @IBOutlet weak var usernamTextField: UITextField!
     @IBOutlet weak var securityToggle: UISwitch!
+    @IBOutlet weak var usernameView: UIView!
     
     // MARK: - Overriden Methods
     
@@ -35,15 +37,24 @@ class SettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         selectionLabel.text = Utility.shared.espAppSettings.deviceType.value
+        usernamTextField.text = Utility.shared.espAppSettings.username
         switch Utility.shared.espAppSettings.securityMode {
-        case .secure:
-            securityLabel.text = "Secured"
-            securityToggle.setOn(true, animated: true)
         case .unsecure:
             securityLabel.text = "Unsecured"
             securityToggle.setOn(false, animated: true)
+            usernameView.isHidden = true
+        default:
+            securityLabel.text = "Secured"
+            securityToggle.setOn(true, animated: true)
+            usernameView.isHidden = false
         }
         
+        // Adding tap gesture to hide keyboard on outside touch
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     // MARK: - IBActions
@@ -67,11 +78,13 @@ class SettingsViewController: UIViewController {
     
     @IBAction func togglePressed(_ sender: UISwitch) {
         if sender.isOn {
-            Utility.shared.espAppSettings.securityMode = .secure
+            Utility.shared.espAppSettings.securityMode = .secure2
             securityLabel.text = "Secured"
+            usernameView.isHidden = false
         } else {
             Utility.shared.espAppSettings.securityMode = .unsecure
             securityLabel.text = "Unsecured"
+            usernameView.isHidden = true
         }
         Utility.shared.saveAppSettings()
     }
@@ -85,6 +98,17 @@ class SettingsViewController: UIViewController {
     func hidePickerView() {
         pickerToolbar.isHidden = true
         pickerView.isHidden = true
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc func keyboardWillDisappear() {
+        if let username = usernamTextField.text {
+            Utility.shared.espAppSettings.username = username
+            Utility.shared.saveAppSettings()
+        }
     }
     
 }
@@ -107,6 +131,11 @@ extension SettingsViewController:UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return DeviceType.allCases.count
     }
-    
-    
+}
+
+extension SettingsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return false
+    }
 }

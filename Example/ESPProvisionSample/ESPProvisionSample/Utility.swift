@@ -47,13 +47,14 @@ class Utility {
     
     
     init() {
-        espAppSettings = ESPAppSettings(appAllowsQrCodeScan: true, appSettingsEnabled: true, deviceType: .both, securityMode: .secure, allowPrefixSearch: true)
+        espAppSettings = ESPAppSettings(appAllowsQrCodeScan: true, appSettingsEnabled: true, deviceType: .both, securityMode: .secure2, allowPrefixSearch: true)
         if let json = UserDefaults.standard.value(forKey: "com.espressif.example") as? [String: Any] {
-            espAppSettings.allowPrefixSearch = json["allowPrefixSearch"] as! Bool
-            espAppSettings.appAllowsQrCodeScan = json["allowQrCodeScan"] as! Bool
-            espAppSettings.appSettingsEnabled = json["appSettingsEnabled"] as! Bool
-            espAppSettings.deviceType = DeviceType(rawValue: json["deviceType"] as! Int)!
-            espAppSettings.securityMode = ESPSecurity(rawValue: json["securityMode"] as! Int)!
+            espAppSettings.allowPrefixSearch = json["allowPrefixSearch"] as? Bool ?? true
+            espAppSettings.appAllowsQrCodeScan = json["allowQrCodeScan"] as? Bool ?? true
+            espAppSettings.appSettingsEnabled = json["appSettingsEnabled"] as? Bool ?? true
+            espAppSettings.username = json["username"] as? String ?? ""
+            espAppSettings.deviceType = DeviceType(rawValue: json["deviceType"] as? Int ?? 0) ?? .both
+            espAppSettings.securityMode = ESPSecurity(rawValue: json["securityMode"] as? Int ?? 2)
         } else {
             if let settingInfo  = Bundle.main.infoDictionary?["ESP Application Setting"] as? [String:String] {
                 if let allowPrefix = settingInfo["ESP Allow Prefix Search"] {
@@ -66,7 +67,10 @@ class Utility {
                     espAppSettings.appSettingsEnabled = appSettingsEnabled.lowercased() == "no" ? false:true
                 }
                 if let securityMode = settingInfo["ESP Securtiy Mode"] {
-                    espAppSettings.securityMode = securityMode.lowercased() == "unsecure" ? .unsecure:.secure
+                    switch securityMode.lowercased() {
+                    case "unsecure": espAppSettings.securityMode = .unsecure
+                    default: espAppSettings.securityMode = .secure2
+                    }
                 }
                 if let deviceType = settingInfo["ESP Device Type"] {
                     if deviceType.lowercased() == "softap" {
@@ -77,12 +81,15 @@ class Utility {
                         espAppSettings.deviceType = .both
                     }
                 }
+                if let username = settingInfo["ESP Device Username"] {
+                    espAppSettings.username = username
+                }
             }
         }
     }
     
     func saveAppSettings() {
-        let json:[String: Any] = ["allowQrCodeScan":espAppSettings.appAllowsQrCodeScan,"appSettingsEnabled":espAppSettings.appSettingsEnabled,"deviceType":espAppSettings.deviceType.rawValue,"allowPrefixSearch":espAppSettings.allowPrefixSearch,"securityMode":espAppSettings.securityMode.rawValue]
+        let json:[String: Any] = ["allowQrCodeScan":espAppSettings.appAllowsQrCodeScan,"appSettingsEnabled":espAppSettings.appSettingsEnabled,"deviceType":espAppSettings.deviceType.rawValue,"allowPrefixSearch":espAppSettings.allowPrefixSearch,"securityMode":espAppSettings.securityMode.rawValue,"username":espAppSettings.username]
         UserDefaults.standard.set(json, forKey: "com.espressif.example")
     }
     

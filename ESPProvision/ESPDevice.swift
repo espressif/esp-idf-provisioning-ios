@@ -67,11 +67,22 @@ public protocol ESPBLEDelegate {
 /// Class needs to conform to `ESPDeviceConnectionDelegate` protocol when trying to establish a connection.
 public protocol ESPDeviceConnectionDelegate {
     /// Get Proof of possession for an `ESPDevice` from object conforming `ESPDeviceConnectionDelegate` protocol.
+    /// POP is needed when security scheme is sec1 or sec2.
+    /// For other security scheme return nil in completionHandler.
     ///
     /// - Parameters:
     ///  - forDevice: `ESPDevice`for which Proof of possession is needed.
     ///  - completionHandler:  Call this method to return POP needed for initialting session with the device.
     func getProofOfPossesion(forDevice: ESPDevice, completionHandler: @escaping (String) -> Void)
+    
+    /// Get username for an `ESPDevice` from object conforming `ESPDeviceConnectionDelegate` protocol.
+    /// Client needs to handle this delegate in case security scheme is sec2.
+    /// For other schemes return nil for username.
+    ///
+    /// - Parameters:
+    ///  - forDevice: `ESPDevice`for which username is needed.
+    ///  - completionHandler:  Call this method to return username needed for initialting session with the device.
+    func getUsername(forDevice: ESPDevice, completionHandler: @escaping (_ username: String?) -> Void)
 }
 
 /// The `ESPDevice` class is the main inteface for managing a device. It encapsulates method and properties
@@ -110,6 +121,8 @@ open class ESPDevice {
     public var versionInfo:NSDictionary?
     /// Store BLE delegate information
     public var bleDelegate: ESPBLEDelegate?
+    /// Store username for sec1
+    public var username: String?
     /// Advertisement data for BLE device
     /// This property is read-only
     public private(set) var advertisementData:[String:Any]?
@@ -132,11 +145,12 @@ open class ESPDevice {
     ///   - transport: Mode of transport.
     ///   - proofOfPossession: Pop of device.
     ///   - softAPPassword: Password in case SoftAP device.
-    public init(name: String, security: ESPSecurity, transport: ESPTransport, proofOfPossession:String? = nil, softAPPassword:String? = nil, advertisementData: [String:Any]? = nil) {
+    public init(name: String, security: ESPSecurity, transport: ESPTransport, proofOfPossession:String? = nil, username:String? = nil, softAPPassword:String? = nil, advertisementData: [String:Any]? = nil) {
         ESPLog.log("Intializing ESPDevice with name:\(name), security:\(security), transport:\(transport), proofOfPossession:\(proofOfPossession ?? "nil") and softAPPassword:\(softAPPassword ?? "nil")")
         self.deviceName = name
         self.security = security
         self.transport = transport
+        self.username = username
         self.proofOfPossession = proofOfPossession
         self.softAPPassword = softAPPassword
         self.advertisementData = advertisementData
@@ -430,31 +444,46 @@ open class ESPDevice {
     open func initialiseSession(sessionPath: String?, completionHandler: @escaping (ESPSessionStatus) -> Void) {
         ESPLog.log("Initialise session")
         
-        if let capability = self.capabilities, capability.contains(ESPConstants.noSecCapability) {
-            if security != .unsecure {
-                completionHandler(.failedToConnect(.securityMismatch))
-                return
-            }
+        // Determine security scheme of current device using capabilities
+        var securityScheme: ESPSecurity = .secure2
+        if let prov = versionInfo?[ESPConstants.provKey] as? NSDictionary, let secScheme = prov[ESPConstants.securityScheme] as? Int {
+            securityScheme = ESPSecurity.init(rawValue: secScheme)
+        } else if let capability = self.capabilities, capability.contains(ESPConstants.noSecCapability) {
+            securityScheme = .unsecure
         } else {
-            if security != .secure {
-                completionHandler(.failedToConnect(.securityMismatch))
-                return
-            }
+            securityScheme = .secure
+        }
+        
+        // Unsecure communication should only be allowed if explicitily configured in both library and device
+        if (security == .unsecure || securityScheme == .unsecure) && security != securityScheme {
+            completionHandler(.failedToConnect(.securityMismatch))
+            return
         }
 
-        switch security {
+        switch securityScheme {
+        case .secure2:
+            // POP is mandatory for secure 2
+            guard let pop = proofOfPossession else {
+                delegate?.getProofOfPossesion(forDevice: self, completionHandler: { popString in
+                    self.getUsernameForSecure2(sessionPath: sessionPath, password: popString, completionHandler: completionHandler)
+                })
+                return
+            }
+            getUsernameForSecure2(sessionPath: sessionPath, password: pop, completionHandler: completionHandler)
         case .secure:
-            var pop:String!
             if let capability = self.capabilities, capability.contains(ESPConstants.noProofCapability) {
                 initSecureSession(sessionPath: sessionPath, pop: "", completionHandler: completionHandler)
             } else {
                 if self.proofOfPossession == nil {
                     delegate?.getProofOfPossesion(forDevice: self, completionHandler: { popString in
-                        self.initSecureSession(sessionPath: sessionPath, pop: popString, completionHandler: completionHandler)
+                        self.initSecureSession(sessionPath: sessionPath, pop: popString , completionHandler: completionHandler)
                     })
                 } else {
-                    pop = self.proofOfPossession ?? ""
-                    self.initSecureSession(sessionPath: sessionPath, pop: pop, completionHandler: completionHandler)
+                    if let pop = proofOfPossession {
+                        self.initSecureSession(sessionPath: sessionPath, pop: pop, completionHandler: completionHandler)
+                    } else {
+                        completionHandler(.failedToConnect(.noPOP))
+                    }
                 }
             }
         case .unsecure:
@@ -467,6 +496,26 @@ open class ESPDevice {
     func initSecureSession(sessionPath: String?, pop: String, completionHandler: @escaping (ESPSessionStatus) -> Void) {
         ESPLog.log("Initialise session security 1")
         securityLayer = ESPSecurity1(proofOfPossession: pop)
+        initSession(sessionPath: sessionPath, completionHandler: completionHandler)
+    }
+    
+    func getUsernameForSecure2(sessionPath: String?, password: String, completionHandler: @escaping (ESPSessionStatus) -> Void) {
+        if let username = username {
+            initSecure2Session(sessionPath: sessionPath, username: username, password: password, completionHandler: completionHandler)
+        } else {
+            delegate?.getUsername(forDevice: self, completionHandler: { usernameString in
+                if usernameString == nil {
+                    completionHandler(.failedToConnect(.noUsername))
+                } else {
+                    self.initSecure2Session(sessionPath: sessionPath, username: usernameString!, password: password, completionHandler: completionHandler)
+                }
+            })
+        }
+    }
+    
+    func initSecure2Session(sessionPath: String?, username: String, password: String, completionHandler: @escaping (ESPSessionStatus) -> Void) {
+        ESPLog.log("Initialise session security 2")
+        securityLayer = ESPSecurity2(username: username, password: password)
         initSession(sessionPath: sessionPath, completionHandler: completionHandler)
     }
     

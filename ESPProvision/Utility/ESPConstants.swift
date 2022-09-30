@@ -51,6 +51,8 @@ struct ESPConstants {
     static let noProofCapability = "no_pop"
     /// Key for getting security capability of device.
     static let noSecCapability = "no_sec"
+    /// Key for getting security scheme
+    static let securityScheme = "sec_ver"
     
 }
 

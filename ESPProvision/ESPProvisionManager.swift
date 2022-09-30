@@ -22,11 +22,19 @@ import CoreBluetooth
 import AVFoundation
 
 /// Supported mode of communication with device.
-public enum ESPTransport {
+public enum ESPTransport: String {
     /// Communicate using bluetooth.
     case ble
     /// Communicate using Soft Access Point.
     case softap
+    
+    public init?(rawValue: String) {
+        switch rawValue.lowercased() {
+        case "ble": self = .ble
+        case "softap": self = .softap
+        default: return nil
+        }
+    }
 }
 
 /// Security options on data transmission.
@@ -34,7 +42,22 @@ public enum ESPSecurity: Int {
     /// Unsecure data transmission.
     case unsecure = 0
     /// Data is encrypted before transmission.
-    case secure  = 1
+    case secure = 1
+    /// Data is encrypted using SRP algorithm before transmission
+    case secure2 = 2
+    
+    public init(rawValue: Int) {
+        switch rawValue {
+        case 0:
+            self = .unsecure
+        case 1:
+            self = .secure
+        case 2:
+            self = .secure2
+        default:
+            self = .secure2
+        }
+    }
 }
 
 /// The `ESPProvisionManager` class is a singleton class. It provides methods for getting `ESPDevice` object.
@@ -45,7 +68,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     private var espBleTransport:ESPBleTransport!
     private var devicePrefix = ""
     private var transport:ESPTransport = .ble
-    private var security: ESPSecurity = .secure
+    private var security: ESPSecurity = .secure2
     private var searchCompletionHandler: (([ESPDevice]?,ESPDeviceCSSError?) -> Void)?
     private var scanCompletionHandler: ((ESPDevice?,ESPDeviceCSSError?) -> Void)?
     private var captureSession: AVCaptureSession!
@@ -261,27 +284,28 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
         ESPLog.log("Parsing QR code response...code:\(code)")
         self.scanStatusBlock?(.readingCode)
         
-        if let jsonArray = try? JSONSerialization.jsonObject(with: Data(code.utf8), options: []) as? [String: String] {
-            if let deviceName = jsonArray["name"], let transportInfo = jsonArray["transport"] {
-                if (transportInfo.lowercased() == "softap" || transportInfo.lowercased() == "ble"){
-                    let transport:ESPTransport = transportInfo.lowercased() == "softap" ? .softap:.ble
-                    let security:ESPSecurity = jsonArray["security"] ?? "1" == "0" ? .unsecure:.secure
-                    let pop = jsonArray["pop"] ?? ""
-                    if let scanCompletionHandler = scanCompletionHandler {
-                        switch transport {
-                        case .ble:
-                            createESPDevice(deviceName: deviceName, transport: transport, security: security, proofOfPossession: pop, completionHandler: scanCompletionHandler)
-                        default:
-                            createESPDevice(deviceName: deviceName, transport: transport, security: security, proofOfPossession: pop, softAPPassword: jsonArray["password"] ?? "", completionHandler: scanCompletionHandler)
-                            
-                        }
-                    }
-                    return
-                }
-            }
+        guard let scanCompletionHandler = scanCompletionHandler else {
+            return
         }
-        ESPLog.log("Invalid QR code.")
-        scanCompletionHandler?(nil,.invalidQRCode(code))
+        
+        if let jsonData = code.data(using: .utf8) {
+            do {
+                let decoder = JSONDecoder()
+                let decodeResponse = try decoder.decode(ESPScanResult.self, from: jsonData)
+                switch decodeResponse.transport {
+                case .ble:
+                    createESPDevice(deviceName: decodeResponse.name, transport: decodeResponse.transport, security: decodeResponse.security, proofOfPossession: decodeResponse.pop, username: decodeResponse.username, completionHandler: scanCompletionHandler)
+                default:
+                    createESPDevice(deviceName: decodeResponse.name, transport: decodeResponse.transport, security: decodeResponse.security, proofOfPossession: decodeResponse.pop, softAPPassword: decodeResponse.password ?? "", username: decodeResponse.username, completionHandler: scanCompletionHandler)
+                    
+                }
+            } catch {
+                scanCompletionHandler(nil,.invalidQRCode(code))
+            }
+        } else {
+            ESPLog.log("Invalid QR code.")
+            scanCompletionHandler(nil,.invalidQRCode(code))
+        }
     }
         
     /// Manually create `ESPDevice` object.
@@ -292,7 +316,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     ///   - security: Security mode for communication.
     ///   - completionHandler: The completion handler is invoked with parameters containing newly created device object.
     ///                        Error in case where method fails to return a device object.
-    public func createESPDevice(deviceName: String, transport: ESPTransport, security: ESPSecurity = .secure, proofOfPossession:String? = nil, softAPPassword:String? = nil, completionHandler: @escaping (ESPDevice?,ESPDeviceCSSError?) -> Void) {
+    public func createESPDevice(deviceName: String, transport: ESPTransport, security: ESPSecurity = .secure2, proofOfPossession:String? = nil, softAPPassword:String? = nil, username:String? = nil, completionHandler: @escaping (ESPDevice?,ESPDeviceCSSError?) -> Void) {
         
         ESPLog.log("Creating ESPDevice...")
         
@@ -302,11 +326,11 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
             self.scanCompletionHandler = completionHandler
             self.security = security
             self.scanStatusBlock?(.searchingBLE(deviceName))
-            espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: deviceName, proofOfPossession: proofOfPossession)
+            espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: deviceName, proofOfPossession: proofOfPossession, username: username)
             espBleTransport.scan(delegate: self)
         default:
             self.scanStatusBlock?(.joiningSoftAP(deviceName))
-            let newDevice = ESPDevice(name: deviceName, security: security, transport: transport,proofOfPossession: proofOfPossession, softAPPassword: softAPPassword)
+            let newDevice = ESPDevice(name: deviceName, security: security, transport: transport, proofOfPossession: proofOfPossession, username:username, softAPPassword: softAPPassword)
             ESPLog.log("SoftAp device created successfully.")
             completionHandler(newDevice, nil)
         }
@@ -331,6 +355,7 @@ extension ESPProvisionManager: ESPBLETransportDelegate {
         for device in peripherals.values {
             device.security = self.security
             device.proofOfPossession  = espBleTransport.proofOfPossession
+            device.username = espBleTransport.username
             device.espBleTransport = espBleTransport
             espDevices.append(device)
         }
