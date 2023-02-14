@@ -174,6 +174,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                 self.scanQrCode()
             }
         }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
 
