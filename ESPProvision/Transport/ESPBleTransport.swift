@@ -67,7 +67,8 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     private var isBLEEnabled = false
     private var scanTimeout = 5.0
     private var readCounter = 0
-    private var deviceNamePrefix:String!
+    private var deviceNamePrefix:String?
+    private var serviceUuids:[CBUUID]?
     
     /// Stores Proof of Possesion for a device.
     var proofOfPossession:String?
@@ -95,13 +96,15 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     ///
     /// - Parameters:
     ///   - deviceNamePrefix: Device name prefix.
+    ///   - serviceUuids: Device serviceUuids.
     ///   - scanTimeout: Timeout in seconds for which BLE scan should happen.
-    init(scanTimeout: TimeInterval, deviceNamePrefix: String, proofOfPossession:String? = nil, username: String? = nil) {
+    init(scanTimeout: TimeInterval, deviceNamePrefix: String? = nil, proofOfPossession:String? = nil, username: String? = nil, serviceUuids: [CBUUID]? = nil) {
         ESPLog.log("Initalising BLE transport class with scan timeout \(scanTimeout)")
         self.scanTimeout = scanTimeout
         self.deviceNamePrefix = deviceNamePrefix
         self.proofOfPossession = proofOfPossession
         self.username = username
+        self.serviceUuids = serviceUuids
         utility = ESPUtility()
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
@@ -204,7 +207,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
                                      selector: #selector(stopScan(timer:)),
                                      userInfo: nil,
                                      repeats: true)
-            centralManager.scanForPeripherals(withServices: nil)
+            centralManager.scanForPeripherals(withServices: self.serviceUuids)
         }
     }
 
@@ -262,7 +265,7 @@ extension ESPBleTransport: CBCentralManagerDelegate {
                                      selector: #selector(stopScan(timer:)),
                                      userInfo: nil,
                                      repeats: true)
-            centralManager.scanForPeripherals(withServices: nil)
+            centralManager.scanForPeripherals(withServices: self.serviceUuids)
         @unknown default: break
         }
     }
@@ -273,7 +276,7 @@ extension ESPBleTransport: CBCentralManagerDelegate {
                         rssi _: NSNumber) {
         ESPLog.log("Peripheral devices discovered.\(data.debugDescription)")
         if let peripheralName = data["kCBAdvDataLocalName"] as? String ?? peripheral.name  {
-            if peripheralName.lowercased().hasPrefix(deviceNamePrefix.lowercased()) {
+            if peripheralName.lowercased().hasPrefix((deviceNamePrefix?.lowercased())!) || (self.serviceUuids != nil) {
                 let newEspDevice  = ESPDevice(name: peripheralName, security: .secure, transport: .ble, advertisementData: data)
                 espressifPeripherals[peripheralName] = newEspDevice
                 newEspDevice.peripheral = peripheral
@@ -283,7 +286,7 @@ extension ESPBleTransport: CBCentralManagerDelegate {
 
     func centralManager(_: CBCentralManager, didConnect _: CBPeripheral) {
         ESPLog.log("Connected to peripheral. Discover services.")
-        currentPeripheral?.discoverServices(nil)
+        currentPeripheral?.discoverServices(self.serviceUuids)
     }
 
     func centralManager(_: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -306,7 +309,7 @@ extension ESPBleTransport: CBPeripheralDelegate {
         currentPeripheral = peripheral
         currentService = services[0]
         if let currentService = currentService {
-            currentPeripheral?.discoverCharacteristics(nil, for: currentService)
+            currentPeripheral?.discoverCharacteristics(self.serviceUuids, for: currentService)
         }
     }
 
