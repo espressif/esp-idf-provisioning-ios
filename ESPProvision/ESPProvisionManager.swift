@@ -166,7 +166,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     /// - Parameter completionHandler: The completion handler is called when refresh is completed. Result
     ///                                of refresh is returned as parameter of this function.
     public func refreshDeviceList(completionHandler: @escaping ([ESPDevice]?,ESPDeviceCSSError?) -> Void) {
-        searchESPDevices(devicePrefix: self.devicePrefix, transport: self.transport, security: self.security, completionHandler: completionHandler)
+        searchESPDevices(devicePrefix: self.devicePrefix, serviceUuids: self.serviceUuids, transport: self.transport, security: self.security, completionHandler: completionHandler)
     }
     
     /// Get authorization status of Camera.

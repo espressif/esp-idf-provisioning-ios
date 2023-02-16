@@ -276,7 +276,7 @@ extension ESPBleTransport: CBCentralManagerDelegate {
                         rssi _: NSNumber) {
         ESPLog.log("Peripheral devices discovered.\(data.debugDescription)")
         if let peripheralName = data["kCBAdvDataLocalName"] as? String ?? peripheral.name  {
-            if peripheralName.lowercased().hasPrefix((deviceNamePrefix?.lowercased())!) || (self.serviceUuids != nil) {
+            if (deviceNamePrefix != nil && peripheralName.lowercased().hasPrefix((deviceNamePrefix?.lowercased())!) ) || (self.serviceUuids != nil) {
                 let newEspDevice  = ESPDevice(name: peripheralName, security: .secure, transport: .ble, advertisementData: data)
                 espressifPeripherals[peripheralName] = newEspDevice
                 newEspDevice.peripheral = peripheral
