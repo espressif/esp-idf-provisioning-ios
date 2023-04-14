@@ -17,18 +17,18 @@
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">ESPProvision 2.0.12 Docs</a> (61% documented)</p>
-        <p class="header-right">
+        <p><a href="index.html">ESPProvision 2.1.0 Docs</a> (65% documented)</p>
+        <div class="header-right">
           <form role="search" action="search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
           </form>
-        </p>
+        </div>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="index.html">ESPProvision Reference</a>
-        <img id="carat" src="img/carat.png" />
+        <img id="carat" src="img/carat.png" alt=""/>
         Structures  Reference
       </p>
     </div>
@@ -36,16 +36,11 @@
       <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a href="Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="readme.html">README</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
             <a href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Client.html">Client</a>
+              </li>
               <li class="nav-group-task">
                 <a href="Classes/CryptoAES.html">CryptoAES</a>
               </li>
@@ -71,6 +66,9 @@
                 <a href="Classes/ESPSecurity1.html">ESPSecurity1</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/ESPSecurity2.html">ESPSecurity2</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/ESPSession.html">ESPSession</a>
               </li>
               <li class="nav-group-task">
@@ -88,6 +86,9 @@
             <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Enums/AuthenticationFailure.html">AuthenticationFailure</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/ESPDeviceCSSError.html">ESPDeviceCSSError</a>
               </li>
               <li class="nav-group-task">
@@ -95,6 +96,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="Enums/ESPProvisionStatus.html">ESPProvisionStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ESPScanError.html">ESPScanError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/ESPScanStatus.html">ESPScanStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/ESPSecurity.html">ESPSecurity</a>
@@ -121,6 +128,9 @@
                 <a href="Enums/Espressif_Sec1MsgType.html">Espressif_Sec1MsgType</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/Espressif_Sec2MsgType.html">Espressif_Sec2MsgType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/Espressif_SecSchemeVersion.html">Espressif_SecSchemeVersion</a>
               </li>
               <li class="nav-group-task">
@@ -142,10 +152,22 @@
                 <a href="Enums/Espressif_WifiStationState.html">Espressif_WifiStationState</a>
               </li>
               <li class="nav-group-task">
+                <a href="Enums/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Group/CustomGroup.html">– CustomGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Implementation.html">Implementation</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Enums/Security0SessionState.html">Security0SessionState</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/Security1SessionState.html">Security1SessionState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/Security2SessionState.html">Security2SessionState</a>
               </li>
               <li class="nav-group-task">
                 <a href="Enums/SecurityError.html">SecurityError</a>
@@ -165,7 +187,42 @@
                 <a href="Extensions/Data/HexEncodingOptions.html">– HexEncodingOptions</a>
               </li>
               <li class="nav-group-task">
+                <a href="Extensions/FixedWidthInteger.html">FixedWidthInteger</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/UIInterfaceOrientation.html">UIInterfaceOrientation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:12ESPProvision1poiy10Foundation4DataVAE_AEtF">+(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:12ESPProvision1xoiy10Foundation4DataVSgAE_AEtF">^(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:12ESPProvision11calculate_v5group1xAA7BigUIntVAA5GroupO_AFtF">calculate_v(group:x:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:12ESPProvision27createSaltedVerificationKey4from4salt5group10Foundation4DataVAD_AH012verificationE0tAA7BigUIntV_AHSgAA5GroupOtF">createSaltedVerificationKey(from:salt:group:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:12ESPProvision27createSaltedVerificationKey4from4salt5group10Foundation4DataVAD_AH012verificationE0tAH_AHSgAA5GroupOtF">createSaltedVerificationKey(from:salt:group:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:12ESPProvision27createSaltedVerificationKey5using5group8username8password4salt10Foundation4DataVAG_AJ012verificationE0txm_AA5GroupOS2SAJSgt9CryptoKit12HashFunctionRzlF">createSaltedVerificationKey(using:group:username:password:salt:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:12ESPProvision3pad_2to10Foundation4DataVAF_SitF">pad(_:to:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:12ESPProvision11randomBytesy10Foundation4DataVSiF">randomBytes(_:)</a>
               </li>
             </ul>
           </li>
@@ -202,7 +259,22 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Structs/BigUInt.html">BigUInt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/BigUInt/Kind.html">– Kind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/BigUInt/Words.html">– Words</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/ESPConstants.html">ESPConstants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ESPScanResult.html">ESPScanResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ESPScanResult/CodingKeys.html">– CodingKeys</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ESPWifiNetwork.html">ESPWifiNetwork</a>
@@ -253,6 +325,18 @@
                 <a href="Structs/Espressif_S0SessionResp.html">Espressif_S0SessionResp</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/Espressif_S2SessionCmd0.html">Espressif_S2SessionCmd0</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_S2SessionCmd1.html">Espressif_S2SessionCmd1</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_S2SessionResp0.html">Espressif_S2SessionResp0</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_S2SessionResp1.html">Espressif_S2SessionResp1</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Espressif_Sec0Payload.html">Espressif_Sec0Payload</a>
               </li>
               <li class="nav-group-task">
@@ -263,6 +347,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Espressif_Sec1Payload/OneOf_Payload.html">– OneOf_Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_Sec2Payload.html">Espressif_Sec2Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Espressif_Sec2Payload/OneOf_Payload.html">– OneOf_Payload</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Espressif_SessionCmd0.html">Espressif_SessionCmd0</a>
@@ -317,6 +407,34 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision13ESPScanResultV"></a>
+                    <a name="//apple_ref/swift/Struct/ESPScanResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision13ESPScanResultV">ESPScanResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/ESPScanResult.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">ESPScanResult</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -581,6 +699,156 @@ Array of this object is returned when scan Wi-Fi command is given to ESPDevice.<
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:12ESPProvision23Espressif_S2SessionCmd0V"></a>
+                    <a name="//apple_ref/swift/Struct/Espressif_S2SessionCmd0" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision23Espressif_S2SessionCmd0V">Espressif_S2SessionCmd0</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Data structure of Session command0 packet</p>
+
+                        <a href="Structs/Espressif_S2SessionCmd0.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Espressif_S2SessionCmd0</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_S2SessionCmd0</span><span class="p">:</span> <span class="kd">@unchecked</span> <span class="kt">Sendable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_S2SessionCmd0</span><span class="p">:</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="kt">Message</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_MessageImplementationBase</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_ProtoNameProviding</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision24Espressif_S2SessionResp0V"></a>
+                    <a name="//apple_ref/swift/Struct/Espressif_S2SessionResp0" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision24Espressif_S2SessionResp0V">Espressif_S2SessionResp0</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Data structure of Session response0 packet</p>
+
+                        <a href="Structs/Espressif_S2SessionResp0.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Espressif_S2SessionResp0</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_S2SessionResp0</span><span class="p">:</span> <span class="kd">@unchecked</span> <span class="kt">Sendable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_S2SessionResp0</span><span class="p">:</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="kt">Message</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_MessageImplementationBase</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_ProtoNameProviding</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision23Espressif_S2SessionCmd1V"></a>
+                    <a name="//apple_ref/swift/Struct/Espressif_S2SessionCmd1" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision23Espressif_S2SessionCmd1V">Espressif_S2SessionCmd1</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Data structure of Session command1 packet</p>
+
+                        <a href="Structs/Espressif_S2SessionCmd1.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Espressif_S2SessionCmd1</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_S2SessionCmd1</span><span class="p">:</span> <span class="kd">@unchecked</span> <span class="kt">Sendable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_S2SessionCmd1</span><span class="p">:</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="kt">Message</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_MessageImplementationBase</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_ProtoNameProviding</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision24Espressif_S2SessionResp1V"></a>
+                    <a name="//apple_ref/swift/Struct/Espressif_S2SessionResp1" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision24Espressif_S2SessionResp1V">Espressif_S2SessionResp1</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Data structure of Session response1 packet</p>
+
+                        <a href="Structs/Espressif_S2SessionResp1.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Espressif_S2SessionResp1</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_S2SessionResp1</span><span class="p">:</span> <span class="kd">@unchecked</span> <span class="kt">Sendable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_S2SessionResp1</span><span class="p">:</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="kt">Message</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_MessageImplementationBase</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_ProtoNameProviding</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision21Espressif_Sec2PayloadV"></a>
+                    <a name="//apple_ref/swift/Struct/Espressif_Sec2Payload" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision21Espressif_Sec2PayloadV">Espressif_Sec2Payload</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Payload structure of session data</p>
+
+                        <a href="Structs/Espressif_Sec2Payload.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Espressif_Sec2Payload</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_Sec2Payload</span><span class="p">:</span> <span class="kd">@unchecked</span> <span class="kt">Sendable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_Sec2Payload</span><span class="p">:</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="kt">Message</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_MessageImplementationBase</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_ProtoNameProviding</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:12ESPProvision21Espressif_SessionDataV"></a>
                     <a name="//apple_ref/swift/Struct/Espressif_SessionData" class="dashAnchor"></a>
                     <a class="token" href="#/s:12ESPProvision21Espressif_SessionDataV">Espressif_SessionData</a>
@@ -591,7 +859,8 @@ Array of this object is returned when scan Wi-Fi command is given to ESPDevice.<
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>Data structure exchanged when establishing
+secure session between Host and Client</p>
 
                         <a href="Structs/Espressif_SessionData.html" class="slightly-smaller">See more</a>
                       </div>
@@ -600,6 +869,7 @@ Array of this object is returned when scan Wi-Fi command is given to ESPDevice.<
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Espressif_SessionData</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_SessionData</span><span class="p">:</span> <span class="kd">@unchecked</span> <span class="kt">Sendable</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">Espressif_SessionData</span><span class="p">:</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="kt">Message</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_MessageImplementationBase</span><span class="p">,</span> <span class="kt">SwiftProtobuf</span><span class="o">.</span><span class="n">_ProtoNameProviding</span></code></pre>
 
                         </div>
@@ -1074,6 +1344,45 @@ Array of this object is returned when scan Wi-Fi command is given to ESPDevice.<
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:12ESPProvision7BigUIntV"></a>
+                    <a name="//apple_ref/swift/Struct/BigUInt" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision7BigUIntV">BigUInt</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An arbitary precision unsigned integer type, also known as a &ldquo;big integer&rdquo;.</p>
+
+<p>Operations on big integers never overflow, but they may take a long time to execute.
+The amount of memory (and address space) available is the only constraint to the magnitude of these numbers.</p>
+
+<p>This particular big integer type uses base-2^64 digits to represent integers; you can think of it as a wrapper
+around <code>Array&lt;UInt64&gt;</code>. (In fact, <code>BigUInt</code> only uses an array if there are more than two digits.)</p>
+
+                        <a href="Structs/BigUInt.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">BigUInt</span> <span class="p">:</span> <span class="kt">UnsignedInteger</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BigUInt</span><span class="p">:</span> <span class="kt">Comparable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BigUInt</span><span class="p">:</span> <span class="kt">Hashable</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BigUInt</span><span class="p">:</span> <span class="kt">ExpressibleByIntegerLiteral</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BigUInt</span><span class="p">:</span> <span class="kt">ExpressibleByStringLiteral</span></code></pre>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">BigUInt</span><span class="p">:</span> <span class="kt">CustomPlaygroundDisplayConvertible</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:12ESPProvision12ESPConstantsV"></a>
                     <a name="//apple_ref/swift/Struct/ESPConstants" class="dashAnchor"></a>
                     <a class="token" href="#/s:12ESPProvision12ESPConstantsV">ESPConstants</a>
@@ -1132,11 +1441,10 @@ Array of this object is returned when scan Wi-Fi command is given to ESPDevice.<
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/espressif/esp-idf-provisioning-ios" target="_blank" rel="external">Espressif Systems</a>. All rights reserved. (Last updated: 2021-06-18)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2023 <a class="link" href="https://github.com/espressif/esp-idf-provisioning-ios" target="_blank" rel="external noopener">Espressif Systems</a>. All rights reserved. (Last updated: 2023-04-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
   </body>
-</div>
 </html>

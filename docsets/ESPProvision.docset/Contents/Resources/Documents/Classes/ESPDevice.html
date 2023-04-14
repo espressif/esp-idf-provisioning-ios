@@ -17,18 +17,18 @@
     <a title="ESPDevice Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">ESPProvision 2.0.12 Docs</a> (61% documented)</p>
-        <p class="header-right">
+        <p><a href="../index.html">ESPProvision 2.1.0 Docs</a> (65% documented)</p>
+        <div class="header-right">
           <form role="search" action="../search.json">
             <input type="text" placeholder="Search documentation" data-typeahead>
           </form>
-        </p>
+        </div>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
         <a href="../index.html">ESPProvision Reference</a>
-        <img id="carat" src="../img/carat.png" />
+        <img id="carat" src="../img/carat.png" alt=""/>
         ESPDevice Class Reference
       </p>
     </div>
@@ -36,16 +36,11 @@
       <nav class="sidebar">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a href="../Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../readme.html">README</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Client.html">Client</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Classes/CryptoAES.html">CryptoAES</a>
               </li>
@@ -71,6 +66,9 @@
                 <a href="../Classes/ESPSecurity1.html">ESPSecurity1</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Classes/ESPSecurity2.html">ESPSecurity2</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Classes/ESPSession.html">ESPSession</a>
               </li>
               <li class="nav-group-task">
@@ -88,6 +86,9 @@
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Enums/AuthenticationFailure.html">AuthenticationFailure</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/ESPDeviceCSSError.html">ESPDeviceCSSError</a>
               </li>
               <li class="nav-group-task">
@@ -95,6 +96,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/ESPProvisionStatus.html">ESPProvisionStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ESPScanError.html">ESPScanError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ESPScanStatus.html">ESPScanStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/ESPSecurity.html">ESPSecurity</a>
@@ -121,6 +128,9 @@
                 <a href="../Enums/Espressif_Sec1MsgType.html">Espressif_Sec1MsgType</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/Espressif_Sec2MsgType.html">Espressif_Sec2MsgType</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/Espressif_SecSchemeVersion.html">Espressif_SecSchemeVersion</a>
               </li>
               <li class="nav-group-task">
@@ -142,10 +152,22 @@
                 <a href="../Enums/Espressif_WifiStationState.html">Espressif_WifiStationState</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Enums/Group.html">Group</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Group/CustomGroup.html">– CustomGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Implementation.html">Implementation</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Enums/Security0SessionState.html">Security0SessionState</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/Security1SessionState.html">Security1SessionState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/Security2SessionState.html">Security2SessionState</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Enums/SecurityError.html">SecurityError</a>
@@ -165,7 +187,42 @@
                 <a href="../Extensions/Data/HexEncodingOptions.html">– HexEncodingOptions</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Extensions/FixedWidthInteger.html">FixedWidthInteger</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Extensions/String.html">String</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/UIInterfaceOrientation.html">UIInterfaceOrientation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:12ESPProvision1poiy10Foundation4DataVAE_AEtF">+(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:12ESPProvision1xoiy10Foundation4DataVSgAE_AEtF">^(_:_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:12ESPProvision11calculate_v5group1xAA7BigUIntVAA5GroupO_AFtF">calculate_v(group:x:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:12ESPProvision27createSaltedVerificationKey4from4salt5group10Foundation4DataVAD_AH012verificationE0tAA7BigUIntV_AHSgAA5GroupOtF">createSaltedVerificationKey(from:salt:group:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:12ESPProvision27createSaltedVerificationKey4from4salt5group10Foundation4DataVAD_AH012verificationE0tAH_AHSgAA5GroupOtF">createSaltedVerificationKey(from:salt:group:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:12ESPProvision27createSaltedVerificationKey5using5group8username8password4salt10Foundation4DataVAG_AJ012verificationE0txm_AA5GroupOS2SAJSgt9CryptoKit12HashFunctionRzlF">createSaltedVerificationKey(using:group:username:password:salt:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:12ESPProvision3pad_2to10Foundation4DataVAF_SitF">pad(_:to:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Functions.html#/s:12ESPProvision11randomBytesy10Foundation4DataVSiF">randomBytes(_:)</a>
               </li>
             </ul>
           </li>
@@ -202,7 +259,22 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/BigUInt.html">BigUInt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BigUInt/Kind.html">– Kind</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BigUInt/Words.html">– Words</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/ESPConstants.html">ESPConstants</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ESPScanResult.html">ESPScanResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ESPScanResult/CodingKeys.html">– CodingKeys</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ESPWifiNetwork.html">ESPWifiNetwork</a>
@@ -253,6 +325,18 @@
                 <a href="../Structs/Espressif_S0SessionResp.html">Espressif_S0SessionResp</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/Espressif_S2SessionCmd0.html">Espressif_S2SessionCmd0</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_S2SessionCmd1.html">Espressif_S2SessionCmd1</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_S2SessionResp0.html">Espressif_S2SessionResp0</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_S2SessionResp1.html">Espressif_S2SessionResp1</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Espressif_Sec0Payload.html">Espressif_Sec0Payload</a>
               </li>
               <li class="nav-group-task">
@@ -263,6 +347,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Espressif_Sec1Payload/OneOf_Payload.html">– OneOf_Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_Sec2Payload.html">Espressif_Sec2Payload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Espressif_Sec2Payload/OneOf_Payload.html">– OneOf_Payload</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Espressif_SessionCmd0.html">Espressif_SessionCmd0</a>
@@ -314,7 +404,7 @@
               <div class="declaration">
                 <div class="language">
                   
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ESPDevice</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">class</span> <span class="kt">ESPDevice</span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ESPDevice</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ESPScanWifiListProtocol.html">ESPScanWifiListProtocol</a></span></code></pre>
 <pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ESPDevice</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ESPBLEStatusDelegate.html">ESPBLEStatusDelegate</a></span></code></pre>
 
@@ -428,7 +518,7 @@ required to provision, connect and communicate with the device.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">espSoftApTransport</span><span class="p">:</span> <span class="kt"><a href="../Classes/ESPSoftAPTransport.html">ESPSoftAPTransport</a></span><span class="o">!</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">espSoftApTransport</span><span class="p">:</span> <span class="kt"><a href="../Classes/ESPSoftAPTransport.html">ESPSoftAPTransport</a></span><span class="o">!</span></code></pre>
 
                         </div>
                       </div>
@@ -762,6 +852,33 @@ required to provision, connect and communicate with the device.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:12ESPProvision9ESPDeviceC8usernameSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/username" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision9ESPDeviceC8usernameSSSgvp">username</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Store username for sec1</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:12ESPProvision9ESPDeviceC17advertisementDataSDySSypGSgvp"></a>
                     <a name="//apple_ref/swift/Property/advertisementData" class="dashAnchor"></a>
                     <a class="token" href="#/s:12ESPProvision9ESPDeviceC17advertisementDataSDySSypGSgvp">advertisementData</a>
@@ -817,9 +934,9 @@ This property is read-only</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:12ESPProvision9ESPDeviceC4name8security9transport17proofOfPossession14softAPPassword17advertisementDataACSS_AA11ESPSecurityOAA12ESPTransportOSSSgANSDySSypGSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(name:security:transport:proofOfPossession:softAPPassword:advertisementData:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:12ESPProvision9ESPDeviceC4name8security9transport17proofOfPossession14softAPPassword17advertisementDataACSS_AA11ESPSecurityOAA12ESPTransportOSSSgANSDySSypGSgtcfc">init(name:<wbr>security:<wbr>transport:<wbr>proofOfPossession:<wbr>softAPPassword:<wbr>advertisementData:<wbr>)</a>
+                    <a name="/s:12ESPProvision9ESPDeviceC4name8security9transport17proofOfPossession8username14softAPPassword17advertisementDataACSS_AA11ESPSecurityOAA12ESPTransportOSSSgA2OSDySSypGSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(name:security:transport:proofOfPossession:username:softAPPassword:advertisementData:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision9ESPDeviceC4name8security9transport17proofOfPossession8username14softAPPassword17advertisementDataACSS_AA11ESPSecurityOAA12ESPTransportOSSSgA2OSDySSypGSgtcfc">init(name:<wbr>security:<wbr>transport:<wbr>proofOfPossession:<wbr>username:<wbr>softAPPassword:<wbr>advertisementData:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -834,7 +951,7 @@ This property is read-only</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="nf">init</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">security</span><span class="p">:</span> <span class="kt"><a href="../Enums/ESPSecurity.html">ESPSecurity</a></span><span class="p">,</span> <span class="nv">transport</span><span class="p">:</span> <span class="kt"><a href="../Enums/ESPTransport.html">ESPTransport</a></span><span class="p">,</span> <span class="nv">proofOfPossession</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">softAPPassword</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">advertisementData</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">security</span><span class="p">:</span> <span class="kt"><a href="../Enums/ESPSecurity.html">ESPSecurity</a></span><span class="p">,</span> <span class="nv">transport</span><span class="p">:</span> <span class="kt"><a href="../Enums/ESPTransport.html">ESPTransport</a></span><span class="p">,</span> <span class="nv">proofOfPossession</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">softAPPassword</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">advertisementData</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -928,7 +1045,7 @@ This property is read-only</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">connect</span><span class="p">(</span><span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ESPDeviceConnectionDelegate.html">ESPDeviceConnectionDelegate</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/ESPSessionStatus.html">ESPSessionStatus</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">connect</span><span class="p">(</span><span class="nv">delegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/ESPDeviceConnectionDelegate.html">ESPDeviceConnectionDelegate</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/ESPSessionStatus.html">ESPSessionStatus</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -986,7 +1103,7 @@ This property is read-only</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sendData</span><span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Data</span><span class="p">?,</span> <span class="kt"><a href="../Enums/ESPSessionError.html">ESPSessionError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Void</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">sendData</span><span class="p">(</span><span class="nv">path</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Data</span><span class="p">?,</span> <span class="kt"><a href="../Enums/ESPSessionError.html">ESPSessionError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Swift</span><span class="o">.</span><span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1033,6 +1150,37 @@ This property is read-only</p>
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision9ESPDeviceC20isSessionEstablishedSbyF"></a>
+                    <a name="//apple_ref/swift/Method/isSessionEstablished()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision9ESPDeviceC20isSessionEstablishedSbyF">isSessionEstablished()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Checks if connection is established with the device.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isSessionEstablished</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>true</code> if session is established, <code>false</code> otherwise.</p>
                       </div>
                     </section>
                   </div>
@@ -1111,6 +1259,33 @@ This property is read-only</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:12ESPProvision9ESPDeviceC20wifiConnectedIp4AddrSSSgyF"></a>
+                    <a name="//apple_ref/swift/Method/wifiConnectedIp4Addr()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision9ESPDeviceC20wifiConnectedIp4AddrSSSgyF">wifiConnectedIp4Addr()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the wireless network IP 4 address after successful provision.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">wifiConnectedIp4Addr</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:12ESPProvision9ESPDeviceC10disconnectyyF"></a>
                     <a name="//apple_ref/swift/Method/disconnect()" class="dashAnchor"></a>
                     <a class="token" href="#/s:12ESPProvision9ESPDeviceC10disconnectyyF">disconnect()</a>
@@ -1178,6 +1353,173 @@ This property is read-only</p>
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision9ESPDeviceC17initialiseSession11sessionPath17completionHandlerySSSg_yAA16ESPSessionStatusOctF"></a>
+                    <a name="//apple_ref/swift/Method/initialiseSession(sessionPath:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision9ESPDeviceC17initialiseSession11sessionPath17completionHandlerySSSg_yAA16ESPSessionStatusOctF">initialiseSession(sessionPath:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialise session with <code>ESPDevice</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">open</span> <span class="kd">func</span> <span class="nf">initialiseSession</span><span class="p">(</span><span class="nv">sessionPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/ESPSessionStatus.html">ESPSessionStatus</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sessionPath</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Path for sending session related data.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The completion handler that is called when session is initalised.
+                Parameter of block include status of session.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision9ESPDeviceC17initSecureSession11sessionPath3pop17completionHandlerySSSg_SSyAA16ESPSessionStatusOctF"></a>
+                    <a name="//apple_ref/swift/Method/initSecureSession(sessionPath:pop:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision9ESPDeviceC17initSecureSession11sessionPath3pop17completionHandlerySSSg_SSyAA16ESPSessionStatusOctF">initSecureSession(sessionPath:<wbr>pop:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">initSecureSession</span><span class="p">(</span><span class="nv">sessionPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">pop</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/ESPSessionStatus.html">ESPSessionStatus</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision9ESPDeviceC21getUsernameForSecure211sessionPath8password17completionHandlerySSSg_SSyAA16ESPSessionStatusOctF"></a>
+                    <a name="//apple_ref/swift/Method/getUsernameForSecure2(sessionPath:password:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision9ESPDeviceC21getUsernameForSecure211sessionPath8password17completionHandlerySSSg_SSyAA16ESPSessionStatusOctF">getUsernameForSecure2(sessionPath:<wbr>password:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">getUsernameForSecure2</span><span class="p">(</span><span class="nv">sessionPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/ESPSessionStatus.html">ESPSessionStatus</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision9ESPDeviceC18initSecure2Session11sessionPath8username8password17completionHandlerySSSg_S2SyAA16ESPSessionStatusOctF"></a>
+                    <a name="//apple_ref/swift/Method/initSecure2Session(sessionPath:username:password:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision9ESPDeviceC18initSecure2Session11sessionPath8username8password17completionHandlerySSSg_S2SyAA16ESPSessionStatusOctF">initSecure2Session(sessionPath:<wbr>username:<wbr>password:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">initSecure2Session</span><span class="p">(</span><span class="nv">sessionPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/ESPSessionStatus.html">ESPSessionStatus</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:12ESPProvision9ESPDeviceC11initSession11sessionPath17completionHandlerySSSg_yAA16ESPSessionStatusOctF"></a>
+                    <a name="//apple_ref/swift/Method/initSession(sessionPath:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:12ESPProvision9ESPDeviceC11initSession11sessionPath17completionHandlerySSSg_yAA16ESPSessionStatusOctF">initSession(sessionPath:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">initSession</span><span class="p">(</span><span class="nv">sessionPath</span><span class="p">:</span> <span class="kt">String</span><span class="p">?,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums/ESPSessionStatus.html">ESPSessionStatus</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -1292,11 +1634,10 @@ This property is read-only</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2021 <a class="link" href="https://github.com/espressif/esp-idf-provisioning-ios" target="_blank" rel="external">Espressif Systems</a>. All rights reserved. (Last updated: 2021-06-18)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2023 <a class="link" href="https://github.com/espressif/esp-idf-provisioning-ios" target="_blank" rel="external noopener">Espressif Systems</a>. All rights reserved. (Last updated: 2023-04-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external noopener">jazzy ♪♫ v0.14.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external noopener">Realm</a> project.</p>
         </section>
       </article>
     </div>
   </body>
-</div>
 </html>
