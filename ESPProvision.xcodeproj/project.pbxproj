@@ -12,6 +12,7 @@
 		F15B525828AA1794009852DB /* sec2.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15B525728AA1794009852DB /* sec2.pb.swift */; };
 		F15B525A28AA1915009852DB /* ESPSecurity2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15B525928AA1915009852DB /* ESPSecurity2.swift */; };
 		F168F2C928E0B97A00E39433 /* Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F168F2C828E0B97A00E39433 /* Comparable.swift */; };
+		F177859C2A057F4500C3AE73 /* AESDecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F177859B2A057F4500C3AE73 /* AESDecryptor.swift */; };
 		F17B313C28476DB50052D80F /* ESPScanStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F17B313B28476DB50052D80F /* ESPScanStatus.swift */; };
 		F183F7EF28B37ADE00CB7E86 /* AuthenticationFailure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F7E928B37ADD00CB7E86 /* AuthenticationFailure.swift */; };
 		F183F7F028B37ADE00CB7E86 /* SRP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F7EA28B37ADD00CB7E86 /* SRP.swift */; };
@@ -33,15 +34,12 @@
 		F183F85028B37D4D00CB7E86 /* String Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F83A28B37D4D00CB7E86 /* String Conversion.swift */; };
 		F183F85228C5F41500CB7E86 /* ESPScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F85128C5F41300CB7E86 /* ESPScanResult.swift */; };
 		F183F85428C73A8D00CB7E86 /* Bitwise Ops.swift in Sources */ = {isa = PBXBuildFile; fileRef = F183F85328C73A8C00CB7E86 /* Bitwise Ops.swift */; };
-		F1C34D30244EEF0000340B04 /* ESPProvision.h in Headers */ = {isa = PBXBuildFile; fileRef = F1C34D22244EEEFF00340B04 /* ESPProvision.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F1C34D3C245017C900340B04 /* ESPDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D3B245017C900340B04 /* ESPDevice.swift */; };
 		F1C34D402451810200340B04 /* ESPCommunicable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D3F2451810200340B04 /* ESPCommunicable.swift */; };
 		F1C34D4224518F3900340B04 /* ESPSoftAPTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D4124518F3900340B04 /* ESPSoftAPTransport.swift */; };
 		F1C34D4424518F4B00340B04 /* ESPBleTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D4324518F4B00340B04 /* ESPBleTransport.swift */; };
 		F1C34D462451B33100340B04 /* ESPCodeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D452451B33100340B04 /* ESPCodeable.swift */; };
 		F1C34D482451F46400340B04 /* ESPSecurity0.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D472451F46400340B04 /* ESPSecurity0.swift */; };
-		F1C34D4B2457463700340B04 /* AESDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D492457463600340B04 /* AESDecryptor.m */; };
-		F1C34D4C2457463700340B04 /* AESDecryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = F1C34D4A2457463700340B04 /* AESDecryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F1C34D4E2457469D00340B04 /* ESPExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D4D2457469D00340B04 /* ESPExtensions.swift */; };
 		F1C34D502457479C00340B04 /* CryptoAES.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D4F2457479C00340B04 /* CryptoAES.swift */; };
 		F1C34D5D24596C8500340B04 /* constants.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D5624596C8500340B04 /* constants.pb.swift */; };
@@ -98,6 +96,7 @@
 		F15B525728AA1794009852DB /* sec2.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sec2.pb.swift; sourceTree = "<group>"; };
 		F15B525928AA1915009852DB /* ESPSecurity2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPSecurity2.swift; sourceTree = "<group>"; };
 		F168F2C828E0B97A00E39433 /* Comparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comparable.swift; sourceTree = "<group>"; };
+		F177859B2A057F4500C3AE73 /* AESDecryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AESDecryptor.swift; sourceTree = "<group>"; };
 		F17B313B28476DB50052D80F /* ESPScanStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPScanStatus.swift; sourceTree = "<group>"; };
 		F183F7E928B37ADD00CB7E86 /* AuthenticationFailure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationFailure.swift; sourceTree = "<group>"; };
 		F183F7EA28B37ADD00CB7E86 /* SRP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRP.swift; sourceTree = "<group>"; };
@@ -120,7 +119,6 @@
 		F183F85128C5F41300CB7E86 /* ESPScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPScanResult.swift; sourceTree = "<group>"; };
 		F183F85328C73A8C00CB7E86 /* Bitwise Ops.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bitwise Ops.swift"; sourceTree = "<group>"; };
 		F1C34D1F244EEEFF00340B04 /* ESPProvision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ESPProvision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F1C34D22244EEEFF00340B04 /* ESPProvision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESPProvision.h; sourceTree = "<group>"; };
 		F1C34D23244EEEFF00340B04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1C34D3B245017C900340B04 /* ESPDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPDevice.swift; sourceTree = "<group>"; };
 		F1C34D3F2451810200340B04 /* ESPCommunicable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPCommunicable.swift; sourceTree = "<group>"; };
@@ -128,8 +126,6 @@
 		F1C34D4324518F4B00340B04 /* ESPBleTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPBleTransport.swift; sourceTree = "<group>"; };
 		F1C34D452451B33100340B04 /* ESPCodeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPCodeable.swift; sourceTree = "<group>"; };
 		F1C34D472451F46400340B04 /* ESPSecurity0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPSecurity0.swift; sourceTree = "<group>"; };
-		F1C34D492457463600340B04 /* AESDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESDecryptor.m; sourceTree = "<group>"; };
-		F1C34D4A2457463700340B04 /* AESDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESDecryptor.h; sourceTree = "<group>"; };
 		F1C34D4D2457469D00340B04 /* ESPExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPExtensions.swift; sourceTree = "<group>"; };
 		F1C34D4F2457479C00340B04 /* CryptoAES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoAES.swift; sourceTree = "<group>"; };
 		F1C34D5624596C8500340B04 /* constants.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.pb.swift; sourceTree = "<group>"; };
@@ -263,7 +259,6 @@
 				F1C34D542459679900340B04 /* Crypto */,
 				F1C34D532459677300340B04 /* Transport */,
 				F15B525F28AB83EF009852DB /* Security2 */,
-				F1C34D22244EEEFF00340B04 /* ESPProvision.h */,
 				F1C34D23244EEEFF00340B04 /* Info.plist */,
 				F1C34D75245F178E00340B04 /* ESPProvisionManager.swift */,
 				F1C34D692459B3F200340B04 /* ESPSession.swift */,
@@ -287,10 +282,9 @@
 		F1C34D542459679900340B04 /* Crypto */ = {
 			isa = PBXGroup;
 			children = (
+				F177859B2A057F4500C3AE73 /* AESDecryptor.swift */,
 				F1C34D452451B33100340B04 /* ESPCodeable.swift */,
 				F1C34D472451F46400340B04 /* ESPSecurity0.swift */,
-				F1C34D4A2457463700340B04 /* AESDecryptor.h */,
-				F1C34D492457463600340B04 /* AESDecryptor.m */,
 				F1C34D4F2457479C00340B04 /* CryptoAES.swift */,
 				F1C34D71245C7EEB00340B04 /* ESPSecurity1.swift */,
 			);
@@ -353,8 +347,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1C34D4C2457463700340B04 /* AESDecryptor.h in Headers */,
-				F1C34D30244EEF0000340B04 /* ESPProvision.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,12 +489,12 @@
 				F1C34D502457479C00340B04 /* CryptoAES.swift in Sources */,
 				F1C34D76245F178E00340B04 /* ESPProvisionManager.swift in Sources */,
 				F1C34D6024596C8500340B04 /* wifi_constants.pb.swift in Sources */,
-				F1C34D4B2457463700340B04 /* AESDecryptor.m in Sources */,
 				F183F84A28B37D4D00CB7E86 /* Exponentiation.swift in Sources */,
 				F1C34D702459F60900340B04 /* ESPErrors.swift in Sources */,
 				F1C34D5D24596C8500340B04 /* constants.pb.swift in Sources */,
 				F1C34D8124618ACC00340B04 /* ESPWifiNetwork.swift in Sources */,
 				F183F7F228B37ADE00CB7E86 /* Client.swift in Sources */,
+				F177859C2A057F4500C3AE73 /* AESDecryptor.swift in Sources */,
 				F1C34D6224596C8500340B04 /* sec0.pb.swift in Sources */,
 				F1C34D3C245017C900340B04 /* ESPDevice.swift in Sources */,
 				F183F84E28B37D4D00CB7E86 /* Integer Conversion.swift in Sources */,

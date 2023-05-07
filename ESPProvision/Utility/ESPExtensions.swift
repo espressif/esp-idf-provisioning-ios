@@ -18,6 +18,7 @@
 //
 
 import Foundation
+import CommonCrypto
 
 extension Data {
     public init(hex: String) {

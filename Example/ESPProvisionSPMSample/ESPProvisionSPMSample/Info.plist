@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
+	<key>ESP Application Setting</key>
+	<dict>
+		<key>ESP Allow Prefix Search</key>
+		<string>$(ESP_ALLOW_PREFIX_SEARCH)</string>
+		<key>ESP Allow QR Code Scan</key>
+		<string>$(ESP_ALLOW_QR_CODE_SCAN)</string>
+		<key>ESP Device Type</key>
+		<string>$(ESP_DEVICE_TYPE)</string>
+		<key>ESP Device Username</key>
+		<string>$(ESP_DEVICE_USERNAME)</string>
+		<key>ESP Enable Setting</key>
+		<string>$(ESP_SETTINGS_ENABLED)</string>
+		<key>ESP Securtiy Mode</key>
+		<string>$(ESP_SECURITY_MODE)</string>
+	</dict>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+					<key>UISceneStoryboardFile</key>
+					<string>Main</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -16,10 +16,11 @@
 //  ESPProvision
 //
 
-import Curve25519
+
 import Foundation
 import Security
 import SwiftProtobuf
+import CryptoKit
 
 /// Enum type which encapsulates different states of a secured session.
 enum Security1SessionState: Int {
@@ -41,8 +42,8 @@ class ESPSecurity1: ESPCodeable {
 
     private var sessionState: Security1SessionState = .Request1
     private var proofOfPossession: Data?
-    private var privateKey: Data?
-    private var publicKey: Data?
+    private var privateKey: Curve25519.KeyAgreement.PrivateKey?
+    private var publicKey: Curve25519.KeyAgreement.PublicKey?
     private var clientVerify: Data?
     private var cryptoAES: CryptoAES?
 
@@ -115,26 +116,18 @@ class ESPSecurity1: ESPCodeable {
 
     private func generatePrivateKey() -> Data? {
         ESPLog.log("Generating random private key.")
-        var keyData = Data(count: 32)
-        let result = keyData.withUnsafeMutableBytes {
-            SecRandomCopyBytes(kSecRandomDefault, 32, $0.baseAddress!)
-        }
-        if result == errSecSuccess {
-            return keyData
-        } else {
-            ESPLog.log("Error generating random bytes.")
-            return nil
-        }
+        
+        return Curve25519.Signing.PrivateKey().rawRepresentation
     }
 
     private func generateKeyPair() {
         ESPLog.log("Generating key pair for encrypting data.")
-        self.privateKey = generatePrivateKey()
-        guard let privateKey = self.privateKey else {
+        self.privateKey = CryptoKit.Curve25519.KeyAgreement.PrivateKey()
+        guard self.privateKey != nil else {
             publicKey = nil
             return
         }
-        publicKey = try? Curve25519.publicKey(for: privateKey, basepoint: ESPSecurity1.basePoint)
+        publicKey = self.privateKey?.publicKey
     }
 
     /// Generate data to send on Step 0 of session request.
@@ -146,7 +139,7 @@ class ESPSecurity1: ESPCodeable {
         }
         var sessionData = Espressif_SessionData()
         sessionData.secVer = .secScheme1
-        sessionData.sec1.sc0.clientPubkey = publicKey
+        sessionData.sec1.sc0.clientPubkey = publicKey.rawRepresentation
         do {
             return try sessionData.serializedData()
         } catch {
@@ -194,23 +187,25 @@ class ESPSecurity1: ESPCodeable {
         let devicePublicKey = sessionData.sec1.sr0.devicePubkey
         let deviceRandom = sessionData.sec1.sr0.deviceRandom
         do {
-            var sharedKey = try Curve25519.calculateAgreement(privateKey: privateKey!, publicKey: devicePublicKey)
-            if let pop = self.proofOfPossession, pop.count > 0 {
-                let digest = pop.sha256()
-                sharedKey = HexUtils.xor(first: sharedKey, second: digest)
+            let sharedKey = try privateKey?.sharedSecretFromKeyAgreement(with: Curve25519.KeyAgreement.PublicKey(rawRepresentation: devicePublicKey))
+            if var sharedKeyData = sharedKey?.withUnsafeBytes({Data($0)}) {
+                if let pop = self.proofOfPossession, pop.count > 0 {
+                    let digest = pop.sha256()
+                    sharedKeyData = HexUtils.xor(first: sharedKeyData, second: digest)
+                }
+
+                cryptoAES = CryptoAES(key: sharedKeyData, iv: deviceRandom)
+
+                let verifyBytes = encrypt(data: devicePublicKey)
+
+                if verifyBytes == nil {
+                    ESPLog.log("Cannot encrypt device key")
+                    throw SecurityError.handshakeError("Cannot encrypt device key")
+                }
+                
+                ESPLog.log("Step0 response processed.")
+                clientVerify = verifyBytes
             }
-
-            cryptoAES = CryptoAES(key: sharedKey, iv: deviceRandom)
-
-            let verifyBytes = encrypt(data: devicePublicKey)
-
-            if verifyBytes == nil {
-                ESPLog.log("Cannot encrypt device key")
-                throw SecurityError.handshakeError("Cannot encrypt device key")
-            }
-            
-            ESPLog.log("Step0 response processed.")
-            clientVerify = verifyBytes
         } catch {
             ESPLog.log(error.localizedDescription)
         }
@@ -234,7 +229,7 @@ class ESPSecurity1: ESPCodeable {
         let deviceVerify = sessionData.sec1.sr1.deviceVerifyData
         let decryptedDeviceVerify = decrypt(data: deviceVerify)
         if let decryptedDeviceVerify = decryptedDeviceVerify,
-            !decryptedDeviceVerify.bytes.elementsEqual(self.publicKey!.bytes) {
+           !decryptedDeviceVerify.bytes.elementsEqual(self.publicKey!.rawRepresentation.bytes) {
             ESPLog.log("Key mismatch")
             throw SecurityError.handshakeError("Key mismatch")
         }

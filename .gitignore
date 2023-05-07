@@ -70,3 +70,5 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 EspressifProvision/EspressifProvision/proto/*.swift
+Package.resolved
+Example/ESPProvisionSPMSample/ESPProvisionSPMSample.xcworkspace/xcshareddata/swiftpm/Package.resolved

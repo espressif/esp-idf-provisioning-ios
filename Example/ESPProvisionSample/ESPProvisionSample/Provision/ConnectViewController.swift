@@ -102,7 +102,7 @@ extension ConnectViewController: ESPDeviceConnectionDelegate {
         completionHandler(pop)
     }
 
-    func getUsername(forDevice: ESPProvision.ESPDevice, completionHandler: @escaping (String?) -> Void) {
+    func getUsername(forDevice: ESPDevice, completionHandler: @escaping (String?) -> Void) {
         completionHandler(Utility.shared.espAppSettings.username)
     }
 }
