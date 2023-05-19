@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "ESPProvision"
-  spec.version      = "2.1.0"
+  spec.version      = "2.1.1"
   spec.summary      = "ESP-IDF provisioning in Swift"
   spec.description  = "It provides mechanism to provide network credentials and/or custom data to an ESP32, ESP32-S2 or ESP8266 devices"
   spec.homepage     = "https://github.com/espressif/esp-idf-provisioning-ios"
@@ -23,14 +23,13 @@ Pod::Spec.new do |spec|
 
   spec.author = "Espressif Systems"
   spec.platform = :ios, "13.0"
-  spec.source = { :git => "https://github.com/espressif/esp-idf-provisioning-ios.git", :tag => "lib-#{spec.version}" }
+  spec.source = { :git => "https://github.com/espressif/esp-idf-provisioning-ios.git", :tag => "#{spec.version}" }
 
-  spec.source_files  = "ESPProvision", "ESPProvision/**/*.{h,m,swift}"
+  spec.source_files  = "ESPProvision", "ESPProvision/**/*.{swift}"
 
 
   spec.subspec 'Core' do |cs|
       cs.dependency "SwiftProtobuf", "~> 1.5.0"
-      cs.dependency "Curve25519", "~> 1.1.0"
   end
 
   spec.swift_versions = ['5.1', '5.2']

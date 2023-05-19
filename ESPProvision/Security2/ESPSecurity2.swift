@@ -16,7 +16,6 @@
 //  ESPProvision
 //
 
-import Curve25519
 import Foundation
 import Security
 import SwiftProtobuf
