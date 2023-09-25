@@ -724,7 +724,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP PROV Debug";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -757,7 +757,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP PROV Release";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -933,7 +933,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provble;
 				PRODUCT_NAME = "ESP BLE Prov";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1065,7 +1065,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP SoftAP Prov";
 				PROVISIONING_PROFILE_SPECIFIER = "";
