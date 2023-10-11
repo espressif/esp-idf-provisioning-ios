@@ -262,7 +262,9 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
             scanView.layer.addSublayer(self.previewLayer!)
 
             ESPLog.log("Camera session started...")
-            self.captureSession.startRunning()
+            DispatchQueue.global(qos: .background).async {
+                self.captureSession.startRunning()
+            }
         }
     }
     
