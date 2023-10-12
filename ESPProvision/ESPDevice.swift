@@ -212,9 +212,29 @@ open class ESPDevice {
                     completionHandler(self.connectionStatus)
                 }
                 ESPLog.log("Successfully conected to SoftAP.")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                    self.getDeviceVersionInfo(completionHandler: completionHandler)
-                }
+                                                                       
+                //There is no guarranty that the real wi-fi connction to the wi-fi hotspot occured.
+                //Only the fact tha the configuration was applied. Apple`s security policies....
+                //We need to precisely request if the device connected to target SSID.
+                
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {[weak self] in
+                            guard let self = self else { return }
+                            
+                            NEHotspotNetwork.fetchCurrent {[weak self] networkOrNil in
+                                guard let self = self else { return }
+                                
+                                if let networkInfo = networkOrNil, networkInfo.ssid == ssid {
+                                    let status:ESPSessionStatus = .connected
+                                    self.connectionStatus = status
+                                    self.getDeviceVersionInfo(completionHandler: completionHandler)
+                                }
+                                else {
+                                    let status:ESPSessionStatus = .failedToConnect(.softAPConnectionFailure)
+                                    self.connectionStatus = status
+                                    completionHandler(status)
+                                }
+                            }
+                        }
             }
         }
     }
