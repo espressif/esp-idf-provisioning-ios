@@ -66,7 +66,8 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     
     private var espDevices:[ESPDevice] = []
     private var espBleTransport:ESPBleTransport!
-    private var devicePrefix = ""
+    private var devicePrefix:String?
+    private var serviceUuids:[CBUUID]?
     private var transport:ESPTransport = .ble
     private var security: ESPSecurity = .secure2
     private var searchCompletionHandler: (([ESPDevice]?,ESPDeviceCSSError?) -> Void)?
@@ -94,7 +95,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     ///                        of search is returned as parameter of this function. When search is successful
     ///                        array of found devices are returned. When search fails then reaon for failure is
     ///                        returned as `ESPDeviceCSSError`.
-    public func searchESPDevices(devicePrefix: String,transport: ESPTransport, security:ESPSecurity = .secure, completionHandler: @escaping ([ESPDevice]?,ESPDeviceCSSError?) -> Void) {
+    public func searchESPDevices(devicePrefix: String? = nil, serviceUuids:[CBUUID]? = nil, transport: ESPTransport, security:ESPSecurity = .secure, completionHandler: @escaping ([ESPDevice]?,ESPDeviceCSSError?) -> Void) {
         
         ESPLog.log("Search ESPDevices called.")
         
@@ -105,11 +106,12 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
         // Store configuration related properties
         self.transport = transport
         self.devicePrefix = devicePrefix
+        self.serviceUuids = serviceUuids
         self.security = security
         
         switch transport {
             case .ble:
-                espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: devicePrefix)
+                espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: devicePrefix, serviceUuids: serviceUuids)
                 espBleTransport.scan(delegate: self)
             case .softap:
                 ESPLog.log("ESP SoftAp Devices search is not yet supported in iOS.")
@@ -164,7 +166,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     /// - Parameter completionHandler: The completion handler is called when refresh is completed. Result
     ///                                of refresh is returned as parameter of this function.
     public func refreshDeviceList(completionHandler: @escaping ([ESPDevice]?,ESPDeviceCSSError?) -> Void) {
-        searchESPDevices(devicePrefix: self.devicePrefix, transport: self.transport, security: self.security, completionHandler: completionHandler)
+        searchESPDevices(devicePrefix: self.devicePrefix, serviceUuids: self.serviceUuids, transport: self.transport, security: self.security, completionHandler: completionHandler)
     }
     
     /// Get authorization status of Camera.
