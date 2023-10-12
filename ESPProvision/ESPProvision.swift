@@ -21,7 +21,7 @@ import UIKit
 
 /// Provision class which exposes the main API for provisioning
 /// the device with Wifi credentials.
-class ESPProvision {
+public class ESPProvision {
     private let session: ESPSession
     private let transportLayer: ESPCommunicable
     private let securityLayer: ESPCodeable

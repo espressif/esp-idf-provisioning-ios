@@ -18,6 +18,7 @@
 import Foundation
 import MBProgressHUD
 import ESPProvision
+import UIKit
 
 enum DeviceType: Int, CaseIterable {
     case both = 0

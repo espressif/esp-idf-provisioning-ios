@@ -30,13 +30,13 @@ class CryptoAES {
     public init(key: Data, iv: Data) {
         self.key = key
         self.iv = iv
-        decryptor = AESDecryptor(key: key, andIV: iv)
+        decryptor = AESDecryptor(key: key, iv: iv)
     }
 
     func encrypt(data: Data) -> Data? {
         var returnData: Data?
         var error: NSError?
-        returnData = decryptor.cryptData(data, operation: CCOperation(kCCEncrypt), mode: CCMode(kCCModeCTR), algorithm: CCAlgorithm(kCCAlgorithmAES), padding: CCPadding(ccNoPadding), keyLength: kCCKeySizeAES256, iv: iv, key: key, error: &error)
+        returnData = decryptor.cryptData(dataIn: data, operation: CCOperation(kCCEncrypt), mode: CCMode(kCCModeCTR), algorithm: CCAlgorithm(kCCAlgorithmAES), padding: CCPadding(ccNoPadding), keyLength: kCCKeySizeAES256, iv: iv, key: key, error: &error)
         return returnData
     }
 }

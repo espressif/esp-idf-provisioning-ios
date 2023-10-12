@@ -17,11 +17,11 @@
 //
 
 import AVFoundation
-import ESPProvision
 import NetworkExtension
 import SystemConfiguration.CaptiveNetwork
 import UIKit
 import CoreLocation
+import ESPProvision
 
 // Class that manages QRCode scanning and provides way to switch to manual provisioning.
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
@@ -211,7 +211,7 @@ extension ScannerViewController: ESPDeviceConnectionDelegate {
         completionHandler("")
     }
     
-    func getUsername(forDevice: ESPProvision.ESPDevice, completionHandler: @escaping (String?) -> Void) {
+    func getUsername(forDevice: ESPDevice, completionHandler: @escaping (String?) -> Void) {
         completionHandler(Utility.shared.espAppSettings.username)
     }
 }

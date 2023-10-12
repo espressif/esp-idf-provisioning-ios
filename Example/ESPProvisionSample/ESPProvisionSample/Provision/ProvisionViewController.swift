@@ -17,10 +17,10 @@
 //
 
 import CoreBluetooth
-import ESPProvision
 import Foundation
 import MBProgressHUD
 import UIKit
+import ESPProvision
 
 // Class that shows Wi-Fi network list and takes Wi-Fi credentials from user.
 class ProvisionViewController: UIViewController {
