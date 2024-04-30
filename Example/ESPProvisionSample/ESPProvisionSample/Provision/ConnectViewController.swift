@@ -55,9 +55,20 @@ class ConnectViewController: UIViewController {
                 Utility.hideLoader(view: self.view)
                 switch status {
                 case .connected:
-                    self.goToProvision()
+                    if let caps = self.espDevice.capabilities {
+                        if caps.contains(AppConstants.threadScan) {
+                            self.showThreadNetworkSelectionVC(shouldScanThreadNetworks: true, device: self.espDevice)
+                            return
+                        } else if caps.contains(AppConstants.threadProv) {
+                            self.showThreadNetworkSelectionVC(shouldScanThreadNetworks: false, device: self.espDevice)
+                            return
+                        }
+                    }
+                    DispatchQueue.main.async {
+                        self.goToProvision()
+                    }
                 case let .failedToConnect(error):
-                    self.showStatusScreen(error: error)
+                    self.showStatusScreen(espDevice: self.espDevice, error: error)
                 default:
                     let action = UIAlertAction(title: "Retry", style: .default, handler: nil)
                     self.showAlert(error: "Device disconnected", action: action)
@@ -67,17 +78,6 @@ class ConnectViewController: UIViewController {
     }
     
     // MARK: - Navigation
-    
-    // Show status screen, called when device connection fails.
-    func showStatusScreen(error: ESPSessionError) {
-            let statusVC = self.storyboard?.instantiateViewController(withIdentifier: "statusVC") as! StatusViewController
-            statusVC.espDevice = self.espDevice
-            statusVC.step1Failed = true
-            statusVC.message = error.description
-            self.navigationController?.pushViewController(statusVC, animated: true)
-
-    }
-
     // Go to provision screen, called when device is connected.
     func goToProvision() {
         DispatchQueue.main.async {
@@ -103,6 +103,12 @@ extension ConnectViewController: ESPDeviceConnectionDelegate {
     }
 
     func getUsername(forDevice: ESPDevice, completionHandler: @escaping (String?) -> Void) {
-        completionHandler(Utility.shared.espAppSettings.username)
+        if let capabilities = forDevice.capabilities {
+            if capabilities.contains(AppConstants.threadScan) || capabilities.contains(AppConstants.threadProv) {
+                completionHandler(Utility.shared.espAppSettings.threadUsername)
+                return
+            }
+        }
+        completionHandler(Utility.shared.espAppSettings.wifiUsername)
     }
 }

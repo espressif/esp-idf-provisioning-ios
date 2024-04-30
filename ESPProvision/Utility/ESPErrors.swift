@@ -61,6 +61,40 @@ public enum ESPWiFiScanError: ESPError {
     }
 }
 
+/// 'ESPThreadScanError' consist of error cases that will be generated in the process of fetching available Thread
+/// network list from an ESPDevice,
+public enum ESPThreadScanError: ESPError {
+
+    /// Unable to generate Thread scan request configuration data.
+    case emptyConfigData
+    /// Scan result returned from ESPDevice contains no Thread networks.
+    case emptyResultCount
+    /// Consist of errors generated during sending, recieving and parsing of request/response related with Thread scan.
+    case scanRequestError(Error)
+    
+    public var description: String {
+        switch self {
+        case .emptyConfigData:
+            return "Configuration data to request Thread list is empty."
+        case .emptyResultCount:
+            return "Number of Thread network scanned result is nil"
+        case .scanRequestError(let error):
+            return "Request for returning Wi-Fi network list failed with error: \(error.localizedDescription)"
+        }
+    }
+    
+    public var code:Int {
+        switch self {
+        case .emptyConfigData:
+            return 1
+        case .emptyResultCount:
+            return 2
+        case .scanRequestError(_):
+            return 3
+        }
+    }
+}
+
 /// 'ESPSessionError' covers error cases that are generated throughout the life cycle of ESPDevice session
 /// right from the beginning of session establishment till termination.
 public enum ESPSessionError: ESPError {
@@ -218,6 +252,16 @@ public enum ESPProvisionError: ESPError {
     case wifiStatusNetworkNotFound
     /// Wi-Fi status of ESPDevice is unknown.
     case wifiStatusUnknownError
+    /// The attempt to fetch Thread status of ESPDevice failed with underlying error.
+    case threadStatusError(Error)
+    /// Unable to apply Thread settings to ESPDevice with status disconnected.
+    case threadStatusDettached
+    /// Wrong Thread credentials applied to ESPDevice.
+    case threadDatasetInvalid
+    /// Thread network not found.
+    case threadStatusNetworkNotFound
+    /// Thread status of ESPDevice is unknown.
+    case threadStatusUnknownError
     /// Unkown error
     case unknownError
     
@@ -237,6 +281,16 @@ public enum ESPProvisionError: ESPError {
             return "Wi-Fi status: network not found"
         case .wifiStatusUnknownError:
             return "Wi-Fi status: unknown error"
+        case .threadStatusError(let error):
+            return "Unable to fetch wifi status with error: \(error.localizedDescription)"
+        case .threadStatusDettached:
+            return "Thread status: detached"
+        case .threadDatasetInvalid:
+            return "Thread status: dataset invalid"
+        case .threadStatusNetworkNotFound:
+            return "Thread status: network not found"
+        case .threadStatusUnknownError:
+            return "Thread status: unknown error"
         case .unknownError:
             return "Unknown error"
         }
@@ -260,6 +314,16 @@ public enum ESPProvisionError: ESPError {
             return 37
         case .unknownError:
             return 38
+        case .threadStatusError:
+            return 0
+        case .threadStatusDettached:
+            return 1
+        case .threadDatasetInvalid:
+            return 2
+        case .threadStatusNetworkNotFound:
+            return 3
+        case .threadStatusUnknownError:
+            return 4
         }
     }
 }

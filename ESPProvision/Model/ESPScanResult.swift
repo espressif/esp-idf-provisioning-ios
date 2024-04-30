@@ -29,6 +29,7 @@ struct ESPScanResult: Decodable {
     var security: ESPSecurity
     var transport: ESPTransport
     var password: String?
+    var network: ESPNetworkType?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -37,6 +38,7 @@ struct ESPScanResult: Decodable {
         case security
         case transport
         case password
+        case network
     }
 
     init(from decoder: Decoder) throws {
@@ -54,5 +56,8 @@ struct ESPScanResult: Decodable {
             throw ESPScanError.invalidQRCode
         }
         password = try container.decodeIfPresent(String.self, forKey: .password)
+        if let networkType = try? container.decodeIfPresent(String.self, forKey: .network) {
+            network = ESPNetworkType(rawValue: networkType)
+        }
     }
 }

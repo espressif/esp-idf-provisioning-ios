@@ -146,6 +146,15 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             }
             switch status {
             case .connected:
+                if let caps = espDevice.capabilities {
+                    if caps.contains(AppConstants.threadScan) {
+                        self.showThreadNetworkSelectionVC(shouldScanThreadNetworks: true, device: espDevice)
+                        return
+                    } else if caps.contains(AppConstants.threadProv) {
+                        self.showThreadNetworkSelectionVC(shouldScanThreadNetworks: false, device: espDevice)
+                        return
+                    }
+                }
                 DispatchQueue.main.async {
                     self.goToProvision(device: espDevice)
                 }
@@ -211,6 +220,12 @@ extension ScannerViewController: ESPDeviceConnectionDelegate {
     }
     
     func getUsername(forDevice: ESPDevice, completionHandler: @escaping (String?) -> Void) {
-        completionHandler(Utility.shared.espAppSettings.username)
+        if let capabilities = forDevice.capabilities {
+            if capabilities.contains(AppConstants.threadScan) || capabilities.contains(AppConstants.threadProv) {
+                completionHandler(Utility.shared.espAppSettings.threadUsername)
+                return
+            }
+        }
+        completionHandler(Utility.shared.espAppSettings.wifiUsername)
     }
 }

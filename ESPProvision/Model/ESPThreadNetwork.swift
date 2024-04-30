@@ -1,4 +1,4 @@
-// Copyright 2020 Espressif Systems
+// Copyright 2024 Espressif Systems
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-//  ESPWifiNetwork.swift
+//  ESPThreadNetwork.swift
 //  ESPProvision
 //
 //
@@ -22,18 +22,19 @@ import SwiftProtobuf
 
 /// Type that represent a single Wi-Fi network.
 /// Array of this object is returned when scan Wi-Fi command is given to ESPDevice.
-public struct ESPWifiNetwork {
+public struct ESPThreadNetwork {
 
-    /// The name of wireless network.
-    public var ssid: String = ""
-    /// The numbers of Wi-Fi channel.
+    public var panID: UInt32 = 0
+
     public var channel: UInt32 = 0
-    /// Number indicating the signal strength of wireless network.
+
     public var rssi: Int32 = 0
-    /// The mac address of wireless network.
-    public var bssid: Data = SwiftProtobuf.Internal.emptyData
-    /// The authorisation mode of wireless network.
-    public var auth: WifiAuthMode = .open
-    /// Contains uncategorized additional info of wireless network.
-    public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+    public var lqi: UInt32 = 0
+
+    public var extAddr: Data = Data()
+
+    public var networkName: String = String()
+
+    public var extPanID: Data = Data()
 }

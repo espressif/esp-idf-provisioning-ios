@@ -53,7 +53,10 @@ struct ESPConstants {
     static let noSecCapability = "no_sec"
     /// Key for getting security scheme
     static let securityScheme = "sec_ver"
-    
+    /// Value for thread provisioning
+    static let threadProv = "thread_prov"
+    /// Value for thread scan capability
+    static let threadScanCapability = "thread_scan"
 }
 
 

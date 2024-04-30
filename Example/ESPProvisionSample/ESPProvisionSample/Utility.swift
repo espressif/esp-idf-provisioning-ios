@@ -20,6 +20,13 @@ import MBProgressHUD
 import ESPProvision
 import UIKit
 
+class AppConstants {
+    static let threadProv = "thread_prov"
+    static let threadScan = "thread_scan"
+    static let wifiUserName = "wifiprov"
+    static let threadUserName = "threadprov"
+}
+
 enum DeviceType: Int, CaseIterable {
     case both = 0
     case ble
@@ -38,6 +45,28 @@ enum DeviceType: Int, CaseIterable {
     
 }
 
+enum UtilKeys: String {
+    
+    case allowQrCodeScanKey = "allowQrCodeScan"
+    case appSettingsEnabledKey = "appSettingsEnabled"
+    case deviceTypeKey = "deviceType"
+    case allowPrefixSearchKey = "allowPrefixSearch"
+    case securityModeKey = "securityMode"
+    case wifiUsernameKey = "wifiUsername"
+    case threadUsernameKey = "threadUsername"
+    
+    case espSampleId = "com.espressif.example"
+    
+    case espAppSettingKey = "ESP Application Setting"
+    case espAllowPrefixSearchKey = "ESP Allow Prefix Search"
+    case espAllowWQRCodeScanKey = "ESP Allow QR Code Scan"
+    case espEnableSettingKey = "ESP Enable Setting"
+    case espSecurityModeKey = "ESP Securtiy Mode"
+    case espDeviceTypeKey = "ESP Device Type"
+    case espDeviceWifiUsernameKey = "ESP Device Wifi Username"
+    case espDeviceThreadUsernameKey = "ESP Device Thread Username"
+}
+
 class Utility {
     
     /// Member to access singleton object of class.
@@ -49,31 +78,32 @@ class Utility {
     
     init() {
         espAppSettings = ESPAppSettings(appAllowsQrCodeScan: true, appSettingsEnabled: true, deviceType: .both, securityMode: .secure2, allowPrefixSearch: true)
-        if let json = UserDefaults.standard.value(forKey: "com.espressif.example") as? [String: Any] {
-            espAppSettings.allowPrefixSearch = json["allowPrefixSearch"] as? Bool ?? true
-            espAppSettings.appAllowsQrCodeScan = json["allowQrCodeScan"] as? Bool ?? true
-            espAppSettings.appSettingsEnabled = json["appSettingsEnabled"] as? Bool ?? true
-            espAppSettings.username = json["username"] as? String ?? ""
-            espAppSettings.deviceType = DeviceType(rawValue: json["deviceType"] as? Int ?? 0) ?? .both
-            espAppSettings.securityMode = ESPSecurity(rawValue: json["securityMode"] as? Int ?? 2)
+        if let json = UserDefaults.standard.value(forKey: UtilKeys.espSampleId.rawValue) as? [String: Any] {
+            espAppSettings.allowPrefixSearch = json[UtilKeys.allowPrefixSearchKey.rawValue] as? Bool ?? true
+            espAppSettings.appAllowsQrCodeScan = json[UtilKeys.allowQrCodeScanKey.rawValue] as? Bool ?? true
+            espAppSettings.appSettingsEnabled = json[UtilKeys.appSettingsEnabledKey.rawValue] as? Bool ?? true
+            espAppSettings.wifiUsername = json[UtilKeys.wifiUsernameKey.rawValue] as? String ?? AppConstants.wifiUserName
+            espAppSettings.threadUsername = json[UtilKeys.threadUsernameKey.rawValue] as? String ?? AppConstants.threadUserName
+            espAppSettings.deviceType = DeviceType(rawValue: json[UtilKeys.deviceTypeKey.rawValue] as? Int ?? 0) ?? .both
+            espAppSettings.securityMode = ESPSecurity(rawValue: json[UtilKeys.securityModeKey.rawValue] as? Int ?? 2)
         } else {
-            if let settingInfo  = Bundle.main.infoDictionary?["ESP Application Setting"] as? [String:String] {
-                if let allowPrefix = settingInfo["ESP Allow Prefix Search"] {
+            if let settingInfo  = Bundle.main.infoDictionary?[UtilKeys.espAppSettingKey.rawValue] as? [String:String] {
+                if let allowPrefix = settingInfo[UtilKeys.espAllowPrefixSearchKey.rawValue] {
                     espAppSettings.allowPrefixSearch = allowPrefix.lowercased() == "no" ? false:true
                 }
-                if let appAllowsQrCodeScan = settingInfo["ESP Allow QR Code Scan"] {
+                if let appAllowsQrCodeScan = settingInfo[UtilKeys.espAllowWQRCodeScanKey.rawValue] {
                     espAppSettings.appAllowsQrCodeScan = appAllowsQrCodeScan.lowercased() == "no" ? false:true
                 }
-                if let appSettingsEnabled = settingInfo["ESP Enable Setting"] {
+                if let appSettingsEnabled = settingInfo[UtilKeys.espEnableSettingKey.rawValue] {
                     espAppSettings.appSettingsEnabled = appSettingsEnabled.lowercased() == "no" ? false:true
                 }
-                if let securityMode = settingInfo["ESP Securtiy Mode"] {
+                if let securityMode = settingInfo[UtilKeys.espSecurityModeKey.rawValue] {
                     switch securityMode.lowercased() {
                     case "unsecure": espAppSettings.securityMode = .unsecure
                     default: espAppSettings.securityMode = .secure2
                     }
                 }
-                if let deviceType = settingInfo["ESP Device Type"] {
+                if let deviceType = settingInfo[UtilKeys.espDeviceTypeKey.rawValue] {
                     if deviceType.lowercased() == "softap" {
                         espAppSettings.deviceType = .softAp
                     } else if deviceType.lowercased() == "ble" {
@@ -82,16 +112,25 @@ class Utility {
                         espAppSettings.deviceType = .both
                     }
                 }
-                if let username = settingInfo["ESP Device Username"] {
-                    espAppSettings.username = username
+                if let wifiUsername = settingInfo[UtilKeys.espDeviceWifiUsernameKey.rawValue] {
+                    espAppSettings.wifiUsername = wifiUsername
+                }
+                if let threadUsername = settingInfo[UtilKeys.espDeviceThreadUsernameKey.rawValue] {
+                    espAppSettings.threadUsername = threadUsername
                 }
             }
         }
     }
     
     func saveAppSettings() {
-        let json:[String: Any] = ["allowQrCodeScan":espAppSettings.appAllowsQrCodeScan,"appSettingsEnabled":espAppSettings.appSettingsEnabled,"deviceType":espAppSettings.deviceType.rawValue,"allowPrefixSearch":espAppSettings.allowPrefixSearch,"securityMode":espAppSettings.securityMode.rawValue,"username":espAppSettings.username]
-        UserDefaults.standard.set(json, forKey: "com.espressif.example")
+        let json:[String: Any] = [UtilKeys.allowQrCodeScanKey.rawValue: espAppSettings.appAllowsQrCodeScan,
+        UtilKeys.appSettingsEnabledKey.rawValue: espAppSettings.appSettingsEnabled,
+        UtilKeys.deviceTypeKey.rawValue: espAppSettings.deviceType.rawValue,
+        UtilKeys.allowPrefixSearchKey.rawValue: espAppSettings.allowPrefixSearch,
+        UtilKeys.securityModeKey.rawValue: espAppSettings.securityMode.rawValue,
+        UtilKeys.wifiUsernameKey.rawValue: espAppSettings.wifiUsername,
+        UtilKeys.threadUsernameKey.rawValue: espAppSettings.threadUsername]
+        UserDefaults.standard.set(json, forKey: UtilKeys.espSampleId.rawValue)
     }
     
     /// This method can be invoked from any ViewController and will present MBProgressHUD loader with the given message
