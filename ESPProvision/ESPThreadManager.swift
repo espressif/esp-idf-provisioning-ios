@@ -1,4 +1,4 @@
-// Copyright 2020 Espressif Systems
+// Copyright 2024 Espressif Systems
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,24 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-//  ESPWiFiManager.swift
+//  ESPThreadManager.swift
 //  ESPProvision
 //
 
 import Foundation
 
 /// `ESPScanWifiListProtocol` provides Wi-Fi scan result to conforming class.
-protocol ESPScanWifiListProtocol {
-    func wifiScanFinished(wifiList: [ESPWifiNetwork]?, error: ESPWiFiScanError?)
+protocol ESPScanThreadListProtocol {
+    func threadScanFinished(threadList: [ESPThreadNetwork]?, error: ESPThreadScanError?)
 }
 
 /// The `ESPWiFiManager` class manages methods related with Wi-Fi scanning and processing.
-class ESPWiFiManager {
+class ESPThreadManager {
     private let transport: ESPCommunicable
     private let security: ESPCodeable
-    private var scanResult: [String: WiFiScanResult] = [:]
+    private var scanResult: [String: ThreadScanResult] = [:]
 
-    var delegate: ESPScanWifiListProtocol?
+    var delegate: ESPScanThreadListProtocol?
 
     /// Initialise Wi-Fi manager instance.
     ///
@@ -40,23 +40,23 @@ class ESPWiFiManager {
     }
 
     /// Send command to `ESPDevice` to start scanning for available Wi-Fi networks.
-    func startWifiScan() {
+    func startThreadScan() {
         do {
             let payloadData = try createStartScanRequest()
             if let data = payloadData {
                 transport.SendConfigData(path: transport.utility.scanPath, data: data) { response, error in
                     guard error == nil, response != nil else {
-                        self.delegate?.wifiScanFinished(wifiList: nil, error: .scanRequestError(error!))
+                        self.delegate?.threadScanFinished(threadList: nil, error: .scanRequestError(error!))
                         return
                     }
                     self.processStartScan(responseData: response!)
-                    self.getWiFiScanStatus()
+                    self.getThreadScanStatus()
                 }
             } else {
-                delegate?.wifiScanFinished(wifiList: nil, error: .emptyConfigData)
+                delegate?.threadScanFinished(threadList: nil, error: .emptyConfigData)
             }
         } catch {
-            delegate?.wifiScanFinished(wifiList: nil, error: .scanRequestError(error))
+            delegate?.threadScanFinished(threadList: nil, error: .scanRequestError(error))
         }
     }
 
@@ -65,47 +65,47 @@ class ESPWiFiManager {
         do {
             _ = try NetworkScanPayload(serializedData: decryptedResponse)
         } catch {
-            delegate?.wifiScanFinished(wifiList: nil, error: .scanRequestError(error))
+            delegate?.threadScanFinished(threadList: nil, error: .scanRequestError(error))
         }
     }
 
-    private func getWiFiScanStatus() {
+    private func getThreadScanStatus() {
         do {
-            let payloadData = try createWifiScanConfigRequest()
+            let payloadData = try createThreadScanConfigRequest()
             if let data = payloadData {
                 transport.SendConfigData(path: transport.utility.scanPath, data: data) { response, error in
                     guard error == nil, response != nil else {
-                        self.delegate?.wifiScanFinished(wifiList: nil, error: .scanRequestError(error!))
+                        self.delegate?.threadScanFinished(threadList: nil, error: .scanRequestError(error!))
                         return
                     }
-                    let scanCount = self.processGetWiFiScanStatus(responseData: response!)
+                    let scanCount = self.processGetThreadScanStatus(responseData: response!)
                     if scanCount > 0 {
-                        self.getScannedWiFiListResponse(count: scanCount)
+                        self.getScannedThreadListResponse(count: scanCount)
                     } else {
-                        self.delegate?.wifiScanFinished(wifiList: nil, error: .emptyResultCount)
+                        self.delegate?.threadScanFinished(threadList: nil, error: .emptyResultCount)
                     }
                 }
             }
         } catch {
-            delegate?.wifiScanFinished(wifiList: nil, error: .scanRequestError(error))
+            delegate?.threadScanFinished(threadList: nil, error: .scanRequestError(error))
         }
     }
 
-    func processGetWiFiScanStatus(responseData: Data) -> UInt32 {
+    func processGetThreadScanStatus(responseData: Data) -> UInt32 {
         let resultCount: UInt32 = 0
         if let decryptedResponse = security.decrypt(data: responseData) {
             do {
                 let payload = try NetworkScanPayload(serializedData: decryptedResponse)
-                let response = payload.respScanWifiStatus
+                let response = payload.respScanThreadStatus
                 return response.resultCount
             } catch {
-                delegate?.wifiScanFinished(wifiList: nil, error: .scanRequestError(error))
+                delegate?.threadScanFinished(threadList: nil, error: .scanRequestError(error))
             }
         }
         return resultCount
     }
 
-    func getScannedWiFiListResponse(count: UInt32, startIndex: UInt32 = 0) {
+    func getScannedThreadListResponse(count: UInt32, startIndex: UInt32 = 0) {
         do {
             var lastFetch = false
             var fetchCount: UInt32 = 4
@@ -113,89 +113,82 @@ class ESPWiFiManager {
                 fetchCount = count - startIndex
                 lastFetch = true
             }
-            let payloadData = try createWifiListConfigRequest(startIndex: startIndex, count: fetchCount)
+            let payloadData = try createThreadListConfigRequest(startIndex: startIndex, count: fetchCount)
             if let data = payloadData {
                 transport.SendConfigData(path: transport.utility.scanPath, data: data) { response, error in
                     guard error == nil, response != nil else {
-                        self.delegate?.wifiScanFinished(wifiList: nil, error: .scanRequestError(error!))
+                        self.delegate?.threadScanFinished(threadList: nil, error: .scanRequestError(error!))
                         return
                     }
-                    self.getScannedWifiSSIDs(response: response!, fetchFinish: lastFetch)
+                    self.getScannedThreadNetworks(response: response!, fetchFinish: lastFetch)
                     if startIndex + fetchCount < count {
-                        self.getScannedWiFiListResponse(count: count, startIndex: startIndex + 4)
+                        self.getScannedThreadListResponse(count: count, startIndex: startIndex + 4)
                     }
                 }
             } else {
-                delegate?.wifiScanFinished(wifiList: nil, error: .emptyConfigData)
+                delegate?.threadScanFinished(threadList: nil, error: .emptyConfigData)
             }
         } catch {
-            delegate?.wifiScanFinished(wifiList: nil, error: .scanRequestError(error))
+            delegate?.threadScanFinished(threadList: nil, error: .scanRequestError(error))
         }
     }
 
-    private func getScannedWifiSSIDs(response: Data, fetchFinish: Bool) {
+    private func getScannedThreadNetworks(response: Data, fetchFinish: Bool) {
         do {
             if let decryptedResponse = try security.decrypt(data: response) {
                 let payload = try NetworkScanPayload(serializedData: decryptedResponse)
-                let responseList = payload.respScanWifiResult
+                let responseList = payload.respScanThreadResult
                 for index in 0 ... responseList.entries.count - 1 {
-                    let ssid = String(decoding: responseList.entries[index].ssid, as: UTF8.self)
-                    let rssi = responseList.entries[index].rssi
-                    if let val = scanResult[ssid] {
-                        if rssi > val.rssi {
-                            scanResult[ssid] = val
-                        }
-                    } else {
-                        scanResult[ssid] = responseList.entries[index]
-                    }
+                    let networkName = responseList.entries[index].networkName
+                    scanResult[networkName] = responseList.entries[index]
                 }
                 if fetchFinish {
-                    var wifiList:[ESPWifiNetwork] = []
-                        for item in [WiFiScanResult](scanResult.values) {
-                            let wifiNetwork = ESPWifiNetwork(ssid: String(decoding: item.ssid, as: UTF8.self), channel: item.channel, rssi: item.rssi, bssid: item.bssid, auth: item.auth, unknownFields: item.unknownFields)
-                            wifiList.append(wifiNetwork)
-                        }
-                    if wifiList.isEmpty {
-                        delegate?.wifiScanFinished(wifiList: nil, error: nil)
+                    var threadList:[ESPThreadNetwork] = []
+                    for item in [ThreadScanResult](scanResult.values) {
+                        let threadNetwork = ESPThreadNetwork(panID: item.panID, channel: item.channel, rssi: item.rssi, lqi: item.lqi, extAddr: item.extAddr, networkName: item.networkName, extPanID: item.extPanID)
+                        threadList.append(threadNetwork)
+                    }
+                    if threadList.isEmpty {
+                        delegate?.threadScanFinished(threadList: nil, error: nil)
                     } else {
-                        delegate?.wifiScanFinished(wifiList: wifiList, error: nil)
+                        delegate?.threadScanFinished(threadList: threadList, error: nil)
                     }
                 }
             }
         } catch {
-            delegate?.wifiScanFinished(wifiList: nil, error: .scanRequestError(error))
+            delegate?.threadScanFinished(threadList: nil, error: .scanRequestError(error))
         }
     }
 
     private func createStartScanRequest() throws -> Data? {
-        var configRequest = CmdScanWifiStart()
+        var configRequest = CmdScanThreadStart()
         configRequest.blocking = true
-        configRequest.passive = false
-        configRequest.groupChannels = 0
-        configRequest.periodMs = 120
-        let msgType = NetworkScanMsgType.typeCmdScanWifiStart
+        configRequest.channelMask = 0
+        let msgType = NetworkScanMsgType.typeCmdScanThreadStart
         var payload = NetworkScanPayload()
         payload.msg = msgType
-        payload.cmdScanWifiStart = configRequest
+        payload.cmdScanThreadStart = configRequest
         return try security.encrypt(data: payload.serializedData())
     }
 
-    private func createWifiScanConfigRequest() throws -> Data? {
-        var configRequest = CmdScanWifiStatus()
-        let msgType = NetworkScanMsgType.typeCmdScanWifiStatus
+    private func createThreadScanConfigRequest() throws -> Data? {
+        let configRequest = CmdScanThreadStatus()
+        let msgType = NetworkScanMsgType.typeCmdScanThreadStatus
         var payload = NetworkScanPayload()
         payload.msg = msgType
-        payload.cmdScanWifiStatus = configRequest
+        payload.cmdScanThreadStatus = configRequest
         return try security.encrypt(data: payload.serializedData())
     }
 
-    private func createWifiListConfigRequest(startIndex: UInt32, count: UInt32) throws -> Data? {
-        var configRequest = CmdScanWifiResult()
+    private func createThreadListConfigRequest(startIndex: UInt32, count: UInt32) throws -> Data? {
+        var configRequest = CmdScanThreadResult()
         configRequest.startIndex = startIndex
         configRequest.count = count
         var payload = NetworkScanPayload()
-        payload.msg = NetworkScanMsgType.typeCmdScanWifiResult
-        payload.cmdScanWifiResult = configRequest
+        payload.msg = NetworkScanMsgType.typeCmdScanThreadResult
+        payload.cmdScanThreadResult = configRequest
         return try security.encrypt(data: payload.serializedData())
     }
 }
+
+

@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CAC43E02C46AC890047B1DB /* ThreadNetworkSelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CAC43DF2C46AC890047B1DB /* ThreadNetworkSelectionVC.swift */; };
+		0CF1218B2C37D0B4008962E7 /* ThreadCredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF1218A2C37D0AA008962E7 /* ThreadCredentialsManager.swift */; };
+		0CF1218D2C37D6E1008962E7 /* UIViewController+ThreadUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF1218C2C37D6D8008962E7 /* UIViewController+ThreadUtils.swift */; };
 		3ED0C43B27D43AAA5D47EFD6 /* Pods_ESPProvisionSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B95D3CB45501BB92685CB62 /* Pods_ESPProvisionSample.framework */; };
 		415DC57E712D9EEF889F4DC6 /* Pods_ESPProvisionSample_ESPProvisionSampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B0EA111F8D65975C74DDBBE /* Pods_ESPProvisionSample_ESPProvisionSampleUITests.framework */; };
 		544A5946C8BFDFDD77056E81 /* Pods_ESPProvisionSampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28306B0C6FBBC399C5140C2D /* Pods_ESPProvisionSampleTests.framework */; };
@@ -53,6 +56,9 @@
 
 /* Begin PBXFileReference section */
 		0B0EA111F8D65975C74DDBBE /* Pods_ESPProvisionSample_ESPProvisionSampleUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESPProvisionSample_ESPProvisionSampleUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CAC43DF2C46AC890047B1DB /* ThreadNetworkSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadNetworkSelectionVC.swift; sourceTree = "<group>"; };
+		0CF1218A2C37D0AA008962E7 /* ThreadCredentialsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadCredentialsManager.swift; sourceTree = "<group>"; };
+		0CF1218C2C37D6D8008962E7 /* UIViewController+ThreadUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+ThreadUtils.swift"; sourceTree = "<group>"; };
 		28306B0C6FBBC399C5140C2D /* Pods_ESPProvisionSampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESPProvisionSampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B56EA7FAACF4B45FD97313D /* Pods-ESPProvisionSampleTests.ble.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvisionSampleTests.ble.xcconfig"; path = "Target Support Files/Pods-ESPProvisionSampleTests/Pods-ESPProvisionSampleTests.ble.xcconfig"; sourceTree = "<group>"; };
 		3097141A9823166E10FF7F9F /* Pods-ESPProvisionSample-ESPProvisionSampleUITests.softap.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvisionSample-ESPProvisionSampleUITests.softap.xcconfig"; path = "Target Support Files/Pods-ESPProvisionSample-ESPProvisionSampleUITests/Pods-ESPProvisionSample-ESPProvisionSampleUITests.softap.xcconfig"; sourceTree = "<group>"; };
@@ -247,12 +253,15 @@
 		F1A0A48A24A5DB5900CB347C /* Provision */ = {
 			isa = PBXGroup;
 			children = (
+				0CF1218A2C37D0AA008962E7 /* ThreadCredentialsManager.swift */,
+				0CF1218C2C37D6D8008962E7 /* UIViewController+ThreadUtils.swift */,
 				F1A3DBC924A0E934005AF0ED /* ConnectViewController.swift */,
 				F19AEBD8249FD0D50078E5A1 /* WifiListTableViewCell.swift */,
 				F19AEBDA249FD8C10078E5A1 /* DeviceTypeViewController.swift */,
 				F19AEBD2249B926F0078E5A1 /* ScannerViewController.swift */,
 				F19AEBD4249B94540078E5A1 /* ProvisionViewController.swift */,
 				F19AEBD6249BAB4D0078E5A1 /* StatusViewController.swift */,
+				0CAC43DF2C46AC890047B1DB /* ThreadNetworkSelectionVC.swift */,
 			);
 			path = Provision;
 			sourceTree = "<group>";
@@ -522,12 +531,15 @@
 				F1A0A47A24A29C9900CB347C /* GitVersion.swift in Sources */,
 				F19AEBD3249B92700078E5A1 /* ScannerViewController.swift in Sources */,
 				F19AEBA32498E66A0078E5A1 /* ViewController.swift in Sources */,
+				0CF1218D2C37D6E1008962E7 /* UIViewController+ThreadUtils.swift in Sources */,
 				F19AEBDB249FD8C10078E5A1 /* DeviceTypeViewController.swift in Sources */,
 				F19AEBDD249FDBEC0078E5A1 /* BLELandingViewController.swift in Sources */,
 				F19AEB9F2498E66A0078E5A1 /* AppDelegate.swift in Sources */,
 				F19AEBA12498E66A0078E5A1 /* SceneDelegate.swift in Sources */,
+				0CF1218B2C37D0B4008962E7 /* ThreadCredentialsManager.swift in Sources */,
 				F19AEBCF2499E3ED0078E5A1 /* SettingsViewController.swift in Sources */,
 				F1A0A47424A27E5000CB347C /* SoftAPLandingViewController.swift in Sources */,
+				0CAC43E02C46AC890047B1DB /* ThreadNetworkSelectionVC.swift in Sources */,
 				F19AEBD5249B94540078E5A1 /* ProvisionViewController.swift in Sources */,
 				F19AEBD9249FD0D50078E5A1 /* WifiListTableViewCell.swift in Sources */,
 			);
@@ -714,8 +726,9 @@
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				ESP_ALLOW_PREFIX_SEARCH = YES;
 				ESP_ALLOW_QR_CODE_SCAN = YES;
+				ESP_DEVICE_THREAD_USERNAME = threadprov;
 				ESP_DEVICE_TYPE = Both;
-				ESP_DEVICE_USERNAME = wifiprov;
+				ESP_DEVICE_WIFI_USERNAME = wifiprov;
 				ESP_SECURITY_MODE = Secure;
 				ESP_SETTINGS_ENABLED = YES;
 				INFOPLIST_FILE = ESPProvisionSample/Info.plist;
@@ -724,7 +737,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.2;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP PROV Debug";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -747,8 +760,9 @@
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				ESP_ALLOW_PREFIX_SEARCH = YES;
 				ESP_ALLOW_QR_CODE_SCAN = YES;
+				ESP_DEVICE_THREAD_USERNAME = threadprov;
 				ESP_DEVICE_TYPE = Both;
-				ESP_DEVICE_USERNAME = wifiprov;
+				ESP_DEVICE_WIFI_USERNAME = wifiprov;
 				ESP_SECURITY_MODE = Secure;
 				ESP_SETTINGS_ENABLED = YES;
 				INFOPLIST_FILE = ESPProvisionSample/Info.plist;
@@ -757,7 +771,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.2;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP PROV Release";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -923,8 +937,9 @@
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				ESP_ALLOW_PREFIX_SEARCH = YES;
 				ESP_ALLOW_QR_CODE_SCAN = YES;
+				ESP_DEVICE_THREAD_USERNAME = threadprov;
 				ESP_DEVICE_TYPE = BLE;
-				ESP_DEVICE_USERNAME = wifiprov;
+				ESP_DEVICE_WIFI_USERNAME = wifiprov;
 				ESP_SECURITY_MODE = Secure;
 				ESP_SETTINGS_ENABLED = YES;
 				INFOPLIST_FILE = ESPProvisionSample/Info.plist;
@@ -933,7 +948,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.2;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provble;
 				PRODUCT_NAME = "ESP BLE Prov";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1055,8 +1070,9 @@
 				DEVELOPMENT_TEAM = QWXF6GB4AV;
 				ESP_ALLOW_PREFIX_SEARCH = YES;
 				ESP_ALLOW_QR_CODE_SCAN = YES;
+				ESP_DEVICE_THREAD_USERNAME = threadprov;
 				ESP_DEVICE_TYPE = SoftAP;
-				ESP_DEVICE_USERNAME = wifiprov;
+				ESP_DEVICE_WIFI_USERNAME = wifiprov;
 				ESP_SECURITY_MODE = Secure;
 				ESP_SETTINGS_ENABLED = YES;
 				INFOPLIST_FILE = ESPProvisionSample/Info.plist;
@@ -1065,7 +1081,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.2;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.espressif.provsoftap;
 				PRODUCT_NAME = "ESP SoftAP Prov";
 				PROVISIONING_PROFILE_SPECIFIER = "";

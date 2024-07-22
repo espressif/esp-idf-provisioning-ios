@@ -25,5 +25,6 @@ struct ESPAppSettings {
     var deviceType:DeviceType
     var securityMode:ESPSecurity
     var allowPrefixSearch:Bool
-    var username = ""
+    var wifiUsername = AppConstants.wifiUserName
+    var threadUsername = AppConstants.threadUserName
 }

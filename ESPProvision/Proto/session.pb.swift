@@ -6,19 +6,6 @@
 //
 // For information on using the generated types, please see the documentation:
 //   https://github.com/apple/swift-protobuf/
-// Copyright 2020 Espressif Systems
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 import Foundation
 import SwiftProtobuf
@@ -35,7 +22,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 
 /// Allowed values for the type of security
 /// being used in a protocomm session 
-enum Espressif_SecSchemeVersion: SwiftProtobuf.Enum {
+enum SecSchemeVersion: SwiftProtobuf.Enum {
   typealias RawValue = Int
 
   ///!< Unsecured - plaintext communication 
@@ -74,9 +61,9 @@ enum Espressif_SecSchemeVersion: SwiftProtobuf.Enum {
 
 #if swift(>=4.2)
 
-extension Espressif_SecSchemeVersion: CaseIterable {
+extension SecSchemeVersion: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  static var allCases: [Espressif_SecSchemeVersion] = [
+  static let allCases: [SecSchemeVersion] = [
     .secScheme0,
     .secScheme1,
     .secScheme2,
@@ -87,39 +74,39 @@ extension Espressif_SecSchemeVersion: CaseIterable {
 
 /// Data structure exchanged when establishing
 /// secure session between Host and Client 
-struct Espressif_SessionData {
+struct SessionData {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   ///!< Type of security 
-  var secVer: Espressif_SecSchemeVersion = .secScheme0
+  var secVer: SecSchemeVersion = .secScheme0
 
-  var proto: Espressif_SessionData.OneOf_Proto? = nil
+  var proto: SessionData.OneOf_Proto? = nil
 
   ///!< Payload data in case of security 0 
-  var sec0: Espressif_Sec0Payload {
+  var sec0: Sec0Payload {
     get {
       if case .sec0(let v)? = proto {return v}
-      return Espressif_Sec0Payload()
+      return Sec0Payload()
     }
     set {proto = .sec0(newValue)}
   }
 
   ///!< Payload data in case of security 1 
-  var sec1: Espressif_Sec1Payload {
+  var sec1: Sec1Payload {
     get {
       if case .sec1(let v)? = proto {return v}
-      return Espressif_Sec1Payload()
+      return Sec1Payload()
     }
     set {proto = .sec1(newValue)}
   }
 
   ///!< Payload data in case of security 2 
-  var sec2: Espressif_Sec2Payload {
+  var sec2: Sec2Payload {
     get {
       if case .sec2(let v)? = proto {return v}
-      return Espressif_Sec2Payload()
+      return Sec2Payload()
     }
     set {proto = .sec2(newValue)}
   }
@@ -128,14 +115,14 @@ struct Espressif_SessionData {
 
   enum OneOf_Proto: Equatable {
     ///!< Payload data in case of security 0 
-    case sec0(Espressif_Sec0Payload)
+    case sec0(Sec0Payload)
     ///!< Payload data in case of security 1 
-    case sec1(Espressif_Sec1Payload)
+    case sec1(Sec1Payload)
     ///!< Payload data in case of security 2 
-    case sec2(Espressif_Sec2Payload)
+    case sec2(Sec2Payload)
 
   #if !swift(>=4.1)
-    static func ==(lhs: Espressif_SessionData.OneOf_Proto, rhs: Espressif_SessionData.OneOf_Proto) -> Bool {
+    static func ==(lhs: SessionData.OneOf_Proto, rhs: SessionData.OneOf_Proto) -> Bool {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
@@ -162,16 +149,14 @@ struct Espressif_SessionData {
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
-extension Espressif_SecSchemeVersion: @unchecked Sendable {}
-extension Espressif_SessionData: @unchecked Sendable {}
-extension Espressif_SessionData.OneOf_Proto: @unchecked Sendable {}
+extension SecSchemeVersion: @unchecked Sendable {}
+extension SessionData: @unchecked Sendable {}
+extension SessionData.OneOf_Proto: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "espressif"
-
-extension Espressif_SecSchemeVersion: SwiftProtobuf._ProtoNameProviding {
+extension SecSchemeVersion: SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "SecScheme0"),
     1: .same(proto: "SecScheme1"),
@@ -179,8 +164,8 @@ extension Espressif_SecSchemeVersion: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
-extension Espressif_SessionData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".SessionData"
+extension SessionData: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "SessionData"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     2: .standard(proto: "sec_ver"),
     10: .same(proto: "sec0"),
@@ -196,7 +181,7 @@ extension Espressif_SessionData: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       switch fieldNumber {
       case 2: try { try decoder.decodeSingularEnumField(value: &self.secVer) }()
       case 10: try {
-        var v: Espressif_Sec0Payload?
+        var v: Sec0Payload?
         var hadOneofValue = false
         if let current = self.proto {
           hadOneofValue = true
@@ -209,7 +194,7 @@ extension Espressif_SessionData: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
         }
       }()
       case 11: try {
-        var v: Espressif_Sec1Payload?
+        var v: Sec1Payload?
         var hadOneofValue = false
         if let current = self.proto {
           hadOneofValue = true
@@ -222,7 +207,7 @@ extension Espressif_SessionData: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
         }
       }()
       case 12: try {
-        var v: Espressif_Sec2Payload?
+        var v: Sec2Payload?
         var hadOneofValue = false
         if let current = self.proto {
           hadOneofValue = true
@@ -265,7 +250,7 @@ extension Espressif_SessionData: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Espressif_SessionData, rhs: Espressif_SessionData) -> Bool {
+  static func ==(lhs: SessionData, rhs: SessionData) -> Bool {
     if lhs.secVer != rhs.secVer {return false}
     if lhs.proto != rhs.proto {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}

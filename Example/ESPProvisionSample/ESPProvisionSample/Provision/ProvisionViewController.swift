@@ -97,7 +97,7 @@ class ProvisionViewController: UIViewController {
     func provisionDevice(ssid: String, passphrase: String) {
         self.ssid = ssid
         self.passphrase = passphrase
-        showStatusScreen()
+        self.showStatusScreen(espDevice: self.espDevice, ssid: self.ssid, passphrase: self.passphrase, error: nil)
     }
 
     // Scan device for available Wi-Fi networks.
@@ -222,19 +222,6 @@ class ProvisionViewController: UIViewController {
             } else {
                 showPasswordImageView.image = UIImage(named: "show_password")
             }
-        }
-    }
-
-    // MARK: - Helper Methods
-    
-    func showStatusScreen() {
-        DispatchQueue.main.async {
-            Utility.hideLoader(view: self.view)
-            let statusVC = self.storyboard?.instantiateViewController(withIdentifier: "statusVC") as! StatusViewController
-            statusVC.ssid = self.ssid
-            statusVC.passphrase = self.passphrase
-            statusVC.espDevice = self.espDevice
-            self.navigationController?.pushViewController(statusVC, animated: true)
         }
     }
 }

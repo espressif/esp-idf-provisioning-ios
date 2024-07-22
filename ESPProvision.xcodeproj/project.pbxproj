@@ -3,10 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C2426F62BF4E3D7004BDF49 /* ESPThreadNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2426F52BF4E3D7004BDF49 /* ESPThreadNetwork.swift */; };
+		0C2426FA2BF4E429004BDF49 /* ESPThreadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2426F92BF4E429004BDF49 /* ESPThreadManager.swift */; };
+		0C5163FC2C22EDDF004EF494 /* constants.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5163F72C22EDDF004EF494 /* constants.pb.swift */; };
+		0C5163FD2C22EDDF004EF494 /* network_constants.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5163F92C22EDDF004EF494 /* network_constants.pb.swift */; };
+		0C5163FE2C22EDDF004EF494 /* network_config.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5163F82C22EDDF004EF494 /* network_config.pb.swift */; };
+		0C5163FF2C22EDDF004EF494 /* network_ctrl.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5163FA2C22EDDF004EF494 /* network_ctrl.pb.swift */; };
+		0C5164002C22EDDF004EF494 /* network_scan.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5163FB2C22EDDF004EF494 /* network_scan.pb.swift */; };
 		E9645E43CF7B1380FC310F19 /* Pods_ESPProvision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247B21F19D9AA0FB3A6A6B94 /* Pods_ESPProvision.framework */; };
 		F151FF03247B1C40006F514E /* ESPProvisionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F151FEF8247B17B3006F514E /* ESPProvisionTests.swift */; };
 		F15B525828AA1794009852DB /* sec2.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15B525728AA1794009852DB /* sec2.pb.swift */; };
@@ -42,13 +49,9 @@
 		F1C34D482451F46400340B04 /* ESPSecurity0.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D472451F46400340B04 /* ESPSecurity0.swift */; };
 		F1C34D4E2457469D00340B04 /* ESPExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D4D2457469D00340B04 /* ESPExtensions.swift */; };
 		F1C34D502457479C00340B04 /* CryptoAES.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D4F2457479C00340B04 /* CryptoAES.swift */; };
-		F1C34D5D24596C8500340B04 /* constants.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D5624596C8500340B04 /* constants.pb.swift */; };
-		F1C34D5E24596C8500340B04 /* wifi_config.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D5724596C8500340B04 /* wifi_config.pb.swift */; };
 		F1C34D5F24596C8500340B04 /* sec1.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D5824596C8500340B04 /* sec1.pb.swift */; };
-		F1C34D6024596C8500340B04 /* wifi_constants.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D5924596C8500340B04 /* wifi_constants.pb.swift */; };
 		F1C34D6124596C8500340B04 /* session.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D5A24596C8500340B04 /* session.pb.swift */; };
 		F1C34D6224596C8500340B04 /* sec0.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D5B24596C8500340B04 /* sec0.pb.swift */; };
-		F1C34D6324596C8500340B04 /* wifi_scan.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D5C24596C8500340B04 /* wifi_scan.pb.swift */; };
 		F1C34D6624597B8E00340B04 /* HexUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D6524597B8E00340B04 /* HexUtils.swift */; };
 		F1C34D682459B35200340B04 /* ESPWiFiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D672459B35200340B04 /* ESPWiFiManager.swift */; };
 		F1C34D6A2459B3F200340B04 /* ESPSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C34D692459B3F200340B04 /* ESPSession.swift */; };
@@ -85,6 +88,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0C2426F52BF4E3D7004BDF49 /* ESPThreadNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESPThreadNetwork.swift; sourceTree = "<group>"; };
+		0C2426F92BF4E429004BDF49 /* ESPThreadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESPThreadManager.swift; sourceTree = "<group>"; };
+		0C5163F72C22EDDF004EF494 /* constants.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constants.pb.swift; sourceTree = "<group>"; };
+		0C5163F82C22EDDF004EF494 /* network_config.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = network_config.pb.swift; sourceTree = "<group>"; };
+		0C5163F92C22EDDF004EF494 /* network_constants.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = network_constants.pb.swift; sourceTree = "<group>"; };
+		0C5163FA2C22EDDF004EF494 /* network_ctrl.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = network_ctrl.pb.swift; sourceTree = "<group>"; };
+		0C5163FB2C22EDDF004EF494 /* network_scan.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = network_scan.pb.swift; sourceTree = "<group>"; };
 		247B21F19D9AA0FB3A6A6B94 /* Pods_ESPProvision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ESPProvision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		44F8E73C277B503EAD29F630 /* Pods-ESPProvision-ESPProvisionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision-ESPProvisionTests.release.xcconfig"; path = "Target Support Files/Pods-ESPProvision-ESPProvisionTests/Pods-ESPProvision-ESPProvisionTests.release.xcconfig"; sourceTree = "<group>"; };
 		93F6B39AD52298DB1DAAFAAB /* Pods-ESPProvision.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ESPProvision.debug.xcconfig"; path = "Target Support Files/Pods-ESPProvision/Pods-ESPProvision.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,13 +138,9 @@
 		F1C34D472451F46400340B04 /* ESPSecurity0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPSecurity0.swift; sourceTree = "<group>"; };
 		F1C34D4D2457469D00340B04 /* ESPExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPExtensions.swift; sourceTree = "<group>"; };
 		F1C34D4F2457479C00340B04 /* CryptoAES.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CryptoAES.swift; sourceTree = "<group>"; };
-		F1C34D5624596C8500340B04 /* constants.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.pb.swift; sourceTree = "<group>"; };
-		F1C34D5724596C8500340B04 /* wifi_config.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_config.pb.swift; sourceTree = "<group>"; };
 		F1C34D5824596C8500340B04 /* sec1.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sec1.pb.swift; sourceTree = "<group>"; };
-		F1C34D5924596C8500340B04 /* wifi_constants.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_constants.pb.swift; sourceTree = "<group>"; };
 		F1C34D5A24596C8500340B04 /* session.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = session.pb.swift; sourceTree = "<group>"; };
 		F1C34D5B24596C8500340B04 /* sec0.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sec0.pb.swift; sourceTree = "<group>"; };
-		F1C34D5C24596C8500340B04 /* wifi_scan.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wifi_scan.pb.swift; sourceTree = "<group>"; };
 		F1C34D6524597B8E00340B04 /* HexUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexUtils.swift; sourceTree = "<group>"; };
 		F1C34D672459B35200340B04 /* ESPWiFiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ESPWiFiManager.swift; sourceTree = "<group>"; };
 		F1C34D692459B3F200340B04 /* ESPSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESPSession.swift; sourceTree = "<group>"; };
@@ -264,6 +270,7 @@
 				F1C34D692459B3F200340B04 /* ESPSession.swift */,
 				F1C34D3B245017C900340B04 /* ESPDevice.swift */,
 				F1C34D672459B35200340B04 /* ESPWiFiManager.swift */,
+				0C2426F92BF4E429004BDF49 /* ESPThreadManager.swift */,
 				F1C34D77245F17B900340B04 /* ESPProvision.swift */,
 			);
 			path = ESPProvision;
@@ -294,14 +301,15 @@
 		F1C34D552459696400340B04 /* Proto */ = {
 			isa = PBXGroup;
 			children = (
-				F15B525728AA1794009852DB /* sec2.pb.swift */,
-				F1C34D5624596C8500340B04 /* constants.pb.swift */,
+				0C5163F72C22EDDF004EF494 /* constants.pb.swift */,
+				0C5163F82C22EDDF004EF494 /* network_config.pb.swift */,
+				0C5163F92C22EDDF004EF494 /* network_constants.pb.swift */,
+				0C5163FA2C22EDDF004EF494 /* network_ctrl.pb.swift */,
+				0C5163FB2C22EDDF004EF494 /* network_scan.pb.swift */,
 				F1C34D5B24596C8500340B04 /* sec0.pb.swift */,
 				F1C34D5824596C8500340B04 /* sec1.pb.swift */,
+				F15B525728AA1794009852DB /* sec2.pb.swift */,
 				F1C34D5A24596C8500340B04 /* session.pb.swift */,
-				F1C34D5724596C8500340B04 /* wifi_config.pb.swift */,
-				F1C34D5924596C8500340B04 /* wifi_constants.pb.swift */,
-				F1C34D5C24596C8500340B04 /* wifi_scan.pb.swift */,
 			);
 			path = Proto;
 			sourceTree = "<group>";
@@ -322,6 +330,7 @@
 		F1C34D7E24618A5800340B04 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0C2426F52BF4E3D7004BDF49 /* ESPThreadNetwork.swift */,
 				F1C34D8024618ACC00340B04 /* ESPWifiNetwork.swift */,
 				F17B313B28476DB50052D80F /* ESPScanStatus.swift */,
 				F183F85128C5F41300CB7E86 /* ESPScanResult.swift */,
@@ -488,10 +497,9 @@
 				F183F84928B37D4D00CB7E86 /* Multiplication.swift in Sources */,
 				F1C34D502457479C00340B04 /* CryptoAES.swift in Sources */,
 				F1C34D76245F178E00340B04 /* ESPProvisionManager.swift in Sources */,
-				F1C34D6024596C8500340B04 /* wifi_constants.pb.swift in Sources */,
 				F183F84A28B37D4D00CB7E86 /* Exponentiation.swift in Sources */,
 				F1C34D702459F60900340B04 /* ESPErrors.swift in Sources */,
-				F1C34D5D24596C8500340B04 /* constants.pb.swift in Sources */,
+				0C2426FA2BF4E429004BDF49 /* ESPThreadManager.swift in Sources */,
 				F1C34D8124618ACC00340B04 /* ESPWifiNetwork.swift in Sources */,
 				F183F7F228B37ADE00CB7E86 /* Client.swift in Sources */,
 				F177859C2A057F4500C3AE73 /* AESDecryptor.swift in Sources */,
@@ -499,6 +507,11 @@
 				F1C34D3C245017C900340B04 /* ESPDevice.swift in Sources */,
 				F183F84E28B37D4D00CB7E86 /* Integer Conversion.swift in Sources */,
 				F183F84528B37D4D00CB7E86 /* Division.swift in Sources */,
+				0C5163FC2C22EDDF004EF494 /* constants.pb.swift in Sources */,
+				0C5163FD2C22EDDF004EF494 /* network_constants.pb.swift in Sources */,
+				0C5163FE2C22EDDF004EF494 /* network_config.pb.swift in Sources */,
+				0C5163FF2C22EDDF004EF494 /* network_ctrl.pb.swift in Sources */,
+				0C5164002C22EDDF004EF494 /* network_scan.pb.swift in Sources */,
 				F183F85228C5F41500CB7E86 /* ESPScanResult.swift in Sources */,
 				F183F84C28B37D4D00CB7E86 /* Shifts.swift in Sources */,
 				F183F84B28B37D4D00CB7E86 /* Floating Point Conversion.swift in Sources */,
@@ -516,6 +529,7 @@
 				F183F7F028B37ADE00CB7E86 /* SRP.swift in Sources */,
 				F15B525A28AA1915009852DB /* ESPSecurity2.swift in Sources */,
 				F1C34D482451F46400340B04 /* ESPSecurity0.swift in Sources */,
+				0C2426F62BF4E3D7004BDF49 /* ESPThreadNetwork.swift in Sources */,
 				F1C34D4224518F3900340B04 /* ESPSoftAPTransport.swift in Sources */,
 				F17B313C28476DB50052D80F /* ESPScanStatus.swift in Sources */,
 				F1C34D462451B33100340B04 /* ESPCodeable.swift in Sources */,
@@ -528,9 +542,7 @@
 				F1C34DEF24673D7300340B04 /* ESPLogging.swift in Sources */,
 				F1C34D6A2459B3F200340B04 /* ESPSession.swift in Sources */,
 				F183F85428C73A8D00CB7E86 /* Bitwise Ops.swift in Sources */,
-				F1C34D5E24596C8500340B04 /* wifi_config.pb.swift in Sources */,
 				F168F2C928E0B97A00E39433 /* Comparable.swift in Sources */,
-				F1C34D6324596C8500340B04 /* wifi_scan.pb.swift in Sources */,
 				F1C34D6124596C8500340B04 /* session.pb.swift in Sources */,
 				F183F7EF28B37ADE00CB7E86 /* AuthenticationFailure.swift in Sources */,
 				F1C34D6624597B8E00340B04 /* HexUtils.swift in Sources */,

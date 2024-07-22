@@ -103,6 +103,8 @@ open class ESPDevice {
     var connectionStatus:ESPSessionStatus = .disconnected
     /// Completion handler for scan Wi-Fi list.
     var wifiListCompletionHandler: (([ESPWifiNetwork]?,ESPWiFiScanError?) -> Void)?
+    /// Completion handler for scan Thread list.
+    var threadListCompletionHandler: (([ESPThreadNetwork]?,ESPThreadScanError?) -> Void)?
     /// Completion handler for BLE connection status.
     var bleConnectionStatusHandler: ((ESPSessionStatus) -> Void)?
     /// Proof of possession 
@@ -123,6 +125,8 @@ open class ESPDevice {
     public var bleDelegate: ESPBLEDelegate?
     /// Store username for sec1
     public var username: String?
+    /// Store network for device
+    public var network: ESPNetworkType?
     /// Advertisement data for BLE device
     /// This property is read-only
     public private(set) var advertisementData:[String:Any]?
@@ -145,12 +149,13 @@ open class ESPDevice {
     ///   - transport: Mode of transport.
     ///   - proofOfPossession: Pop of device.
     ///   - softAPPassword: Password in case SoftAP device.
-    public init(name: String, security: ESPSecurity, transport: ESPTransport, proofOfPossession:String? = nil, username:String? = nil, softAPPassword:String? = nil, advertisementData: [String:Any]? = nil) {
+    public init(name: String, security: ESPSecurity, transport: ESPTransport, proofOfPossession:String? = nil, username:String? = nil, network: ESPNetworkType? = nil, softAPPassword:String? = nil, advertisementData: [String:Any]? = nil) {
         ESPLog.log("Intializing ESPDevice with name:\(name), security:\(security), transport:\(transport), proofOfPossession:\(proofOfPossession ?? "nil") and softAPPassword:\(softAPPassword ?? "nil")")
         self.deviceName = name
         self.security = security
         self.transport = transport
         self.username = username
+        self.network = network
         self.proofOfPossession = proofOfPossession
         self.softAPPassword = softAPPassword
         self.advertisementData = advertisementData
@@ -322,12 +327,12 @@ open class ESPDevice {
     ///     - passPhrase: Password of home network.
     ///     - completionHandler: The completion handler that is called when provision is completed.
     ///                          Parameter of block include status of provision.
-    public func provision(ssid: String, passPhrase: String = "", completionHandler: @escaping (ESPProvisionStatus) -> Void) {
+    public func provision(ssid: String?, passPhrase: String? = "", threadOperationalDataset: Data? = nil, completionHandler: @escaping (ESPProvisionStatus) -> Void) {
         ESPLog.log("Provisioning started.. with ssid:\(ssid) and password:\(passPhrase)")
         if session == nil || !session.isEstablished {
             completionHandler(.failure(.sessionError))
         } else {
-            provisionDevice(ssid: ssid, passPhrase: passPhrase, retryOnce: true, completionHandler: completionHandler)
+            provisionDevice(ssid: ssid, passPhrase: passPhrase, threadOperationalDataset: threadOperationalDataset, retryOnce: true, completionHandler: completionHandler)
         }
     }
     
@@ -336,13 +341,48 @@ open class ESPDevice {
         return self.provision?.wifiConnectedIp4Addr
     }
     
-    private func provisionDevice(ssid: String, passPhrase: String = "", retryOnce: Bool, completionHandler: @escaping (ESPProvisionStatus) -> Void) {
+    private func provisionDevice(ssid: String?, passPhrase: String? = "", threadOperationalDataset: Data?, retryOnce: Bool, completionHandler: @escaping (ESPProvisionStatus) -> Void) {
         provision = ESPProvision(session: session)
         ESPLog.log("Configure wi-fi credentials in device.")
-        provision.configureWifi(ssid: ssid, passphrase: passPhrase) { status, error in
+        provision.configureNetwork(ssid: ssid, passphrase: passPhrase, threadOperationalDataset: threadOperationalDataset) { status, error in
             ESPLog.log("Received configuration response.")
             switch status {
                 case .success:
+                if let _ = threadOperationalDataset {
+                    self.provision.applyThreadConfigurations(completionHandler: { _, error in
+                        DispatchQueue.main.async {
+                            guard error == nil else {
+                                completionHandler(.failure(.configurationError(error!)))
+                                return
+                            }
+                            completionHandler(.configApplied)
+                        }
+                    }, threadStatusUpdatedHandler: { threadState, failReason, error in
+                        DispatchQueue.main.async {
+                            if error != nil {
+                                completionHandler(.failure(.threadStatusError(error!)))
+                                return
+                            } else if threadState == ThreadNetworkState.attached {
+                                completionHandler(.success)
+                                return
+                            } else if threadState == ThreadNetworkState.dettached {
+                                completionHandler(.failure(.threadStatusDettached))
+                                return
+                            } else {
+                                if failReason == ThreadAttachFailedReason.datasetInvalid {
+                                    completionHandler(.failure(.threadDatasetInvalid))
+                                    return
+                                } else if failReason == ThreadAttachFailedReason.threadNetworkNotFound {
+                                    completionHandler(.failure(.threadStatusNetworkNotFound))
+                                    return
+                                } else {
+                                    completionHandler(.failure(.threadStatusUnknownError))
+                                    return
+                                }
+                            }
+                        }
+                    })
+                } else {
                     self.provision.applyConfigurations(completionHandler: { _, error in
                         DispatchQueue.main.async {
                             guard error == nil else {
@@ -357,17 +397,17 @@ open class ESPDevice {
                             if error != nil {
                                 completionHandler(.failure(.wifiStatusError(error!)))
                                 return
-                            } else if wifiState == Espressif_WifiStationState.connected {
+                            } else if wifiState == WifiStationState.connected {
                                 completionHandler(.success)
                                 return
-                            } else if wifiState == Espressif_WifiStationState.disconnected {
+                            } else if wifiState == WifiStationState.disconnected {
                                 completionHandler(.failure(.wifiStatusDisconnected))
                                 return
                             } else {
-                                if failReason == Espressif_WifiConnectFailedReason.authError {
+                                if failReason == WifiConnectFailedReason.authError {
                                     completionHandler(.failure(.wifiStatusAuthenticationError))
                                     return
-                                } else if failReason == Espressif_WifiConnectFailedReason.networkNotFound {
+                                } else if failReason == WifiConnectFailedReason.wifiNetworkNotFound {
                                     completionHandler(.failure(.wifiStatusNetworkNotFound))
                                     return
                                 } else {
@@ -377,13 +417,14 @@ open class ESPDevice {
                             }
                         }
                     })
+                }
                 default:
                     if error != nil, self.isNetworkDisconnected(error: error!) {
                         DispatchQueue.main.async {
                             self.connect { status in
                                 switch status {
                                 case .connected:
-                                    self.provisionDevice(ssid: ssid, passPhrase: passPhrase, retryOnce: false, completionHandler: completionHandler)
+                                    self.provisionDevice(ssid: ssid, passPhrase: passPhrase, threadOperationalDataset: threadOperationalDataset, retryOnce: false, completionHandler: completionHandler)
                                     return
                                 default:
                                    completionHandler(.failure(.configurationError(error!)))
@@ -411,6 +452,27 @@ open class ESPDevice {
             NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: self.name)
         }
         
+    }
+    
+    /// Send command to device for scanning Thread list.
+    ///
+    /// - Parameter completionHandler: The completion handler that is called when Thread list is scanned.
+    ///                                Parameter of block include list of available Thread network or error in case of failure.
+    public func scanThreadList(completionHandler: @escaping ([ESPThreadNetwork]?,ESPThreadScanError?) -> Void) {
+        retryScan = true
+        scanDeviceForThreadList(completionHandler: completionHandler)
+    }
+    
+    private func scanDeviceForThreadList(completionHandler: @escaping ([ESPThreadNetwork]?,ESPThreadScanError?) -> Void) {
+        if let capability = self.capabilities, capability.contains(ESPConstants.threadScanCapability) {
+            self.threadListCompletionHandler = completionHandler
+            let scanThreadManager: ESPThreadManager = ESPThreadManager(session: self.session!)
+            scanThreadManager.delegate = self
+            threadListCompletionHandler = completionHandler
+            scanThreadManager.startThreadScan()
+        } else {
+            completionHandler(nil,.emptyResultCount)
+        }
     }
     
     /// Send command to device for scanning Wi-Fi list.
@@ -638,8 +700,43 @@ extension ESPDevice: ESPScanWifiListProtocol {
         } else {
             self.wifiListCompletionHandler?(nil,error)
         }
+    }
+    
+}
+
+extension ESPDevice: ESPScanThreadListProtocol {
+    func threadScanFinished(threadList: [ESPThreadNetwork]?, error: ESPThreadScanError?) {
+        if let threadResult = threadList {
+            threadListCompletionHandler?(threadResult,nil)
+            return
+        }
+        if retryScan {
+                self.retryScan  = false
+                switch error  {
+                case .scanRequestError(let requestError):
+                    if isNetworkDisconnected(error: requestError) {
+                        DispatchQueue.main.async {
+                            self.connect { status in
+                                switch status {
+                                case .connected:
+                                    self.scanDeviceForThreadList(completionHandler: self.threadListCompletionHandler!)
+                                default:
+                                    self.threadListCompletionHandler?(nil, error)
+                                }
+                            }
+                        }
+                    } else {
+                        self.threadListCompletionHandler?(nil,error)
+                    }
+                default:
+                    self.threadListCompletionHandler?(nil,error)
+                }
+        } else {
+            self.threadListCompletionHandler?(nil,error)
         }
     }
+
+}
 
 extension ESPDevice: ESPBLEStatusDelegate {
     func peripheralConnected() {
@@ -664,6 +761,5 @@ extension ESPDevice: ESPBLEStatusDelegate {
             bleDelegate?.peripheralFailedToConnect(peripheral: peripheral, error: error)
         }
     }
-    
     
 }

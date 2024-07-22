@@ -137,7 +137,7 @@ class ESPSecurity1: ESPCodeable {
         guard let publicKey = self.publicKey else {
             throw SecurityError.keygenError("Could not generate keypair")
         }
-        var sessionData = Espressif_SessionData()
+        var sessionData = SessionData()
         sessionData.secVer = .secScheme1
         sessionData.sec1.sc0.clientPubkey = publicKey.rawRepresentation
         do {
@@ -156,7 +156,7 @@ class ESPSecurity1: ESPCodeable {
             throw SecurityError.keygenError("Could not generate keypair")
         }
 
-        var sessionData = Espressif_SessionData()
+        var sessionData = SessionData()
         sessionData.secVer = .secScheme1
         sessionData.sec1.msg = .sessionCommand1
         sessionData.sec1.sc1.clientVerifyData = verifyData
@@ -178,7 +178,7 @@ class ESPSecurity1: ESPCodeable {
             ESPLog.log("Response 0 is nil.")
             throw SecurityError.handshakeError("Response 0 is nil")
         }
-        let sessionData = try Espressif_SessionData(serializedData: response)
+        let sessionData = try SessionData(serializedData: response)
         if sessionData.secVer != .secScheme1 {
             ESPLog.log("Security version mismatch.")
             throw SecurityError.handshakeError("Security version mismatch")
@@ -220,7 +220,7 @@ class ESPSecurity1: ESPCodeable {
             ESPLog.log("Response 1 is nil")
             throw SecurityError.handshakeError("Response 1 is nil")
         }
-        let sessionData = try Espressif_SessionData(serializedData: response)
+        let sessionData = try SessionData(serializedData: response)
         if sessionData.secVer != .secScheme1 {
             ESPLog.log("Security version mismatch")
             throw SecurityError.handshakeError("Security version mismatch")

@@ -148,6 +148,15 @@ class BLELandingViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             switch status {
             case .connected:
+                if let caps = device.capabilities {
+                    if caps.contains(AppConstants.threadScan) {
+                        self.showThreadNetworkSelectionVC(shouldScanThreadNetworks: true, device: device)
+                        return
+                    } else if caps.contains(AppConstants.threadProv) {
+                        self.showThreadNetworkSelectionVC(shouldScanThreadNetworks: false, device: device)
+                        return
+                    }
+                }
                 DispatchQueue.main.async {
                     self.goToProvision(device: device)
                 }

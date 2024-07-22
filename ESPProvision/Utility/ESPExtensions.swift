@@ -40,6 +40,10 @@ extension Data {
         }
         return Data(hash)
     }
+    
+    public var hexadecimalString: String {
+        return map { String(format: "%02hhx", $0) }.joined()
+    }
 }
 
 extension Array {

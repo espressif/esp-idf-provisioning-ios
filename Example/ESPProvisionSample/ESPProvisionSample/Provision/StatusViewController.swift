@@ -24,12 +24,15 @@ import UIKit
 class StatusViewController: UIViewController {
     var ssid: String!
     var passphrase: String!
+    var threadOpetationalDataset: Data!
     var step1Failed = false
     var espDevice: ESPDevice!
     var message = ""
 
     @IBOutlet var step1Image: UIImageView!
     @IBOutlet var step2Image: UIImageView!
+    @IBOutlet weak var sendingCredsLabel: UILabel!
+    @IBOutlet weak var confirmNetworkConnectionLabel: UILabel!
     @IBOutlet var step1Indicator: UIActivityIndicatorView!
     @IBOutlet var step2Indicator: UIActivityIndicatorView!
     @IBOutlet var step1ErrorLabel: UILabel!
@@ -41,6 +44,10 @@ class StatusViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let _ = threadOpetationalDataset {
+            self.sendingCredsLabel.text = "Sending Thread credentials."
+            self.confirmNetworkConnectionLabel.text = "Confirming Thread connection."
+        }
         if step1Failed {
             step1FailedWithMessage(message: message)
         } else {
@@ -66,7 +73,7 @@ class StatusViewController: UIViewController {
         step1Indicator.isHidden = false
         step1Indicator.startAnimating()
 
-        espDevice.provision(ssid: ssid, passPhrase: passphrase) { status in
+        espDevice.provision(ssid: self.ssid, passPhrase: self.passphrase, threadOperationalDataset: self.threadOpetationalDataset) { status in
             DispatchQueue.main.async {
                 switch status {
                 case .success:

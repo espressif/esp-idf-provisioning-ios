@@ -26,9 +26,11 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var pickerToolbar: UIToolbar!
     @IBOutlet weak var selectionLabel: UILabel!
     @IBOutlet weak var securityLabel: UILabel!
-    @IBOutlet weak var usernamTextField: UITextField!
+    @IBOutlet weak var wifiUserNamTextField: UITextField!
     @IBOutlet weak var securityToggle: UISwitch!
-    @IBOutlet weak var usernameView: UIView!
+    @IBOutlet weak var wifiUserNameView: UIView!
+    @IBOutlet weak var threadUserNamTextField: UITextField!
+    @IBOutlet weak var threadUserNameView: UIView!
     
     // MARK: - Overriden Methods
     
@@ -38,16 +40,17 @@ class SettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         selectionLabel.text = Utility.shared.espAppSettings.deviceType.value
-        usernamTextField.text = Utility.shared.espAppSettings.username
+        wifiUserNamTextField.text = Utility.shared.espAppSettings.wifiUsername
+        threadUserNamTextField.text = Utility.shared.espAppSettings.threadUsername
         switch Utility.shared.espAppSettings.securityMode {
         case .unsecure:
             securityLabel.text = "Unsecured"
             securityToggle.setOn(false, animated: true)
-            usernameView.isHidden = true
+            wifiUserNameView.isHidden = true
         default:
             securityLabel.text = "Secured"
             securityToggle.setOn(true, animated: true)
-            usernameView.isHidden = false
+            wifiUserNameView.isHidden = false
         }
         
         // Adding tap gesture to hide keyboard on outside touch
@@ -81,11 +84,13 @@ class SettingsViewController: UIViewController {
         if sender.isOn {
             Utility.shared.espAppSettings.securityMode = .secure2
             securityLabel.text = "Secured"
-            usernameView.isHidden = false
+            wifiUserNameView.isHidden = false
+            threadUserNameView.isHidden = false
         } else {
             Utility.shared.espAppSettings.securityMode = .unsecure
             securityLabel.text = "Unsecured"
-            usernameView.isHidden = true
+            wifiUserNameView.isHidden = true
+            threadUserNameView.isHidden = true
         }
         Utility.shared.saveAppSettings()
     }
@@ -106,10 +111,13 @@ class SettingsViewController: UIViewController {
     }
     
     @objc func keyboardWillDisappear() {
-        if let username = usernamTextField.text {
-            Utility.shared.espAppSettings.username = username
-            Utility.shared.saveAppSettings()
+        if let wifiUsername = wifiUserNamTextField.text {
+            Utility.shared.espAppSettings.wifiUsername = wifiUsername
         }
+        if let threadUsername = threadUserNamTextField.text {
+            Utility.shared.espAppSettings.threadUsername = threadUsername
+        }
+        Utility.shared.saveAppSettings()
     }
     
 }

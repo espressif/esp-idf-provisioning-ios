@@ -21,6 +21,21 @@ import UIKit
 import CoreBluetooth
 import AVFoundation
 
+public enum ESPNetworkType: String {
+    /// Communicate over wifi
+    case wifi
+    ///  Communicate over thread
+    case thread
+    
+    public init?(rawValue: String) {
+        switch rawValue.lowercased() {
+        case "wifi": self = .wifi
+        case "thread": self = .thread
+        default: return nil
+        }
+    }
+}
+
 /// Supported mode of communication with device.
 public enum ESPTransport: String {
     /// Communicate using bluetooth.
@@ -296,9 +311,9 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
                 let decodeResponse = try decoder.decode(ESPScanResult.self, from: jsonData)
                 switch decodeResponse.transport {
                 case .ble:
-                    createESPDevice(deviceName: decodeResponse.name, transport: decodeResponse.transport, security: decodeResponse.security, proofOfPossession: decodeResponse.pop, username: decodeResponse.username, completionHandler: scanCompletionHandler)
+                    createESPDevice(deviceName: decodeResponse.name, transport: decodeResponse.transport, security: decodeResponse.security, proofOfPossession: decodeResponse.pop, username: decodeResponse.username, network: decodeResponse.network, completionHandler: scanCompletionHandler)
                 default:
-                    createESPDevice(deviceName: decodeResponse.name, transport: decodeResponse.transport, security: decodeResponse.security, proofOfPossession: decodeResponse.pop, softAPPassword: decodeResponse.password ?? "", username: decodeResponse.username, completionHandler: scanCompletionHandler)
+                    createESPDevice(deviceName: decodeResponse.name, transport: decodeResponse.transport, security: decodeResponse.security, proofOfPossession: decodeResponse.pop, softAPPassword: decodeResponse.password ?? "", username: decodeResponse.username, network: decodeResponse.network, completionHandler: scanCompletionHandler)
                     
                 }
             } catch {
@@ -318,7 +333,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     ///   - security: Security mode for communication.
     ///   - completionHandler: The completion handler is invoked with parameters containing newly created device object.
     ///                        Error in case where method fails to return a device object.
-    public func createESPDevice(deviceName: String, transport: ESPTransport, security: ESPSecurity = .secure2, proofOfPossession:String? = nil, softAPPassword:String? = nil, username:String? = nil, completionHandler: @escaping (ESPDevice?,ESPDeviceCSSError?) -> Void) {
+    public func createESPDevice(deviceName: String, transport: ESPTransport, security: ESPSecurity = .secure2, proofOfPossession:String? = nil, softAPPassword:String? = nil, username:String? = nil, network: ESPNetworkType? = nil, completionHandler: @escaping (ESPDevice?,ESPDeviceCSSError?) -> Void) {
         
         ESPLog.log("Creating ESPDevice...")
         
@@ -328,11 +343,11 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
             self.scanCompletionHandler = completionHandler
             self.security = security
             self.scanStatusBlock?(.searchingBLE(deviceName))
-            espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: deviceName, proofOfPossession: proofOfPossession, username: username)
+            espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: deviceName, proofOfPossession: proofOfPossession, username: username, network: network)
             espBleTransport.scan(delegate: self)
         default:
             self.scanStatusBlock?(.joiningSoftAP(deviceName))
-            let newDevice = ESPDevice(name: deviceName, security: security, transport: transport, proofOfPossession: proofOfPossession, username:username, softAPPassword: softAPPassword)
+            let newDevice = ESPDevice(name: deviceName, security: security, transport: transport, proofOfPossession: proofOfPossession, username:username, network: network, softAPPassword: softAPPassword)
             ESPLog.log("SoftAp device created successfully.")
             completionHandler(newDevice, nil)
         }

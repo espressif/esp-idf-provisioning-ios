@@ -6,19 +6,6 @@
 //
 // For information on using the generated types, please see the documentation:
 //   https://github.com/apple/swift-protobuf/
-// Copyright 2022 Espressif Systems
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
 
 import Foundation
 import SwiftProtobuf
@@ -34,7 +21,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 }
 
 /// A message must be of type Cmd0 / Cmd1 / Resp0 / Resp1 
-enum Espressif_Sec2MsgType: SwiftProtobuf.Enum {
+enum Sec2MsgType: SwiftProtobuf.Enum {
   typealias RawValue = Int
   case s2SessionCommand0 // = 0
   case s2SessionResponse0 // = 1
@@ -70,9 +57,9 @@ enum Espressif_Sec2MsgType: SwiftProtobuf.Enum {
 
 #if swift(>=4.2)
 
-extension Espressif_Sec2MsgType: CaseIterable {
+extension Sec2MsgType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  static var allCases: [Espressif_Sec2MsgType] = [
+  static let allCases: [Sec2MsgType] = [
     .s2SessionCommand0,
     .s2SessionResponse0,
     .s2SessionCommand1,
@@ -83,7 +70,7 @@ extension Espressif_Sec2MsgType: CaseIterable {
 #endif  // swift(>=4.2)
 
 /// Data structure of Session command0 packet 
-struct Espressif_S2SessionCmd0 {
+struct S2SessionCmd0 {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -98,12 +85,12 @@ struct Espressif_S2SessionCmd0 {
 }
 
 /// Data structure of Session response0 packet 
-struct Espressif_S2SessionResp0 {
+struct S2SessionResp0 {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var status: Espressif_Status = .success
+  var status: Status = .success
 
   var devicePubkey: Data = Data()
 
@@ -115,7 +102,7 @@ struct Espressif_S2SessionResp0 {
 }
 
 /// Data structure of Session command1 packet 
-struct Espressif_S2SessionCmd1 {
+struct S2SessionCmd1 {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -128,12 +115,12 @@ struct Espressif_S2SessionCmd1 {
 }
 
 /// Data structure of Session response1 packet 
-struct Espressif_S2SessionResp1 {
+struct S2SessionResp1 {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var status: Espressif_Status = .success
+  var status: Status = .success
 
   var deviceProof: Data = Data()
 
@@ -145,48 +132,48 @@ struct Espressif_S2SessionResp1 {
 }
 
 /// Payload structure of session data 
-struct Espressif_Sec2Payload {
+struct Sec2Payload {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   ///!< Type of message 
-  var msg: Espressif_Sec2MsgType = .s2SessionCommand0
+  var msg: Sec2MsgType = .s2SessionCommand0
 
-  var payload: Espressif_Sec2Payload.OneOf_Payload? = nil
+  var payload: Sec2Payload.OneOf_Payload? = nil
 
   ///!< Payload data interpreted as Cmd0 
-  var sc0: Espressif_S2SessionCmd0 {
+  var sc0: S2SessionCmd0 {
     get {
       if case .sc0(let v)? = payload {return v}
-      return Espressif_S2SessionCmd0()
+      return S2SessionCmd0()
     }
     set {payload = .sc0(newValue)}
   }
 
   ///!< Payload data interpreted as Resp0 
-  var sr0: Espressif_S2SessionResp0 {
+  var sr0: S2SessionResp0 {
     get {
       if case .sr0(let v)? = payload {return v}
-      return Espressif_S2SessionResp0()
+      return S2SessionResp0()
     }
     set {payload = .sr0(newValue)}
   }
 
   ///!< Payload data interpreted as Cmd1 
-  var sc1: Espressif_S2SessionCmd1 {
+  var sc1: S2SessionCmd1 {
     get {
       if case .sc1(let v)? = payload {return v}
-      return Espressif_S2SessionCmd1()
+      return S2SessionCmd1()
     }
     set {payload = .sc1(newValue)}
   }
 
   ///!< Payload data interpreted as Resp1 
-  var sr1: Espressif_S2SessionResp1 {
+  var sr1: S2SessionResp1 {
     get {
       if case .sr1(let v)? = payload {return v}
-      return Espressif_S2SessionResp1()
+      return S2SessionResp1()
     }
     set {payload = .sr1(newValue)}
   }
@@ -195,16 +182,16 @@ struct Espressif_Sec2Payload {
 
   enum OneOf_Payload: Equatable {
     ///!< Payload data interpreted as Cmd0 
-    case sc0(Espressif_S2SessionCmd0)
+    case sc0(S2SessionCmd0)
     ///!< Payload data interpreted as Resp0 
-    case sr0(Espressif_S2SessionResp0)
+    case sr0(S2SessionResp0)
     ///!< Payload data interpreted as Cmd1 
-    case sc1(Espressif_S2SessionCmd1)
+    case sc1(S2SessionCmd1)
     ///!< Payload data interpreted as Resp1 
-    case sr1(Espressif_S2SessionResp1)
+    case sr1(S2SessionResp1)
 
   #if !swift(>=4.1)
-    static func ==(lhs: Espressif_Sec2Payload.OneOf_Payload, rhs: Espressif_Sec2Payload.OneOf_Payload) -> Bool {
+    static func ==(lhs: Sec2Payload.OneOf_Payload, rhs: Sec2Payload.OneOf_Payload) -> Bool {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
@@ -235,20 +222,18 @@ struct Espressif_Sec2Payload {
 }
 
 #if swift(>=5.5) && canImport(_Concurrency)
-extension Espressif_Sec2MsgType: @unchecked Sendable {}
-extension Espressif_S2SessionCmd0: @unchecked Sendable {}
-extension Espressif_S2SessionResp0: @unchecked Sendable {}
-extension Espressif_S2SessionCmd1: @unchecked Sendable {}
-extension Espressif_S2SessionResp1: @unchecked Sendable {}
-extension Espressif_Sec2Payload: @unchecked Sendable {}
-extension Espressif_Sec2Payload.OneOf_Payload: @unchecked Sendable {}
+extension Sec2MsgType: @unchecked Sendable {}
+extension S2SessionCmd0: @unchecked Sendable {}
+extension S2SessionResp0: @unchecked Sendable {}
+extension S2SessionCmd1: @unchecked Sendable {}
+extension S2SessionResp1: @unchecked Sendable {}
+extension Sec2Payload: @unchecked Sendable {}
+extension Sec2Payload.OneOf_Payload: @unchecked Sendable {}
 #endif  // swift(>=5.5) && canImport(_Concurrency)
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "espressif"
-
-extension Espressif_Sec2MsgType: SwiftProtobuf._ProtoNameProviding {
+extension Sec2MsgType: SwiftProtobuf._ProtoNameProviding {
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "S2Session_Command0"),
     1: .same(proto: "S2Session_Response0"),
@@ -257,8 +242,8 @@ extension Espressif_Sec2MsgType: SwiftProtobuf._ProtoNameProviding {
   ]
 }
 
-extension Espressif_S2SessionCmd0: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".S2SessionCmd0"
+extension S2SessionCmd0: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "S2SessionCmd0"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "client_username"),
     2: .standard(proto: "client_pubkey"),
@@ -287,7 +272,7 @@ extension Espressif_S2SessionCmd0: SwiftProtobuf.Message, SwiftProtobuf._Message
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Espressif_S2SessionCmd0, rhs: Espressif_S2SessionCmd0) -> Bool {
+  static func ==(lhs: S2SessionCmd0, rhs: S2SessionCmd0) -> Bool {
     if lhs.clientUsername != rhs.clientUsername {return false}
     if lhs.clientPubkey != rhs.clientPubkey {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -295,8 +280,8 @@ extension Espressif_S2SessionCmd0: SwiftProtobuf.Message, SwiftProtobuf._Message
   }
 }
 
-extension Espressif_S2SessionResp0: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".S2SessionResp0"
+extension S2SessionResp0: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "S2SessionResp0"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "status"),
     2: .standard(proto: "device_pubkey"),
@@ -330,7 +315,7 @@ extension Espressif_S2SessionResp0: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Espressif_S2SessionResp0, rhs: Espressif_S2SessionResp0) -> Bool {
+  static func ==(lhs: S2SessionResp0, rhs: S2SessionResp0) -> Bool {
     if lhs.status != rhs.status {return false}
     if lhs.devicePubkey != rhs.devicePubkey {return false}
     if lhs.deviceSalt != rhs.deviceSalt {return false}
@@ -339,8 +324,8 @@ extension Espressif_S2SessionResp0: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension Espressif_S2SessionCmd1: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".S2SessionCmd1"
+extension S2SessionCmd1: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "S2SessionCmd1"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "client_proof"),
   ]
@@ -364,15 +349,15 @@ extension Espressif_S2SessionCmd1: SwiftProtobuf.Message, SwiftProtobuf._Message
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Espressif_S2SessionCmd1, rhs: Espressif_S2SessionCmd1) -> Bool {
+  static func ==(lhs: S2SessionCmd1, rhs: S2SessionCmd1) -> Bool {
     if lhs.clientProof != rhs.clientProof {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Espressif_S2SessionResp1: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".S2SessionResp1"
+extension S2SessionResp1: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "S2SessionResp1"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "status"),
     2: .standard(proto: "device_proof"),
@@ -406,7 +391,7 @@ extension Espressif_S2SessionResp1: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Espressif_S2SessionResp1, rhs: Espressif_S2SessionResp1) -> Bool {
+  static func ==(lhs: S2SessionResp1, rhs: S2SessionResp1) -> Bool {
     if lhs.status != rhs.status {return false}
     if lhs.deviceProof != rhs.deviceProof {return false}
     if lhs.deviceNonce != rhs.deviceNonce {return false}
@@ -415,8 +400,8 @@ extension Espressif_S2SessionResp1: SwiftProtobuf.Message, SwiftProtobuf._Messag
   }
 }
 
-extension Espressif_Sec2Payload: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".Sec2Payload"
+extension Sec2Payload: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = "Sec2Payload"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "msg"),
     20: .same(proto: "sc0"),
@@ -433,7 +418,7 @@ extension Espressif_Sec2Payload: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularEnumField(value: &self.msg) }()
       case 20: try {
-        var v: Espressif_S2SessionCmd0?
+        var v: S2SessionCmd0?
         var hadOneofValue = false
         if let current = self.payload {
           hadOneofValue = true
@@ -446,7 +431,7 @@ extension Espressif_Sec2Payload: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
         }
       }()
       case 21: try {
-        var v: Espressif_S2SessionResp0?
+        var v: S2SessionResp0?
         var hadOneofValue = false
         if let current = self.payload {
           hadOneofValue = true
@@ -459,7 +444,7 @@ extension Espressif_Sec2Payload: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
         }
       }()
       case 22: try {
-        var v: Espressif_S2SessionCmd1?
+        var v: S2SessionCmd1?
         var hadOneofValue = false
         if let current = self.payload {
           hadOneofValue = true
@@ -472,7 +457,7 @@ extension Espressif_Sec2Payload: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
         }
       }()
       case 23: try {
-        var v: Espressif_S2SessionResp1?
+        var v: S2SessionResp1?
         var hadOneofValue = false
         if let current = self.payload {
           hadOneofValue = true
@@ -519,7 +504,7 @@ extension Espressif_Sec2Payload: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Espressif_Sec2Payload, rhs: Espressif_Sec2Payload) -> Bool {
+  static func ==(lhs: Sec2Payload, rhs: Sec2Payload) -> Bool {
     if lhs.msg != rhs.msg {return false}
     if lhs.payload != rhs.payload {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}

@@ -89,10 +89,10 @@ class ESPSecurity0: ESPCodeable {
         ESPLog.log("Generating Step 0 request data...")
 
         var request: Data?
-        var sessionData = Espressif_SessionData()
+        var sessionData = SessionData()
         sessionData.secVer = .secScheme0
         do {
-            try sessionData.sec0.sc.merge(serializedData: Espressif_S0SessionCmd().serializedData())
+            try sessionData.sec0.sc.merge(serializedData: S0SessionCmd().serializedData())
             request = try? sessionData.serializedData()
         } catch {
             ESPLog.log("Serializing Step0 request throws error.")
@@ -116,7 +116,7 @@ class ESPSecurity0: ESPCodeable {
         }
         
         ESPLog.log("Serializing Step0 response.")
-        let sessionData = try Espressif_SessionData(serializedData: response)
+        let sessionData = try SessionData(serializedData: response)
         if sessionData.secVer != .secScheme0 {
             ESPLog.log("Security version mismatch.")
             throw SecurityError.handshakeError("Security version mismatch")
