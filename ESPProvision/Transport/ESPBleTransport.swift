@@ -335,6 +335,7 @@ extension ESPBleTransport: CBPeripheralDelegate {
         
         ESPLog.log("Writing value for characterisitic \(characteristic)")
         guard error == nil else {
+            transportToken.signal()
             currentRequestCompletionHandler?(nil, error)
             return
         }
@@ -345,6 +346,7 @@ extension ESPBleTransport: CBPeripheralDelegate {
     func peripheral(_: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         ESPLog.log("Updating value for characterisitic \(characteristic)")
         guard error == nil else {
+            transportToken.signal()
             currentRequestCompletionHandler?(nil, error)
             return
         }
