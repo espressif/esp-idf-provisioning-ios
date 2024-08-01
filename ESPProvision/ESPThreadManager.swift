@@ -61,7 +61,7 @@ class ESPThreadManager {
     }
 
     private func processStartScan(responseData: Data) {
-        let decryptedResponse = (security.encrypt(data: responseData))!
+        let decryptedResponse = (security.decrypt(data: responseData))!
         do {
             _ = try NetworkScanPayload(serializedData: decryptedResponse)
         } catch {
