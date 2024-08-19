@@ -20,6 +20,11 @@ import Foundation
 
 // Type that stores pre defined constant strings used in framework.
 struct ESPConstants {
+    
+    // MARK: Read descriptors
+    
+    /// UUID of user supported descriptors
+    static let user_descriptor_uuid = "2901"
 
     // MARK: Wi-Fi
     

@@ -68,6 +68,7 @@ class ThreadNetworkSelectionVC: UIViewController {
     }
     
     @IBAction func backButtonPressed(_ sender: Any) {
+        self.espDevice.disconnect()
         self.navigationController?.popToRootViewController(animated: true)
     }
     
