@@ -83,7 +83,10 @@ public class ESPDevice {
     public var versionInfo:NSDictionary?
     /// BLE advertisement data
     public let advertisementData: [String: Any]
-    
+
+    // rssi value set at initial discovery time
+    public var initialRssi: Float = -100.0
+
     private var transportLayer: ESPCommunicable!
     private var provision: ESPProvision!
     private var softAPPassword:String?
@@ -96,9 +99,6 @@ public class ESPDevice {
         return deviceName
     }
  
-    public var rssi: Float {
-        return espBleTransport.espressifPeripherals[name]?.rssi.floatValue ?? -100.0
-    }
 
     /// Create `ESPDevice` object.
     ///

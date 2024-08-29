@@ -318,6 +318,7 @@ extension ESPProvisionManager: ESPBLETransportDelegate {
                 advertisementData: foundPeripheral.advertisementData,
                 proofOfPossession: espBleTransport.proofOfPossession
             )
+            newESPDevice.initialRssi = foundPeripheral.rssi.floatValue
             newESPDevice.peripheral = foundPeripheral.cbPeripheral
             newESPDevice.espBleTransport = espBleTransport
             espDevices.append(newESPDevice)
