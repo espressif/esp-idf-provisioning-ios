@@ -142,6 +142,7 @@ class StatusViewController: UIViewController {
     }
 
     func provisionFinsihedWithStatus(message: String) {
+        self.espDevice.disconnect()
         okayButton.isEnabled = true
         okayButton.alpha = 1.0
         finalStatusLabel.text = message

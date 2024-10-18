@@ -164,6 +164,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
         if let currentPeripheral = currentPeripheral {
             centralManager.cancelPeripheralConnection(currentPeripheral)
         }
+        readCounter = 0
         currentPeripheral = peripheral
         centralManager.connect(currentPeripheral!, options: options)
         currentPeripheral?.delegate = self
@@ -319,7 +320,6 @@ extension ESPBleTransport: CBPeripheralDelegate {
         guard let characteristics = service.characteristics else { return }
 
         peripheralCanWrite = true
-        readCounter = characteristics.count
         for characteristic in characteristics {
             if !characteristic.properties.contains(.read) {
                 peripheralCanRead = false
@@ -359,8 +359,18 @@ extension ESPBleTransport: CBPeripheralDelegate {
 
     func peripheral(_: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error _: Error?) {
         ESPLog.log("Did sicover descriptor for characterisitic: \(characteristic)")
+        var finalDescriptors = [CBDescriptor]()
         for descriptor in characteristic.descriptors! {
-            currentPeripheral?.readValue(for: descriptor)
+            let uuidString = descriptor.uuid.uuidString
+            if uuidString.contains(ESPConstants.user_descriptor_uuid) {
+                finalDescriptors.append(descriptor)
+            }
+        }
+        if finalDescriptors.count > 0 {
+            readCounter += finalDescriptors.count
+            for desc in finalDescriptors {
+                currentPeripheral?.readValue(for: desc)
+            }
         }
     }
 
