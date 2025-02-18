@@ -98,7 +98,7 @@ open class ESPDevice {
     /// SoftAp transport layer.
     public var espSoftApTransport: ESPSoftAPTransport!
     /// Peripheral object in case of BLE device.
-    var peripheral: CBPeripheral!
+    public var peripheral: CBPeripheral!
     /// Connection status of device.
     var connectionStatus:ESPSessionStatus = .disconnected
     /// Completion handler for scan Wi-Fi list.
