@@ -33,33 +33,49 @@ enum Security2SessionState: Int {
     case Finished
 }
 
-/// The `ESPSecurity1` class conforms and implememnt methods of `ESPCodeable` protocol.
+/// The `ESPSecurity2` class implements secure communication with ESP devices using SRP6a and AES-GCM.
 /// This class provides methods for handling request/response data in a secure communication.
 class ESPSecurity2: ESPCodeable {
     
     private static let basePoint = Data([9] + [UInt8](repeating: 0, count: 31))
 
-    private var sessionState: Security1SessionState = .Request1
+    private var sessionState: Security2SessionState = .Request1
     private var privateKey: Data?
     private var publicKey: Data?
     private var clientVerify: Data?
-    private var cryptoAES: AES.GCM?
     private var username: String
     private var password: String
     private var srp6a: Client<SHA512>
     private var nonce: AES.GCM.Nonce?
     var sessionKey: SymmetricKey?
+    
+    // MARK: - AES-GCM IV Management Properties
+    var useCounter: Bool = false
+    
+    /// Device nonce received from device (first 8 bytes used as session ID)
+    private var deviceNonce: Data?
+    
+    /// Counter for IV generation (last 4 bytes)
+    private var counter: UInt32 = 1
+    
+    /// Size of the counter component in IV
+    private let counterSize = 4
+    
+    /// Size of the session ID component in IV
+    private let sessionIdSize = 8
 
-    private var sharedKey: Data?
-    private var deviceRandom: Data?
-
-    /// Create Security 1 implementation with given proof of possession
+    // MARK: - Initialization
+    
+    /// Initialize Security 2 implementation with given credentials
     ///
-    /// - Parameter proofOfPossession: Proof of possession identifying the  `ESPDevice`.
-    init(username: String, password: String) {
-        ESPLog.log("Initailising secure class with proof of possession.")
+    /// - Parameters:
+    ///   - username: Username for authentication
+    ///   - password: Password for authentication
+    init(username: String, password: String, useCounterFlag: Bool = false) {
+        ESPLog.log("Initialising secure class")
         self.username = username
         self.password = password
+        self.useCounter = useCounterFlag
         self.srp6a = Client<SHA512>(username: username, password: password)
         self.publicKey = randomBytes(32)
         generateKeyPair()
@@ -92,7 +108,6 @@ class ESPSecurity2: ESPCodeable {
         } catch {
             throw error
         }
-
         return request
     }
 
@@ -102,8 +117,21 @@ class ESPSecurity2: ESPCodeable {
     /// - Returns: Encrypted data.
     func encrypt(data: Data) -> Data? {
         do {
-            let encryptedData = try AES.GCM.seal(data, using: sessionKey!, nonce: nonce)
-            return encryptedData.ciphertext + encryptedData.tag
+            if self.useCounter {
+                // Create 12-byte IV by combining session ID and counter
+                let iv = constructIV()
+                self.nonce = try AES.GCM.Nonce(data: iv)
+                
+                let encryptedData = try AES.GCM.seal(data, using: sessionKey!, nonce: nonce!)
+                
+                // Increment counter after successful encryption
+                incrementCounter()
+                
+                return encryptedData.ciphertext + encryptedData.tag
+            } else {
+                let encryptedData = try AES.GCM.seal(data, using: sessionKey!, nonce: nonce)
+                return encryptedData.ciphertext + encryptedData.tag
+            }
         } catch {
             ESPLog.log("Encryption failed with error:" + error.localizedDescription)
             return nil
@@ -116,12 +144,31 @@ class ESPSecurity2: ESPCodeable {
     /// - Returns: Decrypted data.
     func decrypt(data: Data) -> Data? {
         do {
-            let range: Range = (data.count - 16)..<data.count
-            let tag = data.subdata(in: range)
-            let dataRange:Range = 0..<(data.count - 16)
-            let cipherText = data.subdata(in: dataRange)
-            let sealedBox = try AES.GCM.SealedBox(nonce: self.nonce!, ciphertext: cipherText, tag: tag)
-            return try AES.GCM.open(sealedBox, using: sessionKey!)
+            if self.useCounter {
+                // Create 12-byte IV by combining session ID and counter
+                let iv = constructIV()
+                self.nonce = try AES.GCM.Nonce(data: iv)
+                
+                let range: Range = (data.count - 16)..<data.count
+                let tag = data.subdata(in: range)
+                let dataRange: Range = 0..<(data.count - 16)
+                let cipherText = data.subdata(in: dataRange)
+                
+                let sealedBox = try AES.GCM.SealedBox(nonce: self.nonce!, ciphertext: cipherText, tag: tag)
+                let decryptedData = try AES.GCM.open(sealedBox, using: sessionKey!)
+                
+                // Increment counter after successful decryption
+                incrementCounter()
+                
+                return decryptedData
+            } else {
+                let range: Range = (data.count - 16)..<data.count
+                let tag = data.subdata(in: range)
+                let dataRange:Range = 0..<(data.count - 16)
+                let cipherText = data.subdata(in: dataRange)
+                let sealedBox = try AES.GCM.SealedBox(nonce: self.nonce!, ciphertext: cipherText, tag: tag)
+                return try AES.GCM.open(sealedBox, using: sessionKey!)
+            }
         } catch {
             ESPLog.log("Decryption failed with error:" + error.localizedDescription)
             return nil
@@ -148,6 +195,27 @@ class ESPSecurity2: ESPCodeable {
         privateKey = srp6a.privateKey
     }
 
+    /// Constructs the 12-byte IV using session ID and counter
+    private func constructIV() -> Data {
+        ESPLog.log("Constructing 12-byte IV using session ID and counter.")
+        guard let deviceNonce = self.deviceNonce else {
+            return Data(repeating: 0, count: 12)
+        }
+        
+        // Take first 8 bytes from device nonce as session ID
+        var iv = Data(deviceNonce.prefix(sessionIdSize))
+        
+        // Append 4-byte counter in big-endian format
+        iv.append(contentsOf: withUnsafeBytes(of: counter.bigEndian) { Data($0) })
+        
+        return iv
+    }
+    
+    /// Increments the counter after each operation
+    private func incrementCounter() {
+        counter += 1
+    }
+    
     /// Generate data to send on Step 0 of session request.
     ///
     /// - Throws: Error generated on getting data from session object.
@@ -203,15 +271,16 @@ class ESPSecurity2: ESPCodeable {
             ESPLog.log("Security version mismatch.")
             throw SecurityError.handshakeError("Security version mismatch")
         }
-
+        
         let devicePublicKey = sessionData.sec2.sr0.devicePubkey
         let deviceSalt = sessionData.sec2.sr0.deviceSalt
         do {
-            let chanllengeResponse = try srp6a.processChallenge(salt: deviceSalt, publicKey: devicePublicKey)
-            clientVerify = chanllengeResponse.clientVerify
-            sessionKey = chanllengeResponse.sessionKey
+            let challengeResponse = try srp6a.processChallenge(salt: deviceSalt, publicKey: devicePublicKey)
+            clientVerify = challengeResponse.clientVerify
+            sessionKey = challengeResponse.sessionKey
         } catch {
             ESPLog.log(error.localizedDescription)
+            throw error
         }
     }
     
@@ -220,27 +289,57 @@ class ESPSecurity2: ESPCodeable {
     /// - Parameter response: Step 1 response.
     /// - Throws: Security errors.
     private func processStep1Response(response: Data?) throws {
-        guard let response = response else {
-            ESPLog.log("Response 1 is nil")
-            throw SecurityError.handshakeError("Response 1 is nil")
-        }
-        let sessionData = try SessionData(serializedData: response)
-        if sessionData.secVer != .secScheme2 {
-            ESPLog.log("Security version mismatch")
-            throw SecurityError.handshakeError("Security version mismatch")
-        }
+        if self.useCounter {
+            guard let response = response else {
+                ESPLog.log("Response 1 is nil")
+                throw SecurityError.handshakeError("Response 1 is nil")
+            }
+            let sessionData = try SessionData(serializedData: response)
+            if sessionData.secVer != .secScheme2 {
+                ESPLog.log("Security version mismatch")
+                throw SecurityError.handshakeError("Security version mismatch")
+            }
 
-        let deviceProof = sessionData.sec2.sr1.deviceProof
-        self.nonce = try AES.GCM.Nonce(data: sessionData.sec2.sr1.deviceNonce)
-        do {
-            try srp6a.verifySession(keyProof: deviceProof)
-        } catch  {
-            throw error
-        }
-        if !srp6a.isAuthenticated {
-            ESPLog.log("Authentication failed")
-            throw SecurityError.handshakeError("Authentication failed")
+            let deviceProof = sessionData.sec2.sr1.deviceProof
+            
+            // Store device nonce for IV generation
+            self.deviceNonce = sessionData.sec2.sr1.deviceNonce
+            
+            // Initialize counter
+            self.counter = 1
+            
+            do {
+                try srp6a.verifySession(keyProof: deviceProof)
+            } catch {
+                throw error
+            }
+            
+            if !srp6a.isAuthenticated {
+                ESPLog.log("Authentication failed")
+                throw SecurityError.handshakeError("Authentication failed")
+            }
+        } else {
+            guard let response = response else {
+                ESPLog.log("Response 1 is nil")
+                throw SecurityError.handshakeError("Response 1 is nil")
+            }
+            let sessionData = try SessionData(serializedData: response)
+            if sessionData.secVer != .secScheme2 {
+                ESPLog.log("Security version mismatch")
+                throw SecurityError.handshakeError("Security version mismatch")
+            }
+            
+            let deviceProof = sessionData.sec2.sr1.deviceProof
+            self.nonce = try AES.GCM.Nonce(data: sessionData.sec2.sr1.deviceNonce)
+            do {
+                try srp6a.verifySession(keyProof: deviceProof)
+            } catch  {
+                throw error
+            }
+            if !srp6a.isAuthenticated {
+                ESPLog.log("Authentication failed")
+                throw SecurityError.handshakeError("Authentication failed")
+            }
         }
     }
 }
-

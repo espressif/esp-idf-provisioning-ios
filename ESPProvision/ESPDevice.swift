@@ -575,7 +575,11 @@ open class ESPDevice {
     
     func initSecure2Session(sessionPath: String?, username: String, password: String, completionHandler: @escaping (ESPSessionStatus) -> Void) {
         ESPLog.log("Initialise session security 2")
-        securityLayer = ESPSecurity2(username: username, password: password)
+        var useCounter: Bool = false
+        if let prov = versionInfo?[ESPConstants.provKey] as? [String: Any], let securityPatch = prov[ESPConstants.security2PatchVersionKey] as? Int, securityPatch == ESPConstants.defaultSecurity2PatchVersion {
+            useCounter = true
+        }
+        securityLayer = ESPSecurity2(username: username, password: password, useCounterFlag: useCounter)
         initSession(sessionPath: sessionPath, completionHandler: completionHandler)
     }
     
