@@ -19,6 +19,12 @@
 import CoreBluetooth
 import Foundation
 
+/// This lists the keys for the values that we need to retrieve from the BLE advertisement data
+struct ESPBLEAdvertisementKeys {
+    
+    static let localDeviceName = "kCBAdvDataLocalName"
+    static let serviceUUIDs = "kCBAdvDataServiceUUIDs"
+}
 
 /// The `ESPBLEStatusDelegate` protocol define methods that provide information
 /// of current BLE device connection status
@@ -80,6 +86,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     var centralManager: CBCentralManager!
     var espressifPeripherals: [String:ESPDevice] = [:]
     var currentPeripheral: CBPeripheral?
+    var currentAdvertisementData: [String: Any]?
     var currentService: CBService?
     var bleConnectTimer = Timer()
     var bleScanTimer: Timer?
@@ -92,6 +99,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
 
     public var delegate: ESPBLETransportDelegate?
     var bleStatusDelegate: ESPBLEStatusDelegate?
+    
 
     /// Create BLETransport object.
     ///
@@ -156,9 +164,10 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     ///
     /// - Parameters:
     ///   - peripheral: The peripheral device
+    ///   - advertisementData: The peripheral advertisement data
     ///   - options: An optional dictionary specifying connection behavior options.
     ///              Sent as is to the CBCentralManager.connect function.
-    func connect(peripheral: CBPeripheral, withOptions options: [String: Any]?, delegate: ESPBLEStatusDelegate) {
+    func connect(peripheral: CBPeripheral, withAdvertisementData advertisementData: [String: Any]?, withOptions options: [String: Any]?, delegate: ESPBLEStatusDelegate) {
         ESPLog.log("Connecting peripheral device...")
         self.bleStatusDelegate = delegate
         if let currentPeripheral = currentPeripheral {
@@ -166,6 +175,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
         }
         readCounter = 0
         currentPeripheral = peripheral
+        currentAdvertisementData = advertisementData
         centralManager.connect(currentPeripheral!, options: options)
         currentPeripheral?.delegate = self
         bleDeviceConnected = false
@@ -287,7 +297,16 @@ extension ESPBleTransport: CBCentralManagerDelegate {
 
     func centralManager(_: CBCentralManager, didConnect _: CBPeripheral) {
         ESPLog.log("Connected to peripheral. Discover services.")
-        currentPeripheral?.discoverServices(nil)
+        if let advertisementData = currentAdvertisementData {
+            if let serviceUUID = advertisementData[ESPBLEAdvertisementKeys.serviceUUIDs] as? CBUUID {
+                currentPeripheral?.discoverServices([serviceUUID])
+            } else if let serviceUUIDs = advertisementData[ESPBLEAdvertisementKeys.serviceUUIDs] as? [CBUUID], serviceUUIDs.count > 0 {
+                let serviceUUID = serviceUUIDs[0]
+                currentPeripheral?.discoverServices([serviceUUID])
+            }
+        } else {
+            currentPeripheral?.discoverServices(nil)
+        }
     }
 
     func centralManager(_: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
