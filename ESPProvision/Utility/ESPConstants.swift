@@ -62,6 +62,10 @@ struct ESPConstants {
     static let threadProv = "thread_prov"
     /// Value for thread scan capability
     static let threadScanCapability = "thread_scan"
+    /// Security patch version for security2
+    static let security2PatchVersionKey = "sec_patch_ver"
+    /// Security patch version for security2 default value
+    static let defaultSecurity2PatchVersion: Int = 1
 }
 
 
