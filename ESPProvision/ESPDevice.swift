@@ -176,7 +176,7 @@ open class ESPDevice {
                 if espBleTransport == nil {
                     espBleTransport = ESPBleTransport(scanTimeout: 0, deviceNamePrefix: "")
             }
-                espBleTransport.connect(peripheral: peripheral, withOptions: nil, delegate: self)
+            espBleTransport.connect(peripheral: peripheral, withAdvertisementData: advertisementData, withOptions: nil, delegate: self)
             case .softap:
                 ESPLog.log("Start connecting SoftAp device.")
                 if espSoftApTransport == nil {
