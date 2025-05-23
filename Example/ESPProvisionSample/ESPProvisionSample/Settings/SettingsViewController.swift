@@ -47,10 +47,12 @@ class SettingsViewController: UIViewController {
             securityLabel.text = "Unsecured"
             securityToggle.setOn(false, animated: true)
             wifiUserNameView.isHidden = true
+            threadUserNameView.isHidden = true
         default:
             securityLabel.text = "Secured"
             securityToggle.setOn(true, animated: true)
             wifiUserNameView.isHidden = false
+            threadUserNameView.isHidden = false
         }
         
         // Adding tap gesture to hide keyboard on outside touch
