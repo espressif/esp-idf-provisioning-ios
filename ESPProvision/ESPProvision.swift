@@ -205,7 +205,10 @@ public class ESPProvision {
             return Status.invalidArgument
         }
 
-        let decryptedResponse = securityLayer.decrypt(data: response)!
+        guard let decryptedResponse = securityLayer.decrypt(data: response) else {
+            ESPLog.log("Failed to decrypt set Wi-Fi config response.")
+            return Status.invalidArgument
+        }
         var responseStatus: Status = .invalidArgument
         do {
             let configResponse = try NetworkConfigPayload(serializedData: decryptedResponse)
@@ -222,7 +225,10 @@ public class ESPProvision {
             return Status.invalidArgument
         }
 
-        let decryptedResponse = securityLayer.decrypt(data: response)!
+        guard let decryptedResponse = securityLayer.decrypt(data: response) else {
+            ESPLog.log("Failed to decrypt apply Wi-Fi config response.")
+            return Status.invalidArgument
+        }
         var responseStatus: Status = .invalidArgument
         do {
             let configResponse = try NetworkConfigPayload(serializedData: decryptedResponse)
@@ -239,7 +245,10 @@ public class ESPProvision {
             return (WifiStationState.disconnected, WifiConnectFailedReason.UNRECOGNIZED(-1))
         }
 
-        let decryptedResponse = securityLayer.decrypt(data: response)!
+        guard let decryptedResponse = securityLayer.decrypt(data: response) else {
+            ESPLog.log("Failed to decrypt get Wi-Fi status response.")
+            return (WifiStationState.disconnected, WifiConnectFailedReason.UNRECOGNIZED(-1))
+        }
         var responseStatus = WifiStationState.disconnected
         var failReason = WifiConnectFailedReason.UNRECOGNIZED(-1)
         let configResponse = try NetworkConfigPayload(serializedData: decryptedResponse)
@@ -277,7 +286,10 @@ public class ESPProvision {
             return Status.invalidArgument
         }
 
-        let decryptedResponse = securityLayer.decrypt(data: response)!
+        guard let decryptedResponse = securityLayer.decrypt(data: response) else {
+            ESPLog.log("Failed to decrypt set Thread config response.")
+            return Status.invalidArgument
+        }
         var responseStatus: Status = .invalidArgument
         do {
             let configResponse = try NetworkConfigPayload(serializedData: decryptedResponse)
@@ -334,7 +346,10 @@ public class ESPProvision {
             return (ThreadNetworkState.dettached, ThreadAttachFailedReason.UNRECOGNIZED(-1))
         }
 
-        let decryptedResponse = securityLayer.decrypt(data: response)!
+        guard let decryptedResponse = securityLayer.decrypt(data: response) else {
+            ESPLog.log("Failed to decrypt get Thread status response.")
+            return (ThreadNetworkState.dettached, ThreadAttachFailedReason.UNRECOGNIZED(-1))
+        }
         var responseStatus = ThreadNetworkState.dettached
         var failReason = ThreadAttachFailedReason.UNRECOGNIZED(-1)
         let configResponse = try NetworkConfigPayload(serializedData: decryptedResponse)
@@ -354,7 +369,10 @@ public class ESPProvision {
             return Status.invalidArgument
         }
 
-        let decryptedResponse = securityLayer.decrypt(data: response)!
+        guard let decryptedResponse = securityLayer.decrypt(data: response) else {
+            ESPLog.log("Failed to decrypt apply Thread config response.")
+            return Status.invalidArgument
+        }
         var responseStatus: Status = .invalidArgument
         do {
             let configResponse = try NetworkConfigPayload(serializedData: decryptedResponse)

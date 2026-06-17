@@ -105,10 +105,12 @@ open class ESPDevice {
     var wifiListCompletionHandler: (([ESPWifiNetwork]?,ESPWiFiScanError?) -> Void)?
     /// Completion handler for scan Thread list.
     var threadListCompletionHandler: (([ESPThreadNetwork]?,ESPThreadScanError?) -> Void)?
-    /// Completion handler for BLE connection status.
+    /// Completion handler for BLE provisioning connect flow.
     var bleConnectionStatusHandler: ((ESPSessionStatus) -> Void)?
-    /// Proof of possession 
-    var proofOfPossession:String?
+    /// Completion handler for post-provision BLE local control (RainMaker local-control path).
+    private var bleLocalControlSessionHandler: ((ESPSessionStatus) -> Void)?
+    /// Proof of possession for secure session (sec1/sec2).
+    public var proofOfPossession: String?
     /// List of capabilities of a device.
     public var capabilities: [String]?
     /// Security implementation.
@@ -171,14 +173,15 @@ open class ESPDevice {
     open func connect(delegate: ESPDeviceConnectionDelegate? = nil, completionHandler: @escaping (ESPSessionStatus) -> Void) {
         ESPLog.log("Connecting ESPDevice...")
         self.delegate = delegate
+        bleLocalControlSessionHandler = nil
         switch transport {
             case .ble:
                 ESPLog.log("Start connecting ble device.")
                 bleConnectionStatusHandler = completionHandler
                 if espBleTransport == nil {
                     espBleTransport = ESPBleTransport(scanTimeout: 0, deviceNamePrefix: "")
-            }
-            espBleTransport.connect(peripheral: peripheral, withAdvertisementData: advertisementData, withOptions: nil, delegate: self)
+                }
+                espBleTransport.connect(peripheral: peripheral, withAdvertisementData: advertisementData, withOptions: nil, delegate: self)
             case .softap:
                 ESPLog.log("Start connecting SoftAp device.")
                 if espSoftApTransport == nil {
@@ -186,6 +189,51 @@ open class ESPDevice {
                 }
                 self.connectToSoftApUsingCredentials(ssid: name, completionHandler: completionHandler)
         }
+    }
+
+    /// Connect for post-provision BLE local control (GATT + secure session).
+    ///
+    /// Uses a dedicated completion handler so local-control callers do not share the
+    /// provisioning `connect(_:completionHandler:)` callback path.
+    ///
+    /// - Parameters:
+    ///   - delegate: Class conforming to `ESPDeviceConnectionDelegate` protocol.
+    ///   - completionHandler: Invoked when GATT connect and session setup finish.
+    open func connectBleForLocalControl(delegate: ESPDeviceConnectionDelegate? = nil, completionHandler: @escaping (ESPSessionStatus) -> Void) {
+        ESPLog.log("Connecting ESPDevice for BLE local control...")
+        guard transport == .ble else {
+            completionHandler(.failedToConnect(.bleFailedToConnect))
+            return
+        }
+        guard peripheral != nil else {
+            ESPLog.log("BLE local control connect failed: peripheral is nil.")
+            completionHandler(.failedToConnect(.bleFailedToConnect))
+            return
+        }
+        self.delegate = delegate
+        bleConnectionStatusHandler = nil
+        bleLocalControlSessionHandler = completionHandler
+        if espBleTransport == nil {
+            espBleTransport = ESPBleTransport(scanTimeout: 0, deviceNamePrefix: "")
+        }
+        espBleTransport.connect(peripheral: peripheral, withAdvertisementData: advertisementData, withOptions: nil, delegate: self)
+    }
+
+    /// Disconnect and connect again so GATT handles match the current firmware table.
+    open func reconnectBleForLocalControl(delegate: ESPDeviceConnectionDelegate? = nil, completionHandler: @escaping (ESPSessionStatus) -> Void) {
+        ESPLog.log("Reconnecting ESPDevice for BLE local control...")
+        guard transport == .ble else {
+            completionHandler(.failedToConnect(.bleFailedToConnect))
+            return
+        }
+        guard peripheral != nil, espBleTransport != nil else {
+            completionHandler(.failedToConnect(.bleFailedToConnect))
+            return
+        }
+        self.delegate = delegate
+        bleConnectionStatusHandler = nil
+        bleLocalControlSessionHandler = completionHandler
+        espBleTransport.reconnect(delegate: self)
     }
     
     /// Connect to SoftAp device using credentials. It is required before data can be transmitted from application to device.
@@ -478,8 +526,12 @@ open class ESPDevice {
     
     private func scanDeviceForThreadList(completionHandler: @escaping ([ESPThreadNetwork]?,ESPThreadScanError?) -> Void) {
         if let capability = self.capabilities, capability.contains(ESPConstants.threadScanCapability) {
+            guard let session = self.session, session.isEstablished else {
+                completionHandler(nil, .scanRequestError(ESPSessionError.sessionNotEstablished))
+                return
+            }
             self.threadListCompletionHandler = completionHandler
-            let scanThreadManager: ESPThreadManager = ESPThreadManager(session: self.session!)
+            let scanThreadManager: ESPThreadManager = ESPThreadManager(session: session)
             scanThreadManager.delegate = self
             threadListCompletionHandler = completionHandler
             scanThreadManager.startThreadScan()
@@ -522,8 +574,12 @@ open class ESPDevice {
     
     private func scanDeviceForWifiList(completionHandler: @escaping ([ESPWifiNetwork]?,ESPWiFiScanError?) -> Void) {
         if let capability = self.capabilities, capability.contains(ESPConstants.wifiScanCapability) {
+            guard let session = self.session, session.isEstablished else {
+                completionHandler(nil, .scanRequestError(ESPSessionError.sessionNotEstablished))
+                return
+            }
             self.wifiListCompletionHandler = completionHandler
-            self.scanWifiManager = ESPWiFiManager(session: self.session!)
+            self.scanWifiManager = ESPWiFiManager(session: session)
             self.scanWifiManager?.delegate = self
             self.scanWifiManager?.startWifiScan()
         } else {
@@ -546,7 +602,8 @@ open class ESPDevice {
         } else if let capability = self.capabilities, capability.contains(ESPConstants.noSecCapability) {
             securityScheme = .unsecure
         } else {
-            securityScheme = .secure
+            // Honour caller-configured security (e.g. sec2 for post-provision local control).
+            securityScheme = self.security
         }
         
         // Unsecure communication should only be allowed if explicitily configured in both library and device
@@ -685,9 +742,9 @@ open class ESPDevice {
                 
                 if let prov = result[ESPConstants.provKey] as? NSDictionary, let capabilities = prov[ESPConstants.capabilitiesKey] as? [String] {
                     self.capabilities = capabilities
-                    DispatchQueue.main.async {
-                        self.initialiseSession(sessionPath: nil, completionHandler: completionHandler)
-                    }
+                }
+                DispatchQueue.main.async {
+                    self.initialiseSession(sessionPath: nil, completionHandler: completionHandler)
                 }
             }
         } catch {
@@ -780,7 +837,17 @@ extension ESPDevice: ESPScanThreadListProtocol {
 extension ESPDevice: ESPBLEStatusDelegate {
     func peripheralConnected() {
         ESPLog.log("Peripheral connected.")
-        self.getDeviceVersionInfo(completionHandler: bleConnectionStatusHandler!)
+        if let localHandler = takeLocalControlSessionHandler() {
+            getDeviceVersionInfo(completionHandler: localHandler)
+            bleDelegate?.peripheralConnected()
+            return
+        }
+        guard let handler = bleConnectionStatusHandler else {
+            ESPLog.log("No BLE connection handler registered.")
+            bleDelegate?.peripheralConnected()
+            return
+        }
+        getDeviceVersionInfo(completionHandler: handler)
         bleDelegate?.peripheralConnected()
     }
     
@@ -793,11 +860,30 @@ extension ESPDevice: ESPBLEStatusDelegate {
     
     func peripheralFailedToConnect(peripheral: CBPeripheral?, error: Error?) {
         ESPLog.log("Peripheral failed to connect.")
-        bleConnectionStatusHandler?(.failedToConnect(.bleFailedToConnect))
+        completeBleConnectionAttempt(with: .failedToConnect(.bleFailedToConnect))
         if peripheral == nil {
             bleDelegate?.peripheralFailedToConnect(peripheral: self.peripheral, error: error)
         } else if self.peripheral.identifier.uuidString == peripheral?.identifier.uuidString {
             bleDelegate?.peripheralFailedToConnect(peripheral: peripheral, error: error)
+        }
+    }
+
+    /// Returns and clears the local-control handler so it is consumed once per connect attempt.
+    private func takeLocalControlSessionHandler() -> ((ESPSessionStatus) -> Void)? {
+        let handler = bleLocalControlSessionHandler
+        bleLocalControlSessionHandler = nil
+        return handler
+    }
+
+    /// Delivers failure to whichever BLE connect handler is active.
+    private func completeBleConnectionAttempt(with status: ESPSessionStatus) {
+        if let localHandler = takeLocalControlSessionHandler() {
+            localHandler(status)
+            return
+        }
+        if let handler = bleConnectionStatusHandler {
+            bleConnectionStatusHandler = nil
+            handler(status)
         }
     }
     

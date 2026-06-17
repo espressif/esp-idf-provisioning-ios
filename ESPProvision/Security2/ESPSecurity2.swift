@@ -116,20 +116,32 @@ class ESPSecurity2: ESPCodeable {
     /// - Parameter data: Data to be sent.
     /// - Returns: Encrypted data.
     func encrypt(data: Data) -> Data? {
+        guard let sessionKey = sessionKey else {
+            ESPLog.log("Encryption failed: session key is not available.")
+            return nil
+        }
         do {
             if self.useCounter {
                 // Create 12-byte IV by combining session ID and counter
                 let iv = constructIV()
                 self.nonce = try AES.GCM.Nonce(data: iv)
+                guard let nonce = self.nonce else {
+                    ESPLog.log("Encryption failed: nonce is not available.")
+                    return nil
+                }
                 
-                let encryptedData = try AES.GCM.seal(data, using: sessionKey!, nonce: nonce!)
+                let encryptedData = try AES.GCM.seal(data, using: sessionKey, nonce: nonce)
                 
                 // Increment counter after successful encryption
                 incrementCounter()
                 
                 return encryptedData.ciphertext + encryptedData.tag
             } else {
-                let encryptedData = try AES.GCM.seal(data, using: sessionKey!, nonce: nonce)
+                guard let nonce = self.nonce else {
+                    ESPLog.log("Encryption failed: nonce is not available.")
+                    return nil
+                }
+                let encryptedData = try AES.GCM.seal(data, using: sessionKey, nonce: nonce)
                 return encryptedData.ciphertext + encryptedData.tag
             }
         } catch {
@@ -143,31 +155,43 @@ class ESPSecurity2: ESPCodeable {
     /// - Parameter data: Data to be sent.
     /// - Returns: Decrypted data.
     func decrypt(data: Data) -> Data? {
+        guard let sessionKey = sessionKey else {
+            ESPLog.log("Decryption failed: session key is not available.")
+            return nil
+        }
         do {
             if self.useCounter {
                 // Create 12-byte IV by combining session ID and counter
                 let iv = constructIV()
                 self.nonce = try AES.GCM.Nonce(data: iv)
+                guard let nonce = self.nonce else {
+                    ESPLog.log("Decryption failed: nonce is not available.")
+                    return nil
+                }
                 
                 let range: Range = (data.count - 16)..<data.count
                 let tag = data.subdata(in: range)
                 let dataRange: Range = 0..<(data.count - 16)
                 let cipherText = data.subdata(in: dataRange)
                 
-                let sealedBox = try AES.GCM.SealedBox(nonce: self.nonce!, ciphertext: cipherText, tag: tag)
-                let decryptedData = try AES.GCM.open(sealedBox, using: sessionKey!)
+                let sealedBox = try AES.GCM.SealedBox(nonce: nonce, ciphertext: cipherText, tag: tag)
+                let decryptedData = try AES.GCM.open(sealedBox, using: sessionKey)
                 
                 // Increment counter after successful decryption
                 incrementCounter()
                 
                 return decryptedData
             } else {
+                guard let nonce = self.nonce else {
+                    ESPLog.log("Decryption failed: nonce is not available.")
+                    return nil
+                }
                 let range: Range = (data.count - 16)..<data.count
                 let tag = data.subdata(in: range)
                 let dataRange:Range = 0..<(data.count - 16)
                 let cipherText = data.subdata(in: dataRange)
-                let sealedBox = try AES.GCM.SealedBox(nonce: self.nonce!, ciphertext: cipherText, tag: tag)
-                return try AES.GCM.open(sealedBox, using: sessionKey!)
+                let sealedBox = try AES.GCM.SealedBox(nonce: nonce, ciphertext: cipherText, tag: tag)
+                return try AES.GCM.open(sealedBox, using: sessionKey)
             }
         } catch {
             ESPLog.log("Decryption failed with error:" + error.localizedDescription)
