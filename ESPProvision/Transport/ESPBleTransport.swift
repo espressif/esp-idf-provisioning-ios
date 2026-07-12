@@ -74,7 +74,13 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     private var scanTimeout = 5.0
     private var readCounter = 0
     private var deviceNamePrefix:String!
-    
+    /// When `true`, the scan completes and returns as soon as the first peripheral
+    /// matching `deviceNamePrefix` is discovered, instead of always waiting out
+    /// `scanTimeout`. Used for single-device intent (e.g. `createESPDevice`).
+    private var returnOnFirstMatch = false
+    /// Guards against emitting a scan result more than once (early match vs. timer).
+    private var didFinishScan = false
+
     /// Stores Proof of Possesion for a device.
     var proofOfPossession:String?
     /// Store username for device
@@ -106,10 +112,15 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     /// - Parameters:
     ///   - deviceNamePrefix: Device name prefix.
     ///   - scanTimeout: Timeout in seconds for which BLE scan should happen.
-    init(scanTimeout: TimeInterval, deviceNamePrefix: String, proofOfPossession:String? = nil, username: String? = nil, network: ESPNetworkType? = nil) {
+    ///   - returnOnFirstMatch: When `true`, the scan returns as soon as the first matching
+    ///                         peripheral is found rather than waiting for `scanTimeout`.
+    ///                         Defaults to `false` to preserve the existing behaviour of
+    ///                         collecting all matches over the full window (multi-device search).
+    init(scanTimeout: TimeInterval, deviceNamePrefix: String, proofOfPossession:String? = nil, username: String? = nil, network: ESPNetworkType? = nil, returnOnFirstMatch: Bool = false) {
         ESPLog.log("Initalising BLE transport class with scan timeout \(scanTimeout)")
         self.scanTimeout = scanTimeout
         self.deviceNamePrefix = deviceNamePrefix
+        self.returnOnFirstMatch = returnOnFirstMatch
         self.proofOfPossession = proofOfPossession
         self.username = username
         self.network = network
@@ -210,6 +221,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
         ESPLog.log("Ble scan started...")
         
         self.delegate = delegate
+        didFinishScan = false
 
         if isBLEEnabled {
             bleScanTimer?.invalidate()
@@ -224,11 +236,14 @@ class ESPBleTransport: NSObject, ESPCommunicable {
 
     /// Stop scan when timer runs off.
     @objc func stopScan(timer: Timer) {
-        
+
         ESPLog.log("Ble scan stopped.")
-        
+
         centralManager.stopScan()
         timer.invalidate()
+        // Skip if the scan already finished early via `returnOnFirstMatch`.
+        guard !didFinishScan else { return }
+        didFinishScan = true
         if espressifPeripherals.count > 0 {
             delegate?.peripheralsFound(peripherals: espressifPeripherals)
             espressifPeripherals.removeAll()
@@ -291,6 +306,17 @@ extension ESPBleTransport: CBCentralManagerDelegate {
                 let newEspDevice  = ESPDevice(name: peripheralName, security: .secure, transport: .ble, advertisementData: data)
                 espressifPeripherals[peripheralName] = newEspDevice
                 newEspDevice.peripheral = peripheral
+                // Single-device intent: stop the scan and return immediately on the first
+                // match instead of waiting out `scanTimeout`. Opt-in; multi-device search
+                // leaves `returnOnFirstMatch` false and still collects for the full window.
+                if returnOnFirstMatch, !didFinishScan {
+                    didFinishScan = true
+                    bleScanTimer?.invalidate()
+                    bleScanTimer = nil
+                    centralManager.stopScan()
+                    delegate?.peripheralsFound(peripherals: espressifPeripherals)
+                    espressifPeripherals.removeAll()
+                }
             }
         }
     }

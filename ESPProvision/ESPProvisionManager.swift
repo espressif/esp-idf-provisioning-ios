@@ -343,7 +343,9 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
             self.scanCompletionHandler = completionHandler
             self.security = security
             self.scanStatusBlock?(.searchingBLE(deviceName))
-            espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: deviceName, proofOfPossession: proofOfPossession, username: username, network: network)
+            // createESPDevice targets a single named device, so return as soon as it is
+            // found rather than waiting out the full scan window.
+            espBleTransport = ESPBleTransport(scanTimeout: 5.0, deviceNamePrefix: deviceName, proofOfPossession: proofOfPossession, username: username, network: network, returnOnFirstMatch: true)
             espBleTransport.scan(delegate: self)
         default:
             self.scanStatusBlock?(.joiningSoftAP(deviceName))
