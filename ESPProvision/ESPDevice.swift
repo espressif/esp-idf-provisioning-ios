@@ -208,15 +208,26 @@ open class ESPDevice {
             hotSpotConfig.joinOnce = false
             ESPLog.log("Applying Hotspot configuration")
             NEHotspotConfigurationManager.shared.apply(hotSpotConfig) { error in
-                if error != nil {
-                    if error?.localizedDescription == "already associated." {
+                if let error = error {
+                    if error.localizedDescription == "already associated." {
                         ESPLog.log("SoftAp is already connected.")
                         self.getDeviceVersionInfo(completionHandler: completionHandler)
                         return
                     }
-                    ESPLog.log("Failed to connect")
-                    self.connectionStatus = .failedToConnect(.softAPConnectionFailure)
-                    completionHandler(self.connectionStatus)
+                    // NEHotspotConfiguration may fail even when the phone is already on the SoftAP.
+                    ESPLog.log("SoftAP hotspot configuration failed: \(error.localizedDescription). Verifying device reachability.")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                        self.getDeviceVersionInfo(completionHandler: { status in
+                            if case .connected = status {
+                                completionHandler(status)
+                            } else {
+                                ESPLog.log("Failed to connect")
+                                self.connectionStatus = .failedToConnect(.softAPConnectionFailure)
+                                completionHandler(self.connectionStatus)
+                            }
+                        })
+                    }
+                    return
                 }
                 ESPLog.log("Successfully conected to SoftAP.")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
