@@ -61,7 +61,10 @@ class ESPWiFiManager {
     }
 
     private func processStartScan(responseData: Data) {
-        let decryptedResponse = (security.decrypt(data: responseData))!
+        guard let decryptedResponse = security.decrypt(data: responseData) else {
+            delegate?.wifiScanFinished(wifiList: nil, error: .scanRequestError(ESPSessionError.encryptionError))
+            return
+        }
         do {
             _ = try NetworkScanPayload(serializedData: decryptedResponse)
         } catch {

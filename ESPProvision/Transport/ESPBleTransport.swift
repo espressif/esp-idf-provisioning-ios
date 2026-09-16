@@ -97,6 +97,13 @@ class ESPBleTransport: NSObject, ESPCommunicable {
 
     var currentRequestCompletionHandler: ((Data?, Error?) -> Void)?
 
+    /// Serializes BLE read/write operations without blocking the calling thread.
+    /// All access is confined to the main queue (the CBCentralManager delegate queue),
+    /// so no lock is required. A blocking primitive here would deadlock, since the
+    /// callbacks that complete a request are also delivered on the main queue.
+    private var isRequestInFlight = false
+    private var pendingRequests: [() -> Void] = []
+
     public var delegate: ESPBLETransportDelegate?
     var bleStatusDelegate: ESPBLEStatusDelegate?
     
@@ -118,6 +125,63 @@ class ESPBleTransport: NSObject, ESPCommunicable {
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
 
+    /// Enqueue a BLE request. Runs immediately when idle, otherwise queued (FIFO) until the
+    /// in-flight request completes. Never blocks the caller, so it is safe on the main thread.
+    private func submitRequest(_ execute: @escaping () -> Void) {
+        if Thread.isMainThread {
+            startOrQueueRequest(execute)
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                self?.startOrQueueRequest(execute)
+            }
+        }
+    }
+
+    /// Main-queue only.
+    private func startOrQueueRequest(_ execute: @escaping () -> Void) {
+        if isRequestInFlight {
+            pendingRequests.append(execute)
+        } else {
+            isRequestInFlight = true
+            execute()
+        }
+    }
+
+    /// Advance to the next queued request, or mark the transport idle. Main-queue only.
+    private func startNextRequestIfNeeded() {
+        if pendingRequests.isEmpty {
+            isRequestInFlight = false
+        } else {
+            let next = pendingRequests.removeFirst()
+            DispatchQueue.main.async { next() }
+        }
+    }
+
+    /// Wrap a request completion so the transport advances its queue after delivering the result.
+    private func makeSerializedCompletion(_ completionHandler: @escaping (Data?, Error?) -> Void) -> (Data?, Error?) -> Void {
+        return { [weak self] data, error in
+            completionHandler(data, error)
+            if Thread.isMainThread {
+                self?.startNextRequestIfNeeded()
+            } else {
+                DispatchQueue.main.async { self?.startNextRequestIfNeeded() }
+            }
+        }
+    }
+
+    /// Deliver an immediate failure (a guard failed before the write) and advance the queue.
+    /// Runs on the main queue as part of an in-flight request closure.
+    private func failCurrentRequest(_ completionHandler: @escaping (Data?, Error?) -> Void, error: Error) {
+        completionHandler(nil, error)
+        startNextRequestIfNeeded()
+    }
+
+    private func deliverTransportResponse(_ data: Data?, error: Error?) {
+        let handler = currentRequestCompletionHandler
+        currentRequestCompletionHandler = nil
+        handler?(data, error)
+    }
+
     /// BLE implementation of `ESPCommunicable` protocol.
     ///
     /// - Parameters:
@@ -126,14 +190,17 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     ///   - completionHandler: Handler called when data is sent.
     func SendSessionData(data: Data, sessionPath: String?, completionHandler: @escaping (Data?, Error?) -> Void) {
         ESPLog.log("Sending session data.")
-        guard peripheralCanWrite, peripheralCanRead,
-            let espressifPeripheral = currentPeripheral else {
-            completionHandler(nil, ESPTransportError.deviceUnreachableError("BLE device unreachable"))
-            return
+        submitRequest { [weak self] in
+            guard let self = self else { return }
+            guard self.peripheralCanWrite, self.peripheralCanRead,
+                let espressifPeripheral = self.currentPeripheral,
+                let sessionCharacteristic = self.utility.sessionCharacteristic else {
+                self.failCurrentRequest(completionHandler, error: ESPTransportError.deviceUnreachableError("BLE device unreachable"))
+                return
+            }
+            self.currentRequestCompletionHandler = self.makeSerializedCompletion(completionHandler)
+            espressifPeripheral.writeValue(data, for: sessionCharacteristic, type: .withResponse)
         }
-        
-        espressifPeripheral.writeValue(data, for: utility.sessionCharacteristic, type: .withResponse)
-        currentRequestCompletionHandler = completionHandler
     }
 
     /// BLE implemenation of the `ESPCommunicable` protocol
@@ -146,17 +213,19 @@ class ESPBleTransport: NSObject, ESPCommunicable {
                         data: Data,
                         completionHandler: @escaping (Data?, Error?) -> Void) {
         ESPLog.log("Sending configration data to path \(path)")
-        guard peripheralCanWrite, peripheralCanRead,
-            let espressifPeripheral = currentPeripheral else {
-            completionHandler(nil, ESPTransportError.deviceUnreachableError("BLE device unreachable"))
-            return
-        }
-        
-        if let characteristic = utility.configUUIDMap[path] {
-            espressifPeripheral.writeValue(data, for: characteristic, type: .withResponse)
-            currentRequestCompletionHandler = completionHandler
-        } else {
-            completionHandler(nil,NSError(domain: "com.espressif.ble", code: 1, userInfo: [NSLocalizedDescriptionKey:"BLE characteristic does not exist."]))
+        submitRequest { [weak self] in
+            guard let self = self else { return }
+            guard self.peripheralCanWrite, self.peripheralCanRead,
+                let espressifPeripheral = self.currentPeripheral else {
+                self.failCurrentRequest(completionHandler, error: ESPTransportError.deviceUnreachableError("BLE device unreachable"))
+                return
+            }
+            if let characteristic = self.utility.configUUIDMap[path] {
+                self.currentRequestCompletionHandler = self.makeSerializedCompletion(completionHandler)
+                espressifPeripheral.writeValue(data, for: characteristic, type: .withResponse)
+            } else {
+                self.failCurrentRequest(completionHandler, error: NSError(domain: "com.espressif.ble", code: 1, userInfo: [NSLocalizedDescriptionKey: "BLE characteristic does not exist."]))
+            }
         }
     }
 
@@ -183,11 +252,48 @@ class ESPBleTransport: NSObject, ESPCommunicable {
         ESPLog.log("Initiating timeout for connection completion.")
         bleConnectTimer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(bleConnectionTimeout), userInfo: nil, repeats: false)
     }
+
+    /// Drop the current ATT connection and connect again so CoreBluetooth
+    /// rediscovers characteristics. Needed when a long-lived local-control
+    /// session has stale handles (CBATTError 1 on `prov-config`).
+    func reconnect(delegate: ESPBLEStatusDelegate) {
+        bleStatusDelegate = delegate
+        resetGATTMapForReconnect()
+        bleDeviceConnected = false
+        pendingRequests.removeAll()
+        isRequestInFlight = false
+        currentRequestCompletionHandler = nil
+        guard let peripheral = currentPeripheral else {
+            delegate.peripheralFailedToConnect(peripheral: nil, error: NSError(domain: "com.espressif.ble", code: 3, userInfo: [NSLocalizedDescriptionKey: "No BLE peripheral to reconnect."]))
+            return
+        }
+        currentPeripheral?.delegate = self
+        bleConnectTimer.invalidate()
+        ESPLog.log("Initiating timeout for BLE reconnect.")
+        bleConnectTimer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(bleConnectionTimeout), userInfo: nil, repeats: false)
+        if peripheral.state == .connected || peripheral.state == .connecting {
+            reconnectPending = true
+            centralManager.cancelPeripheralConnection(peripheral)
+        } else {
+            reconnectPending = false
+            centralManager.connect(peripheral, options: nil)
+        }
+    }
+
+    private var reconnectPending = false
+
+    private func resetGATTMapForReconnect() {
+        utility.configUUIDMap.removeAll()
+        utility.sessionCharacteristic = nil
+        utility.peripheralConfigured = false
+        readCounter = 0
+    }
     
     /// This method is invoked on timeout of connection with BLE device.
     @objc func bleConnectionTimeout() {
         if !bleDeviceConnected {
             ESPLog.log("Peripheral connection timeout occured.")
+            reconnectPending = false
             self.disconnect()
             bleConnectTimer.invalidate()
             bleStatusDelegate?.peripheralFailedToConnect(peripheral: nil, error: NSError(domain: "com.espressif.ble", code: 2, userInfo: [NSLocalizedDescriptionKey:"Connection timeout. Unable to read BLE characteristic on time."]))
@@ -316,6 +422,13 @@ extension ESPBleTransport: CBCentralManagerDelegate {
 
     func centralManager(_: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         ESPLog.log("Disconnected with peripheral")
+        if reconnectPending {
+            reconnectPending = false
+            resetGATTMapForReconnect()
+            currentPeripheral?.delegate = self
+            centralManager.connect(peripheral, options: nil)
+            return
+        }
         bleStatusDelegate?.peripheralDisconnected(peripheral: peripheral, error: error)
     }
 }
@@ -354,7 +467,7 @@ extension ESPBleTransport: CBPeripheralDelegate {
         
         ESPLog.log("Writing value for characterisitic \(characteristic)")
         guard error == nil else {
-            currentRequestCompletionHandler?(nil, error)
+            deliverTransportResponse(nil, error: error)
             return
         }
 
@@ -364,15 +477,16 @@ extension ESPBleTransport: CBPeripheralDelegate {
     func peripheral(_: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         ESPLog.log("Updating value for characterisitic \(characteristic)")
         guard error == nil else {
-            currentRequestCompletionHandler?(nil, error)
+            deliverTransportResponse(nil, error: error)
             return
         }
 
-        if let currentRequestCompletionHandler = currentRequestCompletionHandler {
-            DispatchQueue.global().async {
-                currentRequestCompletionHandler(characteristic.value, nil)
-            }
-            self.currentRequestCompletionHandler = nil
+        guard currentRequestCompletionHandler != nil else {
+            return
+        }
+        let responseData = characteristic.value
+        DispatchQueue.global().async { [weak self] in
+            self?.deliverTransportResponse(responseData, error: nil)
         }
     }
 

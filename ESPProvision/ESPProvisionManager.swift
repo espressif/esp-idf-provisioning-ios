@@ -137,7 +137,7 @@ public class ESPProvisionManager: NSObject, AVCaptureMetadataOutputObjectsDelega
     /// Any intermediate search result will be ignored. Delegate for peripheralsNotFound is called.
     public func stopESPDevicesSearch() {
         ESPLog.log("Stop ESPDevices search called.")
-        espBleTransport.stopSearch()
+        espBleTransport?.stopSearch()
     }
     
     /// Scan for `ESPDevice` using QR code.
