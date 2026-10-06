@@ -438,12 +438,27 @@ extension ESPBleTransport: CBCentralManagerDelegate {
 extension ESPBleTransport: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices _: Error?) {
         ESPLog.log("Peripheral did discover services.")
-        guard let services = peripheral.services else { return }
-        currentPeripheral = peripheral
-        currentService = services[0]
-        if let currentService = currentService {
-            currentPeripheral?.discoverCharacteristics(nil, for: currentService)
+        // `services` is non-nil but empty when discovery completes without matching the
+        // service UUID it was filtered on in `centralManager(_:didConnect:)` - for example
+        // when the device rebooted and no longer exposes the provisioning service.
+        // Subscripting it raised an NSRangeException and terminated the host app.
+        guard let services = peripheral.services, let firstService = services.first else {
+            ESPLog.log("Peripheral exposed no services. Treating as a failed connection.")
+            bleConnectTimer.invalidate()
+            centralManager.cancelPeripheralConnection(peripheral)
+            bleStatusDelegate?.peripheralFailedToConnect(
+                peripheral: peripheral,
+                error: NSError(
+                    domain: "com.espressif.ble",
+                    code: 3,
+                    userInfo: [NSLocalizedDescriptionKey: "No services found on BLE device."]
+                )
+            )
+            return
         }
+        currentPeripheral = peripheral
+        currentService = firstService
+        currentPeripheral?.discoverCharacteristics(nil, for: firstService)
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error _: Error?) {
