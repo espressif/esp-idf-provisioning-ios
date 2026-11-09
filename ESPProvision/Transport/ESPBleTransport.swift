@@ -19,6 +19,48 @@
 import CoreBluetooth
 import Foundation
 
+/// Whether a characteristic can carry a request/response exchange: the SDK
+/// writes the request and then reads the response from the same characteristic.
+func espCanExchange(_ properties: CBCharacteristicProperties) -> Bool {
+    properties.contains(.read) && properties.contains(.write)
+}
+
+/// Decides when GATT setup has finished: every characteristic's descriptors
+/// discovered and every user-description (0x2901) descriptor read. Reports
+/// ready exactly once per connection.
+struct ESPReadinessTracker {
+    private(set) var pendingDiscoveries = 0
+    private(set) var pendingReads = 0
+    private(set) var reported = false
+
+    mutating func reset() {
+        pendingDiscoveries = 0
+        pendingReads = 0
+        reported = false
+    }
+
+    mutating func discoveriesStarted(_ count: Int) {
+        pendingDiscoveries += count
+    }
+
+    mutating func discoveryFinished(reads: Int) {
+        pendingDiscoveries = max(0, pendingDiscoveries - 1)
+        pendingReads += reads
+    }
+
+    mutating func readFinished() {
+        pendingReads = max(0, pendingReads - 1)
+    }
+
+    mutating func takeReady(sessionMapped: Bool) -> Bool {
+        guard !reported, pendingDiscoveries == 0, pendingReads == 0, sessionMapped else {
+            return false
+        }
+        reported = true
+        return true
+    }
+}
+
 /// This lists the keys for the values that we need to retrieve from the BLE advertisement data
 struct ESPBLEAdvertisementKeys {
     
@@ -73,6 +115,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
     private var isBLEEnabled = false
     private var scanTimeout = 5.0
     private var readCounter = 0
+    private var readiness = ESPReadinessTracker()
     private var deviceNamePrefix:String!
     
     /// Stores Proof of Possesion for a device.
@@ -192,9 +235,9 @@ class ESPBleTransport: NSObject, ESPCommunicable {
         ESPLog.log("Sending session data.")
         submitRequest { [weak self] in
             guard let self = self else { return }
-            guard self.peripheralCanWrite, self.peripheralCanRead,
-                let espressifPeripheral = self.currentPeripheral,
-                let sessionCharacteristic = self.utility.sessionCharacteristic else {
+            guard let espressifPeripheral = self.currentPeripheral,
+                let sessionCharacteristic = self.utility.sessionCharacteristic,
+                espCanExchange(sessionCharacteristic.properties) else {
                 self.failCurrentRequest(completionHandler, error: ESPTransportError.deviceUnreachableError("BLE device unreachable"))
                 return
             }
@@ -215,12 +258,13 @@ class ESPBleTransport: NSObject, ESPCommunicable {
         ESPLog.log("Sending configration data to path \(path)")
         submitRequest { [weak self] in
             guard let self = self else { return }
-            guard self.peripheralCanWrite, self.peripheralCanRead,
-                let espressifPeripheral = self.currentPeripheral else {
+            guard let espressifPeripheral = self.currentPeripheral else {
                 self.failCurrentRequest(completionHandler, error: ESPTransportError.deviceUnreachableError("BLE device unreachable"))
                 return
             }
-            if let characteristic = self.utility.configUUIDMap[path] {
+            if let characteristic = self.utility.configUUIDMap[path], !espCanExchange(characteristic.properties) {
+                self.failCurrentRequest(completionHandler, error: ESPTransportError.deviceUnreachableError("BLE characteristic \(path) cannot be written and read"))
+            } else if let characteristic = self.utility.configUUIDMap[path] {
                 self.currentRequestCompletionHandler = self.makeSerializedCompletion(completionHandler)
                 espressifPeripheral.writeValue(data, for: characteristic, type: .withResponse)
             } else {
@@ -243,6 +287,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
             centralManager.cancelPeripheralConnection(currentPeripheral)
         }
         readCounter = 0
+        readiness.reset()
         currentPeripheral = peripheral
         currentAdvertisementData = advertisementData
         centralManager.connect(currentPeripheral!, options: options)
@@ -287,6 +332,7 @@ class ESPBleTransport: NSObject, ESPCommunicable {
         utility.sessionCharacteristic = nil
         utility.peripheralConfigured = false
         readCounter = 0
+        readiness.reset()
     }
     
     /// This method is invoked on timeout of connection with BLE device.
@@ -451,14 +497,8 @@ extension ESPBleTransport: CBPeripheralDelegate {
         ESPLog.log("Peripheral did discover chatacteristics.")
         guard let characteristics = service.characteristics else { return }
 
-        peripheralCanWrite = true
+        readiness.discoveriesStarted(characteristics.count)
         for characteristic in characteristics {
-            if !characteristic.properties.contains(.read) {
-                peripheralCanRead = false
-            }
-            if !characteristic.properties.contains(.write) {
-                peripheralCanWrite = false
-            }
             currentPeripheral?.discoverDescriptors(for: characteristic)
         }
     }
@@ -493,17 +533,20 @@ extension ESPBleTransport: CBPeripheralDelegate {
     func peripheral(_: CBPeripheral, didDiscoverDescriptorsFor characteristic: CBCharacteristic, error _: Error?) {
         ESPLog.log("Did sicover descriptor for characterisitic: \(characteristic)")
         var finalDescriptors = [CBDescriptor]()
-        for descriptor in characteristic.descriptors! {
+        for descriptor in characteristic.descriptors ?? [] {
             let uuidString = descriptor.uuid.uuidString
             if uuidString.contains(ESPConstants.user_descriptor_uuid) {
                 finalDescriptors.append(descriptor)
             }
         }
+        readiness.discoveryFinished(reads: finalDescriptors.count)
         if finalDescriptors.count > 0 {
             readCounter += finalDescriptors.count
             for desc in finalDescriptors {
                 currentPeripheral?.readValue(for: desc)
             }
+        } else {
+            reportReadyIfSettled()
         }
     }
 
@@ -511,11 +554,14 @@ extension ESPBleTransport: CBPeripheralDelegate {
         ESPLog.log("Did update value for descriptor: \(descriptor)")
         utility.processDescriptor(descriptor: descriptor)
         readCounter -= 1
-        if readCounter < 1 {
-            if utility.peripheralConfigured {
-                bleConnectTimer.invalidate()
-                bleStatusDelegate?.peripheralConnected()
-            }
+        readiness.readFinished()
+        reportReadyIfSettled()
+    }
+
+    private func reportReadyIfSettled() {
+        if readiness.takeReady(sessionMapped: utility.peripheralConfigured) {
+            bleConnectTimer.invalidate()
+            bleStatusDelegate?.peripheralConnected()
         }
     }
 }
